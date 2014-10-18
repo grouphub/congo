@@ -1,0 +1,41 @@
+header {
+  background-color: #3c8dbc;
+
+  .navbar-nav {
+    > li {
+      > a {
+        color: white;
+      }
+
+      > a:hover,
+      > a:focus {
+        background-color: #357ca5;
+        color: white;
+      }
+    }
+  }
+
+  .navbar-header {
+    > a:hover,
+    > a:focus {
+      background-color: #357ca5;
+      color: white;
+    }
+  }
+
+  .navbar-brand {
+    color: white;
+  }
+
+  .icon-bar {
+    border: 1px solid white;
+  }
+}
+
+footer {
+  text-align: center;
+  margin-top: 40px;
+  border-top: 1px solid #ccc;
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
