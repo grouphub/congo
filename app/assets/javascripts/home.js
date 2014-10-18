@@ -123,7 +123,25 @@ congoApp.controller('ProductsIndexController', function ($scope, $http, $locatio
     })
     .error(function (data, status, headers, config) {
       debugger
-    })
+    });
+
+  $scope.deleteProductAt = function (index) {
+    var product = $scope.products[index];
+
+    if (!product) {
+      debugger
+    }
+
+    $http
+      .delete('/api/v1/products/' + product.id + '.json')
+      .success(function (data, status, headers, config) {
+        $scope.products.splice(index, 1);
+        debugger
+      })
+      .error(function (data, status, headers, config) {
+        debugger
+      });
+    };
 });
 
 congoApp.controller('ProductsNewController', function ($scope, $http, $location) {

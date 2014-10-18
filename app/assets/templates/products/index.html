@@ -2,8 +2,11 @@
   <div class="col-md-12">
     <h1>Products</h1>
 
-    <ul ng-repeat="product in products">
-      <li>{{product.name}}</li>
+    <ul class="products">
+      <li ng-repeat="product in products">
+        <span>{{product.name}}</span>
+        <span>(<a href="" ng-click="deleteProductAt($index)">Delete</a>)</span>
+      </li>
     </ul>
 
     <p>
