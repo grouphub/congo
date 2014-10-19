@@ -2,9 +2,11 @@ header {
   background-color: #3c8dbc;
 
   .navbar-nav {
-    > li {
+    > li,
+    > li.dropdown {
       > a {
         color: white;
+        background-color: #3c8dbc;
       }
 
       > a:hover,
@@ -29,6 +31,15 @@ header {
 
   .icon-bar {
     border: 1px solid white;
+  }
+}
+
+@media (max-width: 767px) {
+  header .navbar-nav > li.dropdown > ul > li {
+    > a:hover,
+    > a:focus {
+      background-color: #357ca5;
+    }
   }
 }
 

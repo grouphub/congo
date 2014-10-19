@@ -8,31 +8,47 @@ congoApp.config([
 
     $routeProvider
       .when('/', {
-        templateUrl: '/assets/home.html',
-        controller: 'HomeController'
-      })
-      .when('/users/signin', {
-        templateUrl: '/assets/users/signin.html',
-        controller: 'UsersSigninController'
+        templateUrl: '/assets/landing.html',
+        controller: 'LandingController'
       })
       .when('/users/new', {
         templateUrl: '/assets/users/new.html',
         controller: 'UsersNewController'
       })
-      .when('/users/new_manager', {
+      .when('/accounts/:slug', {
+        templateUrl: '/assets/home.html',
+        controller: 'HomeController'
+      })
+      .when('/accounts/:slug/users/signin', {
+        templateUrl: '/assets/users/signin.html',
+        controller: 'UsersSigninController'
+      })
+      .when('/accounts/:slug/users/new_manager', {
         templateUrl: '/assets/users/new_manager.html',
         controller: 'UsersNewManagerController'
       })
-      .when('/products', {
+      .when('/accounts/:slug/products', {
         templateUrl: '/assets/products/index.html',
         controller: 'ProductsIndexController'
       })
-      .when('/products/new', {
+      .when('/accounts/:slug/products/new', {
         templateUrl: '/assets/products/new.html',
         controller: 'ProductsNewController'
       });
   }
 ]);
+
+congoApp.factory('slugFactory', function ($location) {
+  return {
+    slug: function () {
+      var match = $location.path().match(/\/accounts\/([^\/]+)/);
+
+      if (match && match[1] && match[1].length > 0) {
+        return match[1];
+      }
+    }
+  }
+});
 
 congoApp.directive('autoFocus', function($timeout) {
   return {
@@ -45,7 +61,7 @@ congoApp.directive('autoFocus', function($timeout) {
   };
 });
 
-congoApp.controller('MainController', function ($scope, $http, $location) {
+congoApp.controller('MainController', function ($scope, $http, $location, slugFactory) {
   $scope.isSignedin = function () {
     return !!congo.currentUser;
   };
@@ -53,6 +69,16 @@ congoApp.controller('MainController', function ($scope, $http, $location) {
   $scope.userName = function () {
     return congo.currentUser.name;
   };
+
+  $scope.accounts = function () {
+    return congo.currentUser.accounts;
+  };
+
+  $scope.slug = function () {
+    return slugFactory.slug();
+  }
+
+  $scope.$watch('slug()');
 
   $scope.signout = function () {
     $http
@@ -66,6 +92,10 @@ congoApp.controller('MainController', function ($scope, $http, $location) {
         debugger
       });
   };
+});
+
+congoApp.controller('LandingController', function ($scope) {
+
 });
 
 congoApp.controller('HomeController', function ($scope) {
@@ -115,9 +145,15 @@ congoApp.controller('UsersNewManagerController', function ($scope, $http, $locat
   };
 });
 
-congoApp.controller('ProductsIndexController', function ($scope, $http, $location) {
+congoApp.controller('ProductsIndexController', function ($scope, $http, $location, slugFactory) {
+  var slug = slugFactory.slug();
+
+  $scope.slug = function () {
+    return slug;
+  };
+
   $http
-    .get('/api/v1/products.json')
+    .get('/api/v1/accounts/' + slug + '/products.json')
     .success(function (data, status, headers, config) {
       $scope.products = data.products;
     })
@@ -133,7 +169,7 @@ congoApp.controller('ProductsIndexController', function ($scope, $http, $locatio
     }
 
     $http
-      .delete('/api/v1/products/' + product.id + '.json')
+      .delete('/api/v1/accounts/' + slug + '/products/' + product.id + '.json')
       .success(function (data, status, headers, config) {
         $scope.products.splice(index, 1);
         debugger
@@ -144,10 +180,12 @@ congoApp.controller('ProductsIndexController', function ($scope, $http, $locatio
     };
 });
 
-congoApp.controller('ProductsNewController', function ($scope, $http, $location) {
+congoApp.controller('ProductsNewController', function ($scope, $http, $location, slugFactory) {
+  var slug = slugFactory.slug();
+
   $scope.submit = function () {
     $http
-      .post('/api/v1/products.json', {
+      .post('/api/v1/accounts/' + slug + '/products.json', {
         name: $scope.name
       })
       .success(function (data, status, headers, config) {

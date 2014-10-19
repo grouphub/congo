@@ -8,6 +8,7 @@ Dir.glob("#{Rails.root}/db/seeds/**/*.rb").each do |path|
     load(path)
   rescue StandardError => e
     print "Error loading #{path} I think...\n\n#{e.message}\n\n#{e.backtrace.join("\n")}\n\n"
+    exit
   end
 end
 

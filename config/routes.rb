@@ -5,24 +5,29 @@ def angular_routes(routes)
 end
 
 Rails.application.routes.draw do
-  root 'home#index'
-
   angular_routes [
+    '/',
     '/home',
     '/users/signin',
     '/users/new',
-    '/users/new_manager',
-    '/products',
-    '/products/new'
+    '/accounts/:account_name',
+    '/accounts/:account_name/home',
+    '/accounts/:account_name/users/signin',
+    '/accounts/:account_name/users/new',
+    '/accounts/:account_name/users/new_manager',
+    '/accounts/:account_name/products',
+    '/accounts/:account_name/products/new'
   ]
 
   namespace :api do
     namespace :v1 do
+      resources :accounts do
+        resources :products
+      end
+
       post '/users/signin', to: 'users#signin'
       delete '/users/signout', to: 'users#signout'
       resources :users
-
-      resources :products
     end
   end
 end
