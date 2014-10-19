@@ -1,10 +1,10 @@
-class Api::V1::ProductsController < ApplicationController
+class Api::V1::GroupsController < ApplicationController
   def index
     respond_to do |format|
       format.json {
         render json: {
-          # TODO: Scope products by account
-          products: Product.all
+          # TODO: Scope groups by account
+          groups: Group.all
         }
       }
     end
@@ -17,12 +17,12 @@ class Api::V1::ProductsController < ApplicationController
       # TODO: Handle this
     end
 
-    product = Product.create! \
+    group = Group.create! \
       name: name
 
     respond_to do |format|
       format.json {
-        render json: product
+        render json: group
       }
     end
   end
@@ -30,13 +30,14 @@ class Api::V1::ProductsController < ApplicationController
   def destroy
     id = params[:id]
 
-    product = Product.find(id).destroy
+    group = Group.find(id).destroy
 
     respond_to do |format|
       format.json {
-        render json: product
+        render json: group
       }
     end
   end
 end
+
 

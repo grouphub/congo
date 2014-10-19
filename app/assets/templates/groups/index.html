@@ -1,0 +1,17 @@
+<div class="row">
+  <div class="col-md-12">
+    <h1>Groups</h1>
+
+    <ul class="groups">
+      <li ng-repeat="group in groups">
+        <span>{{group.name}}</span>
+        <span>(<a href="" ng-click="deleteGroupAt($index)">Delete</a>)</span>
+      </li>
+    </ul>
+
+    <p>
+      <a href="/accounts/{{slug()}}/groups/new">New group</a>
+    </p>
+  </div>
+</div>
+

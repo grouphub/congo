@@ -34,6 +34,14 @@ congoApp.config([
       .when('/accounts/:slug/products/new', {
         templateUrl: '/assets/products/new.html',
         controller: 'ProductsNewController'
+      })
+      .when('/accounts/:slug/groups', {
+        templateUrl: '/assets/groups/index.html',
+        controller: 'GroupsIndexController'
+      })
+      .when('/accounts/:slug/groups/new', {
+        templateUrl: '/assets/groups/new.html',
+        controller: 'GroupsNewController'
       });
   }
 ]);
@@ -146,14 +154,14 @@ congoApp.controller('UsersNewManagerController', function ($scope, $http, $locat
 });
 
 congoApp.controller('ProductsIndexController', function ($scope, $http, $location, slugFactory) {
-  var slug = slugFactory.slug();
-
   $scope.slug = function () {
-    return slug;
+    return slugFactory.slug();
   };
 
+  $scope.$watch('slug()');
+
   $http
-    .get('/api/v1/accounts/' + slug + '/products.json')
+    .get('/api/v1/accounts/' + $scope.slug() + '/products.json')
     .success(function (data, status, headers, config) {
       $scope.products = data.products;
     })
@@ -169,7 +177,7 @@ congoApp.controller('ProductsIndexController', function ($scope, $http, $locatio
     }
 
     $http
-      .delete('/api/v1/accounts/' + slug + '/products/' + product.id + '.json')
+      .delete('/api/v1/accounts/' + $scope.slug() + '/products/' + product.id + '.json')
       .success(function (data, status, headers, config) {
         $scope.products.splice(index, 1);
         debugger
@@ -181,15 +189,75 @@ congoApp.controller('ProductsIndexController', function ($scope, $http, $locatio
 });
 
 congoApp.controller('ProductsNewController', function ($scope, $http, $location, slugFactory) {
-  var slug = slugFactory.slug();
+  $scope.slug = function () {
+    return slugFactory.slug();
+  };
+
+  $scope.$watch('slug()');
 
   $scope.submit = function () {
     $http
-      .post('/api/v1/accounts/' + slug + '/products.json', {
+      .post('/api/v1/accounts/' + $scope.slug() + '/products.json', {
         name: $scope.name
       })
       .success(function (data, status, headers, config) {
-        $location.path('/products');
+        $location.path('/accounts/' + $scope.slug() + '/products');
+      })
+      .error(function (data, status, headers, config) {
+        debugger
+      });
+  };
+});
+
+congoApp.controller('GroupsIndexController', function ($scope, $http, $location, slugFactory) {
+  $scope.slug = function () {
+    return slugFactory.slug();
+  };
+
+  $scope.$watch('slug()');
+
+  $http
+    .get('/api/v1/accounts/' + $scope.slug() + '/groups.json')
+    .success(function (data, status, headers, config) {
+      $scope.groups = data.groups;
+    })
+    .error(function (data, status, headers, config) {
+      debugger
+    });
+
+  $scope.deleteGroupAt = function (index) {
+    var group = $scope.groups[index];
+
+    if (!product) {
+      debugger
+    }
+
+    $http
+      .delete('/api/v1/accounts/' + $scope.slug() + '/groups/' + group.id + '.json')
+      .success(function (data, status, headers, config) {
+        $scope.groups.splice(index, 1);
+        debugger
+      })
+      .error(function (data, status, headers, config) {
+        debugger
+      });
+    };
+});
+
+congoApp.controller('GroupsNewController', function ($scope, $http, $location, slugFactory) {
+  $scope.slug = function () {
+    return slugFactory.slug();
+  };
+
+  $scope.$watch('slug()');
+
+  $scope.submit = function () {
+    $http
+      .post('/api/v1/accounts/' + $scope.slug() + '/groups.json', {
+        name: $scope.name
+      })
+      .success(function (data, status, headers, config) {
+        $location.path('/accounts/' + $scope.slug() + '/groups');
       })
       .error(function (data, status, headers, config) {
         debugger
