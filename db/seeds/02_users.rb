@@ -16,11 +16,20 @@ alice = User.create! \
   email: 'alice@first-account.com',
   password: 'testtest'
 
-account = Account.first
+account = Account.where(name: 'First Account').first
 
-[admin, bob, alice].each do |user|
-  AccountUser.create! \
-    user_id: user.id,
-    account_id: account.id
-end
+AccountUser.create! \
+  user_id: admin.id,
+  account_id: account.id,
+  role: 'broker'
+
+AccountUser.create! \
+  user_id: bob.id,
+  account_id: account.id,
+  role: 'customer'
+
+AccountUser.create! \
+  user_id: alice.id,
+  account_id: account.id,
+  role: 'customer'
 

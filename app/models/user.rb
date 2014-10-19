@@ -4,16 +4,6 @@ require "#{Rails.root}/lib/sluggerizer"
 class User < ActiveRecord::Base
   has_many :account_users
 
-  def roles=(list)
-    self.roles_data = list
-      .map { |item| Sluggerizer::sluggerize(item) }
-      .join(', ')
-  end
-
-  def roles
-    self.roles_data.split(', ')
-  end
-
   def properties=(hash)
     self.properties_data = hash.to_json
   end
@@ -31,23 +21,27 @@ class User < ActiveRecord::Base
     self.encrypted_password = @password
   end
 
-  def accounts
-    self
+  def simple_hash
+    accounts = self
       .account_users
       .includes(:account)
       .inject([]) { |sum, account_user|
-        sum << account_user.account
+        account_hash = account_user.account.try(:as_json)
+
+        if account_hash
+          account_hash['role'] = account_user.role
+          sum << account_hash
+        end
+
         sum
       }
-  end
 
-  def simple_hash
     {
       id: self.id,
       first_name: self.first_name,
       last_name: self.last_name,
       email: self.email,
-      accounts: self.accounts.map { |account| account.simple_hash }
+      accounts: accounts
     }
   end
 end

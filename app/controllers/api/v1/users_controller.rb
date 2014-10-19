@@ -18,12 +18,13 @@ class Api::V1::UsersController < ApplicationController
       first_name: first_name,
       last_name: last_name,
       email: email,
-      password: password,
-      roles: [type]
+      password: password
 
     # User came in from an email and is therefore a customer
     if email_token
-      membership = Membership.where(email_token: email_token).first
+      membership = Membership.where(email_token: email_token).includes(:group).first
+      group = membership.group
+      account_id = group.account_id
 
       unless membership
         # TODO: Handle this
@@ -31,6 +32,20 @@ class Api::V1::UsersController < ApplicationController
 
       membership.user_id = user.id
       membership.save!
+
+      account_user = AccountUser.create! \
+        account_id: account_id,
+        user_id: user.id,
+        role: 'customer'
+
+    # User came from a manual signup and is a broker
+    else
+      account = Account.create!
+
+      account_user = AccountUser.create! \
+        account_id: account.id,
+        user_id: user.id,
+        role: 'broker'
     end
 
     signin! email, password
@@ -68,9 +83,10 @@ class Api::V1::UsersController < ApplicationController
 
     if account_name || account_tagline
       if account_name
-        account = Account.create! \
-          name: account_name,
-          tagline: account_tagline
+        account = user.account
+        account.name = account_name,
+        account.tagline = account_tagline
+        account.save!
 
         account_user = AccountUser.create! \
           account_id: account.id,
@@ -97,7 +113,9 @@ class Api::V1::UsersController < ApplicationController
 
       respond_to do |format|
         format.json {
-          render json: user.simple_hash
+          render json: {
+            user: user.simple_hash
+          }
         }
       end
     rescue AuthenticationException => e
