@@ -67,6 +67,7 @@ class Api::V1::UsersController < ApplicationController
     month = params[:month]
     year = params[:year]
     cvc = params[:cvc]
+    account_id = params[:account_id]
     account_name = params[:account_name]
     account_tagline = params[:account_tagline]
     properties = user.properties || {}
@@ -83,8 +84,8 @@ class Api::V1::UsersController < ApplicationController
 
     if account_name || account_tagline
       if account_name
-        account = user.account
-        account.name = account_name,
+        account = Account.where(id: account_id).first
+        account.name = account_name
         account.tagline = account_tagline
         account.save!
 
@@ -99,7 +100,9 @@ class Api::V1::UsersController < ApplicationController
 
     respond_to do |format|
       format.json {
-        render json: user.simple_hash
+        render json: {
+          user: user.simple_hash
+        }
       }
     end
   end

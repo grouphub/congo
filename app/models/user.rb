@@ -30,9 +30,9 @@ class User < ActiveRecord::Base
 
         if account_hash
           account_hash['role'] = account_user.role
-          sum << account_hash
         end
 
+        sum << account_hash
         sum
       }
 

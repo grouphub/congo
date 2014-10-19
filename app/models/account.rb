@@ -6,7 +6,7 @@ class Account < ActiveRecord::Base
   before_save :add_slug
 
   def add_slug
-    self.slug = Sluggerizer.sluggerize(self.name)
+    self.slug = Sluggerizer.sluggerize(self.name) if self.name
   end
 
   def simple_hash

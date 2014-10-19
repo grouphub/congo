@@ -229,6 +229,7 @@ congoApp.controller('UsersNewAccountController', function ($scope, $http, $locat
   $scope.submit = function () {
     $http
       .put('/api/v1/users/' + congo.currentUser.id + '.json', {
+        account_id: congo.currentUser.accounts[0].id,
         account_name: $scope.name,
         account_tagline: $scope.tagline
       })
@@ -294,7 +295,6 @@ congoApp.controller('ProductsIndexController', function ($scope, $http, $locatio
       .delete('/api/v1/accounts/' + $scope.slug() + '/products/' + product.id + '.json')
       .success(function (data, status, headers, config) {
         $scope.products.splice(index, 1);
-        debugger
       })
       .error(function (data, status, headers, config) {
         debugger

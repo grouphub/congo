@@ -1,3 +1,4 @@
 Account.create! \
-  name: 'First Account'
+  name: 'First Account',
+  tagline: 'First account is best account!'
 
