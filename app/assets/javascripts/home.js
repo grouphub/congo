@@ -15,17 +15,17 @@ congoApp.config([
         templateUrl: '/assets/users/new.html',
         controller: 'UsersNewController'
       })
-      .when('/accounts/:slug', {
-        templateUrl: '/assets/home.html',
-        controller: 'HomeController'
+      .when('/users/new_manager', {
+        templateUrl: '/assets/users/new_manager.html',
+        controller: 'UsersNewManagerController'
       })
-      .when('/accounts/:slug/users/signin', {
+      .when('/users/signin', {
         templateUrl: '/assets/users/signin.html',
         controller: 'UsersSigninController'
       })
-      .when('/accounts/:slug/users/new_manager', {
-        templateUrl: '/assets/users/new_manager.html',
-        controller: 'UsersNewManagerController'
+      .when('/accounts/:slug', {
+        templateUrl: '/assets/home.html',
+        controller: 'HomeController'
       })
       .when('/accounts/:slug/products', {
         templateUrl: '/assets/products/index.html',
