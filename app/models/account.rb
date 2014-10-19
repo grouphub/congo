@@ -1,5 +1,5 @@
 require "#{Rails.root}/lib/sluggerizer"
-#test
+
 class Account < ActiveRecord::Base
   has_many :account_users
 
