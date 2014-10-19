@@ -13,7 +13,8 @@ class Account < ActiveRecord::Base
     {
       id: self.id,
       name: self.name,
-      slug: self.slug
+      slug: self.slug,
+      tagline: self.tagline
     }
   end
 end

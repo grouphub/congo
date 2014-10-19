@@ -11,13 +11,21 @@ congoApp.config([
         templateUrl: '/assets/landing.html',
         controller: 'LandingController'
       })
-      .when('/users/new', {
-        templateUrl: '/assets/users/new.html',
-        controller: 'UsersNewController'
-      })
       .when('/users/new_manager', {
         templateUrl: '/assets/users/new_manager.html',
         controller: 'UsersNewManagerController'
+      })
+      .when('/users/new_plan', {
+        templateUrl: '/assets/users/new_plan.html',
+        controller: 'UsersNewPlanController'
+      })
+      .when('/users/new_billing', {
+        templateUrl: '/assets/users/new_billing.html',
+        controller: 'UsersNewBillingController'
+      })
+      .when('/users/new_account', {
+        templateUrl: '/assets/users/new_account.html',
+        controller: 'UsersNewAccountController'
       })
       .when('/users/new_customer', {
         templateUrl: '/assets/users/new_customer.html',
@@ -91,7 +99,7 @@ congoApp.controller('MainController', function ($scope, $http, $location, slugFa
 
   $scope.userName = function () {
     if (congo.currentUser) {
-      return congo.currentUser.name;
+      return congo.currentUser.first_name;
     }
   };
 
@@ -147,11 +155,11 @@ congoApp.controller('UsersSigninController', function ($scope, $http, $location)
   $scope.submit = function () {
     $http
       .post('/api/v1/users/signin.json', {
-        name: $scope.name,
+        email: $scope.email,
         password: $scope.password
       })
       .success(function (data, status, headers, config) {
-        congo.currentUser = data;
+        congo.currentUser = data.user;
 
         $location.path('/');
       })
@@ -161,24 +169,72 @@ congoApp.controller('UsersSigninController', function ($scope, $http, $location)
   };
 });
 
-congoApp.controller('UsersNewController', function ($scope, $http, $location) {
-
-});
-
 congoApp.controller('UsersNewManagerController', function ($scope, $http, $location) {
   $scope.submit = function () {
     $http
       .post('/api/v1/users.json', {
-        name: $scope.name,
+        first_name: $scope.first_name,
+        last_name: $scope.last_name,
         email: $scope.email,
         password: $scope.password,
         password_confirmation: $scope.password_confirmation,
         type: 'broker'
       })
       .success(function (data, status, headers, config) {
-        congo.currentUser = data;
+        congo.currentUser = data.user;
 
-        $location.path('/');
+        $location.path('/users/new_plan');
+      })
+      .error(function (data, status, headers, config) {
+        debugger
+      });
+  };
+});
+
+congoApp.controller('UsersNewPlanController', function ($scope, $http, $location) {
+  $scope.pickPlan = function (planName) {
+    $http
+      .put('/api/v1/users/' + congo.currentUser.id + '.json', {
+        plan_name: planName
+      })
+      .success(function (data, status, headers, config) {
+        $location.path('/users/new_billing');
+      })
+      .error(function (data, status, headers, config) {
+        debugger
+      });
+  };
+});
+
+congoApp.controller('UsersNewBillingController', function ($scope, $http, $location) {
+  $scope.submit = function () {
+    $http
+      .put('/api/v1/users/' + congo.currentUser.id + '.json', {
+        card_number: $scope.cardNumber,
+        month: $scope.month,
+        year: $scope.year,
+        cvc: $scope.cvc
+      })
+      .success(function (data, status, headers, config) {
+        $location.path('/users/new_account');
+      })
+      .error(function (data, status, headers, config) {
+        debugger
+      });
+  };
+});
+
+congoApp.controller('UsersNewAccountController', function ($scope, $http, $location) {
+  $scope.submit = function () {
+    $http
+      .put('/api/v1/users/' + congo.currentUser.id + '.json', {
+        account_name: $scope.name,
+        account_tagline: $scope.tagline
+      })
+      .success(function (data, status, headers, config) {
+        congo.currentUser = data.user;
+
+        $location.path('/accounts/' + congo.currentUser.accounts[0].slug);
       })
       .error(function (data, status, headers, config) {
         debugger
@@ -200,7 +256,7 @@ congoApp.controller('UsersNewCustomerController', function ($scope, $http, $loca
         type: 'customer'
       })
       .success(function (data, status, headers, config) {
-        congo.currentUser = data;
+        congo.currentUser = data.user;
 
         $location.path('/');
       })
@@ -340,7 +396,6 @@ congoApp.controller('GroupsShowController', function ($scope, $http, $location, 
   $scope.$watch('slug()');
   $scope.$watch('groupSlug()');
   $scope.$watch('memberships()');
-  $scope.$watch('enabledProducts');
 
   $scope.inviteMember = function () {
     var email = $scope.email;
@@ -351,7 +406,7 @@ congoApp.controller('GroupsShowController', function ($scope, $http, $location, 
     $http
       .post('/api/v1/accounts/' + $scope.slug() + '/groups/' + $scope.groupSlug() + '/memberships.json', data)
       .success(function (data, status, headers, config) {
-        $scope.group.memberships.push(data);    
+        $scope.group.memberships.push(data.membership);    
       })
       .error(function (data, status, headers, config) {
         debugger
@@ -444,7 +499,7 @@ congoApp.controller('GroupsShowController', function ($scope, $http, $location, 
   $http
     .get('/api/v1/accounts/' + $scope.slug() + '/groups/' + $scope.groupSlug() + '.json')
     .success(function (data, status, headers, config) {
-      $scope.group = data;
+      $scope.group = data.group;
       done();
     })
     .error(function (data, status, headers, config) {

@@ -22,7 +22,9 @@ class Api::V1::GroupsController < ApplicationController
 
     respond_to do |format|
       format.json {
-        render json: group
+        render json: {
+          group: group.simple_hash
+        }
       }
     end
   end
@@ -33,7 +35,9 @@ class Api::V1::GroupsController < ApplicationController
 
     respond_to do |format|
       format.json {
-        render json: group.simple_hash
+        render json: {
+          group.simple_hash
+        }
       }
     end
   end
@@ -45,10 +49,11 @@ class Api::V1::GroupsController < ApplicationController
 
     respond_to do |format|
       format.json {
-        render json: group
+        render json: {
+          group: group
+        }
       }
     end
   end
 end
-
 

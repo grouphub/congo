@@ -27,7 +27,9 @@ class Api::V1::MembershipsController < ApplicationController
 
     respond_to do |format|
       format.json {
-        render json: membership
+        render json: {
+          membership: membership
+        }
       }
     end
   end
@@ -42,7 +44,9 @@ class Api::V1::MembershipsController < ApplicationController
 
     respond_to do |format|
       format.json {
-        render json: membership
+        render json: {
+          membership: membership
+        }
       }
     end
   end
@@ -57,7 +61,9 @@ class Api::V1::MembershipsController < ApplicationController
 
     respond_to do |format|
       format.json {
-        render json: membership
+        render json: {
+          membership: membership
+        }
       }
     end
   end
