@@ -11,19 +11,27 @@ Rails.application.routes.draw do
     '/users/signin',
     '/users/new',
     '/users/new_manager',
-    '/accounts/:account_name',
-    '/accounts/:account_name/home',
-    '/accounts/:account_name/products',
-    '/accounts/:account_name/products/new',
-    '/accounts/:account_name/groups',
-    '/accounts/:account_name/groups/new'
+    '/accounts/:slug',
+    '/accounts/:slug/home',
+    '/accounts/:slug/products',
+    '/accounts/:slug/products/new',
+    '/accounts/:slug/groups',
+    '/accounts/:slug/groups/new',
+    '/accounts/:slug/groups/:group_slug'
   ]
 
   namespace :api do
     namespace :v1 do
       resources :accounts do
         resources :products
-        resources :groups
+        resources :groups do
+          resources :memberships do
+            post '/confirmations', to: 'memberships#send_confirmation'
+          end
+
+          post '/group_products', to: 'group_products#create'
+          delete '/group_products', to: 'group_products#destroy'
+        end
       end
 
       post '/users/signin', to: 'users#signin'

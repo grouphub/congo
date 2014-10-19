@@ -15,11 +15,21 @@ gem 'coffee-rails', github: "rails/coffee-rails"
 
 gem 'jquery-rails'
 gem 'jbuilder', '~> 2.0'
-gem 'sdoc', '~> 0.4.0', group: :doc
-
-gem 'spring', group: :development
 
 gem 'bcrypt', '~> 3.1.7'
 
 gem 'pry'
+
+group :doc do
+  gem 'sdoc', '~> 0.4.0'
+end
+
+group :development do
+  gem 'spring'
+  gem 'letter_opener'
+end
+
+group :test do
+
+end
 

@@ -27,6 +27,17 @@ class Api::V1::GroupsController < ApplicationController
     end
   end
 
+  def show
+    slug = params[:id]
+    group = Group.where(slug: slug).first
+
+    respond_to do |format|
+      format.json {
+        render json: group.simple_hash
+      }
+    end
+  end
+
   def destroy
     id = params[:id]
 

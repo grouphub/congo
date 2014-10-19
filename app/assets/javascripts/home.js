@@ -42,6 +42,10 @@ congoApp.config([
       .when('/accounts/:slug/groups/new', {
         templateUrl: '/assets/groups/new.html',
         controller: 'GroupsNewController'
+      })
+      .when('/accounts/:slug/groups/:group_slug', {
+        templateUrl: '/assets/groups/show.html',
+        controller: 'GroupsShowController'
       });
   }
 ]);
@@ -50,6 +54,13 @@ congoApp.factory('slugFactory', function ($location) {
   return {
     slug: function () {
       var match = $location.path().match(/\/accounts\/([^\/]+)/);
+
+      if (match && match[1] && match[1].length > 0) {
+        return match[1];
+      }
+    },
+    groupSlug: function () {
+      var match = $location.path().match(/\/groups\/([^\/]+)/);
 
       if (match && match[1] && match[1].length > 0) {
         return match[1];
@@ -84,7 +95,7 @@ congoApp.controller('MainController', function ($scope, $http, $location, slugFa
 
   $scope.slug = function () {
     return slugFactory.slug();
-  }
+  };
 
   $scope.$watch('slug()');
 
@@ -106,8 +117,21 @@ congoApp.controller('LandingController', function ($scope) {
 
 });
 
-congoApp.controller('HomeController', function ($scope) {
+congoApp.controller('HomeController', function ($scope, slugFactory) {
+  $scope.accountName = function () {
+    var slug = slugFactory.slug();
+    var currentUser = congo.currentUser;
+    var account;
 
+    if (currentUser) {
+      account = _(congo.currentUser.accounts).findWhere({ slug: slug });
+      if (account) {
+        return account.name;
+      }
+    }
+  };
+
+  $scope.$watch('accountName()');
 });
 
 congoApp.controller('UsersSigninController', function ($scope, $http, $location) {
@@ -263,5 +287,135 @@ congoApp.controller('GroupsNewController', function ($scope, $http, $location, s
         debugger
       });
   };
+});
+
+congoApp.controller('GroupsShowController', function ($scope, $http, $location, slugFactory) {
+  $scope.slug = function () {
+    return slugFactory.slug();
+  };
+
+  $scope.groupSlug = function () {
+    return slugFactory.groupSlug();
+  };
+
+  $scope.memberships = function () {
+    if ($scope.group) {
+      return $scope.group.memberships;
+    }
+  };
+
+  $scope.$watch('slug()');
+  $scope.$watch('groupSlug()');
+  $scope.$watch('memberships()');
+  $scope.$watch('enabledProducts');
+
+  $scope.inviteMember = function () {
+    var email = $scope.email;
+    var data = {
+      email: email
+    };
+
+    $http
+      .post('/api/v1/accounts/' + $scope.slug() + '/groups/' + $scope.groupSlug() + '/memberships.json', data)
+      .success(function (data, status, headers, config) {
+        $scope.group.memberships.push(data);    
+      })
+      .error(function (data, status, headers, config) {
+        debugger
+      });
+  };
+
+  $scope.resendConfirmation = function (membership) {
+    $http
+      .post('/api/v1/accounts/' + $scope.slug() + '/groups/' + $scope.groupSlug() + '/memberships/' + membership.id + '/confirmations.json')
+      .success(function (data, status, headers, config) {
+        debugger
+      })
+      .error(function (data, status, headers, config) {
+        debugger
+      });
+  };
+
+  $scope.revokeMembership = function (membership) {
+    $http
+      .delete('/api/v1/accounts/' + $scope.slug() + '/groups/' + $scope.groupSlug() + '/memberships/' + membership.id + '.json')
+      .success(function (data, status, headers, config) {
+        $scope.group.memberships = _($scope.group.memberships).reject(function (m) {
+          return membership.id === m.id;
+        });
+      })
+      .error(function (data, status, headers, config) {
+        debugger
+      });
+  };
+
+  $scope.enableProduct = function (product) {
+    var data = {
+      product_id: product.id
+    }
+
+    $http
+      .post('/api/v1/accounts/' + $scope.slug() + '/groups/' + $scope.groupSlug() + '/group_products.json', data)
+      .success(function (data, status, headers, config) {
+        product.isEnabled = true;
+      })
+      .error(function (data, status, headers, config) {
+        debugger
+      });
+  };
+
+  $scope.changeProduct = function (product) {
+    if (product.isEnabled) {
+      var data = {
+        product_id: product.id
+      }
+
+      $http
+        .post('/api/v1/accounts/' + $scope.slug() + '/groups/' + $scope.groupSlug() + '/group_products.json', data)
+        .success(function (data, status, headers, config) {
+          product.isEnabled = true;
+        })
+        .error(function (data, status, headers, config) {
+          debugger
+        });
+    } else {
+      $http
+        .delete('/api/v1/accounts/' + $scope.slug() + '/groups/' + $scope.groupSlug() + '/group_products.json?product_id=' + product.id)
+        .success(function (data, status, headers, config) {
+          product.isEnabled = false;
+        })
+        .error(function (data, status, headers, config) {
+          debugger
+        });
+    }
+  };
+
+  function done() {
+    if ($scope.products && $scope.group) {
+      _($scope.products).each(function (product) {
+        product.isEnabled = !!_($scope.group.products).findWhere({ id: product.id });
+      });
+    }
+  }
+
+  $http
+    .get('/api/v1/accounts/' + $scope.slug() + '/products.json')
+    .success(function (data, status, headers, config) {
+      $scope.products = data.products;
+      done();
+    })
+    .error(function (data, status, headers, config) {
+      debugger
+    });
+
+  $http
+    .get('/api/v1/accounts/' + $scope.slug() + '/groups/' + $scope.groupSlug() + '.json')
+    .success(function (data, status, headers, config) {
+      $scope.group = data;
+      done();
+    })
+    .error(function (data, status, headers, config) {
+      debugger
+    });
 });
 

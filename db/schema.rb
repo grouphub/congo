@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 20141019014234) do
 
   create_table "groups", force: true do |t|
     t.string   "name"
+    t.string   "slug"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -46,18 +47,22 @@ ActiveRecord::Schema.define(version: 20141019014234) do
   create_table "memberships", force: true do |t|
     t.integer  "user_id"
     t.integer  "group_id"
+    t.string   "email"
+    t.string   "email_token"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "products", force: true do |t|
     t.string   "name"
+    t.string   "slug"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "users", force: true do |t|
     t.string   "name"
+    t.string   "slug"
     t.string   "email"
     t.string   "encrypted_password"
     t.text     "roles_data"
