@@ -1,4 +1,7 @@
+account = Account.where(name: 'First Account').first
+
 group = Group.create! \
+  account_id: account.id,
   name: 'My Group'
 
 alice = User.where(email: 'alice@first-account.com').first

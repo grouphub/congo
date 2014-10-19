@@ -160,6 +160,7 @@ congoApp.controller('UsersSigninController', function ($scope, $http, $location)
       })
       .success(function (data, status, headers, config) {
         congo.currentUser = data.user;
+        debugger
 
         $location.path('/');
       })
@@ -248,12 +249,12 @@ congoApp.controller('UsersNewCustomerController', function ($scope, $http, $loca
   $scope.submit = function () {
     $http
       .post('/api/v1/users.json', {
-        name: $scope.name,
+        first_name: $scope.first_name,
+        last_name: $scope.last_name,
         email: $scope.email,
         password: $scope.password,
         password_confirmation: $scope.password_confirmation,
-        email_token: emailToken,
-        type: 'customer'
+        email_token: emailToken
       })
       .success(function (data, status, headers, config) {
         congo.currentUser = data.user;

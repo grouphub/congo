@@ -2,6 +2,8 @@ class Group < ActiveRecord::Base
   has_many :memberships
   has_many :group_products
 
+  belongs_to :account
+
   before_save :add_slug
 
   def add_slug
