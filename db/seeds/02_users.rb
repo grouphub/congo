@@ -1,15 +1,18 @@
 admin = User.create! \
-  name: 'admin',
+  first_name: 'Adam',
+  last_name: 'Admin',
   email: 'admin@grouphub.io',
   password: 'testtest'
 
 bob = User.create! \
-  name: 'bob',
+  first_name: 'Bob',
+  last_name: 'Smith',
   email: 'bob@first-account.com',
   password: 'testtest'
 
 alice = User.create! \
-  name: 'alice',
+  first_name: 'Alice',
+  last_name: 'Doe',
   email: 'alice@first-account.com',
   password: 'testtest'
 

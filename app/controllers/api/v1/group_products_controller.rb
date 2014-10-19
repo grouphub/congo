@@ -11,7 +11,9 @@ class Api::V1::GroupProductsController < ApplicationController
 
     respond_to do |format|
       format.json {
-        render json: group_product
+        render json: {
+          group_product: group_product
+        }
       }
     end
   end
@@ -29,7 +31,9 @@ class Api::V1::GroupProductsController < ApplicationController
 
     respond_to do |format|
       format.json {
-        render json: group_products.first
+        render json: {
+          group_product: group_products.first
+        }
       }
     end
   end

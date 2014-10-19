@@ -22,7 +22,9 @@ class Api::V1::ProductsController < ApplicationController
 
     respond_to do |format|
       format.json {
-        render json: product
+        render json: {
+          product: product
+        }
       }
     end
   end
@@ -34,7 +36,9 @@ class Api::V1::ProductsController < ApplicationController
 
     respond_to do |format|
       format.json {
-        render json: product
+        render json: {
+          product: product
+        }
       }
     end
   end

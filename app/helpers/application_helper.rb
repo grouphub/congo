@@ -2,8 +2,8 @@ module ApplicationHelper
   class AuthenticationException < StandardError
   end
 
-  def signin!(name, password)
-    user = User.find_by_name(name)
+  def signin!(email, password)
+    user = User.find_by_email(email)
 
     if user && user.password == password
       @current_user = user

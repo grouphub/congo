@@ -1,13 +1,8 @@
 require 'bcrypt'
+require "#{Rails.root}/lib/sluggerizer"
 
 class User < ActiveRecord::Base
   has_many :account_users
-
-  before_save :add_slug
-
-  def add_slug
-    self.slug = Sluggerizer.sluggerize(self.name)
-  end
 
   def roles=(list)
     self.roles_data = list
@@ -17,6 +12,14 @@ class User < ActiveRecord::Base
 
   def roles
     self.roles_data.split(', ')
+  end
+
+  def properties=(hash)
+    self.properties_data = hash.to_json
+  end
+
+  def properties
+    JSON.load(self.properties_data)
   end
 
   def password
@@ -41,7 +44,8 @@ class User < ActiveRecord::Base
   def simple_hash
     {
       id: self.id,
-      name: self.name,
+      first_name: self.first_name,
+      last_name: self.last_name,
       email: self.email,
       accounts: self.accounts.map { |account| account.simple_hash }
     }

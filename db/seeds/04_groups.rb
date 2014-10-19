@@ -1,8 +1,8 @@
 group = Group.create! \
   name: 'My Group'
 
-alice = User.where(name: 'alice').first
-bob = User.where(name: 'bob').first
+alice = User.where(email: 'alice@first-account.com').first
+bob = User.where(email: 'bob@first-account.com').first
 product = Product.first
 
 GroupProduct.create! \
