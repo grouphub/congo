@@ -1,0 +1,61 @@
+<div class="row">
+  <div class="col-md-12">
+    <h1>{{group.name}}</h1>
+
+    <h2>Products</h2>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Product name</th>
+          <th>Enabled?</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr ng-repeat="product in products">
+          <td>{{product.name}}</td>
+          <td><input type="checkbox" value="{{product.id}}" ng-model="product.isEnabled" ng-change="changeProduct(product)"></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Members</h2>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Emails</th>
+          <th>Connected as</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr ng-repeat="membership in memberships()">
+          <td>{{membership.email}}</td>
+
+          <td>
+            <a ng-href="/users/{{membership.user.name}}" ng-if="membership.user">{{membership.user.name}}</a>
+          </td>
+
+          <td>
+            <a class="btn btn-danger btn-xs" href="" ng-click="revokeMembership(membership)">Revoke membership</a>
+            <a class="btn btn-primary btn-xs" href="" ng-if="!membership.user" ng-click="resendConfirmation(membership)">Re-send invitation</a>
+          </td>
+        </li>
+      </tbody>
+    </table>
+
+    <form ng-submit="inviteMember()">
+      <div class="form-group">
+        <label for="email">Invite a new member</label>
+        <input type="email" class="form-control" id="email" placeholder="Enter email&hellip;" ng-model="email" auto-focus>
+      </div>
+
+      <input type="submit" class="btn btn-default" value="Invite member">
+    </form>
+  </div>
+</div>
+
+

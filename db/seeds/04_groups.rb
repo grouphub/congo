@@ -11,9 +11,11 @@ GroupProduct.create! \
 
 Membership.create! \
   group_id: group.id,
-  user_id: alice.id
+  user_id: alice.id,
+  email: alice.email
 
 Membership.create! \
   group_id: group.id,
-  user_id: bob.id
+  user_id: bob.id,
+  email: bob.email
 

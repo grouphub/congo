@@ -51,7 +51,7 @@
                   <a ng-href="/accounts/{{account.slug}}">{{account.name}}</a>
                 </li>
 
-                <li class="divider"></li>
+                <li class="divider" ng-if="accounts().length > 0"></li>
 
                 <li>
                   <a href="" ng-click="signout()">Sign out</a>

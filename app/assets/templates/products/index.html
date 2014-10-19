@@ -2,12 +2,24 @@
   <div class="col-md-12">
     <h1>Products</h1>
 
-    <ul class="products">
-      <li ng-repeat="product in products">
-        <span>{{product.name}}</span>
-        <span>(<a href="" ng-click="deleteProductAt($index)">Delete</a>)</span>
-      </li>
-    </ul>
+    <table class="products table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr ng-repeat="product in products">
+          <td>{{product.name}}</td>
+
+          <td>
+            <a class="btn btn-danger btn-xs" href="" ng-click="deleteProductAt($index)">Delete</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
 
     <p>
       <a href="/accounts/{{slug()}}/products/new">New product</a>

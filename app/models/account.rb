@@ -11,6 +11,7 @@ class Account < ActiveRecord::Base
 
   def simple_hash
     {
+      id: self.id,
       name: self.name,
       slug: self.slug
     }

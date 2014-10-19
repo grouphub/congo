@@ -7,6 +7,7 @@ class Api::V1::UsersController < ApplicationController
     password = params[:password]
     password_confirmation = params[:password_confirmation]
     type = params[:type]
+    email_token = params[:email_token]
 
     if password != password_confirmation
       # TODO: Handle this
@@ -17,6 +18,13 @@ class Api::V1::UsersController < ApplicationController
       email: email,
       password: password,
       roles: [type]
+
+    # User came in from an email and is therefore a customer
+    if email_token
+      membership = Membership.where(email_token: email_token).first
+      membership.user_id = user.id
+      membership.save!
+    end
 
     respond_to do |format|
       format.json {
