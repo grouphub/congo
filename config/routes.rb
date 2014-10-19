@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     '/users/signin',
     '/users/new',
     '/users/new_manager',
+    '/users/new_customer',
     '/accounts/:slug',
     '/accounts/:slug/home',
     '/accounts/:slug/products',

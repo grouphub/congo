@@ -19,6 +19,10 @@ congoApp.config([
         templateUrl: '/assets/users/new_manager.html',
         controller: 'UsersNewManagerController'
       })
+      .when('/users/new_customer', {
+        templateUrl: '/assets/users/new_customer.html',
+        controller: 'UsersNewCustomerController'
+      })
       .when('/users/signin', {
         templateUrl: '/assets/users/signin.html',
         controller: 'UsersSigninController'
@@ -86,11 +90,15 @@ congoApp.controller('MainController', function ($scope, $http, $location, slugFa
   };
 
   $scope.userName = function () {
-    return congo.currentUser.name;
+    if (congo.currentUser) {
+      return congo.currentUser.name;
+    }
   };
 
   $scope.accounts = function () {
-    return congo.currentUser.accounts;
+    if (congo.currentUser) {
+      return congo.currentUser.accounts;
+    }
   };
 
   $scope.slug = function () {
@@ -98,6 +106,7 @@ congoApp.controller('MainController', function ($scope, $http, $location, slugFa
   };
 
   $scope.$watch('slug()');
+  $scope.$watch('hasAccounts()');
 
   $scope.signout = function () {
     $http
@@ -165,6 +174,30 @@ congoApp.controller('UsersNewManagerController', function ($scope, $http, $locat
         password: $scope.password,
         password_confirmation: $scope.password_confirmation,
         type: 'broker'
+      })
+      .success(function (data, status, headers, config) {
+        congo.currentUser = data;
+
+        $location.path('/');
+      })
+      .error(function (data, status, headers, config) {
+        debugger
+      });
+  };
+});
+
+congoApp.controller('UsersNewCustomerController', function ($scope, $http, $location) {
+  var emailToken = $location.search().email_token;
+
+  $scope.submit = function () {
+    $http
+      .post('/api/v1/users.json', {
+        name: $scope.name,
+        email: $scope.email,
+        password: $scope.password,
+        password_confirmation: $scope.password_confirmation,
+        email_token: emailToken,
+        type: 'customer'
       })
       .success(function (data, status, headers, config) {
         congo.currentUser = data;

@@ -1,0 +1,30 @@
+<div class="row">
+  <div class="col-md-12">
+    <h1>Sign up as a customer</h1>
+
+    <form ng-submit="submit()">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" id="name" placeholder="Enter name&hellip;" ng-model="name" auto-focus>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="text" class="form-control" id="email" placeholder="Enter email&hellip;" ng-model="email" auto-focus>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" id="password" placeholder="Enter password&hellip;" ng-model="password">
+      </div>
+
+      <div class="form-group">
+        <label for="password_confirmation">Password Confirmation</label>
+        <input type="password" class="form-control" id="password_confirmation" placeholder="Enter password again&hellip;" ng-model="password_confirmation">
+      </div>
+
+      <input type="submit" class="btn btn-default" value="Sign in">
+    </form>
+  </div>
+</div>
+
