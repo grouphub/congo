@@ -24,6 +24,11 @@ class Api::V1::UsersController < ApplicationController
     # User came in from an email and is therefore a customer
     if email_token
       membership = Membership.where(email_token: email_token).first
+
+      unless membership
+        # TODO: Handle this
+      end
+
       membership.user_id = user.id
       membership.save!
     end
