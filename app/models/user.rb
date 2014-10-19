@@ -2,7 +2,7 @@ require 'bcrypt'
 
 class User < ActiveRecord::Base
   def roles=(list)
-    self.roles_data = list.map { |item| sluggerize item }.join(', ')
+    self.roles_data = list.map { |item| sluggerize(item) }.join(', ')
   end
 
   def roles
