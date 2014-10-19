@@ -36,7 +36,7 @@ class Api::V1::GroupsController < ApplicationController
     respond_to do |format|
       format.json {
         render json: {
-          group.simple_hash
+          group: group.simple_hash
         }
       }
     end
@@ -50,7 +50,7 @@ class Api::V1::GroupsController < ApplicationController
     respond_to do |format|
       format.json {
         render json: {
-          group: group
+          group: group.simple_hash
         }
       }
     end

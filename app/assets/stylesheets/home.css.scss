@@ -34,6 +34,15 @@ header {
   }
 }
 
+.dropdown .dropdown-menu .heading {
+  &:hover {
+    background-color: initial;
+    cursor: default;
+  }
+
+  font-weight: bold;
+}
+
 @media (max-width: 767px) {
   header .navbar-nav > li.dropdown > ul > li {
     > a:hover,
