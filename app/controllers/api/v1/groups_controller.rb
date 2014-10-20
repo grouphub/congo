@@ -12,13 +12,16 @@ class Api::V1::GroupsController < ApplicationController
 
   def create
     name = params[:name]
+    account_slug = params[:account_id]
+    account = Account.where(slug: account_slug).first
 
     unless name
       # TODO: Handle this
     end
 
     group = Group.create! \
-      name: name
+      name: name,
+      account_id: account.id
 
     respond_to do |format|
       format.json {

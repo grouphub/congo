@@ -116,13 +116,20 @@ congoApp.factory('userDataFactory', function ($location) {
       return congo.currentUser.accounts;
     },
     accountName: function () {
+      var account;
+
       if (!congo.currentUser) {
         return;
       }
 
-      return _(congo.currentUser.accounts)
-        .findWhere({ slug: userDataFactory.accountSlug() })
-        .name;
+      account = _(congo.currentUser.accounts)
+        .findWhere({ slug: userDataFactory.accountSlug() });
+
+      if(!account) {
+        return;
+      }
+
+      return account.name;
     }
   };
 
@@ -296,7 +303,29 @@ congoApp.controller('UsersNewAccountController', function ($scope, $http, $locat
 congoApp.controller('UsersNewCustomerController', function ($scope, $http, $location) {
   var emailToken = $location.search().email_token;
 
-  $scope.submit = function () {
+  congo.currentUser = null;
+
+  $scope.signin = function () {
+    var email = $scope.signin_email;
+    var password = $scope.signin_password;
+
+    $http
+      .post('/api/v1/users/signin.json', {
+        email: email,
+        password: password,
+        email_token: emailToken
+      })
+      .success(function (data, status, headers, config) {
+        congo.currentUser = data.user;
+
+        $location.path('/');
+      })
+      .error(function (data, status, headers, config) {
+        debugger
+      });
+  }
+
+  $scope.signup = function () {
     $http
       .post('/api/v1/users.json', {
         first_name: $scope.first_name,

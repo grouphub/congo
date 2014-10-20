@@ -12,13 +12,20 @@ class Api::V1::ProductsController < ApplicationController
 
   def create
     name = params[:name]
+    account_slug = params[:account_id]
+    account = Account.where(slug: account_slug).first
 
     unless name
       # TODO: Handle this
     end
 
+    unless account
+      # TODO: Handle this
+    end
+
     product = Product.create! \
-      name: name
+      name: name,
+      account_id: account.id
 
     respond_to do |format|
       format.json {
