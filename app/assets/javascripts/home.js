@@ -452,7 +452,12 @@ congoApp.controller('ProductsIndexController', function ($scope, $http, $locatio
     return userDataFactory.accountSlug();
   };
 
+  $scope.currentRole = function () {
+    return userDataFactory.currentRole();
+  };
+
   $scope.$watch('accountSlug()');
+  $scope.$watch('currentRole()');
 
   $http
     .get('/api/v1/accounts/' + $scope.accountSlug() + '/products.json')
@@ -507,7 +512,12 @@ congoApp.controller('GroupsIndexController', function ($scope, $http, $location,
     return userDataFactory.accountSlug();
   };
 
+  $scope.currentRole = function () {
+    return userDataFactory.currentRole();
+  };
+
   $scope.$watch('accountSlug()');
+  $scope.$watch('currentRole()');
 
   $http
     .get('/api/v1/accounts/' + $scope.accountSlug() + '/groups.json')
