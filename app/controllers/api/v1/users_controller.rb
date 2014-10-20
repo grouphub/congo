@@ -107,6 +107,19 @@ class Api::V1::UsersController < ApplicationController
     end
   end
 
+  def show
+    id = params[:id]
+    user = User.find_by_id(id)
+
+    respond_to do |format|
+      format.json {
+        render json: {
+          user: user.simple_hash
+        }
+      }
+    end
+  end
+
   def signin
     email = params[:email]
     password = params[:password]
