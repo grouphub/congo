@@ -184,6 +184,35 @@ congoApp.factory('userDataFactory', function ($location) {
       if (match && match[1] && match[1].length > 0) {
         return match[1];
       }
+    },
+
+    // TODO: Use these to keep track what role a user is currently inhabiting
+    setCurrentAccountAndRole: function () {
+      if (!congo.currentUser) {
+        return;
+      }
+
+      var accountSlug = userDataFactory.accountSlug();
+      var account = _(congo.currentUser.accounts)
+        .findWhere({ slug: accountSlug });
+      var role = account.role;
+
+      congo.currentUser.currentAccount = accountSlug;
+      congo.currentUser.currentRole = role;
+    },
+    currentAccount: function () {
+      if (!congo.currentUser) {
+        return;
+      }
+
+      return congo.currentUser.currentAccount;
+    },
+    currentRole: function () {
+      if (!congo.currentUser) {
+        return;
+      }
+
+      return congo.currentUser.currentRole;
     }
   };
 
