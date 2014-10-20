@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require underscore
+//= require eventemitter-2
 //= require bootstrap
 //= require angular
 //= require angular-route
