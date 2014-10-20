@@ -62,6 +62,42 @@ congoApp.config([
   }
 ]);
 
+congoApp.factory('eventsFactory', function () {
+  var emitter = new EventEmitter2();
+
+  return {
+    on: function ($scope, type, listener) {
+      emitter.on(type, listener);
+
+      $scope.$on('$destroy', function() {
+        emitter.off(type, listener);
+      });
+    },
+    off: function (type, listener) {
+      emitter.off(type, listener);
+    },
+    emit: function () {
+      emitter.emit.apply(emitter, arguments);
+    }
+  };
+});
+
+congoApp.factory('flashesFactory', function (eventsFactory) {
+  var flashes = [];
+
+  return {
+    flashes: flashes,
+    add: function (type, message) {
+      flashes.push({
+        type: type,
+        message: message
+      });
+
+      eventsFactory.emit('flash_added');
+    }
+  };
+});
+
 congoApp.factory('userDataFactory', function ($location) {
   var userDataFactory = {
     accountSlug: function () {
@@ -147,7 +183,13 @@ congoApp.directive('autoFocus', function($timeout) {
   };
 });
 
-congoApp.controller('MainController', function ($scope, $http, $location, userDataFactory) {
+congoApp.controller('MainController', function ($scope, $http, $location, userDataFactory, flashesFactory, eventsFactory) {
+  $scope.flashes = flashesFactory.flashes;
+  eventsFactory.on($scope, 'flash_added', function () {
+    $scope.flashes = flashesFactory.flashes;
+    $scope.$digest();
+  });
+
   $scope.hasRole = function (name) {
     return userDataFactory.hasRole(name);
   };
@@ -168,9 +210,16 @@ congoApp.controller('MainController', function ($scope, $http, $location, userDa
     return userDataFactory.accountSlug();
   };
 
+  $scope.flashes = function () {
+    return flashesFactory.all();
+  }
+
   $scope.$watch('hasRole()');
   $scope.$watch('accountSlug()');
   $scope.$watch('hasAccounts()');
+  $scope.$watch('flashes');
+
+  window.flashesFactory = flashesFactory;
 
   $scope.signout = function () {
     $http

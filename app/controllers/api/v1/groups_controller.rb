@@ -19,6 +19,10 @@ class Api::V1::GroupsController < ApplicationController
       # TODO: Handle this
     end
 
+    unless account
+      # TODO: Handle this
+    end
+
     group = Group.create! \
       name: name,
       account_id: account.id
