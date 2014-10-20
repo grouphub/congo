@@ -110,9 +110,21 @@ class Api::V1::UsersController < ApplicationController
   def signin
     email = params[:email]
     password = params[:password]
+    email_token = params[:email_token]
 
     begin
       user = signin! email, password
+
+      if email_token
+        membership = Membership.where(email_token: email_token).includes(:group).first
+        group = membership.group
+        account_id = group.account_id
+
+        account_user = AccountUser.create! \
+          account_id: account_id,
+          user_id: user.id,
+          role: 'customer'
+      end
 
       respond_to do |format|
         format.json {
