@@ -1,3 +1,7 @@
+body {
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
 header {
   background-color: #3c8dbc;
 
@@ -64,51 +68,56 @@ footer {
   padding-bottom: 40px;
 }
 
-nav {
-  i.envelope {
-    $size: 20px;
+i.envelope {
+  background: image_url('envelope.png');
+}
 
-    text-indent: -9999px;
+i.forms {
+  background: image_url('forms.png');
+}
 
-    display: inline-block;
-    width: $size;
-    height: $size;
-    background: image_url('envelope.png');
-    background-size: $size $size;
+i.envelope,
+i.forms {
+  $size: 20px;
 
-    font-style: normal;
+  text-indent: -9999px;
+  display: inline-block;
+  width: $size;
+  height: $size;
+  background-size: $size $size;
+  font-style: normal;
+}
+
+@media (max-width: 767px) {
+  i.envelope,
+  i.forms {
+    text-indent: initial;
+    width: initial;
+    height: initial;
+    background: initial;
+    background-size: initial;
   }
+}
 
-  @media (max-width: 767px) {
-    i.envelope {
-      text-indent: initial;
-      width: initial;
-      height: initial;
-      background: initial;
-      background-size: initial;
-    }
-  }
+.icon-label {
+  font-size: 10px;
+  font-weight: bold;
+  background-color: #f56954;
+  padding: 0 5px;
+  border-radius: 9999px;
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  line-height: 16px;
+  box-shadow: 0 2px 1px #357ca5;
+  text-shadow: 0 1px #000;
+}
 
-  .icon-label {
-    font-size: 10px;
-    font-weight: bold;
-    background-color: #f56954;
-    padding: 0 5px;
-    border-radius: 9999px;
-    position: absolute;
-    top: 4px;
-    right: 4px;
-    line-height: 16px;
-    box-shadow: 0 2px 1px #357ca5;
-    text-shadow: 0 1px #000;
-  }
+li.dropdown {
+  overflow: visible;
+}
 
-  li.dropdown {
-    overflow: visible;
-  }
-
-  li.dropdown a {
-    position: relative;
-  }
+li.dropdown a {
+  position: relative;
 }
 
