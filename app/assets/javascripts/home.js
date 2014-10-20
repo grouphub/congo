@@ -35,6 +35,10 @@ congoApp.config([
         templateUrl: '/assets/users/signin.html',
         controller: 'UsersSigninController'
       })
+      .when('/users/:id', {
+        templateUrl: '/assets/users/show.html',
+        controller: 'UsersShowController'
+      })
       .when('/accounts/:slug', {
         templateUrl: '/assets/home.html',
         controller: 'HomeController'
@@ -166,6 +170,20 @@ congoApp.factory('userDataFactory', function ($location) {
       }
 
       return account.name;
+    },
+    currentUserId: function () {
+      if (!congo.currentUser) {
+        return;
+      }
+
+      return congo.currentUser.id;
+    },
+    userId: function () {
+      var match = $location.path().match(/\/users\/(\d+)/);
+
+      if (match && match[1] && match[1].length > 0) {
+        return match[1];
+      }
     }
   };
 
@@ -210,6 +228,10 @@ congoApp.controller('MainController', function ($scope, $http, $location, userDa
     return userDataFactory.accountSlug();
   };
 
+  $scope.currentUserId = function () {
+    return userDataFactory.currentUserId();
+  };
+
   $scope.flashes = function () {
     return flashesFactory.all();
   }
@@ -217,6 +239,7 @@ congoApp.controller('MainController', function ($scope, $http, $location, userDa
   $scope.$watch('hasRole()');
   $scope.$watch('accountSlug()');
   $scope.$watch('hasAccounts()');
+  $scope.$watch('currentUserId()');
   $scope.$watch('flashes');
 
   $scope.signout = function () {
@@ -391,6 +414,26 @@ congoApp.controller('UsersNewCustomerController', function ($scope, $http, $loca
         debugger
       });
   };
+});
+
+congoApp.controller('UsersShowController', function ($scope, $http, $location, userDataFactory) {
+  $scope.user = null;
+
+  $scope.userId = function () {
+    return userDataFactory.userId();
+  }
+
+  $scope.$watch('user');
+  $scope.$watch('userId()');
+
+  $http
+    .get('/api/v1/users/' + $scope.userId() + '.json')
+    .success(function (data, status, headers, config) {
+      $scope.user = data.user;
+    })
+    .error(function (data, status, headers, config) {
+      debugger
+    });
 });
 
 congoApp.controller('ProductsIndexController', function ($scope, $http, $location, userDataFactory) {

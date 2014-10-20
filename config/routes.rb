@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     '/users/new_billing',
     '/users/new_account',
     '/users/new_customer',
+    '/users/:id',
     '/accounts/:slug',
     '/accounts/:slug/home',
     '/accounts/:slug/products',
