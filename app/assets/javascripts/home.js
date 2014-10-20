@@ -219,8 +219,6 @@ congoApp.controller('MainController', function ($scope, $http, $location, userDa
   $scope.$watch('hasAccounts()');
   $scope.$watch('flashes');
 
-  window.flashesFactory = flashesFactory;
-
   $scope.signout = function () {
     $http
       .delete('/api/v1/users/signout.json')
