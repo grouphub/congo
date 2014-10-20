@@ -88,17 +88,6 @@ i.forms {
   font-style: normal;
 }
 
-@media (max-width: 767px) {
-  i.envelope,
-  i.forms {
-    text-indent: initial;
-    width: initial;
-    height: initial;
-    background: initial;
-    background-size: initial;
-  }
-}
-
 .icon-label {
   font-size: 10px;
   font-weight: bold;
@@ -111,6 +100,23 @@ i.forms {
   line-height: 16px;
   box-shadow: 0 2px 1px #357ca5;
   text-shadow: 0 1px #000;
+}
+
+@media (max-width: 767px) {
+  i.envelope,
+  i.forms {
+    text-indent: initial;
+    width: initial;
+    height: initial;
+    background: initial;
+    background-size: initial;
+  }
+
+  .icon-label {
+    font-size: 12px;
+    top: 12px;
+    right: 12px;
+  }
 }
 
 li.dropdown {
