@@ -13,7 +13,7 @@
       <tbody>
         <tr ng-repeat="group in groups">
           <td>
-            <a ng-href="/accounts/{{slug()}}/groups/{{group.slug}}">{{group.name}}</a>
+            <a ng-href="/accounts/{{accountSlug()}}/groups/{{group.slug}}">{{group.name}}</a>
           </td>
 
           <td>
@@ -24,7 +24,7 @@
     </table>
 
     <p>
-      <a href="/accounts/{{slug()}}/groups/new">New group</a>
+      <a href="/accounts/{{accountSlug()}}/groups/new">New group</a>
     </p>
   </div>
 </div>
