@@ -15,13 +15,13 @@ Rails.application.routes.draw do
     '/users/new_account',
     '/users/new_customer',
     '/users/:id',
-    '/accounts/:slug',
-    '/accounts/:slug/home',
-    '/accounts/:slug/products',
-    '/accounts/:slug/products/new',
-    '/accounts/:slug/groups',
-    '/accounts/:slug/groups/new',
-    '/accounts/:slug/groups/:group_slug'
+    '/accounts/:slug/:role',
+    '/accounts/:slug/:role/home',
+    '/accounts/:slug/:role/products',
+    '/accounts/:slug/:role/products/new',
+    '/accounts/:slug/:role/groups',
+    '/accounts/:slug/:role/groups/new',
+    '/accounts/:slug/:role/groups/:group_slug'
   ]
 
   namespace :api do

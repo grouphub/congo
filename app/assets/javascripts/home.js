@@ -39,27 +39,27 @@ congoApp.config([
         templateUrl: '/assets/users/show.html',
         controller: 'UsersShowController'
       })
-      .when('/accounts/:slug', {
+      .when('/accounts/:slug/:role', {
         templateUrl: '/assets/home.html',
         controller: 'HomeController'
       })
-      .when('/accounts/:slug/products', {
+      .when('/accounts/:slug/:role/products', {
         templateUrl: '/assets/products/index.html',
         controller: 'ProductsIndexController'
       })
-      .when('/accounts/:slug/products/new', {
+      .when('/accounts/:slug/:role/products/new', {
         templateUrl: '/assets/products/new.html',
         controller: 'ProductsNewController'
       })
-      .when('/accounts/:slug/groups', {
+      .when('/accounts/:slug/:role/groups', {
         templateUrl: '/assets/groups/index.html',
         controller: 'GroupsIndexController'
       })
-      .when('/accounts/:slug/groups/new', {
+      .when('/accounts/:slug/:role/groups/new', {
         templateUrl: '/assets/groups/new.html',
         controller: 'GroupsNewController'
       })
-      .when('/accounts/:slug/groups/:group_slug', {
+      .when('/accounts/:slug/:role/groups/:group_slug', {
         templateUrl: '/assets/groups/show.html',
         controller: 'GroupsShowController'
       });
@@ -185,34 +185,12 @@ congoApp.factory('userDataFactory', function ($location) {
         return match[1];
       }
     },
-
-    // TODO: Use these to keep track what role a user is currently inhabiting
-    setCurrentAccountAndRole: function () {
-      if (!congo.currentUser) {
-        return;
-      }
-
-      var accountSlug = userDataFactory.accountSlug();
-      var account = _(congo.currentUser.accounts)
-        .findWhere({ slug: accountSlug });
-      var role = account.role;
-
-      congo.currentUser.currentAccount = accountSlug;
-      congo.currentUser.currentRole = role;
-    },
-    currentAccount: function () {
-      if (!congo.currentUser) {
-        return;
-      }
-
-      return congo.currentUser.currentAccount;
-    },
     currentRole: function () {
-      if (!congo.currentUser) {
-        return;
-      }
+      var match = $location.path().match(/\/accounts\/[^\/]+\/([^\/]+)/);
 
-      return congo.currentUser.currentRole;
+      if (match && match[1] && match[1].length > 0) {
+        return match[1];
+      }
     }
   };
 
@@ -255,6 +233,10 @@ congoApp.controller('MainController', function ($scope, $http, $location, userDa
 
   $scope.accountSlug = function () {
     return userDataFactory.accountSlug();
+  };
+
+  $scope.currentRole = function () {
+    return userDataFactory.currentRole();
   };
 
   $scope.currentUserId = function () {
