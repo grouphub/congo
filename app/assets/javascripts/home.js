@@ -81,6 +81,47 @@ congoApp.factory('slugFactory', function ($location) {
   }
 });
 
+congoApp.factory('userDataFactory', function (slugFactory) {
+  return {
+    hasRole: function (name) {
+      var currentUser = congo.currentUser;
+      var accounts;
+      var slug;
+      var account;
+
+      if (!currentUser) {
+        return;
+      }
+
+      accounts = currentUser.accounts;
+      slug = slugFactory.slug();
+      account = _.findWhere(accounts, { slug: slug, role: name });
+
+      if (!account) {
+        return;
+      }
+
+      return true;
+    },
+    firstName: function () {
+      if (!congo.currentUser) {
+        return;
+      }
+
+      return congo.currentUser.first_name;
+    },
+    accountName: function () {
+      if (!congo.currentUser) {
+        return;
+      }
+
+      return _(congo.currentUser.accounts)
+        .findWhere({ slug: slugFactory.slug() })
+        .name;
+    }
+  };
+});
+
 congoApp.directive('autoFocus', function($timeout) {
   return {
     restrict: 'AC',
@@ -134,21 +175,22 @@ congoApp.controller('LandingController', function ($scope) {
 
 });
 
-congoApp.controller('HomeController', function ($scope, slugFactory) {
-  $scope.accountName = function () {
-    var slug = slugFactory.slug();
-    var currentUser = congo.currentUser;
-    var account;
-
-    if (currentUser) {
-      account = _(congo.currentUser.accounts).findWhere({ slug: slug });
-      if (account) {
-        return account.name;
-      }
-    }
+congoApp.controller('HomeController', function ($scope, slugFactory, userDataFactory) {
+  $scope.hasRole = function (name) {
+    return userDataFactory.hasRole(name);
   };
 
-  $scope.$watch('accountName()');
+  $scope.firstName = function () {
+    return userDataFactory.firstName();
+  };
+
+  $scope.accountName = function () {
+    return userDataFactory.accountName();
+  };
+
+  /* $scope.$watch('role()'); */
+  /* $scope.$watch('firstName()'); */
+  /* $scope.$watch('accountName()'); */
 });
 
 congoApp.controller('UsersSigninController', function ($scope, $http, $location) {
@@ -160,7 +202,6 @@ congoApp.controller('UsersSigninController', function ($scope, $http, $location)
       })
       .success(function (data, status, headers, config) {
         congo.currentUser = data.user;
-        debugger
 
         $location.path('/');
       })
