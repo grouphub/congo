@@ -36,6 +36,21 @@ class Api::V1::ProductsController < ApplicationController
     end
   end
 
+  def show
+    id = params[:id]
+    account_slug = params[:account_id]
+    account = Account.where(slug: account_slug).first
+    product = Product.where(id: params[:id]).first
+
+    respond_to do |format|
+      format.json {
+        render json: {
+          product: product
+        }
+      }
+    end
+  end
+
   def destroy
     id = params[:id]
 

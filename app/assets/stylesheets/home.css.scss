@@ -3,14 +3,16 @@ body {
 }
 
 header {
-  background-color: #3c8dbc;
+  $background-color: #3c8dbc;
+
+  background-color: $background-color;
 
   .navbar-nav {
     > li,
     > li.dropdown {
       > a {
         color: white;
-        background-color: #3c8dbc;
+        background-color: $background-color;
       }
 
       > a:hover,

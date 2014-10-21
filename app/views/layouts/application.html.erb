@@ -35,7 +35,7 @@
               <a class="heading" ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/products">Products</a>
             </li>
 
-            <li ng-if="hasRole('broker')">
+            <li ng-if="hasRole('broker') || hasRole('customer')">
               <a ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/groups">Groups</a>
             </li>
           </ul>
