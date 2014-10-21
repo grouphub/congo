@@ -9,7 +9,7 @@ class MembershipMailer < ActionMailer::Base
     # TODO: Add account name
     # TODO: Finish laying out email
     # TODO: Finish routing for customer
-    mail(to: email, subject: "You've been invited to join Grouphub!")
+    mail(to: email, subject: "You've been invited to join GroupHub!")
   end
 end
 
