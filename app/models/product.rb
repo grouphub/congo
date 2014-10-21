@@ -1,5 +1,6 @@
 class Product < ActiveRecord::Base
   has_many :group_products
+  has_many :applications
 
   belongs_to :account
 

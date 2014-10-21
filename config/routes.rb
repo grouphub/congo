@@ -21,7 +21,8 @@ Rails.application.routes.draw do
     '/accounts/:slug/:role/products/new',
     '/accounts/:slug/:role/groups',
     '/accounts/:slug/:role/groups/new',
-    '/accounts/:slug/:role/groups/:group_slug'
+    '/accounts/:slug/:role/groups/:group_slug',
+    '/accounts/:slug/:role/groups/:group_slug/products/:product_id/applications/new'
   ]
 
   namespace :api do
@@ -36,6 +37,8 @@ Rails.application.routes.draw do
           post '/group_products', to: 'group_products#create'
           delete '/group_products', to: 'group_products#destroy'
         end
+
+        resources :applications
       end
 
       post '/users/signin', to: 'users#signin'

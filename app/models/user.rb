@@ -3,6 +3,7 @@ require "#{Rails.root}/lib/sluggerizer"
 
 class User < ActiveRecord::Base
   has_many :account_users
+  has_many :applications
 
   def properties=(hash)
     self.properties_data = hash.to_json

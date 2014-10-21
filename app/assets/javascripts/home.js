@@ -62,7 +62,11 @@ congoApp.config([
       .when('/accounts/:slug/:role/groups/:group_slug', {
         templateUrl: '/assets/groups/show.html',
         controller: 'GroupsShowController'
-      });
+      })
+      .when('/accounts/:slug/:role/groups/:group_slug/products/:product_id/applications/new', {
+        templateUrl: '/assets/applications/new.html',
+        controller: 'ApplicationsNewController'
+      })
   }
 ]);
 
@@ -113,6 +117,13 @@ congoApp.factory('userDataFactory', function ($location) {
     },
     groupSlug: function () {
       var match = $location.path().match(/\/groups\/([^\/]+)/);
+
+      if (match && match[1] && match[1].length > 0) {
+        return match[1];
+      }
+    },
+    productId: function () {
+      var match = $location.path().match(/products\/([^\/])+/);
 
       if (match && match[1] && match[1].length > 0) {
         return match[1];
@@ -191,7 +202,7 @@ congoApp.factory('userDataFactory', function ($location) {
       if (match && match[1] && match[1].length > 0) {
         return match[1];
       }
-    }
+    },
   };
 
   return userDataFactory;
@@ -704,6 +715,68 @@ congoApp.controller('GroupsShowController', function ($scope, $http, $location, 
     .success(function (data, status, headers, config) {
       $scope.group = data.group;
       done();
+    })
+    .error(function (data, status, headers, config) {
+      debugger
+    });
+});
+
+congoApp.controller('ApplicationsNewController', function ($scope, $http, $location, userDataFactory) {
+  $scope.group = null;
+  $scope.product = null;
+
+  $scope.accountSlug = function () {
+    return userDataFactory.accountSlug();
+  };
+
+  $scope.groupSlug = function () {
+    return userDataFactory.groupSlug();
+  };
+
+  $scope.productId = function () {
+    return userDataFactory.productId();
+  };
+
+  $scope.currentRole = function () {
+    return userDataFactory.currentRole();
+  };
+
+  $scope.$watch('accountSlug()');
+  $scope.$watch('groupSlug()');
+  $scope.$watch('productId()');
+  $scope.$watch('currentRole()');
+
+  $scope.submit = function () {
+    var data = {
+      group_slug: $scope.groupSlug(),
+      product_id: $scope.productId()
+    };
+
+    $http
+      .post('/api/v1/accounts/' + $scope.accountSlug() + '/applications.json', data)
+      .success(function (data, status, headers, config) {
+        $location.path('/accounts/' + $scope.accountSlug() + '/' + $scope.currentRole());
+      })
+      .error(function (data, status, headers, config) {
+        debugger
+      });
+  }
+
+  window.$scope = $scope;
+
+  $http
+    .get('/api/v1/accounts/' + $scope.accountSlug() + '/groups/' + $scope.groupSlug() + '.json')
+    .success(function (data, status, headers, config) {
+      $scope.group = data.group;
+    })
+    .error(function (data, status, headers, config) {
+      debugger
+    });
+
+  $http
+    .get('/api/v1/accounts/' + $scope.accountSlug() + '/products/' + $scope.productId() + '.json')
+    .success(function (data, status, headers, config) {
+      $scope.product = data.product;
     })
     .error(function (data, status, headers, config) {
       debugger
