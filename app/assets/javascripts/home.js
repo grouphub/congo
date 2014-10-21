@@ -371,9 +371,13 @@ congoApp.controller('UsersNewAccountController', function ($scope, $http, $locat
         account_tagline: $scope.tagline
       })
       .success(function (data, status, headers, config) {
+        var account;
+
         congo.currentUser = data.user;
 
-        $location.path('/accounts/' + congo.currentUser.accounts[0].slug);
+        account = congo.currentUser.accounts[0];
+
+        $location.path('/accounts/' + account.slug + '/' + account.role);
       })
       .error(function (data, status, headers, config) {
         debugger
@@ -491,7 +495,12 @@ congoApp.controller('ProductsNewController', function ($scope, $http, $location,
     return userDataFactory.accountSlug();
   };
 
+  $scope.currentRole = function () {
+    return userDataFactory.currentRole();
+  };
+
   $scope.$watch('accountSlug()');
+  $scope.$watch('currentRole()');
 
   $scope.submit = function () {
     $http
@@ -499,7 +508,7 @@ congoApp.controller('ProductsNewController', function ($scope, $http, $location,
         name: $scope.name
       })
       .success(function (data, status, headers, config) {
-        $location.path('/accounts/' + $scope.accountSlug() + '/products');
+        $location.path('/accounts/' + $scope.accountSlug() + '/' + $scope.currentRole() + '/products');
       })
       .error(function (data, status, headers, config) {
         debugger
@@ -531,7 +540,7 @@ congoApp.controller('GroupsIndexController', function ($scope, $http, $location,
   $scope.deleteGroupAt = function (index) {
     var group = $scope.groups[index];
 
-    if (!product) {
+    if (!group) {
       debugger
     }
 
@@ -539,7 +548,6 @@ congoApp.controller('GroupsIndexController', function ($scope, $http, $location,
       .delete('/api/v1/accounts/' + $scope.accountSlug() + '/groups/' + group.id + '.json')
       .success(function (data, status, headers, config) {
         $scope.groups.splice(index, 1);
-        debugger
       })
       .error(function (data, status, headers, config) {
         debugger
@@ -552,7 +560,12 @@ congoApp.controller('GroupsNewController', function ($scope, $http, $location, u
     return userDataFactory.accountSlug();
   };
 
+  $scope.currentRole = function () {
+    return userDataFactory.currentRole();
+  };
+
   $scope.$watch('accountSlug()');
+  $scope.$watch('currentRole()');
 
   $scope.submit = function () {
     $http
@@ -560,7 +573,7 @@ congoApp.controller('GroupsNewController', function ($scope, $http, $location, u
         name: $scope.name
       })
       .success(function (data, status, headers, config) {
-        $location.path('/accounts/' + $scope.accountSlug() + '/groups');
+        $location.path('/accounts/' + $scope.accountSlug() + '/' + $scope.currentRole() + '/groups');
       })
       .error(function (data, status, headers, config) {
         debugger

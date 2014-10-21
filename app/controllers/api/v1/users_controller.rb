@@ -88,10 +88,6 @@ class Api::V1::UsersController < ApplicationController
         account.name = account_name
         account.tagline = account_tagline
         account.save!
-
-        account_user = AccountUser.create! \
-          account_id: account.id,
-          user_id: user.id
       else
         render nothing: true, status: :unauthorized
         return
