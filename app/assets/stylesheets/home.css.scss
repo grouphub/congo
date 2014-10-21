@@ -3,7 +3,26 @@ body {
 }
 
 header {
-  $background-color: #3c8dbc;
+  .navbar-header {
+    .navbar-brand {
+      .logo {
+        $width: 145px;
+        $height: 22px;
+
+        display: inline-block;
+        width: $width;
+        height: $height;
+        background: url('/assets/logo.png');
+        background-size: $width $height;
+      }
+    }
+  }
+}
+
+header {
+  $background-color: #2472be;
+  $hover-color: #2064a6;
+  $color: #82c2fd;
 
   background-color: $background-color;
 
@@ -11,14 +30,14 @@ header {
     > li,
     > li.dropdown {
       > a {
-        color: white;
+        color: $color;
         background-color: $background-color;
       }
 
       > a:hover,
       > a:focus {
-        background-color: #357ca5;
-        color: white;
+        background-color: $hover-color;
+        color: $color;
       }
     }
   }
@@ -26,17 +45,13 @@ header {
   .navbar-header {
     > a:hover,
     > a:focus {
-      background-color: #357ca5;
-      color: white;
+      background-color: $hover-color;
+      color: $color;
     }
   }
 
-  .navbar-brand {
-    color: white;
-  }
-
   .icon-bar {
-    border: 1px solid white;
+    border: 1px solid $color;
   }
 }
 
@@ -51,13 +66,16 @@ header {
 
 @media (max-width: 767px) {
   header .navbar-nav > li.dropdown > ul > li {
+    $color: #82c2fd;
+    $hover-color: #2064a6;
+
     > a:hover,
     > a:focus {
-      background-color: #357ca5;
+      background-color: $hover-color;
     }
 
     a {
-      color: white;
+      color: $color;
     }
   }
 }
@@ -91,6 +109,7 @@ i.forms {
 }
 
 .icon-label {
+  color: white;
   font-size: 11px;
   font-weight: bold;
   background-color: #f56954;
@@ -118,6 +137,11 @@ i.forms {
     font-size: 12px;
     top: 12px;
     right: 12px;
+  }
+
+  .label {
+    float: right;
+    margin-top: 4px;
   }
 }
 
