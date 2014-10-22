@@ -111,19 +111,19 @@
       </div>
     </header>
 
-    <main class="container">
-      <div class="col-md-12">
-        <div class="alerts">
-          <div ng-repeat="flash in flashes">
-            <div class="alert alert-{{flash.type}} fade in">
-              <button class="close" data-dismiss="alert">×</button>
-              {{flash.message}}
-            </div>
+    <div class="row">
+      <div class="col-md-12 alerts">
+        <div ng-repeat="flash in flashes">
+          <div class="alert alert-{{flash.type}} fade in">
+            <button class="close" data-dismiss="alert">×</button>
+            {{flash.message}}
           </div>
         </div>
-
-        <%= yield %>
       </div>
+    </div>
+
+    <main>
+      <%= yield %>
     </main>
 
     <footer>
