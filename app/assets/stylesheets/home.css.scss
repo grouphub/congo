@@ -20,8 +20,8 @@ header {
 }
 
 header {
-  $background-color: #2472be;
-  $hover-color: #2064a6;
+  $background-color: #333333;
+  $hover-color: #444444;
   $color: #82c2fd;
 
   background-color: $background-color;
@@ -89,11 +89,11 @@ footer {
 }
 
 i.envelope {
-  background: image_url('envelope.png');
+  background: asset_url('envelope.png');
 }
 
 i.forms {
-  background: image_url('forms.png');
+  background: asset_url('forms.png');
 }
 
 i.envelope,
@@ -119,7 +119,7 @@ i.forms {
   top: 4px;
   right: 4px;
   line-height: 13px;
-  box-shadow: 0 2px 1px #357ca5;
+  box-shadow: 0 2px 1px #333333;
   text-shadow: 0 1px #000;
 }
 
@@ -166,8 +166,16 @@ li.dropdown a {
   background-color: #02417d;
   background: url(/assets/splash-backg.png);
   background-position: center;
-  background-size: 1300px 240px;
+  background-size: 1025px 240px;
   height: 240px;
   margin-top: -21px;
   margin-bottom: 20px;
+
+  .logo {
+    background: url(/assets/splash-logo.png);
+    background-position: center;
+    background-size: 1025px 240px;
+    height: 240px;
+  }
 }
+
