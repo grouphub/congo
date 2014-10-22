@@ -73,6 +73,7 @@ class Api::V1::UsersController < ApplicationController
     properties = user.properties || {}
     account = nil
 
+    # TODO: Put payment info in account
     properties['plan_name'] = plan_name if plan_name
     properties['card_number'] = card_number if card_number
     properties['month'] = month if month
