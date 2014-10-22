@@ -223,7 +223,6 @@ congoApp.controller('MainController', function ($scope, $http, $location, userDa
   $scope.flashes = flashesFactory.flashes;
   eventsFactory.on($scope, 'flash_added', function () {
     $scope.flashes = flashesFactory.flashes;
-    $scope.$digest();
   });
 
   $scope.hasRole = function (name) {
@@ -271,9 +270,11 @@ congoApp.controller('MainController', function ($scope, $http, $location, userDa
         congo.currentUser = null;
 
         $location.path('/');
+
+        flashesFactory.add('success', 'You have signed out.');
       })
       .error(function (data, status, headers, config) {
-        debugger
+        flashesFactory.add('danger', 'There was a problem signing you out');
       });
   };
 });
@@ -300,7 +301,7 @@ congoApp.controller('HomeController', function ($scope, userDataFactory) {
   $scope.$watch('accountName()');
 });
 
-congoApp.controller('UsersSigninController', function ($scope, $http, $location) {
+congoApp.controller('UsersSigninController', function ($scope, $http, $location, flashesFactory) {
   $scope.submit = function () {
     $http
       .post('/api/v1/users/signin.json', {
@@ -311,14 +312,16 @@ congoApp.controller('UsersSigninController', function ($scope, $http, $location)
         congo.currentUser = data.user;
 
         $location.path('/');
+
+        flashesFactory.add('success', 'Welcome back, ' + congo.currentUser.first_name + ' ' + congo.currentUser.last_name + '!');
       })
       .error(function (data, status, headers, config) {
-        debugger
+        flashesFactory.add('danger', 'There was a problem signing you in.');
       });
   };
 });
 
-congoApp.controller('UsersNewManagerController', function ($scope, $http, $location) {
+congoApp.controller('UsersNewManagerController', function ($scope, $http, $location, flashesFactory) {
   $scope.submit = function () {
     $http
       .post('/api/v1/users.json', {
@@ -335,12 +338,12 @@ congoApp.controller('UsersNewManagerController', function ($scope, $http, $locat
         $location.path('/users/new_plan');
       })
       .error(function (data, status, headers, config) {
-        debugger
+        flashesFactory.add('danger', 'There was a problem creating your account.');
       });
   };
 });
 
-congoApp.controller('UsersNewPlanController', function ($scope, $http, $location) {
+congoApp.controller('UsersNewPlanController', function ($scope, $http, $location, flashesFactory) {
   $scope.pickPlan = function (planName) {
     $http
       .put('/api/v1/users/' + congo.currentUser.id + '.json', {
@@ -350,7 +353,7 @@ congoApp.controller('UsersNewPlanController', function ($scope, $http, $location
         $location.path('/users/new_billing');
       })
       .error(function (data, status, headers, config) {
-        debugger
+        flashesFactory.add('danger', 'There was a problem setting up your plan.');
       });
   };
 });
@@ -368,7 +371,7 @@ congoApp.controller('UsersNewBillingController', function ($scope, $http, $locat
         $location.path('/users/new_account');
       })
       .error(function (data, status, headers, config) {
-        debugger
+        flashesFactory.add('danger', 'There was a problem setting up your payment info.');
       });
   };
 });
@@ -389,9 +392,11 @@ congoApp.controller('UsersNewAccountController', function ($scope, $http, $locat
         account = congo.currentUser.accounts[0];
 
         $location.path('/accounts/' + account.slug + '/' + account.role);
+
+        flashesFactory.add('success', 'Welcome, ' + congo.currentUser.first_name + ' ' + congo.currentUser.last_name + '!');
       })
       .error(function (data, status, headers, config) {
-        debugger
+        flashesFactory.add('danger', 'There was a problem creating your account.');
       });
   };
 });
