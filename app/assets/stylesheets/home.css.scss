@@ -163,10 +163,11 @@ li.dropdown a {
 }
 
 .splash {
-  background-color: #02417d;
   background: url(/assets/splash-backg.png);
   background-position: center;
   background-size: 1025px 240px;
+  background-repeat: no-repeat;
+  background-color: #003c82;
   height: 240px;
   margin-top: -21px;
   margin-bottom: 20px;
@@ -175,6 +176,7 @@ li.dropdown a {
     background: url(/assets/splash-logo.png);
     background-position: center;
     background-size: 1025px 240px;
+    background-repeat: no-repeat;
     height: 240px;
   }
 }
