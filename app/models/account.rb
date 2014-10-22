@@ -10,7 +10,7 @@ class Account < ActiveRecord::Base
     self.slug = Sluggerizer.sluggerize(self.name) if self.name
   end
 
-  def once_a_month(&block)
+  def needs_to_pay?
     last_payment = Payment.where(account_id: self.id)
     current_time = Time.now
     created_at = nil
@@ -21,12 +21,8 @@ class Account < ActiveRecord::Base
       created_at = self.created_at
     end
 
-    if(
-      current_time.month > created_at.month &&
+    current_time.month > created_at.month &&
       current_time.day >= created_at.day
-    )
-      block.call
-    end
   end
 
   def simple_hash

@@ -8,7 +8,7 @@ every(1.minute, 'tick') do
   puts 'tick'
 
   Account.find_each do |account|
-    account.once_a_month do
+    if account.needs_to_pay?
       Payment.create! \
         account_id: account.id,
         cents: 0,
