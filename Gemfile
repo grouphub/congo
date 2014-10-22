@@ -13,12 +13,17 @@ gem 'coffee-rails', github: "rails/coffee-rails"
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
+gem 'puma'
+
 gem 'jquery-rails'
 gem 'jbuilder', '~> 2.0'
 
 gem 'bcrypt', '~> 3.1.7'
 
 gem 'pry'
+
+gem 'clockwork'
+gem 'delayed_job_active_record'
 
 group :doc do
   gem 'sdoc', '~> 0.4.0'

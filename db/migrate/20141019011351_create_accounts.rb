@@ -5,6 +5,12 @@ class CreateAccounts < ActiveRecord::Migration
       t.string :slug
       t.string :tagline
 
+      # Payment info
+      t.string :card_number
+      t.string :month
+      t.string :year
+      t.string :cvc
+
       t.timestamps
     end
   end
