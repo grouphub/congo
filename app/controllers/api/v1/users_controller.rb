@@ -33,7 +33,7 @@ class Api::V1::UsersController < ApplicationController
       membership.user_id = user.id
       membership.save!
 
-      account_user = AccountUser.create! \
+      Role.create! \
         account_id: account_id,
         user_id: user.id,
         role: 'customer'
@@ -42,7 +42,7 @@ class Api::V1::UsersController < ApplicationController
     else
       account = Account.create!
 
-      account_user = AccountUser.create! \
+      Role.create! \
         account_id: account.id,
         user_id: user.id,
         role: 'broker'
@@ -130,7 +130,7 @@ class Api::V1::UsersController < ApplicationController
         group = membership.group
         account_id = group.account_id
 
-        account_user = AccountUser.create! \
+        Role.create! \
           account_id: account_id,
           user_id: user.id,
           role: 'customer'

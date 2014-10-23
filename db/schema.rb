@@ -16,14 +16,6 @@ ActiveRecord::Schema.define(version: 20141022052345) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "account_users", force: true do |t|
-    t.integer  "account_id"
-    t.integer  "user_id"
-    t.string   "role"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "accounts", force: true do |t|
     t.string   "name"
     t.string   "slug"
@@ -96,6 +88,14 @@ ActiveRecord::Schema.define(version: 20141022052345) do
     t.integer  "account_id"
     t.string   "name"
     t.string   "slug"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "roles", force: true do |t|
+    t.integer  "account_id"
+    t.integer  "user_id"
+    t.string   "role"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -18,17 +18,17 @@ alice = User.create! \
 
 account = Account.where(name: 'First Account').first
 
-AccountUser.create! \
+Role.create! \
   user_id: admin.id,
   account_id: account.id,
   role: 'broker'
 
-AccountUser.create! \
+Role.create! \
   user_id: bob.id,
   account_id: account.id,
   role: 'customer'
 
-AccountUser.create! \
+Role.create! \
   user_id: alice.id,
   account_id: account.id,
   role: 'customer'
