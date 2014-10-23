@@ -255,7 +255,12 @@ congoApp.controller('MainController', function ($scope, $http, $location, userDa
 
   $scope.flashes = function () {
     return flashesFactory.all();
-  }
+  };
+
+  $scope.showSidebar = false;
+  $scope.toggleSidebar = function () {
+    $scope.showSidebar = !$scope.showSidebar;
+  };
 
   $scope.$watch('hasRole()');
   $scope.$watch('accountSlug()');

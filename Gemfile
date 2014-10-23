@@ -24,6 +24,7 @@ gem 'pry'
 
 gem 'clockwork'
 gem 'delayed_job_active_record'
+gem 'stripe'
 
 group :doc do
   gem 'sdoc', '~> 0.4.0'

@@ -9,12 +9,7 @@ every(1.minute, 'tick') do
 
   Account.find_each do |account|
     if account.needs_to_pay?
-      Payment.create! \
-        account_id: account.id,
-        cents: 0,
-        properties: {}
-
-      pp ['pay', account, last_payment]
+      Delayed::Job.enqueue(PaymentJob.new(account))
     end
   end
 end

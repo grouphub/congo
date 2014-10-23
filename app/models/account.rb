@@ -11,7 +11,10 @@ class Account < ActiveRecord::Base
   end
 
   def needs_to_pay?
-    last_payment = Payment.where(account_id: self.id)
+    last_payment = Payment
+      .where(account_id: self.id)
+      .order('created_at DESC')
+      .first
     current_time = Time.now
     created_at = nil
 

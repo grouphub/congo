@@ -16,118 +16,126 @@
   </head>
 
   <body ng-controller="MainController">
-    <header class="navbar navbar-static-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".congo-navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
+    <div id="wrapper" class="toggled" ng-class="showSidebar ? '' : 'toggled'">
+      <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+          <li class="sidebar-brand">
+            <a href="" class="logo-link">
+              <div class="logo"></div>
+            </a>
+          </li>
 
-          <a href="/" class="navbar-brand">
-            <div class="logo"></div>
-          </a>
-        </div>
+          <li ng-if="hasRole('broker')">
+            <a class="heading" ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/products">Products</a>
+          </li>
 
-        <nav class="collapse navbar-collapse congo-navbar-collapse">
-          <ul class="nav navbar-nav" ng-if="isSignedin() && accountSlug()">
-            <li ng-if="hasRole('broker')">
-              <a class="heading" ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/products">Products</a>
-            </li>
+          <li ng-if="hasRole('broker') || hasRole('customer')">
+            <a ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/groups">Groups</a>
+          </li>
 
-            <li ng-if="hasRole('broker') || hasRole('customer')">
-              <a ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/groups">Groups</a>
-            </li>
-          </ul>
+          <li>
+            <a href="/users/signin">Sign in</a>
+          </li>
 
-          <ul class="nav navbar-nav navbar-right" ng-if="isSignedin()">
-            <li class="dropdown messages-menu">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <i class="envelope">Notifications</i>
-                <span class="icon-label">99</span>
-              </a>
-              <ul class="dropdown-menu">
-                <li>
-                  <a href="">You have 4 messages</a>
-                </li>
-              </ul>
-            </li>
-
-            <li class="dropdown messages-menu">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <i class="forms">To-Dos</i>
-                <span class="icon-label">99</span>
-              </a>
-              <ul class="dropdown-menu">
-                <li>
-                  <a href="">You have 4 to-dos</a>
-                </li>
-              </ul>
-            </li>
-
-            <li class="dropdown">
-              <a href="" class="dropdown-toggle" data-toggle="dropdown">
-                {{firstName()}}
-                <i class="caret"></i>
-              </a>
-
-              <ul class="dropdown-menu">
-                <li>
-                  <a class="heading" href="">Accounts</a>
-                </li>
-
-                <li ng-repeat="account in accounts()">
-                  <a ng-href="/accounts/{{account.slug}}/{{account.role}}">
-                    {{account.name}}
-                    <span class="label label-default role">{{account.role}}</span>
-                  </a>
-                </li>
-
-                <li class="divider" ng-if="accounts().length > 0"></li>
-
-                <li>
-                  <a href="/users/{{currentUserId()}}">My Profile</a>
-                </li>
-
-                <li>
-                  <a href="" ng-click="signout()">Sign out</a>
-                </li>
-              </ul>
-            </li>
-          </ul>
-
-          <ul class="nav navbar-nav navbar-right" ng-if="!isSignedin()">
-            <li>
-              <a href="/users/signin">Sign in</a>
-            </li>
-
-            <li>
-              <a href="/users/new_manager">Sign up</a>
-            </li>
-          </ul>
-        </nav>
+          <li>
+            <a href="/users/new_manager">Sign up</a>
+          </li>
+        </ul>
       </div>
-    </header>
 
-    <div class="row">
-      <div class="col-md-12 alerts">
+      <div id="page-content-wrapper">
+        <header class="navbar navbar-static-top">
+          <nav>
+            <ul class="nav navbar-nav">
+              <li>
+                <a href="" ng-click="toggleSidebar()" class="sidebar-toggle">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </a>
+              </li>
+
+              <li>
+                <a class="logo-link" href="/">
+                  <div class="logo"></div>
+                </a>
+              </li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+              <li class="dropdown messages-menu">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  <i class="envelope">Notifications</i>
+                  <span class="icon-label">99</span>
+                </a>
+                <ul class="dropdown-menu">
+                  <li>
+                    <a href="">You have 4 messages</a>
+                  </li>
+                </ul>
+              </li>
+
+              <li class="dropdown messages-menu">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  <i class="forms">To-Dos</i>
+                  <span class="icon-label">99</span>
+                </a>
+                <ul class="dropdown-menu">
+                  <li>
+                    <a href="">You have 4 to-dos</a>
+                  </li>
+                </ul>
+              </li>
+
+              <li ng-if="firstName()" class="dropdown">
+                <a href="" class="dropdown-toggle" data-toggle="dropdown">
+                  {{firstName()}}
+                  <i class="caret"></i>
+                </a>
+
+                <ul class="dropdown-menu">
+                  <li>
+                    <a class="heading" href="">Accounts</a>
+                  </li>
+
+                  <li ng-repeat="account in accounts()">
+                    <a ng-href="/accounts/{{account.slug}}/{{account.role}}">
+                      {{account.name}}
+                      <span class="label label-default role">{{account.role}}</span>
+                    </a>
+                  </li>
+
+                  <li class="divider" ng-if="accounts().length > 0"></li>
+
+                  <li>
+                    <a href="/users/{{currentUserId()}}">My Profile</a>
+                  </li>
+
+                  <li>
+                    <a href="" ng-click="signout()">Sign out</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </nav>
+        </header>
+
         <div ng-repeat="flash in flashes">
           <div class="alert alert-{{flash.type}} fade in">
             <button class="close" data-dismiss="alert">×</button>
             {{flash.message}}
           </div>
         </div>
+
+        <main>
+          <%= yield %>
+
+          <footer>
+            &copy; 2014 GroupHub Inc.
+          </footer>
+        </main>
       </div>
     </div>
-
-    <main>
-      <%= yield %>
-    </main>
-
-    <footer>
-      &copy; 2014 GroupHub Inc.
-    </footer>
   </body>
 </html>
