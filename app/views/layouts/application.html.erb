@@ -23,32 +23,20 @@
             <a href="#">Start Bootstrap</a>
           </li>
 
-          <li>
-            <a href="#">Dashboard</a>
+          <li ng-if="hasRole('broker')">
+            <a class="heading" ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/products">Products</a>
+          </li>
+
+          <li ng-if="hasRole('broker') || hasRole('customer')">
+            <a ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/groups">Groups</a>
           </li>
 
           <li>
-            <a href="#">Shortcuts</a>
+            <a href="/users/signin">Sign in</a>
           </li>
 
           <li>
-            <a href="#">Overview</a>
-          </li>
-
-          <li>
-            <a href="#">Events</a>
-          </li>
-
-          <li>
-            <a href="#">About</a>
-          </li>
-
-          <li>
-            <a href="#">Services</a>
-          </li>
-
-          <li>
-            <a href="#">Contact</a>
+            <a href="/users/new_manager">Sign up</a>
           </li>
         </ul>
       </div>
@@ -67,17 +55,9 @@
               </li>
 
               <li>
-                <a href="">
+                <a href="/">
                   <div class="logo"></div>
                 </a>
-              </li>
-
-              <li ng-if="hasRole('broker')">
-                <a class="heading" ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/products">Products</a>
-              </li>
-
-              <li ng-if="hasRole('broker') || hasRole('customer')">
-                <a ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/groups">Groups</a>
               </li>
 
               <li class="dropdown messages-menu">
@@ -104,7 +84,7 @@
                 </ul>
               </li>
 
-              <li class="dropdown">
+              <li ng-if="firstName()" class="dropdown">
                 <a href="" class="dropdown-toggle" data-toggle="dropdown">
                   {{firstName()}}
                   <i class="caret"></i>
@@ -133,26 +113,14 @@
                   </li>
                 </ul>
               </li>
-
-              <li>
-                <a href="/users/signin">Sign in</a>
-              </li>
-
-              <li>
-                <a href="/users/new_manager">Sign up</a>
-              </li>
             </ul>
           </nav>
         </header>
 
-        <div class="row">
-          <div class="col-md-12 alerts">
-            <div ng-repeat="flash in flashes">
-              <div class="alert alert-{{flash.type}} fade in">
-                <button class="close" data-dismiss="alert">×</button>
-                {{flash.message}}
-              </div>
-            </div>
+        <div ng-repeat="flash in flashes">
+          <div class="alert alert-{{flash.type}} fade in">
+            <button class="close" data-dismiss="alert">×</button>
+            {{flash.message}}
           </div>
         </div>
 
