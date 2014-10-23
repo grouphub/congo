@@ -1,29 +1,27 @@
-<div class="container">
-  <div class="col-md-12">
-    <h1>Products</h1>
+<div class="col-md-12">
+  <h1>Products</h1>
 
-    <table class="products table">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
+  <table class="products table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
 
-      <tbody>
-        <tr ng-repeat="product in products">
-          <td>{{product.name}}</td>
+    <tbody>
+      <tr ng-repeat="product in products">
+        <td>{{product.name}}</td>
 
-          <td>
-            <a class="btn btn-danger btn-xs" href="" ng-click="deleteProductAt($index)">Delete</a>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+        <td>
+          <a class="btn btn-danger btn-xs" href="" ng-click="deleteProductAt($index)">Delete</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 
-    <p>
-      <a class="btn btn-default" href="/accounts/{{accountSlug()}}/{{currentRole()}}/products/new">New product</a>
-    </p>
-  </div>
+  <p>
+    <a class="btn btn-default" href="/accounts/{{accountSlug()}}/{{currentRole()}}/products/new">New product</a>
+  </p>
 </div>
 
