@@ -288,6 +288,11 @@ main {
   display: block;
   text-decoration: none;
   color: #999999;
+
+  i {
+    margin-left: -20px;
+    margin-right: 12px;
+  }
 }
 
 .sidebar-nav li a:hover {
@@ -344,6 +349,10 @@ nav {
   header.navbar {
     display: none;
   }
+
+  .sidebar-nav {
+    width: 100%;
+  }
 }
 
 main [ng-controller=HomeController] .col-md-12 {
@@ -384,3 +393,17 @@ h1 {
   line-height: 2em;
 }
 
+@media (max-width: 767px) {
+  #wrapper {
+    main {
+      [ng-view],
+      footer {
+        margin-right: 0;
+      }
+    }
+  }
+
+  .sidebar-nav .sidebar-brand {
+    height: 51px;
+  }
+}
