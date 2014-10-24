@@ -18,145 +18,20 @@
   <body ng-controller="MainController">
     <div id="wrapper" class="toggled" ng-class="showSidebar ? '' : 'toggled'">
       <div id="sidebar-wrapper">
-        <ul class="sidebar-nav">
-          <li class="sidebar-brand">
-            <a href="" class="logo-link">
-              <div class="logo"></div>
-            </a>
-          </li>
-
-          <li ng-if="hasRole('broker')">
-            <a class="heading" ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/products">
-              <i class="glyphicon glyphicon-user"></i>
-              <span class="caption">Products</span>
-            </a>
-          </li>
-
-          <li ng-if="hasRole('broker') || hasRole('customer')">
-            <a ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/groups">
-              <i class="glyphicon glyphicon-user"></i>
-              <span class="caption">Groups</span>
-            </a>
-          </li>
-
-          <li ng-if="hasRole('broker') || hasRole('customer')">
-            <a ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/applications">
-              <i class="glyphicon glyphicon-user"></i>
-              <span class="caption">Applications</span>
-            </a>
-          </li>
-
-          <li ng-if="!firstName()">
-            <a href="/users/signin">
-              <i class="glyphicon glyphicon-user"></i>
-              <span class="caption">Sign in</span>
-            </a>
-          </li>
-
-          <li ng-if="!firstName()">
-            <a href="/users/new_manager">
-              <i class="glyphicon glyphicon-user"></i>
-              <span class="caption">Sign up</span>
-            </a>
-          </li>
-        </ul>
+        <%= render partial: 'layouts/sidebar' %>
       </div>
 
       <div id="page-content-wrapper">
-        <header class="navbar navbar-static-top">
-          <nav>
-            <ul class="nav navbar-nav">
-              <li>
-                <a href="" ng-click="toggleSidebar()" class="sidebar-toggle">
-                  <span class="sr-only">Toggle navigation</span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                </a>
-              </li>
-
-              <li>
-                <a class="logo-link" href="/">
-                  <div class="logo"></div>
-                </a>
-              </li>
-            </ul>
-
-            <ul class="nav navbar-nav navbar-right">
-              <li class="dropdown messages-menu" ng-if="hasRole('broker') || hasRole('customer')">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <i class="envelope">Notifications</i>
-                  <span class="icon-label">99</span>
-                </a>
-                <ul class="dropdown-menu">
-                  <li>
-                    <a href="">You have 4 messages</a>
-                  </li>
-                </ul>
-              </li>
-
-              <li class="dropdown messages-menu" ng-if="hasRole('broker') || hasRole('customer')">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <i class="forms">To-Dos</i>
-                  <span class="icon-label">99</span>
-                </a>
-                <ul class="dropdown-menu">
-                  <li>
-                    <a href="">You have 4 to-dos</a>
-                  </li>
-                </ul>
-              </li>
-
-              <li ng-if="firstName()" class="dropdown">
-                <a href="" class="dropdown-toggle" data-toggle="dropdown">
-                  {{firstName()}}
-                  <i class="caret"></i>
-                </a>
-
-                <ul class="dropdown-menu">
-                  <li>
-                    <a class="heading" href="">Accounts</a>
-                  </li>
-
-                  <li ng-repeat="account in accounts()">
-                    <a ng-href="/accounts/{{account.slug}}/{{account.role.role}}">
-                      {{account.name}}
-                      <span class="label label-default role">{{account.role.role}}</span>
-                    </a>
-                  </li>
-
-                  <li class="divider" ng-if="accounts().length > 0"></li>
-
-                  <li>
-                    <a href="/users/{{currentUserId()}}">My Profile</a>
-                  </li>
-
-                  <li>
-                    <a href="" ng-click="signout()">
-                      Sign out
-                    </a>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </nav>
-        </header>
-
-        <div class="alerts" ng-repeat="flash in flashes">
-          <div class="alert alert-{{flash.type}} fade in">
-            <button class="close" data-dismiss="alert">×</button>
-            {{flash.message}}
-          </div>
-        </div>
+        <%= render partial: 'layouts/navbar' %>
+        <%= render partial: 'layouts/alerts' %>
 
         <main>
           <%= yield %>
 
-          <footer>
-            &copy; 2014 GroupHub Inc.
-          </footer>
+          <%= render partial: 'layouts/footer' %>
         </main>
       </div>
     </div>
   </body>
 </html>
+
