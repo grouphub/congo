@@ -67,6 +67,10 @@ congoApp.config([
         templateUrl: '/assets/applications/new.html',
         controller: 'ApplicationsNewController'
       })
+      .when('/accounts/:slug/:role/applications', {
+        templateUrl: '/assets/applications/index.html',
+        controller: 'ApplicationsIndexController'
+      })
   }
 ]);
 
@@ -791,5 +795,9 @@ congoApp.controller('ApplicationsNewController', function ($scope, $http, $locat
     .error(function (data, status, headers, config) {
       debugger
     });
+});
+
+congoApp.controller('ApplicationsIndexController', function ($scope, $http, $location, userDataFactory) {
+
 });
 

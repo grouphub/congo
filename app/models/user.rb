@@ -24,10 +24,10 @@ class User < ActiveRecord::Base
 
   def simple_hash
     accounts = self
-      .account_users
+      .roles
       .includes(:account)
-      .inject([]) { |sum, account_user|
-        account_hash = account_user.account.try(:as_json)
+      .inject([]) { |sum, role|
+        account_hash = role.account.try(:as_json)
 
         if account_hash
           account_hash['role'] = account_user.role
