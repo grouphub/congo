@@ -30,7 +30,7 @@ class User < ActiveRecord::Base
         account_hash = role.account.try(:as_json)
 
         if account_hash
-          account_hash['role'] = account_user.role
+          account_hash['role'] = role
         end
 
         sum << account_hash

@@ -119,9 +119,9 @@
                   </li>
 
                   <li ng-repeat="account in accounts()">
-                    <a ng-href="/accounts/{{account.slug}}/{{account.role}}">
+                    <a ng-href="/accounts/{{account.slug}}/{{account.role.role}}">
                       {{account.name}}
-                      <span class="label label-default role">{{account.role}}</span>
+                      <span class="label label-default role">{{account.role.role}}</span>
                     </a>
                   </li>
 

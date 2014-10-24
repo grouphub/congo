@@ -148,7 +148,9 @@ congoApp.factory('userDataFactory', function ($location) {
 
       accounts = currentUser.accounts;
       accountSlug = userDataFactory.accountSlug();
-      account = _.findWhere(accounts, { slug: accountSlug, role: name });
+      account = _.find(accounts, function (account) {
+        return account.slug === accountSlug && account.role.role === name;
+      });
 
       if (!account) {
         return;
