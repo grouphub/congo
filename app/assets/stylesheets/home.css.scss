@@ -330,32 +330,6 @@ nav {
   background: none;
 }
 
-@media (max-width: 767px) {
-  #wrapper {
-    position: initial;
-    padding-left: initial;
-  }
-
-  #sidebar-wrapper {
-    height: initial;
-    position: initial;
-    margin-left: initial;
-    width: 100%;
-
-    ul {
-      position: initial;
-    }
-  }
-
-  header.navbar {
-    display: none;
-  }
-
-  .sidebar-nav {
-    width: 100%;
-  }
-}
-
 main [ng-controller=HomeController] .col-md-12 {
   float: initial;
 }
@@ -396,6 +370,9 @@ h1 {
 
 @media (max-width: 767px) {
   #wrapper {
+    position: initial;
+    padding-left: initial;
+
     main {
       [ng-view],
       footer {
@@ -404,7 +381,85 @@ h1 {
     }
   }
 
+  #sidebar-wrapper {
+    height: initial;
+    position: initial;
+    margin-left: initial;
+    width: 100%;
+
+    ul {
+      position: initial;
+    }
+  }
+
+  header.navbar {
+    display: none;
+  }
+
+  .sidebar-nav {
+    width: 100%;
+  }
+
   .sidebar-nav .sidebar-brand {
     height: 51px;
   }
 }
+
+@media (max-width: 900px) {
+  @media (min-width: 767px) {
+    #wrapper {
+      position: relative;
+      padding-left: 75px;
+
+      #sidebar-wrapper {
+        width: 75px;
+
+        .logo {
+          $width: 18px;
+          $height: 22px;
+
+          display: inline-block;
+          width: $width;
+          height: $height;
+          background: url('/assets/logo-small.png');
+          background-size: $width $height;
+
+          margin-bottom: -7px;
+          
+          position: relative;
+          left: 7px;
+        }
+
+        .sidebar-nav {
+          > li:not(.sidebar-brand) {
+            a {
+              padding-left: 9px;
+            }
+
+            .caption {
+              display: none;
+            }
+          }
+        }
+      }
+
+      #page-content-wrapper {
+        .logo-link {
+          display: block;
+        }
+      }
+
+      main {
+        [ng-view],
+        footer {
+          margin-right: 75px;
+        }
+      }
+
+      .sidebar-nav {
+        width: 75px;
+      }
+  }
+    }
+}
+
