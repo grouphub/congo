@@ -227,7 +227,7 @@ congoApp.directive('autoFocus', function ($timeout) {
 
 congoApp.directive('propertiesForm', function () {
   return {
-    restrict: 'AEC',
+    restrict: 'E',
     replace: true,
     templateUrl: '/assets/directives/properties-form.html',
     link: function ($scope, $element, $attrs) {
@@ -536,6 +536,17 @@ congoApp.controller('ProductsNewController', function ($scope, $http, $location,
   $scope.currentRole = function () {
     return userDataFactory.currentRole();
   };
+
+  $scope.elements = [];
+
+  $http
+    .get('/assets/products-new-properties.json')
+    .success(function (data, status, headers, config) {
+      $scope.elements = data;
+    })
+    .error(function (data, status, headers, config) {
+      debugger
+    });
 
   $scope.$watch('accountSlug()');
   $scope.$watch('currentRole()');
