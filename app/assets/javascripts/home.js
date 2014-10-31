@@ -552,6 +552,8 @@ congoApp.controller('ProductsNewController', function ($scope, $http, $location,
   $scope.$watch('currentRole()');
 
   $scope.submit = function () {
+    // TODO: Get properties out of `elements` (stored in `value`)
+
     $http
       .post('/api/v1/accounts/' + $scope.accountSlug() + '/products.json', {
         name: $scope.name
