@@ -133,6 +133,20 @@ congoApp.factory('userDataFactory', function ($location) {
         return match[1];
       }
     },
+    userId: function () {
+      var match = $location.path().match(/\/users\/(\d+)/);
+
+      if (match && match[1] && match[1].length > 0) {
+        return match[1];
+      }
+    },
+    currentRole: function () {
+      var match = $location.path().match(/\/accounts\/[^\/]+\/([^\/]+)/);
+
+      if (match && match[1] && match[1].length > 0) {
+        return match[1];
+      }
+    },
     isSignedin: function () {
       return !!congo.currentUser;
     },
@@ -194,33 +208,30 @@ congoApp.factory('userDataFactory', function ($location) {
       }
 
       return congo.currentUser.id;
-    },
-    userId: function () {
-      var match = $location.path().match(/\/users\/(\d+)/);
-
-      if (match && match[1] && match[1].length > 0) {
-        return match[1];
-      }
-    },
-    currentRole: function () {
-      var match = $location.path().match(/\/accounts\/[^\/]+\/([^\/]+)/);
-
-      if (match && match[1] && match[1].length > 0) {
-        return match[1];
-      }
-    },
+    }
   };
 
   return userDataFactory;
 });
 
-congoApp.directive('autoFocus', function($timeout) {
+congoApp.directive('autoFocus', function ($timeout) {
   return {
     restrict: 'AC',
-    link: function($scope, $element) {
-      $timeout(function(){
+    link: function ($scope, $element) {
+      $timeout(function () {
         $element[0].focus();
       }, 0);
+    }
+  };
+});
+
+congoApp.directive('propertiesForm', function () {
+  return {
+    restrict: 'AEC',
+    replace: true,
+    templateUrl: '/assets/directives/properties-form.html',
+    link: function ($scope, $element, $attrs) {
+      $scope.elements = JSON.parse($attrs.elements);
     }
   };
 });
