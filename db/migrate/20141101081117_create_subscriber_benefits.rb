@@ -13,7 +13,7 @@ class CreateSubscriberBenefits < ActiveRecord::Migration
       t.date      :benefit_begin_date
       t.string    :benefit_type
       t.boolean   :benefit_late_enrollment
-      t.string    :benefit_maintenance_type: "Addition"
+      t.string    :benefit_maintenance_type
 
       t.timestamps
     end

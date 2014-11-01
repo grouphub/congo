@@ -10,6 +10,7 @@ class CreateSubscriberDependents < ActiveRecord::Migration
       t.date 	    :enrollment_date
       t.integer   :subscriber_number
       t.string    :dependent_id
+      
       t.timestamps
     end
   end
