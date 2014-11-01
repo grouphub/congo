@@ -143,6 +143,20 @@ congoApp.factory('userDataFactory', function ($location, $cookieStore) {
         return match[1];
       }
     },
+    userId: function () {
+      var match = $location.path().match(/\/users\/(\d+)/);
+
+      if (match && match[1] && match[1].length > 0) {
+        return match[1];
+      }
+    },
+    currentRole: function () {
+      var match = $location.path().match(/\/accounts\/[^\/]+\/([^\/]+)/);
+
+      if (match && match[1] && match[1].length > 0) {
+        return match[1];
+      }
+    },
     isSignedin: function () {
       return !!congo.currentUser;
     },
@@ -204,33 +218,30 @@ congoApp.factory('userDataFactory', function ($location, $cookieStore) {
       }
 
       return congo.currentUser.id;
-    },
-    userId: function () {
-      var match = $location.path().match(/\/users\/(\d+)/);
-
-      if (match && match[1] && match[1].length > 0) {
-        return match[1];
-      }
-    },
-    currentRole: function () {
-      var match = $location.path().match(/\/accounts\/[^\/]+\/([^\/]+)/);
-
-      if (match && match[1] && match[1].length > 0) {
-        return match[1];
-      }
-    },
+    }
   };
 
   return userDataFactory;
 });
 
-congoApp.directive('autoFocus', function($timeout) {
+congoApp.directive('autoFocus', function ($timeout) {
   return {
     restrict: 'AC',
-    link: function($scope, $element) {
-      $timeout(function(){
+    link: function ($scope, $element) {
+      $timeout(function () {
         $element[0].focus();
       }, 0);
+    }
+  };
+});
+
+congoApp.directive('propertiesForm', function () {
+  return {
+    restrict: 'E',
+    replace: true,
+    templateUrl: '/assets/directives/properties-form.html',
+    link: function ($scope, $element, $attrs) {
+      $scope.elements = JSON.parse($attrs.elements);
     }
   };
 });
@@ -543,10 +554,23 @@ congoApp.controller('ProductsNewController', function ($scope, $http, $location,
     return userDataFactory.currentRole();
   };
 
+  $scope.elements = [];
+
+  $http
+    .get('/assets/products-new-properties.json')
+    .success(function (data, status, headers, config) {
+      $scope.elements = data;
+    })
+    .error(function (data, status, headers, config) {
+      debugger
+    });
+
   $scope.$watch('accountSlug()');
   $scope.$watch('currentRole()');
 
   $scope.submit = function () {
+    // TODO: Get properties out of `elements` (stored in `value`)
+
     $http
       .post('/api/v1/accounts/' + $scope.accountSlug() + '/products.json', {
         name: $scope.name
