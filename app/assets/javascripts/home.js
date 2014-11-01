@@ -1,4 +1,4 @@
-var congoApp = angular.module('congoApp', ['ngRoute']);
+var congoApp = angular.module('congoApp', ['ngRoute', 'ngCookies']);
 
 congoApp.config([
   '$routeProvider',
@@ -50,6 +50,10 @@ congoApp.config([
       .when('/accounts/:slug/:role/products/new', {
         templateUrl: '/assets/products/new.html',
         controller: 'ProductsNewController'
+      })
+      .when('/accounts/:slug/:role/products/:product_id', {
+        templateUrl: '/assets/products/show.html',
+        controller: 'ProductsShowController'
       })
       .when('/accounts/:slug/:role/groups', {
         templateUrl: '/assets/groups/index.html',
@@ -110,8 +114,14 @@ congoApp.factory('flashesFactory', function (eventsFactory) {
   };
 });
 
-congoApp.factory('userDataFactory', function ($location) {
+congoApp.factory('userDataFactory', function ($location, $cookieStore) {
   var userDataFactory = {
+    drawerToggle: function () {
+      $cookieStore.put('show-drawer', !$cookieStore.get('show-drawer'));
+    },
+    isDrawerShown: function () {
+      return $cookieStore.get('show-drawer');
+    },
     accountSlug: function () {
       var match = $location.path().match(/\/accounts\/([^\/]+)/);
 
@@ -259,19 +269,26 @@ congoApp.controller('MainController', function ($scope, $http, $location, userDa
     return userDataFactory.currentUserId();
   };
 
+  $scope.isDrawerShown = function () {
+    return userDataFactory.isDrawerShown();
+  }
+
+  $scope.drawerToggle = function () {
+    userDataFactory.drawerToggle();
+  };
+
   $scope.flashes = function () {
     return flashesFactory.all();
   };
 
-  $scope.showSidebar = false;
-  $scope.toggleSidebar = function () {
-    $scope.showSidebar = !$scope.showSidebar;
-  };
-
   $scope.$watch('hasRole()');
+  $scope.$watch('isSignedIn()');
+  $scope.$watch('firstName()');
+  $scope.$watch('accounts()');
   $scope.$watch('accountSlug()');
-  $scope.$watch('hasAccounts()');
+  $scope.$watch('currentRole()');
   $scope.$watch('currentUserId()');
+  $scope.$watch('isDrawerShown()');
   $scope.$watch('flashes');
 
   $scope.signout = function () {
@@ -541,6 +558,37 @@ congoApp.controller('ProductsNewController', function ($scope, $http, $location,
         debugger
       });
   };
+});
+
+congoApp.controller('ProductsShowController', function ($scope, $http, $location, userDataFactory) {
+  $scope.accountSlug = function () {
+    return userDataFactory.accountSlug();
+  };
+
+  $scope.currentRole = function () {
+    return userDataFactory.currentRole();
+  };
+
+  $scope.productId = function () {
+    return userDataFactory.productId();
+  };
+
+  $scope.$watch('accountSlug()');
+  $scope.$watch('currentRole()');
+  $scope.$watch('productId()');
+
+  $scope.product = undefined;
+
+  $http
+    .get('/api/v1/accounts/' + $scope.accountSlug() + '/products/' + $scope.productId() + '.json', {
+      name: $scope.name
+    })
+    .success(function (data, status, headers, config) {
+      $scope.product = data.product;
+    })
+    .error(function (data, status, headers, config) {
+      debugger
+    });
 });
 
 congoApp.controller('GroupsIndexController', function ($scope, $http, $location, userDataFactory) {

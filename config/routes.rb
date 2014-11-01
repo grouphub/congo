@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     '/accounts/:slug/:role/home',
     '/accounts/:slug/:role/products',
     '/accounts/:slug/:role/products/new',
+    '/accounts/:slug/:role/products/:product_id',
     '/accounts/:slug/:role/groups',
     '/accounts/:slug/:role/groups/new',
     '/accounts/:slug/:role/groups/:group_slug',

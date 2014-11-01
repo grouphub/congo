@@ -16,7 +16,7 @@
   </head>
 
   <body ng-controller="MainController">
-    <div id="wrapper" class="toggled" ng-class="showSidebar ? '' : 'toggled'">
+    <div id="wrapper" ng-class="isDrawerShown() ? 'toggled' : ''">
       <div id="sidebar-wrapper">
         <%= render partial: 'layouts/sidebar' %>
       </div>
