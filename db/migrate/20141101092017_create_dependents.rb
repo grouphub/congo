@@ -24,6 +24,7 @@ class CreateDependents < ActiveRecord::Migration
       t.string 	:dependent_home_phone
       t.string 	:dependent_date_of_birth
       t.integer	:dependent_gender
+      t.boolean :dependent_disabled
       t.timestamps
     end
   end
