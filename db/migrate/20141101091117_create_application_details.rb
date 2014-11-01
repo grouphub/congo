@@ -39,7 +39,7 @@ class CreateApplicationDetails < ActiveRecord::Migration
       t.integer	:subscriber_benefits_id
       t.string  :subscriber_substance_abuse
       t.string  :subscriber_tobacco_use
-      t.integer	:dependents_id
+      t.integer	:subscriber_dependents_id
       
       t.timestamps
     end
