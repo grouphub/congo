@@ -250,38 +250,13 @@ congoApp.directive('propertiesForm', function () {
   };
 });
 
-var data = {
-  items: [
-    {
-      value: 0.3
-    },
-    {
-      value: 0.2
-    },
-    {
-      value: 0.6
-    },
-    {
-      value: 1.0
-    },
-    {
-      value: 0.0
-    },
-    {
-      value: 0.1
-    },
-    {
-      value: 0.4
-    }
-  ]
-};
-
 congoApp.directive('horizontalLineChart', function () {
   return {
     restrict: 'E',
     replace: true,
     templateUrl: '/assets/directives/horizontal-line-chart.html',
     link: function ($scope, $element, $attrs) {
+      var data = $scope.data;
       var strokeWidth = $attrs.strokeWidth;
       var strokeColor = $attrs.strokeColor;
       var marginX = parseInt(strokeWidth, 10);
@@ -312,6 +287,7 @@ congoApp.directive('horizontalBarChart', function () {
     replace: true,
     templateUrl: '/assets/directives/horizontal-bar-chart.html',
     link: function ($scope, $element, $attrs) {
+      var data = $scope.data;
       var chartWidth = $attrs.chartWidth;
       var chartHeight = $attrs.chartHeight;
       var chartMargin = parseInt($attrs.chartMargin, 10);
@@ -322,8 +298,6 @@ congoApp.directive('horizontalBarChart', function () {
       $scope.chartHeight = chartHeight;
       $scope.chartMargin = chartMargin;
       $scope.barColor = barColor;
-
-      /* $element.find('.horizontal-bar-chart').empty() */
 
       var html = _.map($scope.data.items, function (item, index) {
         var width = (chartWidth / $scope.data.items.length) - chartMargin * 2;
@@ -976,6 +950,30 @@ congoApp.controller('ApplicationsIndexController', function ($scope, $http, $loc
 });
 
 congoApp.controller('ChartsController', function ($scope, $http, $location, userDataFactory) {
-
+  $scope.data = {
+    items: [
+      {
+        value: 0.3
+      },
+      {
+        value: 0.2
+      },
+      {
+        value: 0.6
+      },
+      {
+        value: 1.0
+      },
+      {
+        value: 0.0
+      },
+      {
+        value: 0.1
+      },
+      {
+        value: 0.4
+      }
+    ]
+  };
 });
 
