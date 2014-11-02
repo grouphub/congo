@@ -28,7 +28,8 @@ Rails.application.routes.draw do
     '/accounts/:slug/:role/groups',
     '/accounts/:slug/:role/groups/new',
     '/accounts/:slug/:role/groups/:group_slug',
-    '/accounts/:slug/:role/groups/:group_slug/products/:product_id/applications/new'
+    '/accounts/:slug/:role/groups/:group_slug/products/:product_id/applications/new',
+    '/accounts/:slug/:role/applications'
   ]
 
   namespace :api do

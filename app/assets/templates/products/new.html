@@ -5,7 +5,8 @@
     <!-- TODO: Hook this up -->
     <div class="form-group">
       <label for="carrier">Carrier</label>
-      <select class="form-control" id="carrier" name="carrier">
+      <select class="form-control" id="carrier" name="carrier" ng-model="selectedCarrier">
+        <option ng-repeat="carrier in carriers" name="{{carrier.slug}}" value="{{carrier.slug}}">{{carrier.name}}</option>
       </select>
     </div>
 

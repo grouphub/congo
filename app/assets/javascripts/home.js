@@ -356,6 +356,8 @@ congoApp.controller('ProductsNewController', function ($scope, $http, $location,
   };
 
   $scope.elements = [];
+  $scope.carriers = [];
+  $scope.selectedCarrier = null;
 
   $http
     .get('/assets/products-new-properties.json')
@@ -366,12 +368,21 @@ congoApp.controller('ProductsNewController', function ($scope, $http, $location,
       debugger
     });
 
+  $http
+    .get('/api/v1/carriers.json')
+    .success(function (data, status, headers, config) {
+      $scope.carriers = data.carriers;
+    })
+    .error(function (data, status, headers, config) {
+      debugger
+    });
+
   $scope.submit = function () {
     // TODO: Get properties out of `elements` (stored in `value`)
-
     $http
       .post('/api/v1/accounts/' + $scope.accountSlug() + '/products.json', {
-        name: $scope.name
+        name: $scope.name,
+        carrier_slug: $scope.selectedCarrier
       })
       .success(function (data, status, headers, config) {
         $location.path('/accounts/' + $scope.accountSlug() + '/' + $scope.currentRole() + '/products');
@@ -651,6 +662,17 @@ congoApp.controller('ApplicationsNewController', function ($scope, $http, $locat
 });
 
 congoApp.controller('ApplicationsIndexController', function ($scope, $http, $location, userDataFactory) {
+  $scope.accountSlug = function () {
+    return userDataFactory.accountSlug();
+  };
 
+  $http
+    .get('/api/v1/accounts/' + $scope.accountSlug() + '/applications.json')
+    .success(function (data, status, headers, config) {
+      $scope.applications = data.applications;
+    })
+    .error(function (data, status, headers, config) {
+      debugger
+    });
 });
 
