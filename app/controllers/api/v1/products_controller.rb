@@ -14,6 +14,8 @@ class Api::V1::ProductsController < ApplicationController
     name = params[:name]
     account_slug = params[:account_id]
     account = Account.where(slug: account_slug).first
+    carrier_slug = params[:carrier_slug]
+    carrier = Carrier.where(slug: carrier_slug).first
 
     unless name
       # TODO: Handle this
@@ -23,9 +25,14 @@ class Api::V1::ProductsController < ApplicationController
       # TODO: Handle this
     end
 
+    unless carrier
+      # TODO: Handle this
+    end
+
     product = Product.create! \
       name: name,
-      account_id: account.id
+      account_id: account.id,
+      carrier_id: carrier.id
 
     respond_to do |format|
       format.json {
@@ -45,7 +52,7 @@ class Api::V1::ProductsController < ApplicationController
     respond_to do |format|
       format.json {
         render json: {
-          product: product
+          product: product.simple_hash
         }
       }
     end

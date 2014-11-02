@@ -1,8 +1,17 @@
+admin_account = Account.where(name: 'Admin').first
+
 admin = User.create! \
-  first_name: 'Adam',
+  first_name: 'GroupHub',
   last_name: 'Admin',
   email: 'admin@grouphub.io',
   password: 'testtest'
+
+Role.create! \
+  user_id: admin.id,
+  account_id: admin_account.id,
+  role: 'admin'
+
+first_account = Account.where(name: 'First Account').first
 
 bob = User.create! \
   first_name: 'Bob',
@@ -16,20 +25,18 @@ alice = User.create! \
   email: 'alice@first-account.com',
   password: 'testtest'
 
-account = Account.where(name: 'First Account').first
-
 Role.create! \
   user_id: admin.id,
-  account_id: account.id,
+  account_id: first_account.id,
   role: 'broker'
 
 Role.create! \
   user_id: bob.id,
-  account_id: account.id,
+  account_id: first_account.id,
   role: 'customer'
 
 Role.create! \
   user_id: alice.id,
-  account_id: account.id,
+  account_id: first_account.id,
   role: 'customer'
 

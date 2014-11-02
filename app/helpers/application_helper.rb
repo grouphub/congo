@@ -20,8 +20,24 @@ module ApplicationHelper
     session[:current_user_id] = nil
   end
 
+  def admin?
+    current_user && current_user.admin?
+  end
+
   def current_user
     @current_user ||= User.where(id: session[:current_user_id]).first
+  end
+
+  def authenticate!
+    unless current_user
+      raise AuthenticationException
+    end
+  end
+
+  def authenticate_admin!
+    unless admin?
+      raise AuthenticationException
+    end
   end
 end
 
