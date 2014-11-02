@@ -75,6 +75,10 @@ congoApp.config([
         templateUrl: '/assets/applications/index.html',
         controller: 'ApplicationsIndexController'
       })
+      .when('/charts', {
+        templateUrl: '/assets/charts.html',
+        controller: 'ChartsController'
+      });
   }
 ]);
 
@@ -242,6 +246,102 @@ congoApp.directive('propertiesForm', function () {
     templateUrl: '/assets/directives/properties-form.html',
     link: function ($scope, $element, $attrs) {
       $scope.elements = JSON.parse($attrs.elements);
+    }
+  };
+});
+
+var data = {
+  items: [
+    {
+      value: 0.3
+    },
+    {
+      value: 0.2
+    },
+    {
+      value: 0.6
+    },
+    {
+      value: 1.0
+    },
+    {
+      value: 0.0
+    },
+    {
+      value: 0.1
+    },
+    {
+      value: 0.4
+    }
+  ]
+};
+
+congoApp.directive('horizontalLineChart', function () {
+  return {
+    restrict: 'E',
+    replace: true,
+    templateUrl: '/assets/directives/horizontal-line-chart.html',
+    link: function ($scope, $element, $attrs) {
+      var strokeWidth = $attrs.strokeWidth;
+      var strokeColor = $attrs.strokeColor;
+      var marginX = parseInt(strokeWidth, 10);
+      var marginY = parseInt(strokeWidth, 10);
+      var chartWidth = $attrs.chartWidth;
+      var chartHeight = $attrs.chartHeight;
+      var xScale = (chartWidth - (2 * marginX)) / (data.items.length - 1);
+      var yScale = chartHeight - (2 * marginY);
+
+      $scope.data = data;
+      $scope.chartWidth = chartWidth;
+      $scope.chartHeight = chartHeight;
+      $scope.strokeWidth = strokeWidth;
+      $scope.strokeColor = strokeColor;
+      $scope.points = _.map($scope.data.items, function (item, index) {
+        var x = marginX + xScale * index;
+        var y = marginY + item.value * yScale;
+
+        return (index === 0 ? 'M' : 'L') + x.toString() + ',' + y.toString();
+      }).join(' ');
+    }
+  };
+});
+
+congoApp.directive('horizontalBarChart', function () {
+  return {
+    restrict: 'E',
+    replace: true,
+    templateUrl: '/assets/directives/horizontal-bar-chart.html',
+    link: function ($scope, $element, $attrs) {
+      var chartWidth = $attrs.chartWidth;
+      var chartHeight = $attrs.chartHeight;
+      var chartMargin = parseInt($attrs.chartMargin, 10);
+      var barColor = $attrs.barColor;
+
+      $scope.data = data;
+      $scope.chartWidth = chartWidth;
+      $scope.chartHeight = chartHeight;
+      $scope.chartMargin = chartMargin;
+      $scope.barColor = barColor;
+
+      /* $element.find('.horizontal-bar-chart').empty() */
+
+      var html = _.map($scope.data.items, function (item, index) {
+        var width = (chartWidth / $scope.data.items.length) - chartMargin * 2;
+        var x = (chartWidth / $scope.data.items.length) * index;
+        var y = item.value * chartHeight;
+        var height = chartHeight - y;
+
+        var $point = '<rect id="Rectangle-1" ' +
+          'sketch:type="MSShapeGroup" ' +
+          'x="' + x + '" ' +
+          'y="' + y + '" ' +
+          'width="' + width + '" ' +
+          'height="' + height + '"></rect>';
+
+        return $point;
+      }).join("\n");
+
+      $element.find('.horizontal-bar-chart').html(html);
     }
   };
 });
@@ -872,6 +972,10 @@ congoApp.controller('ApplicationsNewController', function ($scope, $http, $locat
 });
 
 congoApp.controller('ApplicationsIndexController', function ($scope, $http, $location, userDataFactory) {
+
+});
+
+congoApp.controller('ChartsController', function ($scope, $http, $location, userDataFactory) {
 
 });
 

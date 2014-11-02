@@ -6,6 +6,7 @@ end
 
 Rails.application.routes.draw do
   get '/index_v1', :to => redirect('/index_v1.html')
+
   angular_routes [
     '/',
     '/home',
@@ -24,7 +25,8 @@ Rails.application.routes.draw do
     '/accounts/:slug/:role/groups',
     '/accounts/:slug/:role/groups/new',
     '/accounts/:slug/:role/groups/:group_slug',
-    '/accounts/:slug/:role/groups/:group_slug/products/:product_id/applications/new'
+    '/accounts/:slug/:role/groups/:group_slug/products/:product_id/applications/new',
+    '/charts'
   ]
 
   namespace :api do
