@@ -54,7 +54,12 @@
           </li>
 
           <li ng-repeat="account in accounts()">
-            <a ng-href="/accounts/{{account.slug}}/{{account.role.role}}">
+            <a ng-href="/admin" ng-if="account.role.role == 'admin'">
+              Admin
+              <span class="label label-default role">Admin</span>
+            </a>
+
+            <a ng-href="/accounts/{{account.slug}}/{{account.role.role}}" ng-if="account.role.role != 'admin'">
               {{account.name}}
               <span class="label label-default role">{{account.role.role}}</span>
             </a>

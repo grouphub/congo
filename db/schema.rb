@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141101110117) do
+ActiveRecord::Schema.define(version: 20141102041408) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,50 +28,6 @@ ActiveRecord::Schema.define(version: 20141101110117) do
     t.datetime "updated_at"
   end
 
-  create_table "application_details", force: true do |t|
-    t.integer  "application_id"
-    t.integer  "carrier_id"
-    t.string   "master_policy_number"
-    t.integer  "group_id"
-    t.string   "group_or_policy_number"
-    t.string   "sponsor_tax_id"
-    t.string   "payer_tax_id"
-    t.string   "payer_responsibility"
-    t.integer  "member_id"
-    t.string   "enrollment_reference_number"
-    t.string   "enrollment_action"
-    t.string   "enrollment_event"
-    t.date     "enrollment_date"
-    t.string   "enrollment_maintenance_reason"
-    t.string   "enrollment_maintenance_type"
-    t.string   "subscriber_eligibility_begin_date"
-    t.integer  "subscriber_number"
-    t.string   "subscriber_first_name"
-    t.string   "subscriber_middle_name"
-    t.string   "subscriber_last_name"
-    t.string   "subscriber_ssn"
-    t.string   "subscriber_address_1"
-    t.string   "subscriber_address_2"
-    t.string   "subscriber_city"
-    t.string   "subscriber_state"
-    t.integer  "subscriber_zip"
-    t.string   "subscriber_home_phone"
-    t.string   "subscriber_date_of_birth"
-    t.integer  "subscriber_gender"
-    t.string   "subscriber_marital_status"
-    t.string   "subscriber_employer"
-    t.string   "subscriber_employment_status"
-    t.date     "subscriber_hire_date"
-    t.string   "subscriber_job_title"
-    t.string   "subscriber_benefit_status"
-    t.integer  "subscriber_benefit_plan_id"
-    t.string   "subscriber_substance_abuse"
-    t.string   "subscriber_tobacco_use"
-    t.integer  "subscriber_dependents_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "applications", force: true do |t|
     t.integer  "account_id"
     t.integer  "product_id"
@@ -80,25 +36,9 @@ ActiveRecord::Schema.define(version: 20141101110117) do
     t.datetime "updated_at"
   end
 
-  create_table "benefit_plans", force: true do |t|
-    t.integer  "carrier_id"
-    t.string   "plan_name"
-    t.string   "plan_type"
-    t.boolean  "exchange_plan"
-    t.boolean  "small_group"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "carrier", force: true do |t|
-    t.integer  "carrier_number"
-    t.string   "carrier_name"
-    t.string   "carrier_address_1"
-    t.string   "carrier_address_2"
-    t.string   "carrier_city"
-    t.string   "carrier_state"
-    t.integer  "carrier_zip"
-    t.string   "carrier_phone"
+  create_table "carriers", force: true do |t|
+    t.string   "name"
+    t.string   "slug"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -118,35 +58,6 @@ ActiveRecord::Schema.define(version: 20141101110117) do
   end
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
-
-  create_table "dependents", force: true do |t|
-    t.integer  "application_id"
-    t.integer  "carrier_id"
-    t.string   "master_policy_number"
-    t.integer  "group_id"
-    t.integer  "member_id"
-    t.string   "enrollment_reference_number"
-    t.date     "enrollment_date"
-    t.integer  "subscriber_number"
-    t.string   "dependent_type"
-    t.boolean  "dependent_coverage_refusal"
-    t.integer  "dependent_coverage_refusal_id"
-    t.string   "dependent_first_name"
-    t.string   "dependent_middle_name"
-    t.string   "dependent_last_name"
-    t.string   "dependent_ssn"
-    t.string   "dependent_address_1"
-    t.string   "dependent_address_2"
-    t.string   "dependent_city"
-    t.string   "dependent_state"
-    t.integer  "dependent_zip"
-    t.string   "dependent_home_phone"
-    t.string   "dependent_date_of_birth"
-    t.integer  "dependent_gender"
-    t.boolean  "dependent_disabled"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
   create_table "group_products", force: true do |t|
     t.integer  "group_id"
@@ -182,6 +93,7 @@ ActiveRecord::Schema.define(version: 20141101110117) do
 
   create_table "products", force: true do |t|
     t.integer  "account_id"
+    t.integer  "carrier_id"
     t.string   "name"
     t.string   "slug"
     t.datetime "created_at"
@@ -192,38 +104,6 @@ ActiveRecord::Schema.define(version: 20141101110117) do
     t.integer  "account_id"
     t.integer  "user_id"
     t.string   "role"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "subscriber_benefits", force: true do |t|
-    t.integer  "carrier_id"
-    t.string   "master_policy_number"
-    t.integer  "group_id"
-    t.string   "group_or_policy_number"
-    t.integer  "member_id"
-    t.string   "enrollment_reference_number"
-    t.date     "enrollment_date"
-    t.integer  "subscriber_number"
-    t.integer  "benefit_plan_id"
-    t.date     "benefit_begin_date"
-    t.string   "benefit_type"
-    t.boolean  "benefit_late_enrollment"
-    t.string   "benefit_maintenance_type"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "subscriber_dependents", force: true do |t|
-    t.integer  "application_id"
-    t.integer  "carrier_id"
-    t.string   "master_policy_number"
-    t.integer  "group_id"
-    t.integer  "member_id"
-    t.string   "enrollment_reference_number"
-    t.date     "enrollment_date"
-    t.integer  "subscriber_number"
-    t.string   "dependent_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

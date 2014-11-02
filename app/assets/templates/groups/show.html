@@ -53,6 +53,7 @@
         <tr>
           <th>Emails</th>
           <th>Connected as</th>
+          <th>Status</th>
           <th>Actions</th>
         </tr>
       </thead>
@@ -63,6 +64,11 @@
 
           <td>
             <a ng-href="/users/{{membership.user.id}}" ng-if="membership.user">{{membership.user.email}}</a>
+          </td>
+
+          <td>
+            <a class="btn btn-primary btn-xs" href="javascript:;" ng-if="membership.applications.length > 0">Applied</a>
+            <a class="btn btn-warning btn-xs" href="javascript:;" ng-if="membership.applications.length == 0">Not Applied</a>
           </td>
 
           <td>

@@ -22,6 +22,10 @@ class User < ActiveRecord::Base
     self.encrypted_password = @password
   end
 
+  def admin?
+    User.first.roles.any? { |role| role.role == 'admin' }
+  end
+
   def simple_hash
     accounts = self
       .roles
@@ -42,7 +46,8 @@ class User < ActiveRecord::Base
       first_name: self.first_name,
       last_name: self.last_name,
       email: self.email,
-      accounts: accounts
+      accounts: accounts,
+      is_admin: admin?
     }
   end
 end
