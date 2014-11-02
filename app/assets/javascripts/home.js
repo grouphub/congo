@@ -372,6 +372,7 @@ congoApp.controller('ProductsNewController', function ($scope, $http, $location,
     .get('/api/v1/carriers.json')
     .success(function (data, status, headers, config) {
       $scope.carriers = data.carriers;
+      $scope.selectedCarrier = data.carriers[0];
     })
     .error(function (data, status, headers, config) {
       debugger
