@@ -9,7 +9,7 @@ class CreateSubscriberBenefits < ActiveRecord::Migration
       t.string 	:enrollment_reference_number
       t.date 	:enrollment_date
       t.integer   :subscriber_number
-      t.integer   :benefit_id
+      t.integer   :benefit_plan_id
       t.date      :benefit_begin_date
       t.string    :benefit_type
       t.boolean   :benefit_late_enrollment

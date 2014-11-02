@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141101092217) do
+ActiveRecord::Schema.define(version: 20141101110117) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,7 +64,7 @@ ActiveRecord::Schema.define(version: 20141101092217) do
     t.date     "subscriber_hire_date"
     t.string   "subscriber_job_title"
     t.string   "subscriber_benefit_status"
-    t.integer  "subscriber_benefits_id"
+    t.integer  "subscriber_benefit_plan_id"
     t.string   "subscriber_substance_abuse"
     t.string   "subscriber_tobacco_use"
     t.integer  "subscriber_dependents_id"
@@ -76,6 +76,29 @@ ActiveRecord::Schema.define(version: 20141101092217) do
     t.integer  "account_id"
     t.integer  "product_id"
     t.integer  "membership_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "benefit_plans", force: true do |t|
+    t.integer  "carrier_id"
+    t.string   "plan_name"
+    t.string   "plan_type"
+    t.boolean  "exchange_plan"
+    t.boolean  "small_group"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "carrier", force: true do |t|
+    t.integer  "carrier_number"
+    t.string   "carrier_name"
+    t.string   "carrier_address_1"
+    t.string   "carrier_address_2"
+    t.string   "carrier_city"
+    t.string   "carrier_state"
+    t.integer  "carrier_zip"
+    t.string   "carrier_phone"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -182,7 +205,7 @@ ActiveRecord::Schema.define(version: 20141101092217) do
     t.string   "enrollment_reference_number"
     t.date     "enrollment_date"
     t.integer  "subscriber_number"
-    t.integer  "benefit_id"
+    t.integer  "benefit_plan_id"
     t.date     "benefit_begin_date"
     t.string   "benefit_type"
     t.boolean  "benefit_late_enrollment"

@@ -36,7 +36,7 @@ class CreateApplicationDetails < ActiveRecord::Migration
       t.date 	:subscriber_hire_date
       t.string 	:subscriber_job_title
       t.string	:subscriber_benefit_status
-      t.integer	:subscriber_benefits_id
+      t.integer	:subscriber_benefit_plan_id
       t.string  :subscriber_substance_abuse
       t.string  :subscriber_tobacco_use
       t.integer	:subscriber_dependents_id
