@@ -1,4 +1,6 @@
 class Api::V1::CarriersController < ApplicationController
+  before_filter :authenticate_admin!
+
   def index
     # TODO: Check for current user and admin
 

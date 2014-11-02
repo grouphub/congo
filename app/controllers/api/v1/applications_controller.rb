@@ -1,6 +1,4 @@
 class Api::V1::ApplicationsController < ApplicationController
-  include ApplicationHelper
-
   # TODO: Implement this
   def index
     respond_to do |format|
