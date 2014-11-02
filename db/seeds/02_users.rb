@@ -1,4 +1,4 @@
-admin_account = Account.where(name: 'Admin Account').first
+admin_account = Account.where(name: 'Admin').first
 
 admin = User.create! \
   first_name: 'GroupHub',

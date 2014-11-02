@@ -1,5 +1,5 @@
 Account.create! \
-  name: 'Admin Account',
+  name: 'Admin',
   tagline: 'GroupHub administrative account'
 
 Account.create! \

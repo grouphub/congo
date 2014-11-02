@@ -46,14 +46,51 @@ congoApp.factory('userDataFactory', function ($location, $cookieStore) {
     isSignedin: function () {
       return !!congo.currentUser;
     },
+    isAdmin: function () {
+      var currentUser = congo.currentUser;
+
+      if (!currentUser) {
+        return;
+      }
+
+      return currentUser.is_admin;
+    },
+    inAdminPanel: function () {
+      var currentUser = congo.currentUser;
+      var inAdmin = $location.path().match(/^\/admin/);
+      var currentUserMatch = $location.path().match(/\/accounts\/[^\/]+\/([^\/]+)/);
+      var currentRole = currentUserMatch && currentUserMatch[1] && currentUserMatch[1].length > 0;
+
+      if (!currentUser) {
+        return;
+      }
+
+      if (
+        !currentRole &&
+        inAdmin &&
+        currentUser.is_admin
+      ) {
+        return true; 
+      }
+    },
     hasRole: function (name) {
       var currentUser = congo.currentUser;
       var accounts;
       var accountSlug;
       var account;
+      var match = $location.path().match(/\/accounts\/[^\/]+\/([^\/]+)/);
+      var currentRole = match && match[1] && match[1].length > 0;
 
       if (!currentUser) {
         return;
+      }
+
+      if (
+        !currentRole &&
+        name === 'admin' &&
+        currentUser.is_admin
+      ) {
+        return true; 
       }
 
       accounts = currentUser.accounts;

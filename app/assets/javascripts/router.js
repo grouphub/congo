@@ -39,6 +39,14 @@ congoApp.config([
         templateUrl: '/assets/users/show.html',
         controller: 'UsersShowController'
       })
+      .when('/admin', {
+        templateUrl: '/assets/home.html',
+        controller: 'HomeController'
+      })
+      .when('/admin/carriers', {
+        templateUrl: '/assets/carriers/index.html',
+        controller: 'CarriersIndexController'
+      })
       .when('/accounts/:slug/:role', {
         templateUrl: '/assets/home.html',
         controller: 'HomeController'

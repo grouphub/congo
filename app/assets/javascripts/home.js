@@ -6,6 +6,10 @@ congoApp.controller('MainController', function ($scope, $http, $location, userDa
     $scope.flashes = flashesFactory.flashes;
   });
 
+  $scope.inAdminPanel = function () {
+    return userDataFactory.inAdminPanel();
+  };
+
   $scope.hasRole = function (name) {
     return userDataFactory.hasRole(name);
   };
@@ -245,6 +249,10 @@ congoApp.controller('UsersShowController', function ($scope, $http, $location, u
     .error(function (data, status, headers, config) {
       debugger
     });
+});
+
+congoApp.controller('CarriersIndexController', function ($scope, $http, $location, userDataFactory) {
+
 });
 
 congoApp.controller('ProductsIndexController', function ($scope, $http, $location, userDataFactory) {
