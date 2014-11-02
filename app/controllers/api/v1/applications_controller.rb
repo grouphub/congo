@@ -1,11 +1,20 @@
 class Api::V1::ApplicationsController < ApplicationController
-  include ApplicationHelper
-
   # TODO: Implement this
   def index
+    applications = Membership
+      .where(user_id: current_user.id)
+      .joins(:applications)
+      .inject([]) { |applications, membership|
+        applications += membership.applications
+        applications
+      }
+
     respond_to do |format|
       format.json {
-        render json: {}
+        # TODO: Needs optimizing
+        render json: {
+          applications: applications.map(&:simple_hash)
+        }
       }
     end
   end

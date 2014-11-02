@@ -16,6 +16,10 @@ Rails.application.routes.draw do
     '/users/new_account',
     '/users/new_customer',
     '/users/:id',
+    '/admin',
+    '/admin/carriers',
+    '/admin/carriers/new',
+    '/admin/carriers/:carrier_slug',
     '/accounts/:slug/:role',
     '/accounts/:slug/:role/home',
     '/accounts/:slug/:role/products',
@@ -24,7 +28,8 @@ Rails.application.routes.draw do
     '/accounts/:slug/:role/groups',
     '/accounts/:slug/:role/groups/new',
     '/accounts/:slug/:role/groups/:group_slug',
-    '/accounts/:slug/:role/groups/:group_slug/products/:product_id/applications/new'
+    '/accounts/:slug/:role/groups/:group_slug/products/:product_id/applications/new',
+    '/accounts/:slug/:role/applications'
   ]
 
   namespace :api do
@@ -42,6 +47,8 @@ Rails.application.routes.draw do
 
         resources :applications
       end
+
+      resources :carriers
 
       post '/users/signin', to: 'users#signin'
       delete '/users/signout', to: 'users#signout'

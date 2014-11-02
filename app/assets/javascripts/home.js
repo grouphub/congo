@@ -6,6 +6,14 @@ congoApp.controller('MainController', function ($scope, $http, $location, userDa
     $scope.flashes = flashesFactory.flashes;
   });
 
+  $scope.isAdmin = function () {
+    return userDataFactory.isAdmin();
+  };
+
+  $scope.inAdminPanel = function () {
+    return userDataFactory.inAdminPanel();
+  };
+
   $scope.hasRole = function (name) {
     return userDataFactory.hasRole(name);
   };
@@ -46,14 +54,18 @@ congoApp.controller('MainController', function ($scope, $http, $location, userDa
     return flashesFactory.all();
   };
 
-  $scope.$watch('hasRole()');
-  $scope.$watch('isSignedIn()');
-  $scope.$watch('firstName()');
-  $scope.$watch('accounts()');
-  $scope.$watch('accountSlug()');
-  $scope.$watch('currentRole()');
-  $scope.$watch('currentUserId()');
-  $scope.$watch('isDrawerShown()');
+  $scope.carrierSlug = function () {
+    return userDataFactory.carrierSlug();
+  };
+
+  $scope.groupSlug = function () {
+    return userDataFactory.groupSlug();
+  };
+
+  $scope.productId = function () {
+    return userDataFactory.productId();
+  };
+
   $scope.$watch('flashes');
 
   $scope.signout = function () {
@@ -76,22 +88,8 @@ congoApp.controller('LandingController', function ($scope) {
 
 });
 
-congoApp.controller('HomeController', function ($scope, userDataFactory) {
-  $scope.hasRole = function (name) {
-    return userDataFactory.hasRole(name);
-  };
+congoApp.controller('HomeController', function ($scope) {
 
-  $scope.firstName = function () {
-    return userDataFactory.firstName();
-  };
-
-  $scope.accountName = function () {
-    return userDataFactory.accountName();
-  };
-
-  $scope.$watch('hasRole()');
-  $scope.$watch('firstName()');
-  $scope.$watch('accountName()');
 });
 
 congoApp.controller('UsersSigninController', function ($scope, $http, $location, flashesFactory) {
@@ -240,15 +238,10 @@ congoApp.controller('UsersNewCustomerController', function ($scope, $http, $loca
   };
 });
 
-congoApp.controller('UsersShowController', function ($scope, $http, $location, userDataFactory) {
+congoApp.controller('UsersShowController', function ($scope, $http, $location) {
   $scope.user = null;
 
-  $scope.userId = function () {
-    return userDataFactory.userId();
-  }
-
   $scope.$watch('user');
-  $scope.$watch('userId()');
 
   $http
     .get('/api/v1/users/' + $scope.userId() + '.json')
@@ -260,18 +253,46 @@ congoApp.controller('UsersShowController', function ($scope, $http, $location, u
     });
 });
 
-congoApp.controller('ProductsIndexController', function ($scope, $http, $location, userDataFactory) {
-  $scope.accountSlug = function () {
-    return userDataFactory.accountSlug();
+congoApp.controller('CarriersNewController', function ($scope, $http, $location) {
+  $scope.submit = function () {
+    // TODO: Get properties out of `elements` (stored in `value`)
+
+    $http
+      .post('/api/v1/carriers.json', {
+        name: $scope.name
+      })
+      .success(function (data, status, headers, config) {
+        $location.path('/admin/carriers');
+      })
+      .error(function (data, status, headers, config) {
+        debugger
+      });
   };
+});
 
-  $scope.currentRole = function () {
-    return userDataFactory.currentRole();
-  };
+congoApp.controller('CarriersIndexController', function ($scope, $http, $location) {
+  $http
+    .get('/api/v1/carriers.json')
+    .success(function (data, status, headers, config) {
+      $scope.carriers = data.carriers;
+    })
+    .error(function (data, status, headers, config) {
+      debugger
+    });
+});
 
-  $scope.$watch('accountSlug()');
-  $scope.$watch('currentRole()');
+congoApp.controller('CarriersShowController', function ($scope, $http, $location) {
+  $http
+    .get('/api/v1/carriers/' + $scope.carrierSlug() + '.json')
+    .success(function (data, status, headers, config) {
+      $scope.carrier = data.carrier;
+    })
+    .error(function (data, status, headers, config) {
+      debugger
+    });
+});
 
+congoApp.controller('ProductsIndexController', function ($scope, $http, $location) {
   $http
     .get('/api/v1/accounts/' + $scope.accountSlug() + '/products.json')
     .success(function (data, status, headers, config) {
@@ -299,16 +320,10 @@ congoApp.controller('ProductsIndexController', function ($scope, $http, $locatio
     };
 });
 
-congoApp.controller('ProductsNewController', function ($scope, $http, $location, userDataFactory) {
-  $scope.accountSlug = function () {
-    return userDataFactory.accountSlug();
-  };
-
-  $scope.currentRole = function () {
-    return userDataFactory.currentRole();
-  };
-
+congoApp.controller('ProductsNewController', function ($scope, $http, $location) {
   $scope.elements = [];
+  $scope.carriers = [];
+  $scope.selectedCarrier = null;
 
   $http
     .get('/assets/products-new-properties.json')
@@ -319,15 +334,22 @@ congoApp.controller('ProductsNewController', function ($scope, $http, $location,
       debugger
     });
 
-  $scope.$watch('accountSlug()');
-  $scope.$watch('currentRole()');
+  $http
+    .get('/api/v1/carriers.json')
+    .success(function (data, status, headers, config) {
+      $scope.carriers = data.carriers;
+      $scope.selectedCarrier = data.carriers[0];
+    })
+    .error(function (data, status, headers, config) {
+      debugger
+    });
 
   $scope.submit = function () {
     // TODO: Get properties out of `elements` (stored in `value`)
-
     $http
       .post('/api/v1/accounts/' + $scope.accountSlug() + '/products.json', {
-        name: $scope.name
+        name: $scope.name,
+        carrier_slug: $scope.selectedCarrier
       })
       .success(function (data, status, headers, config) {
         $location.path('/accounts/' + $scope.accountSlug() + '/' + $scope.currentRole() + '/products');
@@ -338,23 +360,7 @@ congoApp.controller('ProductsNewController', function ($scope, $http, $location,
   };
 });
 
-congoApp.controller('ProductsShowController', function ($scope, $http, $location, userDataFactory) {
-  $scope.accountSlug = function () {
-    return userDataFactory.accountSlug();
-  };
-
-  $scope.currentRole = function () {
-    return userDataFactory.currentRole();
-  };
-
-  $scope.productId = function () {
-    return userDataFactory.productId();
-  };
-
-  $scope.$watch('accountSlug()');
-  $scope.$watch('currentRole()');
-  $scope.$watch('productId()');
-
+congoApp.controller('ProductsShowController', function ($scope, $http, $location) {
   $scope.product = undefined;
 
   $http
@@ -369,18 +375,7 @@ congoApp.controller('ProductsShowController', function ($scope, $http, $location
     });
 });
 
-congoApp.controller('GroupsIndexController', function ($scope, $http, $location, userDataFactory) {
-  $scope.accountSlug = function () {
-    return userDataFactory.accountSlug();
-  };
-
-  $scope.currentRole = function () {
-    return userDataFactory.currentRole();
-  };
-
-  $scope.$watch('accountSlug()');
-  $scope.$watch('currentRole()');
-
+congoApp.controller('GroupsIndexController', function ($scope, $http, $location) {
   $http
     .get('/api/v1/accounts/' + $scope.accountSlug() + '/groups.json')
     .success(function (data, status, headers, config) {
@@ -408,18 +403,7 @@ congoApp.controller('GroupsIndexController', function ($scope, $http, $location,
     };
 });
 
-congoApp.controller('GroupsNewController', function ($scope, $http, $location, userDataFactory) {
-  $scope.accountSlug = function () {
-    return userDataFactory.accountSlug();
-  };
-
-  $scope.currentRole = function () {
-    return userDataFactory.currentRole();
-  };
-
-  $scope.$watch('accountSlug()');
-  $scope.$watch('currentRole()');
-
+congoApp.controller('GroupsNewController', function ($scope, $http, $location) {
   $scope.submit = function () {
     $http
       .post('/api/v1/accounts/' + $scope.accountSlug() + '/groups.json', {
@@ -434,24 +418,12 @@ congoApp.controller('GroupsNewController', function ($scope, $http, $location, u
   };
 });
 
-congoApp.controller('GroupsShowController', function ($scope, $http, $location, userDataFactory) {
-  $scope.accountSlug = function () {
-    return userDataFactory.accountSlug();
-  };
-
-  $scope.groupSlug = function () {
-    return userDataFactory.groupSlug();
-  };
-
+congoApp.controller('GroupsShowController', function ($scope, $http, $location) {
   $scope.memberships = function () {
     if ($scope.group) {
       return $scope.group.memberships;
     }
   };
-
-  $scope.$watch('accountSlug()');
-  $scope.$watch('groupSlug()');
-  $scope.$watch('memberships()');
 
   $scope.inviteMember = function () {
     var email = $scope.email;
@@ -563,30 +535,9 @@ congoApp.controller('GroupsShowController', function ($scope, $http, $location, 
     });
 });
 
-congoApp.controller('ApplicationsNewController', function ($scope, $http, $location, userDataFactory) {
+congoApp.controller('ApplicationsNewController', function ($scope, $http, $location) {
   $scope.group = null;
   $scope.product = null;
-
-  $scope.accountSlug = function () {
-    return userDataFactory.accountSlug();
-  };
-
-  $scope.groupSlug = function () {
-    return userDataFactory.groupSlug();
-  };
-
-  $scope.productId = function () {
-    return userDataFactory.productId();
-  };
-
-  $scope.currentRole = function () {
-    return userDataFactory.currentRole();
-  };
-
-  $scope.$watch('accountSlug()');
-  $scope.$watch('groupSlug()');
-  $scope.$watch('productId()');
-  $scope.$watch('currentRole()');
 
   $scope.submit = function () {
     var data = {
@@ -625,7 +576,14 @@ congoApp.controller('ApplicationsNewController', function ($scope, $http, $locat
     });
 });
 
-congoApp.controller('ApplicationsIndexController', function ($scope, $http, $location, userDataFactory) {
-
+congoApp.controller('ApplicationsIndexController', function ($scope, $http, $location) {
+  $http
+    .get('/api/v1/accounts/' + $scope.accountSlug() + '/applications.json')
+    .success(function (data, status, headers, config) {
+      $scope.applications = data.applications;
+    })
+    .error(function (data, status, headers, config) {
+      debugger
+    });
 });
 
