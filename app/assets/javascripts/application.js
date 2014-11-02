@@ -19,3 +19,12 @@
 //= require angular-route
 //= require angular-cookies
 //= require home
+//= require router
+//= require factories/events-factory
+//= require factories/flashes-factory
+//= require factories/user-data-factory
+//= require directives/auto-focus
+//= require directives/properties-form
+//= require directives/horizontal-line-chart
+//= require directives/horizontal-bar-chart
+
