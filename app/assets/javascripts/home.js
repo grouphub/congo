@@ -46,14 +46,6 @@ congoApp.controller('MainController', function ($scope, $http, $location, userDa
     return flashesFactory.all();
   };
 
-  $scope.$watch('hasRole()');
-  $scope.$watch('isSignedIn()');
-  $scope.$watch('firstName()');
-  $scope.$watch('accounts()');
-  $scope.$watch('accountSlug()');
-  $scope.$watch('currentRole()');
-  $scope.$watch('currentUserId()');
-  $scope.$watch('isDrawerShown()');
   $scope.$watch('flashes');
 
   $scope.signout = function () {
@@ -88,10 +80,6 @@ congoApp.controller('HomeController', function ($scope, userDataFactory) {
   $scope.accountName = function () {
     return userDataFactory.accountName();
   };
-
-  $scope.$watch('hasRole()');
-  $scope.$watch('firstName()');
-  $scope.$watch('accountName()');
 });
 
 congoApp.controller('UsersSigninController', function ($scope, $http, $location, flashesFactory) {
@@ -248,7 +236,6 @@ congoApp.controller('UsersShowController', function ($scope, $http, $location, u
   }
 
   $scope.$watch('user');
-  $scope.$watch('userId()');
 
   $http
     .get('/api/v1/users/' + $scope.userId() + '.json')
@@ -268,9 +255,6 @@ congoApp.controller('ProductsIndexController', function ($scope, $http, $locatio
   $scope.currentRole = function () {
     return userDataFactory.currentRole();
   };
-
-  $scope.$watch('accountSlug()');
-  $scope.$watch('currentRole()');
 
   $http
     .get('/api/v1/accounts/' + $scope.accountSlug() + '/products.json')
@@ -319,9 +303,6 @@ congoApp.controller('ProductsNewController', function ($scope, $http, $location,
       debugger
     });
 
-  $scope.$watch('accountSlug()');
-  $scope.$watch('currentRole()');
-
   $scope.submit = function () {
     // TODO: Get properties out of `elements` (stored in `value`)
 
@@ -351,10 +332,6 @@ congoApp.controller('ProductsShowController', function ($scope, $http, $location
     return userDataFactory.productId();
   };
 
-  $scope.$watch('accountSlug()');
-  $scope.$watch('currentRole()');
-  $scope.$watch('productId()');
-
   $scope.product = undefined;
 
   $http
@@ -377,9 +354,6 @@ congoApp.controller('GroupsIndexController', function ($scope, $http, $location,
   $scope.currentRole = function () {
     return userDataFactory.currentRole();
   };
-
-  $scope.$watch('accountSlug()');
-  $scope.$watch('currentRole()');
 
   $http
     .get('/api/v1/accounts/' + $scope.accountSlug() + '/groups.json')
@@ -417,9 +391,6 @@ congoApp.controller('GroupsNewController', function ($scope, $http, $location, u
     return userDataFactory.currentRole();
   };
 
-  $scope.$watch('accountSlug()');
-  $scope.$watch('currentRole()');
-
   $scope.submit = function () {
     $http
       .post('/api/v1/accounts/' + $scope.accountSlug() + '/groups.json', {
@@ -448,10 +419,6 @@ congoApp.controller('GroupsShowController', function ($scope, $http, $location, 
       return $scope.group.memberships;
     }
   };
-
-  $scope.$watch('accountSlug()');
-  $scope.$watch('groupSlug()');
-  $scope.$watch('memberships()');
 
   $scope.inviteMember = function () {
     var email = $scope.email;
@@ -582,11 +549,6 @@ congoApp.controller('ApplicationsNewController', function ($scope, $http, $locat
   $scope.currentRole = function () {
     return userDataFactory.currentRole();
   };
-
-  $scope.$watch('accountSlug()');
-  $scope.$watch('groupSlug()');
-  $scope.$watch('productId()');
-  $scope.$watch('currentRole()');
 
   $scope.submit = function () {
     var data = {
