@@ -54,6 +54,18 @@ congoApp.controller('MainController', function ($scope, $http, $location, userDa
     return flashesFactory.all();
   };
 
+  $scope.carrierSlug = function () {
+    return userDataFactory.carrierSlug();
+  };
+
+  $scope.groupSlug = function () {
+    return userDataFactory.groupSlug();
+  };
+
+  $scope.productId = function () {
+    return userDataFactory.productId();
+  };
+
   $scope.$watch('flashes');
 
   $scope.signout = function () {
@@ -76,18 +88,8 @@ congoApp.controller('LandingController', function ($scope) {
 
 });
 
-congoApp.controller('HomeController', function ($scope, userDataFactory) {
-  $scope.hasRole = function (name) {
-    return userDataFactory.hasRole(name);
-  };
+congoApp.controller('HomeController', function ($scope) {
 
-  $scope.firstName = function () {
-    return userDataFactory.firstName();
-  };
-
-  $scope.accountName = function () {
-    return userDataFactory.accountName();
-  };
 });
 
 congoApp.controller('UsersSigninController', function ($scope, $http, $location, flashesFactory) {
@@ -236,12 +238,8 @@ congoApp.controller('UsersNewCustomerController', function ($scope, $http, $loca
   };
 });
 
-congoApp.controller('UsersShowController', function ($scope, $http, $location, userDataFactory) {
+congoApp.controller('UsersShowController', function ($scope, $http, $location) {
   $scope.user = null;
-
-  $scope.userId = function () {
-    return userDataFactory.userId();
-  }
 
   $scope.$watch('user');
 
@@ -255,26 +253,7 @@ congoApp.controller('UsersShowController', function ($scope, $http, $location, u
     });
 });
 
-congoApp.controller('CarriersIndexController', function ($scope, $http, $location, userDataFactory) {
-  $scope.isAdmin = function () {
-    return userDataFactory.isAdmin();
-  };
-
-  $http
-    .get('/api/v1/carriers.json')
-    .success(function (data, status, headers, config) {
-      $scope.carriers = data.carriers;
-    })
-    .error(function (data, status, headers, config) {
-      debugger
-    });
-});
-
-congoApp.controller('CarriersNewController', function ($scope, $http, $location, userDataFactory) {
-  $scope.isAdmin = function () {
-    return userDataFactory.isAdmin();
-  };
-
+congoApp.controller('CarriersNewController', function ($scope, $http, $location) {
   $scope.submit = function () {
     // TODO: Get properties out of `elements` (stored in `value`)
 
@@ -291,15 +270,18 @@ congoApp.controller('CarriersNewController', function ($scope, $http, $location,
   };
 });
 
-congoApp.controller('CarriersShowController', function ($scope, $http, $location, userDataFactory) {
-  $scope.isAdmin = function () {
-    return userDataFactory.isAdmin();
-  };
+congoApp.controller('CarriersIndexController', function ($scope, $http, $location) {
+  $http
+    .get('/api/v1/carriers.json')
+    .success(function (data, status, headers, config) {
+      $scope.carriers = data.carriers;
+    })
+    .error(function (data, status, headers, config) {
+      debugger
+    });
+});
 
-  $scope.carrierSlug = function () {
-    return userDataFactory.carrierSlug();
-  };
-
+congoApp.controller('CarriersShowController', function ($scope, $http, $location) {
   $http
     .get('/api/v1/carriers/' + $scope.carrierSlug() + '.json')
     .success(function (data, status, headers, config) {
@@ -310,15 +292,7 @@ congoApp.controller('CarriersShowController', function ($scope, $http, $location
     });
 });
 
-congoApp.controller('ProductsIndexController', function ($scope, $http, $location, userDataFactory) {
-  $scope.accountSlug = function () {
-    return userDataFactory.accountSlug();
-  };
-
-  $scope.currentRole = function () {
-    return userDataFactory.currentRole();
-  };
-
+congoApp.controller('ProductsIndexController', function ($scope, $http, $location) {
   $http
     .get('/api/v1/accounts/' + $scope.accountSlug() + '/products.json')
     .success(function (data, status, headers, config) {
@@ -346,15 +320,7 @@ congoApp.controller('ProductsIndexController', function ($scope, $http, $locatio
     };
 });
 
-congoApp.controller('ProductsNewController', function ($scope, $http, $location, userDataFactory) {
-  $scope.accountSlug = function () {
-    return userDataFactory.accountSlug();
-  };
-
-  $scope.currentRole = function () {
-    return userDataFactory.currentRole();
-  };
-
+congoApp.controller('ProductsNewController', function ($scope, $http, $location) {
   $scope.elements = [];
   $scope.carriers = [];
   $scope.selectedCarrier = null;
@@ -394,19 +360,7 @@ congoApp.controller('ProductsNewController', function ($scope, $http, $location,
   };
 });
 
-congoApp.controller('ProductsShowController', function ($scope, $http, $location, userDataFactory) {
-  $scope.accountSlug = function () {
-    return userDataFactory.accountSlug();
-  };
-
-  $scope.currentRole = function () {
-    return userDataFactory.currentRole();
-  };
-
-  $scope.productId = function () {
-    return userDataFactory.productId();
-  };
-
+congoApp.controller('ProductsShowController', function ($scope, $http, $location) {
   $scope.product = undefined;
 
   $http
@@ -421,15 +375,7 @@ congoApp.controller('ProductsShowController', function ($scope, $http, $location
     });
 });
 
-congoApp.controller('GroupsIndexController', function ($scope, $http, $location, userDataFactory) {
-  $scope.accountSlug = function () {
-    return userDataFactory.accountSlug();
-  };
-
-  $scope.currentRole = function () {
-    return userDataFactory.currentRole();
-  };
-
+congoApp.controller('GroupsIndexController', function ($scope, $http, $location) {
   $http
     .get('/api/v1/accounts/' + $scope.accountSlug() + '/groups.json')
     .success(function (data, status, headers, config) {
@@ -457,15 +403,7 @@ congoApp.controller('GroupsIndexController', function ($scope, $http, $location,
     };
 });
 
-congoApp.controller('GroupsNewController', function ($scope, $http, $location, userDataFactory) {
-  $scope.accountSlug = function () {
-    return userDataFactory.accountSlug();
-  };
-
-  $scope.currentRole = function () {
-    return userDataFactory.currentRole();
-  };
-
+congoApp.controller('GroupsNewController', function ($scope, $http, $location) {
   $scope.submit = function () {
     $http
       .post('/api/v1/accounts/' + $scope.accountSlug() + '/groups.json', {
@@ -480,15 +418,7 @@ congoApp.controller('GroupsNewController', function ($scope, $http, $location, u
   };
 });
 
-congoApp.controller('GroupsShowController', function ($scope, $http, $location, userDataFactory) {
-  $scope.accountSlug = function () {
-    return userDataFactory.accountSlug();
-  };
-
-  $scope.groupSlug = function () {
-    return userDataFactory.groupSlug();
-  };
-
+congoApp.controller('GroupsShowController', function ($scope, $http, $location) {
   $scope.memberships = function () {
     if ($scope.group) {
       return $scope.group.memberships;
@@ -605,25 +535,9 @@ congoApp.controller('GroupsShowController', function ($scope, $http, $location, 
     });
 });
 
-congoApp.controller('ApplicationsNewController', function ($scope, $http, $location, userDataFactory) {
+congoApp.controller('ApplicationsNewController', function ($scope, $http, $location) {
   $scope.group = null;
   $scope.product = null;
-
-  $scope.accountSlug = function () {
-    return userDataFactory.accountSlug();
-  };
-
-  $scope.groupSlug = function () {
-    return userDataFactory.groupSlug();
-  };
-
-  $scope.productId = function () {
-    return userDataFactory.productId();
-  };
-
-  $scope.currentRole = function () {
-    return userDataFactory.currentRole();
-  };
 
   $scope.submit = function () {
     var data = {
@@ -662,11 +576,7 @@ congoApp.controller('ApplicationsNewController', function ($scope, $http, $locat
     });
 });
 
-congoApp.controller('ApplicationsIndexController', function ($scope, $http, $location, userDataFactory) {
-  $scope.accountSlug = function () {
-    return userDataFactory.accountSlug();
-  };
-
+congoApp.controller('ApplicationsIndexController', function ($scope, $http, $location) {
   $http
     .get('/api/v1/accounts/' + $scope.accountSlug() + '/applications.json')
     .success(function (data, status, headers, config) {
