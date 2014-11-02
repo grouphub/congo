@@ -1,16 +1,51 @@
 class Api::V1::CarriersController < ApplicationController
   def index
+    # TODO: Check for current user and admin
+
     respond_to do |format|
       format.json {
         render json: {
           # TODO: Scope groups by account
-          groups: Carrier.all
+          carriers: Carrier.all
         }
       }
     end
   end
 
   def create
+    # TODO: Check for current user and admin
+
+    name = params[:name]
+
+    unless name
+      # TODO: Handle this
+    end
+
+    carrier = Carrier.create! \
+      name: name
+
+    respond_to do |format|
+      format.json {
+        render json: {
+          carrier: carrier
+        }
+      }
+    end
+  end
+
+  def show
+    # TODO: Check for current user and admin
+
+    slug = params[:id]
+    carrier = Carrier.where(slug: slug).first
+
+    respond_to do |format|
+      format.json {
+        render json: {
+          carrier: carrier
+        }
+      }
+    end
   end
 end
 

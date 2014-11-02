@@ -6,6 +6,10 @@ congoApp.controller('MainController', function ($scope, $http, $location, userDa
     $scope.flashes = flashesFactory.flashes;
   });
 
+  $scope.isAdmin = function () {
+    return userDataFactory.isAdmin();
+  };
+
   $scope.inAdminPanel = function () {
     return userDataFactory.inAdminPanel();
   };
@@ -252,7 +256,58 @@ congoApp.controller('UsersShowController', function ($scope, $http, $location, u
 });
 
 congoApp.controller('CarriersIndexController', function ($scope, $http, $location, userDataFactory) {
+  $scope.isAdmin = function () {
+    return userDataFactory.isAdmin();
+  };
 
+  $http
+    .get('/api/v1/carriers.json')
+    .success(function (data, status, headers, config) {
+      $scope.carriers = data.carriers;
+    })
+    .error(function (data, status, headers, config) {
+      debugger
+    });
+});
+
+congoApp.controller('CarriersNewController', function ($scope, $http, $location, userDataFactory) {
+  $scope.isAdmin = function () {
+    return userDataFactory.isAdmin();
+  };
+
+  $scope.submit = function () {
+    // TODO: Get properties out of `elements` (stored in `value`)
+
+    $http
+      .post('/api/v1/carriers.json', {
+        name: $scope.name
+      })
+      .success(function (data, status, headers, config) {
+        $location.path('/admin/carriers');
+      })
+      .error(function (data, status, headers, config) {
+        debugger
+      });
+  };
+});
+
+congoApp.controller('CarriersShowController', function ($scope, $http, $location, userDataFactory) {
+  $scope.isAdmin = function () {
+    return userDataFactory.isAdmin();
+  };
+
+  $scope.carrierSlug = function () {
+    return userDataFactory.carrierSlug();
+  };
+
+  $http
+    .get('/api/v1/carriers/' + $scope.carrierSlug() + '.json')
+    .success(function (data, status, headers, config) {
+      $scope.carrier = data.carrier;
+    })
+    .error(function (data, status, headers, config) {
+      debugger
+    });
 });
 
 congoApp.controller('ProductsIndexController', function ($scope, $http, $location, userDataFactory) {

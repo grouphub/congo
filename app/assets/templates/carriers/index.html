@@ -1,4 +1,28 @@
 <div class="col-md-12">
   <h1>Carriers</h1>
+
+  <table class="carriers table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th ng-if="isAdmin()">Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr ng-repeat="carrier in carriers">
+        <td>
+          <a ng-href="/admin/carriers/{{carrier.slug}}">{{carrier.name}}</a>
+        </td>
+
+        <td ng-if="isAdmin()">
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p ng-if="isAdmin()">
+    <a class="btn btn-default" href="/admin/carriers/new">New carrier</a>
+  </p>
 </div>
 

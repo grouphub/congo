@@ -19,6 +19,7 @@ Rails.application.routes.draw do
     '/admin',
     '/admin/carriers',
     '/admin/carriers/new',
+    '/admin/carriers/:carrier_slug',
     '/accounts/:slug/:role',
     '/accounts/:slug/:role/home',
     '/accounts/:slug/:role/products',
@@ -45,6 +46,8 @@ Rails.application.routes.draw do
 
         resources :applications
       end
+
+      resources :carriers
 
       post '/users/signin', to: 'users#signin'
       delete '/users/signout', to: 'users#signout'
