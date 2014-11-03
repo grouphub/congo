@@ -190,7 +190,8 @@ ActiveRecord::Schema.define(version: 20141103003532) do
   create_table "roles", force: true do |t|
     t.integer  "account_id"
     t.integer  "user_id"
-    t.string   "role"
+    t.string   "name"
+    t.string   "english_name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
