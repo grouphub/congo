@@ -38,16 +38,16 @@ Rails.application.routes.draw do
     '/accounts/:slug/:role/account_carriers/new',
     '/accounts/:slug/:role/account_carriers/:account_carrier_id',
 
-    # Products
-    '/accounts/:slug/:role/products',
-    '/accounts/:slug/:role/products/new',
-    '/accounts/:slug/:role/products/:product_id',
+    # Benefit plans
+    '/accounts/:slug/:role/benefit_plans',
+    '/accounts/:slug/:role/benefit_plans/new',
+    '/accounts/:slug/:role/benefit_plans/:benefit_plan_id',
 
     # Groups
     '/accounts/:slug/:role/groups',
     '/accounts/:slug/:role/groups/new',
     '/accounts/:slug/:role/groups/:group_slug',
-    '/accounts/:slug/:role/groups/:group_slug/products/:product_id/applications/new',
+    '/accounts/:slug/:role/groups/:group_slug/benefit_plans/:benefit_plan_id/applications/new',
 
     # Applications
     '/accounts/:slug/:role/applications'

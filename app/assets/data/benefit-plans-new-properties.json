@@ -1,0 +1,9 @@
+[
+  {
+    "type": "text",
+    "name": "benefit_plan_id",
+    "title": "Benefit plan ID",
+    "placeholder": "Enter a benefit plan ID…"
+  }
+]
+
