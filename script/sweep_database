@@ -1,11 +1,4 @@
 #!/bin/sh
 
-echo "Dropping database"
-bundle exec rake db:drop
-echo "Creating database"
-bundle exec rake db:create
-echo "Migrating"
-bundle exec rake db:migrate
-echo "Seeding"
-bundle exec rake db:seed
+bundle exec rake db:drop db:create db:migrate db:seed --trace
 
