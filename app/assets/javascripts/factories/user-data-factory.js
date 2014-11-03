@@ -95,46 +95,6 @@ congoApp.factory('userDataFactory', function ($location, $cookieStore) {
         return true; 
       }
     },
-    hasRole: function (name) {
-      var currentUser = congo.currentUser;
-      var accounts;
-      var accountSlug;
-      var account;
-      var match = $location.path().match(/\/accounts\/[^\/]+\/([^\/]+)/);
-      var currentRole = match && match[1] && match[1].length > 0;
-
-      var currentRole = null;
-
-      if (!match || !match[1] || match.length === 0) {
-        return;
-      }
-
-      currentRole = match[1];
-
-      if (!currentUser) {
-        return;
-      }
-
-      if (
-        !currentRole &&
-        name === 'admin' &&
-        currentUser.is_admin
-      ) {
-        return true; 
-      }
-
-      accounts = currentUser.accounts;
-      accountSlug = userDataFactory.accountSlug();
-      account = _.find(accounts, function (account) {
-        return account.slug === accountSlug && account.role.name === name;
-      });
-
-      if (!account) {
-        return;
-      }
-
-      return true;
-    },
     firstName: function () {
       if (!congo.currentUser) {
         return;

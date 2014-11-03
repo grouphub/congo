@@ -18,10 +18,6 @@ congoApp.controller('MainController', function ($scope, $http, $location, userDa
     return userDataFactory.accountName();
   };
 
-  $scope.hasRole = function (name) {
-    return userDataFactory.hasRole(name);
-  };
-
   $scope.isSignedin = function () {
     return userDataFactory.isSignedin();
   };
