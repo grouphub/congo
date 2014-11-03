@@ -11,10 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141102041408) do
+ActiveRecord::Schema.define(version: 20141103003532) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "account_carriers", force: true do |t|
+    t.integer  "account_id"
+    t.integer  "carrier_id"
+    t.string   "name"
+    t.text     "properties_data"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "accounts", force: true do |t|
     t.string   "name"
@@ -93,14 +102,7 @@ ActiveRecord::Schema.define(version: 20141102041408) do
   create_table "carriers", force: true do |t|
     t.string   "name"
     t.string   "slug"
-    t.integer  "carrier_number"
-    t.string   "carrier_name"
-    t.string   "carrier_address_1"
-    t.string   "carrier_address_2"
-    t.string   "carrier_city"
-    t.string   "carrier_state"
-    t.integer  "carrier_zip"
-    t.string   "carrier_phone"
+    t.text     "properties_data"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
