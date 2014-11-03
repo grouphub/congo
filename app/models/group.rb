@@ -1,6 +1,6 @@
 class Group < ActiveRecord::Base
   has_many :memberships
-  has_many :group_products
+  has_many :group_benefit_plans
 
   belongs_to :account
 
@@ -16,10 +16,10 @@ class Group < ActiveRecord::Base
       name: self.name,
       slug: self.slug,
       memberships: self.memberships.map { |membership| membership.simple_hash },
-      products: self
-        .group_products
-        .includes(:product)
-        .map { |group_product| group_product.product }
+      benefit_plans: self
+        .group_benefit_plans
+        .includes(:benefit_plan)
+        .map { |group_benefit_plan| group_benefit_plan.benefit_plan }
     }
   end
 end

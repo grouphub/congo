@@ -1,0 +1,29 @@
+<div class="col-md-12">
+  <h1>Benefit plans</h1>
+
+  <table class="benefit-plans table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr ng-repeat="benefitPlan in benefitPlans">
+        <td>
+          <a href="/accounts/{{accountSlug()}}/{{currentRole()}}/benefit_plans/{{benefitPlan.id}}">{{benefitPlan.name}}</a>
+        </td>
+
+        <td>
+          <a class="btn btn-danger btn-xs" href="" ng-click="deleteBenefitPlanAt($index)">Delete</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>
+    <a class="btn btn-default" href="/accounts/{{accountSlug()}}/{{currentRole()}}/benefit_plans/new">New benefit plan</a>
+  </p>
+</div>
+

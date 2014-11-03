@@ -22,15 +22,15 @@ class Api::V1::ApplicationsController < ApplicationController
   def create
     account_slug = params[:account_id]
     group_slug = params[:group_slug]
-    product_id = params[:product_id]
+    benefit_plan_id = params[:benefit_plan_id]
     account = Account.where(slug: account_slug).first
     group = Group.where(slug: group_slug).first
-    product = Product.where(id: product_id).first
+    benefit_plan = BenefitPlan.where(id: benefit_plan_id).first
     membership = Membership.where(group_id: group.id, user_id: current_user.id).first
 
     application = Application.create! \
       account_id: account.id,
-      product_id: product.id,
+      benefit_plan_id: benefit_plan.id,
       membership_id: membership.id
 
     respond_to do |format|

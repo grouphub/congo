@@ -36,8 +36,8 @@ congoApp.factory('userDataFactory', function ($location, $cookieStore) {
         return match[1];
       }
     },
-    productId: function () {
-      var match = $location.path().match(/products\/([^\/])+/);
+    benefitPlanId: function () {
+      var match = $location.path().match(/benefit_plans\/([^\/])+/);
 
       if (match && match[1] && match[1].length > 0) {
         return match[1];

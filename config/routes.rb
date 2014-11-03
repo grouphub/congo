@@ -38,16 +38,16 @@ Rails.application.routes.draw do
     '/accounts/:slug/:role/account_carriers/new',
     '/accounts/:slug/:role/account_carriers/:account_carrier_id',
 
-    # Products
-    '/accounts/:slug/:role/products',
-    '/accounts/:slug/:role/products/new',
-    '/accounts/:slug/:role/products/:product_id',
+    # Benefit plans
+    '/accounts/:slug/:role/benefit_plans',
+    '/accounts/:slug/:role/benefit_plans/new',
+    '/accounts/:slug/:role/benefit_plans/:benefit_plan_id',
 
     # Groups
     '/accounts/:slug/:role/groups',
     '/accounts/:slug/:role/groups/new',
     '/accounts/:slug/:role/groups/:group_slug',
-    '/accounts/:slug/:role/groups/:group_slug/products/:product_id/applications/new',
+    '/accounts/:slug/:role/groups/:group_slug/benefit_plans/:benefit_plan_id/applications/new',
 
     # Applications
     '/accounts/:slug/:role/applications'
@@ -57,14 +57,14 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :accounts do
         resources :account_carriers
-        resources :products
+        resources :benefit_plans
         resources :groups do
           resources :memberships do
             post '/confirmations', to: 'memberships#send_confirmation'
           end
 
-          post '/group_products', to: 'group_products#create'
-          delete '/group_products', to: 'group_products#destroy'
+          post '/group_benefit_plans', to: 'group_benefit_plans#create'
+          delete '/group_benefit_plans', to: 'group_benefit_plans#destroy'
         end
 
         resources :applications

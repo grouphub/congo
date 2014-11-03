@@ -1,10 +1,10 @@
-class Api::V1::ProductsController < ApplicationController
+class Api::V1::BenefitPlansController < ApplicationController
   def index
     respond_to do |format|
       format.json {
         render json: {
-          # TODO: Scope products by account
-          products: Product.all
+          # TODO: Scope benefit_plans by account
+          benefit_plans: BenefitPlan.all
         }
       }
     end
@@ -29,7 +29,7 @@ class Api::V1::ProductsController < ApplicationController
       # TODO: Handle this
     end
 
-    product = Product.create! \
+    benefit_plan = BenefitPlan.create! \
       name: name,
       account_id: account.id,
       account_carrier_id: account_carrier.id
@@ -37,7 +37,7 @@ class Api::V1::ProductsController < ApplicationController
     respond_to do |format|
       format.json {
         render json: {
-          product: product
+          benefit_plan: benefit_plan
         }
       }
     end
@@ -47,12 +47,12 @@ class Api::V1::ProductsController < ApplicationController
     id = params[:id]
     account_slug = params[:account_id]
     account = Account.where(slug: account_slug).first
-    product = Product.where(id: params[:id]).first
+    benefit_plan = BenefitPlan.where(id: params[:id]).first
 
     respond_to do |format|
       format.json {
         render json: {
-          product: product.simple_hash
+          benefit_plan: benefit_plan.simple_hash
         }
       }
     end
@@ -61,12 +61,12 @@ class Api::V1::ProductsController < ApplicationController
   def destroy
     id = params[:id]
 
-    product = Product.find(id).destroy
+    benefit_plan = BenefitPlan.find(id).destroy
 
     respond_to do |format|
       format.json {
         render json: {
-          product: product
+          benefit_plan: benefit_plan
         }
       }
     end
