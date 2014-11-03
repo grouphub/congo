@@ -59,6 +59,18 @@ congoApp.config([
         templateUrl: '/assets/home.html',
         controller: 'HomeController'
       })
+      .when('/accounts/:slug/:role/account_carriers', {
+        templateUrl: '/assets/account_carriers/index.html',
+        controller: 'AccountCarriersIndexController'
+      })
+      .when('/accounts/:slug/:role/account_carriers/new', {
+        templateUrl: '/assets/account_carriers/new.html',
+        controller: 'AccountCarriersNewController'
+      })
+      .when('/accounts/:slug/:role/account_carriers/:account_carrier_id', {
+        templateUrl: '/assets/account_carriers/show.html',
+        controller: 'AccountCarriersShowController'
+      })
       .when('/accounts/:slug/:role/products', {
         templateUrl: '/assets/products/index.html',
         controller: 'ProductsIndexController'

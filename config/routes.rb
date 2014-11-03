@@ -8,8 +8,11 @@ Rails.application.routes.draw do
   get '/index_v1', :to => redirect('/index_v1.html')
 
   angular_routes [
+    # Home
     '/',
     '/home',
+
+    # Users
     '/users/signin',
     '/users/new_manager',
     '/users/new_plan',
@@ -17,25 +20,36 @@ Rails.application.routes.draw do
     '/users/new_account',
     '/users/new_customer',
     '/users/:id',
+
+    # Admin home
     '/admin',
+
+    # Carriers
     '/admin/carriers',
     '/admin/carriers/new',
     '/admin/carriers/:carrier_slug',
+
+    # Account home
     '/accounts/:slug/:role',
     '/accounts/:slug/:role/home',
 
-    # TODO: Add these
+    # Account carriers
     '/accounts/:slug/:role/account_carriers',
     '/accounts/:slug/:role/account_carriers/new',
     '/accounts/:slug/:role/account_carriers/:account_carrier_id',
 
+    # Products
     '/accounts/:slug/:role/products',
     '/accounts/:slug/:role/products/new',
     '/accounts/:slug/:role/products/:product_id',
+
+    # Groups
     '/accounts/:slug/:role/groups',
     '/accounts/:slug/:role/groups/new',
     '/accounts/:slug/:role/groups/:group_slug',
     '/accounts/:slug/:role/groups/:group_slug/products/:product_id/applications/new',
+
+    # Applications
     '/accounts/:slug/:role/applications'
   ]
 
