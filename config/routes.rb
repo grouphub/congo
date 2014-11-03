@@ -57,14 +57,14 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :accounts do
         resources :account_carriers
-        resources :products
+        resources :benefit_plans
         resources :groups do
           resources :memberships do
             post '/confirmations', to: 'memberships#send_confirmation'
           end
 
-          post '/group_products', to: 'group_products#create'
-          delete '/group_products', to: 'group_products#destroy'
+          post '/group_benefit_plans', to: 'group_benefit_plans#create'
+          delete '/group_benefit_plans', to: 'group_benefit_plans#destroy'
         end
 
         resources :applications

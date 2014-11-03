@@ -2,7 +2,7 @@ class AccountCarrier < ActiveRecord::Base
   belongs_to :account
   belongs_to :carrier
 
-  has_many :products
+  has_many :benefit_plans
 
   def properties=(hash)
     self.properties_data = hash.to_json

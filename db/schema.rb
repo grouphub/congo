@@ -83,7 +83,7 @@ ActiveRecord::Schema.define(version: 20141103003532) do
 
   create_table "applications", force: true do |t|
     t.integer  "account_id"
-    t.integer  "product_id"
+    t.integer  "benefit_plan_id"
     t.integer  "membership_id"
     t.datetime "created_at"
     t.datetime "updated_at"

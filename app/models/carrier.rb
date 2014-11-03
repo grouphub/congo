@@ -1,7 +1,7 @@
 class Carrier < ActiveRecord::Base
   before_save :add_slug
 
-  has_many :products
+  has_many :benefit_plans
   has_many :account_carriers
 
   def add_slug
