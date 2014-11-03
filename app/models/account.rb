@@ -1,14 +1,11 @@
 require "#{Rails.root}/lib/sluggerizer"
 
 class Account < ActiveRecord::Base
+  include Sluggable
+
   has_many :roles
   has_many :applications
-
-  before_save :add_slug
-
-  def add_slug
-    self.slug = Sluggerizer.sluggerize(self.name) if self.name
-  end
+  has_many :account_carriers
 
   def needs_to_pay?
     last_payment = Payment

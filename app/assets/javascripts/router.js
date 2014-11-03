@@ -59,17 +59,29 @@ congoApp.config([
         templateUrl: '/assets/home.html',
         controller: 'HomeController'
       })
-      .when('/accounts/:slug/:role/products', {
-        templateUrl: '/assets/products/index.html',
-        controller: 'ProductsIndexController'
+      .when('/accounts/:slug/:role/account_carriers', {
+        templateUrl: '/assets/account_carriers/index.html',
+        controller: 'AccountCarriersIndexController'
       })
-      .when('/accounts/:slug/:role/products/new', {
-        templateUrl: '/assets/products/new.html',
-        controller: 'ProductsNewController'
+      .when('/accounts/:slug/:role/account_carriers/new', {
+        templateUrl: '/assets/account_carriers/new.html',
+        controller: 'AccountCarriersNewController'
       })
-      .when('/accounts/:slug/:role/products/:product_id', {
-        templateUrl: '/assets/products/show.html',
-        controller: 'ProductsShowController'
+      .when('/accounts/:slug/:role/account_carriers/:account_carrier_id', {
+        templateUrl: '/assets/account_carriers/show.html',
+        controller: 'AccountCarriersShowController'
+      })
+      .when('/accounts/:slug/:role/benefit_plans', {
+        templateUrl: '/assets/benefit_plans/index.html',
+        controller: 'BenefitPlansIndexController'
+      })
+      .when('/accounts/:slug/:role/benefit_plans/new', {
+        templateUrl: '/assets/benefit_plans/new.html',
+        controller: 'BenefitPlansNewController'
+      })
+      .when('/accounts/:slug/:role/benefit_plans/:benefit_plan_id', {
+        templateUrl: '/assets/benefit_plans/show.html',
+        controller: 'BenefitPlansShowController'
       })
       .when('/accounts/:slug/:role/groups', {
         templateUrl: '/assets/groups/index.html',
@@ -83,7 +95,7 @@ congoApp.config([
         templateUrl: '/assets/groups/show.html',
         controller: 'GroupsShowController'
       })
-      .when('/accounts/:slug/:role/groups/:group_slug/products/:product_id/applications/new', {
+      .when('/accounts/:slug/:role/groups/:group_slug/benefit_plans/:benefit_plan_id/applications/new', {
         templateUrl: '/assets/applications/new.html',
         controller: 'ApplicationsNewController'
       })

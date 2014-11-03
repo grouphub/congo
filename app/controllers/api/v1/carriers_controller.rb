@@ -18,13 +18,15 @@ class Api::V1::CarriersController < ApplicationController
     # TODO: Check for current user and admin
 
     name = params[:name]
+    properties = params[:properties]
 
     unless name
       # TODO: Handle this
     end
 
     carrier = Carrier.create! \
-      name: name
+      name: name,
+      properties: properties
 
     respond_to do |format|
       format.json {

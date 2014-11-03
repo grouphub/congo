@@ -18,7 +18,7 @@
 //= require angular
 //= require angular-route
 //= require angular-cookies
-//= require home
+//= require controllers
 //= require router
 //= require factories/events-factory
 //= require factories/flashes-factory

@@ -1,16 +1,22 @@
-<div ng-if="hasRole('admin')" class="col-md-12">
+<div ng-if="currentRole() === 'admin'" class="col-md-12">
   <h1>Admin Dashboard</h1>
 
   <p>Lorem ipsum...</p>
 </div>
 
-<div ng-if="hasRole('broker')" class="col-md-12">
-  <h1>{{accountName()}} Dashboard</h1>
+<div ng-if="currentRole() === 'broker'" class="col-md-12">
+  <h1>{{accountName()}} Broker Dashboard</h1>
 
   <p>Lorem ipsum...</p>
 </div>
 
-<div ng-if="hasRole('customer')" class="col-md-12">
+<div ng-if="currentRole() === 'group_admin'" class="col-md-12">
+  <h1>{{accountName()}} Group Admin Dashboard</h1>
+
+  <p>Lorem ipsum...</p>
+</div>
+
+<div ng-if="currentRole() === 'customer'" class="col-md-12">
   <h1>Welcome to {{accountName()}}, {{firstName()}}!</h1>
 
   <p>Lorem ipsum 2...</p>

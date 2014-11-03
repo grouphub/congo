@@ -1,10 +1,8 @@
 class Carrier < ActiveRecord::Base
-  before_save :add_slug
+  include Sluggable
+  include Proper
 
-  has_many :products
-
-  def add_slug
-    self.slug = Sluggerizer.sluggerize(self.name) if self.name
-  end
+  has_many :benefit_plans
+  has_many :account_carriers
 end
 

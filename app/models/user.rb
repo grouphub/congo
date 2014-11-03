@@ -2,16 +2,10 @@ require 'bcrypt'
 require "#{Rails.root}/lib/sluggerizer"
 
 class User < ActiveRecord::Base
+  include Proper
+
   has_many :roles
   has_many :applications
-
-  def properties=(hash)
-    self.properties_data = hash.to_json
-  end
-
-  def properties
-    JSON.load(self.properties_data)
-  end
 
   def password
     @password = BCrypt::Password.new(self.encrypted_password)
@@ -23,7 +17,7 @@ class User < ActiveRecord::Base
   end
 
   def admin?
-    User.first.roles.any? { |role| role.role == 'admin' }
+    User.first.roles.any? { |role| role.name == 'admin' }
   end
 
   def simple_hash

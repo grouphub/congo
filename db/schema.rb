@@ -11,10 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20141110241408) do
+=======
+ActiveRecord::Schema.define(version: 20141103003532) do
+>>>>>>> 3d3a371bc6b4b336fc2318e6878129b3dd74a7db
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "account_carriers", force: true do |t|
+    t.integer  "account_id"
+    t.integer  "carrier_id"
+    t.string   "name"
+    t.text     "properties_data"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "accounts", force: true do |t|
     t.string   "name"
@@ -74,13 +87,14 @@ ActiveRecord::Schema.define(version: 20141110241408) do
 
   create_table "applications", force: true do |t|
     t.integer  "account_id"
-    t.integer  "product_id"
+    t.integer  "benefit_plan_id"
     t.integer  "membership_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "benefit_plans", force: true do |t|
+<<<<<<< HEAD
     t.integer  "carrier_id"
     t.string   "plan_name"
     t.string   "plan_type"
@@ -96,6 +110,16 @@ ActiveRecord::Schema.define(version: 20141110241408) do
     t.string   "broker_number"
     t.string   "brokerage_name"
     t.string   "tax_id"
+=======
+    t.integer  "account_id"
+    t.integer  "account_carrier_id"
+    t.string   "name"
+    t.string   "slug"
+    t.string   "type"
+    t.boolean  "exchange_plan"
+    t.boolean  "small_group"
+    t.text     "properties_data"
+>>>>>>> 3d3a371bc6b4b336fc2318e6878129b3dd74a7db
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -103,6 +127,7 @@ ActiveRecord::Schema.define(version: 20141110241408) do
   create_table "carriers", force: true do |t|
     t.string   "name"
     t.string   "slug"
+<<<<<<< HEAD
     t.integer  "carrier_number"
     t.string   "carrier_name"
     t.string   "carrier_address_1"
@@ -111,6 +136,9 @@ ActiveRecord::Schema.define(version: 20141110241408) do
     t.string   "carrier_state"
     t.integer  "carrier_zip"
     t.string   "carrier_phone"
+=======
+    t.text     "properties_data"
+>>>>>>> 3d3a371bc6b4b336fc2318e6878129b3dd74a7db
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -135,6 +163,7 @@ ActiveRecord::Schema.define(version: 20141110241408) do
     t.integer  "application_id"
     t.integer  "carrier_id"
     t.string   "master_policy_number"
+<<<<<<< HEAD
     t.integer  "group_id"
     t.integer  "member_id"
     t.string   "enrollment_reference_number"
@@ -161,8 +190,36 @@ ActiveRecord::Schema.define(version: 20141110241408) do
   end
 
   create_table "group_products", force: true do |t|
+=======
+>>>>>>> 3d3a371bc6b4b336fc2318e6878129b3dd74a7db
     t.integer  "group_id"
-    t.integer  "product_id"
+    t.integer  "member_id"
+    t.string   "enrollment_reference_number"
+    t.date     "enrollment_date"
+    t.integer  "subscriber_number"
+    t.string   "dependent_type"
+    t.boolean  "dependent_coverage_refusal"
+    t.integer  "dependent_coverage_refusal_id"
+    t.string   "dependent_first_name"
+    t.string   "dependent_middle_name"
+    t.string   "dependent_last_name"
+    t.string   "dependent_ssn"
+    t.string   "dependent_address_1"
+    t.string   "dependent_address_2"
+    t.string   "dependent_city"
+    t.string   "dependent_state"
+    t.integer  "dependent_zip"
+    t.string   "dependent_home_phone"
+    t.string   "dependent_date_of_birth"
+    t.integer  "dependent_gender"
+    t.boolean  "dependent_disabled"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "group_benefit_plans", force: true do |t|
+    t.integer  "group_id"
+    t.integer  "benefit_plan_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -192,19 +249,43 @@ ActiveRecord::Schema.define(version: 20141110241408) do
     t.datetime "updated_at"
   end
 
-  create_table "products", force: true do |t|
+  create_table "roles", force: true do |t|
     t.integer  "account_id"
-    t.integer  "carrier_id"
+    t.integer  "user_id"
     t.string   "name"
-    t.string   "slug"
+    t.string   "english_name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "roles", force: true do |t|
-    t.integer  "account_id"
-    t.integer  "user_id"
-    t.string   "role"
+  create_table "subscriber_benefits", force: true do |t|
+    t.integer  "carrier_id"
+    t.string   "master_policy_number"
+    t.integer  "group_id"
+    t.string   "group_or_policy_number"
+    t.integer  "member_id"
+    t.string   "enrollment_reference_number"
+    t.date     "enrollment_date"
+    t.integer  "subscriber_number"
+    t.integer  "benefit_plan_id"
+    t.date     "benefit_begin_date"
+    t.string   "benefit_type"
+    t.boolean  "benefit_late_enrollment"
+    t.string   "benefit_maintenance_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "subscriber_dependents", force: true do |t|
+    t.integer  "application_id"
+    t.integer  "carrier_id"
+    t.string   "master_policy_number"
+    t.integer  "group_id"
+    t.integer  "member_id"
+    t.string   "enrollment_reference_number"
+    t.date     "enrollment_date"
+    t.integer  "subscriber_number"
+    t.string   "dependent_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

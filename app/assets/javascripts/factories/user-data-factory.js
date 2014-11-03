@@ -29,8 +29,15 @@ congoApp.factory('userDataFactory', function ($location, $cookieStore) {
         return match[1];
       }
     },
-    productId: function () {
-      var match = $location.path().match(/products\/([^\/])+/);
+    accountCarrierId: function () {
+      var match = $location.path().match(/account_carriers\/([^\/])+/);
+
+      if (match && match[1] && match[1].length > 0) {
+        return match[1];
+      }
+    },
+    benefitPlanId: function () {
+      var match = $location.path().match(/benefit_plans\/([^\/])+/);
 
       if (match && match[1] && match[1].length > 0) {
         return match[1];
@@ -44,7 +51,15 @@ congoApp.factory('userDataFactory', function ($location, $cookieStore) {
       }
     },
     currentRole: function () {
-      var match = $location.path().match(/\/accounts\/[^\/]+\/([^\/]+)/);
+      var match;
+
+      match = $location.path().match(/^\/admin/);
+
+      if (match) {
+        return 'admin';
+      }
+
+      match = $location.path().match(/\/accounts\/[^\/]+\/([^\/]+)/);
 
       if (match && match[1] && match[1].length > 0) {
         return match[1];
@@ -79,38 +94,6 @@ congoApp.factory('userDataFactory', function ($location, $cookieStore) {
       ) {
         return true; 
       }
-    },
-    hasRole: function (name) {
-      var currentUser = congo.currentUser;
-      var accounts;
-      var accountSlug;
-      var account;
-      var match = $location.path().match(/\/accounts\/[^\/]+\/([^\/]+)/);
-      var currentRole = match && match[1] && match[1].length > 0;
-
-      if (!currentUser) {
-        return;
-      }
-
-      if (
-        !currentRole &&
-        name === 'admin' &&
-        currentUser.is_admin
-      ) {
-        return true; 
-      }
-
-      accounts = currentUser.accounts;
-      accountSlug = userDataFactory.accountSlug();
-      account = _.find(accounts, function (account) {
-        return account.slug === accountSlug && account.role.role === name;
-      });
-
-      if (!account) {
-        return;
-      }
-
-      return true;
     },
     firstName: function () {
       if (!congo.currentUser) {

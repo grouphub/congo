@@ -1,8 +1,12 @@
 <div class="col-md-12">
-  <h1>New product</h1>
+  <h1>Accounts</h1>
 
   <form ng-submit="submit()">
-    <!-- TODO: Hook this up -->
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" class="form-control" id="name" placeholder="Enter name&hellip;" ng-model="name" auto-focus>
+    </div>
+
     <div class="form-group">
       <label for="carrier">Carrier</label>
       <select class="form-control" id="carrier" name="carrier" ng-model="selectedCarrier.slug">
@@ -10,15 +14,9 @@
       </select>
     </div>
 
-    <div class="form-group">
-      <label for="name">Name</label>
-      <input type="text" class="form-control" id="name" placeholder="Enter name&hellip;" ng-model="name" auto-focus>
-    </div>
-
-    <!-- TODO: Hook this up -->
     <properties:form x-elements="{{elements}}" x-data="{{data}}"></properties:form>
 
-    <input type="submit" class="btn btn-default" value="New product">
+    <input type="submit" class="btn btn-default" value="Link account">
   </form>
 </div>
 

@@ -1,44 +1,44 @@
 <div class="col-md-12">
-  <div ng-if="hasRole('broker')" class="products">
+  <div ng-if="hasRole('broker')" class="benefit-plans">
     <h1>{{group.name}}</h1>
 
-    <h2>Products</h2>
+    <h2>Benefit plans</h2>
 
     <table class="table">
       <thead>
         <tr>
-          <th>Product name</th>
+          <th>Benefit plan name</th>
           <th>Enabled?</th>
         </tr>
       </thead>
 
       <tbody>
-        <tr ng-repeat="product in products">
-          <td>{{product.name}}</td>
-          <td><input type="checkbox" value="{{product.id}}" ng-model="product.isEnabled" ng-change="changeProduct(product)"></td>
+        <tr ng-repeat="benefitPlan in benefitPlans">
+          <td>{{benefitPlan.name}}</td>
+          <td><input type="checkbox" value="{{benefitPlan.id}}" ng-model="benefitPlan.isEnabled" ng-change="changeBenefitPlan(benefitPlan)"></td>
         </tr>
       </tbody>
     </table>
   </div>
 
-  <div ng-if="hasRole('customer')" class="products">
+  <div ng-if="hasRole('customer')" class="benefit-plans">
     <h1>{{group.name}}</h1>
 
-    <h2>Products</h2>
+    <h2>Benefit plans</h2>
 
     <table class="table">
       <thead>
         <tr>
-          <th>Product name</th>
+          <th>Benefit plan name</th>
           <th>Actions</th>
         </tr>
       </thead>
 
       <tbody>
-        <tr ng-repeat="product in products">
-          <td>{{product.name}}</td>
+        <tr ng-repeat="benefitPlan in benefitPlans">
+          <td>{{benefitPlan.name}}</td>
           <td>
-            <a class="btn btn-info btn-xs" ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/groups/{{groupSlug()}}/products/{{product.id}}/applications/new">Apply</a>
+            <a class="btn btn-info btn-xs" ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/groups/{{groupSlug()}}/benefit_plans/{{benefitPlan.id}}/applications/new">Apply</a>
           </td>
         </tr>
       </tbody>
