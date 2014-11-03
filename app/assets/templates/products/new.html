@@ -2,11 +2,10 @@
   <h1>New product</h1>
 
   <form ng-submit="submit()">
-    <!-- TODO: Hook this up -->
     <div class="form-group">
       <label for="carrier">Carrier</label>
-      <select class="form-control" id="carrier" name="carrier" ng-model="selectedCarrier.slug">
-        <option ng-repeat="carrier in carriers" value="{{carrier.slug}}">{{carrier.name}}</option>
+      <select class="form-control" id="account_carrier" name="account_carrier" ng-model="selectedAccountCarrier.id">
+        <option ng-repeat="accountCarrier in accountCarriers" value="{{accountCarrier.id}}">{{accountCarrier.name}}&mdash;{{accountCarrier.carrier.name}}</option>
       </select>
     </div>
 

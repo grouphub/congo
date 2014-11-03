@@ -3,6 +3,7 @@ require "#{Rails.root}/lib/sluggerizer"
 class Account < ActiveRecord::Base
   has_many :roles
   has_many :applications
+  has_many :account_carriers
 
   before_save :add_slug
 

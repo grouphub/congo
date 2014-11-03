@@ -1,0 +1,87 @@
+class Api::V1::AccountCarriersController < ApplicationController
+  def index
+    # TODO: Check for current user
+
+    respond_to do |format|
+      format.json {
+        render json: {
+          account_carriers: AccountCarrier.all.map(&:simple_hash)
+        }
+      }
+    end
+  end
+
+  def create
+    # TODO: Check for current user
+
+    name = params[:name]
+    account_slug = params[:account_id]
+    account = Account.where(slug: account_slug).first
+    carrier_slug = params[:carrier_slug]
+    carrier = Carrier.where(slug: carrier_slug).first
+
+    unless name
+      # TODO: Handle this
+    end
+
+    unless account
+      # TODO: Handle this
+    end
+
+    unless carrier
+      # TODO: Handle this
+    end
+
+    account_carrier = AccountCarrier.create! \
+      account_id: account.id,
+      carrier_id: carrier.id,
+      name: name
+
+    respond_to do |format|
+      format.json {
+        render json: {
+          account_carrier: account_carrier.simple_hash
+        }
+      }
+    end
+  end
+
+  def show
+    id = params[:id]
+    account_slug = params[:account_id]
+    account = Account.where(slug: account_slug).first
+    account_carrier = AccountCarrier.where(account_id: account.id, id: id).first
+
+    unless account_carrier
+      # TODO: Handle this
+    end
+
+    respond_to do |format|
+      format.json {
+        render json: {
+          account_carrier: account_carrier.simple_hash
+        }
+      }
+    end
+  end
+
+  def destroy
+    id = params[:id]
+    account_slug = params[:account_id]
+    account = Account.where(slug: account_slug).first
+    account_carrier = AccountCarrier.where(account_id: account.id, id: id).first
+
+    unless account_carrier
+      # TODO: Handle this
+    end
+
+    account_carrier.destroy!
+
+    respond_to do |format|
+      format.json {
+        render json: {}
+      }
+    end
+  end
+end
+
