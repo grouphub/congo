@@ -1,14 +1,10 @@
 class Group < ActiveRecord::Base
+  include Sluggable
+
   has_many :memberships
   has_many :group_benefit_plans
 
   belongs_to :account
-
-  before_save :add_slug
-
-  def add_slug
-    self.slug = Sluggerizer.sluggerize(self.name)
-  end
 
   def simple_hash
     {

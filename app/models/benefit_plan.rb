@@ -1,23 +1,12 @@
 class BenefitPlan < ActiveRecord::Base
+  include Sluggable
+  include Proper
+
   has_many :group_benefit_plans
   has_many :applications
 
   belongs_to :account
   belongs_to :account_carrier
-
-  before_save :add_slug
-
-  def add_slug
-    self.slug = Sluggerizer.sluggerize(self.name)
-  end
-
-  def properties=(hash)
-    self.properties_data = hash.to_json
-  end
-
-  def properties
-    JSON.load(self.properties_data)
-  end
 
   def simple_hash
     {
