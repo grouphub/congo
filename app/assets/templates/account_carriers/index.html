@@ -1,0 +1,29 @@
+<div class="col-md-12">
+  <h1>Accounts</h1>
+
+  <table class="account-carriers table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th ng-if="hasRole('broker')">Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr ng-repeat="accountCarriers in accountCarriers">
+        <td>
+          <a ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/account_carriers/{{accountCarriers.id}}">{{accountCarriers.name}}</a>
+        </td>
+
+        <td ng-if="hasRole('broker')">
+          <a class="btn btn-danger btn-xs" href="" ng-click="deleteAccountCarrierAt($index)">Delete</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p ng-if="hasRole('broker')">
+    <a class="btn btn-default" href="/accounts/{{accountSlug()}}/{{currentRole()}}/account_carriers/new">Link to a new account</a>
+  </p>
+</div>
+

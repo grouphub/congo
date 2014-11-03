@@ -62,6 +62,10 @@ congoApp.controller('MainController', function ($scope, $http, $location, userDa
     return userDataFactory.groupSlug();
   };
 
+  $scope.accountCarrierId = function () {
+    return userDataFactory.accountCarrierId();
+  };
+
   $scope.productId = function () {
     return userDataFactory.productId();
   };
@@ -292,6 +296,80 @@ congoApp.controller('CarriersShowController', function ($scope, $http, $location
     });
 });
 
+congoApp.controller('AccountCarriersIndexController', function ($scope, $http, $location) {
+  $scope.accountCarriers = null;
+
+  $http
+    .get('/api/v1/accounts/' + $scope.accountSlug() + '/account_carriers.json')
+    .success(function (data, status, headers, config) {
+      $scope.accountCarriers = data.account_carriers;
+    })
+    .error(function (data, status, headers, config) {
+      debugger
+    });
+
+  $scope.deleteAccountCarrierAt = function (index) {
+    var accountCarrier = $scope.accountCarriers[index];
+
+    if (!accountCarrier) {
+      debugger
+    }
+
+    $http
+      .delete('/api/v1/accounts/' + $scope.accountSlug() + '/account_carriers/' + accountCarrier.id + '.json')
+      .success(function (data, status, headers, config) {
+        $scope.accountCarriers.splice(index, 1);
+      })
+      .error(function (data, status, headers, config) {
+        debugger
+      });
+  };
+});
+
+congoApp.controller('AccountCarriersNewController', function ($scope, $http, $location) {
+  $scope.carriers = null;
+  $scope.selectedCarrier = null;
+
+  $http
+    .get('/api/v1/carriers.json')
+    .success(function (data, status, headers, config) {
+      $scope.carriers = data.carriers;
+      $scope.selectedCarrier = data.carriers[0];
+    })
+    .error(function (data, status, headers, config) {
+      debugger
+    });
+
+  $scope.submit = function () {
+    // TODO: Get properties out of `elements` (stored in `value`)
+
+    $http
+      .post('/api/v1/accounts/' + $scope.accountSlug() + '/account_carriers.json', {
+        name: $scope.name,
+        carrier_slug: $scope.selectedCarrier.slug
+      })
+      .success(function (data, status, headers, config) {
+        $location.path('/accounts/' + $scope.accountSlug() + '/' + $scope.currentRole() + '/account_carriers');
+      })
+      .error(function (data, status, headers, config) {
+        debugger
+      });
+  };
+});
+
+congoApp.controller('AccountCarriersShowController', function ($scope, $http, $location) {
+  $scope.accountCarrier = null;
+
+  $http
+    .get('/api/v1/accounts/' + $scope.accountSlug() + '/account_carriers/' + $scope.accountCarrierId() + '.json')
+    .success(function (data, status, headers, config) {
+      $scope.accountCarrier = data.account_carrier;
+    })
+    .error(function (data, status, headers, config) {
+      debugger
+    });
+});
+
 congoApp.controller('ProductsIndexController', function ($scope, $http, $location) {
   $http
     .get('/api/v1/accounts/' + $scope.accountSlug() + '/products.json')
@@ -317,13 +395,13 @@ congoApp.controller('ProductsIndexController', function ($scope, $http, $locatio
       .error(function (data, status, headers, config) {
         debugger
       });
-    };
+  };
 });
 
 congoApp.controller('ProductsNewController', function ($scope, $http, $location) {
   $scope.elements = [];
-  $scope.carriers = [];
-  $scope.selectedCarrier = null;
+  $scope.accountCarriers = [];
+  $scope.selectedAccountCarrier = null;
 
   $http
     .get('/assets/products-new-properties.json')
@@ -335,21 +413,22 @@ congoApp.controller('ProductsNewController', function ($scope, $http, $location)
     });
 
   $http
-    .get('/api/v1/carriers.json')
+    .get('/api/v1/accounts/' + $scope.accountSlug() + '/account_carriers.json')
     .success(function (data, status, headers, config) {
-      $scope.carriers = data.carriers;
-      $scope.selectedCarrier = data.carriers[0];
+      $scope.accountCarriers = data.account_carriers;
+      $scope.selectedAccountCarrier = data.account_carriers[0];
     })
     .error(function (data, status, headers, config) {
       debugger
     });
 
   $scope.submit = function () {
+    debugger
     // TODO: Get properties out of `elements` (stored in `value`)
     $http
       .post('/api/v1/accounts/' + $scope.accountSlug() + '/products.json', {
         name: $scope.name,
-        carrier_slug: $scope.selectedCarrier
+        account_carrier_id: $scope.selectedAccountCarrier.id
       })
       .success(function (data, status, headers, config) {
         $location.path('/accounts/' + $scope.accountSlug() + '/' + $scope.currentRole() + '/products');
@@ -361,7 +440,7 @@ congoApp.controller('ProductsNewController', function ($scope, $http, $location)
 });
 
 congoApp.controller('ProductsShowController', function ($scope, $http, $location) {
-  $scope.product = undefined;
+  $scope.product = null;
 
   $http
     .get('/api/v1/accounts/' + $scope.accountSlug() + '/products/' + $scope.productId() + '.json', {
