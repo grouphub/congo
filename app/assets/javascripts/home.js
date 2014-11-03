@@ -555,8 +555,6 @@ congoApp.controller('ApplicationsNewController', function ($scope, $http, $locat
       });
   }
 
-  window.$scope = $scope;
-
   $http
     .get('/api/v1/accounts/' + $scope.accountSlug() + '/groups/' + $scope.groupSlug() + '.json')
     .success(function (data, status, headers, config) {
