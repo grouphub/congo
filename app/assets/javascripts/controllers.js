@@ -258,12 +258,31 @@ congoApp.controller('UsersShowController', function ($scope, $http, $location) {
 });
 
 congoApp.controller('CarriersNewController', function ($scope, $http, $location) {
+  $scope.elements = [];
+
+  $http
+    .get('/assets/carriers-new-properties.json')
+    .success(function (data, status, headers, config) {
+      $scope.elements = data;
+    })
+    .error(function (data, status, headers, config) {
+      debugger
+    });
+
   $scope.submit = function () {
-    // TODO: Get properties out of `elements` (stored in `value`)
+    var properties = _.reduce(
+      $scope.elements,
+      function (sum, element) {
+        sum[element.name] = element.value;
+        return sum;
+      },
+      {}
+    );
 
     $http
       .post('/api/v1/carriers.json', {
-        name: $scope.name
+        name: $scope.name,
+        properties: properties
       })
       .success(function (data, status, headers, config) {
         $location.path('/admin/carriers');
