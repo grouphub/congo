@@ -12,7 +12,7 @@ class CreateBenefitPlans < ActiveRecord::Migration
 
       # Fields:
       #
-      # * type
+      # * plan_type
       # * exchange_plan
       # * small_group
       t.text :properties_data

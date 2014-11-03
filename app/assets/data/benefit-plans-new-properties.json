@@ -1,9 +1,21 @@
 [
   {
     "type": "text",
-    "name": "benefit_plan_id",
-    "title": "Benefit plan ID",
-    "placeholder": "Enter a benefit plan ID…"
+    "name": "plan_type",
+    "title": "Plan type",
+    "placeholder": "Enter a plan type…"
+  },
+  {
+    "type": "text",
+    "name": "exchange_plan",
+    "title": "Exchange plan",
+    "placeholder": "Enter an exchange plan…"
+  },
+  {
+    "type": "text",
+    "name": "small_group",
+    "title": "Small group",
+    "placeholder": "Enter a small group…"
   }
 ]
 

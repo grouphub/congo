@@ -10,3 +10,4 @@ class CreateAccountCarriers < ActiveRecord::Migration
     end
   end
 end
+

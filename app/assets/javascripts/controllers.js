@@ -327,8 +327,18 @@ congoApp.controller('AccountCarriersIndexController', function ($scope, $http, $
 });
 
 congoApp.controller('AccountCarriersNewController', function ($scope, $http, $location) {
+  $scope.elements = [];
   $scope.carriers = null;
   $scope.selectedCarrier = null;
+
+  $http
+    .get('/assets/benefit-plans-new-properties.json')
+    .success(function (data, status, headers, config) {
+      $scope.elements = data;
+    })
+    .error(function (data, status, headers, config) {
+      debugger
+    });
 
   $http
     .get('/api/v1/carriers.json')
@@ -341,12 +351,20 @@ congoApp.controller('AccountCarriersNewController', function ($scope, $http, $lo
     });
 
   $scope.submit = function () {
-    // TODO: Get properties out of `elements` (stored in `value`)
+    var properties = _.reduce(
+      $scope.elements,
+      function (sum, element) {
+        sum[element.name] = element.value;
+        return sum;
+      },
+      {}
+    );
 
     $http
       .post('/api/v1/accounts/' + $scope.accountSlug() + '/account_carriers.json', {
         name: $scope.name,
-        carrier_slug: $scope.selectedCarrier.slug
+        carrier_slug: $scope.selectedCarrier.slug,
+        properties: properties
       })
       .success(function (data, status, headers, config) {
         $location.path('/accounts/' + $scope.accountSlug() + '/' + $scope.currentRole() + '/account_carriers');
@@ -423,11 +441,20 @@ congoApp.controller('BenefitPlansNewController', function ($scope, $http, $locat
     });
 
   $scope.submit = function () {
-    // TODO: Get properties out of `elements` (stored in `value`)
+    var properties = _.reduce(
+      $scope.elements,
+      function (sum, element) {
+        sum[element.name] = element.value;
+        return sum;
+      },
+      {}
+    );
+
     $http
       .post('/api/v1/accounts/' + $scope.accountSlug() + '/benefit_plans.json', {
         name: $scope.name,
-        account_carrier_id: $scope.selectedAccountCarrier.id
+        account_carrier_id: $scope.selectedAccountCarrier.id,
+        properties: properties
       })
       .success(function (data, status, headers, config) {
         $location.path('/accounts/' + $scope.accountSlug() + '/' + $scope.currentRole() + '/benefit_plans');

@@ -16,6 +16,7 @@ class Api::V1::BenefitPlansController < ApplicationController
     account = Account.where(slug: account_slug).first
     account_carrier_id = params[:account_carrier_id]
     account_carrier = AccountCarrier.where(id: account_carrier_id, account_id: account.id).first
+    properties = params[:properties]
 
     unless name
       # TODO: Handle this
@@ -32,7 +33,8 @@ class Api::V1::BenefitPlansController < ApplicationController
     benefit_plan = BenefitPlan.create! \
       name: name,
       account_id: account.id,
-      account_carrier_id: account_carrier.id
+      account_carrier_id: account_carrier.id,
+      properties: properties
 
     respond_to do |format|
       format.json {
