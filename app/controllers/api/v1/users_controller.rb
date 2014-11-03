@@ -34,7 +34,7 @@ class Api::V1::UsersController < ApplicationController
       Role.create! \
         account_id: account_id,
         user_id: user.id,
-        role: 'customer'
+        name: 'customer'
 
     # User came from a manual signup and is a broker
     else
@@ -43,7 +43,12 @@ class Api::V1::UsersController < ApplicationController
       Role.create! \
         account_id: account.id,
         user_id: user.id,
-        role: 'broker'
+        name: 'broker'
+
+      Role.create! \
+        account_id: account.id,
+        user_id: user.id,
+        name: 'group_admin'
     end
 
     signin! email, password
@@ -131,7 +136,7 @@ class Api::V1::UsersController < ApplicationController
         Role.create! \
           account_id: account_id,
           user_id: user.id,
-          role: 'customer'
+          name: 'customer'
       end
 
       respond_to do |format|

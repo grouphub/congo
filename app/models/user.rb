@@ -23,7 +23,7 @@ class User < ActiveRecord::Base
   end
 
   def admin?
-    User.first.roles.any? { |role| role.role == 'admin' }
+    User.first.roles.any? { |role| role.name == 'admin' }
   end
 
   def simple_hash

@@ -9,7 +9,7 @@ admin = User.create! \
 Role.create! \
   user_id: admin.id,
   account_id: admin_account.id,
-  role: 'admin'
+  name: 'admin'
 
 first_account = Account.where(name: 'First Account').first
 
@@ -28,15 +28,20 @@ alice = User.create! \
 Role.create! \
   user_id: admin.id,
   account_id: first_account.id,
-  role: 'broker'
+  name: 'broker'
+
+Role.create! \
+  user_id: admin.id,
+  account_id: first_account.id,
+  name: 'group_admin'
 
 Role.create! \
   user_id: bob.id,
   account_id: first_account.id,
-  role: 'customer'
+  name: 'customer'
 
 Role.create! \
   user_id: alice.id,
   account_id: first_account.id,
-  role: 'customer'
+  name: 'customer'
 
