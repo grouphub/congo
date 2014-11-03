@@ -6,68 +6,13 @@ congoApp.controller('MainController', function ($scope, $http, $location, userDa
     $scope.flashes = flashesFactory.flashes;
   });
 
-  $scope.isAdmin = function () {
-    return userDataFactory.isAdmin();
-  };
-
-  $scope.inAdminPanel = function () {
-    return userDataFactory.inAdminPanel();
-  };
-
-  $scope.accountName = function () {
-    return userDataFactory.accountName();
-  };
-
-  $scope.isSignedin = function () {
-    return userDataFactory.isSignedin();
-  };
-
-  $scope.firstName = function () {
-    return userDataFactory.firstName();
-  };
-
-  $scope.accounts = function () {
-    return userDataFactory.accounts();
-  };
-
-  $scope.accountSlug = function () {
-    return userDataFactory.accountSlug();
-  };
-
-  $scope.currentRole = function () {
-    return userDataFactory.currentRole();
-  };
-
-  $scope.currentUserId = function () {
-    return userDataFactory.currentUserId();
-  };
-
-  $scope.isDrawerShown = function () {
-    return userDataFactory.isDrawerShown();
+  // Inject the userDataFactory methods onto MainController
+  for (var key in userDataFactory) {
+    $scope[key] = userDataFactory[key];
   }
-
-  $scope.drawerToggle = function () {
-    userDataFactory.drawerToggle();
-  };
 
   $scope.flashes = function () {
     return flashesFactory.all();
-  };
-
-  $scope.carrierSlug = function () {
-    return userDataFactory.carrierSlug();
-  };
-
-  $scope.groupSlug = function () {
-    return userDataFactory.groupSlug();
-  };
-
-  $scope.accountCarrierId = function () {
-    return userDataFactory.accountCarrierId();
-  };
-
-  $scope.benefitPlanId = function () {
-    return userDataFactory.benefitPlanId();
   };
 
   $scope.$watch('flashes');
