@@ -8,7 +8,7 @@ account_carrier = AccountCarrier.create! \
   carrier_id: carrier.id,
   account_id: account.id
 
-Product.create! \
+BenefitPlan.create! \
   account_id: account.id,
   account_carrier_id: account_carrier.id,
   name: 'Best Health Insurance PPO'

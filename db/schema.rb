@@ -90,11 +90,14 @@ ActiveRecord::Schema.define(version: 20141103003532) do
   end
 
   create_table "benefit_plans", force: true do |t|
-    t.integer  "carrier_id"
-    t.string   "plan_name"
-    t.string   "plan_type"
+    t.integer  "account_id"
+    t.integer  "account_carrier_id"
+    t.string   "name"
+    t.string   "slug"
+    t.string   "type"
     t.boolean  "exchange_plan"
     t.boolean  "small_group"
+    t.text     "properties_data"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -152,9 +155,9 @@ ActiveRecord::Schema.define(version: 20141103003532) do
     t.datetime "updated_at"
   end
 
-  create_table "group_products", force: true do |t|
+  create_table "group_benefit_plans", force: true do |t|
     t.integer  "group_id"
-    t.integer  "product_id"
+    t.integer  "benefit_plan_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -180,15 +183,6 @@ ActiveRecord::Schema.define(version: 20141103003532) do
     t.integer  "account_id"
     t.integer  "cents"
     t.text     "properties"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "products", force: true do |t|
-    t.integer  "account_id"
-    t.integer  "account_carrier_id"
-    t.string   "name"
-    t.string   "slug"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

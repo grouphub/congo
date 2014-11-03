@@ -6,11 +6,11 @@ group = Group.create! \
 
 alice = User.where(email: 'alice@first-account.com').first
 bob = User.where(email: 'bob@first-account.com').first
-product = Product.first
+benefit_plan = BenefitPlan.first
 
-GroupProduct.create! \
+GroupBenefitPlan.create! \
   group_id: group.id,
-  product_id: product.id
+  benefit_plan_id: benefit_plan.id
 
 Membership.create! \
   group_id: group.id,
