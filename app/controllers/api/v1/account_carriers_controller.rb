@@ -5,7 +5,9 @@ class Api::V1::AccountCarriersController < ApplicationController
     respond_to do |format|
       format.json {
         render json: {
-          account_carriers: AccountCarrier.all.map(&:simple_hash)
+          account_carriers: AccountCarrier.all.map { |account_carrier|
+            render_account_carrier(account_carrier)
+          }
         }
       }
     end
@@ -42,7 +44,7 @@ class Api::V1::AccountCarriersController < ApplicationController
     respond_to do |format|
       format.json {
         render json: {
-          account_carrier: account_carrier.simple_hash
+          account_carrier: render_account_carrier(account_carrier)
         }
       }
     end
@@ -61,7 +63,7 @@ class Api::V1::AccountCarriersController < ApplicationController
     respond_to do |format|
       format.json {
         render json: {
-          account_carrier: account_carrier.simple_hash
+          account_carrier: render_account_carrier(account_carrier)
         }
       }
     end
@@ -84,6 +86,15 @@ class Api::V1::AccountCarriersController < ApplicationController
         render json: {}
       }
     end
+  end
+
+  # Render methods
+
+  def render_account_carrier(account_carrier)
+    account_carrier.as_json.merge({
+      account: account_carrier.account,
+      carrier: account_carrier.carrier
+    })
   end
 end
 

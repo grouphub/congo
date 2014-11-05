@@ -9,26 +9,5 @@ class Membership < ActiveRecord::Base
   def create_email_token
     self.email_token = SecureRandom.uuid if self.email_token.nil?
   end
-
-  def simple_hash
-    {
-      id: self.id,
-      email: self.email,
-      email_token: self.email_token,
-      user: self.user.try(:simple_hash),
-      applications: self.applications
-    }
-  end
-
-  # TODO: Find a better solution for this. Presenters?
-  def simple_hash_with_group
-    {
-      id: self.id,
-      email: self.email,
-      email_token: self.email_token,
-      group: self.group,
-      applications: self.applications
-    }
-  end
 end
 

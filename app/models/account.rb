@@ -24,14 +24,5 @@ class Account < ActiveRecord::Base
     current_time.month > created_at.month &&
       current_time.day >= created_at.day
   end
-
-  def simple_hash
-    {
-      id: self.id,
-      name: self.name,
-      slug: self.slug,
-      tagline: self.tagline
-    }
-  end
 end
 
