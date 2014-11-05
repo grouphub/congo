@@ -1,4 +1,6 @@
 class Api::V1::GroupsController < ApplicationController
+  include UsersHelper
+
   def index
     respond_to do |format|
       format.json {
@@ -66,23 +68,9 @@ class Api::V1::GroupsController < ApplicationController
   # Render methods
 
   def render_group(group)
-    memberships = self.memberships.map { |membership|
-      accounts = membership
-        .roles
-        .includes(:account)
-        .map { |role|
-          role.account.as_json.merge({
-            'role' => role
-          })
-        }
-
-      user = membership.user.as_json.merge({
-        is_admin: membership.user.admin?,
-        accounts: accounts
-      })
-
+    memberships = group.memberships.map { |membership|
       membership.as_json.merge({
-        'user' => user,
+        'user' => render_user(membership.user),
         'applications' => membership.applications
       })
     }
