@@ -1,4 +1,6 @@
 class Api::V1::UsersController < ApplicationController
+  include UsersHelper
+
   def create
     first_name = params[:first_name]
     last_name = params[:last_name]
@@ -56,7 +58,7 @@ class Api::V1::UsersController < ApplicationController
     respond_to do |format|
       format.json {
         render json: {
-          user: user.simple_hash
+          user: render_user(user)
         }
       }
     end
@@ -101,7 +103,7 @@ class Api::V1::UsersController < ApplicationController
     respond_to do |format|
       format.json {
         render json: {
-          user: user.simple_hash
+          user: render_user(user)
         }
       }
     end
@@ -114,7 +116,7 @@ class Api::V1::UsersController < ApplicationController
     respond_to do |format|
       format.json {
         render json: {
-          user: user.simple_hash
+          user: render_user(user)
         }
       }
     end
@@ -142,7 +144,7 @@ class Api::V1::UsersController < ApplicationController
       respond_to do |format|
         format.json {
           render json: {
-            user: user.simple_hash
+            user: render_user(user)
           }
         }
       end

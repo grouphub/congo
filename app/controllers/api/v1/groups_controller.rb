@@ -1,4 +1,6 @@
 class Api::V1::GroupsController < ApplicationController
+  include UsersHelper
+
   def index
     respond_to do |format|
       format.json {
@@ -30,7 +32,7 @@ class Api::V1::GroupsController < ApplicationController
     respond_to do |format|
       format.json {
         render json: {
-          group: group.simple_hash
+          group: render_group(group)
         }
       }
     end
@@ -43,7 +45,7 @@ class Api::V1::GroupsController < ApplicationController
     respond_to do |format|
       format.json {
         render json: {
-          group: group.simple_hash
+          group: render_group(group)
         }
       }
     end
@@ -57,10 +59,33 @@ class Api::V1::GroupsController < ApplicationController
     respond_to do |format|
       format.json {
         render json: {
-          group: group.simple_hash
+          group: render_group(group)
         }
       }
     end
+  end
+
+  # Render methods
+
+  def render_group(group)
+    memberships = group.memberships.map { |membership|
+      membership.as_json.merge({
+        'user' => render_user(membership.user),
+        'applications' => membership.applications
+      })
+    }
+
+    benefit_plans = group
+      .group_benefit_plans
+      .includes(:benefit_plan)
+      .map { |group_benefit_plan|
+        group_benefit_plan.benefit_plan
+      }
+
+    group.as_json.merge({
+      'memberships' => memberships,
+      'benefit_plans' => benefit_plans
+    })
   end
 end
 

@@ -3,8 +3,9 @@ class Api::V1::BenefitPlansController < ApplicationController
     respond_to do |format|
       format.json {
         render json: {
-          # TODO: Scope benefit_plans by account
-          benefit_plans: BenefitPlan.all
+          benefit_plans: BenefitPlan.all.map { |benefit_plan|
+            render_benefit_plan(benefit_plan)
+          }
         }
       }
     end
@@ -39,7 +40,7 @@ class Api::V1::BenefitPlansController < ApplicationController
     respond_to do |format|
       format.json {
         render json: {
-          benefit_plan: benefit_plan
+          benefit_plan: render_benefit_plan(benefit_plan)
         }
       }
     end
@@ -54,7 +55,7 @@ class Api::V1::BenefitPlansController < ApplicationController
     respond_to do |format|
       format.json {
         render json: {
-          benefit_plan: benefit_plan.simple_hash
+          benefit_plan: render_benefit_plan(benefit_plan)
         }
       }
     end
@@ -68,10 +69,23 @@ class Api::V1::BenefitPlansController < ApplicationController
     respond_to do |format|
       format.json {
         render json: {
-          benefit_plan: benefit_plan
+          benefit_plan: render_benefit_plan(benefit_plan)
         }
       }
     end
+  end
+
+  # Render methods
+
+  def render_benefit_plan(benefit_plan)
+    account_carrier = benefit_plan.account_carrier
+
+    benefit_plan.as_json.merge({
+      'account_carrier' => account_carrier.as_json.merge({
+        'account' => account_carrier.account,
+        'carrier' => account_carrier.carrier
+      })
+    })
   end
 end
 

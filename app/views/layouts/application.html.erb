@@ -10,7 +10,7 @@
 
     <script>
       window.congo = {
-        currentUser: <%= current_user ? raw(current_user.simple_hash.to_json) : 'null' %>
+        currentUser: <%= current_user ? raw(render_user(current_user).to_json) : 'null' %>
       }
     </script>
   </head>
