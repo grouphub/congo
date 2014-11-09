@@ -454,6 +454,10 @@ congoApp.controller('GroupsIndexController', function ($scope, $http, $location)
       debugger
     });
 
+  $scope.currentApplication = function (membership) {
+    return _(membership.applications).last();
+  };
+
   $scope.deleteGroupAt = function (index) {
     var group = $scope.groups[index];
 
@@ -528,6 +532,21 @@ congoApp.controller('GroupsShowController', function ($scope, $http, $location) 
         $scope.group.memberships = _($scope.group.memberships).reject(function (m) {
           return membership.id === m.id;
         });
+      })
+      .error(function (data, status, headers, config) {
+        debugger
+      });
+  };
+
+  $scope.submitApplication = function (application) {
+    debugger
+    $http
+      .put('/api/v1/accounts/' + $scope.accountSlug() + '/applications/' + application.id + '.json')
+      .success(function (data, status, headers, config) {
+       debugger
+       // $scope.group.memberships = _($scope.group.memberships).reject(function (m) {
+       //   return membership.id === m.id;
+       // });
       })
       .error(function (data, status, headers, config) {
         debugger

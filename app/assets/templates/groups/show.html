@@ -67,11 +67,13 @@
           </td>
 
           <td>
-            <a class="btn btn-primary btn-xs disabled" href="javascript:;" ng-if="membership.applications.length > 0">Applied</a>
-            <a class="btn btn-warning btn-xs disabled" href="javascript:;" ng-if="membership.applications.length == 0">Not Applied</a>
+            <a class="btn btn-warning btn-xs disabled" href="javascript:;" ng-if="!membership.applications[0].applied_by_id">Not Applied</a>
+            <a class="btn btn-primary btn-xs disabled" href="javascript:;" ng-if="membership.applications[0].applied_by_id && !membership.applications[0].submitted_by_id">Applied</a>
+            <a class="btn btn-success btn-xs disabled" href="javascript:;" ng-if="membership.applications[0].submitted_by_id">Submitted</a>
           </td>
 
           <td>
+            <a class="btn btn-success btn-xs" href="" ng-if="currentApplication(membership).applied_by_id && !currentApplication(membership).submitted_by_id" ng-click="submitApplication(currentApplication(membership))">Submit Application</a>
             <a class="btn btn-danger btn-xs" href="" ng-click="revokeMembership(membership)">Revoke membership</a>
             <a class="btn btn-primary btn-xs" href="" ng-if="!membership.user" ng-click="resendConfirmation(membership)">Re-send invitation</a>
           </td>
