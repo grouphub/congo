@@ -80,7 +80,7 @@
     </table>
   </div>
 
-  <form ng-if="currentRole() === 'broker'" ng-submit="inviteMember()">
+  <form ng-if="isGroupAdmin()" ng-submit="inviteMember()">
     <div class="form-group">
       <label for="email">Invite a new member</label>
       <input type="email" class="form-control" id="email" placeholder="Enter email&hellip;" ng-model="email" auto-focus>
