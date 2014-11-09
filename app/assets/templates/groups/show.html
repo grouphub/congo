@@ -1,5 +1,5 @@
 <div class="col-md-12">
-  <div ng-if="currentRole() === 'broker'" class="benefit-plans">
+  <div ng-if="isGroupAdmin()" class="benefit-plans">
     <h1>{{group.name}}</h1>
 
     <h2>Benefit plans</h2>
@@ -45,7 +45,7 @@
     </table>
   </div>
 
-  <div ng-if="currentRole() === 'broker' || currentRole() === 'group_admin'" class="members">
+  <div ng-if="isGroupAdmin()" class="members">
     <h2>Members</h2>
 
     <table class="table">
