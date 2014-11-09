@@ -45,7 +45,7 @@
     </table>
   </div>
 
-  <div ng-if="currentRole() === 'broker'" class="members">
+  <div ng-if="currentRole() === 'broker' || currentRole() === 'group_admin'" class="members">
     <h2>Members</h2>
 
     <table class="table">
@@ -67,8 +67,8 @@
           </td>
 
           <td>
-            <a class="btn btn-primary btn-xs" href="javascript:;" ng-if="membership.applications.length > 0">Applied</a>
-            <a class="btn btn-warning btn-xs" href="javascript:;" ng-if="membership.applications.length == 0">Not Applied</a>
+            <a class="btn btn-primary btn-xs disabled" href="javascript:;" ng-if="membership.applications.length > 0">Applied</a>
+            <a class="btn btn-warning btn-xs disabled" href="javascript:;" ng-if="membership.applications.length == 0">Not Applied</a>
           </td>
 
           <td>

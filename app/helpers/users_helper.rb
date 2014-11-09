@@ -46,10 +46,6 @@ module UsersHelper
           'role' => role
         })
       }
-      .uniq { |account|
-        account['id']
-      }
-
 
     user.as_json.merge({
       'is_admin' => user.admin?,
