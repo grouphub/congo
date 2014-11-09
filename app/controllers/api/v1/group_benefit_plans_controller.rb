@@ -12,7 +12,7 @@ class Api::V1::GroupBenefitPlansController < ApplicationController
     respond_to do |format|
       format.json {
         render json: {
-          group_benefit_plan: group_benfit_plan
+          group_benefit_plan: group_benefit_plan
         }
       }
     end
@@ -32,7 +32,7 @@ class Api::V1::GroupBenefitPlansController < ApplicationController
     respond_to do |format|
       format.json {
         render json: {
-          group_benefit_plan: group_benefit_plan.first
+          group_benefit_plan: nil
         }
       }
     end
