@@ -643,6 +643,17 @@ congoApp.controller('ApplicationsNewController', function ($scope, $http, $locat
     });
 });
 
+congoApp.controller('ApplicationsShowController', function ($scope, $http, $location) {
+  $http
+    .get('/api/v1/accounts/' + $scope.accountSlug() + '/applications/' + $scope.applicationId() + '.json')
+    .success(function (data, status, headers, config) {
+      $scope.applications = data.applications;
+    })
+    .error(function (data, status, headers, config) {
+      debugger
+    });
+});
+
 congoApp.controller('ApplicationsIndexController', function ($scope, $http, $location) {
   $http
     .get('/api/v1/accounts/' + $scope.accountSlug() + '/applications.json')

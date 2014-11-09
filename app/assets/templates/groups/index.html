@@ -5,7 +5,7 @@
     <thead>
       <tr>
         <th>Name</th>
-        <th ng-if="currentRole() === 'broker'">Actions</th>
+        <th ng-if="currentRole() === 'broker' || currentRole() === 'group_admin'">Actions</th>
       </tr>
     </thead>
 
@@ -22,7 +22,7 @@
     </tbody>
   </table>
 
-  <p ng-if="currentRole() === 'broker'">
+  <p ng-if="currentRole() === 'broker' || currentRole() === 'group_admin'">
     <a class="btn btn-default" href="/accounts/{{accountSlug()}}/{{currentRole()}}/groups/new">New group</a>
   </p>
 </div>
