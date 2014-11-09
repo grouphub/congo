@@ -26,7 +26,7 @@
     </a>
   </li>
 
-  <li ng-if="currentRole() === 'broker' || currentRole() === 'customer'">
+  <li ng-if="currentRole() === 'broker' || currentRole() === 'group_admin' || currentRole() === 'customer'">
     <a ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/groups">
       <i class="glyphicon glyphicon-user"></i>
       <span class="caption">Groups</span>
