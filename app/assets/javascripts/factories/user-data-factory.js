@@ -65,6 +65,14 @@ congoApp.factory('userDataFactory', function ($location, $cookieStore) {
         return match[1];
       }
     },
+    isGroupAdmin: function () {
+      switch (userDataFactory.currentRole()) { 
+        case "broker":
+        case "group_admin":
+          return true;
+          break;
+      }
+    },
     isSignedin: function () {
       return !!congo.currentUser;
     },
