@@ -21,6 +21,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'bcrypt', '~> 3.1.7'
 
 gem 'pry'
+gem 'foreman'
 
 gem 'clockwork'
 gem 'delayed_job_active_record'
