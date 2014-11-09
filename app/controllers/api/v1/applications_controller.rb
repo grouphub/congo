@@ -42,6 +42,17 @@ class Api::V1::ApplicationsController < ApplicationController
     end
   end
 
+  # NOTE: Only supports setting approved_by or submitted_by
+  # TODO: Finish this
+  def update
+    binding.pry
+    application = nil # TODO: Fill this in
+    approved_by_id = nil # TODO: Fill this in
+    submitted_by_id = nil # TODO: Fill this in
+    action = approved_by_id ? :approved_by : :submitted_by
+    user_id = approved_by_id ? approved_by_id : submitted_by_id
+  end
+
   # Render methods
 
   def render_application(application)
