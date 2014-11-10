@@ -488,9 +488,17 @@ congoApp.controller('GroupsNewController', function ($scope, $http, $location) {
 });
 
 congoApp.controller('GroupsShowController', function ($scope, $http, $location) {
+  // Only used by group admins
   $scope.memberships = function () {
     if ($scope.group) {
       return $scope.group.memberships;
+    }
+  };
+
+  // Only used by customers
+  $scope.applications = function (benefitPlan) {
+    if ($scope.group) {
+      return _($scope.group.applications).where({ benefit_plan_id: benefitPlan.id });
     }
   };
 

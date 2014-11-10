@@ -6,7 +6,9 @@ class Api::V1::GroupsController < ApplicationController
       format.json {
         render json: {
           # TODO: Scope groups by account
-          groups: Group.all
+          groups: Group.all.map { |group|
+            render_group(group)
+          }
         }
       }
     end
@@ -82,9 +84,18 @@ class Api::V1::GroupsController < ApplicationController
         group_benefit_plan.benefit_plan
       }
 
+    applications = Membership
+      .where(user_id: current_user.id)
+      .includes(:applications)
+      .inject([]) { |sum, membership|
+        sum += membership.applications
+        sum
+      }
+
     group.as_json.merge({
       'memberships' => memberships,
-      'benefit_plans' => benefit_plans
+      'benefit_plans' => benefit_plans,
+      'applications' => applications
     })
   end
 end

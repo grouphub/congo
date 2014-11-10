@@ -31,14 +31,32 @@
         <tr>
           <th>Benefit plan name</th>
           <th>Actions</th>
+          <th>Applications</th>
         </tr>
       </thead>
 
       <tbody>
         <tr ng-repeat="benefitPlan in benefitPlans">
           <td>{{benefitPlan.name}}</td>
+
           <td>
             <a class="btn btn-info btn-xs" ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/groups/{{groupSlug()}}/benefit_plans/{{benefitPlan.id}}/applications/new">Apply</a>
+          </td>
+
+          <td>
+            <table class="table">
+              <thead>
+                <th>Id</th>
+                <th>Selected On</th>
+              </thead>
+
+              <tbody>
+                <tr ng-repeat="application in applications(benefitPlan)">
+                  <td>{{application.id}}</td>
+                  <td>{{application.created_at | date}}</td>
+                </tr>
+              </tbody>
+            </table>
           </td>
         </tr>
       </tbody>
