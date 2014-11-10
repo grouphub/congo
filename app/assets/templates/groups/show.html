@@ -40,20 +40,24 @@
           <td>{{benefitPlan.name}}</td>
 
           <td>
-            <a class="btn btn-info btn-xs" ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/groups/{{groupSlug()}}/benefit_plans/{{benefitPlan.id}}/applications/new">Apply</a>
+            <a class="btn btn-info btn-xs" ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/groups/{{groupSlug()}}/benefit_plans/{{benefitPlan.id}}/applications/new">Select</a>
           </td>
 
           <td>
             <table class="table">
               <thead>
                 <th>Id</th>
-                <th>Selected On</th>
+                <th>State</th>
               </thead>
 
               <tbody>
                 <tr ng-repeat="application in applications(benefitPlan)">
                   <td>{{application.id}}</td>
-                  <td>{{application.created_at | date}}</td>
+                  <td>
+                    <a href="" class="btn btn-warning btn-xs disabled" ng-if="!application.applied_by_id">Not Applied</a>
+                    <a href="" class="btn btn-info btn-xs disabled" ng-if="application.applied_by_id && !application.submitted_by_id">Applied</a>
+                    <a href="" class="btn btn-success btn-xs disabled" ng-if="application.submitted_by_id">Submitted</a>
+                  </td>
                 </tr>
               </tbody>
             </table>
