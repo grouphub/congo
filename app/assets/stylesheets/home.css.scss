@@ -8,6 +8,26 @@ body {
   font-family: 'Source Sans Pro', sans-serif;
 }
 
+// Spinner styles
+
+#main {
+  #spinner-container {
+    display: none;
+    text-align: center;
+    margin-top: 100px;
+  }
+}
+
+#main.loading {
+  main {
+    display: none;
+  }
+
+  #spinner-container {
+    display: block
+  }
+}
+
 .alerts {
   width: 100%;
   margin-bottom: 0;

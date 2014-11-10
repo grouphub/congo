@@ -43,6 +43,16 @@ class Api::V1::ApplicationsController < ApplicationController
     end
   end
 
+  def show
+    application = Application.find(params[:id].to_i)
+
+    respond_to do |format|
+      format.json {
+        render json: render_application(application)
+      }
+    end
+  end
+
   # NOTE: Only supports setting approved_by or submitted_by
   # TODO: Finish this
   def update
