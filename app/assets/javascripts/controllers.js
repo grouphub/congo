@@ -2,9 +2,21 @@ var congoApp = angular.module('congoApp', ['ngRoute', 'ngCookies']);
 
 congoApp.controller('MainController', function ($scope, $http, $location, userDataFactory, flashesFactory, eventsFactory) {
   $scope.flashes = flashesFactory.flashes;
-  eventsFactory.on($scope, 'flash_added', function () {
+  $scope.vent = eventsFactory;
+
+  $scope.vent.on($scope, 'flashes:added', function () {
     $scope.flashes = flashesFactory.flashes;
   });
+
+  $scope.vent.on($scope, 'loading:start', function () {
+    $scope.loading = true;
+  });
+
+  $scope.vent.on($scope, 'loading:stop', function () {
+    $scope.loading = false;
+  });
+
+  $scope.loading = true;
 
   // Inject the userDataFactory methods onto MainController
   for (var key in userDataFactory) {
@@ -34,11 +46,11 @@ congoApp.controller('MainController', function ($scope, $http, $location, userDa
 });
 
 congoApp.controller('LandingController', function ($scope) {
-
+  $scope.vent.emit('loading:stop');
 });
 
 congoApp.controller('HomeController', function ($scope) {
-
+  $scope.vent.emit('loading:stop');
 });
 
 congoApp.controller('UsersSigninController', function ($scope, $http, $location, flashesFactory) {
@@ -59,6 +71,8 @@ congoApp.controller('UsersSigninController', function ($scope, $http, $location,
         flashesFactory.add('danger', 'There was a problem signing you in.');
       });
   };
+
+  $scope.vent.emit('loading:stop');
 });
 
 congoApp.controller('UsersNewManagerController', function ($scope, $http, $location, flashesFactory) {
@@ -81,6 +95,8 @@ congoApp.controller('UsersNewManagerController', function ($scope, $http, $locat
         flashesFactory.add('danger', 'There was a problem creating your account.');
       });
   };
+
+  $scope.vent.emit('loading:stop');
 });
 
 congoApp.controller('UsersNewPlanController', function ($scope, $http, $location, flashesFactory) {
@@ -96,6 +112,8 @@ congoApp.controller('UsersNewPlanController', function ($scope, $http, $location
         flashesFactory.add('danger', 'There was a problem setting up your plan.');
       });
   };
+
+  $scope.vent.emit('loading:stop');
 });
 
 congoApp.controller('UsersNewBillingController', function ($scope, $http, $location) {
@@ -114,6 +132,8 @@ congoApp.controller('UsersNewBillingController', function ($scope, $http, $locat
         flashesFactory.add('danger', 'There was a problem setting up your payment info.');
       });
   };
+
+  $scope.vent.emit('loading:stop');
 });
 
 congoApp.controller('UsersNewAccountController', function ($scope, $http, $location) {
@@ -139,6 +159,8 @@ congoApp.controller('UsersNewAccountController', function ($scope, $http, $locat
         flashesFactory.add('danger', 'There was a problem creating your account.');
       });
   };
+
+  $scope.vent.emit('loading:stop');
 });
 
 congoApp.controller('UsersNewCustomerController', function ($scope, $http, $location) {
@@ -185,6 +207,8 @@ congoApp.controller('UsersNewCustomerController', function ($scope, $http, $loca
         debugger
       });
   };
+
+  $scope.vent.emit('loading:stop');
 });
 
 congoApp.controller('UsersShowController', function ($scope, $http, $location) {
@@ -196,6 +220,8 @@ congoApp.controller('UsersShowController', function ($scope, $http, $location) {
     .get('/api/v1/users/' + $scope.userId() + '.json')
     .success(function (data, status, headers, config) {
       $scope.user = data.user;
+
+      $scope.vent.emit('loading:stop');
     })
     .error(function (data, status, headers, config) {
       debugger
@@ -204,15 +230,6 @@ congoApp.controller('UsersShowController', function ($scope, $http, $location) {
 
 congoApp.controller('CarriersNewController', function ($scope, $http, $location) {
   $scope.elements = [];
-
-  $http
-    .get('/assets/carriers-new-properties.json')
-    .success(function (data, status, headers, config) {
-      $scope.elements = data;
-    })
-    .error(function (data, status, headers, config) {
-      debugger
-    });
 
   $scope.submit = function () {
     var properties = _.reduce(
@@ -236,6 +253,17 @@ congoApp.controller('CarriersNewController', function ($scope, $http, $location)
         debugger
       });
   };
+
+  $http
+    .get('/assets/carriers-new-properties.json')
+    .success(function (data, status, headers, config) {
+      $scope.elements = data;
+
+      $scope.vent.emit('loading:stop');
+    })
+    .error(function (data, status, headers, config) {
+      debugger
+    });
 });
 
 congoApp.controller('CarriersIndexController', function ($scope, $http, $location) {
@@ -243,6 +271,8 @@ congoApp.controller('CarriersIndexController', function ($scope, $http, $locatio
     .get('/api/v1/carriers.json')
     .success(function (data, status, headers, config) {
       $scope.carriers = data.carriers;
+
+      $scope.vent.emit('loading:stop');
     })
     .error(function (data, status, headers, config) {
       debugger
@@ -254,6 +284,8 @@ congoApp.controller('CarriersShowController', function ($scope, $http, $location
     .get('/api/v1/carriers/' + $scope.carrierSlug() + '.json')
     .success(function (data, status, headers, config) {
       $scope.carrier = data.carrier;
+
+      $scope.vent.emit('loading:stop');
     })
     .error(function (data, status, headers, config) {
       debugger
@@ -262,15 +294,6 @@ congoApp.controller('CarriersShowController', function ($scope, $http, $location
 
 congoApp.controller('AccountCarriersIndexController', function ($scope, $http, $location) {
   $scope.accountCarriers = null;
-
-  $http
-    .get('/api/v1/accounts/' + $scope.accountSlug() + '/account_carriers.json')
-    .success(function (data, status, headers, config) {
-      $scope.accountCarriers = data.account_carriers;
-    })
-    .error(function (data, status, headers, config) {
-      debugger
-    });
 
   $scope.deleteAccountCarrierAt = function (index) {
     var accountCarrier = $scope.accountCarriers[index];
@@ -288,31 +311,23 @@ congoApp.controller('AccountCarriersIndexController', function ($scope, $http, $
         debugger
       });
   };
+
+  $http
+    .get('/api/v1/accounts/' + $scope.accountSlug() + '/account_carriers.json')
+    .success(function (data, status, headers, config) {
+      $scope.accountCarriers = data.account_carriers;
+
+      $scope.vent.emit('loading:stop');
+    })
+    .error(function (data, status, headers, config) {
+      debugger
+    });
 });
 
 congoApp.controller('AccountCarriersNewController', function ($scope, $http, $location) {
-  $scope.elements = [];
+  $scope.elements = null;
   $scope.carriers = null;
   $scope.selectedCarrier = null;
-
-  $http
-    .get('/assets/benefit-plans-new-properties.json')
-    .success(function (data, status, headers, config) {
-      $scope.elements = data;
-    })
-    .error(function (data, status, headers, config) {
-      debugger
-    });
-
-  $http
-    .get('/api/v1/carriers.json')
-    .success(function (data, status, headers, config) {
-      $scope.carriers = data.carriers;
-      $scope.selectedCarrier = data.carriers[0];
-    })
-    .error(function (data, status, headers, config) {
-      debugger
-    });
 
   $scope.submit = function () {
     var properties = _.reduce(
@@ -337,6 +352,35 @@ congoApp.controller('AccountCarriersNewController', function ($scope, $http, $lo
         debugger
       });
   };
+
+  function done () {
+    if ($scope.elements && $scope.carriers) {
+      $scope.vent.emit('loading:stop');
+    }
+  }
+
+  $http
+    .get('/assets/benefit-plans-new-properties.json')
+    .success(function (data, status, headers, config) {
+      $scope.elements = data;
+
+      done();
+    })
+    .error(function (data, status, headers, config) {
+      debugger
+    });
+
+  $http
+    .get('/api/v1/carriers.json')
+    .success(function (data, status, headers, config) {
+      $scope.carriers = data.carriers;
+      $scope.selectedCarrier = data.carriers[0];
+
+      done();
+    })
+    .error(function (data, status, headers, config) {
+      debugger
+    });
 });
 
 congoApp.controller('AccountCarriersShowController', function ($scope, $http, $location) {
@@ -346,6 +390,8 @@ congoApp.controller('AccountCarriersShowController', function ($scope, $http, $l
     .get('/api/v1/accounts/' + $scope.accountSlug() + '/account_carriers/' + $scope.accountCarrierId() + '.json')
     .success(function (data, status, headers, config) {
       $scope.accountCarrier = data.account_carrier;
+
+      $scope.vent.emit('loading:stop');
     })
     .error(function (data, status, headers, config) {
       debugger
@@ -353,15 +399,6 @@ congoApp.controller('AccountCarriersShowController', function ($scope, $http, $l
 });
 
 congoApp.controller('BenefitPlansIndexController', function ($scope, $http, $location) {
-  $http
-    .get('/api/v1/accounts/' + $scope.accountSlug() + '/benefit_plans.json')
-    .success(function (data, status, headers, config) {
-      $scope.benefitPlans = data.benefit_plans;
-    })
-    .error(function (data, status, headers, config) {
-      debugger
-    });
-
   $scope.deleteBenefitPlanAt = function (index) {
     var benefitPlan = $scope.benefitPlans[index];
 
@@ -378,31 +415,23 @@ congoApp.controller('BenefitPlansIndexController', function ($scope, $http, $loc
         debugger
       });
   };
+
+  $http
+    .get('/api/v1/accounts/' + $scope.accountSlug() + '/benefit_plans.json')
+    .success(function (data, status, headers, config) {
+      $scope.benefitPlans = data.benefit_plans;
+
+      $scope.vent.emit('loading:stop');
+    })
+    .error(function (data, status, headers, config) {
+      debugger
+    });
 });
 
 congoApp.controller('BenefitPlansNewController', function ($scope, $http, $location) {
-  $scope.elements = [];
-  $scope.accountCarriers = [];
+  $scope.elements = null;
+  $scope.accountCarriers = null;
   $scope.selectedAccountCarrier = null;
-
-  $http
-    .get('/assets/benefit-plans-new-properties.json')
-    .success(function (data, status, headers, config) {
-      $scope.elements = data;
-    })
-    .error(function (data, status, headers, config) {
-      debugger
-    });
-
-  $http
-    .get('/api/v1/accounts/' + $scope.accountSlug() + '/account_carriers.json')
-    .success(function (data, status, headers, config) {
-      $scope.accountCarriers = data.account_carriers;
-      $scope.selectedAccountCarrier = data.account_carriers[0];
-    })
-    .error(function (data, status, headers, config) {
-      debugger
-    });
 
   $scope.submit = function () {
     var properties = _.reduce(
@@ -427,6 +456,35 @@ congoApp.controller('BenefitPlansNewController', function ($scope, $http, $locat
         debugger
       });
   };
+
+  function done () {
+    if ($scope.elements && $scope.accountCarriers) {
+      $scope.vent.emit('loading:stop');
+    }
+  }
+
+  $http
+    .get('/assets/benefit-plans-new-properties.json')
+    .success(function (data, status, headers, config) {
+      $scope.elements = data;
+
+      done();
+    })
+    .error(function (data, status, headers, config) {
+      debugger
+    });
+
+  $http
+    .get('/api/v1/accounts/' + $scope.accountSlug() + '/account_carriers.json')
+    .success(function (data, status, headers, config) {
+      $scope.accountCarriers = data.account_carriers;
+      $scope.selectedAccountCarrier = data.account_carriers[0];
+
+      done();
+    })
+    .error(function (data, status, headers, config) {
+      debugger
+    });
 });
 
 congoApp.controller('BenefitPlansShowController', function ($scope, $http, $location) {
@@ -438,6 +496,8 @@ congoApp.controller('BenefitPlansShowController', function ($scope, $http, $loca
     })
     .success(function (data, status, headers, config) {
       $scope.benefitPlan = data.benefit_plan;
+
+      $scope.vent.emit('loading:stop');
     })
     .error(function (data, status, headers, config) {
       debugger
@@ -445,15 +505,6 @@ congoApp.controller('BenefitPlansShowController', function ($scope, $http, $loca
 });
 
 congoApp.controller('GroupsIndexController', function ($scope, $http, $location) {
-  $http
-    .get('/api/v1/accounts/' + $scope.accountSlug() + '/groups.json')
-    .success(function (data, status, headers, config) {
-      $scope.groups = data.groups;
-    })
-    .error(function (data, status, headers, config) {
-      debugger
-    });
-
   $scope.deleteGroupAt = function (index) {
     var group = $scope.groups[index];
 
@@ -470,6 +521,17 @@ congoApp.controller('GroupsIndexController', function ($scope, $http, $location)
         debugger
       });
     };
+
+  $http
+    .get('/api/v1/accounts/' + $scope.accountSlug() + '/groups.json')
+    .success(function (data, status, headers, config) {
+      $scope.groups = data.groups;
+
+      $scope.vent.emit('loading:stop');
+    })
+    .error(function (data, status, headers, config) {
+      debugger
+    });
 });
 
 congoApp.controller('GroupsNewController', function ($scope, $http, $location) {
@@ -480,6 +542,8 @@ congoApp.controller('GroupsNewController', function ($scope, $http, $location) {
       })
       .success(function (data, status, headers, config) {
         $location.path('/accounts/' + $scope.accountSlug() + '/' + $scope.currentRole() + '/groups');
+
+        $scope.vent.emit('loading:stop');
       })
       .error(function (data, status, headers, config) {
         debugger
@@ -598,6 +662,8 @@ congoApp.controller('GroupsShowController', function ($scope, $http, $location) 
     if ($scope.benefitPlans && $scope.group) {
       _($scope.benefitPlans).each(function (benefitPlan) {
         benefitPlan.isEnabled = !!_($scope.group.benefitPlans).findWhere({ id: benefitPlan.id });
+
+        $scope.vent.emit('loading:stop');
       });
     }
   }
@@ -643,10 +709,18 @@ congoApp.controller('ApplicationsNewController', function ($scope, $http, $locat
       });
   }
 
+  function done () {
+    if ($scope.group && $scope.benefitPlan) {
+      $scope.vent.emit('loading:stop');
+    }
+  }
+
   $http
     .get('/api/v1/accounts/' + $scope.accountSlug() + '/groups/' + $scope.groupSlug() + '.json')
     .success(function (data, status, headers, config) {
       $scope.group = data.group;
+
+      done();
     })
     .error(function (data, status, headers, config) {
       debugger
@@ -656,6 +730,8 @@ congoApp.controller('ApplicationsNewController', function ($scope, $http, $locat
     .get('/api/v1/accounts/' + $scope.accountSlug() + '/benefit_plans/' + $scope.benefitPlanId() + '.json')
     .success(function (data, status, headers, config) {
       $scope.benefitPlan = data.benefit_plan;
+
+      done();
     })
     .error(function (data, status, headers, config) {
       debugger
@@ -667,6 +743,8 @@ congoApp.controller('ApplicationsShowController', function ($scope, $http, $loca
     .get('/api/v1/accounts/' + $scope.accountSlug() + '/applications/' + $scope.applicationId() + '.json')
     .success(function (data, status, headers, config) {
       $scope.applications = data.applications;
+
+      $scope.vent.emit('loading:stop');
     })
     .error(function (data, status, headers, config) {
       debugger
@@ -678,6 +756,8 @@ congoApp.controller('ApplicationsIndexController', function ($scope, $http, $loc
     .get('/api/v1/accounts/' + $scope.accountSlug() + '/applications.json')
     .success(function (data, status, headers, config) {
       $scope.applications = data.applications;
+
+      $scope.vent.emit('loading:stop');
     })
     .error(function (data, status, headers, config) {
       debugger

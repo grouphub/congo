@@ -11,7 +11,7 @@ congoApp.factory('flashesFactory', function (eventsFactory) {
         message: message
       });
 
-      eventsFactory.emit('flash_added');
+      eventsFactory.emit('flashes:added');
     }
   };
 });

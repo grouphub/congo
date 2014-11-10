@@ -15,7 +15,7 @@
     </script>
   </head>
 
-  <body ng-controller="MainController">
+  <body id="main" ng-class="{loading: loading}" ng-controller="MainController">
     <div id="wrapper" ng-class="isDrawerShown() ? 'toggled' : ''">
       <div id="sidebar-wrapper">
         <%= render partial: 'layouts/sidebar' %>
@@ -30,6 +30,10 @@
 
           <%= render partial: 'layouts/footer' %>
         </main>
+
+        <div id="spinner-container">
+          <img src="/assets/spinner.gif">
+        </div>
       </div>
     </div>
   </body>

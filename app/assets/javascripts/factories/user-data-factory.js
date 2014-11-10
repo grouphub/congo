@@ -43,6 +43,13 @@ congoApp.factory('userDataFactory', function ($location, $cookieStore) {
         return match[1];
       }
     },
+    applicationId: function () {
+      var match = $location.path().match(/applications\/([^\/])+/);
+
+      if (match && match[1] && match[1].length > 0) {
+        return match[1];
+      }
+    },
     userId: function () {
       var match = $location.path().match(/\/users\/(\d+)/);
 
