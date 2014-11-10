@@ -13,7 +13,9 @@ congoApp.controller('MainController', function ($scope, $http, $location, userDa
   });
 
   $scope.vent.on($scope, 'loading:stop', function () {
-    $scope.loading = false;
+    _.defer(function () {
+      $scope.loading = false;
+    });
   });
 
   $scope.loading = true;
