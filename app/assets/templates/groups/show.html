@@ -48,13 +48,19 @@
   <div ng-if="isGroupAdmin()" class="members">
     <h2>Members</h2>
 
+    <div class="memberships">
+      <div class="membership" ng-repeat="membership in memberships()">
+        <h3>{{membership.name}}</h3>
+      </div>
+    </div>
+
     <table class="table">
       <thead>
         <tr>
           <th>Emails</th>
           <th>Connected as</th>
-          <th>Status</th>
           <th>Actions</th>
+          <th>Applications</th>
         </tr>
       </thead>
 
@@ -67,17 +73,38 @@
           </td>
 
           <td>
-            <a class="btn btn-warning btn-xs disabled" href="javascript:;" ng-if="!membership.applications[0].applied_by_id">Not Applied</a>
-            <a class="btn btn-primary btn-xs disabled" href="javascript:;" ng-if="membership.applications[0].applied_by_id && !membership.applications[0].submitted_by_id">Applied</a>
-            <a class="btn btn-success btn-xs disabled" href="javascript:;" ng-if="membership.applications[0].submitted_by_id">Submitted</a>
-          </td>
-
-          <td>
-            <a class="btn btn-success btn-xs" href="" ng-if="currentApplication(membership).applied_by_id && !currentApplication(membership).submitted_by_id" ng-click="submitApplication(currentApplication(membership))">Submit Application</a>
             <a class="btn btn-danger btn-xs" href="" ng-click="revokeMembership(membership)">Revoke membership</a>
             <a class="btn btn-primary btn-xs" href="" ng-if="!membership.user" ng-click="resendConfirmation(membership)">Re-send invitation</a>
           </td>
-        </li>
+
+          <td>
+            <table class="table" ng-if="membership.applications.length > 0">
+              <thead>
+                <tr>
+                  <th>Id</th>
+                  <th>State</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr ng-repeat="application in membership.applications">
+                  <td>{{application.id}}</td>
+
+                  <td>
+                    <a class="btn btn-warning btn-xs disabled" href="" ng-if="!application.applied_by_id">Not Applied</a>
+                    <a class="btn btn-primary btn-xs disabled" href="" ng-if="application.applied_by_id && !application.submitted_by_id">Applied</a>
+                    <a class="btn btn-success btn-xs disabled" href="" ng-if="application.submitted_by_id">Submitted</a>
+                  </td>
+
+                  <td>
+                    <a class="btn btn-success btn-xs" href="" ng-if="application.applied_by_id && !application.submitted_by_id" ng-click="submitApplication(application)">Submit Application</a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
       </tbody>
     </table>
   </div>
