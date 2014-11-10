@@ -1,16 +1,29 @@
 var congoApp = angular.module('congoApp');
 
+// Enable HTML 5 history
+congoApp.config([
+  '$locationProvider',
+  function ($locationProvider) {
+    $locationProvider.html5Mode(true);
+  }
+]);
+
+// General routes
 congoApp.config([
   '$routeProvider',
-  '$locationProvider',
-  function ($routeProvider, $locationProvider) {
-    $locationProvider.html5Mode(true);
-
+  function ($routeProvider) {
     $routeProvider
       .when('/', {
         templateUrl: '/assets/landing.html',
         controller: 'LandingController'
       })
+  }
+]);
+
+congoApp.config([
+  '$routeProvider',
+  function ($routeProvider) {
+    $routeProvider
       .when('/users/new_manager', {
         templateUrl: '/assets/users/new_manager.html',
         controller: 'UsersNewManagerController'
@@ -98,6 +111,10 @@ congoApp.config([
       .when('/accounts/:slug/:role/groups/:group_slug/benefit_plans/:benefit_plan_id/applications/new', {
         templateUrl: '/assets/applications/new.html',
         controller: 'ApplicationsNewController'
+      })
+      .when('/accounts/:slug/:role/applications/:application_id', {
+        templateUrl: '/assets/applications/show.html',
+        controller: 'ApplicationsShowController'
       })
       .when('/accounts/:slug/:role/applications', {
         templateUrl: '/assets/applications/index.html',

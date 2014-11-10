@@ -50,7 +50,9 @@ Rails.application.routes.draw do
     '/accounts/:slug/:role/groups/:group_slug/benefit_plans/:benefit_plan_id/applications/new',
 
     # Applications
-    '/accounts/:slug/:role/applications'
+    '/accounts/:slug/:role/applications',
+    '/accounts/:slug/:role/applications/new',
+    '/accounts/:slug/:role/applications/:application_id'
   ]
 
   namespace :api do

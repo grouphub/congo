@@ -534,6 +534,17 @@ congoApp.controller('GroupsShowController', function ($scope, $http, $location) 
       });
   };
 
+  $scope.submitApplication = function (application) {
+    $http
+      .put('/api/v1/accounts/' + $scope.accountSlug() + '/applications/' + application.id + '.json')
+      .success(function (data, status, headers, config) {
+        debugger
+      })
+      .error(function (data, status, headers, config) {
+        debugger
+      });
+  };
+
   $scope.enableBenefitPlan = function (benefitPlan) {
     var data = {
       benefit_plan_id: benefitPlan.id
@@ -637,6 +648,17 @@ congoApp.controller('ApplicationsNewController', function ($scope, $http, $locat
     .get('/api/v1/accounts/' + $scope.accountSlug() + '/benefit_plans/' + $scope.benefitPlanId() + '.json')
     .success(function (data, status, headers, config) {
       $scope.benefitPlan = data.benefit_plan;
+    })
+    .error(function (data, status, headers, config) {
+      debugger
+    });
+});
+
+congoApp.controller('ApplicationsShowController', function ($scope, $http, $location) {
+  $http
+    .get('/api/v1/accounts/' + $scope.accountSlug() + '/applications/' + $scope.applicationId() + '.json')
+    .success(function (data, status, headers, config) {
+      $scope.applications = data.applications;
     })
     .error(function (data, status, headers, config) {
       debugger

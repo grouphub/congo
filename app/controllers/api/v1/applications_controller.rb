@@ -33,8 +33,21 @@ class Api::V1::ApplicationsController < ApplicationController
     application = Application.create! \
       account_id: account.id,
       benefit_plan_id: benefit_plan.id,
-      membership_id: membership.id
+      membership_id: membership.id,
+      applied_by_id: current_user.id
 
+    respond_to do |format|
+      format.json {
+        render json: render_application(application)
+      }
+    end
+  end
+
+  # NOTE: Only supports setting approved_by or submitted_by
+  # TODO: Finish this
+  def update
+    application = Application.find(params[:id])
+    application.update_attribute(:submitted_by_id, current_user.id)
     respond_to do |format|
       format.json {
         render json: render_application(application)
