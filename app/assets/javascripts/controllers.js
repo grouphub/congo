@@ -1,77 +1,26 @@
 var congoApp = angular.module('congoApp', ['ngRoute', 'ngCookies']);
 
 congoApp.controller('MainController', function ($scope, $http, $location, userDataFactory, flashesFactory, eventsFactory) {
-  $scope.flashes = flashesFactory.flashes;
-  eventsFactory.on($scope, 'flash_added', function () {
+  // Expose an event emitter to all controllers for messaging
+  $scope.vent = eventsFactory;
+
+  // Loading behavior
+  $scope.loading = true;
+  $scope.ready = function () {
+    $scope.loading = false;
+  };
+
+  // Inject the userDataFactory methods onto MainController
+  for (var key in userDataFactory) {
+    $scope[key] = userDataFactory[key];
+  }
+
+  // Setup flashes
+  $scope.vent.on($scope, 'flashes:added', function () {
     $scope.flashes = flashesFactory.flashes;
   });
 
-  $scope.isAdmin = function () {
-    return userDataFactory.isAdmin();
-  };
-
-  $scope.inAdminPanel = function () {
-    return userDataFactory.inAdminPanel();
-  };
-
-  $scope.hasRole = function (name) {
-    return userDataFactory.hasRole(name);
-  };
-
-  $scope.isSignedin = function () {
-    return userDataFactory.isSignedin();
-  };
-
-  $scope.firstName = function () {
-    return userDataFactory.firstName();
-  };
-
-  $scope.accounts = function () {
-    return userDataFactory.accounts();
-  };
-
-  $scope.accountSlug = function () {
-    return userDataFactory.accountSlug();
-  };
-
-  $scope.currentRole = function () {
-    return userDataFactory.currentRole();
-  };
-
-  $scope.currentUserId = function () {
-    return userDataFactory.currentUserId();
-  };
-
-  $scope.isDrawerShown = function () {
-    return userDataFactory.isDrawerShown();
-  }
-
-  $scope.drawerToggle = function () {
-    userDataFactory.drawerToggle();
-  };
-
-  $scope.flashes = function () {
-    return flashesFactory.all();
-  };
-
-  $scope.carrierSlug = function () {
-    return userDataFactory.carrierSlug();
-  };
-
-  $scope.groupSlug = function () {
-    return userDataFactory.groupSlug();
-  };
-
-  $scope.accountCarrierId = function () {
-    return userDataFactory.accountCarrierId();
-  };
-
-  $scope.productId = function () {
-    return userDataFactory.productId();
-  };
-
-  $scope.$watch('flashes');
-
+  // Signout functionality
   $scope.signout = function () {
     $http
       .delete('/api/v1/users/signout.json')
@@ -89,11 +38,11 @@ congoApp.controller('MainController', function ($scope, $http, $location, userDa
 });
 
 congoApp.controller('LandingController', function ($scope) {
-
+  $scope.ready();
 });
 
 congoApp.controller('HomeController', function ($scope) {
-
+  $scope.ready();
 });
 
 congoApp.controller('UsersSigninController', function ($scope, $http, $location, flashesFactory) {
@@ -114,6 +63,8 @@ congoApp.controller('UsersSigninController', function ($scope, $http, $location,
         flashesFactory.add('danger', 'There was a problem signing you in.');
       });
   };
+
+  $scope.ready();
 });
 
 congoApp.controller('UsersNewManagerController', function ($scope, $http, $location, flashesFactory) {
@@ -136,6 +87,8 @@ congoApp.controller('UsersNewManagerController', function ($scope, $http, $locat
         flashesFactory.add('danger', 'There was a problem creating your account.');
       });
   };
+
+  $scope.ready();
 });
 
 congoApp.controller('UsersNewPlanController', function ($scope, $http, $location, flashesFactory) {
@@ -151,16 +104,20 @@ congoApp.controller('UsersNewPlanController', function ($scope, $http, $location
         flashesFactory.add('danger', 'There was a problem setting up your plan.');
       });
   };
+
+  $scope.ready();
 });
 
 congoApp.controller('UsersNewBillingController', function ($scope, $http, $location) {
   $scope.submit = function () {
     $http
       .put('/api/v1/users/' + congo.currentUser.id + '.json', {
-        card_number: $scope.cardNumber,
-        month: $scope.month,
-        year: $scope.year,
-        cvc: $scope.cvc
+        user_properties: {
+          card_number: $scope.cardNumber,
+          month: $scope.month,
+          year: $scope.year,
+          cvc: $scope.cvc
+        }
       })
       .success(function (data, status, headers, config) {
         $location.path('/users/new_account');
@@ -169,16 +126,32 @@ congoApp.controller('UsersNewBillingController', function ($scope, $http, $locat
         flashesFactory.add('danger', 'There was a problem setting up your payment info.');
       });
   };
+
+  $scope.ready();
 });
 
 congoApp.controller('UsersNewAccountController', function ($scope, $http, $location) {
+  $scope.elements = [];
+
   $scope.submit = function () {
+    var properties = _.reduce(
+      $scope.elements,
+      function (sum, element) {
+        sum[element.name] = element.value;
+        return sum;
+      },
+      {}
+    );
+
+    var data = {
+      account_id: congo.currentUser.accounts[0].id,
+      account_name: $scope.name,
+      account_tagline: $scope.tagline,
+      account_properties: properties
+    };
+
     $http
-      .put('/api/v1/users/' + congo.currentUser.id + '.json', {
-        account_id: congo.currentUser.accounts[0].id,
-        account_name: $scope.name,
-        account_tagline: $scope.tagline
-      })
+      .put('/api/v1/users/' + congo.currentUser.id + '.json', data)
       .success(function (data, status, headers, config) {
         var account;
 
@@ -186,7 +159,7 @@ congoApp.controller('UsersNewAccountController', function ($scope, $http, $locat
 
         account = congo.currentUser.accounts[0];
 
-        $location.path('/accounts/' + account.slug + '/' + account.role);
+        $location.path('/accounts/' + account.slug + '/' + account.role.name);
 
         flashesFactory.add('success', 'Welcome, ' + congo.currentUser.first_name + ' ' + congo.currentUser.last_name + '!');
       })
@@ -194,6 +167,17 @@ congoApp.controller('UsersNewAccountController', function ($scope, $http, $locat
         flashesFactory.add('danger', 'There was a problem creating your account.');
       });
   };
+
+  $http
+    .get('/assets/accounts-new-properties.json')
+    .success(function (data, status, headers, config) {
+      $scope.elements = data;
+
+      $scope.ready();
+    })
+    .error(function (data, status, headers, config) {
+      debugger
+    });
 });
 
 congoApp.controller('UsersNewCustomerController', function ($scope, $http, $location) {
@@ -240,6 +224,8 @@ congoApp.controller('UsersNewCustomerController', function ($scope, $http, $loca
         debugger
       });
   };
+
+  $scope.ready();
 });
 
 congoApp.controller('UsersShowController', function ($scope, $http, $location) {
@@ -251,6 +237,8 @@ congoApp.controller('UsersShowController', function ($scope, $http, $location) {
     .get('/api/v1/users/' + $scope.userId() + '.json')
     .success(function (data, status, headers, config) {
       $scope.user = data.user;
+
+      $scope.ready();
     })
     .error(function (data, status, headers, config) {
       debugger
@@ -258,12 +246,22 @@ congoApp.controller('UsersShowController', function ($scope, $http, $location) {
 });
 
 congoApp.controller('CarriersNewController', function ($scope, $http, $location) {
+  $scope.elements = [];
+
   $scope.submit = function () {
-    // TODO: Get properties out of `elements` (stored in `value`)
+    var properties = _.reduce(
+      $scope.elements,
+      function (sum, element) {
+        sum[element.name] = element.value;
+        return sum;
+      },
+      {}
+    );
 
     $http
       .post('/api/v1/carriers.json', {
-        name: $scope.name
+        name: $scope.name,
+        properties: properties
       })
       .success(function (data, status, headers, config) {
         $location.path('/admin/carriers');
@@ -272,6 +270,17 @@ congoApp.controller('CarriersNewController', function ($scope, $http, $location)
         debugger
       });
   };
+
+  $http
+    .get('/assets/carriers-new-properties.json')
+    .success(function (data, status, headers, config) {
+      $scope.elements = data;
+
+      $scope.ready();
+    })
+    .error(function (data, status, headers, config) {
+      debugger
+    });
 });
 
 congoApp.controller('CarriersIndexController', function ($scope, $http, $location) {
@@ -279,6 +288,8 @@ congoApp.controller('CarriersIndexController', function ($scope, $http, $locatio
     .get('/api/v1/carriers.json')
     .success(function (data, status, headers, config) {
       $scope.carriers = data.carriers;
+
+      $scope.ready();
     })
     .error(function (data, status, headers, config) {
       debugger
@@ -290,6 +301,8 @@ congoApp.controller('CarriersShowController', function ($scope, $http, $location
     .get('/api/v1/carriers/' + $scope.carrierSlug() + '.json')
     .success(function (data, status, headers, config) {
       $scope.carrier = data.carrier;
+
+      $scope.ready;
     })
     .error(function (data, status, headers, config) {
       debugger
@@ -299,15 +312,6 @@ congoApp.controller('CarriersShowController', function ($scope, $http, $location
 congoApp.controller('AccountCarriersIndexController', function ($scope, $http, $location) {
   $scope.accountCarriers = null;
 
-  $http
-    .get('/api/v1/accounts/' + $scope.accountSlug() + '/account_carriers.json')
-    .success(function (data, status, headers, config) {
-      $scope.accountCarriers = data.account_carriers;
-    })
-    .error(function (data, status, headers, config) {
-      debugger
-    });
-
   $scope.deleteAccountCarrierAt = function (index) {
     var accountCarrier = $scope.accountCarriers[index];
 
@@ -316,7 +320,7 @@ congoApp.controller('AccountCarriersIndexController', function ($scope, $http, $
     }
 
     $http
-      .delete('/api/v1/accounts/' + $scope.accountSlug() + '/account_carriers/' + accountCarrier.id + '.json')
+      .delete('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/account_carriers/' + accountCarrier.id + '.json')
       .success(function (data, status, headers, config) {
         $scope.accountCarriers.splice(index, 1);
       })
@@ -324,29 +328,39 @@ congoApp.controller('AccountCarriersIndexController', function ($scope, $http, $
         debugger
       });
   };
-});
-
-congoApp.controller('AccountCarriersNewController', function ($scope, $http, $location) {
-  $scope.carriers = null;
-  $scope.selectedCarrier = null;
 
   $http
-    .get('/api/v1/carriers.json')
+    .get('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/account_carriers.json')
     .success(function (data, status, headers, config) {
-      $scope.carriers = data.carriers;
-      $scope.selectedCarrier = data.carriers[0];
+      $scope.accountCarriers = data.account_carriers;
+
+      $scope.ready();
     })
     .error(function (data, status, headers, config) {
       debugger
     });
+});
+
+congoApp.controller('AccountCarriersNewController', function ($scope, $http, $location) {
+  $scope.elements = null;
+  $scope.carriers = null;
+  $scope.selectedCarrier = null;
 
   $scope.submit = function () {
-    // TODO: Get properties out of `elements` (stored in `value`)
+    var properties = _.reduce(
+      $scope.elements,
+      function (sum, element) {
+        sum[element.name] = element.value;
+        return sum;
+      },
+      {}
+    );
 
     $http
-      .post('/api/v1/accounts/' + $scope.accountSlug() + '/account_carriers.json', {
+      .post('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/account_carriers.json', {
         name: $scope.name,
-        carrier_slug: $scope.selectedCarrier.slug
+        carrier_slug: $scope.selectedCarrier.slug,
+        properties: properties
       })
       .success(function (data, status, headers, config) {
         $location.path('/accounts/' + $scope.accountSlug() + '/' + $scope.currentRole() + '/account_carriers');
@@ -355,99 +369,152 @@ congoApp.controller('AccountCarriersNewController', function ($scope, $http, $lo
         debugger
       });
   };
+
+  function done () {
+    if ($scope.elements && $scope.carriers) {
+      $scope.ready();
+    }
+  }
+
+  $http
+    .get('/assets/benefit-plans-new-properties.json')
+    .success(function (data, status, headers, config) {
+      $scope.elements = data;
+
+      done();
+    })
+    .error(function (data, status, headers, config) {
+      debugger
+    });
+
+  $http
+    .get('/api/v1/carriers.json')
+    .success(function (data, status, headers, config) {
+      $scope.carriers = data.carriers;
+      $scope.selectedCarrier = data.carriers[0];
+
+      done();
+    })
+    .error(function (data, status, headers, config) {
+      debugger
+    });
 });
 
 congoApp.controller('AccountCarriersShowController', function ($scope, $http, $location) {
   $scope.accountCarrier = null;
 
   $http
-    .get('/api/v1/accounts/' + $scope.accountSlug() + '/account_carriers/' + $scope.accountCarrierId() + '.json')
+    .get('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/account_carriers/' + $scope.accountCarrierId() + '.json')
     .success(function (data, status, headers, config) {
       $scope.accountCarrier = data.account_carrier;
+
+      $scope.ready();
     })
     .error(function (data, status, headers, config) {
       debugger
     });
 });
 
-congoApp.controller('ProductsIndexController', function ($scope, $http, $location) {
-  $http
-    .get('/api/v1/accounts/' + $scope.accountSlug() + '/products.json')
-    .success(function (data, status, headers, config) {
-      $scope.products = data.products;
-    })
-    .error(function (data, status, headers, config) {
-      debugger
-    });
+congoApp.controller('BenefitPlansIndexController', function ($scope, $http, $location) {
+  $scope.deleteBenefitPlanAt = function (index) {
+    var benefitPlan = $scope.benefitPlans[index];
 
-  $scope.deleteProductAt = function (index) {
-    var product = $scope.products[index];
-
-    if (!product) {
+    if (!benefitPlan) {
       debugger
     }
 
     $http
-      .delete('/api/v1/accounts/' + $scope.accountSlug() + '/products/' + product.id + '.json')
+      .delete('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/benefit_plan/' + benefitPlan.id + '.json')
       .success(function (data, status, headers, config) {
-        $scope.products.splice(index, 1);
+        $scope.benefitPlans.splice(index, 1);
       })
       .error(function (data, status, headers, config) {
         debugger
       });
   };
-});
-
-congoApp.controller('ProductsNewController', function ($scope, $http, $location) {
-  $scope.elements = [];
-  $scope.accountCarriers = [];
-  $scope.selectedAccountCarrier = null;
 
   $http
-    .get('/assets/products-new-properties.json')
+    .get('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/benefit_plans.json')
+    .success(function (data, status, headers, config) {
+      $scope.benefitPlans = data.benefit_plans;
+
+      $scope.ready();
+    })
+    .error(function (data, status, headers, config) {
+      debugger
+    });
+});
+
+congoApp.controller('BenefitPlansNewController', function ($scope, $http, $location) {
+  $scope.elements = null;
+  $scope.accountCarriers = null;
+  $scope.selectedAccountCarrier = null;
+
+  $scope.submit = function () {
+    var properties = _.reduce(
+      $scope.elements,
+      function (sum, element) {
+        sum[element.name] = element.value;
+        return sum;
+      },
+      {}
+    );
+
+    $http
+      .post('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/benefit_plans.json', {
+        name: $scope.name,
+        account_carrier_id: $scope.selectedAccountCarrier.id,
+        properties: properties
+      })
+      .success(function (data, status, headers, config) {
+        $location.path('/accounts/' + $scope.accountSlug() + '/' + $scope.currentRole() + '/benefit_plans');
+      })
+      .error(function (data, status, headers, config) {
+        debugger
+      });
+  };
+
+  function done () {
+    if ($scope.elements && $scope.accountCarriers) {
+      $scope.ready();
+    }
+  }
+
+  $http
+    .get('/assets/benefit-plans-new-properties.json')
     .success(function (data, status, headers, config) {
       $scope.elements = data;
+
+      done();
     })
     .error(function (data, status, headers, config) {
       debugger
     });
 
   $http
-    .get('/api/v1/accounts/' + $scope.accountSlug() + '/account_carriers.json')
+    .get('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/account_carriers.json')
     .success(function (data, status, headers, config) {
       $scope.accountCarriers = data.account_carriers;
       $scope.selectedAccountCarrier = data.account_carriers[0];
+
+      done();
     })
     .error(function (data, status, headers, config) {
       debugger
     });
-
-  $scope.submit = function () {
-    debugger
-    // TODO: Get properties out of `elements` (stored in `value`)
-    $http
-      .post('/api/v1/accounts/' + $scope.accountSlug() + '/products.json', {
-        name: $scope.name,
-        account_carrier_id: $scope.selectedAccountCarrier.id
-      })
-      .success(function (data, status, headers, config) {
-        $location.path('/accounts/' + $scope.accountSlug() + '/' + $scope.currentRole() + '/products');
-      })
-      .error(function (data, status, headers, config) {
-        debugger
-      });
-  };
 });
 
-congoApp.controller('ProductsShowController', function ($scope, $http, $location) {
-  $scope.product = null;
+congoApp.controller('BenefitPlansShowController', function ($scope, $http, $location) {
+  $scope.benefitPlan = null;
 
   $http
-    .get('/api/v1/accounts/' + $scope.accountSlug() + '/products/' + $scope.productId() + '.json', {
+    .get('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/benefit_plans/' + $scope.benefitPlanId() + '.json', {
       name: $scope.name
     })
     .success(function (data, status, headers, config) {
-      $scope.product = data.product;
+      $scope.benefitPlan = data.benefit_plan;
+
+      $scope.ready();
     })
     .error(function (data, status, headers, config) {
       debugger
@@ -455,14 +522,26 @@ congoApp.controller('ProductsShowController', function ($scope, $http, $location
 });
 
 congoApp.controller('GroupsIndexController', function ($scope, $http, $location) {
-  $http
-    .get('/api/v1/accounts/' + $scope.accountSlug() + '/groups.json')
-    .success(function (data, status, headers, config) {
-      $scope.groups = data.groups;
-    })
-    .error(function (data, status, headers, config) {
+  $scope.toggleGroupAt = function (index) {
+    var group = $scope.groups[index];
+
+    if (!group) {
       debugger
-    });
+    }
+
+    console.log(group.is_enabled);
+
+    $http
+      .put('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups/' + group.id + '.json', {
+        is_enabled: !group.is_enabled    
+      })
+      .success(function (data, status, headers, config) {
+        $scope.groups[index] = data.group;
+      })
+      .error(function (data, status, headers, config) {
+        debugger
+      });
+  }
 
   $scope.deleteGroupAt = function (index) {
     var group = $scope.groups[index];
@@ -472,36 +551,102 @@ congoApp.controller('GroupsIndexController', function ($scope, $http, $location)
     }
 
     $http
-      .delete('/api/v1/accounts/' + $scope.accountSlug() + '/groups/' + group.id + '.json')
+      .delete('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups/' + group.id + '.json')
       .success(function (data, status, headers, config) {
         $scope.groups.splice(index, 1);
       })
       .error(function (data, status, headers, config) {
         debugger
       });
-    };
+  };
+
+  $http
+    .get('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups.json')
+    .success(function (data, status, headers, config) {
+      $scope.groups = data.groups;
+
+      $scope.ready();
+    })
+    .error(function (data, status, headers, config) {
+      debugger
+    });
 });
 
 congoApp.controller('GroupsNewController', function ($scope, $http, $location) {
+  $scope.elements = [];
+
   $scope.submit = function () {
+    var properties = _.reduce(
+      $scope.elements,
+      function (sum, element) {
+        sum[element.name] = element.value;
+        return sum;
+      },
+      {}
+    );
+
     $http
-      .post('/api/v1/accounts/' + $scope.accountSlug() + '/groups.json', {
-        name: $scope.name
+      .post('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups.json', {
+        name: $scope.name,
+        properties: properties
       })
       .success(function (data, status, headers, config) {
         $location.path('/accounts/' + $scope.accountSlug() + '/' + $scope.currentRole() + '/groups');
+
+        $scope.ready();
       })
       .error(function (data, status, headers, config) {
         debugger
       });
   };
+
+  $http
+    .get('/assets/groups-new-properties.json')
+    .success(function (data, status, headers, config) {
+      $scope.elements = data;
+
+      $scope.ready();
+    })
+    .error(function (data, status, headers, config) {
+      debugger
+    });
 });
 
-congoApp.controller('GroupsShowController', function ($scope, $http, $location) {
+congoApp.controller('GroupsShowController', function ($scope, $http, $location, $cookieStore) {
+  // Only used by group admins
   $scope.memberships = function () {
     if ($scope.group) {
       return $scope.group.memberships;
     }
+  };
+
+  // Only used by customers
+  $scope.applications = function (benefitPlan) {
+    if ($scope.group) {
+      return _($scope.group.applications).where({ benefit_plan_id: benefitPlan.id });
+    }
+  };
+
+  $scope.selectBenefitPlan = function (benefitPlan) {
+    if (!benefitPlan) {
+      debugger
+    }
+
+    var data = {
+      group_slug: $scope.groupSlug(),
+      benefit_plan_id: benefitPlan.id
+    };
+
+    $http
+      .post('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/applications.json', data)
+      .success(function (data, status, headers, config) {
+        $cookieStore.put('current-application-id', data.application.id);
+
+        $location.path('/accounts/' + $scope.accountSlug() + '/' + $scope.currentRole() + '/groups/' + $scope.groupSlug() + '/benefit_plans/' + benefitPlan.id + '/applications/new');
+      })
+      .error(function (data, status, headers, config) {
+        debugger
+      });
   };
 
   $scope.inviteMember = function () {
@@ -511,7 +656,7 @@ congoApp.controller('GroupsShowController', function ($scope, $http, $location) 
     };
 
     $http
-      .post('/api/v1/accounts/' + $scope.accountSlug() + '/groups/' + $scope.groupSlug() + '/memberships.json', data)
+      .post('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups/' + $scope.groupSlug() + '/memberships.json', data)
       .success(function (data, status, headers, config) {
         $scope.group.memberships.push(data.membership);    
       })
@@ -522,7 +667,7 @@ congoApp.controller('GroupsShowController', function ($scope, $http, $location) 
 
   $scope.resendConfirmation = function (membership) {
     $http
-      .post('/api/v1/accounts/' + $scope.accountSlug() + '/groups/' + $scope.groupSlug() + '/memberships/' + membership.id + '/confirmations.json')
+      .post('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups/' + $scope.groupSlug() + '/memberships/' + membership.id + '/confirmations.json')
       .success(function (data, status, headers, config) {
         debugger
       })
@@ -533,7 +678,7 @@ congoApp.controller('GroupsShowController', function ($scope, $http, $location) 
 
   $scope.revokeMembership = function (membership) {
     $http
-      .delete('/api/v1/accounts/' + $scope.accountSlug() + '/groups/' + $scope.groupSlug() + '/memberships/' + membership.id + '.json')
+      .delete('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups/' + $scope.groupSlug() + '/memberships/' + membership.id + '.json')
       .success(function (data, status, headers, config) {
         $scope.group.memberships = _($scope.group.memberships).reject(function (m) {
           return membership.id === m.id;
@@ -544,40 +689,55 @@ congoApp.controller('GroupsShowController', function ($scope, $http, $location) 
       });
   };
 
-  $scope.enableProduct = function (product) {
+  $scope.submitApplication = function (application) {
     var data = {
-      product_id: product.id
+      applied_by_id: $scope.userId()
     }
 
     $http
-      .post('/api/v1/accounts/' + $scope.accountSlug() + '/groups/' + $scope.groupSlug() + '/group_products.json', data)
+      .put('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/applications/' + application.id + '.json', data)
       .success(function (data, status, headers, config) {
-        product.isEnabled = true;
+        debugger
       })
       .error(function (data, status, headers, config) {
         debugger
       });
   };
 
-  $scope.changeProduct = function (product) {
-    if (product.isEnabled) {
+  $scope.enableBenefitPlan = function (benefitPlan) {
+    var data = {
+      benefit_plan_id: benefitPlan.id
+    }
+
+    $http
+      .post('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups/' + $scope.groupSlug() + '/group_benefit_plans.json', data)
+      .success(function (data, status, headers, config) {
+        benefitPlan.isEnabled = true;
+      })
+      .error(function (data, status, headers, config) {
+        debugger
+      });
+  };
+
+  $scope.changeBenefitPlan = function (benefitPlan) {
+    if (benefitPlan.isEnabled) {
       var data = {
-        product_id: product.id
+        benefit_plan_id: benefitPlan.id
       }
 
       $http
-        .post('/api/v1/accounts/' + $scope.accountSlug() + '/groups/' + $scope.groupSlug() + '/group_products.json', data)
+        .post('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups/' + $scope.groupSlug() + '/group_benefit_plans.json', data)
         .success(function (data, status, headers, config) {
-          product.isEnabled = true;
+          benefitPlan.isEnabled = true;
         })
         .error(function (data, status, headers, config) {
           debugger
         });
     } else {
       $http
-        .delete('/api/v1/accounts/' + $scope.accountSlug() + '/groups/' + $scope.groupSlug() + '/group_products.json?product_id=' + product.id)
+        .delete('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups/' + $scope.groupSlug() + '/group_benefit_plans.json?benefit_plan_id=' + benefitPlan.id)
         .success(function (data, status, headers, config) {
-          product.isEnabled = false;
+          benefitPlan.isEnabled = false;
         })
         .error(function (data, status, headers, config) {
           debugger
@@ -586,17 +746,19 @@ congoApp.controller('GroupsShowController', function ($scope, $http, $location) 
   };
 
   function done() {
-    if ($scope.products && $scope.group) {
-      _($scope.products).each(function (product) {
-        product.isEnabled = !!_($scope.group.products).findWhere({ id: product.id });
+    if ($scope.benefitPlans && $scope.group) {
+      _($scope.benefitPlans).each(function (benefitPlan) {
+        benefitPlan.isEnabled = !!_($scope.group.benefitPlans).findWhere({ id: benefitPlan.id });
+
+        $scope.ready();
       });
     }
   }
 
   $http
-    .get('/api/v1/accounts/' + $scope.accountSlug() + '/products.json')
+    .get('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/benefit_plans.json')
     .success(function (data, status, headers, config) {
-      $scope.products = data.products;
+      $scope.benefitPlans = data.benefit_plans;
       done();
     })
     .error(function (data, status, headers, config) {
@@ -604,7 +766,7 @@ congoApp.controller('GroupsShowController', function ($scope, $http, $location) 
     });
 
   $http
-    .get('/api/v1/accounts/' + $scope.accountSlug() + '/groups/' + $scope.groupSlug() + '.json')
+    .get('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups/' + $scope.groupSlug() + '.json')
     .success(function (data, status, headers, config) {
       $scope.group = data.group;
       done();
@@ -614,19 +776,34 @@ congoApp.controller('GroupsShowController', function ($scope, $http, $location) 
     });
 });
 
-congoApp.controller('ApplicationsNewController', function ($scope, $http, $location) {
+congoApp.controller('ApplicationsNewController', function ($scope, $http, $location, $cookieStore) {
+  $scope.elements = [];
   $scope.group = null;
-  $scope.product = null;
+  $scope.benefitPlan = null;
 
   $scope.submit = function () {
+    var properties = _.reduce(
+      $scope.elements,
+      function (sum, element) {
+        sum[element.name] = element.value;
+        return sum;
+      },
+      {}
+    );
+
     var data = {
       group_slug: $scope.groupSlug(),
-      product_id: $scope.productId()
+      benefit_plan_id: $scope.benefitPlanId(),
+      properties: properties
     };
 
+    var id = $cookieStore.get('current-application-id');
+
     $http
-      .post('/api/v1/accounts/' + $scope.accountSlug() + '/applications.json', data)
+      .put('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/applications/' + id  + '.json', data)
       .success(function (data, status, headers, config) {
+        $cookieStore.remove('current-application-id');
+
         $location.path('/accounts/' + $scope.accountSlug() + '/' + $scope.currentRole());
       })
       .error(function (data, status, headers, config) {
@@ -634,19 +811,53 @@ congoApp.controller('ApplicationsNewController', function ($scope, $http, $locat
       });
   }
 
+  function done () {
+    if ($scope.elements && $scope.group && $scope.benefitPlan) {
+      $scope.ready();
+    }
+  }
+
   $http
-    .get('/api/v1/accounts/' + $scope.accountSlug() + '/groups/' + $scope.groupSlug() + '.json')
+    .get('/assets/applications-new-properties.json')
     .success(function (data, status, headers, config) {
-      $scope.group = data.group;
+      $scope.elements = data;
+
+      $scope.ready();
     })
     .error(function (data, status, headers, config) {
       debugger
     });
 
   $http
-    .get('/api/v1/accounts/' + $scope.accountSlug() + '/products/' + $scope.productId() + '.json')
+    .get('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups/' + $scope.groupSlug() + '.json')
     .success(function (data, status, headers, config) {
-      $scope.product = data.product;
+      $scope.group = data.group;
+
+      done();
+    })
+    .error(function (data, status, headers, config) {
+      debugger
+    });
+
+  $http
+    .get('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/benefit_plans/' + $scope.benefitPlanId() + '.json')
+    .success(function (data, status, headers, config) {
+      $scope.benefitPlan = data.benefit_plan;
+
+      done();
+    })
+    .error(function (data, status, headers, config) {
+      debugger
+    });
+});
+
+congoApp.controller('ApplicationsShowController', function ($scope, $http, $location) {
+  $http
+    .get('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/applications/' + $scope.applicationId() + '.json')
+    .success(function (data, status, headers, config) {
+      $scope.applications = data.applications;
+
+      $scope.ready();
     })
     .error(function (data, status, headers, config) {
       debugger
@@ -655,9 +866,11 @@ congoApp.controller('ApplicationsNewController', function ($scope, $http, $locat
 
 congoApp.controller('ApplicationsIndexController', function ($scope, $http, $location) {
   $http
-    .get('/api/v1/accounts/' + $scope.accountSlug() + '/applications.json')
+    .get('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/applications.json')
     .success(function (data, status, headers, config) {
       $scope.applications = data.applications;
+
+      $scope.ready();
     })
     .error(function (data, status, headers, config) {
       debugger

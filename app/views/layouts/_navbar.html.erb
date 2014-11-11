@@ -18,7 +18,7 @@
     </ul>
 
     <ul class="nav navbar-nav navbar-right">
-      <li class="dropdown messages-menu" ng-if="hasRole('broker') || hasRole('customer')">
+      <li class="dropdown messages-menu" ng-if="currentRole()">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
           <i class="envelope">Notifications</i>
           <span class="icon-label">99</span>
@@ -30,7 +30,7 @@
         </ul>
       </li>
 
-      <li class="dropdown messages-menu" ng-if="hasRole('broker') || hasRole('customer')">
+      <li class="dropdown messages-menu" ng-if="currentRole()">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
           <i class="forms">To-Dos</i>
           <span class="icon-label">99</span>
@@ -54,14 +54,14 @@
           </li>
 
           <li ng-repeat="account in accounts()">
-            <a ng-href="/admin" ng-if="account.role.role == 'admin'">
+            <a ng-href="/admin" ng-if="account.role.name == 'admin'">
               Admin
               <span class="label label-default role">Admin</span>
             </a>
 
-            <a ng-href="/accounts/{{account.slug}}/{{account.role.role}}" ng-if="account.role.role != 'admin'">
+            <a ng-href="/accounts/{{account.slug}}/{{account.role.name}}" ng-if="account.role.name != 'admin'">
               {{account.name}}
-              <span class="label label-default role">{{account.role.role}}</span>
+              <span class="label label-default role">{{account.role.english_name}}</span>
             </a>
           </li>
 

@@ -1,0 +1,9 @@
+[
+  {
+    "type": "text",
+    "name": "application_id",
+    "title": "Application ID",
+    "placeholder": "Enter an application ID…"
+  }
+]
+

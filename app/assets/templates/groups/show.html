@@ -1,86 +1,141 @@
 <div class="col-md-12">
-  <div ng-if="hasRole('broker')" class="products">
+  <div ng-if="isGroupAdmin()" class="benefit-plans">
     <h1>{{group.name}}</h1>
 
-    <h2>Products</h2>
+    <h2>Benefit plans</h2>
 
     <table class="table">
       <thead>
         <tr>
-          <th>Product name</th>
+          <th>Benefit plan name</th>
           <th>Enabled?</th>
         </tr>
       </thead>
 
       <tbody>
-        <tr ng-repeat="product in products">
-          <td>{{product.name}}</td>
-          <td><input type="checkbox" value="{{product.id}}" ng-model="product.isEnabled" ng-change="changeProduct(product)"></td>
+        <tr ng-repeat="benefitPlan in benefitPlans">
+          <td>{{benefitPlan.name}}</td>
+          <td><input type="checkbox" value="{{benefitPlan.id}}" ng-model="benefitPlan.isEnabled" ng-change="changeBenefitPlan(benefitPlan)"></td>
         </tr>
       </tbody>
     </table>
   </div>
 
-  <div ng-if="hasRole('customer')" class="products">
+  <div ng-if="currentRole() === 'customer'" class="benefit-plans">
     <h1>{{group.name}}</h1>
 
-    <h2>Products</h2>
+    <h2>Benefit plans</h2>
 
     <table class="table">
       <thead>
         <tr>
-          <th>Product name</th>
+          <th>Benefit plan name</th>
           <th>Actions</th>
+          <th>Applications</th>
         </tr>
       </thead>
 
       <tbody>
-        <tr ng-repeat="product in products">
-          <td>{{product.name}}</td>
+        <tr ng-repeat="benefitPlan in benefitPlans">
+          <td>{{benefitPlan.name}}</td>
+
           <td>
-            <a class="btn btn-info btn-xs" ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/groups/{{groupSlug()}}/products/{{product.id}}/applications/new">Apply</a>
+            <a class="btn btn-info btn-xs" ng-click="selectBenefitPlan(benefitPlan)" ng-href="">Select</a>
+          </td>
+
+          <td>
+            <table class="table">
+              <thead>
+                <th>Id</th>
+                <th>State</th>
+              </thead>
+
+              <tbody>
+                <tr ng-repeat="application in applications(benefitPlan)">
+                  <td>{{application.id}}</td>
+                  <td>
+                    <a href="" class="btn btn-warning btn-xs disabled" ng-if="!application.applied_by_id">Not Applied</a>
+                    <a href="" class="btn btn-info btn-xs disabled" ng-if="application.applied_by_id && !application.submitted_by_id">Applied</a>
+                    <a href="" class="btn btn-success btn-xs disabled" ng-if="application.submitted_by_id">Submitted</a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </td>
         </tr>
       </tbody>
     </table>
   </div>
 
-  <div ng-if="hasRole('broker')" class="members">
+  <div ng-if="isGroupAdmin()" class="members">
     <h2>Members</h2>
+
+    <div class="memberships">
+      <div class="membership" ng-repeat="membership in memberships()">
+        <h3>{{membership.name}}</h3>
+      </div>
+    </div>
 
     <table class="table">
       <thead>
         <tr>
-          <th>Emails</th>
-          <th>Connected as</th>
-          <th>Status</th>
+          <th>Name</th>
+          <th>Email</th>
           <th>Actions</th>
+          <th>Applications</th>
         </tr>
       </thead>
 
       <tbody>
         <tr ng-repeat="membership in memberships()">
-          <td>{{membership.email}}</td>
-
           <td>
-            <a ng-href="/users/{{membership.user.id}}" ng-if="membership.user">{{membership.user.email}}</a>
+            <a ng-href="/users/{{membership.user.id}}" ng-if="membership.user">
+              {{membership.user.first_name}} {{membership.user.last_name}}
+            </a>
           </td>
 
           <td>
-            <a class="btn btn-primary btn-xs" href="javascript:;" ng-if="membership.applications.length > 0">Applied</a>
-            <a class="btn btn-warning btn-xs" href="javascript:;" ng-if="membership.applications.length == 0">Not Applied</a>
+            <a ng-href="mailto:{{membership.email}}" ng-if="membership.user">{{membership.email}}</a>
           </td>
 
           <td>
             <a class="btn btn-danger btn-xs" href="" ng-click="revokeMembership(membership)">Revoke membership</a>
             <a class="btn btn-primary btn-xs" href="" ng-if="!membership.user" ng-click="resendConfirmation(membership)">Re-send invitation</a>
           </td>
-        </li>
+
+          <td>
+            <table class="table" ng-if="membership.applications.length > 0">
+              <thead>
+                <tr>
+                  <th>Selected On</th>
+                  <th>State</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr ng-repeat="application in membership.applications">
+                  <td>{{application.created_at | date}}</td>
+
+                  <td>
+                    <a class="btn btn-warning btn-xs disabled" href="" ng-if="!application.applied_by_id">Not Applied</a>
+                    <a class="btn btn-primary btn-xs disabled" href="" ng-if="application.applied_by_id && !application.submitted_by_id">Applied</a>
+                    <a class="btn btn-success btn-xs disabled" href="" ng-if="application.submitted_by_id">Submitted</a>
+                  </td>
+
+                  <td>
+                    <a class="btn btn-success btn-xs" href="" ng-if="application.applied_by_id && !application.submitted_by_id" ng-click="submitApplication(application)">Submit application</a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
       </tbody>
     </table>
   </div>
 
-  <form ng-if="hasRole('broker')" ng-submit="inviteMember()">
+  <form ng-if="isGroupAdmin()" ng-submit="inviteMember()">
     <div class="form-group">
       <label for="email">Invite a new member</label>
       <input type="email" class="form-control" id="email" placeholder="Enter email&hellip;" ng-model="email" auto-focus>

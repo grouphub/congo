@@ -1,4 +1,6 @@
 class Api::V1::UsersController < ApplicationController
+  include UsersHelper
+
   def create
     first_name = params[:first_name]
     last_name = params[:last_name]
@@ -34,7 +36,7 @@ class Api::V1::UsersController < ApplicationController
       Role.create! \
         account_id: account_id,
         user_id: user.id,
-        role: 'customer'
+        name: 'customer'
 
     # User came from a manual signup and is a broker
     else
@@ -43,7 +45,12 @@ class Api::V1::UsersController < ApplicationController
       Role.create! \
         account_id: account.id,
         user_id: user.id,
-        role: 'broker'
+        name: 'broker'
+
+      Role.create! \
+        account_id: account.id,
+        user_id: user.id,
+        name: 'group_admin'
     end
 
     signin! email, password
@@ -51,7 +58,7 @@ class Api::V1::UsersController < ApplicationController
     respond_to do |format|
       format.json {
         render json: {
-          user: user.simple_hash
+          user: render_user(user)
         }
       }
     end
@@ -60,43 +67,26 @@ class Api::V1::UsersController < ApplicationController
   def update
     id = params[:id]
     user = User.where(id: id).first
-    plan_name = params[:plan_name]
-    card_number = params[:card_number]
-    month = params[:month]
-    year = params[:year]
-    cvc = params[:cvc]
     account_id = params[:account_id]
     account_name = params[:account_name]
     account_tagline = params[:account_tagline]
-    properties = user.properties || {}
-    account = nil
+    user_properties = (user.properties || {}).merge(params[:user_properties] || {})
 
-    # TODO: Put payment info in account
-    properties['plan_name'] = plan_name if plan_name
-    properties['card_number'] = card_number if card_number
-    properties['month'] = month if month
-    properties['year'] = year if year
-    properties['cvc'] = cvc if cvc
-
-    user.properties = properties
+    user.properties = user_properties
     user.save!
 
-    if account_name || account_tagline
-      if account_name
-        account = Account.where(id: account_id).first
-        account.name = account_name
-        account.tagline = account_tagline
-        account.save!
-      else
-        render nothing: true, status: :unauthorized
-        return
-      end
+    if account_name
+      account = Account.where(id: account_id).first
+      account.name = account_name
+      account.tagline = account_tagline
+      account.properties = (account.properties || {}).merge(params[:account_properties])
+      account.save!
     end
 
     respond_to do |format|
       format.json {
         render json: {
-          user: user.simple_hash
+          user: render_user(user)
         }
       }
     end
@@ -109,7 +99,7 @@ class Api::V1::UsersController < ApplicationController
     respond_to do |format|
       format.json {
         render json: {
-          user: user.simple_hash
+          user: render_user(user)
         }
       }
     end
@@ -131,13 +121,13 @@ class Api::V1::UsersController < ApplicationController
         Role.create! \
           account_id: account_id,
           user_id: user.id,
-          role: 'customer'
+          name: 'customer'
       end
 
       respond_to do |format|
         format.json {
           render json: {
-            user: user.simple_hash
+            user: render_user(user)
           }
         }
       end

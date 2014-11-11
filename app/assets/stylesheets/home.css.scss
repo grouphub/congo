@@ -8,12 +8,33 @@ body {
   font-family: 'Source Sans Pro', sans-serif;
 }
 
+// Spinner styles
+
+#main {
+  #spinner-container {
+    display: none;
+    text-align: center;
+    margin-top: 100px;
+  }
+}
+
+#main.loading {
+  main {
+    display: none;
+  }
+
+  #spinner-container {
+    display: block
+  }
+}
+
 .alerts {
   width: 100%;
   margin-bottom: 0;
 
   .alert {
     margin-bottom: 0;
+    border-radius: 0;
   }
 }
 
@@ -202,21 +223,18 @@ main {
 }
 
 .splash {
-  background: url(/assets/splash-backg.png);
-  background-position: center;
-  background-size: 1025px 240px;
-  background-repeat: no-repeat;
+  background: linear-gradient(180deg, #057ff4, #0460b9 60%, #02417d 100%);
   background-color: #003c82;
-  height: 240px;
   margin-top: -21px;
   margin-bottom: 20px;
 
   .logo {
-    background: url(/assets/splash-logo.png);
-    background-position: center;
-    background-size: 1025px 240px;
-    background-repeat: no-repeat;
-    height: 240px;
+    text-align: center;
+
+    img {
+      max-height: 240px;
+      max-width: 100%;
+    }
   }
 }
 
@@ -308,12 +326,14 @@ main {
 }
 
 .sidebar-nav > .sidebar-brand {
-  height: 65px;
+  height: 52px;
   font-size: 18px;
   line-height: 60px;
+  border-bottom: 1px solid #444;
+  margin-bottom: 13px;
 
   a {
-    height: 50px;
+    height: 51px;
   }
 }
 

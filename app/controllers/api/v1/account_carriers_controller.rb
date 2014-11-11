@@ -5,7 +5,9 @@ class Api::V1::AccountCarriersController < ApplicationController
     respond_to do |format|
       format.json {
         render json: {
-          account_carriers: AccountCarrier.all.map(&:simple_hash)
+          account_carriers: AccountCarrier.all.map { |account_carrier|
+            render_account_carrier(account_carrier)
+          }
         }
       }
     end
@@ -19,6 +21,7 @@ class Api::V1::AccountCarriersController < ApplicationController
     account = Account.where(slug: account_slug).first
     carrier_slug = params[:carrier_slug]
     carrier = Carrier.where(slug: carrier_slug).first
+    properties = params[:properties]
 
     unless name
       # TODO: Handle this
@@ -35,12 +38,13 @@ class Api::V1::AccountCarriersController < ApplicationController
     account_carrier = AccountCarrier.create! \
       account_id: account.id,
       carrier_id: carrier.id,
+      properties: properties,
       name: name
 
     respond_to do |format|
       format.json {
         render json: {
-          account_carrier: account_carrier.simple_hash
+          account_carrier: render_account_carrier(account_carrier)
         }
       }
     end
@@ -59,7 +63,7 @@ class Api::V1::AccountCarriersController < ApplicationController
     respond_to do |format|
       format.json {
         render json: {
-          account_carrier: account_carrier.simple_hash
+          account_carrier: render_account_carrier(account_carrier)
         }
       }
     end
@@ -82,6 +86,15 @@ class Api::V1::AccountCarriersController < ApplicationController
         render json: {}
       }
     end
+  end
+
+  # Render methods
+
+  def render_account_carrier(account_carrier)
+    account_carrier.as_json.merge({
+      account: account_carrier.account,
+      carrier: account_carrier.carrier
+    })
   end
 end
 

@@ -6,8 +6,8 @@ class CreateCarriers < ActiveRecord::Migration
 
       # Fields:
       #
-      # * number
-      # * name
+      # * carrier_number
+      # * carrier_name
       # * address_1
       # * address_2
       # * city

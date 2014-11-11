@@ -1,19 +1,8 @@
 class Carrier < ActiveRecord::Base
-  before_save :add_slug
+  include Sluggable
+  include Propertied
 
-  has_many :products
+  has_many :benefit_plans
   has_many :account_carriers
-
-  def add_slug
-    self.slug = Sluggerizer.sluggerize(self.name) if self.name
-  end
-
-  def properties=(hash)
-    self.properties_data = hash.to_json
-  end
-
-  def properties
-    JSON.load(self.properties_data)
-  end
 end
 

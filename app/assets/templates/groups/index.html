@@ -5,7 +5,7 @@
     <thead>
       <tr>
         <th>Name</th>
-        <th ng-if="hasRole('broker')">Actions</th>
+        <th ng-if="isGroupAdmin()">Actions</th>
       </tr>
     </thead>
 
@@ -15,14 +15,15 @@
           <a ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/groups/{{group.slug}}">{{group.name}}</a>
         </td>
 
-        <td ng-if="hasRole('broker')">
-          <a class="btn btn-danger btn-xs" href="" ng-click="deleteGroupAt($index)">Delete</a>
+        <td ng-if="isGroupAdmin()">
+          <a class="btn btn-info btn-xs" href="" ng-click="toggleGroupAt($index)">{{group.is_enabled ? 'Disable' : 'Enable'}}</a>
+          <a class="btn btn-danger btn-xs" href="" ng-if="currentRole() === 'broker'" ng-click="deleteGroupAt($index)">Delete</a>
         </td>
       </tr>
     </tbody>
   </table>
 
-  <p ng-if="hasRole('broker')">
+  <p ng-if="currentRole() === 'broker' || currentRole() === 'group_admin'">
     <a class="btn btn-default" href="/accounts/{{accountSlug()}}/{{currentRole()}}/groups/new">New group</a>
   </p>
 </div>

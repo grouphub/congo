@@ -1,10 +1,11 @@
-class Api::V1::ProductsController < ApplicationController
+class Api::V1::BenefitPlansController < ApplicationController
   def index
     respond_to do |format|
       format.json {
         render json: {
-          # TODO: Scope products by account
-          products: Product.all
+          benefit_plans: BenefitPlan.all.map { |benefit_plan|
+            render_benefit_plan(benefit_plan)
+          }
         }
       }
     end
@@ -16,6 +17,7 @@ class Api::V1::ProductsController < ApplicationController
     account = Account.where(slug: account_slug).first
     account_carrier_id = params[:account_carrier_id]
     account_carrier = AccountCarrier.where(id: account_carrier_id, account_id: account.id).first
+    properties = params[:properties]
 
     unless name
       # TODO: Handle this
@@ -29,15 +31,16 @@ class Api::V1::ProductsController < ApplicationController
       # TODO: Handle this
     end
 
-    product = Product.create! \
+    benefit_plan = BenefitPlan.create! \
       name: name,
       account_id: account.id,
-      account_carrier_id: account_carrier.id
+      account_carrier_id: account_carrier.id,
+      properties: properties
 
     respond_to do |format|
       format.json {
         render json: {
-          product: product
+          benefit_plan: render_benefit_plan(benefit_plan)
         }
       }
     end
@@ -47,12 +50,12 @@ class Api::V1::ProductsController < ApplicationController
     id = params[:id]
     account_slug = params[:account_id]
     account = Account.where(slug: account_slug).first
-    product = Product.where(id: params[:id]).first
+    benefit_plan = BenefitPlan.where(id: params[:id]).first
 
     respond_to do |format|
       format.json {
         render json: {
-          product: product.simple_hash
+          benefit_plan: render_benefit_plan(benefit_plan)
         }
       }
     end
@@ -61,15 +64,28 @@ class Api::V1::ProductsController < ApplicationController
   def destroy
     id = params[:id]
 
-    product = Product.find(id).destroy
+    benefit_plan = BenefitPlan.find(id).destroy
 
     respond_to do |format|
       format.json {
         render json: {
-          product: product
+          benefit_plan: render_benefit_plan(benefit_plan)
         }
       }
     end
+  end
+
+  # Render methods
+
+  def render_benefit_plan(benefit_plan)
+    account_carrier = benefit_plan.account_carrier
+
+    benefit_plan.as_json.merge({
+      'account_carrier' => account_carrier.as_json.merge({
+        'account' => account_carrier.account,
+        'carrier' => account_carrier.carrier
+      })
+    })
   end
 end
 
