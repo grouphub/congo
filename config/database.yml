@@ -80,6 +80,4 @@ test:
 #
 production:
   <<: *default
-  database: congo2_production
-  username: congo2
-  password: <%= ENV['CONGO2_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DATABASE_URL'] %>
