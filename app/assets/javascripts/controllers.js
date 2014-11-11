@@ -295,7 +295,7 @@ congoApp.controller('AccountCarriersIndexController', function ($scope, $http, $
     }
 
     $http
-      .delete('/api/v1/accounts/' + $scope.accountSlug() + '/account_carriers/' + accountCarrier.id + '.json')
+      .delete('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/account_carriers/' + accountCarrier.id + '.json')
       .success(function (data, status, headers, config) {
         $scope.accountCarriers.splice(index, 1);
       })
@@ -305,7 +305,7 @@ congoApp.controller('AccountCarriersIndexController', function ($scope, $http, $
   };
 
   $http
-    .get('/api/v1/accounts/' + $scope.accountSlug() + '/account_carriers.json')
+    .get('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/account_carriers.json')
     .success(function (data, status, headers, config) {
       $scope.accountCarriers = data.account_carriers;
 
@@ -332,7 +332,7 @@ congoApp.controller('AccountCarriersNewController', function ($scope, $http, $lo
     );
 
     $http
-      .post('/api/v1/accounts/' + $scope.accountSlug() + '/account_carriers.json', {
+      .post('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/account_carriers.json', {
         name: $scope.name,
         carrier_slug: $scope.selectedCarrier.slug,
         properties: properties
@@ -379,7 +379,7 @@ congoApp.controller('AccountCarriersShowController', function ($scope, $http, $l
   $scope.accountCarrier = null;
 
   $http
-    .get('/api/v1/accounts/' + $scope.accountSlug() + '/account_carriers/' + $scope.accountCarrierId() + '.json')
+    .get('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/account_carriers/' + $scope.accountCarrierId() + '.json')
     .success(function (data, status, headers, config) {
       $scope.accountCarrier = data.account_carrier;
 
@@ -399,7 +399,7 @@ congoApp.controller('BenefitPlansIndexController', function ($scope, $http, $loc
     }
 
     $http
-      .delete('/api/v1/accounts/' + $scope.accountSlug() + '/benefit_plan/' + benefitPlan.id + '.json')
+      .delete('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/benefit_plan/' + benefitPlan.id + '.json')
       .success(function (data, status, headers, config) {
         $scope.benefitPlans.splice(index, 1);
       })
@@ -409,7 +409,7 @@ congoApp.controller('BenefitPlansIndexController', function ($scope, $http, $loc
   };
 
   $http
-    .get('/api/v1/accounts/' + $scope.accountSlug() + '/benefit_plans.json')
+    .get('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/benefit_plans.json')
     .success(function (data, status, headers, config) {
       $scope.benefitPlans = data.benefit_plans;
 
@@ -436,7 +436,7 @@ congoApp.controller('BenefitPlansNewController', function ($scope, $http, $locat
     );
 
     $http
-      .post('/api/v1/accounts/' + $scope.accountSlug() + '/benefit_plans.json', {
+      .post('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/benefit_plans.json', {
         name: $scope.name,
         account_carrier_id: $scope.selectedAccountCarrier.id,
         properties: properties
@@ -467,7 +467,7 @@ congoApp.controller('BenefitPlansNewController', function ($scope, $http, $locat
     });
 
   $http
-    .get('/api/v1/accounts/' + $scope.accountSlug() + '/account_carriers.json')
+    .get('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/account_carriers.json')
     .success(function (data, status, headers, config) {
       $scope.accountCarriers = data.account_carriers;
       $scope.selectedAccountCarrier = data.account_carriers[0];
@@ -483,7 +483,7 @@ congoApp.controller('BenefitPlansShowController', function ($scope, $http, $loca
   $scope.benefitPlan = null;
 
   $http
-    .get('/api/v1/accounts/' + $scope.accountSlug() + '/benefit_plans/' + $scope.benefitPlanId() + '.json', {
+    .get('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/benefit_plans/' + $scope.benefitPlanId() + '.json', {
       name: $scope.name
     })
     .success(function (data, status, headers, config) {
@@ -505,7 +505,7 @@ congoApp.controller('GroupsIndexController', function ($scope, $http, $location)
     }
 
     $http
-      .delete('/api/v1/accounts/' + $scope.accountSlug() + '/groups/' + group.id + '.json')
+      .delete('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups/' + group.id + '.json')
       .success(function (data, status, headers, config) {
         $scope.groups.splice(index, 1);
       })
@@ -515,7 +515,7 @@ congoApp.controller('GroupsIndexController', function ($scope, $http, $location)
     };
 
   $http
-    .get('/api/v1/accounts/' + $scope.accountSlug() + '/groups.json')
+    .get('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups.json')
     .success(function (data, status, headers, config) {
       $scope.groups = data.groups;
 
@@ -529,7 +529,7 @@ congoApp.controller('GroupsIndexController', function ($scope, $http, $location)
 congoApp.controller('GroupsNewController', function ($scope, $http, $location) {
   $scope.submit = function () {
     $http
-      .post('/api/v1/accounts/' + $scope.accountSlug() + '/groups.json', {
+      .post('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups.json', {
         name: $scope.name
       })
       .success(function (data, status, headers, config) {
@@ -565,7 +565,7 @@ congoApp.controller('GroupsShowController', function ($scope, $http, $location) 
     };
 
     $http
-      .post('/api/v1/accounts/' + $scope.accountSlug() + '/groups/' + $scope.groupSlug() + '/memberships.json', data)
+      .post('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups/' + $scope.groupSlug() + '/memberships.json', data)
       .success(function (data, status, headers, config) {
         $scope.group.memberships.push(data.membership);    
       })
@@ -576,7 +576,7 @@ congoApp.controller('GroupsShowController', function ($scope, $http, $location) 
 
   $scope.resendConfirmation = function (membership) {
     $http
-      .post('/api/v1/accounts/' + $scope.accountSlug() + '/groups/' + $scope.groupSlug() + '/memberships/' + membership.id + '/confirmations.json')
+      .post('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups/' + $scope.groupSlug() + '/memberships/' + membership.id + '/confirmations.json')
       .success(function (data, status, headers, config) {
         debugger
       })
@@ -587,7 +587,7 @@ congoApp.controller('GroupsShowController', function ($scope, $http, $location) 
 
   $scope.revokeMembership = function (membership) {
     $http
-      .delete('/api/v1/accounts/' + $scope.accountSlug() + '/groups/' + $scope.groupSlug() + '/memberships/' + membership.id + '.json')
+      .delete('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups/' + $scope.groupSlug() + '/memberships/' + membership.id + '.json')
       .success(function (data, status, headers, config) {
         $scope.group.memberships = _($scope.group.memberships).reject(function (m) {
           return membership.id === m.id;
@@ -600,7 +600,7 @@ congoApp.controller('GroupsShowController', function ($scope, $http, $location) 
 
   $scope.submitApplication = function (application) {
     $http
-      .put('/api/v1/accounts/' + $scope.accountSlug() + '/applications/' + application.id + '.json')
+      .put('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/applications/' + application.id + '.json')
       .success(function (data, status, headers, config) {
         debugger
       })
@@ -615,7 +615,7 @@ congoApp.controller('GroupsShowController', function ($scope, $http, $location) 
     }
 
     $http
-      .post('/api/v1/accounts/' + $scope.accountSlug() + '/groups/' + $scope.groupSlug() + '/group_benefit_plans.json', data)
+      .post('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups/' + $scope.groupSlug() + '/group_benefit_plans.json', data)
       .success(function (data, status, headers, config) {
         benefitPlan.isEnabled = true;
       })
@@ -631,7 +631,7 @@ congoApp.controller('GroupsShowController', function ($scope, $http, $location) 
       }
 
       $http
-        .post('/api/v1/accounts/' + $scope.accountSlug() + '/groups/' + $scope.groupSlug() + '/group_benefit_plans.json', data)
+        .post('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups/' + $scope.groupSlug() + '/group_benefit_plans.json', data)
         .success(function (data, status, headers, config) {
           benefitPlan.isEnabled = true;
         })
@@ -640,7 +640,7 @@ congoApp.controller('GroupsShowController', function ($scope, $http, $location) 
         });
     } else {
       $http
-        .delete('/api/v1/accounts/' + $scope.accountSlug() + '/groups/' + $scope.groupSlug() + '/group_benefit_plans.json?benefit_plan_id=' + benefitPlan.id)
+        .delete('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups/' + $scope.groupSlug() + '/group_benefit_plans.json?benefit_plan_id=' + benefitPlan.id)
         .success(function (data, status, headers, config) {
           benefitPlan.isEnabled = false;
         })
@@ -661,7 +661,7 @@ congoApp.controller('GroupsShowController', function ($scope, $http, $location) 
   }
 
   $http
-    .get('/api/v1/accounts/' + $scope.accountSlug() + '/benefit_plans.json')
+    .get('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/benefit_plans.json')
     .success(function (data, status, headers, config) {
       $scope.benefitPlans = data.benefit_plans;
       done();
@@ -671,7 +671,7 @@ congoApp.controller('GroupsShowController', function ($scope, $http, $location) 
     });
 
   $http
-    .get('/api/v1/accounts/' + $scope.accountSlug() + '/groups/' + $scope.groupSlug() + '.json')
+    .get('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups/' + $scope.groupSlug() + '.json')
     .success(function (data, status, headers, config) {
       $scope.group = data.group;
       done();
@@ -692,7 +692,7 @@ congoApp.controller('ApplicationsNewController', function ($scope, $http, $locat
     };
 
     $http
-      .post('/api/v1/accounts/' + $scope.accountSlug() + '/applications.json', data)
+      .post('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/applications.json', data)
       .success(function (data, status, headers, config) {
         $location.path('/accounts/' + $scope.accountSlug() + '/' + $scope.currentRole());
       })
@@ -708,7 +708,7 @@ congoApp.controller('ApplicationsNewController', function ($scope, $http, $locat
   }
 
   $http
-    .get('/api/v1/accounts/' + $scope.accountSlug() + '/groups/' + $scope.groupSlug() + '.json')
+    .get('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups/' + $scope.groupSlug() + '.json')
     .success(function (data, status, headers, config) {
       $scope.group = data.group;
 
@@ -719,7 +719,7 @@ congoApp.controller('ApplicationsNewController', function ($scope, $http, $locat
     });
 
   $http
-    .get('/api/v1/accounts/' + $scope.accountSlug() + '/benefit_plans/' + $scope.benefitPlanId() + '.json')
+    .get('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/benefit_plans/' + $scope.benefitPlanId() + '.json')
     .success(function (data, status, headers, config) {
       $scope.benefitPlan = data.benefit_plan;
 
@@ -732,7 +732,7 @@ congoApp.controller('ApplicationsNewController', function ($scope, $http, $locat
 
 congoApp.controller('ApplicationsShowController', function ($scope, $http, $location) {
   $http
-    .get('/api/v1/accounts/' + $scope.accountSlug() + '/applications/' + $scope.applicationId() + '.json')
+    .get('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/applications/' + $scope.applicationId() + '.json')
     .success(function (data, status, headers, config) {
       $scope.applications = data.applications;
 
@@ -745,7 +745,7 @@ congoApp.controller('ApplicationsShowController', function ($scope, $http, $loca
 
 congoApp.controller('ApplicationsIndexController', function ($scope, $http, $location) {
   $http
-    .get('/api/v1/accounts/' + $scope.accountSlug() + '/applications.json')
+    .get('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/applications.json')
     .success(function (data, status, headers, config) {
       $scope.applications = data.applications;
 
