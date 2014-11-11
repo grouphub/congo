@@ -35,6 +35,10 @@ congoApp.controller('MainController', function ($scope, $http, $location, userDa
         flashesFactory.add('danger', 'There was a problem signing you out');
       });
   };
+
+  $scope.asset = function (path) {
+    return congo.assets[path];
+  }
 });
 
 congoApp.controller('LandingController', function ($scope) {
