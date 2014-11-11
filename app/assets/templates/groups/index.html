@@ -16,6 +16,7 @@
         </td>
 
         <td ng-if="currentRole() === 'broker'">
+          <a class="btn btn-info btn-xs" href="" ng-click="toggleGroupAt($index)">{{group.is_enabled ? 'Disable' : 'Enable'}}</a>
           <a class="btn btn-danger btn-xs" href="" ng-click="deleteGroupAt($index)">Delete</a>
         </td>
       </tr>

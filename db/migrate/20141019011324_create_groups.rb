@@ -4,6 +4,7 @@ class CreateGroups < ActiveRecord::Migration
       t.integer :account_id
       t.string :name
       t.string :slug
+      t.boolean :is_enabled
 
       t.timestamps
     end

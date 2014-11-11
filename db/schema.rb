@@ -169,6 +169,7 @@ ActiveRecord::Schema.define(version: 20141103003532) do
     t.integer  "account_id"
     t.string   "name"
     t.string   "slug"
+    t.boolean  "is_enabled"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

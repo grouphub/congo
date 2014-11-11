@@ -66,6 +66,22 @@ class Api::V1::GroupsController < ApplicationController
     end
   end
 
+  def update
+    group = Group.find(params[:id])
+
+    unless params[:group]['is_enabled'].nil?
+      group.update_attribute(:is_enabled, params[:is_enabled])
+    end
+
+    respond_to do |format|
+      format.json {
+        render json: {
+          group: render_group(group)
+        }
+      }
+    end
+  end
+
   def destroy
     id = params[:id]
 
