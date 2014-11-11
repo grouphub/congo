@@ -110,6 +110,13 @@ congoApp.factory('userDataFactory', function ($location, $cookieStore) {
         return true; 
       }
     },
+    userId: function () {
+      if (!congo.currentUser) {
+        return;
+      }
+
+      return congo.currentUser.id;
+    },
     firstName: function () {
       if (!congo.currentUser) {
         return;

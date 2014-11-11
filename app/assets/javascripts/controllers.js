@@ -558,7 +558,7 @@ congoApp.controller('GroupsIndexController', function ($scope, $http, $location)
       .error(function (data, status, headers, config) {
         debugger
       });
-    };
+  };
 
   $http
     .get('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups.json')
@@ -612,7 +612,7 @@ congoApp.controller('GroupsNewController', function ($scope, $http, $location) {
     });
 });
 
-congoApp.controller('GroupsShowController', function ($scope, $http, $location) {
+congoApp.controller('GroupsShowController', function ($scope, $http, $location, $cookieStore) {
   // Only used by group admins
   $scope.memberships = function () {
     if ($scope.group) {
@@ -625,6 +625,28 @@ congoApp.controller('GroupsShowController', function ($scope, $http, $location) 
     if ($scope.group) {
       return _($scope.group.applications).where({ benefit_plan_id: benefitPlan.id });
     }
+  };
+
+  $scope.selectBenefitPlan = function (benefitPlan) {
+    if (!benefitPlan) {
+      debugger
+    }
+
+    var data = {
+      group_slug: $scope.groupSlug(),
+      benefit_plan_id: benefitPlan.id
+    };
+
+    $http
+      .post('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/applications.json', data)
+      .success(function (data, status, headers, config) {
+        $cookieStore.put('current-application-id', data.application.id);
+
+        $location.path('/accounts/' + $scope.accountSlug() + '/' + $scope.currentRole() + '/groups/' + $scope.groupSlug() + '/benefit_plans/' + benefitPlan.id + '/applications/new');
+      })
+      .error(function (data, status, headers, config) {
+        debugger
+      });
   };
 
   $scope.inviteMember = function () {
@@ -668,8 +690,12 @@ congoApp.controller('GroupsShowController', function ($scope, $http, $location) 
   };
 
   $scope.submitApplication = function (application) {
+    var data = {
+      applied_by_id: $scope.userId()
+    }
+
     $http
-      .put('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/applications/' + application.id + '.json')
+      .put('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/applications/' + application.id + '.json', data)
       .success(function (data, status, headers, config) {
         debugger
       })
@@ -750,7 +776,8 @@ congoApp.controller('GroupsShowController', function ($scope, $http, $location) 
     });
 });
 
-congoApp.controller('ApplicationsNewController', function ($scope, $http, $location) {
+congoApp.controller('ApplicationsNewController', function ($scope, $http, $location, $cookieStore) {
+  $scope.elements = [];
   $scope.group = null;
   $scope.benefitPlan = null;
 
@@ -770,9 +797,13 @@ congoApp.controller('ApplicationsNewController', function ($scope, $http, $locat
       properties: properties
     };
 
+    var id = $cookieStore.get('current-application-id');
+
     $http
-      .post('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/applications.json', data)
+      .put('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/applications/' + id  + '.json', data)
       .success(function (data, status, headers, config) {
+        $cookieStore.remove('current-application-id');
+
         $location.path('/accounts/' + $scope.accountSlug() + '/' + $scope.currentRole());
       })
       .error(function (data, status, headers, config) {
