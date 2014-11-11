@@ -133,6 +133,11 @@ GEM
     rack (1.5.2)
     rack-test (0.6.2)
       rack (>= 1.0)
+    rails_12factor (0.0.3)
+      rails_serve_static_assets
+      rails_stdout_logging
+    rails_serve_static_assets (0.0.2)
+    rails_stdout_logging (0.0.3)
     rake (10.3.2)
     rdoc (4.1.2)
       json (~> 1.4)
@@ -196,6 +201,7 @@ DEPENDENCIES
   pry
   puma
   rails!
+  rails_12factor
   rspec-rails
   sass-rails!
   sdoc (~> 0.4.0)
