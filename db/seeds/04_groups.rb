@@ -2,7 +2,8 @@ account = Account.where(name: 'First Account').first
 
 group = Group.create! \
   account_id: account.id,
-  name: 'My Group'
+  name: 'My Group',
+  is_enabled: true
 
 alice = User.where(email: 'alice@first-account.com').first
 bob = User.where(email: 'bob@first-account.com').first

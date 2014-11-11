@@ -29,12 +29,14 @@ class Api::V1::ApplicationsController < ApplicationController
     group = Group.where(slug: group_slug).first
     benefit_plan = BenefitPlan.where(id: benefit_plan_id).first
     membership = Membership.where(group_id: group.id, user_id: current_user.id).first
+    properties = params[:properties]
 
     application = Application.create! \
       account_id: account.id,
       benefit_plan_id: benefit_plan.id,
       membership_id: membership.id,
-      applied_by_id: current_user.id
+      applied_by_id: current_user.id,
+      properties: properties
 
     respond_to do |format|
       format.json {

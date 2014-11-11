@@ -2,7 +2,7 @@ require 'bcrypt'
 require "#{Rails.root}/lib/sluggerizer"
 
 class User < ActiveRecord::Base
-  include Proper
+  include Propertied
 
   has_many :roles
   has_many :applications

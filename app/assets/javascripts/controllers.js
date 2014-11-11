@@ -112,10 +112,12 @@ congoApp.controller('UsersNewBillingController', function ($scope, $http, $locat
   $scope.submit = function () {
     $http
       .put('/api/v1/users/' + congo.currentUser.id + '.json', {
-        card_number: $scope.cardNumber,
-        month: $scope.month,
-        year: $scope.year,
-        cvc: $scope.cvc
+        user_properties: {
+          card_number: $scope.cardNumber,
+          month: $scope.month,
+          year: $scope.year,
+          cvc: $scope.cvc
+        }
       })
       .success(function (data, status, headers, config) {
         $location.path('/users/new_account');
@@ -129,13 +131,27 @@ congoApp.controller('UsersNewBillingController', function ($scope, $http, $locat
 });
 
 congoApp.controller('UsersNewAccountController', function ($scope, $http, $location) {
+  $scope.elements = [];
+
   $scope.submit = function () {
+    var properties = _.reduce(
+      $scope.elements,
+      function (sum, element) {
+        sum[element.name] = element.value;
+        return sum;
+      },
+      {}
+    );
+
+    var data = {
+      account_id: congo.currentUser.accounts[0].id,
+      account_name: $scope.name,
+      account_tagline: $scope.tagline,
+      account_properties: properties
+    };
+
     $http
-      .put('/api/v1/users/' + congo.currentUser.id + '.json', {
-        account_id: congo.currentUser.accounts[0].id,
-        account_name: $scope.name,
-        account_tagline: $scope.tagline
-      })
+      .put('/api/v1/users/' + congo.currentUser.id + '.json', data)
       .success(function (data, status, headers, config) {
         var account;
 
@@ -143,7 +159,7 @@ congoApp.controller('UsersNewAccountController', function ($scope, $http, $locat
 
         account = congo.currentUser.accounts[0];
 
-        $location.path('/accounts/' + account.slug + '/' + account.role);
+        $location.path('/accounts/' + account.slug + '/' + account.role.name);
 
         flashesFactory.add('success', 'Welcome, ' + congo.currentUser.first_name + ' ' + congo.currentUser.last_name + '!');
       })
@@ -152,7 +168,16 @@ congoApp.controller('UsersNewAccountController', function ($scope, $http, $locat
       });
   };
 
-  $scope.ready();
+  $http
+    .get('/assets/accounts-new-properties.json')
+    .success(function (data, status, headers, config) {
+      $scope.elements = data;
+
+      $scope.ready();
+    })
+    .error(function (data, status, headers, config) {
+      debugger
+    });
 });
 
 congoApp.controller('UsersNewCustomerController', function ($scope, $http, $location) {
@@ -497,6 +522,27 @@ congoApp.controller('BenefitPlansShowController', function ($scope, $http, $loca
 });
 
 congoApp.controller('GroupsIndexController', function ($scope, $http, $location) {
+  $scope.toggleGroupAt = function (index) {
+    var group = $scope.groups[index];
+
+    if (!group) {
+      debugger
+    }
+
+    console.log(group.is_enabled);
+
+    $http
+      .put('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups/' + group.id + '.json', {
+        is_enabled: !group.is_enabled    
+      })
+      .success(function (data, status, headers, config) {
+        $scope.groups[index] = data.group;
+      })
+      .error(function (data, status, headers, config) {
+        debugger
+      });
+  }
+
   $scope.deleteGroupAt = function (index) {
     var group = $scope.groups[index];
 
@@ -527,10 +573,22 @@ congoApp.controller('GroupsIndexController', function ($scope, $http, $location)
 });
 
 congoApp.controller('GroupsNewController', function ($scope, $http, $location) {
+  $scope.elements = [];
+
   $scope.submit = function () {
+    var properties = _.reduce(
+      $scope.elements,
+      function (sum, element) {
+        sum[element.name] = element.value;
+        return sum;
+      },
+      {}
+    );
+
     $http
       .post('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups.json', {
-        name: $scope.name
+        name: $scope.name,
+        properties: properties
       })
       .success(function (data, status, headers, config) {
         $location.path('/accounts/' + $scope.accountSlug() + '/' + $scope.currentRole() + '/groups');
@@ -541,6 +599,17 @@ congoApp.controller('GroupsNewController', function ($scope, $http, $location) {
         debugger
       });
   };
+
+  $http
+    .get('/assets/groups-new-properties.json')
+    .success(function (data, status, headers, config) {
+      $scope.elements = data;
+
+      $scope.ready();
+    })
+    .error(function (data, status, headers, config) {
+      debugger
+    });
 });
 
 congoApp.controller('GroupsShowController', function ($scope, $http, $location) {
@@ -686,9 +755,19 @@ congoApp.controller('ApplicationsNewController', function ($scope, $http, $locat
   $scope.benefitPlan = null;
 
   $scope.submit = function () {
+    var properties = _.reduce(
+      $scope.elements,
+      function (sum, element) {
+        sum[element.name] = element.value;
+        return sum;
+      },
+      {}
+    );
+
     var data = {
       group_slug: $scope.groupSlug(),
-      benefit_plan_id: $scope.benefitPlanId()
+      benefit_plan_id: $scope.benefitPlanId(),
+      properties: properties
     };
 
     $http
@@ -702,10 +781,21 @@ congoApp.controller('ApplicationsNewController', function ($scope, $http, $locat
   }
 
   function done () {
-    if ($scope.group && $scope.benefitPlan) {
+    if ($scope.elements && $scope.group && $scope.benefitPlan) {
       $scope.ready();
     }
   }
+
+  $http
+    .get('/assets/applications-new-properties.json')
+    .success(function (data, status, headers, config) {
+      $scope.elements = data;
+
+      $scope.ready();
+    })
+    .error(function (data, status, headers, config) {
+      debugger
+    });
 
   $http
     .get('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups/' + $scope.groupSlug() + '.json')
