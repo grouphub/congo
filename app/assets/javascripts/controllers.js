@@ -1,36 +1,26 @@
 var congoApp = angular.module('congoApp', ['ngRoute', 'ngCookies']);
 
 congoApp.controller('MainController', function ($scope, $http, $location, userDataFactory, flashesFactory, eventsFactory) {
-  $scope.flashes = flashesFactory.flashes;
+  // Expose an event emitter to all controllers for messaging
   $scope.vent = eventsFactory;
 
-  $scope.vent.on($scope, 'flashes:added', function () {
-    $scope.flashes = flashesFactory.flashes;
-  });
-
-  $scope.vent.on($scope, 'loading:start', function () {
-    $scope.loading = true;
-  });
-
-  $scope.vent.on($scope, 'loading:stop', function () {
-    _.defer(function () {
-      $scope.loading = false;
-    });
-  });
-
+  // Loading behavior
   $scope.loading = true;
+  $scope.ready = function () {
+    $scope.loading = false;
+  };
 
   // Inject the userDataFactory methods onto MainController
   for (var key in userDataFactory) {
     $scope[key] = userDataFactory[key];
   }
 
-  $scope.flashes = function () {
-    return flashesFactory.all();
-  };
+  // Setup flashes
+  $scope.vent.on($scope, 'flashes:added', function () {
+    $scope.flashes = flashesFactory.flashes;
+  });
 
-  $scope.$watch('flashes');
-
+  // Signout functionality
   $scope.signout = function () {
     $http
       .delete('/api/v1/users/signout.json')
@@ -48,11 +38,11 @@ congoApp.controller('MainController', function ($scope, $http, $location, userDa
 });
 
 congoApp.controller('LandingController', function ($scope) {
-  $scope.vent.emit('loading:stop');
+  $scope.ready();
 });
 
 congoApp.controller('HomeController', function ($scope) {
-  $scope.vent.emit('loading:stop');
+  $scope.ready();
 });
 
 congoApp.controller('UsersSigninController', function ($scope, $http, $location, flashesFactory) {
@@ -74,7 +64,7 @@ congoApp.controller('UsersSigninController', function ($scope, $http, $location,
       });
   };
 
-  $scope.vent.emit('loading:stop');
+  $scope.ready();
 });
 
 congoApp.controller('UsersNewManagerController', function ($scope, $http, $location, flashesFactory) {
@@ -98,7 +88,7 @@ congoApp.controller('UsersNewManagerController', function ($scope, $http, $locat
       });
   };
 
-  $scope.vent.emit('loading:stop');
+  $scope.ready();
 });
 
 congoApp.controller('UsersNewPlanController', function ($scope, $http, $location, flashesFactory) {
@@ -115,7 +105,7 @@ congoApp.controller('UsersNewPlanController', function ($scope, $http, $location
       });
   };
 
-  $scope.vent.emit('loading:stop');
+  $scope.ready();
 });
 
 congoApp.controller('UsersNewBillingController', function ($scope, $http, $location) {
@@ -135,7 +125,7 @@ congoApp.controller('UsersNewBillingController', function ($scope, $http, $locat
       });
   };
 
-  $scope.vent.emit('loading:stop');
+  $scope.ready();
 });
 
 congoApp.controller('UsersNewAccountController', function ($scope, $http, $location) {
@@ -162,7 +152,7 @@ congoApp.controller('UsersNewAccountController', function ($scope, $http, $locat
       });
   };
 
-  $scope.vent.emit('loading:stop');
+  $scope.ready();
 });
 
 congoApp.controller('UsersNewCustomerController', function ($scope, $http, $location) {
@@ -210,7 +200,7 @@ congoApp.controller('UsersNewCustomerController', function ($scope, $http, $loca
       });
   };
 
-  $scope.vent.emit('loading:stop');
+  $scope.ready();
 });
 
 congoApp.controller('UsersShowController', function ($scope, $http, $location) {
@@ -223,7 +213,7 @@ congoApp.controller('UsersShowController', function ($scope, $http, $location) {
     .success(function (data, status, headers, config) {
       $scope.user = data.user;
 
-      $scope.vent.emit('loading:stop');
+      $scope.ready();
     })
     .error(function (data, status, headers, config) {
       debugger
@@ -261,7 +251,7 @@ congoApp.controller('CarriersNewController', function ($scope, $http, $location)
     .success(function (data, status, headers, config) {
       $scope.elements = data;
 
-      $scope.vent.emit('loading:stop');
+      $scope.ready();
     })
     .error(function (data, status, headers, config) {
       debugger
@@ -274,7 +264,7 @@ congoApp.controller('CarriersIndexController', function ($scope, $http, $locatio
     .success(function (data, status, headers, config) {
       $scope.carriers = data.carriers;
 
-      $scope.vent.emit('loading:stop');
+      $scope.ready();
     })
     .error(function (data, status, headers, config) {
       debugger
@@ -287,7 +277,7 @@ congoApp.controller('CarriersShowController', function ($scope, $http, $location
     .success(function (data, status, headers, config) {
       $scope.carrier = data.carrier;
 
-      $scope.vent.emit('loading:stop');
+      $scope.ready;
     })
     .error(function (data, status, headers, config) {
       debugger
@@ -319,7 +309,7 @@ congoApp.controller('AccountCarriersIndexController', function ($scope, $http, $
     .success(function (data, status, headers, config) {
       $scope.accountCarriers = data.account_carriers;
 
-      $scope.vent.emit('loading:stop');
+      $scope.ready();
     })
     .error(function (data, status, headers, config) {
       debugger
@@ -357,7 +347,7 @@ congoApp.controller('AccountCarriersNewController', function ($scope, $http, $lo
 
   function done () {
     if ($scope.elements && $scope.carriers) {
-      $scope.vent.emit('loading:stop');
+      $scope.ready();
     }
   }
 
@@ -393,7 +383,7 @@ congoApp.controller('AccountCarriersShowController', function ($scope, $http, $l
     .success(function (data, status, headers, config) {
       $scope.accountCarrier = data.account_carrier;
 
-      $scope.vent.emit('loading:stop');
+      $scope.ready();
     })
     .error(function (data, status, headers, config) {
       debugger
@@ -423,7 +413,7 @@ congoApp.controller('BenefitPlansIndexController', function ($scope, $http, $loc
     .success(function (data, status, headers, config) {
       $scope.benefitPlans = data.benefit_plans;
 
-      $scope.vent.emit('loading:stop');
+      $scope.ready();
     })
     .error(function (data, status, headers, config) {
       debugger
@@ -461,7 +451,7 @@ congoApp.controller('BenefitPlansNewController', function ($scope, $http, $locat
 
   function done () {
     if ($scope.elements && $scope.accountCarriers) {
-      $scope.vent.emit('loading:stop');
+      $scope.ready();
     }
   }
 
@@ -499,7 +489,7 @@ congoApp.controller('BenefitPlansShowController', function ($scope, $http, $loca
     .success(function (data, status, headers, config) {
       $scope.benefitPlan = data.benefit_plan;
 
-      $scope.vent.emit('loading:stop');
+      $scope.ready();
     })
     .error(function (data, status, headers, config) {
       debugger
@@ -529,7 +519,7 @@ congoApp.controller('GroupsIndexController', function ($scope, $http, $location)
     .success(function (data, status, headers, config) {
       $scope.groups = data.groups;
 
-      $scope.vent.emit('loading:stop');
+      $scope.ready();
     })
     .error(function (data, status, headers, config) {
       debugger
@@ -545,7 +535,7 @@ congoApp.controller('GroupsNewController', function ($scope, $http, $location) {
       .success(function (data, status, headers, config) {
         $location.path('/accounts/' + $scope.accountSlug() + '/' + $scope.currentRole() + '/groups');
 
-        $scope.vent.emit('loading:stop');
+        $scope.ready();
       })
       .error(function (data, status, headers, config) {
         debugger
@@ -665,7 +655,7 @@ congoApp.controller('GroupsShowController', function ($scope, $http, $location) 
       _($scope.benefitPlans).each(function (benefitPlan) {
         benefitPlan.isEnabled = !!_($scope.group.benefitPlans).findWhere({ id: benefitPlan.id });
 
-        $scope.vent.emit('loading:stop');
+        $scope.ready();
       });
     }
   }
@@ -713,7 +703,7 @@ congoApp.controller('ApplicationsNewController', function ($scope, $http, $locat
 
   function done () {
     if ($scope.group && $scope.benefitPlan) {
-      $scope.vent.emit('loading:stop');
+      $scope.ready();
     }
   }
 
@@ -746,7 +736,7 @@ congoApp.controller('ApplicationsShowController', function ($scope, $http, $loca
     .success(function (data, status, headers, config) {
       $scope.applications = data.applications;
 
-      $scope.vent.emit('loading:stop');
+      $scope.ready();
     })
     .error(function (data, status, headers, config) {
       debugger
@@ -759,7 +749,7 @@ congoApp.controller('ApplicationsIndexController', function ($scope, $http, $loc
     .success(function (data, status, headers, config) {
       $scope.applications = data.applications;
 
-      $scope.vent.emit('loading:stop');
+      $scope.ready();
     })
     .error(function (data, status, headers, config) {
       debugger
