@@ -325,12 +325,14 @@ main {
 }
 
 .sidebar-nav > .sidebar-brand {
-  height: 65px;
+  height: 52px;
   font-size: 18px;
   line-height: 60px;
+  border-bottom: 1px solid #444;
+  margin-bottom: 13px;
 
   a {
-    height: 50px;
+    height: 51px;
   }
 }
 
