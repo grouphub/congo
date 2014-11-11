@@ -4,6 +4,8 @@ congoApp.controller('MainController', function ($scope, $http, $location, userDa
   // Expose an event emitter to all controllers for messaging
   $scope.vent = eventsFactory;
 
+  $scope.assetPaths = congo.assetPaths;
+
   // Loading behavior
   $scope.loading = true;
   $scope.ready = function () {

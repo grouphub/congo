@@ -10,7 +10,10 @@
 
     <script>
       window.congo = {
-        currentUser: <%= current_user ? raw(render_user(current_user).to_json) : 'null' %>
+        currentUser: <%= current_user ? raw(render_user(current_user).to_json) : 'null' %>,
+        assetPaths: {
+          splashLogo: "<%= image_path('splash-logo.png') %>"
+        }
       }
     </script>
   </head>
