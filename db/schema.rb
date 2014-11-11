@@ -172,6 +172,7 @@ ActiveRecord::Schema.define(version: 20141103003532) do
     t.string   "name"
     t.string   "slug"
     t.boolean  "is_enabled"
+    t.text     "properties_data"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -1,5 +1,5 @@
 class AccountCarrier < ActiveRecord::Base
-  include Proper
+  include Propertied
 
   belongs_to :account
   belongs_to :carrier

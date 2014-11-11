@@ -32,6 +32,7 @@ class Api::V1::GroupsController < ApplicationController
     name = params[:name]
     account_slug = params[:account_id]
     account = Account.where(slug: account_slug).first
+    properties = params[:properties]
 
     unless name
       # TODO: Handle this
@@ -43,7 +44,8 @@ class Api::V1::GroupsController < ApplicationController
 
     group = Group.create! \
       name: name,
-      account_id: account.id
+      account_id: account.id,
+      properties: properties
 
     respond_to do |format|
       format.json {

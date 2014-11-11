@@ -1,5 +1,5 @@
 class Application < ActiveRecord::Base
-  include Proper
+  include Propertied
 
   belongs_to :account
   belongs_to :benefit_plan

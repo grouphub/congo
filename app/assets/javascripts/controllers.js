@@ -573,10 +573,22 @@ congoApp.controller('GroupsIndexController', function ($scope, $http, $location)
 });
 
 congoApp.controller('GroupsNewController', function ($scope, $http, $location) {
+  $scope.elements = [];
+
   $scope.submit = function () {
+    var properties = _.reduce(
+      $scope.elements,
+      function (sum, element) {
+        sum[element.name] = element.value;
+        return sum;
+      },
+      {}
+    );
+
     $http
       .post('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups.json', {
-        name: $scope.name
+        name: $scope.name,
+        properties: properties
       })
       .success(function (data, status, headers, config) {
         $location.path('/accounts/' + $scope.accountSlug() + '/' + $scope.currentRole() + '/groups');
@@ -587,6 +599,17 @@ congoApp.controller('GroupsNewController', function ($scope, $http, $location) {
         debugger
       });
   };
+
+  $http
+    .get('/assets/groups-new-properties.json')
+    .success(function (data, status, headers, config) {
+      $scope.elements = data;
+
+      $scope.ready();
+    })
+    .error(function (data, status, headers, config) {
+      debugger
+    });
 });
 
 congoApp.controller('GroupsShowController', function ($scope, $http, $location) {
