@@ -9,9 +9,7 @@
     <%= csrf_meta_tags %>
 
     <script>
-      window.congo = {
-        currentUser: <%= current_user ? raw(render_user(current_user).to_json) : 'null' %>
-      }
+      window.congo.currentUser = <%= current_user ? raw(render_user(current_user).to_json) : 'null' %>;
     </script>
   </head>
 
@@ -32,7 +30,7 @@
         </main>
 
         <div id="spinner-container">
-          <img src="/assets/spinner.gif">
+          <img src="<%= image_path 'spinner.gif' %>">
         </div>
       </div>
     </div>

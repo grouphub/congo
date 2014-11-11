@@ -169,7 +169,7 @@ congoApp.controller('UsersNewAccountController', function ($scope, $http, $locat
   };
 
   $http
-    .get('/assets/accounts-new-properties.json')
+    .get(congo.assets['accounts-new-properties.json'])
     .success(function (data, status, headers, config) {
       $scope.elements = data;
 
@@ -272,7 +272,7 @@ congoApp.controller('CarriersNewController', function ($scope, $http, $location)
   };
 
   $http
-    .get('/assets/carriers-new-properties.json')
+    .get(congo.assets['carriers-new-properties.json'])
     .success(function (data, status, headers, config) {
       $scope.elements = data;
 
@@ -377,7 +377,7 @@ congoApp.controller('AccountCarriersNewController', function ($scope, $http, $lo
   }
 
   $http
-    .get('/assets/benefit-plans-new-properties.json')
+    .get(congo.assets['benefit-plans-new-properties.json'])
     .success(function (data, status, headers, config) {
       $scope.elements = data;
 
@@ -481,7 +481,7 @@ congoApp.controller('BenefitPlansNewController', function ($scope, $http, $locat
   }
 
   $http
-    .get('/assets/benefit-plans-new-properties.json')
+    .get(congo.assets['benefit-plans-new-properties.json'])
     .success(function (data, status, headers, config) {
       $scope.elements = data;
 
@@ -533,7 +533,7 @@ congoApp.controller('GroupsIndexController', function ($scope, $http, $location)
 
     $http
       .put('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups/' + group.id + '.json', {
-        is_enabled: !group.is_enabled    
+        is_enabled: !group.is_enabled
       })
       .success(function (data, status, headers, config) {
         $scope.groups[index] = data.group;
@@ -601,7 +601,7 @@ congoApp.controller('GroupsNewController', function ($scope, $http, $location) {
   };
 
   $http
-    .get('/assets/groups-new-properties.json')
+    .get(congo.assets['groups-new-properties.json'])
     .success(function (data, status, headers, config) {
       $scope.elements = data;
 
@@ -658,7 +658,7 @@ congoApp.controller('GroupsShowController', function ($scope, $http, $location, 
     $http
       .post('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups/' + $scope.groupSlug() + '/memberships.json', data)
       .success(function (data, status, headers, config) {
-        $scope.group.memberships.push(data.membership);    
+        $scope.group.memberships.push(data.membership);
       })
       .error(function (data, status, headers, config) {
         debugger
@@ -818,7 +818,7 @@ congoApp.controller('ApplicationsNewController', function ($scope, $http, $locat
   }
 
   $http
-    .get('/assets/applications-new-properties.json')
+    .get(congo.assets['applications-new-properties.json'])
     .success(function (data, status, headers, config) {
       $scope.elements = data;
 
