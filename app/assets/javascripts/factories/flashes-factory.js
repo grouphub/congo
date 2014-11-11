@@ -1,6 +1,7 @@
 var congoApp = angular.module('congoApp');
 
 congoApp.factory('flashesFactory', [
+  'eventsFactory',
   function (eventsFactory) {
     var flashes = [];
 
