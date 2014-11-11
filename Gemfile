@@ -13,7 +13,7 @@ gem 'coffee-rails', github: "rails/coffee-rails"
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
-gem 'puma'
+gem 'unicorn'
 
 gem 'jquery-rails'
 gem 'jbuilder', '~> 2.0'
