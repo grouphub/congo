@@ -5,6 +5,9 @@ class CreateAccounts < ActiveRecord::Migration
       t.string :slug
       t.string :tagline
 
+      # TODO: What fields do we need?
+      t.text :properties_data
+
       # Payment info
       t.string :card_number
       t.string :month

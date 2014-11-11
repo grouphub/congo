@@ -11,6 +11,7 @@ class Api::V1::GroupsController < ApplicationController
         .where(user_id: current_user.id)
         .includes(:group)
         .map(&:group)
+        .select(&:is_enabled)
     else
       groups = Group.all
     end

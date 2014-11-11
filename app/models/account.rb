@@ -2,6 +2,7 @@ require "#{Rails.root}/lib/sluggerizer"
 
 class Account < ActiveRecord::Base
   include Sluggable
+  include Proper
 
   has_many :roles
   has_many :applications
