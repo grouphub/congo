@@ -103,8 +103,11 @@ class Api::V1::GroupsController < ApplicationController
 
   def render_group(group)
     memberships = group.memberships.map { |membership|
+      # TODO: Should never be nil
+      user = membership.user ? render_user(membership.user) : nil
+
       membership.as_json.merge({
-        'user' => render_user(membership.user),
+        'user' => nil,
         'applications' => membership.applications
       })
     }
