@@ -18,6 +18,7 @@
 //= require angular
 //= require angular-route
 //= require angular-cookies
+//= require assets
 //= require controllers
 //= require router
 //= require factories/events-factory

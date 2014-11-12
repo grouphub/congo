@@ -13,7 +13,7 @@ gem 'coffee-rails', github: "rails/coffee-rails"
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
-gem 'puma'
+gem 'unicorn'
 
 gem 'jquery-rails'
 gem 'jbuilder', '~> 2.0'
@@ -40,4 +40,10 @@ group :test do
   gem 'rspec-rails'
   gem 'database_cleaner'
 end
+
+group :production do
+  gem 'rails_12factor'
+end
+
+ruby "2.1.4"
 
