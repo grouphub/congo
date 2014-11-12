@@ -11,7 +11,9 @@ congoApp.controller('MainController', [
     // Loading behavior
     $scope.loading = true;
     $scope.ready = function () {
-      $scope.loading = false;
+      _.defer(function () {
+        $scope.loading = false;
+      });
     };
 
     // Inject the userDataFactory methods onto MainController
