@@ -8,7 +8,6 @@
         <th ng-if="isAdmin()">Actions</th>
       </tr>
     </thead>
-
     <tbody>
       <tr ng-repeat="carrier in carriers">
         <td>
@@ -21,7 +20,6 @@
       </tr>
     </tbody>
   </table>
-
   <p ng-if="isAdmin()">
     <a class="btn btn-default" href="/admin/carriers/new">New carrier</a>
   </p>
