@@ -1,24 +1,32 @@
 <div ng-if="currentRole() === 'admin'" class="col-md-12">
   <h1>Admin Dashboard</h1>
 
-  <p>Lorem ipsum...</p>
+  <p>Administrator Functions:</p>
+  <p>- Manage Carriers</p>
 </div>
 
 <div ng-if="currentRole() === 'broker'" class="col-md-12">
   <h1>{{accountName()}} Broker Dashboard</h1>
 
-  <p>Lorem ipsum...</p>
+  <p>Broker Functions:</p>
+  <p>- Manage Carrier Accounts</p>
+  <p>- Manage Benefits Plans</p>
+  <p>- Manage Groups</p>
 </div>
 
 <div ng-if="currentRole() === 'group_admin'" class="col-md-12">
   <h1>{{accountName()}} Group Admin Dashboard</h1>
 
-  <p>Lorem ipsum...</p>
+  <p>Broker Functions:</p>
+  <p>- Manage Benefits Plans</p>
+  <p>- Manage Groups</p>
 </div>
 
 <div ng-if="currentRole() === 'customer'" class="col-md-12">
   <h1>Welcome to {{accountName()}}, {{firstName()}}!</h1>
 
-  <p>Lorem ipsum 2...</p>
+  <p>Member Functions:</p>
+  <p>- Manage Group Benefits</p>
+  <p>- Manage Benefits Applications</p>
 </div>
 
