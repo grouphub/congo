@@ -19,7 +19,7 @@ body {
     .spinner {
       width: 220px;
       height: 19px;
-      background: image-url('spinner.gif');
+      background: asset_url('spinner.gif');
       margin-left: auto;
       margin-right: auto;
     }
@@ -72,7 +72,7 @@ header,
     display: inline-block;
     width: $width;
     height: $height;
-    background: image-url('logo.png');
+    background: asset_url('logo.png');
     background-size: $width $height;
 
     margin-bottom: -7px;
@@ -454,7 +454,7 @@ h1 {
           display: inline-block;
           width: $width;
           height: $height;
-          background: image-url('logo-small.png');
+          background: asset_url('logo-small.png');
           background-size: $width $height;
 
           margin-bottom: -7px;
