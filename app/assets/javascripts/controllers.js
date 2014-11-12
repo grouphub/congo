@@ -13,7 +13,7 @@ congoApp.controller('MainController', [
     $scope.ready = function () {
       $timeout(function () {
         $scope.loading = false;
-      });
+      }, 100);
     };
 
     // Inject the userDataFactory methods onto MainController
