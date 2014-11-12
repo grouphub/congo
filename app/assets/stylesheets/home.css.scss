@@ -449,7 +449,7 @@ h1 {
           display: inline-block;
           width: $width;
           height: $height;
-          background: url('/assets/logo-small.png');
+          background: image-url('logo-small.png');
           background-size: $width $height;
 
           margin-bottom: -7px;
