@@ -9,6 +9,10 @@ congoApp.controller('MainController', [
     $scope.assetPaths = congo.assetPaths;
 
     // Loading behavior
+    $scope.$on('$locationChangeStart', function(event) {
+      $scope.loading = true;
+    });
+
     $scope.loading = true;
     $scope.ready = function () {
       $timeout(function () {
