@@ -684,6 +684,10 @@ congoApp.controller('GroupsNewController', [
 congoApp.controller('GroupsShowController', [
   '$scope', '$http', '$location', '$cookieStore',
   function ($scope, $http, $location, $cookieStore) {
+    $scope.formData = {
+      email: null 
+    };
+
     // Only used by group admins
     $scope.memberships = function () {
       if ($scope.group) {
@@ -721,7 +725,7 @@ congoApp.controller('GroupsShowController', [
     };
 
     $scope.inviteMember = function () {
-      var email = $scope.email;
+      var email = $scope.formData.email;
       var data = {
         email: email
       };

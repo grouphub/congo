@@ -1,7 +1,7 @@
 <div class="col-md-6">
   <h1>Have an account? Sign in</h1>
 
-  <form ng-submit="signin()">
+  <form class="signin-form" ng-submit="signin()">
     <div class="form-group">
       <label for="email">Email</label>
       <input type="text" class="form-control" id="email" placeholder="Enter email&hellip;" ng-model="signin_email" auto-focus>
@@ -19,7 +19,7 @@
 <div class="col-md-6">
   <h1>&hellip;or, sign up</h1>
 
-  <form ng-submit="signup()">
+  <form class="signup-form" ng-submit="signup()">
     <div class="form-group">
       <label for="email">Email</label>
       <input type="text" class="form-control" id="email" placeholder="Enter email&hellip;" ng-model="email" auto-focus>

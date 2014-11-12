@@ -396,6 +396,11 @@ h1 {
   line-height: 2em;
 }
 
+.signin-form,
+.signup-form {
+  margin-bottom: 10px;
+}
+
 @media (max-width: 767px) {
   #wrapper {
     position: initial;
@@ -487,7 +492,7 @@ h1 {
       .sidebar-nav {
         width: 75px;
       }
-  }
     }
+  }
 }
 
