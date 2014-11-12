@@ -1,8 +1,8 @@
 var congoApp = angular.module('congoApp', ['ngRoute', 'ngCookies']);
 
 congoApp.controller('MainController', [
-  '$scope', '$http', '$location', 'userDataFactory', 'flashesFactory', 'eventsFactory',
-  function ($scope, $http, $location, userDataFactory, flashesFactory, eventsFactory) {
+  '$scope', '$http', '$location', '$timeout', 'userDataFactory', 'flashesFactory', 'eventsFactory',
+  function ($scope, $http, $location, $timeout, userDataFactory, flashesFactory, eventsFactory) {
     // Expose an event emitter to all controllers for messaging
     $scope.vent = eventsFactory;
 
@@ -11,7 +11,7 @@ congoApp.controller('MainController', [
     // Loading behavior
     $scope.loading = true;
     $scope.ready = function () {
-      _.defer(function () {
+      $timeout(function () {
         $scope.loading = false;
       });
     };
