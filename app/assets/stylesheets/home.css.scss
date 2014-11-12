@@ -98,16 +98,18 @@ header,
 }
 
 header {
-  ul.nav {
-    height: 50px;
-  }
-}
-
-header {
   $background-color: #333333;
   $color: #82c2fd;
 
   background-color: $background-color;
+
+  position: fixed;
+  left: 0;
+  right: 0;
+
+  ul.nav {
+    height: 50px;
+  }
 
   .navbar-nav {
     > li,
@@ -224,10 +226,6 @@ li.dropdown a {
   padding-bottom: 0.2em;
   padding-left: 0.4em;
   padding-right: 0.4em;
-}
-
-main {
-  margin-top: 20px;
 }
 
 .splash {
