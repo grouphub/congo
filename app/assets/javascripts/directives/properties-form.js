@@ -5,7 +5,7 @@ congoApp.directive('propertiesForm', [
     return {
       restrict: 'E',
       replace: true,
-      templateUrl: '<%= asset_path 'properties-form.html' %>',
+      templateUrl: congo.assets['/directives/properties-form.html'],
       link: function ($scope, $element, $attrs) {
         $scope.elements = JSON.parse($attrs.elements);
       }
