@@ -1,6 +1,6 @@
 <div class="col-md-12">
-  <h1>Benefit plans</h1>
-
+  <h1>Benefit Plans</h1>
+  <p>Add and update benefits plans available from connected carriers</p>
   <table class="benefit-plans table">
     <thead>
       <tr>
@@ -16,6 +16,7 @@
         </td>
 
         <td>
+          <a class="btn btn-info btn-xs enabled" ng-click="updateBenefitPlanAt($index)">Update</a>
           <a class="btn btn-danger btn-xs" href="" ng-click="deleteBenefitPlanAt($index)">Delete</a>
         </td>
       </tr>
@@ -23,7 +24,7 @@
   </table>
 
   <p>
-    <a class="btn btn-default" href="/accounts/{{accountSlug()}}/{{currentRole()}}/benefit_plans/new">New benefit plan</a>
+    <a class="btn btn-default" href="/accounts/{{accountSlug()}}/{{currentRole()}}/benefit_plans/new">New Benefit Plan</a>
   </p>
 </div>
 
