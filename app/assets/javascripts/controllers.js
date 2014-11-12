@@ -772,13 +772,13 @@ congoApp.controller('GroupsShowController', [
 
     $scope.submitApplication = function (application) {
       var data = {
-        applied_by_id: $scope.userId()
+        submitted_by_id: $scope.userId()
       }
 
       $http
         .put('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/applications/' + application.id + '.json', data)
         .success(function (data, status, headers, config) {
-          debugger
+          application.submitted_by_id = congo.currentUser.id
         })
         .error(function (data, status, headers, config) {
           debugger

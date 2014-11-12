@@ -1,6 +1,8 @@
 <div class="col-md-12">
-  <h1>{{benefitPlan.name}}</h1>
+  <h1>{{benefitPlan.account_carrier.carrier.name}}: {{benefitPlan.name}}</h1>
 
-  <p>{{benefitPlan.account_carrier.name}}&mdash;{{benefitPlan.account_carrier.carrier.name}}</p>
+  <p>{{benefitPlan.account_carrier.name}}</p>
+   <properties:form x-elements="{{elements}}" x-data="{{data}}"></properties:form>
+  <input type="submit" class="btn btn-default" value="Update Account">
 </div>
 
