@@ -1,6 +1,12 @@
 <div class="col-md-12">
-  <h1>{{accountCarrier.name}}&mdash;{{accountCarrier.carrier.name}}</h1>
+  <h1>{{accountCarrier.carrier.name}}: {{accountCarrier.name}}</h1>
 
-  <p>Lorem ipsum&hellip;</p>
+  <form ng-submit="submit()">
+   
+
+    <properties:form x-elements="{{elements}}" x-data="{{data}}"></properties:form>
+
+    <input type="submit" class="btn btn-default" value="Update Account">
+  </form>
 </div>
 
