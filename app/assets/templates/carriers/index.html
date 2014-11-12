@@ -1,6 +1,6 @@
 <div class="col-md-12">
-  <h1>Carriers</h1>
-
+  <h1>Carrier Managemnt</h1>
+  <p>Add new carriers to the system or update existing carriers listed below.</p>
   <table class="carriers table">
     <thead>
       <tr>
@@ -15,7 +15,8 @@
           <a ng-href="/admin/carriers/{{carrier.slug}}">{{carrier.name}}</a>
         </td>
 
-        <td ng-if="isAdmin()">
+        <td>
+        <a class="btn btn-info btn-xs enabled" ng-if="isAdmin()">update</a>
         </td>
       </tr>
     </tbody>
