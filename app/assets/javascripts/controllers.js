@@ -669,7 +669,7 @@ congoApp.controller('GroupsNewController', [
     };
 
     $http
-      .get(congo.assets['/assets/groups-new-properties.json'])
+      .get(congo.assets['groups-new-properties.json'])
       .success(function (data, status, headers, config) {
         $scope.elements = data;
 
