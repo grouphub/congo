@@ -40,7 +40,7 @@
           <td>{{benefitPlan.name}}</td>
 
           <td>
-            <a class="btn btn-info btn-xs" ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/groups/{{groupSlug()}}/benefit_plans/{{benefitPlan.id}}/applications/new">Select</a>
+            <a class="btn btn-info btn-xs" ng-click="selectBenefitPlan(benefitPlan)" ng-href="">Select</a>
           </td>
 
           <td>
@@ -79,8 +79,8 @@
     <table class="table">
       <thead>
         <tr>
-          <th>Emails</th>
-          <th>Connected as</th>
+          <th>Name</th>
+          <th>Email</th>
           <th>Actions</th>
           <th>Applications</th>
         </tr>
@@ -88,10 +88,14 @@
 
       <tbody>
         <tr ng-repeat="membership in memberships()">
-          <td>{{membership.email}}</td>
+          <td>
+            <a ng-href="/users/{{membership.user.id}}" ng-if="membership.user">
+              {{membership.user.first_name}} {{membership.user.last_name}}
+            </a>
+          </td>
 
           <td>
-            <a ng-href="/users/{{membership.user.id}}" ng-if="membership.user">{{membership.user.email}}</a>
+            <a ng-href="mailto:{{membership.email}}" ng-if="membership.user">{{membership.email}}</a>
           </td>
 
           <td>
@@ -103,7 +107,7 @@
             <table class="table" ng-if="membership.applications.length > 0">
               <thead>
                 <tr>
-                  <th>Id</th>
+                  <th>Selected On</th>
                   <th>State</th>
                   <th>Actions</th>
                 </tr>
@@ -111,7 +115,7 @@
 
               <tbody>
                 <tr ng-repeat="application in membership.applications">
-                  <td>{{application.id}}</td>
+                  <td>{{application.created_at | date}}</td>
 
                   <td>
                     <a class="btn btn-warning btn-xs disabled" href="" ng-if="!application.applied_by_id">Not Applied</a>
@@ -120,7 +124,7 @@
                   </td>
 
                   <td>
-                    <a class="btn btn-success btn-xs" href="" ng-if="application.applied_by_id && !application.submitted_by_id" ng-click="submitApplication(application)">Submit Application</a>
+                    <a class="btn btn-success btn-xs" href="" ng-if="application.applied_by_id && !application.submitted_by_id" ng-click="submitApplication(application)">Submit application</a>
                   </td>
                 </tr>
               </tbody>

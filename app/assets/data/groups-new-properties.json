@@ -1,0 +1,9 @@
+[
+  {
+    "type": "text",
+    "name": "group_id",
+    "title": "Group ID",
+    "placeholder": "Enter a group ID…"
+  }
+]
+

@@ -58,22 +58,27 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :accounts do
-        resources :account_carriers
-        resources :benefit_plans
-        resources :groups do
-          resources :memberships do
-            post '/confirmations', to: 'memberships#send_confirmation'
+        resources :roles do
+          resources :account_carriers
+          resources :benefit_plans
+
+          resources :groups do
+            resources :memberships do
+              post '/confirmations', to: 'memberships#send_confirmation'
+            end
+
+            post '/group_benefit_plans', to: 'group_benefit_plans#create'
+            delete '/group_benefit_plans', to: 'group_benefit_plans#destroy'
           end
 
-          post '/group_benefit_plans', to: 'group_benefit_plans#create'
-          delete '/group_benefit_plans', to: 'group_benefit_plans#destroy'
+          resources :applications
         end
-
-        resources :applications
       end
 
+      # Admin routes
       resources :carriers
 
+      # User routes
       post '/users/signin', to: 'users#signin'
       delete '/users/signout', to: 'users#signout'
       resources :users

@@ -5,6 +5,9 @@ class CreateApplications < ActiveRecord::Migration
       t.integer :benefit_plan_id
       t.integer :membership_id
 
+      # TODO: What fields do we need?
+      t.text :properties_data
+
       # Customer applies
       t.integer :applied_by_id
 

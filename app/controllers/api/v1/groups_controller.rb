@@ -2,11 +2,25 @@ class Api::V1::GroupsController < ApplicationController
   include UsersHelper
 
   def index
+    role_name = params[:role_id]
+    groups = nil
+
+    # TODO: Verify user role
+    if role_name == 'customer'
+      groups = Membership
+        .where(user_id: current_user.id)
+        .includes(:group)
+        .map(&:group)
+        .select(&:is_enabled)
+    else
+      groups = Group.all
+    end
+
     respond_to do |format|
       format.json {
         render json: {
           # TODO: Scope groups by account
-          groups: Group.all.map { |group|
+          groups: groups.map { |group|
             render_group(group)
           }
         }
@@ -18,6 +32,7 @@ class Api::V1::GroupsController < ApplicationController
     name = params[:name]
     account_slug = params[:account_id]
     account = Account.where(slug: account_slug).first
+    properties = params[:properties]
 
     unless name
       # TODO: Handle this
@@ -29,7 +44,8 @@ class Api::V1::GroupsController < ApplicationController
 
     group = Group.create! \
       name: name,
-      account_id: account.id
+      account_id: account.id,
+      properties: properties
 
     respond_to do |format|
       format.json {
@@ -43,6 +59,22 @@ class Api::V1::GroupsController < ApplicationController
   def show
     slug = params[:id]
     group = Group.where(slug: slug).first
+
+    respond_to do |format|
+      format.json {
+        render json: {
+          group: render_group(group)
+        }
+      }
+    end
+  end
+
+  def update
+    group = Group.find(params[:id])
+
+    unless params[:group]['is_enabled'].nil?
+      group.update_attribute(:is_enabled, params[:is_enabled])
+    end
 
     respond_to do |format|
       format.json {

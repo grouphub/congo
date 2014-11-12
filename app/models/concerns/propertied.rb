@@ -1,4 +1,4 @@
-module Proper
+module Propertied
   extend ActiveSupport::Concern
 
   def properties=(hash)
