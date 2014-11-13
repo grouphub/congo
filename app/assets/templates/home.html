@@ -2,31 +2,31 @@
   <h1>Admin Dashboard</h1>
 
   <p>Administrator Functions:</p>
-  <p>- Manage Carriers</p>
+  <ul>Manage Carriers</ul>
 </div>
 
 <div ng-if="currentRole() === 'broker'" class="col-md-12">
   <h1>Broker Dashboard: {{accountName()}}</h1>
 
   <p>Broker Functions:</p>
-  <p>- Manage Carrier Accounts</p>
-  <p>- Manage Benefits Plans</p>
-  <p>- Manage Groups</p>
+  <ul>Manage Carrier Accounts</p>
+  <ul>Manage Benefits Plans</p>
+  <ul>Manage Groups</p>
 </div>
 
 <div ng-if="currentRole() === 'group_admin'" class="col-md-12">
   <h1>Group Admin Dashboard: {{accountName()}}</h1>
 
-  <p>Broker Functions:</p>
-  <p>- Manage Benefits Plans</p>
-  <p>- Manage Groups</p>
+  <p>Broker Functions:</ul>
+  <ul> Manage Benefits Plans</ul>
+  <ul>Manage Groups</ul>
 </div>
 
 <div ng-if="currentRole() === 'customer'" class="col-md-12">
   <h1>Welcome {{firstName()}}!</h1>
 
-  <p>Member Functions:</p>
-  <p>- Manage Group Benefits</p>
-  <p>- Manage Benefits Applications</p>
+  <p>Member Functions:</ul>
+  <ul>Manage Group Benefits</ul>
+  <ul>Manage Benefits Applications</ul>
 </div>
 
