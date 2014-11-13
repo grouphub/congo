@@ -800,6 +800,21 @@ congoApp.controller('GroupsShowController', [
         });
     };
 
+    $scope.disableBenefitPlan = function (benefitPlan) {
+      var data = {
+        benefit_plan_id: benefitPlan.id
+      }
+
+      $http
+        .post('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups/' + $scope.groupSlug() + '/group_benefit_plans.json', data)
+        .success(function (data, status, headers, config) {
+          benefitPlan.isEnabled = false;
+        })
+        .error(function (data, status, headers, config) {
+          debugger
+        });
+    };
+
     $scope.changeBenefitPlan = function (benefitPlan) {
       if (benefitPlan.isEnabled) {
         var data = {

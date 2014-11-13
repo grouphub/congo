@@ -15,7 +15,11 @@
       <tbody>
         <tr ng-repeat="benefitPlan in benefitPlans">
           <td>{{benefitPlan.name}}</td>
-          <td><input type="checkbox" value="{{benefitPlan.id}}" ng-model="benefitPlan.isEnabled" ng-change="changeBenefitPlan(benefitPlan)"></td>
+           
+          <td><a class="btn btn-success btn-xs disabled" ng-if="benefitPlan.isEnabled" ng-href="" ng-click="" >Enabled</a>
+          <a class="btn btn-danger btn-xs" ng-if="benefitPlan.isEnabled" ng-href="" ng-click="disableBenefitPlan(benefitPlan)" >Disable</a>
+            <a class="btn btn-danger btn-xs disabled" ng-if="!benefitPlan.isEnabled" ng-href="">Disabled</a>
+            <a href="" class="btn btn-success btn-xs" ng-if="!benefitPlan.isEnabled" ng-click="enableBenefitPlan(benefitPlan)">Enable</a>
         </tr>
       </tbody>
     </table>
