@@ -7,7 +7,7 @@ class Api::V1::MembershipsController < ApplicationController
     respond_to do |format|
       format.json {
         render json: {
-          memberships: memberships
+          memberships: memberships.map { |membership| render_membership(membership) }
         }
       }
     end
@@ -28,7 +28,7 @@ class Api::V1::MembershipsController < ApplicationController
     respond_to do |format|
       format.json {
         render json: {
-          membership: membership
+          membership: render_membership(membership)
         }
       }
     end
@@ -45,7 +45,7 @@ class Api::V1::MembershipsController < ApplicationController
     respond_to do |format|
       format.json {
         render json: {
-          membership: membership
+          membership: render_membership(membership)
         }
       }
     end
@@ -62,10 +62,18 @@ class Api::V1::MembershipsController < ApplicationController
     respond_to do |format|
       format.json {
         render json: {
-          membership: membership
+          membership: render_membership(membership)
         }
       }
     end
+  end
+
+  # Render methods
+
+  def render_membership(membership)
+    membership.as_json.merge({
+      user: membership.user
+    })
   end
 end
 

@@ -15,6 +15,14 @@ body {
     display: none;
     text-align: center;
     margin-top: 100px;
+
+    .spinner {
+      width: 220px;
+      height: 19px;
+      background: asset_url('spinner.gif');
+      margin-left: auto;
+      margin-right: auto;
+    }
   }
 }
 
@@ -64,7 +72,7 @@ header,
     display: inline-block;
     width: $width;
     height: $height;
-    background: url('/assets/logo.png');
+    background: asset_url('logo.png');
     background-size: $width $height;
 
     margin-bottom: -7px;
@@ -90,16 +98,18 @@ header,
 }
 
 header {
-  ul.nav {
-    height: 50px;
-  }
-}
-
-header {
   $background-color: #333333;
   $color: #82c2fd;
 
   background-color: $background-color;
+
+  position: fixed;
+  left: 0;
+  right: 0;
+
+  ul.nav {
+    height: 50px;
+  }
 
   .navbar-nav {
     > li,
@@ -216,10 +226,6 @@ li.dropdown a {
   padding-bottom: 0.2em;
   padding-left: 0.4em;
   padding-right: 0.4em;
-}
-
-main {
-  margin-top: 20px;
 }
 
 .splash {
@@ -388,6 +394,11 @@ h1 {
   line-height: 2em;
 }
 
+.signin-form,
+.signup-form {
+  margin-bottom: 10px;
+}
+
 @media (max-width: 767px) {
   #wrapper {
     position: initial;
@@ -441,7 +452,7 @@ h1 {
           display: inline-block;
           width: $width;
           height: $height;
-          background: url('/assets/logo-small.png');
+          background: asset_url('logo-small.png');
           background-size: $width $height;
 
           margin-bottom: -7px;
@@ -479,7 +490,7 @@ h1 {
       .sidebar-nav {
         width: 75px;
       }
-  }
     }
+  }
 }
 
