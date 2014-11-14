@@ -789,6 +789,7 @@ congoApp.controller('GroupsShowController', [
       var data = {
         benefit_plan_id: benefitPlan.id
       }
+      
 
       $http
         .post('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups/' + $scope.groupSlug() + '/group_benefit_plans.json', data)
