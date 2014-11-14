@@ -852,6 +852,19 @@ congoApp.controller('ApplicationsNewController', function ($scope, $http, $locat
 });
 
 congoApp.controller('ApplicationsShowController', function ($scope, $http, $location) {
+  // Only used by group admins
+  $scope.memberships = function () {
+    if ($scope.group) {
+      return $scope.group.memberships;
+    }
+  };
+
+  // Only used by customers
+  $scope.applications = function (benefitPlan) {
+    if ($scope.group) {
+      return _($scope.group.applications).where({ benefit_plan_id: benefitPlan.id });
+    }
+  };
   $http
     .get('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/applications/' + $scope.applicationId() + '.json')
     .success(function (data, status, headers, config) {

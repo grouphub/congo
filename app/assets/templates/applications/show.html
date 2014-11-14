@@ -1,7 +1,669 @@
+<head>
+	<link href="AdminLTE.css" rel="stylesheet" type="text/css" />
+	<link href="bootstrap.min.css" rel="stylesheet" type="text/css" />
+</head>
 <div class="col-md-12">
   <h1>Application</h1>
+   <section class="content">
+	    <style type="text/css" scoped>
+	        /* hide the form labels for a cleaner look, except for screen readers */
 
-  <p>Lorem ipsum...</p>
+	        
+	        .form-group > label {
+	            position: absolute;
+	            width: 1px;
+	            height: 1px;
+	            padding: 0;
+	            margin: -1px;
+	            overflow: hidden;
+	            clip: rect(0, 0, 0, 0);
+	            border: 0;
+	        }
+
+	        h4.box-title {
+	            font-size: 16px;
+	        }
+
+	        
+
+	    </style>
+	    <div class="row">
+	        <div class="col-sm-12">
+	            <!-- general form elements disabled -->
+	            <div class="box box-warning">
+	                <div class="box-header">
+	                    <h3 class="box-title">Tell us About Yourself (primary applicant)</h3>
+	                </div><!-- /.box-header -->
+	                <div class="box-body">
+	                    <form role="form">
+	                        <!-- text input -->
+	                        <div class="row">
+	                            
+	                            <div class="form-group col-sm-3">
+	                                <label>First name</label>
+	                                <input type="text" class="form-control" placeholder="First name"/>
+	                            </div>
+	                            <div class="form-group col-sm-3">
+	                                <label>Middle name</label>
+	                                <input type="text" class="form-control" placeholder="Middle name"/>
+	                            </div>
+	                            <div class="form-group col-sm-3">
+	                                <label>Last name</label>
+	                                <input type="text" class="form-control" placeholder="Last name"/>
+	                            </div>
+	                            <div class="form-group col-sm-3">
+	                                <label>Medical record # (if any)</label>
+	                                <input type="text" class="form-control" placeholder="Medical record # (if any)"/>
+	                            </div>
+
+	                            <div class="form-group col-sm-9">
+	                                <label>Street address</label>
+	                                <input type="text" class="form-control" placeholder="Street address"/>
+	                            </div>
+	                            <div class="form-group col-sm-3">
+	                                <label>Apt. #</label>
+	                                <input type="text" class="form-control" placeholder="Apt. #"/>
+	                            </div>
+	                            <div class="form-group col-sm-5">
+	                                <label>City</label>
+	                                <input type="text" class="form-control" placeholder="City"/>
+	                            </div>
+	                            <div class="form-group col-sm-2">
+	                                <label>State</label>
+	                                <input type="text" class="form-control" placeholder="State"/>
+	                            </div>
+	                            <div class="form-group col-sm-2">
+	                                <label>ZIP</label>
+	                                <input type="text" class="form-control" placeholder="ZIP"/>
+	                            </div>
+	                            <div class="form-group col-sm-3">
+	                                <label>County</label>
+	                                <input type="text" class="form-control" placeholder="County"/>
+	                            </div>
+	                            <div class="form-group col-sm-6">
+	                                <label>Phone</label>
+	                                <input type="tel" class="form-control" placeholder="Phone"/>
+	                            </div>
+	                            <div class="form-group col-sm-6">
+	                                <label>Other phone</label>
+	                                <input type="tel" class="form-control" placeholder="Other phone"/>
+	                            </div>
+	                            <div class="form-group col-sm-6">
+	                                <label>Preferred language spoken (if not English)</label>
+	                                <input type="text" class="form-control" placeholder="Preferred language spoken (if not English)"/>
+	                            </div>
+	                            <div class="form-group col-sm-6">
+	                                <label>Preferred language read (if not English)</label>
+	                                <input type="text" class="form-control" placeholder="Preferred language read (if not English)"/>
+	                            </div>
+	                            <div class="form-group col-sm-5">
+	                                <label>Social Security number</label>
+	                                <input type="text" class="form-control" placeholder="Social Security number"/>
+	                            </div>
+	                            <div class="form-group col-sm-4">
+	                                <label>Date of birth (mm/dd/yy)</label>
+	                                <input type="text" class="form-control" placeholder="Date of birth (mm/dd/yy)"/>
+	                            </div>
+
+	                            <div class="form-group col-sm-3">
+	                                <label>Sex</label>
+	                                <p class="help-block">Sex</p>
+	                                <fieldset>
+	                                    <label class="radio-inline">
+	                                        <input type="radio" name="sex_indicate" id="" value="Male">
+	                                        Male
+	                                    </label>
+	                                    <label class="radio-inline">
+	                                        <input type="radio" name="sex_indicate" id="" value="Female">
+	                                        Female
+	                                    </label>
+	                                </fieldset>
+	                            </div>
+
+	                            <div class="form-group col-sm-4 col-md-3">
+	                                <label>Have you previously had insurance coverage?</label>
+	                                <p class="help-block">Have you previously had insurance coverage?</p>
+	                                <fieldset>
+	                                    <label class="radio-inline">
+	                                        <input type="radio" name="coverage_experience" id="" value="Yes">
+	                                        Yes
+	                                    </label>
+	                                    <label class="radio-inline">
+	                                        <input type="radio" name="coverage_experience" id="" value="No">
+	                                        No
+	                                    </label>
+	                                </fieldset>
+	                            </div>
+
+	                            <div class="form-group col-sm-4 col-md-5">
+	                                <label>If Yes, most recent insurance carrier:</label>
+	                                <input type="text" class="form-control" placeholder="If Yes, most recent insurance carrier:"/>
+	                            </div>
+	                            <div class="form-group col-sm-4">
+	                                <label>Dates of coverage:</label>
+	                                <input type="text" class="form-control" placeholder="Dates of coverage:"/>
+	                            </div>
+	                        </div>
+
+	                    </form>
+	                </div><!-- /.box-body -->
+	            </div><!-- /.box -->
+
+	            <div class="box box-warning">
+	                <div class="box-header">
+	                    <h3 class="box-title">
+	                        Family Member(s) to be Covered<br>
+	                        <small>All members must reside in our Califonria service area.</small>
+	                    </h3>
+	                </div><!-- /.box-header -->
+	                <div class="box-header">
+	                    <h4 class="text-center">Dependent 1</h4>
+	                </div>
+	                <div class="box-body">
+	                    <form role="form">
+	                        <!-- text input -->
+	                        <div class="row">
+	                            
+	                            <div class="form-group col-sm-3">
+	                                <label>First name</label>
+	                                <input type="text" class="form-control" placeholder="First name"/>
+	                            </div>
+	                            <div class="form-group col-sm-3">
+	                                <label>Middle name</label>
+	                                <input type="text" class="form-control" placeholder="Middle name"/>
+	                            </div>
+	                            <div class="form-group col-sm-3">
+	                                <label>Last name</label>
+	                                <input type="text" class="form-control" placeholder="Last name"/>
+	                            </div>
+	                            <div class="form-group col-sm-3">
+	                                <label>Medical record # (if any)</label>
+	                                <input type="text" class="form-control" placeholder="Medical record # (if any)"/>
+	                            </div>
+
+	                            <div class="form-group col-sm-5">
+	                                <label>Social Security number</label>
+	                                <input type="text" class="form-control" placeholder="Social Security number"/>
+	                            </div>
+	                            <div class="form-group col-sm-4">
+	                                <label>Date of birth (mm/dd/yy)</label>
+	                                <input type="text" class="form-control" placeholder="Date of birth (mm/dd/yy)"/>
+	                            </div>
+
+	                            <div class="form-group col-sm-3">
+	                                <label>Sex</label>
+	                                <p class="help-block">Sex</p>
+	                                <fieldset>
+	                                    <label class="radio-inline">
+	                                        <input type="radio" name="sex_indicate" id="" value="Male">
+	                                        Male
+	                                    </label>
+	                                    <label class="radio-inline">
+	                                        <input type="radio" name="sex_indicate" id="" value="Female">
+	                                        Female
+	                                    </label>
+	                                </fieldset>
+	                            </div>
+
+	                            <div class="form-group col-sm-4 col-md-3">
+	                                <label>Has this dependent previously had insurance coverage?</label>
+	                                <p class="help-block">Has this dependent previously had insurance coverage?</p>
+	                                <fieldset>
+	                                    <label class="radio-inline">
+	                                        <input type="radio" name="coverage_experience" id="" value="Yes">
+	                                        Yes
+	                                    </label>
+	                                    <label class="radio-inline">
+	                                        <input type="radio" name="coverage_experience" id="" value="No">
+	                                        No
+	                                    </label>
+	                                </fieldset>
+	                            </div>
+
+	                            <div class="form-group col-sm-4 col-md-5">
+	                                <label>If Yes, most recent insurance carrier:</label>
+	                                <input type="text" class="form-control" placeholder="If Yes, most recent insurance carrier:"/>
+	                            </div>
+	                            <div class="form-group col-sm-4">
+	                                <label>Dates of coverage:</label>
+	                                <input type="text" class="form-control" placeholder="Dates of coverage:"/>
+	                            </div>
+	                        </div>
+
+	                    </form>
+	                </div><!-- /.box-body -->
+	                <div class="box-header">
+	                    <h4 class="text-center">Dependent 2</h4>
+	                </div>
+	                <div class="box-body">
+	                    <form role="form">
+	                        <!-- text input -->
+	                        <div class="row">
+	                            
+	                            <div class="form-group col-sm-3">
+	                                <label>First name</label>
+	                                <input type="text" class="form-control" placeholder="First name"/>
+	                            </div>
+	                            <div class="form-group col-sm-3">
+	                                <label>Middle name</label>
+	                                <input type="text" class="form-control" placeholder="Middle name"/>
+	                            </div>
+	                            <div class="form-group col-sm-3">
+	                                <label>Last name</label>
+	                                <input type="text" class="form-control" placeholder="Last name"/>
+	                            </div>
+	                            <div class="form-group col-sm-3">
+	                                <label>Medical record # (if any)</label>
+	                                <input type="text" class="form-control" placeholder="Medical record # (if any)"/>
+	                            </div>
+
+	                            <div class="form-group col-sm-5">
+	                                <label>Social Security number</label>
+	                                <input type="text" class="form-control" placeholder="Social Security number"/>
+	                            </div>
+	                            <div class="form-group col-sm-4">
+	                                <label>Date of birth (mm/dd/yy)</label>
+	                                <input type="text" class="form-control" placeholder="Date of birth (mm/dd/yy)"/>
+	                            </div>
+
+	                            <div class="form-group col-sm-3">
+	                                <label>Sex</label>
+	                                <p class="help-block">Sex</p>
+	                                <fieldset>
+	                                    <label class="radio-inline">
+	                                        <input type="radio" name="sex_indicate" id="" value="Male">
+	                                        Male
+	                                    </label>
+	                                    <label class="radio-inline">
+	                                        <input type="radio" name="sex_indicate" id="" value="Female">
+	                                        Female
+	                                    </label>
+	                                </fieldset>
+	                            </div>
+
+	                            <div class="form-group col-sm-4 col-md-3">
+	                                <label>Has this dependent previously had insurance coverage?</label>
+	                                <p class="help-block">Has this dependent previously had insurance coverage?</p>
+	                                <fieldset>
+	                                    <label class="radio-inline">
+	                                        <input type="radio" name="coverage_experience" id="" value="Yes">
+	                                        Yes
+	                                    </label>
+	                                    <label class="radio-inline">
+	                                        <input type="radio" name="coverage_experience" id="" value="No">
+	                                        No
+	                                    </label>
+	                                </fieldset>
+	                            </div>
+
+	                            <div class="form-group col-sm-4 col-md-5">
+	                                <label>If Yes, most recent insurance carrier:</label>
+	                                <input type="text" class="form-control" placeholder="If Yes, most recent insurance carrier:"/>
+	                            </div>
+	                            <div class="form-group col-sm-4">
+	                                <label>Dates of coverage:</label>
+	                                <input type="text" class="form-control" placeholder="Dates of coverage:"/>
+	                            </div>
+	                        </div>
+
+	                    </form>
+	                </div><!-- /.box-body -->
+	                <div class="box-header">
+	                    <h4 class="text-center">Dependent 3</h4>
+	                </div>
+	                <div class="box-body">
+	                    <form role="form">
+	                        <!-- text input -->
+	                        <div class="row">
+	                            
+	                            <div class="form-group col-sm-3">
+	                                <label>First name</label>
+	                                <input type="text" class="form-control" placeholder="First name"/>
+	                            </div>
+	                            <div class="form-group col-sm-3">
+	                                <label>Middle name</label>
+	                                <input type="text" class="form-control" placeholder="Middle name"/>
+	                            </div>
+	                            <div class="form-group col-sm-3">
+	                                <label>Last name</label>
+	                                <input type="text" class="form-control" placeholder="Last name"/>
+	                            </div>
+	                            <div class="form-group col-sm-3">
+	                                <label>Medical record # (if any)</label>
+	                                <input type="text" class="form-control" placeholder="Medical record # (if any)"/>
+	                            </div>
+
+	                            <div class="form-group col-sm-5">
+	                                <label>Social Security number</label>
+	                                <input type="text" class="form-control" placeholder="Social Security number"/>
+	                            </div>
+	                            <div class="form-group col-sm-4">
+	                                <label>Date of birth (mm/dd/yy)</label>
+	                                <input type="text" class="form-control" placeholder="Date of birth (mm/dd/yy)"/>
+	                            </div>
+
+	                            <div class="form-group col-sm-3">
+	                                <label>Sex</label>
+	                                <p class="help-block">Sex</p>
+	                                <fieldset>
+	                                    <label class="radio-inline">
+	                                        <input type="radio" name="sex_indicate" id="" value="Male">
+	                                        Male
+	                                    </label>
+	                                    <label class="radio-inline">
+	                                        <input type="radio" name="sex_indicate" id="" value="Female">
+	                                        Female
+	                                    </label>
+	                                </fieldset>
+	                            </div>
+
+	                            <div class="form-group col-sm-4 col-md-3">
+	                                <label>Has this dependent previously had insurance coverage?</label>
+	                                <p class="help-block">Has this dependent previously had insurance coverage?</p>
+	                                <fieldset>
+	                                    <label class="radio-inline">
+	                                        <input type="radio" name="coverage_experience" id="" value="Yes">
+	                                        Yes
+	                                    </label>
+	                                    <label class="radio-inline">
+	                                        <input type="radio" name="coverage_experience" id="" value="No">
+	                                        No
+	                                    </label>
+	                                </fieldset>
+	                            </div>
+
+	                            <div class="form-group col-sm-4 col-md-5">
+	                                <label>If Yes, most recent insurance carrier:</label>
+	                                <input type="text" class="form-control" placeholder="If Yes, most recent insurance carrier:"/>
+	                            </div>
+	                            <div class="form-group col-sm-4">
+	                                <label>Dates of coverage:</label>
+	                                <input type="text" class="form-control" placeholder="Dates of coverage:"/>
+	                            </div>
+	                        </div>
+
+	                    </form>
+	                </div><!-- /.box-body -->
+	                <div class="box-header">
+	                    <h4 class="text-center">Dependent 4</h4>
+	                </div>
+	                <div class="box-body">
+	                    <form role="form">
+	                        <!-- text input -->
+	                        <div class="row">
+	                            
+	                            <div class="form-group col-sm-3">
+	                                <label>First name</label>
+	                                <input type="text" class="form-control" placeholder="First name"/>
+	                            </div>
+	                            <div class="form-group col-sm-3">
+	                                <label>Middle name</label>
+	                                <input type="text" class="form-control" placeholder="Middle name"/>
+	                            </div>
+	                            <div class="form-group col-sm-3">
+	                                <label>Last name</label>
+	                                <input type="text" class="form-control" placeholder="Last name"/>
+	                            </div>
+	                            <div class="form-group col-sm-3">
+	                                <label>Medical record # (if any)</label>
+	                                <input type="text" class="form-control" placeholder="Medical record # (if any)"/>
+	                            </div>
+
+	                            <div class="form-group col-sm-5">
+	                                <label>Social Security number</label>
+	                                <input type="text" class="form-control" placeholder="Social Security number"/>
+	                            </div>
+	                            <div class="form-group col-sm-4">
+	                                <label>Date of birth (mm/dd/yy)</label>
+	                                <input type="text" class="form-control" placeholder="Date of birth (mm/dd/yy)"/>
+	                            </div>
+
+	                            <div class="form-group col-sm-3">
+	                                <label>Sex</label>
+	                                <p class="help-block">Sex</p>
+	                                <fieldset>
+	                                    <label class="radio-inline">
+	                                        <input type="radio" name="sex_indicate" id="" value="Male">
+	                                        Male
+	                                    </label>
+	                                    <label class="radio-inline">
+	                                        <input type="radio" name="sex_indicate" id="" value="Female">
+	                                        Female
+	                                    </label>
+	                                </fieldset>
+	                            </div>
+
+	                            <div class="form-group col-sm-4 col-md-3">
+	                                <label>Has this dependent previously had insurance coverage?</label>
+	                                <p class="help-block">Has this dependent previously had insurance coverage?</p>
+	                                <fieldset>
+	                                    <label class="radio-inline">
+	                                        <input type="radio" name="coverage_experience" id="" value="Yes">
+	                                        Yes
+	                                    </label>
+	                                    <label class="radio-inline">
+	                                        <input type="radio" name="coverage_experience" id="" value="No">
+	                                        No
+	                                    </label>
+	                                </fieldset>
+	                            </div>
+
+	                            <div class="form-group col-sm-4 col-md-5">
+	                                <label>If Yes, most recent insurance carrier:</label>
+	                                <input type="text" class="form-control" placeholder="If Yes, most recent insurance carrier:"/>
+	                            </div>
+	                            <div class="form-group col-sm-4">
+	                                <label>Dates of coverage:</label>
+	                                <input type="text" class="form-control" placeholder="Dates of coverage:"/>
+	                            </div>
+	                        </div>
+
+	                    </form>
+	                </div><!-- /.box-body -->
+	            </div><!-- /.box -->
+
+	            <div class="box box-warning">
+	                <div class="box-header">
+	                    <h3 class="box-title">Parent or Legal Guardian</h3>
+	                </div><!-- /.box-header -->
+	                <div class="box-body">
+	                    <form role="form">
+	                        <!-- text input -->
+	                        <div class="row">
+	                            
+	                            <div class="form-group col-sm-3">
+	                                <label>First name</label>
+	                                <input type="text" class="form-control" placeholder="First name"/>
+	                            </div>
+	                            <div class="form-group col-sm-3">
+	                                <label>Middle name</label>
+	                                <input type="text" class="form-control" placeholder="Middle name"/>
+	                            </div>
+	                            <div class="form-group col-sm-3">
+	                                <label>Last name</label>
+	                                <input type="text" class="form-control" placeholder="Last name"/>
+	                            </div>
+	                            <div class="form-group col-sm-3">
+	                                <label>Parent/Legal Guardian Social Security number</label>
+	                                <input type="text" class="form-control" placeholder="Parent/Legal Guardian Social Security number"/>
+	                            </div>
+
+	                            <div class="form-group col-sm-8">
+	                                <label>Relationship to applicant</label>
+	                                <p class="help-block">Relationship to applicant:</p>
+	                                <fieldset>
+	                                    <label class="radio-inline">
+	                                        <input type="radio" name="rel_to_applicant" value="Parent/Guardian">
+	                                        Parent/Guardian
+	                                    </label>
+	                                    <label class="radio-inline">
+	                                        <input type="radio" name="rel_to_applicant" value="Spouse">
+	                                        Spouse
+	                                    </label>
+	                                    <label class="radio-inline">
+	                                        <input type="radio" name="rel_to_applicant" value="Domestic partner">
+	                                        Domestic partner
+	                                    </label>
+	                                    <label class="radio-inline">
+	                                        <input type="radio" name="rel_to_applicant" value="Other">
+	                                        Other
+	                                    </label>
+	                                </fieldset>
+	                            </div>
+	                            <div class="form-group col-sm-4">
+	                                <label>Same address as primary applicant?</label>
+	                                <p class="help-block">Same address as primary applicant?</p>
+	                                <fieldset>
+	                                    <label class="radio-inline">
+	                                        <input type="radio" name="same_address" value="Yes">
+	                                        Yes
+	                                    </label>
+	                                    <label class="radio-inline">
+	                                        <input type="radio" name="same_address" value="No">
+	                                        No
+	                                    </label>
+	                                </fieldset>
+	                                <p class="help-block">If no, fill in your address below.</p>
+	                            </div>
+
+	                            <div class="form-group col-sm-9">
+	                                <label>Street address</label>
+	                                <input type="text" class="form-control" placeholder="Street address"/>
+	                            </div>
+	                            <div class="form-group col-sm-3">
+	                                <label>Apt. #</label>
+	                                <input type="text" class="form-control" placeholder="Apt. #"/>
+	                            </div>
+	                            <div class="form-group col-sm-5">
+	                                <label>City</label>
+	                                <input type="text" class="form-control" placeholder="City"/>
+	                            </div>
+	                            <div class="form-group col-sm-2">
+	                                <label>State</label>
+	                                <input type="text" class="form-control" placeholder="State"/>
+	                            </div>
+	                            <div class="form-group col-sm-2">
+	                                <label>ZIP</label>
+	                                <input type="text" class="form-control" placeholder="ZIP"/>
+	                            </div>
+	                            <div class="form-group col-sm-3">
+	                                <label>County</label>
+	                                <input type="text" class="form-control" placeholder="County"/>
+	                            </div>
+	                            <div class="form-group col-sm-6">
+	                                <label>Phone</label>
+	                                <input type="tel" class="form-control" placeholder="Phone"/>
+	                            </div>
+	                            <div class="form-group col-sm-6">
+	                                <label>Other phone</label>
+	                                <input type="tel" class="form-control" placeholder="Other phone"/>
+	                            </div>
+	                            <div class="form-group col-sm-8">
+	                                <label>Parent/Legal guardian date of birth (mm/dd/yy)</label>
+	                                <input type="text" class="form-control" placeholder="Parent/Legal guardian date of birth (mm/dd/yy)"/>
+	                            </div>
+
+	                            <div class="form-group col-sm-4">
+	                                <label>Parent/Legal guardian Sex</label>
+	                                <p class="help-block">Parent/Legal guardian Sex</p>
+	                                <fieldset>
+	                                    <label class="radio-inline">
+	                                        <input type="radio" name="sex_indicate" id="" value="Male">
+	                                        Male
+	                                    </label>
+	                                    <label class="radio-inline">
+	                                        <input type="radio" name="sex_indicate" id="" value="Female">
+	                                        Female
+	                                    </label>
+	                                </fieldset>
+	                            </div>
+
+	                            <div class="form-group col-sm-6">
+	                                <label>Preferred language spoken (if not English)</label>
+	                                <input type="text" class="form-control" placeholder="Preferred language spoken (if not English)"/>
+	                            </div>
+	                            <div class="form-group col-sm-6">
+	                                <label>Preferred language read (if not English)</label>
+	                                <input type="text" class="form-control" placeholder="Preferred language read (if not English)"/>
+	                            </div>
+
+	                        </div>
+
+	                    </form>
+	                </div><!-- /.box-body -->
+	            </div><!-- /.box -->
+	            
+	            <div class="box box-warning">
+	                <div class="box-header">
+	                    <h3 class="box-title">You can choose an authorized representative</h3>
+	                </div><!-- /.box-header -->
+	                <div class="box-body">
+	                    <form role="form">
+	                        <!-- text input -->
+	                        <div class="row">
+	                            
+	                            <div class="form-group col-sm-4">
+	                                <label>First name of authorized representative</label>
+	                                <input type="text" class="form-control" placeholder="First name of authorized representative"/>
+	                            </div>
+	                            <div class="form-group col-sm-4">
+	                                <label>Middle name</label>
+	                                <input type="text" class="form-control" placeholder="Middle name"/>
+	                            </div>
+	                            <div class="form-group col-sm-4">
+	                                <label>Last name</label>
+	                                <input type="text" class="form-control" placeholder="Last name"/>
+	                            </div>
+
+	                            <div class="form-group col-sm-9">
+	                                <label>Street address</label>
+	                                <input type="text" class="form-control" placeholder="Street address"/>
+	                            </div>
+	                            <div class="form-group col-sm-3">
+	                                <label>Apt. #</label>
+	                                <input type="text" class="form-control" placeholder="Apt. #"/>
+	                            </div>
+	                            <div class="form-group col-sm-6">
+	                                <label>City</label>
+	                                <input type="text" class="form-control" placeholder="City"/>
+	                            </div>
+	                            <div class="form-group col-sm-3">
+	                                <label>State</label>
+	                                <input type="text" class="form-control" placeholder="State"/>
+	                            </div>
+	                            <div class="form-group col-sm-3">
+	                                <label>ZIP</label>
+	                                <input type="text" class="form-control" placeholder="ZIP"/>
+	                            </div>
+
+	                            <div class="form-group col-sm-6">
+	                                <label>Phone</label>
+	                                <input type="tel" class="form-control" placeholder="Phone"/>
+	                            </div>
+
+	                        </div>
+
+	                        <div class="row">
+	                            <div class="form-group col-sm-12">
+	                                <p>By signing, you allow this person to sign your application, to get official information about this application, and to act for you on matters related to this application.</p>
+	                            </div>
+	                            <div class="form-group col-sm-8">
+	                                <label>Primary applicant or parent or legal guardian for applicants under age 18</label>
+	                                <input type="text" class="form-control" placeholder="Primary applicant or parent or legal guardian for applicants under age 18"/>
+	                            </div>
+	                            <div class="form-group col-sm-4">
+	                                <label>Date (mm/dd/yyyy)</label>
+	                                <input type="text" class="form-control" placeholder="Date (mm/dd/yyyy)"/>
+	                            </div>
+	                        </div>
+
+	                    </form>
+	                </div><!-- /.box-body -->
+	            </div><!-- /.box -->
+
+	        </div><!--/.col (right) -->
+	    </div>   <!-- /.row -->
+	</section><!-- /.content -->
 
   <!-- TODO: Do not show when customer visits /accounts/:account_slug/:role/applications/:application_id -->
   <a href="" class="btn btn-default" ng-click="submit()">Apply</a>
