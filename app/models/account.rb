@@ -8,6 +8,8 @@ class Account < ActiveRecord::Base
   has_many :applications
   has_many :account_carriers
 
+  PLAN_NAMES = %[basic standard premiere]
+
   def needs_to_pay?
     last_payment = Payment
       .where(account_id: self.id)
