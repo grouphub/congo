@@ -800,6 +800,7 @@ congoApp.controller('GroupsShowController', [
       $http
         .post('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups/' + $scope.groupSlug() + '/memberships.json', data)
         .success(function (data, status, headers, config) {
+          $scope.formData.email = '';
           $scope.group.memberships.push(data.membership);    
         })
         .error(function (data, status, headers, config) {
