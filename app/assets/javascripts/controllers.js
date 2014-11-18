@@ -49,6 +49,34 @@ congoApp.controller('MainController', [
           flashesFactory.add('danger', 'There was a problem signing you out');
         });
     };
+
+    $scope.enforceValidAccount = function () {
+      var currentAccount = _.findWhere(congo.currentUser.accounts, {
+        slug: 'first_account'
+      });
+
+      if (!congo.currentUser) {
+        flashesFactory.add('danger', 'You have to be signed in to continue.');
+        $location.path('/users/sign_in');
+      }
+
+      if (!currentAccount) {
+        flashesFactory.add('danger', 'We could not find an appropriate account.');
+        $location.path('/');
+      }
+
+      if (!currentAccount.plan_name) {
+        flashesFactory.add('danger', 'Please choose a valid plan before continuing.');
+        $location.path('/users/new_plan');
+      }
+    };
+
+    $scope.enforceAdmin = function () {
+      if (!congo.current_user.is_admin) {
+        flashesFactory.add('danger', 'You must be an admin to continue.');
+        $location.path('/');
+      }
+    };
   }
 ]);
 
@@ -331,6 +359,9 @@ congoApp.controller('CarriersNewController', [
 congoApp.controller('CarriersIndexController', [
   '$scope', '$http', '$location',
   function ($scope, $http, $location) {
+    // Make sure user is admin before continuing.
+    $scope.enforceAdmin();
+
     $http
       .get('/api/v1/carriers.json')
       .success(function (data, status, headers, config) {
@@ -347,6 +378,9 @@ congoApp.controller('CarriersIndexController', [
 congoApp.controller('CarriersShowController', [
   '$scope', '$http', '$location',
   function ($scope, $http, $location) {
+    // Make sure user is admin before continuing.
+    $scope.enforceAdmin();
+
     $http
       .get('/api/v1/carriers/' + $scope.carrierSlug() + '.json')
       .success(function (data, status, headers, config) {
@@ -363,6 +397,9 @@ congoApp.controller('CarriersShowController', [
 congoApp.controller('AccountCarriersIndexController', [
   '$scope', '$http', '$location',
   function ($scope, $http, $location) {
+    // Make sure user is totally signed up before continuing.
+    $scope.enforceValidAccount();
+
     $scope.accountCarriers = null;
 
     $scope.deleteAccountCarrierAt = function (index) {
@@ -398,6 +435,9 @@ congoApp.controller('AccountCarriersIndexController', [
 congoApp.controller('AccountCarriersNewController', [
   '$scope', '$http', '$location',
   function ($scope, $http, $location) {
+    // Make sure user is totally signed up before continuing.
+    $scope.enforceValidAccount();
+
     $scope.elements = null;
     $scope.carriers = null;
     $scope.selectedCarrier = null;
@@ -460,6 +500,9 @@ congoApp.controller('AccountCarriersNewController', [
 congoApp.controller('AccountCarriersShowController', [
   '$scope', '$http', '$location',
   function ($scope, $http, $location) {
+    // Make sure user is totally signed up before continuing.
+    $scope.enforceValidAccount();
+
     $scope.accountCarrier = null;
 
     $http
@@ -478,6 +521,9 @@ congoApp.controller('AccountCarriersShowController', [
 congoApp.controller('BenefitPlansIndexController', [
   '$scope', '$http', '$location',
   function ($scope, $http, $location) {
+    // Make sure user is totally signed up before continuing.
+    $scope.enforceValidAccount();
+
     $scope.deleteBenefitPlanAt = function (index) {
       var benefitPlan = $scope.benefitPlans[index];
 
@@ -511,6 +557,9 @@ congoApp.controller('BenefitPlansIndexController', [
 congoApp.controller('BenefitPlansNewController', [
   '$scope', '$http', '$location',
   function ($scope, $http, $location) {
+    // Make sure user is totally signed up before continuing.
+    $scope.enforceValidAccount();
+
     $scope.elements = null;
     $scope.accountCarriers = null;
     $scope.selectedAccountCarrier = null;
@@ -573,6 +622,9 @@ congoApp.controller('BenefitPlansNewController', [
 congoApp.controller('BenefitPlansShowController', [
   '$scope', '$http', '$location',
   function ($scope, $http, $location) {
+    // Make sure user is totally signed up before continuing.
+    $scope.enforceValidAccount();
+
     $scope.benefitPlan = null;
 
     $http
@@ -593,6 +645,9 @@ congoApp.controller('BenefitPlansShowController', [
 congoApp.controller('GroupsIndexController', [
   '$scope', '$http', '$location',
   function ($scope, $http, $location) {
+    // Make sure user is totally signed up before continuing.
+    $scope.enforceValidAccount();
+
     $scope.toggleGroupAt = function (index) {
       var group = $scope.groups[index];
 
@@ -647,6 +702,9 @@ congoApp.controller('GroupsIndexController', [
 congoApp.controller('GroupsNewController', [
   '$scope', '$http', '$location',
   function ($scope, $http, $location) {
+    // Make sure user is totally signed up before continuing.
+    $scope.enforceValidAccount();
+
     $scope.elements = [];
 
     $scope.submit = function () {
@@ -690,6 +748,9 @@ congoApp.controller('GroupsNewController', [
 congoApp.controller('GroupsShowController', [
   '$scope', '$http', '$location', '$cookieStore',
   function ($scope, $http, $location, $cookieStore) {
+    // Make sure user is totally signed up before continuing.
+    $scope.enforceValidAccount();
+
     $scope.formData = {
       email: null 
     };
@@ -861,6 +922,9 @@ congoApp.controller('GroupsShowController', [
 congoApp.controller('ApplicationsNewController', [
   '$scope', '$http', '$location', '$cookieStore',
   function ($scope, $http, $location, $cookieStore) {
+    // Make sure user is totally signed up before continuing.
+    $scope.enforceValidAccount();
+
     $scope.elements = [];
     $scope.group = null;
     $scope.benefitPlan = null;
@@ -939,6 +1003,9 @@ congoApp.controller('ApplicationsNewController', [
 congoApp.controller('ApplicationsShowController', [
   '$scope', '$http', '$location',
   function ($scope, $http, $location) {
+    // Make sure user is totally signed up before continuing.
+    $scope.enforceValidAccount();
+
     $http
       .get('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/applications/' + $scope.applicationId() + '.json')
       .success(function (data, status, headers, config) {
@@ -955,6 +1022,9 @@ congoApp.controller('ApplicationsShowController', [
 congoApp.controller('ApplicationsIndexController', [
   '$scope', '$http', '$location',
   function ($scope, $http, $location) {
+    // Make sure user is totally signed up before continuing.
+    $scope.enforceValidAccount();
+
     $http
       .get('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/applications.json')
       .success(function (data, status, headers, config) {
