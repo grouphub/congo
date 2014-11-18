@@ -932,7 +932,7 @@ congoApp.controller('ApplicationsNewController', [
 
     $scope.submit = function () {
       var properties = _.reduce(
-        $scope.elements,
+        $('#enrollment-form form').serializeArray(),
         function (sum, element) {
           sum[element.name] = element.value;
           return sum;
