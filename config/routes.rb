@@ -29,6 +29,9 @@ Rails.application.routes.draw do
     '/admin/carriers/new',
     '/admin/carriers/:carrier_slug',
 
+    # Invitations
+    '/admin/invitations',
+
     # Account home
     '/accounts/:slug/:role',
     '/accounts/:slug/:role/home',
@@ -77,6 +80,7 @@ Rails.application.routes.draw do
 
       # Admin routes
       resources :carriers
+      resources :invitations
 
       # User routes
       post '/users/signin', to: 'users#signin'

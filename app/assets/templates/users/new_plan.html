@@ -59,5 +59,22 @@
       <a href="" class="btn btn-primary" ng-click="pickPlan('premiere')">Start Premiere</a>
     </div>
   </div>
+
+  <hr>
+
+  <div class="row">
+    <div class="col-md-12">
+      <h3>&hellip;or, enter an invite code:</h3>
+
+      <form ng-submit="addInviteCode()">
+        <div class="form-group">
+          <label for="invitation">Invite code</label>
+          <input type="text" class="form-control" id="invitation" placeholder="Enter invite code&hellip;" ng-model="invitation">
+        </div>
+
+        <input type="submit" class="btn btn-primary" value="Start">
+      </form>
+    </div>
+  </div>
 </div>
 

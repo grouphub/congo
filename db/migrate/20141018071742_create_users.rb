@@ -7,6 +7,9 @@ class CreateUsers < ActiveRecord::Migration
       t.string :encrypted_password
       t.text :properties_data
 
+      # Invitation system
+      t.integer :invitation_id
+
       t.timestamps
     end
   end

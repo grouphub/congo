@@ -9,7 +9,7 @@ class CreateAccounts < ActiveRecord::Migration
       # TODO: What fields do we need?
       t.text :properties_data
 
-      # Payment info
+      # Payment info (TODO: Do we still need these?)
       t.string :card_number
       t.string :month
       t.string :year
