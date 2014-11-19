@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 20141103003532) do
     t.string   "name"
     t.string   "slug"
     t.string   "tagline"
+    t.string   "plan_name"
     t.text     "properties_data"
     t.string   "card_number"
     t.string   "month"

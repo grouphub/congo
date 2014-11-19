@@ -4,6 +4,7 @@ class CreateAccounts < ActiveRecord::Migration
       t.string :name
       t.string :slug
       t.string :tagline
+      t.string :plan_name
 
       # TODO: What fields do we need?
       t.text :properties_data
