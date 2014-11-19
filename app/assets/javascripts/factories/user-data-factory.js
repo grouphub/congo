@@ -159,13 +159,15 @@ congoApp.factory('userDataFactory', [
         return congo.currentUser.id;
       },
       isBrokerIncomplete: function () {
-        return !!_.select(congo.currentUser.accounts, function (account) {
-          if (!account.slug || account.slug.length === 0) {
-            if (account.role === 'Broker') {
-              return true;
-            }
-          }
+        var brokerAccounts = _.select(congo.currentUser.accounts, function (account) {
+          return account.role === 'Broker';
         });
+
+        var emptyBrokerAccounts = _.select(brokerAccounts, function (account) {
+          return (!account.slug || account.slug.length === 0);
+        });
+
+        return emptyBrokerAccounts.length > 0;
       }
     };
 

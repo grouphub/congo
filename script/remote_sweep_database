@@ -1,0 +1,2 @@
+heroku pg:reset HEROKU_POSTGRESQL_YELLOW_URL --confirm grouphub-staging
+heroku rake db:migrate db:seed

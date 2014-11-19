@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
 
   has_many :roles
   has_many :applications
+  has_one :invitation
 
   def password
     @password = BCrypt::Password.new(self.encrypted_password)

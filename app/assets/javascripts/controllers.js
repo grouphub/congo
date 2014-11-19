@@ -65,14 +65,14 @@ congoApp.controller('MainController', [
         $location.path('/');
       }
 
-      if (!currentAccount.plan_name) {
+      if (!currentAccount.plan_name && !congo.currentUser.invitation_id) {
         flashesFactory.add('danger', 'Please choose a valid plan before continuing.');
         $location.path('/users/new_plan');
       }
     };
 
     $scope.enforceAdmin = function () {
-      if (!congo.current_user.is_admin) {
+      if (!congo.currentUser.is_admin) {
         flashesFactory.add('danger', 'You must be an admin to continue.');
         $location.path('/');
       }
@@ -156,6 +156,19 @@ congoApp.controller('UsersNewPlanController', [
         })
         .success(function (data, status, headers, config) {
           $location.path('/users/new_billing');
+        })
+        .error(function (data, status, headers, config) {
+          flashesFactory.add('danger', 'There was a problem setting up your plan.');
+        });
+    };
+
+    $scope.addInviteCode = function () {
+      $http
+        .put('/api/v1/users/' + congo.currentUser.id + '.json', {
+          invite_code: $scope.invitation
+        })
+        .success(function (data, status, headers, config) {
+          $location.path('/users/new_account');
         })
         .error(function (data, status, headers, config) {
           flashesFactory.add('danger', 'There was a problem setting up your plan.');
@@ -386,7 +399,55 @@ congoApp.controller('CarriersShowController', [
       .success(function (data, status, headers, config) {
         $scope.carrier = data.carrier;
 
-        $scope.ready;
+        $scope.ready();
+      })
+      .error(function (data, status, headers, config) {
+        debugger
+      });
+  }
+]);
+
+congoApp.controller('InvitationsIndexController', [
+  '$scope', '$http', '$location',
+  function ($scope, $http, $location) {
+    // Make sure user is admin before continuing.
+    $scope.enforceAdmin();
+
+    $scope.invitations = [];
+
+    $scope.deleteInvitation = function (invitationId) {
+      $http
+        .delete('/api/v1/invitations/' + invitationId + '.json')
+        .success(function (data, status, headers, config) {
+          $scope.invitations = _($scope.invitations).reject(function (invitation) {
+            return invitation.id === invitationId; 
+          });
+        })
+        .error(function (data, status, headers, config) {
+          debugger
+        });
+    };
+
+    $scope.newInvitation = function () {
+      $http
+        .post('/api/v1/invitations.json', {
+          description: $scope.description     
+        })
+        .success(function (data, status, headers, config) {
+          $scope.invitations.push(data.invitation);
+          $scope.description = '';
+        })
+        .error(function (data, status, headers, config) {
+          debugger
+        });
+    };
+
+    $http
+      .get('/api/v1/invitations.json')
+      .success(function (data, status, headers, config) {
+        $scope.invitations = data.invitations;
+
+        $scope.ready();
       })
       .error(function (data, status, headers, config) {
         debugger
