@@ -30,6 +30,11 @@ congoApp.controller('MainController', [
       $scope.flashes = flashesFactory.flashes;
     });
 
+    _(window.congo.flashes).each(function (flash) {
+      flashesFactory.add(flash.type, flash.message);
+    });
+
+    // Assets path
     $scope.asset = function (path) {
       return congo.assets[path];
     };
