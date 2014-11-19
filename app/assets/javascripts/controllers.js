@@ -30,6 +30,11 @@ congoApp.controller('MainController', [
       $scope.flashes = flashesFactory.flashes;
     });
 
+    _(window.congo.flashes).each(function (flash) {
+      flashesFactory.add(flash.type, flash.message);
+    });
+
+    // Assets path
     $scope.asset = function (path) {
       return congo.assets[path];
     };
@@ -48,6 +53,34 @@ congoApp.controller('MainController', [
         .error(function (data, status, headers, config) {
           flashesFactory.add('danger', 'There was a problem signing you out');
         });
+    };
+
+    $scope.enforceValidAccount = function () {
+      var currentAccount = _.findWhere(congo.currentUser.accounts, {
+        slug: 'first_account'
+      });
+
+      if (!congo.currentUser) {
+        flashesFactory.add('danger', 'You have to be signed in to continue.');
+        $location.path('/users/sign_in');
+      }
+
+      if (!currentAccount) {
+        flashesFactory.add('danger', 'We could not find an appropriate account.');
+        $location.path('/');
+      }
+
+      if (!currentAccount.plan_name && !congo.currentUser.invitation_id) {
+        flashesFactory.add('danger', 'Please choose a valid plan before continuing.');
+        $location.path('/users/new_plan');
+      }
+    };
+
+    $scope.enforceAdmin = function () {
+      if (!congo.currentUser.is_admin) {
+        flashesFactory.add('danger', 'You must be an admin to continue.');
+        $location.path('/');
+      }
     };
   }
 ]);
@@ -128,6 +161,19 @@ congoApp.controller('UsersNewPlanController', [
         })
         .success(function (data, status, headers, config) {
           $location.path('/users/new_billing');
+        })
+        .error(function (data, status, headers, config) {
+          flashesFactory.add('danger', 'There was a problem setting up your plan.');
+        });
+    };
+
+    $scope.addInviteCode = function () {
+      $http
+        .put('/api/v1/users/' + congo.currentUser.id + '.json', {
+          invite_code: $scope.invitation
+        })
+        .success(function (data, status, headers, config) {
+          $location.path('/users/new_account');
         })
         .error(function (data, status, headers, config) {
           flashesFactory.add('danger', 'There was a problem setting up your plan.');
@@ -331,6 +377,9 @@ congoApp.controller('CarriersNewController', [
 congoApp.controller('CarriersIndexController', [
   '$scope', '$http', '$location',
   function ($scope, $http, $location) {
+    // Make sure user is admin before continuing.
+    $scope.enforceAdmin();
+
     $http
       .get('/api/v1/carriers.json')
       .success(function (data, status, headers, config) {
@@ -347,12 +396,63 @@ congoApp.controller('CarriersIndexController', [
 congoApp.controller('CarriersShowController', [
   '$scope', '$http', '$location',
   function ($scope, $http, $location) {
+    // Make sure user is admin before continuing.
+    $scope.enforceAdmin();
+
     $http
       .get('/api/v1/carriers/' + $scope.carrierSlug() + '.json')
       .success(function (data, status, headers, config) {
         $scope.carrier = data.carrier;
 
-        $scope.ready;
+        $scope.ready();
+      })
+      .error(function (data, status, headers, config) {
+        debugger
+      });
+  }
+]);
+
+congoApp.controller('InvitationsIndexController', [
+  '$scope', '$http', '$location',
+  function ($scope, $http, $location) {
+    // Make sure user is admin before continuing.
+    $scope.enforceAdmin();
+
+    $scope.invitations = [];
+
+    $scope.deleteInvitation = function (invitationId) {
+      $http
+        .delete('/api/v1/invitations/' + invitationId + '.json')
+        .success(function (data, status, headers, config) {
+          $scope.invitations = _($scope.invitations).reject(function (invitation) {
+            return invitation.id === invitationId; 
+          });
+        })
+        .error(function (data, status, headers, config) {
+          debugger
+        });
+    };
+
+    $scope.newInvitation = function () {
+      $http
+        .post('/api/v1/invitations.json', {
+          description: $scope.description     
+        })
+        .success(function (data, status, headers, config) {
+          $scope.invitations.push(data.invitation);
+          $scope.description = '';
+        })
+        .error(function (data, status, headers, config) {
+          debugger
+        });
+    };
+
+    $http
+      .get('/api/v1/invitations.json')
+      .success(function (data, status, headers, config) {
+        $scope.invitations = data.invitations;
+
+        $scope.ready();
       })
       .error(function (data, status, headers, config) {
         debugger
@@ -363,6 +463,9 @@ congoApp.controller('CarriersShowController', [
 congoApp.controller('AccountCarriersIndexController', [
   '$scope', '$http', '$location',
   function ($scope, $http, $location) {
+    // Make sure user is totally signed up before continuing.
+    $scope.enforceValidAccount();
+
     $scope.accountCarriers = null;
 
     $scope.deleteAccountCarrierAt = function (index) {
@@ -398,6 +501,9 @@ congoApp.controller('AccountCarriersIndexController', [
 congoApp.controller('AccountCarriersNewController', [
   '$scope', '$http', '$location',
   function ($scope, $http, $location) {
+    // Make sure user is totally signed up before continuing.
+    $scope.enforceValidAccount();
+
     $scope.elements = null;
     $scope.carriers = null;
     $scope.selectedCarrier = null;
@@ -460,6 +566,9 @@ congoApp.controller('AccountCarriersNewController', [
 congoApp.controller('AccountCarriersShowController', [
   '$scope', '$http', '$location',
   function ($scope, $http, $location) {
+    // Make sure user is totally signed up before continuing.
+    $scope.enforceValidAccount();
+
     $scope.accountCarrier = null;
 
     $http
@@ -478,6 +587,9 @@ congoApp.controller('AccountCarriersShowController', [
 congoApp.controller('BenefitPlansIndexController', [
   '$scope', '$http', '$location',
   function ($scope, $http, $location) {
+    // Make sure user is totally signed up before continuing.
+    $scope.enforceValidAccount();
+
     $scope.deleteBenefitPlanAt = function (index) {
       var benefitPlan = $scope.benefitPlans[index];
 
@@ -511,6 +623,9 @@ congoApp.controller('BenefitPlansIndexController', [
 congoApp.controller('BenefitPlansNewController', [
   '$scope', '$http', '$location',
   function ($scope, $http, $location) {
+    // Make sure user is totally signed up before continuing.
+    $scope.enforceValidAccount();
+
     $scope.elements = null;
     $scope.accountCarriers = null;
     $scope.selectedAccountCarrier = null;
@@ -573,6 +688,9 @@ congoApp.controller('BenefitPlansNewController', [
 congoApp.controller('BenefitPlansShowController', [
   '$scope', '$http', '$location',
   function ($scope, $http, $location) {
+    // Make sure user is totally signed up before continuing.
+    $scope.enforceValidAccount();
+
     $scope.benefitPlan = null;
 
     $http
@@ -593,6 +711,9 @@ congoApp.controller('BenefitPlansShowController', [
 congoApp.controller('GroupsIndexController', [
   '$scope', '$http', '$location',
   function ($scope, $http, $location) {
+    // Make sure user is totally signed up before continuing.
+    $scope.enforceValidAccount();
+
     $scope.toggleGroupAt = function (index) {
       var group = $scope.groups[index];
 
@@ -647,6 +768,9 @@ congoApp.controller('GroupsIndexController', [
 congoApp.controller('GroupsNewController', [
   '$scope', '$http', '$location',
   function ($scope, $http, $location) {
+    // Make sure user is totally signed up before continuing.
+    $scope.enforceValidAccount();
+
     $scope.elements = [];
 
     $scope.submit = function () {
@@ -690,6 +814,9 @@ congoApp.controller('GroupsNewController', [
 congoApp.controller('GroupsShowController', [
   '$scope', '$http', '$location', '$cookieStore',
   function ($scope, $http, $location, $cookieStore) {
+    // Make sure user is totally signed up before continuing.
+    $scope.enforceValidAccount();
+
     $scope.formData = {
       email: null 
     };
@@ -739,6 +866,7 @@ congoApp.controller('GroupsShowController', [
       $http
         .post('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups/' + $scope.groupSlug() + '/memberships.json', data)
         .success(function (data, status, headers, config) {
+          $scope.formData.email = '';
           $scope.group.memberships.push(data.membership);    
         })
         .error(function (data, status, headers, config) {
@@ -877,13 +1005,16 @@ congoApp.controller('GroupsShowController', [
 congoApp.controller('ApplicationsNewController', [
   '$scope', '$http', '$location', '$cookieStore',
   function ($scope, $http, $location, $cookieStore) {
+    // Make sure user is totally signed up before continuing.
+    $scope.enforceValidAccount();
+
     $scope.elements = [];
     $scope.group = null;
     $scope.benefitPlan = null;
 
     $scope.submit = function () {
       var properties = _.reduce(
-        $scope.elements,
+        $('#enrollment-form form').serializeArray(),
         function (sum, element) {
           sum[element.name] = element.value;
           return sum;
@@ -955,6 +1086,9 @@ congoApp.controller('ApplicationsNewController', [
 congoApp.controller('ApplicationsShowController', [
   '$scope', '$http', '$location',
   function ($scope, $http, $location) {
+    // Make sure user is totally signed up before continuing.
+    $scope.enforceValidAccount();
+
     $http
       .get('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/applications/' + $scope.applicationId() + '.json')
       .success(function (data, status, headers, config) {
@@ -971,6 +1105,9 @@ congoApp.controller('ApplicationsShowController', [
 congoApp.controller('ApplicationsIndexController', [
   '$scope', '$http', '$location',
   function ($scope, $http, $location) {
+    // Make sure user is totally signed up before continuing.
+    $scope.enforceValidAccount();
+
     $http
       .get('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/applications.json')
       .success(function (data, status, headers, config) {

@@ -68,6 +68,10 @@ congoApp.config([
         templateUrl: '<%= asset_path 'carriers/show.html' %>',
         controller: 'CarriersShowController'
       })
+      .when('/admin/invitations', {
+        templateUrl: '<%= asset_path 'invitations/index.html' %>',
+        controller: 'InvitationsIndexController'
+      })
       .when('/accounts/:slug/:role', {
         templateUrl: '<%= asset_path 'home.html' %>',
         controller: 'HomeController'

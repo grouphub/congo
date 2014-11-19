@@ -131,7 +131,9 @@ congoApp.factory('userDataFactory', [
           return;
         }
 
-        return congo.currentUser.accounts;
+        return _.select(congo.currentUser.accounts, function (account) {
+          return (account.slug && account.slug.length)
+        });
       },
       accountName: function () {
         var account;
@@ -155,6 +157,17 @@ congoApp.factory('userDataFactory', [
         }
 
         return congo.currentUser.id;
+      },
+      isBrokerIncomplete: function () {
+        var brokerAccounts = _.select(congo.currentUser.accounts, function (account) {
+          return account.role === 'Broker';
+        });
+
+        var emptyBrokerAccounts = _.select(brokerAccounts, function (account) {
+          return (!account.slug || account.slug.length === 0);
+        });
+
+        return emptyBrokerAccounts.length > 0;
       }
     };
 

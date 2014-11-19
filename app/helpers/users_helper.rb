@@ -2,6 +2,19 @@ module UsersHelper
   class AuthenticationException < StandardError
   end
 
+  # Move to ApplicationHelper
+  def error_response(message, status = :bad_request)
+    respond_to do |format|
+      format.json {
+        render \
+          status: status,
+          json: {
+            error: message
+          }
+      }
+    end
+  end
+
   def signin!(email, password)
     user = User.find_by_email(email)
 
@@ -33,6 +46,11 @@ module UsersHelper
 
   def authenticate_admin!
     raise AuthenticationException unless admin?
+  end
+
+  # Make sure the user is totally signed up
+  def ensure_signed_up!
+    # current_user
   end
 
   # Render methods

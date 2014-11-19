@@ -10,6 +10,7 @@
     <%= csrf_meta_tags %>
 
     <script>
+      window.congo.flashes = <%= raw(flashes_json) %>;
       window.congo.currentUser = <%= current_user ? raw(render_user(current_user).to_json) : 'null' %>;
     </script>
   </head>

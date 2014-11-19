@@ -9,3 +9,4 @@ module Sluggable
     self.slug = Sluggerizer.sluggerize(self.name) if self.name
   end
 end
+

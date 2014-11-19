@@ -7,15 +7,10 @@
         <h2>Basic <small>$1,000</small></h2>
 
         <ul>
-          <li>1 custom domain</li>
-          <li>5 groups</li>
-          <li>50 enrollments/transactions</li>
+          <li>100 enrollments</li>
+          <li>$10 per additional enrollment</li>
           <li>Email support</li>
         </ul>
-
-        <hr>
-
-        <p>$10 each additional enrollment/transaction</p>
       </div>
 
       <a href="" class="btn btn-primary" ng-click="pickPlan('basic')">Start Basic</a>
@@ -23,18 +18,13 @@
 
     <div class="col-md-4">
       <div class="plan">
-        <h2>Standard <small>$1,000 per year</small></h2>
+        <h2>Standard <small>$2,500</small></h2>
 
         <ul>
-          <li>20 groups</li>
-          <li>1,000 enrollments/transactions</li>
-          <li>Custom group domains</li>
+          <li>500 enrollments</li>
+          <li>$5 per additional enrollment</li>
           <li>Email support</li>
         </ul>
-
-        <hr>
-
-        <p>$5 each additional enrollment/transaction</p>
       </div>
 
       <a href="" class="btn btn-primary" ng-click="pickPlan('standard')">Start Standard</a>
@@ -42,21 +32,33 @@
 
     <div class="col-md-4">
       <div class="plan">
-        <h2>Premiere <small>$5,000</small></h2>
+        <h2>Premier <small>$5,000</small></h2>
 
         <ul>
-          <li>Unlimited groups</li>
-          <li>5,000 enrollments/transactions</li>
-          <li>Custom group domains</li>
+          <li>2,500 enrollments</li>
+          <li>$2 per additional enrollment</li>
           <li>Phone &amp; Email support</li>
         </ul>
-
-        <hr>
-
-        <p>$3 each additional enrollment/transaction</p>
       </div>
 
       <a href="" class="btn btn-primary" ng-click="pickPlan('premiere')">Start Premiere</a>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="row">
+    <div class="col-md-12">
+      <h3>&hellip;or, enter an invite code:</h3>
+
+      <form ng-submit="addInviteCode()">
+        <div class="form-group">
+          <label for="invitation">Invite code</label>
+          <input type="text" class="form-control" id="invitation" placeholder="Enter invite code&hellip;" ng-model="invitation">
+        </div>
+
+        <input type="submit" class="btn btn-primary" value="Start">
+      </form>
     </div>
   </div>
 </div>

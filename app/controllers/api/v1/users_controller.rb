@@ -70,6 +70,27 @@ class Api::V1::UsersController < ApplicationController
     account_id = params[:account_id]
     account_name = params[:account_name]
     account_tagline = params[:account_tagline]
+    invite_code = params[:invite_code]
+
+    plan_name = params[:plan_name]
+
+    if invite_code
+      invitation = Invitation.where(uuid: invite_code).first
+
+      if !invitation
+        error_response("#{invite_code} is not a valid invite code")
+        return
+      end
+
+      user.invitation_id = invitation.id
+    end
+
+    # Bail if the plan name is not correct
+    if plan_name && !Account::PLAN_NAMES.include?(plan_name)
+      error_response("#{plan_name} is not a valid plan type")
+      return
+    end
+
     user_properties = (user.properties || {}).merge(params[:user_properties] || {})
 
     user.properties = user_properties
@@ -79,6 +100,7 @@ class Api::V1::UsersController < ApplicationController
       account = Account.where(id: account_id).first
       account.name = account_name
       account.tagline = account_tagline
+      account.plan_name = plan_name
       account.properties = (account.properties || {}).merge(params[:account_properties])
       account.save!
     end
