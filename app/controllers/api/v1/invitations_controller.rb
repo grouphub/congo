@@ -1,6 +1,6 @@
 class Api::V1::InvitationsController < ApplicationController
   def index
-    invitations = Invitation.all.includes(:account)
+    invitations = Invitation.all.includes(:user)
 
     respond_to do |format|
       format.json {
