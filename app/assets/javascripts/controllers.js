@@ -900,13 +900,13 @@ congoApp.controller('GroupsShowController', [
 
     $scope.submitApplication = function (application) {
       var data = {
-        submitted_by_id: $scope.userId()
+        applied_by_id: $scope.userId()
       }
 
       $http
         .put('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/applications/' + application.id + '.json', data)
         .success(function (data, status, headers, config) {
-          application.submitted_by_id = congo.currentUser.id
+          debugger
         })
         .error(function (data, status, headers, config) {
           debugger
@@ -917,27 +917,11 @@ congoApp.controller('GroupsShowController', [
       var data = {
         benefit_plan_id: benefitPlan.id
       }
-      
 
       $http
         .post('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups/' + $scope.groupSlug() + '/group_benefit_plans.json', data)
         .success(function (data, status, headers, config) {
           benefitPlan.isEnabled = true;
-        })
-        .error(function (data, status, headers, config) {
-          debugger
-        });
-    };
-
-    $scope.disableBenefitPlan = function (benefitPlan) {
-      var data = {
-        benefit_plan_id: benefitPlan.id
-      }
-
-      $http
-        .post('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups/' + $scope.groupSlug() + '/group_benefit_plans.json', data)
-        .success(function (data, status, headers, config) {
-          benefitPlan.isEnabled = false;
         })
         .error(function (data, status, headers, config) {
           debugger
@@ -1112,7 +1096,7 @@ congoApp.controller('ApplicationsIndexController', [
       .get('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/applications.json')
       .success(function (data, status, headers, config) {
         $scope.applications = data.applications;
-
+        $scope.benefitPlan = data.benefit_plan;
         $scope.ready();
       })
       .error(function (data, status, headers, config) {

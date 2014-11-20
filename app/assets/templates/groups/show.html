@@ -41,7 +41,7 @@
 
       <tbody>
         <tr ng-repeat="benefitPlan in benefitPlans">
-          <td ng-if="benefitPlan.isEnabled">{{benefitPlan.name}}</td>
+          <td>{{benefitPlan.name}}</td>
 
           <td>
             <a class="btn btn-warning btn-xs" ng-if="!application.applied_by_id" ng-href="" ng-click="selectBenefitPlan(benefitPlan)" >Select</a>
