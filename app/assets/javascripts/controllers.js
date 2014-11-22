@@ -598,7 +598,7 @@ congoApp.controller('BenefitPlansIndexController', [
       }
 
       $http
-        .delete('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/benefit_plan/' + benefitPlan.id + '.json')
+        .delete('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/benefit_plans/' + benefitPlan.id + '.json')
         .success(function (data, status, headers, config) {
           $scope.benefitPlans.splice(index, 1);
         })
@@ -626,7 +626,7 @@ congoApp.controller('BenefitPlansNewController', [
     // Make sure user is totally signed up before continuing.
     $scope.enforceValidAccount();
 
-    $scope.elements = null;
+    $scope.elements = [];
     $scope.accountCarriers = null;
     $scope.selectedAccountCarrier = null;
 

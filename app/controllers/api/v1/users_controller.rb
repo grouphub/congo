@@ -33,24 +33,54 @@ class Api::V1::UsersController < ApplicationController
       membership.user_id = user.id
       membership.save!
 
-      Role.create! \
-        account_id: account_id,
-        user_id: user.id,
-        name: 'customer'
+      role = Role
+        .where({
+          account_id: account_id,
+          user_id: user.id,
+          name: 'customer'
+        })
+        .first
+
+      unless role
+        Role.create! \
+          account_id: account_id,
+          user_id: user.id,
+          name: 'customer'
+      end
 
     # User came from a manual signup and is a broker
     else
       account = Account.create!
 
-      Role.create! \
-        account_id: account.id,
-        user_id: user.id,
-        name: 'broker'
+      broker_role = Role
+        .where({
+          account_id: account.id,
+          user_id: user.id,
+          name: 'broker'
+        })
+        .first
 
-      Role.create! \
-        account_id: account.id,
-        user_id: user.id,
-        name: 'group_admin'
+      group_admin_role = Role
+        .where({
+          account_id: account.id,
+          user_id: user.id,
+          name: 'group_admin'
+        })
+        .first
+
+      unless broker_role
+        broker_role = Role.create \
+          account_id: account.id,
+          user_id: user.id,
+          name: 'broker'
+      end
+
+      unless group_admin_role
+        group_admin_role = Role.create \
+          account_id: account.id,
+          user_id: user.id,
+          name: 'group_admin'
+      end
     end
 
     signin! email, password
@@ -140,10 +170,20 @@ class Api::V1::UsersController < ApplicationController
         group = membership.group
         account_id = group.account_id
 
-        Role.create! \
-          account_id: account_id,
-          user_id: user.id,
-          name: 'customer'
+        role = Role
+          .where({
+            account_id: account_id,
+            user_id: user.id,
+            name: 'customer'
+          })
+          .first
+
+        unless role
+          Role.create! \
+            account_id: account_id,
+            user_id: user.id,
+            name: 'customer'
+        end
       end
 
       respond_to do |format|
