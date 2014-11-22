@@ -1,5 +1,7 @@
 class Api::V1::UsersController < ApplicationController
   include UsersHelper
+  include CustomerCreatable
+  include BrokerCreatable
 
   def create
     first_name = params[:first_name]
@@ -20,68 +22,11 @@ class Api::V1::UsersController < ApplicationController
       email: email,
       password: password
 
-    # User came in from an email and is therefore a customer
-    if email_token
-      membership = Membership.where(email_token: email_token).includes(:group).first
-      group = membership.group
-      account_id = group.account_id
+    # If user came in from an email then they are a customer.
+    attempt_to_create_customer!
 
-      unless membership
-        # TODO: Handle this
-      end
-
-      membership.user_id = user.id
-      membership.save!
-
-      role = Role
-        .where({
-          account_id: account_id,
-          user_id: user.id,
-          name: 'customer'
-        })
-        .first
-
-      unless role
-        Role.create! \
-          account_id: account_id,
-          user_id: user.id,
-          name: 'customer'
-      end
-
-    # User came from a manual signup and is a broker
-    else
-      account = Account.create!
-
-      broker_role = Role
-        .where({
-          account_id: account.id,
-          user_id: user.id,
-          name: 'broker'
-        })
-        .first
-
-      group_admin_role = Role
-        .where({
-          account_id: account.id,
-          user_id: user.id,
-          name: 'group_admin'
-        })
-        .first
-
-      unless broker_role
-        broker_role = Role.create \
-          account_id: account.id,
-          user_id: user.id,
-          name: 'broker'
-      end
-
-      unless group_admin_role
-        group_admin_role = Role.create \
-          account_id: account.id,
-          user_id: user.id,
-          name: 'group_admin'
-      end
-    end
+    # If user came from a manual signup, then they're a broker.
+    attempt_to_create_broker!
 
     signin! email, password
 
@@ -165,26 +110,8 @@ class Api::V1::UsersController < ApplicationController
     begin
       user = signin! email, password
 
-      if email_token
-        membership = Membership.where(email_token: email_token).includes(:group).first
-        group = membership.group
-        account_id = group.account_id
-
-        role = Role
-          .where({
-            account_id: account_id,
-            user_id: user.id,
-            name: 'customer'
-          })
-          .first
-
-        unless role
-          Role.create! \
-            account_id: account_id,
-            user_id: user.id,
-            name: 'customer'
-        end
-      end
+      # If user came in from an email then they are a customer.
+      attempt_to_link_customer!(params)
 
       respond_to do |format|
         format.json {

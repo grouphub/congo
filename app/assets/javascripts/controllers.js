@@ -26,12 +26,24 @@ congoApp.controller('MainController', [
     }
 
     // Setup flashes
-    $scope.vent.on($scope, 'flashes:added', function () {
-      $scope.flashes = flashesFactory.flashes;
+    $scope.vent.on($scope, 'flashes:changed', function (flashes) {
+      $scope.flashes = flashes;
     });
 
     _(window.congo.flashes).each(function (flash) {
       flashesFactory.add(flash.type, flash.message);
+    });
+
+    $('body').delegate('.alert .close', 'click', function (e) {
+      var $me = $(this);
+      var $alert = $me.closest('.alert');
+      var message = $alert.find('.message').text();
+      var type = $alert.data('kind');
+
+      flashesFactory.remove(type, message);
+
+      // NOTE: Should not need to do this manually
+      $alert.remove();
     });
 
     // Assets path

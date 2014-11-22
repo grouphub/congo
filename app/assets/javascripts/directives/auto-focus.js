@@ -6,9 +6,12 @@ congoApp.directive('autoFocus', [
     return {
       restrict: 'AC',
       link: function ($scope, $element) {
-        $timeout(function () {
-          $element[0].focus();
-        }, 0);
+        $scope.$watch('ready', function (show) {
+          console.log('YES');
+          $timeout(function () {
+            $element[0].focus();
+          }, 0);
+        });
       }
     };
   }

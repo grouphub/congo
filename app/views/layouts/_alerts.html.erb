@@ -1,7 +1,7 @@
 <div class="alerts">
-  <div class="alert alert-{{flash.type}} fade in" ng-repeat="flash in flashes">
-    <button class="close" data-dismiss="alert">×</button>
-    {{flash.message}}
+  <div class="alert alert-{{flash.type}}" data-kind="{{flash.type}}" ng-repeat="flash in flashes">
+    <button class="close">×</button>
+    <span class="message">{{flash.message}}</span>
   </div>
 </div>
 
