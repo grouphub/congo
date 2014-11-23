@@ -16,10 +16,12 @@ GroupBenefitPlan.create! \
 Membership.create! \
   group_id: group.id,
   user_id: alice.id,
+  role_id: alice.roles.first.id,
   email: alice.email
 
 Membership.create! \
   group_id: group.id,
   user_id: bob.id,
+  role_id: bob.roles.first.id,
   email: bob.email
 

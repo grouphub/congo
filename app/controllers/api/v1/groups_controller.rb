@@ -2,6 +2,8 @@ class Api::V1::GroupsController < ApplicationController
   include UsersHelper
 
   def index
+    account_slug = params[:account_id]
+    account = Account.where(slug: account_slug).first
     role_name = params[:role_id]
     groups = nil
 
@@ -12,8 +14,17 @@ class Api::V1::GroupsController < ApplicationController
         .includes(:group)
         .map(&:group)
         .select(&:is_enabled)
+        .select { |group| group.account_id == account.id }
+    elsif role_name == 'group_admin'
+      groups = Membership
+        .where(user_id: current_user.id)
+        .includes(:group)
+        .includes(:role)
+        .select { |membership| membership.role.name == 'group_admin' }
+        .map(&:group)
+        .select { |group| group.account_id == account.id }
     else
-      groups = Group.all
+      groups = Group.where(account_id: account.id)
     end
 
     respond_to do |format|
@@ -104,9 +115,11 @@ class Api::V1::GroupsController < ApplicationController
   def render_group(group)
     memberships = group.memberships.map { |membership|
       user = membership.user ? render_user(membership.user) : nil
+      role = membership.role
 
       membership.as_json.merge({
-        'user' => user,
+        'user' => user.as_json,
+        'role' => role.as_json,
         'applications' => membership.applications.map { |application|
           application.as_json.merge({
             'state' => application.state,
@@ -141,6 +154,8 @@ class Api::V1::GroupsController < ApplicationController
 
     group.as_json.merge({
       'memberships' => memberships,
+      'customer_memberships' => memberships.select { |membership| membership['role']['name'] == 'customer' },
+      'group_admin_memberships' => memberships.select { |membership| membership['role']['name'] == 'group_admin' },
       'benefit_plans' => benefit_plans,
       'applications' => applications
     })

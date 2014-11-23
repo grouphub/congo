@@ -31,26 +31,11 @@ module BrokerCreatable
       })
       .first
 
-    group_admin_role = Role
-      .where({
-        account_id: account.id,
-        user_id: user.id,
-        name: 'group_admin'
-      })
-      .first
-
     unless broker_role
       broker_role = Role.create \
         account_id: account.id,
         user_id: user.id,
         name: 'broker'
-    end
-
-    unless group_admin_role
-      group_admin_role = Role.create \
-        account_id: account.id,
-        user_id: user.id,
-        name: 'group_admin'
     end
   end
 end

@@ -22,6 +22,7 @@ module CustomerCreatable
       password: password
 
     membership = Membership.where(email_token: email_token).includes(:group).first
+    role_name = membership.role_name
     group = membership.group
     account_id = group.account_id
 
@@ -29,23 +30,26 @@ module CustomerCreatable
       # TODO: Handle this
     end
 
-    membership.user_id = user.id
-    membership.save!
+    binding.pry
 
     role = Role
       .where({
         account_id: account_id,
         user_id: user.id,
-        name: 'customer'
+        name: role_name
       })
       .first
 
     unless role
-      Role.create! \
+      role = Role.create! \
         account_id: account_id,
         user_id: user.id,
-        name: 'customer'
+        name: role_name
     end
+
+    membership.user_id = user.id
+    membership.role_id = role.id
+    membership.save!
   end
 
   def attempt_to_link_customer!(user)
@@ -58,25 +62,27 @@ module CustomerCreatable
     email_token = params[:email_token]
 
     membership = Membership.where(email_token: email_token).includes(:group).first
+    role_name = membership.role_name
     group = membership.group
     account_id = group.account_id
-
-    membership.user_id = user.id
-    membership.save!
 
     role = Role
       .where({
         account_id: account_id,
         user_id: user.id,
-        name: 'customer'
+        name: role_name
       })
       .first
 
     unless role
-      Role.create! \
+      role = Role.create! \
         account_id: account_id,
         user_id: user.id,
-        name: 'customer'
+        name: role_name
     end
+
+    membership.user_id = user.id
+    membership.role_id = role.id
+    membership.save!
   end
 end
