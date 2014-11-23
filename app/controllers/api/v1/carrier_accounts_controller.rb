@@ -2,10 +2,14 @@ class Api::V1::CarrierAccountsController < ApplicationController
   def index
     # TODO: Check for current user
 
+    account_slug = params[:account_id]
+    account = Account.where(slug: account_slug).first
+    carrier_accounts = CarrierAccount.where(account_id: account.id)
+
     respond_to do |format|
       format.json {
         render json: {
-          carrier_accounts: CarrierAccount.all.map { |carrier_account|
+          carrier_accounts: carrier_accounts.map { |carrier_account|
             render_carrier_account(carrier_account)
           }
         }
@@ -93,6 +97,9 @@ class Api::V1::CarrierAccountsController < ApplicationController
   # Render methods
 
   def render_carrier_account(carrier_account)
+    # TODO: Add this everywhere
+    raise 'Carrier account should not be nil.' if carrier_account.nil?
+
     carrier_account.as_json.merge({
       account: carrier_account.account,
       carrier: carrier_account.carrier
