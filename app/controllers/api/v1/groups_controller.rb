@@ -165,7 +165,7 @@ class Api::V1::GroupsController < ApplicationController
     group.as_json.merge({
       'memberships' => memberships,
       'customer_memberships' => customer_memberships,
-      'group_admin_memberships' => group_admin_memebrships,
+      'group_admin_memberships' => group_admin_memberships,
       'benefit_plans' => benefit_plans,
       'applications' => applications
     })
