@@ -68,7 +68,7 @@ congoApp.controller('MainController', [
 
     $scope.enforceValidAccount = function () {
       var currentAccount = _.findWhere(congo.currentUser.accounts, {
-        slug: 'first_account'
+        slug: $scope.accountSlug()
       });
 
       if (!congo.currentUser) {
