@@ -3,7 +3,6 @@
 
   <p>Lorem ipsum...</p>
 
-  <!-- TODO: Do not show when customer visits /accounts/:account_slug/:role/applications/:application_id -->
-  <a href="" class="btn btn-default" ng-click="submit()">Apply</a>
+  <a href="" class="btn btn-default" ng-click="submit()" ng-if="!applicationId()">Apply</a>
 </div>
 
