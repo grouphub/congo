@@ -26,9 +26,7 @@
         </td>
 
         <td>
-          <a href="" class="btn btn-warning btn-xs disabled" ng-if="!application.applied_by_id">Not Applied</a>
-          <a href="" class="btn btn-info btn-xs disabled" ng-if="application.applied_by_id && !application.submitted_by_id">Applied</a>
-          <a href="" class="btn btn-success btn-xs disabled" ng-if="application.submitted_by_id">Submitted</a>
+          <a href="" class="btn btn-{{application.state_label}} btn-xs disabled">{{application.human_state}}</a>
         </td>
       </tr>
     </tbody>

@@ -47,9 +47,7 @@
                 </span>
 
                 <span class="state">
-                  <a href="" class="btn btn-warning btn-xs disabled" ng-if="!application.applied_by_id">Not Applied</a>
-                  <a href="" class="btn btn-info btn-xs disabled" ng-if="application.applied_by_id && !application.submitted_by_id">Applied</a>
-                  <a href="" class="btn btn-success btn-xs disabled" ng-if="application.submitted_by_id">Submitted</a>
+                  <a href="" class="btn btn-{{application.state_label}} btn-xs disabled">{{application.human_state}}</a>
                 </span>
               </li>
             </ul>
@@ -57,6 +55,7 @@
 
           <td>
             <a class="btn btn-warning btn-xs" ng-click="selectBenefitPlan(benefitPlan)" ng-href="">Select</a>
+            <a class="btn btn-danger btn-xs" ng-click="declineBenefitPlan(benefitPlan)" ng-href="">Decline</a>
           </td>
         </tr>
       </tbody>
@@ -111,12 +110,10 @@
 
               <tbody>
                 <tr ng-repeat="application in membership.applications">
-                  <td>{{application.created_at | date}}</td>
+                  <td>{{application.selected_on | date}}</td>
 
                   <td>
-                    <a class="btn btn-warning btn-xs disabled" href="" ng-if="!application.applied_by_id">Not Applied</a>
-                    <a class="btn btn-primary btn-xs disabled" href="" ng-if="application.applied_by_id && !application.submitted_by_id">Applied</a>
-                    <a class="btn btn-success btn-xs disabled" href="" ng-if="application.submitted_by_id">Submitted</a>
+                    <a href="" class="btn btn-{{application.state_label}} btn-xs disabled">{{application.human_state}}</a>
                   </td>
 
                   <td>

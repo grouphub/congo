@@ -850,6 +850,29 @@ congoApp.controller('GroupsShowController', [
         });
     };
 
+    $scope.declineBenefitPlan = function (benefitPlan) {
+      if (!benefitPlan) {
+        debugger
+      }
+
+      var data = {
+        group_slug: $scope.groupSlug(),
+        benefit_plan_id: benefitPlan.id,
+        declined_by_id: congo.currentUser.id
+      };
+
+      $http
+        .post('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/applications.json', data)
+        .success(function (data, status, headers, config) {
+          $scope.group.applications.push(data.application);
+
+          $location.path('/accounts/' + $scope.accountSlug() + '/' + $scope.currentRole() + '/groups/' + $scope.groupSlug());
+        })
+        .error(function (data, status, headers, config) {
+          debugger
+        });
+    };
+
     $scope.inviteMember = function () {
       var email = $scope.formData.email;
       var data = {
