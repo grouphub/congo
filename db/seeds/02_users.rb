@@ -31,11 +31,6 @@ Role.create! \
   name: 'broker'
 
 Role.create! \
-  user_id: admin.id,
-  account_id: first_account.id,
-  name: 'group_admin'
-
-Role.create! \
   user_id: bob.id,
   account_id: first_account.id,
   name: 'customer'

@@ -18,10 +18,12 @@ class Api::V1::MembershipsController < ApplicationController
     group_slug = params[:group_id]
     group = Group.where(slug: group_slug).first
     email = params[:membership][:email]
+    role_name = params[:role_name]
 
     membership = Membership.create! \
       group_id: group.id,
-      email: email
+      email: email,
+      role_name: role_name
 
     MembershipMailer.confirmation_email(membership, request).deliver
 

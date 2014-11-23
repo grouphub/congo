@@ -2,6 +2,8 @@ class Role < ActiveRecord::Base
   belongs_to :account
   belongs_to :user
 
+  has_many :memberships
+
   before_save :add_english_name
 
   def add_english_name

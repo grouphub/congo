@@ -193,6 +193,8 @@ ActiveRecord::Schema.define(version: 20141119053011) do
   create_table "memberships", force: true do |t|
     t.integer  "user_id"
     t.integer  "group_id"
+    t.string   "role_name"
+    t.integer  "role_id"
     t.string   "email"
     t.string   "email_token"
     t.datetime "created_at"

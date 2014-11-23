@@ -814,14 +814,25 @@ congoApp.controller('GroupsShowController', [
     // Make sure user is totally signed up before continuing.
     $scope.enforceValidAccount();
 
-    $scope.formData = {
-      email: null 
+    $scope.inviteMemberFormData = {
+      email: null
+    };
+
+    $scope.inviteGroupAdminFormData = {
+      email: null
     };
 
     // Only used by group admins
-    $scope.memberships = function () {
+    $scope.customerMemberships = function () {
       if ($scope.group) {
-        return $scope.group.memberships;
+        return $scope.group.customer_memberships;
+      }
+    };
+
+    // Only used by brokers
+    $scope.groupAdminMemberships = function () {
+      if ($scope.group) {
+        return $scope.group.group_admin_memberships;
       }
     };
 
@@ -879,16 +890,37 @@ congoApp.controller('GroupsShowController', [
     };
 
     $scope.inviteMember = function () {
-      var email = $scope.formData.email;
+      var email = $scope.inviteMemberFormData.email;
       var data = {
+        role_name: 'customer',
         email: email
       };
 
       $http
         .post('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups/' + $scope.groupSlug() + '/memberships.json', data)
         .success(function (data, status, headers, config) {
-          $scope.formData.email = '';
-          $scope.group.memberships.push(data.membership);    
+          $scope.inviteMemberFormData.email = '';
+          $scope.group.memberships.push(data.membership);
+          $scope.group.customer_memberships.push(data.membership);
+        })
+        .error(function (data, status, headers, config) {
+          debugger
+        });
+    };
+
+    $scope.inviteGroupAdmin = function () {
+      var email = $scope.inviteGroupAdminFormData.email;
+      var data = {
+        role_name: 'group_admin',
+        email: email
+      };
+
+      $http
+        .post('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups/' + $scope.groupSlug() + '/memberships.json', data)
+        .success(function (data, status, headers, config) {
+          $scope.inviteGroupAdminFormData.email = '';
+          $scope.group.memberships.push(data.membership);
+          $scope.group.group_admin_memberships.push(data.membership);
         })
         .error(function (data, status, headers, config) {
           debugger
@@ -911,6 +943,14 @@ congoApp.controller('GroupsShowController', [
         .delete('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups/' + $scope.groupSlug() + '/memberships/' + membership.id + '.json')
         .success(function (data, status, headers, config) {
           $scope.group.memberships = _($scope.group.memberships).reject(function (m) {
+            return membership.id === m.id;
+          });
+
+          $scope.group.customer_memberships = _($scope.group.customer_memberships).reject(function (m) {
+            return membership.id === m.id;
+          });
+
+          $scope.group.group_admin_memberships = _($scope.group.group_admin_memberships).reject(function (m) {
             return membership.id === m.id;
           });
         })
