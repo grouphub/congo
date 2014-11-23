@@ -2,16 +2,6 @@
   <h1>Create account</h1>
 
   <form ng-submit="submit()">
-    <div class="form-group">
-      <label for="name">Name</label>
-      <input type="text" class="form-control" id="name" placeholder="Enter name&hellip;" ng-model="name" auto-focus>
-    </div>
-
-    <div class="form-group">
-      <label for="tagline">Tagline</label>
-      <input type="text" class="form-control" id="tagline" placeholder="Enter tagline&hellip;" ng-model="tagline">
-    </div>
-
     <properties:form x-elements="{{elements}}" x-data="{{data}}"></properties:form>
 
     <input type="submit" class="btn btn-default" value="Sign up">

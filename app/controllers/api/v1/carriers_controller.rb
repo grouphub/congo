@@ -17,8 +17,8 @@ class Api::V1::CarriersController < ApplicationController
   def create
     # TODO: Check for current user and admin
 
-    name = params[:name]
     properties = params[:properties]
+    name = properties['name']
 
     unless name
       # TODO: Handle this

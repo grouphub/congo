@@ -75,6 +75,12 @@ Rails.application.routes.draw do
           end
 
           resources :applications
+
+          get '/properties/account_carriers', to: 'properties#account_carriers'
+          get '/properties/accounts', to: 'properties#accounts'
+          get '/properties/carriers', to: 'properties#carriers'
+          get '/properties/benefit_plans', to: 'properties#benefit_plans'
+          get '/properties/groups', to: 'properties#groups'
         end
       end
 

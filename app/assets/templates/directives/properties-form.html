@@ -4,5 +4,17 @@
       <label ng-if="element.title" for="{{element.name}}">{{element.title}}</label>
       <input type="text" class="form-control" id="{{element.name}}" name="{{element.name}}" placeholder="{{element.placeholder}}" ng-model="element.value">
     </div>
+
+    <div ng-if="element.type == 'list'">
+      <label ng-if="element.title" for="{{element.name}}">{{element.title}}</label>
+      <select
+        class="form-control"
+        id="{{element.name}}"
+        name="{{element.name}}"
+        ng-options="n as n.title for n in element.items track by n.slug"
+        ng-model="selected"
+      >
+      </select>
+    </div>
   </div>
 </form>
