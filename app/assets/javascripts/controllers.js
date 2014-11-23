@@ -1019,9 +1019,9 @@ congoApp.controller('GroupsShowController', [
       if ($scope.benefitPlans && $scope.group) {
         _($scope.benefitPlans).each(function (benefitPlan) {
           benefitPlan.isEnabled = !!_($scope.group.benefitPlans).findWhere({ id: benefitPlan.id });
-
-          $scope.ready();
         });
+
+        $scope.ready();
       }
     }
 
