@@ -30,8 +30,11 @@
     </a>
 
     <a ng-href="/accounts/{{account.slug}}/{{account.role.name}}" ng-if="account.role.name != 'admin'">
-      {{account.name}}
-      <span class="label label-default role">{{account.role.english_name}}</span>
+      <i class="glyphicon glyphicon-user"></i>
+      <span class="caption">
+        {{account.name}}
+        <span class="label label-default role">{{account.role.english_name}}</span>
+      </span>
     </a>
   </li>
 

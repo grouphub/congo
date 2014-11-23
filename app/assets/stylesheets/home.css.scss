@@ -466,6 +466,10 @@ h1 {
           left: 7px;
         }
 
+        .heading {
+          display: none;
+        }
+
         .sidebar-nav {
           > li:not(.sidebar-brand) {
             a {
