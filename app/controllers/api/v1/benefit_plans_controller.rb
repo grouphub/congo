@@ -1,9 +1,20 @@
 class Api::V1::BenefitPlansController < ApplicationController
   def index
+    account_slug = params[:account_id]
+    account = Account.where(slug: account_slug).first
+    role_slug = params[:role_id]
+    benefit_plans = nil
+
+    if role_slug == 'group_admin' || role_slug == 'broker'
+      benefit_plans = BenefitPlan.where(account_id: account.id)
+    else
+      benefit_plans = BenefitPlan.where(account_id: account.id, is_enabled: true)
+    end
+
     respond_to do |format|
       format.json {
         render json: {
-          benefit_plans: BenefitPlan.all.map { |benefit_plan|
+          benefit_plans: benefit_plans.map { |benefit_plan|
             render_benefit_plan(benefit_plan)
           }
         }
@@ -36,6 +47,22 @@ class Api::V1::BenefitPlansController < ApplicationController
       account_id: account.id,
       carrier_account_id: carrier_account.id,
       properties: properties
+
+    respond_to do |format|
+      format.json {
+        render json: {
+          benefit_plan: render_benefit_plan(benefit_plan)
+        }
+      }
+    end
+  end
+
+  def update
+    benefit_plan = BenefitPlan.find(params[:id])
+
+    unless params[:is_enabled].nil?
+      benefit_plan.update_attribute(:is_enabled, params[:is_enabled])
+    end
 
     respond_to do |format|
       format.json {

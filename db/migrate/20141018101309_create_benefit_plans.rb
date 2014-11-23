@@ -5,10 +5,7 @@ class CreateBenefitPlans < ActiveRecord::Migration
       t.integer :carrier_account_id
       t.string :name
       t.string :slug
-
-      t.string :type
-      t.boolean :exchange_plan
-      t.boolean :small_group
+      t.boolean :is_enabled
 
       # Fields:
       #
