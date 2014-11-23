@@ -51,5 +51,20 @@ class Api::V1::CarriersController < ApplicationController
       }
     end
   end
+
+  def destroy
+    # TODO: Check for current user and admin
+
+    carrier = Carrier.find(params[:id])
+    carrier.destroy!
+
+    respond_to do |format|
+      format.json {
+        render json: {
+          carrier: {}
+        }
+      }
+    end
+  end
 end
 

@@ -16,6 +16,10 @@
         <td>
           <a ng-if="isAdmin()" ng-href="/admin/carriers/{{carrier.slug}}">{{carrier.name}}</a>
         </td>
+
+        <td>
+          <a class="btn btn-danger btn-xs" ng-if="isAdmin()" ng-click="deleteCarrierAt($index)">Delete</a>
+        </td>
       </tr>
     </tbody>
   </table>
