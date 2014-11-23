@@ -794,7 +794,7 @@ congoApp.controller('GroupsNewController', [
     $http
       .get('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/properties/groups.json')
       .success(function (data, status, headers, config) {
-        $scope.elements = data;
+        $scope.elements = data.elements;
 
         $scope.ready();
       })
