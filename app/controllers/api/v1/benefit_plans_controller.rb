@@ -1,9 +1,20 @@
 class Api::V1::BenefitPlansController < ApplicationController
   def index
+    account_slug = params[:account_id]
+    account = Account.where(slug: account_slug).first
+    role_slug = params[:role_id]
+    benefit_plans = nil
+
+    if role_slug == 'group_admin' || role_slug == 'broker'
+      benefit_plans = BenefitPlan.where(account_id: account.id)
+    else
+      benefit_plans = BenefitPlan.where(account_id: account.id, is_enabled: true)
+    end
+
     respond_to do |format|
       format.json {
         render json: {
-          benefit_plans: BenefitPlan.all.map { |benefit_plan|
+          benefit_plans: benefit_plans.map { |benefit_plan|
             render_benefit_plan(benefit_plan)
           }
         }
