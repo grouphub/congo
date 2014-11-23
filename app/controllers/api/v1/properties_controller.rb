@@ -23,6 +23,24 @@ class Api::V1::PropertiesController < ApplicationController
             },
             {
               type: 'text',
+              name: 'broker_number',
+              title: 'Broker Number',
+              placeholder: 'Enter a Broker Number…'
+            },
+            {
+              type: 'text',
+              name: 'brokerage_name',
+              title: 'Brokerage Name',
+              placeholder: 'Enter a Brokerage Name…'
+            },
+            {
+              type: 'text',
+              name: 'tax_id',
+              title: 'Tax ID',
+              placeholder: 'Enter a Tax ID…'
+            },
+            {
+              type: 'text',
               name: 'account_number',
               title: 'Account Number',
               placeholder: 'Enter the Account Number…'
