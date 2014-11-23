@@ -46,6 +46,22 @@ class Api::V1::BenefitPlansController < ApplicationController
     end
   end
 
+  def update
+    benefit_plan = BenefitPlan.find(params[:id])
+
+    unless params[:is_enabled].nil?
+      benefit_plan.update_attribute(:is_enabled, params[:is_enabled])
+    end
+
+    respond_to do |format|
+      format.json {
+        render json: {
+          benefit_plan: render_benefit_plan(benefit_plan)
+        }
+      }
+    end
+  end
+
   def show
     id = params[:id]
     account_slug = params[:account_id]
