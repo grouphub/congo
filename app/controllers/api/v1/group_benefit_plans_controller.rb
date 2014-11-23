@@ -25,7 +25,7 @@ class Api::V1::GroupBenefitPlansController < ApplicationController
     benefit_plan_id = params[:benefit_plan_id]
 
     group_benefit_plans = GroupBenefitPlan
-      .where(group_id: group.id, benfit_plan_id: benefit_plan_id)
+      .where(group_id: group.id, benefit_plan_id: benefit_plan_id)
 
     group_benefit_plans.destroy_all
 

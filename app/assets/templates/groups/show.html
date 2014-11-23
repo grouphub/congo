@@ -30,8 +30,8 @@
       <thead>
         <tr>
           <th>Benefit Plan name</th>
-          <th>Actions</th>
           <th>Applications</th>
+          <th>Actions</th>
         </tr>
       </thead>
 
@@ -40,27 +40,23 @@
           <td>{{benefitPlan.name}}</td>
 
           <td>
-            <a class="btn btn-info btn-xs" ng-click="selectBenefitPlan(benefitPlan)" ng-href="">Select</a>
+            <ul class="application-list" ng-repeat="application in applications(benefitPlan)">
+              <li class="application">
+                <span class="selected-date">
+                  {{application.created_at | date : 'short'}}
+                </span>
+
+                <span class="state">
+                  <a href="" class="btn btn-warning btn-xs disabled" ng-if="!application.applied_by_id">Not Applied</a>
+                  <a href="" class="btn btn-info btn-xs disabled" ng-if="application.applied_by_id && !application.submitted_by_id">Applied</a>
+                  <a href="" class="btn btn-success btn-xs disabled" ng-if="application.submitted_by_id">Submitted</a>
+                </span>
+              </li>
+            </ul>
           </td>
 
           <td>
-            <table class="table">
-              <thead>
-                <th>Id</th>
-                <th>State</th>
-              </thead>
-
-              <tbody>
-                <tr ng-repeat="application in applications(benefitPlan)">
-                  <td>{{application.id}}</td>
-                  <td>
-                    <a href="" class="btn btn-warning btn-xs disabled" ng-if="!application.applied_by_id">Not Applied</a>
-                    <a href="" class="btn btn-info btn-xs disabled" ng-if="application.applied_by_id && !application.submitted_by_id">Applied</a>
-                    <a href="" class="btn btn-success btn-xs disabled" ng-if="application.submitted_by_id">Submitted</a>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+            <a class="btn btn-info btn-xs" ng-click="selectBenefitPlan(benefitPlan)" ng-href="">Select</a>
           </td>
         </tr>
       </tbody>

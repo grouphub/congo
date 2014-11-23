@@ -8,6 +8,7 @@ class Api::V1::ApplicationsController < ApplicationController
         applications += membership.applications
         applications
       }
+      .uniq(&:id)
 
     respond_to do |format|
       format.json {
