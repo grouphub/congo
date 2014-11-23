@@ -25,8 +25,6 @@ module CustomerCreatable
     group = membership.group
     account_id = group.account_id
 
-    binding.pry
-
     unless membership
       # TODO: Handle this
     end
@@ -50,7 +48,7 @@ module CustomerCreatable
     end
   end
 
-  def attempt_to_link_customer!(params)
+  def attempt_to_link_customer!(params, user)
     email_token = params[:email_token]
 
     return unless email_token
@@ -63,6 +61,9 @@ module CustomerCreatable
     group = membership.group
     account_id = group.account_id
 
+    membership.user_id = user.id
+    membership.save!
+
     role = Role
       .where({
         account_id: account_id,
@@ -70,8 +71,6 @@ module CustomerCreatable
         name: 'customer'
       })
       .first
-
-    binding.pry
 
     unless role
       Role.create! \

@@ -111,7 +111,7 @@ class Api::V1::UsersController < ApplicationController
       user = signin! email, password
 
       # If user came in from an email then they are a customer.
-      attempt_to_link_customer!(params)
+      attempt_to_link_customer!(params, user)
 
       respond_to do |format|
         format.json {

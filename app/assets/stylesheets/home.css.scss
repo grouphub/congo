@@ -511,3 +511,21 @@ h1 {
     font-size: 16px;
   }
 }
+
+.application-list {
+  padding-left: 0;
+
+  .application {
+    list-style-type: none;
+
+    .selected-date,
+    .application-state {
+      display: inline-block;
+    }
+
+    .selected-date {
+      margin-right: 5px;
+    }
+  }
+}
+
