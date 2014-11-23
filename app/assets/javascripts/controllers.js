@@ -516,8 +516,8 @@ congoApp.controller('AccountCarriersNewController', [
     // Make sure user is totally signed up before continuing.
     $scope.enforceValidAccount();
 
-    $scope.elements = null;
-    $scope.carriers = null;
+    $scope.elements = [];
+    $scope.carriers = [];
     $scope.selectedCarrier = null;
 
     $scope.submit = function () {
@@ -551,7 +551,7 @@ congoApp.controller('AccountCarriersNewController', [
     }
 
     $http
-      .get('/assets/benefit-plans-new-properties.json')
+      .get('/assets/account-carriers-new-properties.json')
       .success(function (data, status, headers, config) {
         $scope.elements = data;
 
