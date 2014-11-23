@@ -152,10 +152,20 @@ class Api::V1::GroupsController < ApplicationController
         sum
       }
 
+    customer_memberships = memberships.select { |membership|
+      role = membership['role'] || {}
+      role['name'] == 'customer'
+    }
+
+    group_admin_memberships = memberships.select { |membership|
+      role = membership['role'] || {}
+      role['name'] == 'group_admin'
+    }
+
     group.as_json.merge({
       'memberships' => memberships,
-      'customer_memberships' => memberships.select { |membership| membership['role']['name'] == 'customer' },
-      'group_admin_memberships' => memberships.select { |membership| membership['role']['name'] == 'group_admin' },
+      'customer_memberships' => customer_memberships,
+      'group_admin_memberships' => group_admin_memebrships,
       'benefit_plans' => benefit_plans,
       'applications' => applications
     })

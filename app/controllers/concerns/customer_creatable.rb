@@ -30,8 +30,6 @@ module CustomerCreatable
       # TODO: Handle this
     end
 
-    binding.pry
-
     role = Role
       .where({
         account_id: account_id,
