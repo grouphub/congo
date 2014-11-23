@@ -5,27 +5,57 @@
     </a>
   </li>
 
+  <li ng-if="accountSlug()">
+    <a class="heading" ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}">
+      {{accountName()}}
+    </a>
+  </li>
+
   <li ng-if="inAdminPanel()">
-    <a class="heading" ng-href="/admin/carriers">
+    <a class="heading" ng-href="/admin">
+      Admin
+    </a>
+  </li>
+
+  <li ng-if="!accountSlug() && !inAdminPanel() && accounts().length > 0">
+    <a class="heading" ng-href="">
+      Accounts
+    </a>
+  </li>
+
+  <li ng-if="!accountSlug() && !inAdminPanel() && accounts().length > 0" ng-repeat="account in accounts()">
+    <a ng-href="/admin" ng-if="account.role.name == 'admin'">
+      Admin
+      <span class="label label-default role">Admin</span>
+    </a>
+
+    <a ng-href="/accounts/{{account.slug}}/{{account.role.name}}" ng-if="account.role.name != 'admin'">
+      {{account.name}}
+      <span class="label label-default role">{{account.role.english_name}}</span>
+    </a>
+  </li>
+
+  <li ng-if="inAdminPanel()">
+    <a ng-href="/admin/carriers">
       <i class="glyphicon glyphicon-user"></i>
       <span class="caption">Carriers</span>
     </a>
 
-    <a class="heading" ng-href="/admin/invitations">
+    <a ng-href="/admin/invitations">
       <i class="glyphicon glyphicon-user"></i>
       <span class="caption">Invitations</span>
     </a>
   </li>
 
   <li ng-if="currentRole() === 'broker'">
-    <a class="heading" ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/account_carriers">
+    <a ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/account_carriers">
       <i class="glyphicon glyphicon-user"></i>
       <span class="caption">Accounts</span>
     </a>
   </li>
 
   <li ng-if="currentRole() === 'broker'">
-    <a class="heading" ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/benefit_plans">
+    <a ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/benefit_plans">
       <i class="glyphicon glyphicon-user"></i>
       <span class="caption">Benefit plans</span>
     </a>

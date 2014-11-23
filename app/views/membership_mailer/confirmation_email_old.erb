@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>GroupHub Member Invitation</title>
+</head>
+
+<body>
+	<!-- START BODY -->
+	<table width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#333333" style="padding-top:0;padding-bottom:0px;background-color:#333333;">
+        <tr>
+            <td valign="top">
+                <table id="header" width="100%" cellpadding="0" cellspacing="0" border="0">
+                    <tr>
+                        <td valign="bottom" style="padding: 20px 16px 12px;">
+                            <div style="max-width: 600px; font-size:18px; margin: 0 auto; text-align: center;">
+                                <a href="https://www.grouphub.io">
+                                        <img src="http://broker.grouphub.io/assets/logo-db7f4c5fd3a57f6eed737337355d922a.png"  alt="grouphub.io" style="font-size:18px; height: 36px; margin-left: -1.5rem" />
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+		<tr>
+			<td width="100%" style="padding-top:21px;padding-left:14px;padding-right:14px;" class="innerpad"><!-- START TOP -->
+				<table width="680" cellspacing="0" cellpadding="0" border="0" align="center" style="margin:0 auto;" class="maincontainer">
+
+					<tr>
+						<td valign="top" align="left" style="padding-top:0px;">
+							<table width="680" cellspacing="0" cellpadding="0" border="0" bgcolor="#FFFFFF" align="center" class="main" style="background-color:#FFFFFF;border:1px solid #027F8F;">
+
+								<tr>
+									<td width="596" valign="top" align="left" style="padding-top:42px;padding-right:42px;padding-bottom:42px;padding-left:42px;" class="maintdpadded">
+										<table width="596" cellspacing="0" cellpadding="0" border="0" bgcolor="#FFFFFF" align="center" style="background-color:#FFFFFF;" class="maincontent">
+
+											<tr>
+												<td valign="top" align="left" style="padding-top:0;padding-bottom:0;">
+													<table width="312" cellspacing="0" cellpadding="0" border="0" align="left" class="maincontent" style="float:left;">
+
+														<tr>
+															<td valign="top" align="left" style="padding-top:0px;">
+																<div style="font-family:MuseoSans,Trebuchet MS,Arial,Helvetica,sans-serif; font-style:normal; font-weight:bold; display:block;text-align:left;"><span class="header" style="font-size:28px;line-height:34px;color:#055960;margin:0;padding:0;">Welcome to <%= @group %></span></div>
+															</td>
+														</tr>
+														<tr>
+															<td valign="top" align="left" style="padding-top:12px;">
+																<div style="font-family:MuseoSans,Lucida Grande,Lucida Sans Unicode,Verdana,sans-serif; font-weight:normal; text-align:left; display:block;">
+																	<span style="font-size:16px;line-height:23px;color:#000000;margin:0;padding:0;">You've just been invited to become a member of <strong><%= @group %></strong>.  As a group member, you can enroll in and manage your group benefits from a single place.  Benefits enrollment has never been easier.Ready to join <strong><%= @group %></strong>?
+																	</span> 
+																</div>
+															</td>
+														</tr>
+														<tr>
+															<td valign="top" align="left" style="padding-top:22px;">
+																<div style="font-family:MuseoSans,Lucida Grande,Lucida Sans Unicode,Verdana,sans-serif; font-weight:normal; text-align:left; display:block;">
+																	<a href="<%= @url %>" style="display: inline-block; padding: 14px 32px; background: #2ab27b; border-radius: 4px; font-weight: normal; letter-spacing: 1px; font-size: 20px; line-height: 26px; color: white; text-shadow: 0 1px 1px black; text-shadow: 0 1px 1px rgba(0,0,0,0.25); text-decoration: none">Activate your account</a>
+
+																</div>
+															</tr>
+														</table>
+														<table width="246" cellspacing="0" cellpadding="0" border="0" align="right" class="usercontainerouter" style="float:right;">
+
+															<tr>
+																<td valign="top" align="left" style="padding-top:0;">
+																	<table width="246" cellspacing="0" cellpadding="0" border="0" bgcolor="#F3F4F3" align="left" class="usercontainerinner" style="background-color:#F3F4F3;border:1px solid #E3E6E6;">
+
+																		<tr>
+																			<td valign="top" align="left" style="padding-top:24px;padding-left:24px;padding-right:24px;padding-bottom:24px;">
+																				<table width="198" cellspacing="0" cellpadding="0" border="0" class="usercontainershorty">
+
+																					<tr>
+																						<td style="padding-top:0px;">
+																							<div style="font-family:MuseoSans,Lucida Grande,Lucida Sans Unicode,Verdana,sans-serif; font-weight:normal; text-align:left; display:block;"><span style="font-size:15px;line-height:22px;color:#000000;margin:0;padding:0;">The email address linked to this account is:</span></div>
+																						</td>
+																					</tr>
+																					<tr>
+																						<td style="padding-top:0px;word-break:break-all;">
+																							<div style="width:198px; font-family:MuseoSans,Lucida Grande,Lucida Sans Unicode,Verdana,sans-serif; font-weight:normal; text-align:left; display:block;"><span style="font-size:15px;line-height:22px;color:#000000;margin:0;padding:0;word-break:break-all;"><strong>"<%= @email %>"</strong></span></div>
+																						</td>
+																					</tr>
+																					<tr>
+																						<td style="padding-top:16px;">
+																							<div style="font-family:MuseoSans,Lucida Grande,Lucida Sans Unicode,Verdana,sans-serif; font-weight:normal; text-align:left; display:block;"><span style="font-size:15px;line-height:22px;color:#000000;margin:0;padding:0;">Forgot your password?</span></div>
+																						</td>
+																					</tr>
+																					<tr>
+																						<td style="padding-top:0;">
+																							<div style="font-family:MuseoSans,Lucida Grande,Lucida Sans Unicode,Verdana,sans-serif; font-weight:normal; text-align:left; display:block;"><span style="font-size:15px;line-height:22px;color:#000000;margin:0;padding:0;">
+																								<a target="_blank" style="color:#037786; text-decoration:none;" href="http://e.lumosity.com/mpss/c/5QA/v9kKAA/t.1hz/K7CSRoSzQpCdI_U1la-cpQ/h2/jMoC2UYhX1nkaonxj-2BX3wAzCmOWPrEOM9JS-2FM1hHvXO6JozYt-2FjNORn-2FusjyIbyk6upYzXM7tBTXw7GU-2BtCHx8ifxGHbTK2l3LpO-2FenGPdGvxhCRxeQb9VDwRh79vBFJ5XZbWS5mSTSpGwNZhjwTnJkgorg6hS-2Fk3nuP5wSJag3LGWcN-2Fw0pxbplwt76f8dLIGpUujdsLUpXrsbJ3n0oLA-3D-3D">
+																									Request it here</a></span></div>
+																								</td>
+																							</tr>
+																							<tr>
+																								<td style="padding-top:0;"><img alt="0" border="0" height="19" src="http://static.sl.lumosity.com:80/assets/mf/break_welcomeside.gif" width="196" /></td>
+																							</tr>
+																							<tr>
+																								<td style="padding-top:16px;">
+																									<div style="font-family:MuseoSans,Lucida Grande,Lucida Sans Unicode,Verdana,sans-serif; font-weight:normal; text-align:left; display:block;"><span style="font-size:15px;line-height:22px;color:#000000;margin:0;padding:0;">We're here to help!</span><br />
+																										<span style="font-size:15px;line-height:22px;color:#000000;margin:0;padding:0;">
+																											<a target="_blank" style="color:#037786; text-decoration:none;" href="http://e.lumosity.com/mpss/c/5QA/v9kKAA/t.1hz/K7CSRoSzQpCdI_U1la-cpQ/h3/FrfOYoWjCcRRKh-2BXvSgQoCoYE853xJbTG1qE78Xg-2BpEHcuxZPiToBiX8lAn6ThaupAYPU6VTkQuuTVM6l5EqzOhnNbo5jrJWs29cthKBRks2-2Fpj70yyXpAgvXYbI4KnC9P4ldwCSBNWE10eL3n1QcLwTIksXlCRn6V7gmcGIvyg-3D">
+																												Contact us anytime.</a></span></div>
+																											</td>
+																										</tr>
+
+																									</table>
+																								</td>
+																							</tr>
+
+																						</table>
+																					</td>
+																				</tr>
+
+																			</table>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td valign="top" align="left" style="padding-top:0;padding-bottom:0;" class="hide_bottom"><img alt="" border="0" class="break" height="86" src="http://static.sl.lumosity.com:80/assets/mf/break_596.gif" width="594" /></td>
+																	</tr>
+																	<tr>
+																		<td valign="top" align="left" style="padding-top:0;padding-bottom:0;" class="hide_bottom"><!-- START BOTTOM -->
+																			<table  cellspacing="0" cellpadding="0" border="0" align="left" class="maincontent">
+
+																				<tr>
+																					<td valign="top" align="left" style="padding-top:0;">
+																						<table cellspacing="0" cellpadding="10" border="0" align="center" class="table2col" valign="top">
+
+																							<tr>
+
+																								<td valign="middle" align="left" class="table2coltd" style="padding-top:0;">
+																									<div style="font-family:MuseoSans,Lucida Grande,Lucida Sans Unicode,Verdana,sans-serif; text-align:left; font-weight:500; display:block;"><span style="font-size:18px;line-height:24px;color:#000000;margin:0;padding:0;">benefits management provided by</span></div>
+																								</td>
+																								<td valign="top" align="left" rowspan="4" class="table2colcheck" style="padding-top:0;">
+																									<a target="_blank" href="http://grouphub.io">
+																										<img alt="" border="0" class="check" height="66" src="http://broker.grouphub.io/assets/logo-db7f4c5fd3a57f6eed737337355d922a.png" style="font-size:18px; height: 36px;"/></a></td>
+																									</tr>
+
+																								</table>
+
+																							</td>
+																						</tr>
+
+																					</table>
+																				</td>
+																			</tr>
+
+																		</td>
+																	</tr>
+																</table>
+															</td>
+														</tr>
+
+													</table>
+												</td>
+
+											</tr>
+											<td width="100%" style="padding-top:21px;padding-left:14px;padding-right:14px;" class="innerpad">
+											</td>
+										</table>
+									</td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+				</table>
+</body>
+
+
+</html>
+
