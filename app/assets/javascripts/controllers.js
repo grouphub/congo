@@ -34,16 +34,15 @@ congoApp.controller('MainController', [
       flashesFactory.add(flash.type, flash.message);
     });
 
-    $('body').delegate('.alert .close', 'click', function (e) {
-      var $me = $(this);
-      var $alert = $me.closest('.alert');
-      var message = $alert.find('.message').text();
-      var type = $alert.data('kind');
+    $('body').delegate('.alert', 'click', function (e) {
+      var $me = $(this)
+      var message = $me.find('.message').text();
+      var type = $me.data('kind');
 
       flashesFactory.remove(type, message);
 
       // NOTE: Should not need to do this manually
-      $alert.remove();
+      $me.remove();
     });
 
     // Assets path
@@ -250,8 +249,6 @@ congoApp.controller('UsersNewAccountController', [
 
       var data = {
         account_id: congo.currentUser.accounts[0].id,
-        account_name: $scope.name,
-        account_tagline: $scope.tagline,
         account_properties: properties
       };
 
@@ -274,9 +271,9 @@ congoApp.controller('UsersNewAccountController', [
     };
 
     $http
-      .get('/assets/accounts-new-properties.json')
+      .get('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/properties/accounts.json')
       .success(function (data, status, headers, config) {
-        $scope.elements = data;
+        $scope.elements = data.elements;
 
         $scope.ready();
       })
@@ -379,9 +376,9 @@ congoApp.controller('CarriersNewController', [
     };
 
     $http
-      .get('/assets/carriers-new-properties.json')
+      .get('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/properties/carriers.json')
       .success(function (data, status, headers, config) {
-        $scope.elements = data;
+        $scope.elements = data.elements;
 
         $scope.ready();
       })
@@ -551,7 +548,7 @@ congoApp.controller('AccountCarriersNewController', [
     $http
       .get('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/properties/account_carriers.json')
       .success(function (data, status, headers, config) {
-        $scope.elements = data.form;
+        $scope.elements = data.elements;
 
         done();
       })
@@ -664,9 +661,9 @@ congoApp.controller('BenefitPlansNewController', [
     }
 
     $http
-      .get('/assets/benefit-plans-new-properties.json')
+      .get('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/properties/accounts.json')
       .success(function (data, status, headers, config) {
-        $scope.elements = data;
+        $scope.elements = data.elements;
 
         done();
       })
@@ -795,7 +792,7 @@ congoApp.controller('GroupsNewController', [
     };
 
     $http
-      .get(congo.assets['groups-new-properties.json'])
+      .get('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/properties/groups.json')
       .success(function (data, status, headers, config) {
         $scope.elements = data;
 
@@ -988,12 +985,18 @@ congoApp.controller('ApplicationsNewController', [
     // Make sure user is totally signed up before continuing.
     $scope.enforceValidAccount();
 
-    $scope.elements = [];
     $scope.group = null;
     $scope.benefitPlan = null;
 
     $scope.submit = function () {
-      var properties = $scope.getPropertiesFromElements();
+      var properties = _.reduce(
+        $('#enrollment-form form').serializeArray(),
+        function (sum, element) {
+          sum[element.name] = element.value;
+          return sum;
+        },
+        {}
+      );
 
       var data = {
         group_slug: $scope.groupSlug(),
@@ -1016,21 +1019,10 @@ congoApp.controller('ApplicationsNewController', [
     }
 
     function done () {
-      if ($scope.elements && $scope.group && $scope.benefitPlan) {
+      if ($scope.group && $scope.benefitPlan) {
         $scope.ready();
       }
     }
-
-    $http
-      .get('/assets/applications-new-properties.json')
-      .success(function (data, status, headers, config) {
-        $scope.elements = data;
-
-        $scope.ready();
-      })
-      .error(function (data, status, headers, config) {
-        debugger
-      });
 
     $http
       .get('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups/' + $scope.groupSlug() + '.json')

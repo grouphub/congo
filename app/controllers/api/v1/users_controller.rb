@@ -43,9 +43,10 @@ class Api::V1::UsersController < ApplicationController
     id = params[:id]
     user = User.where(id: id).first
     account_id = params[:account_id]
-    account_name = params[:account_name]
-    account_tagline = params[:account_tagline]
     invite_code = params[:invite_code]
+    properties = params[:properties]
+    account_name = properties['account_name']
+    account_tagline = properties['account_tagline']
 
     plan_name = params[:plan_name]
 
