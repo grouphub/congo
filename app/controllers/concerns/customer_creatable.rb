@@ -5,7 +5,7 @@ module CustomerCreatable
     # Class methods here...
   end
 
-  def attempt_to_create_customer!(params)
+  def attempt_to_create_customer!
     email_token = params[:email_token]
 
     return unless email_token
@@ -48,7 +48,7 @@ module CustomerCreatable
     end
   end
 
-  def attempt_to_link_customer!(params, user)
+  def attempt_to_link_customer!(user)
     email_token = params[:email_token]
 
     return unless email_token

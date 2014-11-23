@@ -16,19 +16,13 @@ class Api::V1::UsersController < ApplicationController
       # TODO: Handle this
     end
 
-    user = User.create! \
-      first_name: first_name,
-      last_name: last_name,
-      email: email,
-      password: password
-
     # If user came in from an email then they are a customer.
     attempt_to_create_customer!
 
     # If user came from a manual signup, then they're a broker.
     attempt_to_create_broker!
 
-    signin! email, password
+    user = signin! email, password
 
     respond_to do |format|
       format.json {
@@ -42,11 +36,12 @@ class Api::V1::UsersController < ApplicationController
   def update
     id = params[:id]
     user = User.where(id: id).first
-    account_id = params[:account_id]
     invite_code = params[:invite_code]
-    properties = params[:properties]
-    account_name = properties['account_name']
-    account_tagline = properties['account_tagline']
+    user_properties = params[:user_properties] || {}
+    account_properties = params[:account_properties] || {}
+    account_name = account_properties['name']
+    account_tagline = account_properties['tagline']
+    account = user.roles.first.account
 
     plan_name = params[:plan_name]
 
@@ -67,19 +62,25 @@ class Api::V1::UsersController < ApplicationController
       return
     end
 
-    user_properties = (user.properties || {}).merge(params[:user_properties] || {})
+    user.properties = (user.properties || {}).merge(user_properties)
 
-    user.properties = user_properties
-    user.save!
+    if plan_name
+      account = user.roles.first.account
+      account.plan_name = plan_name
+    end
 
     if account_name
-      account = Account.where(id: account_id).first
+      account = user.roles.first.account
       account.name = account_name
       account.tagline = account_tagline
-      account.plan_name = plan_name
-      account.properties = (account.properties || {}).merge(params[:account_properties])
-      account.save!
     end
+
+    if account_properties
+      account.properties = (account.properties || {}).merge(account_properties)
+    end
+
+    user.save!
+    account.save!
 
     respond_to do |format|
       format.json {
@@ -112,7 +113,7 @@ class Api::V1::UsersController < ApplicationController
       user = signin! email, password
 
       # If user came in from an email then they are a customer.
-      attempt_to_link_customer!(params, user)
+      attempt_to_link_customer!(user)
 
       respond_to do |format|
         format.json {
