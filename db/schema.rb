@@ -16,15 +16,6 @@ ActiveRecord::Schema.define(version: 20141119053011) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "account_carriers", force: true do |t|
-    t.integer  "account_id"
-    t.integer  "carrier_id"
-    t.string   "name"
-    t.text     "properties_data"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "accounts", force: true do |t|
     t.string   "name"
     t.string   "slug"
@@ -97,12 +88,21 @@ ActiveRecord::Schema.define(version: 20141119053011) do
 
   create_table "benefit_plans", force: true do |t|
     t.integer  "account_id"
-    t.integer  "account_carrier_id"
+    t.integer  "carrier_account_id"
     t.string   "name"
     t.string   "slug"
     t.string   "type"
     t.boolean  "exchange_plan"
     t.boolean  "small_group"
+    t.text     "properties_data"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "carrier_accounts", force: true do |t|
+    t.integer  "account_id"
+    t.integer  "carrier_id"
+    t.string   "name"
     t.text     "properties_data"
     t.datetime "created_at"
     t.datetime "updated_at"

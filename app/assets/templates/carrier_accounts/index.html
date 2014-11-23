@@ -12,20 +12,20 @@
     </thead>
 
     <tbody>
-      <tr ng-repeat="accountCarriers in accountCarriers">
+      <tr ng-repeat="carrierAccount in carrierAccounts">
         <td>
-          <a ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/account_carriers/{{accountCarriers.id}}">{{accountCarriers.name}}</a>
+          <a ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/carrier_accounts/{{carrierAccount.id}}">{{carrierAccount.name}}</a>
         </td>
 
         <td ng-if="currentRole() === 'broker'">
-          <a class="btn btn-danger btn-xs" href="" ng-click="deleteAccountCarrierAt($index)">Delete</a>
+          <a class="btn btn-danger btn-xs" href="" ng-click="deleteCarrierAccountAt($index)">Delete</a>
         </td>
       </tr>
     </tbody>
   </table>
 
   <p ng-if="currentRole() === 'broker'">
-    <a class="btn btn-default" href="/accounts/{{accountSlug()}}/{{currentRole()}}/account_carriers/new">Link to a new account</a>
+    <a class="btn btn-default" href="/accounts/{{accountSlug()}}/{{currentRole()}}/carrier_accounts/new">Link to a new account</a>
   </p>
 </div>
 

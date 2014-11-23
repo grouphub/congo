@@ -76,17 +76,17 @@ congoApp.config([
         templateUrl: '<%= asset_path 'home.html' %>',
         controller: 'HomeController'
       })
-      .when('/accounts/:slug/:role/account_carriers', {
-        templateUrl: '<%= asset_path 'account_carriers/index.html' %>',
-        controller: 'AccountCarriersIndexController'
+      .when('/accounts/:slug/:role/carrier_accounts', {
+        templateUrl: '<%= asset_path 'carrier_accounts/index.html' %>',
+        controller: 'CarrierAccountsIndexController'
       })
-      .when('/accounts/:slug/:role/account_carriers/new', {
-        templateUrl: '<%= asset_path 'account_carriers/new.html' %>',
-        controller: 'AccountCarriersNewController'
+      .when('/accounts/:slug/:role/carrier_accounts/new', {
+        templateUrl: '<%= asset_path 'carrier_accounts/new.html' %>',
+        controller: 'CarrierAccountsNewController'
       })
-      .when('/accounts/:slug/:role/account_carriers/:account_carrier_id', {
-        templateUrl: '<%= asset_path 'account_carriers/show.html' %>',
-        controller: 'AccountCarriersShowController'
+      .when('/accounts/:slug/:role/carrier_accounts/:carrier_account_id', {
+        templateUrl: '<%= asset_path 'carrier_accounts/show.html' %>',
+        controller: 'CarrierAccountsShowController'
       })
       .when('/accounts/:slug/:role/benefit_plans', {
         templateUrl: '<%= asset_path 'benefit_plans/index.html' %>',

@@ -11,8 +11,8 @@
 
     <div class="form-group">
       <label for="carrier">Carrier</label>
-      <select class="form-control" id="account_carrier" name="account_carrier" ng-model="selectedAccountCarrier.id">
-        <option ng-repeat="accountCarrier in accountCarriers" value="{{accountCarrier.id}}">{{accountCarrier.name}}&mdash;{{accountCarrier.carrier.name}}</option>
+      <select class="form-control" id="carrier_account" name="carrier_account" ng-model="selectedCarrierAccount.id">
+        <option ng-repeat="carrierAccount in carrierAccounts" value="{{carrierAccount.id}}">{{carrierAccount.name}}&mdash;{{carrierAccount.carrier.name}}</option>
       </select>
     </div>
 

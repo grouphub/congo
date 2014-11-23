@@ -15,8 +15,8 @@ class Api::V1::BenefitPlansController < ApplicationController
     name = params[:name]
     account_slug = params[:account_id]
     account = Account.where(slug: account_slug).first
-    account_carrier_id = params[:account_carrier_id]
-    account_carrier = AccountCarrier.where(id: account_carrier_id, account_id: account.id).first
+    carrier_account_id = params[:carrier_account_id]
+    carrier_account = CarrierAccount.where(id: carrier_account_id, account_id: account.id).first
     properties = params[:properties]
 
     unless name
@@ -27,14 +27,14 @@ class Api::V1::BenefitPlansController < ApplicationController
       # TODO: Handle this
     end
 
-    unless account_carrier
+    unless carrier_account
       # TODO: Handle this
     end
 
     benefit_plan = BenefitPlan.create! \
       name: name,
       account_id: account.id,
-      account_carrier_id: account_carrier.id,
+      carrier_account_id: carrier_account.id,
       properties: properties
 
     respond_to do |format|
@@ -78,12 +78,12 @@ class Api::V1::BenefitPlansController < ApplicationController
   # Render methods
 
   def render_benefit_plan(benefit_plan)
-    account_carrier = benefit_plan.account_carrier
+    carrier_account = benefit_plan.carrier_account
 
     benefit_plan.as_json.merge({
-      'account_carrier' => account_carrier.as_json.merge({
-        'account' => account_carrier.account,
-        'carrier' => account_carrier.carrier
+      'carrier_account' => carrier_account.as_json.merge({
+        'account' => carrier_account.account,
+        'carrier' => carrier_account.carrier
       })
     })
   end

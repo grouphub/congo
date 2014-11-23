@@ -1,12 +1,12 @@
-class Api::V1::AccountCarriersController < ApplicationController
+class Api::V1::CarrierAccountsController < ApplicationController
   def index
     # TODO: Check for current user
 
     respond_to do |format|
       format.json {
         render json: {
-          account_carriers: AccountCarrier.all.map { |account_carrier|
-            render_account_carrier(account_carrier)
+          carrier_accounts: CarrierAccount.all.map { |carrier_account|
+            render_carrier_account(carrier_account)
           }
         }
       }
@@ -37,7 +37,7 @@ class Api::V1::AccountCarriersController < ApplicationController
       # TODO: Handle this
     end
 
-    account_carrier = AccountCarrier.create! \
+    carrier_account = CarrierAccount.create! \
       account_id: account.id,
       carrier_id: carrier.id,
       properties: properties,
@@ -46,7 +46,7 @@ class Api::V1::AccountCarriersController < ApplicationController
     respond_to do |format|
       format.json {
         render json: {
-          account_carrier: render_account_carrier(account_carrier)
+          carrier_account: render_carrier_account(carrier_account)
         }
       }
     end
@@ -56,16 +56,16 @@ class Api::V1::AccountCarriersController < ApplicationController
     id = params[:id]
     account_slug = params[:account_id]
     account = Account.where(slug: account_slug).first
-    account_carrier = AccountCarrier.where(account_id: account.id, id: id).first
+    carrier_account = CarrierAccount.where(account_id: account.id, id: id).first
 
-    unless account_carrier
+    unless carrier_account
       # TODO: Handle this
     end
 
     respond_to do |format|
       format.json {
         render json: {
-          account_carrier: render_account_carrier(account_carrier)
+          carrier_account: render_carrier_account(carrier_account)
         }
       }
     end
@@ -75,13 +75,13 @@ class Api::V1::AccountCarriersController < ApplicationController
     id = params[:id]
     account_slug = params[:account_id]
     account = Account.where(slug: account_slug).first
-    account_carrier = AccountCarrier.where(account_id: account.id, id: id).first
+    carrier_account = CarrierAccount.where(account_id: account.id, id: id).first
 
-    unless account_carrier
+    unless carrier_account
       # TODO: Handle this
     end
 
-    account_carrier.destroy!
+    carrier_account.destroy!
 
     respond_to do |format|
       format.json {
@@ -92,10 +92,10 @@ class Api::V1::AccountCarriersController < ApplicationController
 
   # Render methods
 
-  def render_account_carrier(account_carrier)
-    account_carrier.as_json.merge({
-      account: account_carrier.account,
-      carrier: account_carrier.carrier
+  def render_carrier_account(carrier_account)
+    carrier_account.as_json.merge({
+      account: carrier_account.account,
+      carrier: carrier_account.carrier
     })
   end
 end

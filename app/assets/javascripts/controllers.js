@@ -474,25 +474,25 @@ congoApp.controller('InvitationsIndexController', [
   }
 ]);
 
-congoApp.controller('AccountCarriersIndexController', [
+congoApp.controller('CarrierAccountsIndexController', [
   '$scope', '$http', '$location',
   function ($scope, $http, $location) {
     // Make sure user is totally signed up before continuing.
     $scope.enforceValidAccount();
 
-    $scope.accountCarriers = null;
+    $scope.carrierAccounts = null;
 
-    $scope.deleteAccountCarrierAt = function (index) {
-      var accountCarrier = $scope.accountCarriers[index];
+    $scope.deleteCarrierAccountAt = function (index) {
+      var carrierAccount = $scope.carrierAccounts[index];
 
-      if (!accountCarrier) {
+      if (!carrierAccount) {
         debugger
       }
 
       $http
-        .delete('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/account_carriers/' + accountCarrier.id + '.json')
+        .delete('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/carrier_accounts/' + carrier_account.id + '.json')
         .success(function (data, status, headers, config) {
-          $scope.accountCarriers.splice(index, 1);
+          $scope.carrierAccounts.splice(index, 1);
         })
         .error(function (data, status, headers, config) {
           debugger
@@ -500,9 +500,9 @@ congoApp.controller('AccountCarriersIndexController', [
     };
 
     $http
-      .get('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/account_carriers.json')
+      .get('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/carrier_accounts.json')
       .success(function (data, status, headers, config) {
-        $scope.accountCarriers = data.account_carriers;
+        $scope.carrierAccounts = data.carrier_accounts;
 
         $scope.ready();
       })
@@ -512,7 +512,7 @@ congoApp.controller('AccountCarriersIndexController', [
   }
 ]);
 
-congoApp.controller('AccountCarriersNewController', [
+congoApp.controller('CarrierAccountsNewController', [
   '$scope', '$http', '$location',
   function ($scope, $http, $location) {
     // Make sure user is totally signed up before continuing.
@@ -526,13 +526,13 @@ congoApp.controller('AccountCarriersNewController', [
       var properties = $scope.getPropertiesFromElements();
 
       $http
-        .post('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/account_carriers.json', {
+        .post('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/carrier_accounts.json', {
           name: $scope.name,
           carrier_slug: $scope.selectedCarrier.slug,
           properties: properties
         })
         .success(function (data, status, headers, config) {
-          $location.path('/accounts/' + $scope.accountSlug() + '/' + $scope.currentRole() + '/account_carriers');
+          $location.path('/accounts/' + $scope.accountSlug() + '/' + $scope.currentRole() + '/carrier_accounts');
         })
         .error(function (data, status, headers, config) {
           debugger
@@ -546,7 +546,7 @@ congoApp.controller('AccountCarriersNewController', [
     }
 
     $http
-      .get('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/properties/account_carriers.json')
+      .get('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/properties/carrier_accounts.json')
       .success(function (data, status, headers, config) {
         $scope.elements = data.elements;
 
@@ -570,18 +570,18 @@ congoApp.controller('AccountCarriersNewController', [
   }
 ]);
 
-congoApp.controller('AccountCarriersShowController', [
+congoApp.controller('CarrierAccountsShowController', [
   '$scope', '$http', '$location',
   function ($scope, $http, $location) {
     // Make sure user is totally signed up before continuing.
     $scope.enforceValidAccount();
 
-    $scope.accountCarrier = null;
+    $scope.carrierAccount = null;
 
     $http
-      .get('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/account_carriers/' + $scope.accountCarrierId() + '.json')
+      .get('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/carrier_accounts/' + $scope.carrierAccountId() + '.json')
       .success(function (data, status, headers, config) {
-        $scope.accountCarrier = data.account_carrier;
+        $scope.carrierAccount = data.carrier_account;
 
         $scope.ready();
       })
@@ -634,8 +634,8 @@ congoApp.controller('BenefitPlansNewController', [
     $scope.enforceValidAccount();
 
     $scope.elements = [];
-    $scope.accountCarriers = null;
-    $scope.selectedAccountCarrier = null;
+    $scope.carrierAccounts = null;
+    $scope.selectedCarrierAccount = null;
 
     $scope.submit = function () {
       var properties = $scope.getPropertiesFromElements();
@@ -643,7 +643,7 @@ congoApp.controller('BenefitPlansNewController', [
       $http
         .post('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/benefit_plans.json', {
           name: $scope.name,
-          account_carrier_id: $scope.selectedAccountCarrier.id,
+          carrier_account_id: $scope.selectedCarrierAccount.id,
           properties: properties
         })
         .success(function (data, status, headers, config) {
@@ -655,7 +655,7 @@ congoApp.controller('BenefitPlansNewController', [
     };
 
     function done () {
-      if ($scope.elements && $scope.accountCarriers) {
+      if ($scope.elements && $scope.carrierAccounts) {
         $scope.ready();
       }
     }
@@ -672,10 +672,10 @@ congoApp.controller('BenefitPlansNewController', [
       });
 
     $http
-      .get('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/account_carriers.json')
+      .get('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/carrier_accounts.json')
       .success(function (data, status, headers, config) {
-        $scope.accountCarriers = data.account_carriers;
-        $scope.selectedAccountCarrier = data.account_carriers[0];
+        $scope.carrierAccounts = data.carrier_accounts;
+        $scope.selectedCarrierAccount = data.carrier_accounts[0];
 
         done();
       })
