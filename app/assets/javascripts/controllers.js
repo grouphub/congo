@@ -94,6 +94,25 @@ congoApp.controller('MainController', [
         $location.path('/');
       }
     };
+
+    $scope.getPropertiesFromElements = function () {
+      return _.reduce(
+        $scope.elements,
+        function (sum, element) {
+          var value;
+          if (element.items) {
+            value = element.items[0].name;
+          } else {
+            value = element.value
+          }
+
+          sum[element.name] = value;
+
+          return sum;
+        },
+        {}
+      );
+    }
   }
 ]);
 
@@ -227,14 +246,7 @@ congoApp.controller('UsersNewAccountController', [
     $scope.elements = [];
 
     $scope.submit = function () {
-      var properties = _.reduce(
-        $scope.elements,
-        function (sum, element) {
-          sum[element.name] = element.value;
-          return sum;
-        },
-        {}
-      );
+      var properties = $scope.getPropertiesFromElements();
 
       var data = {
         account_id: congo.currentUser.accounts[0].id,
@@ -351,14 +363,7 @@ congoApp.controller('CarriersNewController', [
     $scope.elements = [];
 
     $scope.submit = function () {
-      var properties = _.reduce(
-        $scope.elements,
-        function (sum, element) {
-          sum[element.name] = element.value;
-          return sum;
-        },
-        {}
-      );
+      var properties = $scope.getPropertiesFromElements();
 
       $http
         .post('/api/v1/carriers.json', {
@@ -521,14 +526,7 @@ congoApp.controller('AccountCarriersNewController', [
     $scope.selectedCarrier = null;
 
     $scope.submit = function () {
-      var properties = _.reduce(
-        $scope.elements,
-        function (sum, element) {
-          sum[element.name] = element.value;
-          return sum;
-        },
-        {}
-      );
+      var properties = $scope.getPropertiesFromElements();
 
       $http
         .post('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/account_carriers.json', {
@@ -551,9 +549,9 @@ congoApp.controller('AccountCarriersNewController', [
     }
 
     $http
-      .get('/assets/account-carriers-new-properties.json')
+      .get('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/properties/account_carriers.json')
       .success(function (data, status, headers, config) {
-        $scope.elements = data;
+        $scope.elements = data.form;
 
         done();
       })
@@ -643,14 +641,7 @@ congoApp.controller('BenefitPlansNewController', [
     $scope.selectedAccountCarrier = null;
 
     $scope.submit = function () {
-      var properties = _.reduce(
-        $scope.elements,
-        function (sum, element) {
-          sum[element.name] = element.value;
-          return sum;
-        },
-        {}
-      );
+      var properties = $scope.getPropertiesFromElements();
 
       $http
         .post('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/benefit_plans.json', {
@@ -786,14 +777,7 @@ congoApp.controller('GroupsNewController', [
     $scope.elements = [];
 
     $scope.submit = function () {
-      var properties = _.reduce(
-        $scope.elements,
-        function (sum, element) {
-          sum[element.name] = element.value;
-          return sum;
-        },
-        {}
-      );
+      var properties = $scope.getPropertiesFromElements();
 
       $http
         .post('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups.json', {
@@ -1009,14 +993,7 @@ congoApp.controller('ApplicationsNewController', [
     $scope.benefitPlan = null;
 
     $scope.submit = function () {
-      var properties = _.reduce(
-        $('#enrollment-form form').serializeArray(),
-        function (sum, element) {
-          sum[element.name] = element.value;
-          return sum;
-        },
-        {}
-      );
+      var properties = $scope.getPropertiesFromElements();
 
       var data = {
         group_slug: $scope.groupSlug(),

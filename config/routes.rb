@@ -75,6 +75,8 @@ Rails.application.routes.draw do
           end
 
           resources :applications
+
+          get '/properties/account_carriers', to: 'properties#account_carriers'
         end
       end
 

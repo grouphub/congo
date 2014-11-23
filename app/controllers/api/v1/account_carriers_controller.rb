@@ -16,12 +16,14 @@ class Api::V1::AccountCarriersController < ApplicationController
   def create
     # TODO: Check for current user
 
-    name = params[:name]
     account_slug = params[:account_id]
     account = Account.where(slug: account_slug).first
-    carrier_slug = params[:carrier_slug]
-    carrier = Carrier.where(slug: carrier_slug).first
     properties = params[:properties]
+    name = properties['name']
+    carrier_slug = properties['carrier_name']
+    carrier = Carrier.where(slug: carrier_slug).first
+
+    binding.pry
 
     unless name
       # TODO: Handle this
