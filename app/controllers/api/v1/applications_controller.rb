@@ -39,9 +39,9 @@ class Api::V1::ApplicationsController < ApplicationController
       benefit_plan_id: benefit_plan.id,
       membership_id: membership.id,
       selected_by_id: selected_by_id,
-      selected_on_id: (selected_by_id ? DateTime.now : nil),
+      selected_on: (selected_by_id ? DateTime.now : nil),
       declined_by_id: declined_by_id,
-      declined_on_id: (declined_by_id ? DateTime.now : nil),
+      declined_on: (declined_by_id ? DateTime.now : nil),
       properties: properties
 
     respond_to do |format|
