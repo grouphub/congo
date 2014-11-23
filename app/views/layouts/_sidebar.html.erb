@@ -54,7 +54,7 @@
     </a>
   </li>
 
-  <li ng-if="currentRole() === 'broker'">
+  <li ng-if="isGroupAdmin()">
     <a ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/benefit_plans">
       <i class="glyphicon glyphicon-user"></i>
       <span class="caption">Benefit plans</span>

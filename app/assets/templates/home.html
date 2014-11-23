@@ -1,24 +1,68 @@
 <div ng-if="currentRole() === 'admin'" class="col-md-12">
-  <h1>Admin Dashboard</h1>
+  <h1>Administrator Dashboard</h1>
 
-  <p>Lorem ipsum...</p>
+  <h2>Manage Carriers</h2>
+
+  <ul>
+    <li>
+      <a ng-href="/admin/carriers">Manage Carrier Accounts</a>
+    </li>
+
+    <li>
+      <a ng-href="/admin/invitations">Manage Invitations</a>
+    </li>
+  </ul>
 </div>
 
 <div ng-if="currentRole() === 'broker'" class="col-md-12">
-  <h1>{{accountName()}} Broker Dashboard</h1>
+  <h1>Broker Dashboard: {{accountName()}}</h1>
 
-  <p>Lorem ipsum...</p>
+  <h2>Broker Functions</h2>
+
+  <ul>
+    <li>
+      <a ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/account_carriers">Manage Carrier Accounts</a>
+    </li>
+
+    <li>
+      <a ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/benefit_plans">Manage Benefit Plans</a>
+    </li>
+
+    <li>
+      <a ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/groups">Manage Groups</a>
+    </li>
+  </ul>
 </div>
 
 <div ng-if="currentRole() === 'group_admin'" class="col-md-12">
-  <h1>{{accountName()}} Group Admin Dashboard</h1>
+  <h1>Group Admin Dashboard: {{accountName()}}</h1>
 
-  <p>Lorem ipsum...</p>
+  <h2>Group Admin Functions</h2>
+
+  <ul>
+    <li>
+      <a ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/benefit_plans">Manage Benefit Plans</a>
+    </li>
+
+    <li>
+      <a ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/groups">Manage Groups</a>
+    </li>
+  </ul>
 </div>
 
 <div ng-if="currentRole() === 'customer'" class="col-md-12">
-  <h1>Welcome to {{accountName()}}, {{firstName()}}!</h1>
+  <h1>Welcome, {{firstName()}}!</h1>
 
-  <p>Lorem ipsum 2...</p>
+  <h2>Member Functions</h2>
+
+  <ul>
+    <li>
+      <a ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/groups">Manage Group Benefits</a>
+    </li>
+
+    <li>
+      <a ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/applications">Manage Benefits Applications</a>
+    </li>
+  </ul>
 </div>
 
