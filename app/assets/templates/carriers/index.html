@@ -1,5 +1,7 @@
 <div class="col-md-12">
-  <h1>Carriers</h1>
+  <h1>Carrier Management</h1>
+
+  <p>Add new carriers to the system or update existing carriers listed below.</p>
 
   <table class="carriers table">
     <thead>
@@ -12,17 +14,14 @@
     <tbody>
       <tr ng-repeat="carrier in carriers">
         <td>
-          <a ng-href="/admin/carriers/{{carrier.slug}}">{{carrier.name}}</a>
-        </td>
-
-        <td ng-if="isAdmin()">
+          <a ng-if="isAdmin()" ng-href="/admin/carriers/{{carrier.slug}}">{{carrier.name}}</a>
         </td>
       </tr>
     </tbody>
   </table>
 
   <p ng-if="isAdmin()">
-    <a class="btn btn-default" href="/admin/carriers/new">New carrier</a>
+    <a class="btn btn-default" href="/admin/carriers/new">New Carrier</a>
   </p>
 </div>
 

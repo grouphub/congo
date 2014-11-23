@@ -1,6 +1,8 @@
 <div class="col-md-12">
   <h1>Groups</h1>
 
+  <p>Select benefits options, enroll, and make changes in the groups listed below.</p>
+
   <table class="groups table">
     <thead>
       <tr>
@@ -17,7 +19,7 @@
 
         <td ng-if="isGroupAdmin()">
           <a class="btn btn-info btn-xs" href="" ng-click="toggleGroupAt($index)">{{group.is_enabled ? 'Disable' : 'Enable'}}</a>
-          <a class="btn btn-danger btn-xs" href="" ng-if="currentRole() === 'broker'" ng-click="deleteGroupAt($index)">Delete</a>
+          <a class="btn btn-danger btn-xs" href="" ng-click="deleteGroupAt($index)">Delete</a>
         </td>
       </tr>
     </tbody>
