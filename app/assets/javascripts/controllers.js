@@ -93,25 +93,6 @@ congoApp.controller('MainController', [
         $location.path('/');
       }
     };
-
-    $scope.getPropertiesFromElements = function () {
-      return _.reduce(
-        $scope.elements,
-        function (sum, element) {
-          var value;
-          if (element.items) {
-            value = element.items[0].name;
-          } else {
-            value = element.value
-          }
-
-          sum[element.name] = value;
-
-          return sum;
-        },
-        {}
-      );
-    }
   }
 ]);
 
@@ -240,15 +221,17 @@ congoApp.controller('UsersNewBillingController', [
 ]);
 
 congoApp.controller('UsersNewAccountController', [
-  '$scope', '$http', '$location',
-  function ($scope, $http, $location) {
+  '$scope', '$http', '$location', 'propertiesFactory',
+  function ($scope, $http, $location, propertiesFactory) {
     $scope.elements = [];
 
     $scope.submit = function () {
-      var properties = $scope.getPropertiesFromElements();
+      var properties = propertiesFactory.getPropertiesFromElements($scope.elements);
+      var account = congo.currentUser.accounts[0] || {};
+      var accountId = account.id
 
       var data = {
-        account_id: congo.currentUser.accounts[0].id,
+        account_id: accountId,
         account_properties: properties
       };
 
@@ -355,12 +338,12 @@ congoApp.controller('UsersShowController', [
 ]);
 
 congoApp.controller('CarriersNewController', [
-  '$scope', '$http', '$location',
-  function ($scope, $http, $location) {
+  '$scope', '$http', '$location', 'propertiesFactory',
+  function ($scope, $http, $location, propertiesFactory) {
     $scope.elements = [];
 
     $scope.submit = function () {
-      var properties = $scope.getPropertiesFromElements();
+      var properties = propertiesFactory.getPropertiesFromElements($scope.elements);
 
       $http
         .post('/api/v1/carriers.json', {
@@ -513,8 +496,8 @@ congoApp.controller('CarrierAccountsIndexController', [
 ]);
 
 congoApp.controller('CarrierAccountsNewController', [
-  '$scope', '$http', '$location',
-  function ($scope, $http, $location) {
+  '$scope', '$http', '$location', 'propertiesFactory',
+  function ($scope, $http, $location, propertiesFactory) {
     // Make sure user is totally signed up before continuing.
     $scope.enforceValidAccount();
 
@@ -523,7 +506,7 @@ congoApp.controller('CarrierAccountsNewController', [
     $scope.selectedCarrier = null;
 
     $scope.submit = function () {
-      var properties = $scope.getPropertiesFromElements();
+      var properties = propertiesFactory.getPropertiesFromElements($scope.elements);
 
       $http
         .post('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/carrier_accounts.json', {
@@ -649,7 +632,7 @@ congoApp.controller('BenefitPlansIndexController', [
 ]);
 
 congoApp.controller('BenefitPlansNewController', [
-  '$scope', '$http', '$location',
+  '$scope', '$http', '$location', 'propertiesFactory',
   function ($scope, $http, $location) {
     // Make sure user is totally signed up before continuing.
     $scope.enforceValidAccount();
@@ -659,7 +642,7 @@ congoApp.controller('BenefitPlansNewController', [
     $scope.selectedCarrierAccount = null;
 
     $scope.submit = function () {
-      var properties = $scope.getPropertiesFromElements();
+      var properties = propertiesFactory.getPropertiesFromElements($scope.elements);
 
       $http
         .post('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/benefit_plans.json', {
@@ -787,15 +770,15 @@ congoApp.controller('GroupsIndexController', [
 ]);
 
 congoApp.controller('GroupsNewController', [
-  '$scope', '$http', '$location',
-  function ($scope, $http, $location) {
+  '$scope', '$http', '$location', 'propertiesFactory',
+  function ($scope, $http, $location, propertiesFactory) {
     // Make sure user is totally signed up before continuing.
     $scope.enforceValidAccount();
 
     $scope.elements = [];
 
     $scope.submit = function () {
-      var properties = $scope.getPropertiesFromElements();
+      var properties = propertiesFactory.getPropertiesFromElements($scope.elements);
 
       $http
         .post('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups.json', {

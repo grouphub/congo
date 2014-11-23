@@ -24,6 +24,7 @@
 //= require factories/events-factory
 //= require factories/flashes-factory
 //= require factories/user-data-factory
+//= require factories/properties-factory
 //= require directives/auto-focus
 //= require directives/properties-form
 

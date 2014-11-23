@@ -5,7 +5,7 @@ module BrokerCreatable
     # Class methods here...
   end
 
-  def attempt_to_create_broker!(params)
+  def attempt_to_create_broker!
     email_token = params[:email_token]
 
     return if email_token
