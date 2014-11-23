@@ -11,5 +11,6 @@ carrier_account = CarrierAccount.create! \
 BenefitPlan.create! \
   account_id: account.id,
   carrier_account_id: carrier_account.id,
-  name: 'Best Health Insurance PPO'
+  name: 'Best Health Insurance PPO',
+  is_enabled: true
 

@@ -107,7 +107,13 @@ class Api::V1::GroupsController < ApplicationController
 
       membership.as_json.merge({
         'user' => user,
-        'applications' => membership.applications
+        'applications' => membership.applications.map { |application|
+          application.as_json.merge({
+            'state' => application.state,
+            'human_state' => application.state.titleize,
+            'state_label' => application.state_label
+          })
+        }
       })
     }
 
@@ -122,7 +128,7 @@ class Api::V1::GroupsController < ApplicationController
       .where(user_id: current_user.id)
       .includes(:applications)
       .inject([]) { |sum, membership|
-      sum += membership.applications.map { |application|
+        sum += membership.applications.map { |application|
           application.as_json.merge({
             'state' => application.state,
             'human_state' => application.state.titleize,

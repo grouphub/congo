@@ -99,29 +99,17 @@
           </td>
 
           <td>
-            <table class="table" ng-if="membership.applications.length > 0">
-              <thead>
-                <tr>
-                  <th>Selected On</th>
-                  <th>State</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
+            <ul class="application-list">
+              <li class="application" ng-repeat="application in membership.applications">
+                <span class="selected-date">
+                  {{application.created_at | date}}
+                </span>
 
-              <tbody>
-                <tr ng-repeat="application in membership.applications">
-                  <td>{{application.selected_on | date}}</td>
-
-                  <td>
-                    <a href="" class="btn btn-{{application.state_label}} btn-xs disabled">{{application.human_state}}</a>
-                  </td>
-
-                  <td>
-                    <a class="btn btn-success btn-xs" href="" ng-if="application.applied_by_id && !application.submitted_by_id" ng-click="submitApplication(application)">Submit application</a>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+                <span class="state">
+                  <a href="" class="btn btn-{{application.state_label}} btn-xs disabled">{{application.human_state}}</a>
+                </span>
+              </li>
+            </ul>
           </td>
         </tr>
       </tbody>

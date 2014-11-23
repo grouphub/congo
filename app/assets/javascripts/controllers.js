@@ -839,7 +839,8 @@ congoApp.controller('GroupsShowController', [
 
       var data = {
         group_slug: $scope.groupSlug(),
-        benefit_plan_id: benefitPlan.id
+        benefit_plan_id: benefitPlan.id,
+        selected_by_id: congo.currentUser.id
       };
 
       $http
