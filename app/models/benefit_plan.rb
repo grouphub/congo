@@ -6,6 +6,6 @@ class BenefitPlan < ActiveRecord::Base
   has_many :applications
 
   belongs_to :account
-  belongs_to :account_carrier
+  belongs_to :carrier_account
 end
 

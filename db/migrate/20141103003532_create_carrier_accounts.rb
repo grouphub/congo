@@ -1,6 +1,6 @@
-class CreateAccountCarriers < ActiveRecord::Migration
+class CreateCarrierAccounts < ActiveRecord::Migration
   def change
-    create_table :account_carriers do |t|
+    create_table :carrier_accounts do |t|
       t.integer :account_id
       t.integer :carrier_id
       t.string :name

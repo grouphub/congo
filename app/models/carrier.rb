@@ -3,6 +3,6 @@ class Carrier < ActiveRecord::Base
   include Propertied
 
   has_many :benefit_plans
-  has_many :account_carriers
+  has_many :carrier_accounts
 end
 

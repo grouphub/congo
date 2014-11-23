@@ -37,9 +37,9 @@ Rails.application.routes.draw do
     '/accounts/:slug/:role/home',
 
     # Account carriers
-    '/accounts/:slug/:role/account_carriers',
-    '/accounts/:slug/:role/account_carriers/new',
-    '/accounts/:slug/:role/account_carriers/:account_carrier_id',
+    '/accounts/:slug/:role/carrier_accounts',
+    '/accounts/:slug/:role/carrier_accounts/new',
+    '/accounts/:slug/:role/carrier_accounts/:carrier_accounts_id',
 
     # Benefit plans
     '/accounts/:slug/:role/benefit_plans',
@@ -62,7 +62,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :accounts do
         resources :roles do
-          resources :account_carriers
+          resources :carrier_accounts
           resources :benefit_plans
 
           resources :groups do
@@ -76,7 +76,7 @@ Rails.application.routes.draw do
 
           resources :applications
 
-          get '/properties/account_carriers', to: 'properties#account_carriers'
+          get '/properties/carrier_accounts', to: 'properties#carrier_accounts'
           get '/properties/accounts', to: 'properties#accounts'
           get '/properties/carriers', to: 'properties#carriers'
           get '/properties/benefit_plans', to: 'properties#benefit_plans'

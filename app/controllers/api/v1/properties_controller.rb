@@ -1,5 +1,5 @@
 class Api::V1::PropertiesController < ApplicationController
-  def account_carriers
+  def carrier_accounts
     respond_to do |format|
       format.json {
         render json: {

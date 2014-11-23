@@ -6,7 +6,7 @@ class Account < ActiveRecord::Base
 
   has_many :roles
   has_many :applications
-  has_many :account_carriers
+  has_many :carrier_accounts
 
   PLAN_NAMES = %[basic standard premiere]
 

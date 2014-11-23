@@ -1,4 +1,4 @@
-class AccountCarrier < ActiveRecord::Base
+class CarrierAccount < ActiveRecord::Base
   include Propertied
 
   belongs_to :account

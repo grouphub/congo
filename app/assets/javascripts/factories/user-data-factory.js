@@ -31,8 +31,8 @@ congoApp.factory('userDataFactory', [
           return match[1];
         }
       },
-      accountCarrierId: function () {
-        var match = $location.path().match(/account_carriers\/([^\/])+/);
+      carrierAccountId: function () {
+        var match = $location.path().match(/carrier_accounts\/([^\/])+/);
 
         if (match && match[1] && match[1].length > 0) {
           return match[1];
