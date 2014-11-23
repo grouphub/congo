@@ -633,7 +633,7 @@ congoApp.controller('BenefitPlansIndexController', [
 
 congoApp.controller('BenefitPlansNewController', [
   '$scope', '$http', '$location', 'propertiesFactory',
-  function ($scope, $http, $location) {
+  function ($scope, $http, $location, propertiesFactory) {
     // Make sure user is totally signed up before continuing.
     $scope.enforceValidAccount();
 
