@@ -34,6 +34,11 @@ congoApp.controller('MainController', [
       flashesFactory.add(flash.type, flash.message);
     });
 
+    // Update age of flashes
+    $scope.$on('$locationChangeStart', function(event) {
+      flashesFactory.update();
+    });
+
     $('body').delegate('.alert', 'click', function (e) {
       var $me = $(this)
       var message = $me.find('.message').text();
