@@ -98,6 +98,9 @@ congoApp.controller('MainController', [
         $location.path('/');
       }
     };
+
+    window.$congo = {}
+    window.$congo.$mainControllerScope = $scope;
   }
 ]);
 

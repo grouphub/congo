@@ -14,15 +14,18 @@ class HomeController < ApplicationController
       end
 
       current_account = Account.where(slug: account_slug).first
-      unless(
-        current_account &&
-        current_user.roles.any? { |role| role.account_id == current_account.id }
-      )
+      unless current_account
         flash[:error] = 'We could not find an appropriate account.'
         redirect_to '/'
       end
 
-      plan_name = current_account.plan_name
+      is_part_of_account = current_user.roles.any? { |role| role.account_id == current_account.id }
+      unless is_part_of_account
+        flash[:error] = 'We could not find an appropriate account.'
+        redirect_to '/'
+      end
+
+      plan_name = current_account.plan_name || ''
       unless current_user.invitation || Account::PLAN_NAMES.include?(plan_name)
         flash[:error] = 'Please choose a valid plan before continuing.'
         redirect_to '/users/new_plan'
