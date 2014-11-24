@@ -2,7 +2,7 @@
   <div class="form-group" ng-repeat="element in elements">
     <div ng-if="element.type == 'text'">
       <label ng-if="element.title" for="{{element.name}}">{{element.title}}</label>
-      <input type="text" class="form-control" id="{{element.name}}" name="{{element.name}}" placeholder="{{element.placeholder}}" ng-model="element.value">
+      <input type="text" class="form-control" id="{{element.name}}" name="{{element.name}}" placeholder="{{element.placeholder}}" ng-model="element.value" required>
     </div>
 
     <div ng-if="element.type == 'list'">

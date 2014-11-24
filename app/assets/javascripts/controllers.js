@@ -155,6 +155,10 @@ congoApp.controller('UsersNewManagerController', [
     };
 
     $scope.submit = function () {
+     
+      $scope.$broadcast('show-errors-check-validity');
+
+      if ($scope.userForm.$invalid) { return; }
       $http
         .post('/api/v1/users.json', {
           first_name: $scope.first_name,
@@ -215,6 +219,10 @@ congoApp.controller('UsersNewBillingController', [
   '$scope', '$http', '$location',
   function ($scope, $http, $location) {
     $scope.submit = function () {
+      $scope.$broadcast('show-errors-check-validity');
+
+      if ($scope.billingForm.$invalid) { return; }
+
       $http
         .put('/api/v1/users/' + congo.currentUser.id + '.json', {
           user_properties: {
@@ -242,6 +250,11 @@ congoApp.controller('UsersNewAccountController', [
     $scope.elements = [];
 
     $scope.submit = function () {
+      $scope.$broadcast('show-errors-check-validity');
+
+      if ($scope.userForm.$invalid) { return; }
+
+
       var properties = propertiesFactory.getPropertiesFromElements($scope.elements);
       var account = congo.currentUser.accounts[0] || {};
       var accountId = account.id
