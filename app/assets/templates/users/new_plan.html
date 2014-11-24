@@ -1,56 +1,96 @@
+<head>
+   <link href="pricing.css" rel="stylesheet">
+    <link href="bootstrap.min.css" rel="stylesheet">
+    <link href="font-awesome.min.css" rel="stylesheet">
+    <link href="prettyPhoto.css" rel="stylesheet">
+    <link href="animate.min.css" rel="stylesheet">
+    <link href="responsive.css" rel="stylesheet">
+</head>
 <div class="col-md-12">
   <h1>Pick a plan</h1>
-
-  <div class="row">
-    <div class="col-md-4">
-      <div class="plan">
-        <h2>Basic <small>$1,000</small></h2>
-
-        <ul>
-          <li>100 enrollments</li>
-          <li>$10 per additional enrollment</li>
-          <li>Email support</li>
-        </ul>
-      </div>
-
-      <a href="" class="btn btn-primary" ng-click="pickPlan('basic')">Start Basic</a>
-    </div>
-
-    <div class="col-md-4">
-      <div class="plan">
-        <h2>Standard <small>$2,500</small></h2>
-
-        <ul>
-          <li>500 enrollments</li>
-          <li>$5 per additional enrollment</li>
-          <li>Email support</li>
-        </ul>
-      </div>
-
-      <a href="" class="btn btn-primary" ng-click="pickPlan('standard')">Start Standard</a>
-    </div>
-
-    <div class="col-md-4">
-      <div class="plan">
-        <h2>Premier <small>$5,000</small></h2>
-
-        <ul>
-          <li>2,500 enrollments</li>
-          <li>$2 per additional enrollment</li>
-          <li>Phone &amp; Email support</li>
-        </ul>
-      </div>
-
-      <a href="" class="btn btn-primary" ng-click="pickPlan('premiere')">Start Premiere</a>
-    </div>
-  </div>
-
-  <hr>
-
-  <div class="row">
-    <div class="col-md-12">
-      <h3>&hellip;or, enter an invite code:</h3>
-
+     <section id="pricing">
+       <!-- <div class="center">
+             <h2>Pick a plan</h2>
+            <p class="lead">Pellentesque habitant morbi tristique senectus et netus et <br>malesuada fames ac turpis egestas.</p>
+        </div>/.center-->   
+        <div id="pricing-table" class="row">
+            <div class="col-sm-3">
+                <ul class="plan">
+                    <li class="plan-name">Pay As You Go</li>
+                    <li class="plan-price">Free</li>
+                    <li>Unlimited</strong> Groups</li>
+                    <li>$15</strong> per enrollment</li>
+                    <li>Forum</strong> Support</li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li class="plan-action"><a href="#" class="btn btn-primary btn-lg" ng-click="pickPlan('free')">Signup</a></li>
+                </ul>
+            </div><!--/.col-sm-4-->
+            <div class="col-sm-3">
+                <ul class="plan">
+                    <li class="plan-name">Basic</li>
+                    <li class="plan-price"><sup>$</sup>1000<small>year</small></li>
+                    <li><strong>Unlimited</strong> Groups</li>
+                    <li><strong>50</strong> enrollments included</li>
+                    <li><strong>Email</strong> support</li>
+                    <li><strong>Forum</strong> Support</li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li><strong>$10</strong> each additional enrollment</li>
+                    <li class="plan-action"><a href="#" class="btn btn-primary btn-lg" ng-click="pickPlan('basic')">Signup</a></li>
+                </ul>
+            </div><!--/.col-sm-4-->
+            <div class="col-sm-3">
+                <ul class="plan featured">
+                    <li class="plan-name">Standard</li>
+                    <li class="plan-price"><sup>$</sup>2,500<small>year</small></li>
+                    <li><strong>Unlimited</strong> Groups</li>
+                    <li><strong>500</strong> enrollments included</li>
+                    <li><strong>Custom</strong> Website</li>
+                    <li><strong>Email</strong> support</li>
+                    <li><strong>Forum</strong> Support</li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li><strong>$5</strong> each additional enrollment</li>
+                    <li class="plan-action"><a href="#" class="btn btn-primary btn-lg" ng-click="pickPlan('standard')">Signup</a></li>
+                </ul>
+            </div><!--/.col-sm-4-->
+            <div class="col-sm-3">
+                <ul class="plan">
+                    <li class="plan-name">Premiere</li>
+                    <li class="plan-price"><sup>$</sup>5,000<small>year</small></li>
+                    <li><strong>Unlimited</strong> Groups</li>
+                    <li><strong>2,500</strong> enrollments included</li>
+                    <li><strong>Personailzed</strong> Website</li>
+                    <li><strong>Phone</strong> Supoort</li>
+                    <li><strong>Email</strong> support</li>
+                    <li><strong>Forum</strong> Support</li>
+                    <li>$2 per additional enrollment</li>
+                    <li class="plan-action"><a href="#" class="btn btn-primary btn-lg" ng-click="pickPlan('premiere')">Signup</a></li>
+                </ul>
+            </div>
+        </div>
+</section>
+<section>
+     <h2>Or enter an invitation code</h2>
       <form ng-submit="addInviteCode()">
         <div class="form-group">
           <label for="invitation">Invite code</label>
@@ -59,7 +99,6 @@
 
         <input type="submit" class="btn btn-primary" value="Start">
       </form>
-    </div>
-  </div>
+</section>
 </div>
 
