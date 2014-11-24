@@ -335,7 +335,7 @@ congoApp.controller('UsersNewCustomerController', [
       $scope.$broadcast('show-errors-check-validity');
 
       if ($scope.memberForm.$invalid) { return; }
-      
+
       $http
         .post('/api/v1/users.json', {
           first_name: $scope.first_name,
