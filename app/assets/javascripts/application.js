@@ -15,6 +15,7 @@
 //= require underscore
 //= require eventemitter-2
 //= require bootstrap
+//= require ui-utils.js
 //= require angular
 //= require angular-route
 //= require angular-cookies

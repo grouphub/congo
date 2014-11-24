@@ -75,37 +75,37 @@ class Api::V1::PropertiesController < ApplicationController
               type: 'text',
               name: 'name',
               title: 'Name',
-              placeholder: 'Enter the Company Name…'
+              placeholder: 'Enter a Company Name…'
             },
             {
               type: 'text',
               name: 'tagline',
               title: 'Tagline',
-              placeholder: 'Enter the Company Tagline…'
+              placeholder: 'Company Tagline'
             },
             {
               type: 'text',
               name: 'tax_id',
               title: 'Tax ID',
-              placeholder: 'Enter your Tax ID…'
+              placeholder: 'Tax ID'
             },
             {
               type: 'text',
               name: 'first_name',
-              title: 'First Name',
-              placeholder: 'Enter the Account Contact\' First Name…'
+              title: 'Account Contact',
+              placeholder: 'Account Contact'
             },
             {
               type: 'text',
               name: 'last_name',
               title: 'Last Name',
-              placeholder: 'Enter the Account Contact\'s Last Name…'
+              placeholder: 'Account Contact'
             },
             {
               type: 'text',
               name: 'phone',
               title: 'Phone Number',
-              placeholder: 'Enter the Account Contact\'s Phone Number…'
+              placeholder: 'Phone Number'
             }
           ]
         }

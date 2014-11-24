@@ -122,6 +122,10 @@ congoApp.controller('UsersSigninController', [
   '$scope','$http', '$location', 'flashesFactory',
   function ($scope, $http, $location, flashesFactory) {
     $scope.submit = function () {
+       $scope.$broadcast('show-errors-check-validity');
+
+      if ($scope.signinForm.$invalid) { return; }
+
       $http
         .post('/api/v1/users/signin.json', {
           email: $scope.email,
@@ -155,6 +159,10 @@ congoApp.controller('UsersNewManagerController', [
     };
 
     $scope.submit = function () {
+     
+      $scope.$broadcast('show-errors-check-validity');
+
+      if ($scope.userForm.$invalid) { return; }
       $http
         .post('/api/v1/users.json', {
           first_name: $scope.first_name,
@@ -215,6 +223,10 @@ congoApp.controller('UsersNewBillingController', [
   '$scope', '$http', '$location',
   function ($scope, $http, $location) {
     $scope.submit = function () {
+      $scope.$broadcast('show-errors-check-validity');
+
+      if ($scope.billingForm.$invalid) { return; }
+
       $http
         .put('/api/v1/users/' + congo.currentUser.id + '.json', {
           user_properties: {
@@ -242,6 +254,11 @@ congoApp.controller('UsersNewAccountController', [
     $scope.elements = [];
 
     $scope.submit = function () {
+      $scope.$broadcast('show-errors-check-validity');
+
+      if ($scope.accountForm.$invalid) { return; }
+
+
       var properties = propertiesFactory.getPropertiesFromElements($scope.elements);
       var account = congo.currentUser.accounts[0] || {};
       var accountId = account.id
@@ -290,6 +307,11 @@ congoApp.controller('UsersNewCustomerController', [
     congo.currentUser = null;
 
     $scope.signin = function () {
+
+      $scope.$broadcast('show-errors-check-validity');
+
+      if ($scope.memberForm.$invalid) { return; }
+
       var email = $scope.signin_email;
       var password = $scope.signin_password;
 
@@ -310,6 +332,10 @@ congoApp.controller('UsersNewCustomerController', [
     }
 
     $scope.signup = function () {
+      $scope.$broadcast('show-errors-check-validity');
+
+      if ($scope.memberForm.$invalid) { return; }
+
       $http
         .post('/api/v1/users.json', {
           first_name: $scope.first_name,
