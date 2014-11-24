@@ -1154,17 +1154,15 @@ congoApp.controller('ApplicationsShowController', [
       .success(function (data, status, headers, config) {
         $scope.application = data.application;
 
-        /* debugger */
-
-        _.defer(function () {
+        // TODO: Find a better way to update this (directive?)
+        (function () {
           var propertiesData = JSON.parse($scope.application.properties_data);
 
           _(propertiesData).each(function (i, key, hash) {
             var value = hash[key]
             console.log(key, value);
 
-            $('#enrollment-form [name="' + key + '"]')
-              .val(value)
+            $('#enrollment-form [name="' + key + '"]').val(value)
           });
 
           $([
@@ -1174,7 +1172,8 @@ congoApp.controller('ApplicationsShowController', [
           ].join(', ')).attr('disabled', 'disabled');
 
           $('#enrollment-form input[type=submit]').hide();
-        });
+          $('#enrollment-form h1').text('Application: ' + $scope.application.benefit_plan.name);
+        })();
 
         $scope.ready();
       })
