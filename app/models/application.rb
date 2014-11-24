@@ -25,6 +25,8 @@ class Application < ActiveRecord::Base
     case self.state
     when 'submitted'
       'success'
+    when 'approved'
+      'info'
     when 'applied'
       'info'
     when 'declined'

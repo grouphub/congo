@@ -1092,7 +1092,8 @@ congoApp.controller('ApplicationsNewController', [
       var data = {
         group_slug: $scope.groupSlug(),
         benefit_plan_id: $scope.benefitPlanId(),
-        properties: properties
+        properties: properties,
+        applied_by_id: congo.currentUser.id
       };
 
       var id = $cookieStore.get('current-application-id');
