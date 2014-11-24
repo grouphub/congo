@@ -1,5 +1,5 @@
 class Invitation < ActiveRecord::Base
-  belongs_to :user
+  has_one :user
 
   before_save :add_uuid
 

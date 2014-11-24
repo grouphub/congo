@@ -27,8 +27,6 @@ class Api::V1::CarrierAccountsController < ApplicationController
     carrier_slug = properties['carrier_name']
     carrier = Carrier.where(slug: carrier_slug).first
 
-    binding.pry
-
     unless name
       # TODO: Handle this
     end

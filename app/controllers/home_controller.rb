@@ -23,7 +23,7 @@ class HomeController < ApplicationController
       end
 
       plan_name = current_account.plan_name
-      unless Account::PLAN_NAMES.include?(plan_name) || current_user.invitation
+      unless current_user.invitation || Account::PLAN_NAMES.include?(plan_name)
         flash[:error] = 'Please choose a valid plan before continuing.'
         redirect_to '/users/new_plan'
       end
