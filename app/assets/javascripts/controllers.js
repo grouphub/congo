@@ -306,7 +306,7 @@ congoApp.controller('UsersNewCustomerController', [
 
     congo.currentUser = null;
 
-    $scope.submit = function () {
+    $scope.signin = function () {
 
       $scope.$broadcast('show-errors-check-validity');
 
@@ -332,6 +332,10 @@ congoApp.controller('UsersNewCustomerController', [
     }
 
     $scope.signup = function () {
+      $scope.$broadcast('show-errors-check-validity');
+
+      if ($scope.memberForm.$invalid) { return; }
+      
       $http
         .post('/api/v1/users.json', {
           first_name: $scope.first_name,
