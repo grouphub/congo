@@ -149,8 +149,9 @@ congoApp.controller('UsersNewManagerController', [
   function ($scope, $http, $location, flashesFactory) {
     $scope.save = function() {
       $scope.$broadcast('show-errors-check-validity');
+
         if ($scope.userForm.$invalid) { return; }
-        // code to add the user
+      // code to add the user
     };
 
     $scope.submit = function () {

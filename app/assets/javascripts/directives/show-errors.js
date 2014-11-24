@@ -13,6 +13,11 @@ var congoApp = angular.module('congoApp');
         // on the form controller
         var inputName = inputNgEl.attr('name');
 
+        // check the validity on show-errors-check-validity’ event
+        scope.$on('show-errors-check-validity', function() {
+          el.toggleClass('has-error', formCtrl[inputName].$invalid);
+        });
+        
         // only apply the has-error class after the user leaves the text box
         inputNgEl.bind('blur', function() {
           el.toggleClass('has-error', formCtrl[inputName].$invalid);
