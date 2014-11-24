@@ -145,7 +145,14 @@ congoApp.controller('UsersSigninController', [
 
 congoApp.controller('UsersNewManagerController', [
   '$scope', '$http', '$location', 'flashesFactory',
+  
   function ($scope, $http, $location, flashesFactory) {
+    $scope.save = function() {
+      $scope.$broadcast('show-errors-check-validity');
+        if ($scope.userForm.$invalid) { return; }
+        // code to add the user
+    };
+
     $scope.submit = function () {
       $http
         .post('/api/v1/users.json', {

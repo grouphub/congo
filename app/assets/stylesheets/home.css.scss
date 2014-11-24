@@ -11,6 +11,17 @@ body {
 // Spinner styles
 
 #main {
+  
+  //Form error message styles
+
+  .form-group .help-block {
+  display: none;
+  }
+  .form-group.has-error .help-block {
+  display: block;
+  }
+  //End Form eror messge styles
+  
   #spinner-container {
     display: none;
     text-align: center;

@@ -27,4 +27,4 @@
 //= require factories/properties-factory
 //= require directives/auto-focus
 //= require directives/properties-form
-
+//= require directives/show-errors
