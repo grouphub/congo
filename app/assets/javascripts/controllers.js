@@ -1149,7 +1149,29 @@ congoApp.controller('ApplicationsShowController', [
     $http
       .get('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/applications/' + $scope.applicationId() + '.json')
       .success(function (data, status, headers, config) {
-        $scope.applications = data.applications;
+        $scope.application = data.application;
+
+        /* debugger */
+
+        _.defer(function () {
+          var propertiesData = JSON.parse($scope.application.properties_data);
+
+          _(propertiesData).each(function (i, key, hash) {
+            var value = hash[key]
+            console.log(key, value);
+
+            $('#enrollment-form [name="' + key + '"]')
+              .val(value)
+          });
+
+          $([
+            '#enrollment-form input',
+            '#enrollment-form select',
+            '#enrollment-form textarea'
+          ].join(', ')).attr('disabled', 'disabled');
+
+          $('#enrollment-form input[type=submit]').hide();
+        });
 
         $scope.ready();
       })
