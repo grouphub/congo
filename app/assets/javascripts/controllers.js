@@ -122,6 +122,10 @@ congoApp.controller('UsersSigninController', [
   '$scope','$http', '$location', 'flashesFactory',
   function ($scope, $http, $location, flashesFactory) {
     $scope.submit = function () {
+       $scope.$broadcast('show-errors-check-validity');
+
+      if ($scope.signinForm.$invalid) { return; }
+
       $http
         .post('/api/v1/users/signin.json', {
           email: $scope.email,
@@ -302,7 +306,12 @@ congoApp.controller('UsersNewCustomerController', [
 
     congo.currentUser = null;
 
-    $scope.signin = function () {
+    $scope.submit = function () {
+
+      $scope.$broadcast('show-errors-check-validity');
+
+      if ($scope.memberForm.$invalid) { return; }
+
       var email = $scope.signin_email;
       var password = $scope.signin_password;
 
