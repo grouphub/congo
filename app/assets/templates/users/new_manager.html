@@ -1,8 +1,21 @@
-<div class="col-md-12">
-  <h1>Sign up as a broker</h1>
 
-  <form ng-submit="submit()">
-    <div class="form-group">
+
+<div class="col-md-12">
+  <h1>Signup</h1>
+
+  <form name="userForm">
+    <div class="form-group" show-errors>
+      <input type="text" class="form-control" name="name" ng-model="user.name" required />
+    </div>
+    <div class="form-group" show-errors>
+      <input type="email" class="form-control" name="email" ng-model="user.email" required />
+    </div>
+  </form>
+
+  <form name="accountSignup" g-submit="submit()">
+    <div class="form-group" ng-class="{ 'has-error': accountSignup.email.$invalid }" >
+      <input type="email" class="form-control" name="email" ng-model="user.email" required />
+
       <label for="email">Email</label>
       <input type="text" class="form-control" id="email" placeholder="Enter email&hellip;" ng-model="email" auto-focus>
     </div>
