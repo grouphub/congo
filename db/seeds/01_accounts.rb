@@ -1,6 +1,7 @@
 Account.create! \
   name: 'Admin',
-  tagline: 'GroupHub administrative account'
+  tagline: 'GroupHub administrative account',
+  plan_name: 'admin'
 
 Account.create! \
   name: 'First Account',

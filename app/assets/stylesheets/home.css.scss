@@ -521,13 +521,17 @@ h1 {
   }
 }
 
-.application-list {
+ul.simple-list {
   padding-left: 0;
 
-  .application {
+  li {
     margin-bottom: 10px;
     list-style-type: none;
+  }
+}
 
+ul.simple-list {
+  .application.li {
     .selected-date,
     .application-state {
       display: inline-block;
@@ -539,3 +543,6 @@ h1 {
   }
 }
 
+ul.simple-list.functions-list {
+  padding-top: 10px;
+}

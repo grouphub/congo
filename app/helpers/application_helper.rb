@@ -11,15 +11,15 @@ module ApplicationHelper
   end
 
   def bootstrap_class_for flash_type
-    case flash_type
+    case flash_type.to_sym
       when :success
-        "alert-success"
+        'success'
       when :error
-        "alert-error"
+        'error'
       when :alert
-        "alert-block"
+        'block'
       when :notice
-        "alert-info"
+        'info'
       else
         flash_type.to_s
     end

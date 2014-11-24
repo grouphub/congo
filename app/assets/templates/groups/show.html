@@ -40,7 +40,7 @@
           <td>{{benefitPlan.name}}</td>
 
           <td>
-            <ul class="application-list" ng-repeat="application in applications(benefitPlan)">
+            <ul class="simple-list" ng-repeat="application in applications(benefitPlan)">
               <li class="application">
                 <span class="selected-date">
                   {{application.created_at | date : 'short'}}
