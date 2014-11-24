@@ -75,7 +75,7 @@ class Api::V1::PropertiesController < ApplicationController
               type: 'text',
               name: 'name',
               title: 'Name',
-              placeholder: 'Enter a Carrier Name…'
+              placeholder: 'Enter a Company Name…'
             },
             {
               type: 'text',

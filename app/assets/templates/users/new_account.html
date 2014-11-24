@@ -1,10 +1,31 @@
 <div class="col-md-12">
-  <h1>Create account</h1>
-
-  <form name="propertiesForm" ng-submit="submit()">
-    <properties:form x-elements="{{elements}}" x-data="{{data}}"></properties:form>
-
-    <input type="submit" class="btn btn-default" value="Sign up">
-  </form>
+  <form name="accountForm">
+    <h1>Account Setup</h1>
+      <div class="form-group" show-errors='{showSuccess: true}'>
+        <label class="control-label">Company Name</label>
+        <input type="text" class="form-control" id="name" name="name" ng-model="name" required placeholder="Company Name" />
+        <p class="help-block" ng-if="accountForm.name.$error.required">The company name is required</p>
+      </div>
+      <div class="form-group" show-errors='{showSuccess: true}'>
+        <label class="control-label">Company Description</label>
+        <input type="text" class="form-control" id="tagline" name="tagline" ng-model="tagline" placeholder="Description" />
+      </div>
+      <div class="form-group" show-errors='{showSuccess: true}'>
+        <label class="control-label">Account Contact</label>
+        <input type="text" class="form-control" id="first_name" name="first_name" ng-model="first_name" required placeholder="Account Contact" />
+        <p class="help-block" ng-if="accountForm.first_name.$error.required">The account contact is required</p>
+      </div>
+      <div class="form-group" show-errors='{showSuccess: true}'>
+        <label class="control-label">Tax Id</label>
+        <input type="text" class="form-control" id="tax_id" name="tax_id" ng-model="tax_id" placeholder="Tax ID" />
+        <p class="help-block" ng-if="accountForm.tax_id.$error.required">The  is required</p>
+        <p class="help-block" ng-if="accountForm.tax_id.$error.tax_id">The tax id is invalid</p>
+      </div>
+      <div class="form-group" show-errors='{showSuccess: true}'>
+        <label class="control-label">Phone Number</label>
+        <input type="text" class="form-control" id="phone" name="phone" ng-model="phone" placeholder="Confirm Password" />
+        <p class="help-block" ng-if="accountForm.phone.$error.required">The phone number is required</p>
+      </div>
+      <button class="btn btn-primary" ng-click="submit()">Save</button>
+    </form>
 </div>
-

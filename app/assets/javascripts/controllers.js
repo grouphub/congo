@@ -252,7 +252,7 @@ congoApp.controller('UsersNewAccountController', [
     $scope.submit = function () {
       $scope.$broadcast('show-errors-check-validity');
 
-      if ($scope.userForm.$invalid) { return; }
+      if ($scope.accountForm.$invalid) { return; }
 
 
       var properties = propertiesFactory.getPropertiesFromElements($scope.elements);
