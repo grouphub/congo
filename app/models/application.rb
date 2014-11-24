@@ -15,7 +15,7 @@ class Application < ActiveRecord::Base
     elsif self.declined_by_id
       'declined'
     elsif self.selected_by_id
-      'selected'
+      'started'
     else
       'not_applied'
     end
