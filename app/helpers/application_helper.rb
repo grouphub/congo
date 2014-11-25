@@ -15,7 +15,7 @@ module ApplicationHelper
       when :success
         'success'
       when :error
-        'error'
+        'danger'
       when :alert
         'block'
       when :notice
