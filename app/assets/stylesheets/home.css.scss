@@ -8,9 +8,19 @@ body {
   font-family: 'Source Sans Pro', sans-serif;
 }
 
+//Form error message style
+.form-group .help-block {
+  display: none;
+}
+//Form error message style
+.form-group.has-error .help-block {
+  display: block;
+}
+
 // Spinner styles
 
 #main {
+
   #spinner-container {
     display: none;
     text-align: center;

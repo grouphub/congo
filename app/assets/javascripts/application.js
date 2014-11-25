@@ -15,6 +15,7 @@
 //= require underscore
 //= require eventemitter-2
 //= require bootstrap
+//= require ui-utils.js
 //= require angular
 //= require angular-route
 //= require angular-cookies
@@ -27,4 +28,4 @@
 //= require factories/properties-factory
 //= require directives/auto-focus
 //= require directives/properties-form
-
+//= require directives/show-errors
