@@ -206,6 +206,7 @@ congoApp.controller('UsersNewPlanController', [
       $http
         .put('/api/v1/users/' + congo.currentUser.id + '.json', {
           invite_code: $scope.invitation
+          plan_name: 'invitation'
         })
         .success(function (data, status, headers, config) {
           $location.path('/users/new_account');
