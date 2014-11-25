@@ -99,6 +99,11 @@ congoApp.controller('MainController', [
       }
     };
 
+    $(function () {
+      // Enable tooltips
+      $('[data-toggle="tooltip"]').tooltip()
+    });
+
     window.$congo = {}
     window.$congo.$mainControllerScope = $scope;
   }

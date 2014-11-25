@@ -10,5 +10,9 @@ Rails.application.config.assets.version = '1.0'
 Rails.application.config.assets.precompile += [
   'glyphicons-halflings-regular.eot',
   'glyphicons-halflings-regular.woff',
-  'glyphicons-halflings-regular.ttf'
+  'glyphicons-halflings-regular.ttf',
+  'fontawesome-webfont.eot',
+  'fontawesome-webfont.woff',
+  'fontawesome-webfont.ttf',
+  'fontawesome-webfont.svg'
 ]

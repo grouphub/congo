@@ -14,6 +14,7 @@
  *= require bootstrap
  *= require pricing
  *= require forms
- *- require font-awesome
+ *= require font-awesome
+ *= require pricing
  *= require home
  */
