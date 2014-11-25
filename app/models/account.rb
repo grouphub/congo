@@ -8,7 +8,7 @@ class Account < ActiveRecord::Base
   has_many :applications
   has_many :carrier_accounts
 
-  PLAN_NAMES = %[basic standard premiere admin]
+  PLAN_NAMES = %[free basic standard premier admin]
 
   def needs_to_pay?
     last_payment = Payment
