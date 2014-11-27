@@ -1033,9 +1033,21 @@ congoApp.controller('GroupsShowController', [
       $http
         .put('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/applications/' + application.id + '.json', data)
         .success(function (data, status, headers, config) {
-          $scope.group.memberships.push(data.membership);
+          var memberships = $scope.customerMemberships();
+          var membership = _(memberships).find(function (membership) {
+            return _(membership.applications).find(function (application) {
+              return data.application.id === application.id;
+            });
+          });
+
+          var application = _(membership.applications).find(function (application) {
+            return data.application.id === application.id;
+          });
+
+          var applicationIndex = membership.applications.indexOf(application);
+
+          membership.applications[applicationIndex] = data.application;
         })
-        
         .error(function (data, status, headers, config) {
           debugger
         });
@@ -1049,9 +1061,21 @@ congoApp.controller('GroupsShowController', [
       $http
         .put('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/applications/' + application.id + '.json', data)
         .success(function (data, status, headers, config) {
-          $scope.group.memberships.push(data.membership);
+          var memberships = $scope.customerMemberships();
+          var membership = _(memberships).find(function (membership) {
+            return _(membership.applications).find(function (application) {
+              return data.application.id === application.id;
+            });
+          });
+
+          var application = _(membership.applications).find(function (application) {
+            return data.application.id === application.id;
+          });
+
+          var applicationIndex = membership.applications.indexOf(application);
+
+          membership.applications[applicationIndex] = data.application;
         })
-        
         .error(function (data, status, headers, config) {
           debugger
         });
