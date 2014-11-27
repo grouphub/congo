@@ -96,12 +96,13 @@
 
                 <span class="state">
                   <a href="" class="btn btn-{{application.state_label}} btn-xs disabled">{{application.human_state}}</a>
+                </span>
                   <a class="btn btn-primary btn-xs" href="" ng-if="application.human_state == 'Declined'" ng-click="submitApplication(application)">Submit
                   <a class="btn btn-primary btn-xs" href="" ng-if="application.human_state == 'Selected'" ng-click="">Remind
                   <a class="btn btn-primary btn-xs" href="" ng-if="application.human_state == 'Applied'" ng-click="approveApplication(application)">Approve
                   <a class="btn btn-primary btn-xs" href="" ng-if="application.human_state == 'Approved'" ng-click="submitApplication(application)">Submit
                   </a>
-                </span>
+                
               </li>
             </ul>
           </td>

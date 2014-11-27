@@ -961,7 +961,6 @@ congoApp.controller('GroupsShowController', [
         role_name: 'customer',
         email: email
       };
-
       $http
         .post('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups/' + $scope.groupSlug() + '/memberships.json', data)
         .success(function (data, status, headers, config) {
@@ -1025,19 +1024,6 @@ congoApp.controller('GroupsShowController', [
         });
     };
 
-    $scope.approveApplication = function (application) {
-      var data = {
-        approved_by_id: $scope.userId()
-      }
-
-      $http
-        .put('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/applications/' + application.id + '.json', data)
-        .success(function (data, status, headers, config) {
-        })
-        .error(function (data, status, headers, config) {
-          debugger
-        });
-    };
 
     $scope.submitApplication = function (application) {
       var data = {
@@ -1047,7 +1033,25 @@ congoApp.controller('GroupsShowController', [
       $http
         .put('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/applications/' + application.id + '.json', data)
         .success(function (data, status, headers, config) {
+          $scope.group.memberships.push(data.membership);
         })
+        
+        .error(function (data, status, headers, config) {
+          debugger
+        });
+    };
+
+    $scope.approveApplication = function (application) {
+      var data = {
+        approved_by_id: $scope.userId()
+      }
+
+      $http
+        .put('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/applications/' + application.id + '.json', data)
+        .success(function (data, status, headers, config) {
+          $scope.group.memberships.push(data.membership);
+        })
+        
         .error(function (data, status, headers, config) {
           debugger
         });
