@@ -15,7 +15,9 @@
       <tbody>
         <tr ng-repeat="benefitPlan in benefitPlans">
           <td>{{benefitPlan.name}}</td>
-          <td><input type="checkbox" value="{{benefitPlan.id}}" ng-model="benefitPlan.isEnabled" ng-change="changeBenefitPlan(benefitPlan)"></td>
+          <td>
+            <input type="checkbox" value="{{benefitPlan.id}}" ng-model="benefitPlan.isEnabled" ng-change="changeBenefitPlan(benefitPlan)">
+          </td>
         </tr>
       </tbody>
     </table>

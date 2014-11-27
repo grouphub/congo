@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   include Propertied
 
   has_many :roles
-  has_many :applications
+  has_many :memberships
   belongs_to :invitation
 
   def password

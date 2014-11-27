@@ -1081,21 +1081,6 @@ congoApp.controller('GroupsShowController', [
         });
     };
 
-    $scope.enableBenefitPlan = function (benefitPlan) {
-      var data = {
-        benefit_plan_id: benefitPlan.id
-      }
-
-      $http
-        .post('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups/' + $scope.groupSlug() + '/group_benefit_plans.json', data)
-        .success(function (data, status, headers, config) {
-          benefitPlan.isEnabled = true;
-        })
-        .error(function (data, status, headers, config) {
-          debugger
-        });
-    };
-
     $scope.changeBenefitPlan = function (benefitPlan) {
       if (benefitPlan.isEnabled) {
         var data = {
@@ -1125,7 +1110,7 @@ congoApp.controller('GroupsShowController', [
     function done() {
       if ($scope.benefitPlans && $scope.group) {
         _($scope.benefitPlans).each(function (benefitPlan) {
-          benefitPlan.isEnabled = !!_($scope.group.benefitPlans).findWhere({ id: benefitPlan.id });
+          benefitPlan.isEnabled = !!_($scope.group.benefit_plans).findWhere({ id: benefitPlan.id });
         });
 
         $scope.ready();

@@ -22,7 +22,7 @@ class Api::V1::GroupBenefitPlansController < ApplicationController
     account_slug = params[:account_id]
     group_slug = params[:group_id]
     group = Group.where(slug: group_slug).first
-    benefit_plan_id = params[:benefit_plan_id]
+    benefit_plan_id = params[:benefit_plan_id].to_i
 
     group_benefit_plans = GroupBenefitPlan
       .where(group_id: group.id, benefit_plan_id: benefit_plan_id)
