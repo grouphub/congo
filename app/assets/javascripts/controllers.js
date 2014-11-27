@@ -961,7 +961,6 @@ congoApp.controller('GroupsShowController', [
         role_name: 'customer',
         email: email
       };
-
       $http
         .post('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups/' + $scope.groupSlug() + '/memberships.json', data)
         .success(function (data, status, headers, config) {
@@ -1025,15 +1024,57 @@ congoApp.controller('GroupsShowController', [
         });
     };
 
+
     $scope.submitApplication = function (application) {
       var data = {
-        applied_by_id: $scope.userId()
+        submitted_by_id: $scope.userId()
       }
 
       $http
         .put('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/applications/' + application.id + '.json', data)
         .success(function (data, status, headers, config) {
+          var memberships = $scope.customerMemberships();
+          var membership = _(memberships).find(function (membership) {
+            return _(membership.applications).find(function (application) {
+              return data.application.id === application.id;
+            });
+          });
+
+          var application = _(membership.applications).find(function (application) {
+            return data.application.id === application.id;
+          });
+
+          var applicationIndex = membership.applications.indexOf(application);
+
+          membership.applications[applicationIndex] = data.application;
+        })
+        .error(function (data, status, headers, config) {
           debugger
+        });
+    };
+
+    $scope.approveApplication = function (application) {
+      var data = {
+        approved_by_id: $scope.userId()
+      }
+
+      $http
+        .put('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/applications/' + application.id + '.json', data)
+        .success(function (data, status, headers, config) {
+          var memberships = $scope.customerMemberships();
+          var membership = _(memberships).find(function (membership) {
+            return _(membership.applications).find(function (application) {
+              return data.application.id === application.id;
+            });
+          });
+
+          var application = _(membership.applications).find(function (application) {
+            return data.application.id === application.id;
+          });
+
+          var applicationIndex = membership.applications.indexOf(application);
+
+          membership.applications[applicationIndex] = data.application;
         })
         .error(function (data, status, headers, config) {
           debugger

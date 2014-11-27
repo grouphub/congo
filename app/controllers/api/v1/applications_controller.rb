@@ -73,6 +73,7 @@ class Api::V1::ApplicationsController < ApplicationController
     benefit_plan_id = params[:benefit_plan_id]
     declined_by_id = params[:declined_by_id]
     applied_by_id = params[:applied_by_id]
+    approved_by_id = params[:approved_by_id]
     submitted_by_id = params[:submitted_by_id]
     properties = params[:properties]
 
@@ -90,6 +91,12 @@ class Api::V1::ApplicationsController < ApplicationController
       application.update_attributes \
         applied_by_id: applied_by_id,
         applied_on: DateTime.now
+    end
+
+    if approved_by_id
+      application.update_attributes \
+        approved_by_id: approved_by_id,
+        approved_on: DateTime.now
     end
 
     if submitted_by_id
