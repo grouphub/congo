@@ -96,6 +96,11 @@
 
                 <span class="state">
                   <a href="" class="btn btn-{{application.state_label}} btn-xs disabled">{{application.human_state}}</a>
+                  <a class="btn btn-primary btn-xs" href="" ng-if="application.human_state == 'Declined'" ng-click="submitApplication(application)">Submit
+                  <a class="btn btn-primary btn-xs" href="" ng-if="application.human_state == 'Selected'" ng-click="">Remind
+                  <a class="btn btn-primary btn-xs" href="" ng-if="application.human_state == 'Applied'" ng-click="submitApplication(application)">Approve
+                  <a class="btn btn-primary btn-xs" href="" ng-if="application.human_state == 'Approved'" ng-click="submitApplication(application)">Submit
+                  </a>
                 </span>
               </li>
             </ul>
@@ -104,6 +109,7 @@
           <td>
             <a class="btn btn-danger btn-xs" href="" ng-click="revokeMembership(membership)">Revoke membership</a>
             <a class="btn btn-primary btn-xs" href="" ng-if="!membership.user" ng-click="resendConfirmation(membership)">Re-send invitation</a>
+
           </td>
         </tr>
       </tbody>
