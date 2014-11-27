@@ -1025,6 +1025,20 @@ congoApp.controller('GroupsShowController', [
         });
     };
 
+    $scope.approveApplication = function (application) {
+      var data = {
+        approved_by_id: $scope.userId()
+      }
+
+      $http
+        .put('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/applications/' + application.id + '.json', data)
+        .success(function (data, status, headers, config) {
+        })
+        .error(function (data, status, headers, config) {
+          debugger
+        });
+    };
+
     $scope.submitApplication = function (application) {
       var data = {
         submitted_by_id: $scope.userId()
