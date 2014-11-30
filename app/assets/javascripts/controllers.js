@@ -539,7 +539,7 @@ congoApp.controller('CarrierAccountsIndexController', [
       }
 
       $http
-        .delete('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/carrier_accounts/' + carrier_account.id + '.json')
+        .delete('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/carrier_accounts/' + carrierAccount.id + '.json')
         .success(function (data, status, headers, config) {
           $scope.carrierAccounts.splice(index, 1);
         })
