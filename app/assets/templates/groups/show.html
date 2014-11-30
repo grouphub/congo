@@ -49,7 +49,7 @@
       <thead>
         <tr>
           <th>Benefit Plan name</th>
-          <th>Applications</th>
+          <th>Current Application</th>
           <th>Actions</th>
         </tr>
       </thead>
@@ -68,11 +68,13 @@
                 <span class="state">
                   <a href="" class="btn btn-{{application.state_label}} btn-xs disabled">{{application.human_state}}</a>
                 </span>
+
+                <a class="btn btn-danger btn-xs" ng-click="revokeApplication(application)" ng-href="">Revoke</a>
               </li>
             </ul>
           </td>
 
-          <td>
+          <td ng-if="applications(benefitPlan).length < 1">
             <a class="btn btn-warning btn-xs" ng-click="selectBenefitPlan(benefitPlan)" ng-href="">Select</a>
             <a class="btn btn-danger btn-xs" ng-click="declineBenefitPlan(benefitPlan)" ng-href="">Decline</a>
           </td>

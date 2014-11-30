@@ -955,6 +955,23 @@ congoApp.controller('GroupsShowController', [
         });
     };
 
+    $scope.revokeApplication = function (application) {
+      if (!application) {
+        debugger
+      }
+
+      $http
+        .delete('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/applications/' + application.id + '.json')
+        .success(function (data, status, headers, config) {
+          $scope.group.applications = _($scope.group.applications).reject(function (groupApplication) {
+            return application.id === groupApplication.id;
+          });
+        })
+        .error(function (data, status, headers, config) {
+          debugger
+        });
+    };
+
     $scope.inviteMember = function () {
       var email = $scope.inviteMemberFormData.email;
       var data = {
@@ -1260,6 +1277,23 @@ congoApp.controller('ApplicationsIndexController', [
   function ($scope, $http, $location) {
     // Make sure user is totally signed up before continuing.
     $scope.enforceValidAccount();
+
+    $scope.revokeApplication = function (application) {
+      if (!application) {
+        debugger
+      }
+
+      $http
+        .delete('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/applications/' + application.id + '.json')
+        .success(function (data, status, headers, config) {
+          $scope.applications = _($scope.applications).reject(function (a) {
+            return application.id === a.id;
+          });
+        })
+        .error(function (data, status, headers, config) {
+          debugger
+        });
+    };
 
     $http
       .get('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/applications.json')
