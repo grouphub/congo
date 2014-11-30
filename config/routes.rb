@@ -70,6 +70,9 @@ Rails.application.routes.draw do
               post '/confirmations', to: 'memberships#send_confirmation'
             end
 
+            # Send confirmation to all members of a group
+            post '/confirmations_all', to: 'memberships#send_confirmation_to_all'
+
             post '/group_benefit_plans', to: 'group_benefit_plans#create'
             delete '/group_benefit_plans', to: 'group_benefit_plans#destroy'
           end

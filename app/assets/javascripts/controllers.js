@@ -895,7 +895,7 @@ congoApp.controller('GroupsShowController', [
       }
     };
 
-    // Only used by brokers
+    // Only used by group admins and brokers
     $scope.groupAdminMemberships = function () {
       if ($scope.group) {
         return $scope.group.group_admin_memberships;
@@ -1009,11 +1009,22 @@ congoApp.controller('GroupsShowController', [
         });
     };
 
-    $scope.resendConfirmation = function (membership) {
+    $scope.sendConfirmation = function (membership) {
       $http
         .post('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups/' + $scope.groupSlug() + '/memberships/' + membership.id + '/confirmations.json')
         .success(function (data, status, headers, config) {
+          // TODO: Do something...
+        })
+        .error(function (data, status, headers, config) {
           debugger
+        });
+    };
+
+    $scope.sendConfirmations = function () {
+      $http
+        .post('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups/' + $scope.groupSlug() + '/confirmations_all.json')
+        .success(function (data, status, headers, config) {
+          // TODO: Do something...
         })
         .error(function (data, status, headers, config) {
           debugger
