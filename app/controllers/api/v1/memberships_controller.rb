@@ -1,20 +1,19 @@
 class Api::V1::MembershipsController < ApplicationController
   def index
-    account_id = params[:account_id]
-    group_id = params[:group_id]
-    memberships = Membership.where(group_id: group_id)
+    group_slug = params[:group_id]
+    group = Group.where(slug: group_slug).first
+    memberships = Membership.where(group_id: group.id)
 
     respond_to do |format|
       format.json {
         render json: {
-          memberships: memberships.map { |membership| render_membership(membership) }
+          memberships: render_memberships(memberships)
         }
       }
     end
   end
 
   def create
-    account_slug = params[:account_id]
     group_slug = params[:group_id]
     group = Group.where(slug: group_slug).first
     email = params[:membership][:email]
@@ -24,8 +23,6 @@ class Api::V1::MembershipsController < ApplicationController
       group_id: group.id,
       email: email,
       role_name: role_name
-
-    MembershipMailer.confirmation_email(membership, request).deliver
 
     respond_to do |format|
       format.json {
@@ -37,8 +34,6 @@ class Api::V1::MembershipsController < ApplicationController
   end
 
   def destroy
-    account_id = params[:account_id]
-    group_id = params[:group_id]
     membership_id = params[:id]
     membership = Membership.where(id: membership_id).first
 
@@ -54,8 +49,6 @@ class Api::V1::MembershipsController < ApplicationController
   end
 
   def send_confirmation
-    account_id = params[:account_id]
-    group_id = params[:group_id]
     membership_id = params[:membership_id]
     membership = Membership.where(id: membership_id).first
 
@@ -70,12 +63,40 @@ class Api::V1::MembershipsController < ApplicationController
     end
   end
 
+  def send_confirmation_to_all
+    group_slug = params[:group_id]
+    group = Group.where(slug: group_slug).first
+    memberships = group.memberships
+
+    memberships.each do |membership|
+      next if membership.user
+
+      MembershipMailer.confirmation_email(membership, request).deliver
+    end
+
+    respond_to do |format|
+      format.json {
+        render json: {
+          membership: render_memberships(memberships)
+        }
+      }
+    end
+  end
+
   # Render methods
 
   def render_membership(membership)
     membership.as_json.merge({
       user: membership.user
     })
+  end
+
+  def render_memberships(memberships)
+    memberships.map { |membership|
+      membership.as_json.merge({
+        user: membership.user
+      })
+    }
   end
 end
 

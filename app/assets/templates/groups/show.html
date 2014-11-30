@@ -40,6 +40,8 @@
     </div>
   </div>
 
+  <hr>
+
   <div ng-if="currentRole() === 'customer'" class="benefit-plans">
     <h1>{{group.name}}</h1>
 
@@ -83,6 +85,8 @@
     </table>
   </div>
 
+  <hr>
+
   <div ng-if="isGroupAdmin()" class="members">
     <h2>Members</h2>
 
@@ -125,14 +129,17 @@
           </td>
 
           <td>
-            <a class="btn btn-danger btn-xs" href="" ng-click="revokeMembership(membership)">Revoke membership</a>
-            <a class="btn btn-primary btn-xs" href="" ng-if="!membership.user" ng-click="resendConfirmation(membership)">Re-send invitation</a>
-
+            <a class="btn btn-danger btn-xs" href="" ng-click="revokeMembership(membership)">Revoke Membership</a>
+            <a class="btn btn-primary btn-xs" href="" ng-if="!membership.user" ng-click="sendConfirmation(membership)">Send Invitation</a>
           </td>
         </tr>
       </tbody>
     </table>
+
+    <a class="btn btn-primary" href="" ng-if="!membership.user" ng-click="sendConfirmations()">Send Invitations to All Members</a>
   </div>
+
+  <hr>
 
   <form ng-if="isGroupAdmin()" ng-submit="inviteMember()">
     <div class="form-group">

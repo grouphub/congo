@@ -154,12 +154,18 @@ class Api::V1::GroupsController < ApplicationController
 
     customer_memberships = memberships.select { |membership|
       role = membership['role'] || {}
-      role['name'] == 'customer'
+
+      # Customers who have been invited but not confirmed do not have a role,
+      # so we must check the "role_name" on the membership instead.
+      role['name'] == 'customer' || membership['role_name'] == 'customer'
     }
 
     group_admin_memberships = memberships.select { |membership|
       role = membership['role'] || {}
-      role['name'] == 'group_admin'
+
+      # Customers who have been invited but not confirmed do not have a role,
+      # so we must check the "role_name" on the membership instead.
+      role['name'] == 'group_admin' || membership['role_name'] == 'group_admin'
     }
 
     group.as_json.merge({
