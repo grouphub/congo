@@ -1081,30 +1081,36 @@ congoApp.controller('GroupsShowController', [
         });
     };
 
-    $scope.changeBenefitPlan = function (benefitPlan) {
-      if (benefitPlan.isEnabled) {
-        var data = {
-          benefit_plan_id: benefitPlan.id
-        }
-
-        $http
-          .post('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups/' + $scope.groupSlug() + '/group_benefit_plans.json', data)
-          .success(function (data, status, headers, config) {
-            benefitPlan.isEnabled = true;
-          })
-          .error(function (data, status, headers, config) {
-            debugger
-          });
-      } else {
-        $http
-          .delete('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups/' + $scope.groupSlug() + '/group_benefit_plans.json?benefit_plan_id=' + benefitPlan.id)
-          .success(function (data, status, headers, config) {
-            benefitPlan.isEnabled = false;
-          })
-          .error(function (data, status, headers, config) {
-            debugger
-          });
+    $scope.addBenefitPlan = function (benefitPlan) {
+      var data = {
+        benefit_plan_id: benefitPlan.id
       }
+
+      $http
+        .post('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups/' + $scope.groupSlug() + '/group_benefit_plans.json', data)
+        .success(function (data, status, headers, config) {
+          benefitPlan.isEnabled = true;
+        })
+        .error(function (data, status, headers, config) {
+          debugger
+        });
+    };
+
+    $scope.disabledBenefitPlans = function () {
+      return _($scope.benefitPlans).select(function (benefitPlan) {
+        return !benefitPlan.isEnabled;
+      });
+    }
+
+    $scope.removeBenefitPlan = function (benefitPlan) {
+      $http
+        .delete('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups/' + $scope.groupSlug() + '/group_benefit_plans.json?benefit_plan_id=' + benefitPlan.id)
+        .success(function (data, status, headers, config) {
+          benefitPlan.isEnabled = false;
+        })
+        .error(function (data, status, headers, config) {
+          debugger
+        });
     };
 
     function done() {
