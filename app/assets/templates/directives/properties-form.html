@@ -11,9 +11,8 @@
         class="form-control"
         id="{{element.name}}"
         name="{{element.name}}"
-        ng-options="n as n.title for n in element.items track by n.slug"
-        ng-model="selected"
       >
+        <option ng-repeat="item in element.items" value="{{item.name}}">{{item.title}}</option>
       </select>
     </div>
   </div>
