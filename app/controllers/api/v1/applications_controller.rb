@@ -118,6 +118,20 @@ class Api::V1::ApplicationsController < ApplicationController
     end
   end
 
+  def destroy
+    application = Application.find(params[:id])
+
+    application.destroy!
+
+    respond_to do |format|
+      format.json {
+        render json: {
+          application: {}
+        }
+      }
+    end
+  end
+
   # Render methods
 
   def render_application(application)
