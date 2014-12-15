@@ -20,6 +20,42 @@ congoApp.config([
   }
 ]);
 
+// Admin routes
+congoApp.config([
+  '$routeProvider',
+  function ($routeProvider) {
+    $routeProvider
+      .when('/admin', {
+        templateUrl: '<%= asset_path 'home.html' %>',
+        controller: 'HomeController'
+      })
+      .when('/admin/carriers', {
+        templateUrl: '<%= asset_path 'admin/carriers/index.html' %>',
+        controller: 'AdminCarriersIndexController'
+      })
+      .when('/admin/carriers/new', {
+        templateUrl: '<%= asset_path 'admin/carriers/new.html' %>',
+        controller: 'AdminCarriersNewController'
+      })
+      .when('/admin/carriers/:carrier_slug', {
+        templateUrl: '<%= asset_path 'admin/carriers/show.html' %>',
+        controller: 'AdminCarriersShowController'
+      })
+      .when('/admin/invitations', {
+        templateUrl: '<%= asset_path 'admin/invitations/index.html' %>',
+        controller: 'AdminInvitationsIndexController'
+      })
+      .when('/admin/accounts', {
+        templateUrl: '<%= asset_path 'admin/accounts/index.html' %>',
+        controller: 'AdminAccountsIndexController'
+      })
+      .when('/admin/groups', {
+        templateUrl: '<%= asset_path 'admin/groups/index.html' %>',
+        controller: 'AdminGroupsIndexController'
+      })
+  }
+]);
+
 congoApp.config([
   '$routeProvider',
   function ($routeProvider) {
@@ -51,26 +87,6 @@ congoApp.config([
       .when('/users/:id', {
         templateUrl: '<%= asset_path 'users/show.html' %>',
         controller: 'UsersShowController'
-      })
-      .when('/admin', {
-        templateUrl: '<%= asset_path 'home.html' %>',
-        controller: 'HomeController'
-      })
-      .when('/admin/carriers', {
-        templateUrl: '<%= asset_path 'carriers/index.html' %>',
-        controller: 'CarriersIndexController'
-      })
-      .when('/admin/carriers/new', {
-        templateUrl: '<%= asset_path 'carriers/new.html' %>',
-        controller: 'CarriersNewController'
-      })
-      .when('/admin/carriers/:carrier_slug', {
-        templateUrl: '<%= asset_path 'carriers/show.html' %>',
-        controller: 'CarriersShowController'
-      })
-      .when('/admin/invitations', {
-        templateUrl: '<%= asset_path 'invitations/index.html' %>',
-        controller: 'InvitationsIndexController'
       })
       .when('/accounts/:slug/:role', {
         templateUrl: '<%= asset_path 'home.html' %>',

@@ -1,4 +1,4 @@
-class Api::V1::InvitationsController < ApplicationController
+class Api::V1::Admin::InvitationsController < ApplicationController
   def index
     invitations = Invitation.all.includes(:user)
 

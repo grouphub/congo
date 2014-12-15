@@ -74,6 +74,22 @@
     </a>
   </li>
 
+  <!-- Admin Accounts -->
+  <li ng-if="inAdminPanel()">
+    <a ng-href="/admin/accounts" title="Accounts">
+      <i class="fa fa-cubes"></i>
+      <span class="caption">All Accounts</span>
+    </a>
+  </li>
+
+  <!-- Admin All Groups -->
+  <li ng-if="inAdminPanel()">
+    <a ng-href="/admin/groups" title="Groups">
+      <i class="fa fa-group"></i>
+      <span class="caption">All Groups</span>
+    </a>
+  </li>
+
   <li ng-if="currentRole() === 'customer'">
     <a ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/applications" title="Applications">
       <i class="fa fa-file-text"></i>
