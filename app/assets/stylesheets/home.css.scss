@@ -1,6 +1,8 @@
 html,
 body,
 #wrapper {
+  position: fixed; // Fix a scrolling bug
+  width: 100%; // Fix a scrolling bug
   height: 100%;
 }
 
