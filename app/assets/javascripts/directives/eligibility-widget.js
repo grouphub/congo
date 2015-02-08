@@ -7,7 +7,7 @@ congoApp.directive('eligibilityWidget', [
       replace: true,
       templateUrl: congo.assets['directives/eligibility-widget.html'],
       link: function ($scope, $element, $attrs) {
-        // ...
+        $('#date-of-birth').datepicker();
       }
     };
   }
