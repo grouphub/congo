@@ -122,13 +122,13 @@ class Api::V1::PropertiesController < ApplicationController
               type: 'text',
               name: 'name',
               title: 'Name',
-              placeholder: 'Enter a Carrier Name…'
+              placeholder: 'Enter a Carrier Organization Name…'
             },
             {
               type: 'text',
-              name: 'carrier_number',
-              title: 'Carrier Number',
-              placeholder: 'Enter a Carrier Number…'
+              name: 'npi',
+              title: 'NPI',
+              placeholder: 'Enter an NPI…'
             },
             {
               type: 'text',
@@ -144,9 +144,15 @@ class Api::V1::PropertiesController < ApplicationController
             },
             {
               type: 'text',
-              name: 'carrier_contact',
-              title: 'Carrier Contact',
-              placeholder: 'Enter the Primary Contact\'s Name for the Carrier…'
+              name: 'first_name',
+              title: 'Carrier Contact First Name',
+              placeholder: 'Enter the Primary Contact\'s First Name for the Carrier…'
+            },
+            {
+              type: 'text',
+              name: 'last_name',
+              title: 'Carrier Contact Last Name',
+              placeholder: 'Enter the Primary Contact\'s First Name for the Carrier…'
             },
             {
               type: 'text',
