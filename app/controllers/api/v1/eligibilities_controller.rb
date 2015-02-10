@@ -13,8 +13,21 @@ class Api::V1::EligibilitiesController < ApplicationController
 
     carrier = carrier_account.carrier
 
+    unparsed_date_of_birth = params[:date_of_birth]
+
+    unless unparsed_date_of_birth.match(/\d\d\/\d\d\/\d\d\d\d/)
+      error_response('Date of birth is not properly formatted.')
+      return
+    end
+
+    date_of_birth_components = unparsed_date_of_birth.split('/')
+    date_of_birth = [
+      date_of_birth_components[2],
+      date_of_birth_components[0],
+      date_of_birth_components[1]
+    ].join('-')
+
     member_id = params[:member_id]
-    date_of_birth = params[:date_of_birth]
     first_name = params[:first_name]
     last_name = params[:last_name]
 
@@ -42,6 +55,18 @@ class Api::V1::EligibilitiesController < ApplicationController
       Rails.application.config.pokitdok.client_id,
       Rails.application.config.pokitdok.client_secret
 
+    # Populate either the carrier name or the carrier first and last names
+    #
+    # TODO: Add separate organization name to carrier and use instead of "name".
+    #
+    carrier_name = nil
+    carrier_first_name = carrier.properties['first_name']
+    carrier_last_name = carrier.properties['last_name']
+    unless carrier_first_name && carrier_last_name
+      carrier_first_name = carrier.properties['first_name']
+      carrier_last_name = carrier.properties['last_name']
+    end
+
     # Eligibility
     eligibility_query = {
       member: {
@@ -51,13 +76,13 @@ class Api::V1::EligibilitiesController < ApplicationController
           id: member_id
       },
       provider: {
-          organization_name: carrier.name,
-          first_name: carrier.properties.first_name,
-          last_name: carrier.properties.last_name,
-          npi: carrier.properties.npi
+          organization_name: carrier_name,
+          first_name: carrier_first_name,
+          last_name: carrier_last_name,
+          npi: carrier.properties['npi']
       },
-      service_types: carrier.properties.service_types,
-      trading_partner_id: carrier.properties.trading_partner_id
+      service_types: carrier.properties['service_types'],
+      trading_partner_id: carrier.properties['trading_partner_id']
     }
 
     eligibility = pokitdok.eligibility(eligibility_query)

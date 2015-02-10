@@ -28,18 +28,20 @@ congoApp.directive('eligibilityModal', [
           error: undefined
         }
 
-        $http.get('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/carrier_accounts.json')
-          .then(
-            function (response) {
-              var carrierAccount = response.data.carrier_accounts[0];
+        $('body').delegate('[data-target="#eligibility-modal"]', 'click', function (e) {
+          $http.get('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/carrier_accounts.json')
+            .then(
+              function (response) {
+                var carrierAccount = response.data.carrier_accounts[0];
 
-              $scope.settings.carrier_accounts = response.data.carrier_accounts;
-              $scope.form.carrier_account_id = (carrierAccount ? carrierAccount.id : undefined);
-            },
-            function (response) {
-              debugger;
-            }
-          );
+                $scope.settings.carrier_accounts = response.data.carrier_accounts;
+                $scope.form.carrier_account_id = (carrierAccount ? carrierAccount.id : undefined);
+              },
+              function (response) {
+                debugger;
+              }
+            );
+        });
 
         $scope.submit = function () {
           $scope.settings.error = undefined;
