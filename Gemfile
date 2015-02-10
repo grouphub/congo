@@ -1,14 +1,14 @@
 source 'https://rubygems.org'
 
-gem 'rails', github: "rails/rails", branch: "4-1-stable"
+gem 'rails', github: 'rails/rails', branch: '4-1-stable'
 
 gem 'pg'
-gem 'sprockets-rails', github: "rails/sprockets-rails", branch: "2-1-stable"
+gem 'sprockets-rails', github: 'rails/sprockets-rails', branch: '2-1-stable'
 
-gem 'sass-rails', github: "rails/sass-rails"
+gem 'sass-rails', github: 'rails/sass-rails'
 
 gem 'uglifier', '>= 1.3.0'
-gem 'coffee-rails', github: "rails/coffee-rails"
+gem 'coffee-rails', github: 'rails/coffee-rails'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
@@ -26,6 +26,8 @@ gem 'foreman'
 gem 'clockwork'
 gem 'delayed_job_active_record'
 gem 'stripe'
+
+gem 'pokitdok-ruby', github: 'pokitdok/pokitdok-ruby'
 
 group :doc do
   gem 'sdoc', '~> 0.4.0'
@@ -45,5 +47,5 @@ group :production do
   gem 'rails_12factor'
 end
 
-ruby "2.1.4"
+ruby '2.1.4'
 

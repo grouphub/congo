@@ -8,43 +8,63 @@ congoApp.directive('eligibilityModal', [
       replace: true,
       templateUrl: congo.assets['directives/eligibility-modal.html'],
       link: function ($scope, $element, $attrs) {
+        // Data that the user populates.
         $scope.form = {
-          // TODO: Populate this
-          carriers: [],
-
-          carrier: '',
+          carrier_account_id: '',
           member_id: '',
           date_of_birth: '',
           first_name: '',
           last_name: ''
         };
 
-        $http.get('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/carrier_accounts.json')
-          .success(function (data, status, headers, config) {
-            $scope.form.carriers = _.map(data.carrier_accounts, function (carrierAccount) {
-              return {
-                label: carrierAccount.name,
-                value: carrierAccount.id
-              };
-            })
-          })
-          .error(function (data, status, headers, config) {
+        $scope.settings = {
+          // Eligibility data from the response.
+          eligibility: undefined,
 
-          });
+          // List of carrier accounts to populate the dropdown.
+          carrier_accounts: [],
 
-        $scope.submit = function () {
-          debugger
-
-          $http.post('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/eligibilities', $scope.form)
-            .success(function (data, status, headers, config) {
-
-            })
-            .error(function (data, status, headers, config) {
-
-            });
+          // If an error occurs when submitting the form.
+          error: undefined
         }
 
-        $('#date-of-birth').datepicker();
+        $http.get('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/carrier_accounts.json')
+          .then(
+            function (response) {
+              $scope.settings.carrier_accounts = response.data.carrier_accounts;
+            },
+            function (response) {
+              debugger;
+            }
+          );
+
+        $scope.submit = function () {
+          $scope.settings.error = undefined;
+
+          $http.post('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/eligibilities.json', $scope.form)
+            .then(
+              function (response) {
+                $scope.settings.eligibility = response.data.eligibility;
+              },
+              function (response) {
+                $scope.settings.error = 'An error occurred. Please try submitting the form again.';
+              }
+            );
+        };
+
+        $scope.reset = function () {
+          $scope.settings.eligibility = undefined;
+
+          $scope.form.carrier_account_id = '';
+          $scope.form.member_id = '';
+          $scope.form.date_of_birth = '';
+          $scope.form.first_name = '';
+          $scope.form.last_name = '';
+        };
+
+        _.defer(function () {
+          $('#date-of-birth').datepicker();
+        });
       }
     };
   }
