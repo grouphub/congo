@@ -18,6 +18,26 @@ class Api::V1::EligibilitiesController < ApplicationController
     first_name = params[:first_name]
     last_name = params[:last_name]
 
+    if member_id.blank?
+      error_response('Member ID cannot be blank.')
+      return
+    end
+
+    if date_of_birth.blank?
+      error_response('Date of birth cannot be blank.')
+      return
+    end
+
+    if first_name.blank?
+      error_response('First name cannot be blank.')
+      return
+    end
+
+    if last_name.blank?
+      error_response('First name cannot be blank.')
+      return
+    end
+
     # pokitdok = PokitDok::PokitDok.new \
     #   Rails.application.config.pokitdok.client_id,
     #   Rails.application.config.pokitdok.client_secret

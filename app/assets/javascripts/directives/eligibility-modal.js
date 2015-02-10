@@ -10,7 +10,7 @@ congoApp.directive('eligibilityModal', [
       link: function ($scope, $element, $attrs) {
         // Data that the user populates.
         $scope.form = {
-          carrier_account_id: '',
+          carrier_account_id: undefined,
           member_id: '',
           date_of_birth: '',
           first_name: '',
@@ -31,7 +31,10 @@ congoApp.directive('eligibilityModal', [
         $http.get('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/carrier_accounts.json')
           .then(
             function (response) {
+              var carrierAccount = response.data.carrier_accounts[0];
+
               $scope.settings.carrier_accounts = response.data.carrier_accounts;
+              $scope.form.carrier_account_id = (carrierAccount ? carrierAccount.id : undefined);
             },
             function (response) {
               debugger;
@@ -53,9 +56,11 @@ congoApp.directive('eligibilityModal', [
         };
 
         $scope.reset = function () {
+          var carrierAccount = $scope.settings.carrier_accounts[0];
+
           $scope.settings.eligibility = undefined;
 
-          $scope.form.carrier_account_id = '';
+          $scope.form.carrier_account_id = (carrierAccount ? carrierAccount.id : undefined);
           $scope.form.member_id = '';
           $scope.form.date_of_birth = '';
           $scope.form.first_name = '';
