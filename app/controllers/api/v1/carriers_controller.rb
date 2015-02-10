@@ -20,6 +20,10 @@ class Api::V1::CarriersController < ApplicationController
     properties = params[:properties]
     name = properties['name']
 
+    # Split service types
+    properties['service_types'] ||= ''
+    properties['service_types'] = properties['service_types'].split(/,\s*/)
+
     unless name
       # TODO: Handle this
     end
