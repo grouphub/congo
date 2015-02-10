@@ -28,7 +28,11 @@ congoApp.directive('eligibilityModal', [
           error: undefined
         }
 
+        // TODO: Using JQuery in a controller is poor style. Find a way to solve
+        // this using $scope variables or a directive.
         $('body').delegate('[data-target="#eligibility-modal"]', 'click', function (e) {
+          $scope.reset();
+
           $http.get('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/carrier_accounts.json')
             .then(
               function (response) {
