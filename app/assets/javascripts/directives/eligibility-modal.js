@@ -33,6 +33,8 @@ congoApp.directive('eligibilityModal', [
         $('body').delegate('[data-target="#eligibility-modal"]', 'click', function (e) {
           $scope.reset();
 
+          $('#date-of-birth').datepicker();
+
           $http.get('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/carrier_accounts.json')
             .then(
               function (response) {
@@ -72,10 +74,6 @@ congoApp.directive('eligibilityModal', [
           $scope.form.first_name = '';
           $scope.form.last_name = '';
         };
-
-        _.defer(function () {
-          $('#date-of-birth').datepicker();
-        });
       }
     };
   }
