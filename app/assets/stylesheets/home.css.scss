@@ -75,6 +75,12 @@ a.sidebar-toggle {
   }
 }
 
+a.sidebar-toggle-small {
+  position: absolute;
+  top: 0px;
+  right: 10px;
+}
+
 header,
 .sidebar-nav {
   .logo {
@@ -447,7 +453,7 @@ h1 {
 
   .sidebar-nav {
     width: 100%;
-  }
+	}
 
   .sidebar-nav .sidebar-brand {
     height: 51px;
