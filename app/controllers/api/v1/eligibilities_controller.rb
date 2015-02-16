@@ -32,22 +32,24 @@ class Api::V1::EligibilitiesController < ApplicationController
     last_name = params[:last_name]
 
     if member_id.blank?
-      error_response('Member ID cannot be blank.')
+      member_id = nil
+    end
+
+    if first_name.blank?
+      first_name = nil
+    end
+
+    if last_name.blank?
+      last_name = nil
+    end
+
+    if member_id.nil? && first_name.nil? && last_name.nil?
+      error_response('Either first and last name must be provided, or member ID must be provided.')
       return
     end
 
     if date_of_birth.blank?
       error_response('Date of birth cannot be blank.')
-      return
-    end
-
-    if first_name.blank?
-      error_response('First name cannot be blank.')
-      return
-    end
-
-    if last_name.blank?
-      error_response('First name cannot be blank.')
       return
     end
 

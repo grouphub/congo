@@ -37,12 +37,14 @@
             </div>
 
             <div class="row">
-              <div class="form-group col-xs-6">
+              <div class="form-group col-xs-12">
                 <label for="member-id">Member ID</label>
                 <input class="form-control" type="text" id="member-id" name="member-id" ng-model="form.member_id">
               </div>
+            </div>
 
-              <div class="form-group col-xs-6">
+            <div class="row">
+              <div class="form-group col-xs-12">
                 <label for="date-of-birth">Date of Birth</label>
                 <div class="input-group">
                   <div class="input-group-addon">
@@ -50,6 +52,12 @@
                   </div>
                   <input class="form-control" type="text" id="date-of-birth" name="date-of-birth" ng-model="form.date_of_birth">
                 </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="form-group col-xs-12">
+                <small>Enter in a member's date of birth and either first and last name or a member ID to see if they are eligible.</small>
               </div>
             </div>
           </form>
