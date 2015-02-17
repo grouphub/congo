@@ -77,8 +77,9 @@ a.sidebar-toggle {
 
 a.sidebar-toggle-small {
   position: absolute;
-  top: 0px;
-  right: 10px;
+  top: 0;
+  right: 0;
+  padding: 10px 15px;
 }
 
 header,
@@ -577,3 +578,38 @@ ul.simple-list.functions-list {
    opacity: 0.5;
 }
 
+// Handle the hamburger icon on small screen sizes.
+
+@media (max-width: 767px) {
+  #wrapper {
+    #sidebar-wrapper {
+      margin-bottom: 0;
+    }
+
+    ul.sidebar-nav {
+      > li.sidebar-item {
+        display: block;
+      }
+    }
+  }
+
+  #wrapper.toggled {
+    #sidebar-wrapper {
+      margin-bottom: -14px;
+    }
+
+    ul.sidebar-nav {
+      > li.sidebar-item {
+        display: none;
+      }
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  #wrapper {
+    .sidebar-toggle-small {
+      display: none;
+    }
+  }
+}
