@@ -23,7 +23,7 @@ class Account < ActiveRecord::Base
     else
       created_at = self.created_at
     end
-    
+
     created_at_month = created_at.month
     created_at_day = (created_at.day > 28) ? 28 : created_at.day
 
