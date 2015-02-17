@@ -21,11 +21,11 @@
       <li class="dropdown messages-menu" ng-if="isSignedin()">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
           <i class="envelope">Notifications</i>
-          <span class="icon-label">99</span>
+          <span class="icon-label">{{messageCount()}}</span>
         </a>
         <ul class="dropdown-menu">
           <li>
-            <a href="">You have 4 messages</a>
+            <a href="">You have {{messageCount()}} messages</a>
           </li>
         </ul>
       </li>
@@ -33,11 +33,11 @@
       <li class="dropdown messages-menu" ng-if="isSignedin()">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
           <i class="forms">To-Dos</i>
-          <span class="icon-label">99</span>
+          <span class="icon-label">{{notificationCount()}}</span>
         </a>
         <ul class="dropdown-menu">
           <li>
-            <a href="">You have 4 to-dos</a>
+            <a href="">You have {{notificationCount()}} to-dos</a>
           </li>
         </ul>
       </li>
