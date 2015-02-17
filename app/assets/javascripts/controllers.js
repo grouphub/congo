@@ -255,8 +255,8 @@ congoApp.controller('UsersNewBillingController', [
 ]);
 
 congoApp.controller('UsersNewAccountController', [
-  '$scope', '$http', '$location', 'propertiesFactory',
-  function ($scope, $http, $location, propertiesFactory) {
+  '$scope', '$http', '$location', 'propertiesFactory', 'flashesFactory',
+  function ($scope, $http, $location, propertiesFactory, flashesFactory) {
     $scope.elements = [];
 
     $scope.submit = function () {
