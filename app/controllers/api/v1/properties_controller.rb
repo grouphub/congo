@@ -14,6 +14,7 @@ class Api::V1::PropertiesController < ApplicationController
               type: 'list',
               name: 'carrier_name',
               title: 'Carrier',
+              value: Carrier.first.slug,
               items: Carrier.all.map { |carrier|
                 {
                   name: carrier.slug,
@@ -49,6 +50,7 @@ class Api::V1::PropertiesController < ApplicationController
               type: 'list',
               name: 'account_type',
               title: 'Account Type',
+              value: 'broker',
               items: [
                 {
                   name: 'broker',

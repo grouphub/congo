@@ -69,6 +69,10 @@ class Api::V1::EligibilitiesController < ApplicationController
       carrier_last_name = carrier.properties['last_name']
     end
 
+    carrier_npi = carrier.properties['npi']
+    carrier_service_types = carrier.properties['service_types']
+    carrier_trading_partner_id = carrier.properties['trading_partner_id']
+
     # Eligibility
     eligibility_query = {
       member: {
@@ -81,11 +85,19 @@ class Api::V1::EligibilitiesController < ApplicationController
           organization_name: carrier_name,
           first_name: carrier_first_name,
           last_name: carrier_last_name,
-          npi: carrier.properties['npi']
+          npi: carrier_npi
       },
-      service_types: carrier.properties['service_types'],
-      trading_partner_id: carrier.properties['trading_partner_id']
+      service_types: carrier_service_types,
+      trading_partner_id: carrier_trading_partner_id
     }
+
+    Rails.logger.info('')
+    Rails.logger.info('=======================================')
+    Rails.logger.info('Sending the following data to Pokitdok:')
+    Rails.logger.info('=======================================')
+    Rails.logger.info(eligibility_query.to_json)
+    Rails.logger.info('')
+    Rails.logger.info('')
 
     eligibility = pokitdok.eligibility(eligibility_query)
 
