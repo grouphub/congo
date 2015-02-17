@@ -8,6 +8,10 @@ congoApp.factory('userDataFactory', [
         $cookieStore.put('show-drawer', !$cookieStore.get('show-drawer'));
       },
       isDrawerShown: function () {
+        if (!congo.currentUser) {
+          return true;
+        }
+
         return $cookieStore.get('show-drawer');
       },
       accountSlug: function () {
