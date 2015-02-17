@@ -385,7 +385,7 @@ congoApp.controller('UsersShowController', [
   }
 ]);
 
-congoApp.controller('CarriersNewController', [
+congoApp.controller('AdminCarriersNewController', [
   '$scope', '$http', '$location', 'propertiesFactory',
   function ($scope, $http, $location, propertiesFactory) {
     $scope.elements = [];
@@ -394,7 +394,7 @@ congoApp.controller('CarriersNewController', [
       var properties = propertiesFactory.getPropertiesFromElements($scope.elements);
 
       $http
-        .post('/api/v1/carriers.json', {
+        .post('/api/v1/admin/carriers.json', {
           name: $scope.name,
           properties: properties
         })
@@ -419,7 +419,7 @@ congoApp.controller('CarriersNewController', [
   }
 ]);
 
-congoApp.controller('CarriersIndexController', [
+congoApp.controller('AdminCarriersIndexController', [
   '$scope', '$http', '$location',
   function ($scope, $http, $location) {
     // Make sure user is admin before continuing.
@@ -433,7 +433,7 @@ congoApp.controller('CarriersIndexController', [
       }
 
       $http
-        .delete('/api/v1/carriers/' + carrier.id + '.json')
+        .delete('/api/v1/admin/carriers/' + carrier.id + '.json')
         .success(function (data, status, headers, config) {
           $scope.carriers.splice(index, 1);
         })
@@ -442,9 +442,8 @@ congoApp.controller('CarriersIndexController', [
         });
     };
 
-
     $http
-      .get('/api/v1/carriers.json')
+      .get('/api/v1/admin/carriers.json')
       .success(function (data, status, headers, config) {
         $scope.carriers = data.carriers;
 
@@ -456,14 +455,14 @@ congoApp.controller('CarriersIndexController', [
   }
 ]);
 
-congoApp.controller('CarriersShowController', [
+congoApp.controller('AdminCarriersShowController', [
   '$scope', '$http', '$location',
   function ($scope, $http, $location) {
     // Make sure user is admin before continuing.
     $scope.enforceAdmin();
 
     $http
-      .get('/api/v1/carriers/' + $scope.carrierSlug() + '.json')
+      .get('/api/v1/admin/carriers/' + $scope.carrierSlug() + '.json')
       .success(function (data, status, headers, config) {
         $scope.carrier = data.carrier;
 
@@ -475,7 +474,7 @@ congoApp.controller('CarriersShowController', [
   }
 ]);
 
-congoApp.controller('InvitationsIndexController', [
+congoApp.controller('AdminInvitationsIndexController', [
   '$scope', '$http', '$location',
   function ($scope, $http, $location) {
     // Make sure user is admin before continuing.
@@ -485,7 +484,7 @@ congoApp.controller('InvitationsIndexController', [
 
     $scope.deleteInvitation = function (invitationId) {
       $http
-        .delete('/api/v1/invitations/' + invitationId + '.json')
+        .delete('/api/v1/admin/invitations/' + invitationId + '.json')
         .success(function (data, status, headers, config) {
           $scope.invitations = _($scope.invitations).reject(function (invitation) {
             return invitation.id === invitationId; 
@@ -498,7 +497,7 @@ congoApp.controller('InvitationsIndexController', [
 
     $scope.newInvitation = function () {
       $http
-        .post('/api/v1/invitations.json', {
+        .post('/api/v1/admin/invitations.json', {
           description: $scope.description     
         })
         .success(function (data, status, headers, config) {
@@ -511,9 +510,51 @@ congoApp.controller('InvitationsIndexController', [
     };
 
     $http
-      .get('/api/v1/invitations.json')
+      .get('/api/v1/admin/invitations.json')
       .success(function (data, status, headers, config) {
         $scope.invitations = data.invitations;
+
+        $scope.ready();
+      })
+      .error(function (data, status, headers, config) {
+        debugger
+      });
+  }
+]);
+
+congoApp.controller('AdminAccountsIndexController', [
+  '$scope', '$http', '$location',
+  function ($scope, $http, $location) {
+    // Make sure user is admin before continuing.
+    $scope.enforceAdmin();
+
+    $scope.accounts = null;
+
+    $http
+      .get('/api/v1/admin/accounts.json')
+      .success(function (data, status, headers, config) {
+        $scope.accounts = data.accounts;
+
+        $scope.ready();
+      })
+      .error(function (data, status, headers, config) {
+        debugger
+      });
+  }
+]);
+
+congoApp.controller('AdminGroupsIndexController', [
+  '$scope', '$http', '$location',
+  function ($scope, $http, $location) {
+    // Make sure user is admin before continuing.
+    $scope.enforceAdmin();
+
+    $scope.groups = null;
+
+    $http
+      .get('/api/v1/admin/groups.json')
+      .success(function (data, status, headers, config) {
+        $scope.groups = data.groups;
 
         $scope.ready();
       })

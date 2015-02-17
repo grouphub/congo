@@ -1,0 +1,30 @@
+<div class="col-md-12">
+  <h1>All Accounts</h1>
+
+  <table class="accounts table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Brokers</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr ng-repeat="account in accounts">
+        <td>
+          <a ng-href="">{{account.name}}</a>
+        </td>
+
+        <td>
+          <ul class="list-unstyled">
+            <li ng-repeat="broker in account.brokers">
+              <a ng-href="mailto:{{broker.email}}">{{broker.full_name}}</a>
+            </li>
+          </ul>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+

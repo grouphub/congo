@@ -28,6 +28,8 @@ Rails.application.routes.draw do
     '/admin/carriers',
     '/admin/carriers/new',
     '/admin/carriers/:carrier_slug',
+    '/admin/accounts',
+    '/admin/groups',
 
     # Invitations
     '/admin/invitations',
@@ -60,6 +62,14 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
+      # Admin routes
+      namespace :admin do
+        resources :carriers
+        resources :invitations
+        resources :accounts
+        resources :groups
+      end
+
       resources :accounts do
         resources :roles do
           resources :carrier_accounts
@@ -86,10 +96,6 @@ Rails.application.routes.draw do
           get '/properties/groups', to: 'properties#groups'
         end
       end
-
-      # Admin routes
-      resources :carriers
-      resources :invitations
 
       # User routes
       post '/users/signin', to: 'users#signin'

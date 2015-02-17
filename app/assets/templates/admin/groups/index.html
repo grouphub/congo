@@ -1,0 +1,25 @@
+<div class="col-md-12">
+  <h1>All Groups</h1>
+
+  <table class="groups table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Account</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr ng-repeat="group in groups">
+        <td>
+          <a ng-href="">{{group.name}}</a>
+        </td>
+
+        <td>
+          <a ng-href="">{{group.account.name}}</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
