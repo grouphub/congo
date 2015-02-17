@@ -15,7 +15,6 @@ class Api::V1::EligibilitiesController < ApplicationController
 
     unparsed_date_of_birth = params[:date_of_birth]
 
-    
     unless unparsed_date_of_birth.match(/\d\d\/\d\d\/\d\d\d\d/)
       error_response('Date of birth is not properly formatted.')
       return
@@ -75,42 +74,22 @@ class Api::V1::EligibilitiesController < ApplicationController
     carrier_service_types = carrier.properties['service_types']
     carrier_trading_partner_id = carrier.properties['trading_partner_id']
 
-#872329642
-
     if member_id.nil?
-         # Eligibility
       eligibility_query = {
         member: {
             birth_date: date_of_birth,
             first_name: first_name,
             last_name: last_name,
-        #    id: member_id
         },
-     #   provider: {
-      #      organization_name: carrier_name,
-       #     first_name: carrier_first_name,
-        #    last_name: carrier_last_name,
-         #   npi: carrier_npi
-       # },
-       # service_types: carrier_service_types,
         trading_partner_id: carrier_trading_partner_id
       }
     else
-       # Eligibility
       eligibility_query = {
         member: {
-          #  birth_date: date_of_birth,
             first_name: first_name,
             last_name: last_name,
             id: member_id
         },
-     #   provider: {
-      #      organization_name: carrier_name,
-       #     first_name: carrier_first_name,
-        #    last_name: carrier_last_name,
-         #   npi: carrier_npi
-       # },
-       # service_types: carrier_service_types,
         trading_partner_id: carrier_trading_partner_id
       }
     end
