@@ -78,16 +78,16 @@ class Api::V1::EligibilitiesController < ApplicationController
       member: {
           birth_date: date_of_birth,
           first_name: first_name,
-          last_name: last_name,
-          id: member_id
+          last_name: last_name#,
+    #      id: member_id
       },
-      provider: {
-          organization_name: carrier_name,
-          first_name: carrier_first_name,
-          last_name: carrier_last_name,
-          npi: carrier_npi
-      },
-      service_types: carrier_service_types,
+   #   provider: {
+    #      organization_name: carrier_name,
+     #     first_name: carrier_first_name,
+      #    last_name: carrier_last_name,
+       #   npi: carrier_npi
+     # },
+     # service_types: carrier_service_types,
       trading_partner_id: carrier_trading_partner_id
     }
 
