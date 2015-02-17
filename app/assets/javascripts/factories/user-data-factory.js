@@ -130,6 +130,20 @@ congoApp.factory('userDataFactory', [
 
         return congo.currentUser.first_name;
       },
+      messageCount: function () {
+        if (!congo.currentUser) {
+          return;
+        }
+
+        return congo.currentUser.message_count;
+      },
+      notificationCount: function () {
+        if (!congo.currentUser) {
+          return;
+        }
+
+        return congo.currentUser.notification_count;
+      },
       accounts: function () {
         if (!congo.currentUser) {
           return;

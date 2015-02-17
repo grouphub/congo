@@ -52,10 +52,16 @@ module UsersHelper
         })
       }
 
-    user.as_json.merge({
-      'is_admin' => user.admin?,
-      'accounts' => accounts
-    })
+    user
+      .as_json({
+        except: [:encrypted_password]
+      })
+      .merge({
+        'is_admin' => user.admin?,
+        'accounts' => accounts,
+        'message_count' => user.message_count,
+        'notification_count' => user.notification_count
+      })
   end
 end
 

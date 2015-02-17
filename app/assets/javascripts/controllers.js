@@ -647,7 +647,7 @@ congoApp.controller('CarrierAccountsNewController', [
       });
 
     $http
-      .get('/api/v1/carriers.json')
+      .get('/api/v1/admin/carriers.json')
       .success(function (data, status, headers, config) {
         $scope.carriers = data.carriers;
         $scope.selectedCarrier = data.carriers[0];
