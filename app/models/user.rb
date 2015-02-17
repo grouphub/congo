@@ -17,6 +17,10 @@ class User < ActiveRecord::Base
     self.encrypted_password = @password
   end
 
+  def full_name
+    [self.first_name, self.last_name].join(' ').strip
+  end
+
   def admin?
     User.first.roles.any? { |role| role.name == 'admin' }
   end

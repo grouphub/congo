@@ -1,4 +1,4 @@
-class Api::V1::CarriersController < ApplicationController
+class Api::V1::Admin::CarriersController < ApplicationController
   before_filter :authenticate_admin!, except: :index
 
   def index

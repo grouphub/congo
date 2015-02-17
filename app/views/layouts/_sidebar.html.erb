@@ -1,29 +1,38 @@
-<ul class="sidebar-nav">
+<ul class="sidebar-nav" ng-class="{drawerShown: isDrawerShown()}">
   <li class="sidebar-brand">
     <a href="/" class="logo-link">
       <div class="logo"></div>
     </a>
   </li>
 
-  <li ng-if="accountSlug()">
+  <li>
+    <a href="" ng-click="drawerToggle()" class="sidebar-toggle sidebar-toggle-small">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </a>
+  </li>
+
+  <li class="sidebar-item" ng-if="accountSlug()">
     <a class="heading" ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}">
       {{accountName()}}
     </a>
   </li>
 
-  <li ng-if="inAdminPanel()">
+  <li class="sidebar-item" ng-if="inAdminPanel()">
     <a class="heading" ng-href="/admin">
       Admin
     </a>
   </li>
 
-  <li ng-if="!accountSlug() && !inAdminPanel() && accounts().length > 0">
+  <li class="sidebar-item" ng-if="!accountSlug() && !inAdminPanel() && accounts().length > 0">
     <a class="heading" ng-href="">
       Accounts
     </a>
   </li>
 
-  <li ng-if="!accountSlug() && !inAdminPanel() && accounts().length > 0" ng-repeat="account in accounts()">
+  <li class="sidebar-item" ng-if="!accountSlug() && !inAdminPanel() && accounts().length > 0" ng-repeat="account in accounts()">
     <a ng-href="/admin" ng-if="account.role.name == 'admin'" title="Admin">
       <i class="fa fa-building-o"></i>
       <span class="caption">
@@ -41,7 +50,7 @@
     </a>
   </li>
 
-  <li ng-if="inAdminPanel()">
+  <li class="sidebar-item" ng-if="inAdminPanel()">
     <a ng-href="/admin/carriers" title="Carriers">
       <i class="fa fa-institution"></i>
       <span class="caption">Carriers</span>
@@ -53,42 +62,58 @@
     </a>
   </li>
 
-  <li ng-if="currentRole() === 'broker'">
+  <li class="sidebar-item" ng-if="currentRole() === 'broker'">
     <a ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/carrier_accounts" title="Carrier Accounts">
       <i class="fa fa-institution"></i>
       <span class="caption">Carrier Accounts</span>
     </a>
   </li>
 
-  <li ng-if="isGroupAdmin()">
+  <li class="sidebar-item" ng-if="isGroupAdmin()">
     <a ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/benefit_plans" title="Benefit Plans">
       <i class="fa fa-heart"></i>
       <span class="caption">Benefit Plans</span>
     </a>
   </li>
 
-  <li ng-if="currentRole() === 'broker' || currentRole() === 'group_admin' || currentRole() === 'customer'">
+  <li class="sidebar-item" ng-if="currentRole() === 'broker' || currentRole() === 'group_admin' || currentRole() === 'customer'">
     <a ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/groups" title="Groups">
       <i class="fa fa-group"></i>
       <span class="caption">Groups</span>
     </a>
   </li>
 
-  <li ng-if="currentRole() === 'customer'">
+  <!-- Admin Accounts -->
+  <li class="sidebar-item" ng-if="inAdminPanel()">
+    <a ng-href="/admin/accounts" title="Accounts">
+      <i class="fa fa-cubes"></i>
+      <span class="caption">All Accounts</span>
+    </a>
+  </li>
+
+  <!-- Admin All Groups -->
+  <li class="sidebar-item" ng-if="inAdminPanel()">
+    <a ng-href="/admin/groups" title="Groups">
+      <i class="fa fa-group"></i>
+      <span class="caption">All Groups</span>
+    </a>
+  </li>
+
+  <li class="sidebar-item" ng-if="currentRole() === 'customer'">
     <a ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/applications" title="Applications">
       <i class="fa fa-file-text"></i>
       <span class="caption">Applications</span>
     </a>
   </li>
 
-  <li ng-if="!firstName()">
+  <li class="sidebar-item" ng-if="!firstName()">
     <a href="/users/signin" title="Sign In">
       <i class="glyphicon glyphicon-user"></i>
       <span class="caption">Sign In</span>
     </a>
   </li>
 
-  <li ng-if="!firstName()">
+  <li class="sidebar-item" ng-if="!firstName()">
     <a href="/users/new_manager" title="Sign Up">
       <i class="glyphicon glyphicon-user"></i>
       <span class="caption">Sign Up</span>
