@@ -26,6 +26,8 @@ ActiveRecord::Schema.define(version: 20141119053011) do
     t.string   "month"
     t.string   "year"
     t.string   "cvc"
+    t.datetime "billing_start"
+    t.integer  "billing_day"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
