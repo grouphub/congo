@@ -65,13 +65,13 @@ GIT
 
 GIT
   remote: git://github.com/rails/sprockets-rails.git
-  revision: c0a75809b2296f6e16e4cebfe6c3942f7b002428
-  branch: 2-1-stable
+  revision: 38863e0a93874d7e19c9a0e505e92fca5dd509a2
+  branch: 2.x
   specs:
-    sprockets-rails (2.1.4)
+    sprockets-rails (2.2.4)
       actionpack (>= 3.0)
       activesupport (>= 3.0)
-      sprockets (~> 2.8)
+      sprockets (>= 2.8, < 4.0)
 
 GEM
   remote: https://rubygems.org/
