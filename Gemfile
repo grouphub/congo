@@ -27,6 +27,7 @@ gem 'rack-livereload', group: :development
 
 gem 'clockwork'
 gem 'delayed_job_active_record'
+gem 'daemons'
 gem 'stripe'
 
 group :doc do
