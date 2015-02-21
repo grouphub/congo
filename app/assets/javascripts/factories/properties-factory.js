@@ -7,14 +7,7 @@ congoApp.factory('propertiesFactory', [
         return _.reduce(
           elements,
           function (sum, element) {
-            var value;
-            if (element.items) {
-              value = element.items[0].name;
-            } else {
-              value = element.value
-            }
-
-            sum[element.name] = value;
+            sum[element.name] = element.value;
 
             return sum;
           },

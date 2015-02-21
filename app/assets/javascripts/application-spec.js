@@ -28,8 +28,9 @@
 //= require factories/user-data-factory
 //= require factories/properties-factory
 //= require directives/auto-focus
-//= require directives/properties-form
 //= require directives/show-errors
+//= require directives/properties-form
+//= require directives/eligibility-modal
 //= require angular-mocks
 //= require sample-spec
 //= require controllers-spec

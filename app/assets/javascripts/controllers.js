@@ -832,8 +832,6 @@ congoApp.controller('GroupsIndexController', [
         debugger
       }
 
-      console.log(group.is_enabled);
-
       $http
         .put('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups/' + group.id + '.json', {
           is_enabled: !group.is_enabled    

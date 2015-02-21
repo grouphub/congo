@@ -74,6 +74,8 @@ Rails.application.routes.draw do
         resources :roles do
           resources :carrier_accounts
           resources :benefit_plans
+          resources :eligibilities
+          resources :applications
 
           resources :groups do
             resources :memberships do
@@ -86,8 +88,6 @@ Rails.application.routes.draw do
             post '/group_benefit_plans', to: 'group_benefit_plans#create'
             delete '/group_benefit_plans', to: 'group_benefit_plans#destroy'
           end
-
-          resources :applications
 
           get '/properties/carrier_accounts', to: 'properties#carrier_accounts'
           get '/properties/accounts', to: 'properties#accounts'
