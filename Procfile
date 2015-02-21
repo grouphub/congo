@@ -1,4 +1,5 @@
-web: bundle exec unicorn -p $PORT -c ./config/unicorn.rb
+web: bundle exec rails server Puma --port=$PORT
+guard: guard --no-interactions
 worker: bundle exec rake jobs:work
 clock: bundle exec clockwork lib/clock.rb
 karma: bundle exec rake karma:start
