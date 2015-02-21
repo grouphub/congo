@@ -1,0 +1,42 @@
+window.congo = {};
+window.congo.assets = <%=
+  [
+    # Templates
+    'admin/carriers/index.html',
+    'admin/carriers/new.html',
+    'admin/carriers/show.html',
+    'admin/invitations/index.html',
+    'admin/accounts/index.html',
+    'admin/groups/index.html',
+    'applications/new.html',
+    'applications/index.html',
+    'benefit_plans/index.html',
+    'benefit_plans/new.html',
+    'benefit_plans/show.html',
+    'carrier_accounts/index.html',
+    'carrier_accounts/new.html',
+    'carrier_accounts/show.html',
+    'directives/properties-form.html',
+    'groups/index.html',
+    'groups/index.html',
+    'groups/show.html',
+    'users/new_manager.html',
+    'users/new_plan.html',
+    'users/new_billing.html',
+    'users/new_account.html',
+    'users/new_customer.html',
+    'users/signin.html',
+    'users/show.html',
+    'home.html',
+    'landing.html',
+
+    # Images
+    'splash-logo.png'
+  ]
+    .inject({}) { |result, short_path|
+      result[short_path] = asset_path(short_path)
+      result
+    }
+    .to_json
+%>;
+

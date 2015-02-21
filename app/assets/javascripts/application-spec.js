@@ -20,7 +20,7 @@
 //= require angular-route
 //= require angular-cookies
 //= require ui-utils
-//= require init
+//= require init-spec
 //= require controllers
 //= require router
 //= require factories/events-factory
@@ -30,4 +30,7 @@
 //= require directives/auto-focus
 //= require directives/properties-form
 //= require directives/show-errors
+//= require angular-mocks
+//= require sample-spec
+//= require controllers-spec
 
