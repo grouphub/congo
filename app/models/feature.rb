@@ -1,6 +1,6 @@
 class Feature < ActiveRecord::Base
 
-  after_create :ensure_account_slugs
+  after_save :ensure_account_slugs
 
   def ensure_account_slugs
     self.account_slugs ||= []
