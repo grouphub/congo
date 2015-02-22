@@ -58,7 +58,11 @@ congoApp.directive('eligibilityModal', [
                 $scope.settings.eligibility = response.data.eligibility;
               },
               function (response) {
-                $scope.settings.error = 'An error occurred. Please try submitting the form again.';
+                var error = (response.data && response.data.error) ?
+                  response.data.error :
+                  'An error occurred. Please try submitting the form again.'
+
+                $scope.settings.error = error;
               }
             );
         };

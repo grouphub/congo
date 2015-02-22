@@ -1,6 +1,8 @@
 require 'pokitdok'
 
 class Api::V1::EligibilitiesController < ApplicationController
+  include ApplicationHelper
+
   def create
     account_slug = params[:account_id]
     account = Account.where(slug: account_slug).first

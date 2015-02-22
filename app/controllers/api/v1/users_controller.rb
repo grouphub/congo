@@ -109,8 +109,6 @@ class Api::V1::UsersController < ApplicationController
     password = params[:password]
     email_token = params[:email_token]
 
-    binding.pry
-
     begin
       user = signin! email, password
 
