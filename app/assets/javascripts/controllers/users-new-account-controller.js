@@ -6,16 +6,22 @@ congoApp.controller('UsersNewAccountController', [
     $scope.elements = [];
 
     $scope.submit = function () {
+      var properties;
+      var account;
+      var accountId;
+      var data;
+
       $scope.$broadcast('show-errors-check-validity');
 
-      if ($scope.accountForm.$invalid) { return; }
+      if ($scope.accountForm.$invalid) {
+        return;
+      }
 
+      properties = propertiesFactory.getPropertiesFromElements($scope.elements);
+      account = congo.currentUser.accounts[0] || {};
+      accountId = account.id
 
-      var properties = propertiesFactory.getPropertiesFromElements($scope.elements);
-      var account = congo.currentUser.accounts[0] || {};
-      var accountId = account.id
-
-      var data = {
+      data = {
         account_id: accountId,
         account_properties: properties
       };

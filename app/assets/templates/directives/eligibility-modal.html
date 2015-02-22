@@ -19,7 +19,7 @@
 
             <div class="form-group">
               <label for="carrier-account">Trading Partner/Carrier</label>
-              <select class="form-control" id="carrier-account" name="carrier-account" ng-model="form.carrier_account_id">
+              <select class="form-control" id="carrier-account" name="carrier-account" ng-model="eligibilityForm.carrier_account_id">
                 <option value="{{carrier_account.id}}" ng-repeat="carrier_account in settings.carrier_accounts">{{carrier_account.name}}</option>
               </select>
             </div>
@@ -27,19 +27,19 @@
             <div class="row">
               <div class="form-group col-xs-6">
                 <label for="first-name">First Name</label>
-                <input class="form-control" type="text" id="first-name" name="first-name" ng-model="form.first_name">
+                <input class="form-control" type="text" id="first-name" name="first-name" ng-model="eligibilityForm.first_name">
               </div>
 
               <div class="form-group col-xs-6">
                 <label for="last-name">Last Name</label>
-                <input class="form-control" type="text" id="last-name" name="last-name" ng-model="form.last_name">
+                <input class="form-control" type="text" id="last-name" name="last-name" ng-model="eligibilityForm.last_name">
               </div>
             </div>
 
             <div class="row">
               <div class="form-group col-xs-12">
                 <label for="member-id">Member ID</label>
-                <input class="form-control" type="text" id="member-id" name="member-id" ng-model="form.member_id">
+                <input class="form-control" type="text" id="member-id" name="member-id" ng-model="eligibilityForm.member_id">
               </div>
             </div>
 
@@ -50,7 +50,7 @@
                   <div class="input-group-addon">
                     <i class="glyphicon glyphicon-calendar"></i>
                   </div>
-                  <input class="form-control" type="text" id="date-of-birth" name="date-of-birth" ng-model="form.date_of_birth">
+                  <input class="form-control" type="text" id="date-of-birth" name="date-of-birth" ng-model="eligibilityForm.date_of_birth">
                 </div>
               </div>
             </div>
@@ -62,15 +62,15 @@
             </div>
           </form>
 
-          <form ng-if="settings.eligibility">
-            <pre>{{settings.eligibility}}
+          <form ng-if="eligibilityFormSettings.eligibility">
+            <pre>{{eligibilityFormSettings.eligibility}}
           </form>
         </div>
       </div>
 
       <div class="modal-footer">
-        <input ng-if="!settings.eligibility" type="submit" class="btn btn-primary" value="Check Eligibility" ng-click="submit()">
-        <input ng-if="settings.eligibility" type="button" class="btn btn-danger" value="Reset" ng-click="reset()">
+        <input ng-if="!settings.eligibility" type="submit" class="btn btn-primary" value="Check Eligibility" ng-click="submitEligibilityForm()">
+        <input ng-if="settings.eligibility" type="button" class="btn btn-danger" value="Reset" ng-click="resetEligibilityForm()">
       </div>
     </div>
   </div>

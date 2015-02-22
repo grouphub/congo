@@ -11,7 +11,9 @@ congoApp.controller('UsersNewCustomerController', [
 
       $scope.$broadcast('show-errors-check-validity');
 
-      if ($scope.memberForm.$invalid) { return; }
+      if ($scope.memberForm.$invalid) {
+        return;
+      }
 
       var email = $scope.signin_email;
       var password = $scope.signin_password;
@@ -35,7 +37,9 @@ congoApp.controller('UsersNewCustomerController', [
     $scope.signup = function () {
       $scope.$broadcast('show-errors-check-validity');
 
-      if ($scope.memberForm.$invalid) { return; }
+      if ($scope.memberForm.$invalid) {
+        return;
+      }
 
       $http
         .post('/api/v1/users.json', {

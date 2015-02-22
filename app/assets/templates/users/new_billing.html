@@ -1,27 +1,32 @@
 <div class="col-md-12">
   <form name="billingForm">
     <h1>Billing Information</h1>
-      <div class="form-group" show-errors='{showSuccess: true}'>
-        <label class="control-label">Card Number</label>
-        <input type="text" class="form-control" id="card_number" name="card_number" ng-model="card_number" required placeholder="Card Number" />
-        <p class="help-block" ng-if="billingForm.card_number.$error.required">Card Number is required</p>
-      </div>
-      <div class="form-group" show-errors='{showSuccess: true}'>
-        <label class="control-label">Expiration Month</label>
-        <input type="text" class="form-control" id="month" name="month" ng-model="month" required placeholder="Expiration Month" />
-        <p class="help-block" ng-if="billingForm.month.$error.required">Expiration Month is required</p>
-      </div>
-      <div class="form-group" show-errors='{showSuccess: true}'>
-        <label class="control-label">Expiration Year</label>
-        <input type="text" class="form-control" id="year" name="year" ng-model="year" required placeholder="Expiration Year" />
-        <p class="help-block" ng-if="billingForm.year.$error.required">Expiration Year is required</p>
-      </div>
-      <div class="form-group" show-errors='{showSuccess: true}'>
-        <label class="control-label">cvc</label>
-        <input type="password" class="form-control" id="cvc" name="cvc" ng-model="cvc" required placeholder="CVC Code" />
-        <p class="help-block" ng-if="billingForm.cvc.$error.required">CVC is required</p>
-      </div>
-      <button class="btn btn-primary" ng-click="submit()">Save</button>
-    </form>
+
+    <div class="form-group" show-errors='{showSuccess: true}'>
+      <label class="control-label">Card Number</label>
+      <input type="text" class="form-control" id="card_number" name="card_number" ng-model="card_number" required placeholder="Card Number" />
+      <p class="help-block" ng-if="billingForm.card_number.$error.required">Card Number is required</p>
+    </div>
+
+    <div class="form-group" show-errors='{showSuccess: true}'>
+      <label class="control-label">Expiration Month</label>
+      <input type="text" class="form-control" id="month" name="month" ng-model="month" required placeholder="Expiration Month" />
+      <p class="help-block" ng-if="billingForm.month.$error.required">Expiration Month is required</p>
+    </div>
+
+    <div class="form-group" show-errors='{showSuccess: true}'>
+      <label class="control-label">Expiration Year</label>
+      <input type="text" class="form-control" id="year" name="year" ng-model="year" required placeholder="Expiration Year" />
+      <p class="help-block" ng-if="billingForm.year.$error.required">Expiration Year is required</p>
+    </div>
+
+    <div class="form-group" show-errors='{showSuccess: true}'>
+      <label class="control-label">cvc</label>
+      <input type="password" class="form-control" id="cvc" name="cvc" ng-model="cvc" required placeholder="CVC Code" />
+      <p class="help-block" ng-if="billingForm.cvc.$error.required">CVC is required</p>
+    </div>
+
+    <button class="btn btn-primary" ng-click="submit()">Save</button>
+  </form>
 </div>
 

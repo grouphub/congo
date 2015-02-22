@@ -9,7 +9,7 @@ congoApp.directive('eligibilityModal', [
       templateUrl: congo.assets['directives/eligibility-modal.html'],
       link: function ($scope, $element, $attrs) {
         // Data that the user populates.
-        $scope.form = {
+        $scope.eligibilityForm = {
           carrier_account_id: undefined,
           member_id: '',
           date_of_birth: '',
@@ -17,7 +17,7 @@ congoApp.directive('eligibilityModal', [
           last_name: ''
         };
 
-        $scope.settings = {
+        $scope.eligibilityFormSettings = {
           // Eligibility data from the response.
           eligibility: undefined,
 
@@ -49,7 +49,7 @@ congoApp.directive('eligibilityModal', [
             );
         });
 
-        $scope.submit = function () {
+        $scope.submitEligibilityForm = function () {
           $scope.settings.error = undefined;
 
           $http.post('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/eligibilities.json', $scope.form)
@@ -67,7 +67,7 @@ congoApp.directive('eligibilityModal', [
             );
         };
 
-        $scope.reset = function () {
+        $scope.resetEligibilityForm = function () {
           var carrierAccount = $scope.settings.carrier_accounts[0];
 
           $scope.settings.eligibility = undefined;

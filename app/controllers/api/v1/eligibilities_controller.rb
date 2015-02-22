@@ -7,6 +7,11 @@ class Api::V1::EligibilitiesController < ApplicationController
     account_slug = params[:account_id]
     account = Account.where(slug: account_slug).first
 
+    unless account
+      error_response('An appropriate account could not be found.')
+      return
+    end
+
     carrier_account_id = params[:carrier_account_id]
     carrier_account = CarrierAccount
       .where(id: carrier_account_id, account_id: account.id)
@@ -21,7 +26,6 @@ class Api::V1::EligibilitiesController < ApplicationController
       error_response('Date of birth is not properly formatted.')
       return
     end
-
 
     date_of_birth_components = unparsed_date_of_birth.split('/')
     date_of_birth = [
