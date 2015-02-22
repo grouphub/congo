@@ -15,6 +15,9 @@ class CreateAccounts < ActiveRecord::Migration
       t.string :year
       t.string :cvc
 
+      t.timestamp :billing_start
+      t.integer :billing_day
+
       t.timestamps
     end
   end
