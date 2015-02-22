@@ -1,0 +1,74 @@
+<div class="col-md-12">
+  <h1>Features</h1>
+
+  <table class="features table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Account IDs</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr ng-repeat="feature in features">
+        <td>
+          {{feature.name}}
+        </td>
+
+        <td>
+          {{feature.description}}
+        </td>
+
+        <td>
+          <form ng-submit="updateFeatureAt($index)">
+            <div class="form-group">
+              <input class="form-control" type="text" ng-model="feature.account_ids" ng-disabled="feature.enabled_for_all" ng-list>
+            </div>
+
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" ng-model="feature.enabled_for_all"> Enable for all accounts?
+              </label>
+            </div>
+
+            <input class="btn btn-primary btn-xs" type="submit" value="Update">
+          </form>
+        </td>
+
+        <td>
+          <a class="btn btn-danger btn-xs" href="" ng-click="deleteFeatureAt($index)">Delete</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <form ng-submit="newFeature()">
+    <h2>New Feature</h2>
+
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input class="form-control" id="name" placeholder="Enter name&hellip;" ng-model="feature.name" auto-focus>
+    </div>
+
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea class="form-control" id="description" placeholder="Enter description&hellip;" ng-model="feature.description"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="account_ids">Account IDs</label>
+      <input class="form-control" id="account_ids" placeholder="Enter account IDs&hellip;" ng-model="feature.account_ids" ng-disabled="feature.enabled_for_all">
+    </div>
+
+    <div class="checkbox">
+      <label>
+        <input name="enabled_for_all" type="checkbox" ng-model="feature.enabled_for_all"> Enable for all accounts?
+      </label>
+    </div>
+
+    <input type="submit" class="btn btn-default" value="New feature">
+  </form>
+</div>
+
