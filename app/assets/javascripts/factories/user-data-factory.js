@@ -176,6 +176,26 @@ congoApp.factory('userDataFactory', [
 
         return congo.currentUser.id;
       },
+      featureEnabled: function (featureName) {
+        var account;
+
+        if (!congo.currentUser) {
+          return;
+        }
+
+        account = _(congo.currentUser.accounts)
+          .findWhere({ slug: userDataFactory.accountSlug() });
+
+        if (!account) {
+          return;
+        }
+
+        if (!account.enabled_features) {
+          return;
+        }
+
+        return _(account.enabled_features).contains(featureName);
+      },
       isBrokerIncomplete: function () {
         var brokerAccounts = _.select(congo.currentUser.accounts, function (account) {
           return account.role === 'Broker';

@@ -32,8 +32,14 @@ class Account < ActiveRecord::Base
   end
 
   def enabled_features
-    Feature.all.to_a.select { |feature|
+    @enabled_features ||= Feature.all.to_a.select { |feature|
       feature.enabled_for_all? || feature.account_ids.include?(self.id)
+    }
+  end
+
+  def feature_enabled?(feature_name)
+    self.enabled_features.any? { |feature|
+      feature.name == feature_name
     }
   end
 end
