@@ -51,7 +51,9 @@ module UsersHelper
       .map { |role|
         role.account.as_json.merge({
           'role' => role,
-          'enabled_features' => role.account.enabled_features.map(&:name)
+          'enabled_features' => role.account.enabled_features.map(&:name),
+          'message_count' => role.message_count,
+          'activity_count' => role.activity_count
         })
       }
 
@@ -61,9 +63,7 @@ module UsersHelper
       })
       .merge({
         'is_admin' => user.admin?,
-        'accounts' => accounts,
-        'message_count' => user.message_count,
-        'notification_count' => user.notification_count
+        'accounts' => accounts
       })
   end
 end

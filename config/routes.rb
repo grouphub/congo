@@ -60,7 +60,11 @@ Rails.application.routes.draw do
     # Applications
     '/accounts/:slug/:role/applications',
     '/accounts/:slug/:role/applications/new',
-    '/accounts/:slug/:role/applications/:application_id'
+    '/accounts/:slug/:role/applications/:application_id',
+
+    # Notifications
+    '/accounts/:slug/:role/messages',
+    '/accounts/:slug/:role/activities'
   ]
 
   namespace :api do

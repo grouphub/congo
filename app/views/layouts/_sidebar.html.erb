@@ -1,16 +1,30 @@
 <ul class="sidebar-nav">
-  <li class="sidebar-brand">
-    <a href="/" class="logo-link">
-      <div class="logo"></div>
-    </a>
-  </li>
-
-  <li>
+  <li class="pull-right">
     <a href="" ng-click="drawerToggle()" class="sidebar-toggle sidebar-toggle-small">
       <span class="sr-only">Toggle navigation</span>
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
+    </a>
+  </li>
+
+  <li class="pull-right" ng-if="isSignedin() && currentRole() && !inAdminPanel()">
+    <a class="activities-menu activities-menu-small" href="/accounts/{{accountSlug()}}/{{currentRole()}}/activities">
+      <i class="forms">Activities</i>
+      <span class="icon-label">{{currentAccount().activity_count}}</span>
+    </a>
+  </li>
+
+  <li class="pull-right" ng-if="isSignedin() && currentRole() && !inAdminPanel()">
+    <a class="messages-menu messages-menu-small" href="/accounts/{{accountSlug()}}/{{currentRole()}}/messages">
+      <i class="envelope">Messages</i>
+      <span class="icon-label">{{currentAccount().message_count}}</span>
+    </a>
+  </li>
+
+  <li class="sidebar-brand">
+    <a href="/" class="logo-link">
+      <div class="logo"></div>
     </a>
   </li>
 

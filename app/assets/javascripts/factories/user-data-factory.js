@@ -130,20 +130,6 @@ congoApp.factory('userDataFactory', [
 
         return congo.currentUser.first_name;
       },
-      messageCount: function () {
-        if (!congo.currentUser) {
-          return;
-        }
-
-        return congo.currentUser.message_count;
-      },
-      notificationCount: function () {
-        if (!congo.currentUser) {
-          return;
-        }
-
-        return congo.currentUser.notification_count;
-      },
       accounts: function () {
         if (!congo.currentUser) {
           return;
@@ -152,6 +138,22 @@ congoApp.factory('userDataFactory', [
         return _.select(congo.currentUser.accounts, function (account) {
           return (account.slug && account.slug.length)
         });
+      },
+      currentAccount: function () {
+        var match;
+        var account;
+
+        if (!congo.currentUser) {
+          return;
+        }
+
+        match = $location.path().match(/\/accounts\/([^\/]+)/);
+
+        if (match && match[1] && match[1].length > 0) {
+          account = _(congo.currentUser.accounts).findWhere({ slug: match[1] });
+        }
+
+        return account;
       },
       accountName: function () {
         var account;
