@@ -15,10 +15,14 @@
 /log/*.log
 /tmp
 
+# OS X artifacts.
 .DS_Store
 
+# Karma JS and related.
+node_modules
 
-# Elastic Beanstalk Files
+# Elastic Beanstalk Files.
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
+

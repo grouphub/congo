@@ -11,6 +11,7 @@
         class="form-control"
         id="{{element.name}}"
         name="{{element.name}}"
+        ng-model="element.value"
       >
         <option ng-repeat="item in element.items" value="{{item.name}}">{{item.title}}</option>
       </select>

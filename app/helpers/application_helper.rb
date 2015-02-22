@@ -24,5 +24,17 @@ module ApplicationHelper
         flash_type.to_s
     end
   end
+
+  def error_response(message, status = :bad_request)
+    respond_to do |format|
+      format.json {
+        render \
+          status: status,
+          json: {
+            error: message
+          }
+      }
+    end
+  end
 end
 

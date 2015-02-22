@@ -29,7 +29,7 @@
 //  Setup
 //  -----
 //
-//= require init
+//= require init-spec
 //
 //  -----------
 //  Controllers
@@ -87,4 +87,17 @@
 //= require directives/show-errors
 //= require directives/properties-form
 //= require directives/eligibility-modal
+//
+//  --------------
+//  Test Libraries
+//  --------------
+//
+//= require angular-mocks
+//
+//  -----
+//  Specs
+//  -----
+//
+//= require sample-spec
+//= require controllers/main-controller-spec
 

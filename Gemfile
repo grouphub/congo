@@ -30,6 +30,8 @@ gem 'delayed_job_active_record'
 gem 'daemons'
 gem 'stripe'
 
+gem 'pokitdok-ruby', github: 'pokitdok/pokitdok-ruby'
+
 group :doc do
   gem 'sdoc', '~> 0.4.0'
 end

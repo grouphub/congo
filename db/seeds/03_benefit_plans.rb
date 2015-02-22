@@ -1,7 +1,14 @@
 account = Account.where(name: 'First Account').first
 
 carrier = Carrier.create! \
-  name: 'Blue Cross'
+  name: 'Blue Cross',
+  properties: {
+    npi: '1467560003',
+    first_name: 'Brad',
+    last_name: 'Bluecross',
+    service_types: ['health_benefit_plan_coverage'],
+    trading_partner_id: 'MOCKPAYER'
+  }
 
 carrier_account = CarrierAccount.create! \
   name: 'My Broker Blue Cross',
