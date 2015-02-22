@@ -9,13 +9,15 @@ class Clock
 
   def start
     Clockwork.every(1.minute, 'tick') do
-      puts 'tick'
+      puts 'Tick. Payment is currently disabled.'
 
-      Account.find_each do |account|
-        if account.needs_to_pay?
-          Delayed::Job.enqueue(PaymentJob.new(account))
-        end
-      end
+      # puts 'Tick.'
+
+      # Account.find_each do |account|
+      #   if account.needs_to_pay?
+      #     Delayed::Job.enqueue(PaymentJob.new(account))
+      #   end
+      # end
     end
   end
 end
