@@ -9,5 +9,13 @@ class Role < ActiveRecord::Base
   def add_english_name
     self.english_name = self.name.split('_').map(&:capitalize).join(' ')
   end
+
+  def message_count
+    Digest::MD5.hexdigest(self.account.slug + ':' + self.user.full_name).to_i(16) % 30
+  end
+
+  def activity_count
+    Digest::MD5.hexdigest(self.account.slug + ':' + self.user.full_name + 'test').to_i(16) % 30
+  end
 end
 

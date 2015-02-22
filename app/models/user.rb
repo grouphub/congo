@@ -24,13 +24,5 @@ class User < ActiveRecord::Base
   def admin?
     User.first.roles.any? { |role| role.name == 'admin' }
   end
-
-  def message_count
-    Digest::MD5.hexdigest(self.full_name).to_i(16) % 30
-  end
-
-  def notification_count
-    Digest::MD5.hexdigest(self.full_name + 'test').to_i(16) % 30
-  end
 end
 

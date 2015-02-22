@@ -38,6 +38,8 @@
 //= require controllers/main-controller
 //= require controllers/landing-controller
 //= require controllers/home-controller
+//= require controllers/activities-index-controller
+//= require controllers/messages-index-controller
 //= require controllers/admin-accounts-index-controller
 //= require controllers/admin-carriers-index-controller
 //= require controllers/admin-carriers-new-controller

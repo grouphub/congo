@@ -18,10 +18,28 @@ a.sidebar-toggle {
 
 // Hamburger icon additional styling for small screens.
 a.sidebar-toggle-small {
-  position: absolute;
-  top: 0;
-  right: 0;
   padding: 10px 15px;
+}
+
+a.messages-menu-small,
+a.activities-menu-small
+{
+  position: relative;
+  padding: 10px 15px;
+  width: 52px;
+  height: 50px;
+
+  i.envelope,
+  i.forms
+  {
+    margin: 0;
+    margin-left: -19px;
+    margin-top: 6px;
+  }
+
+  .icon-label {
+    text-indent: initial;
+  }
 }
 
 // Logo in navbar (shows up in sidebar on small screens).
@@ -424,7 +442,10 @@ main {
 // Hide second hamburger icon when screen is big.
 @media (min-width: 768px) {
   #wrapper {
-    .sidebar-toggle-small {
+    a.sidebar-toggle-small,
+    a.messages-menu-small,
+    a.activities-menu-small
+    {
       display: none;
     }
   }

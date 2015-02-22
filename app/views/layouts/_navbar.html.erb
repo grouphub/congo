@@ -28,28 +28,18 @@
     </ul>
 
     <ul class="nav navbar-nav navbar-right">
-      <li class="dropdown messages-menu" ng-if="isSignedin()">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-          <i class="envelope">Notifications</i>
-          <span class="icon-label">{{messageCount()}}</span>
+      <li class="messages-menu" ng-if="isSignedin() && currentRole() && !inAdminPanel()">
+        <a href="/accounts/{{accountSlug()}}/{{currentRole()}}/messages">
+          <i class="envelope">Messages</i>
+          <span class="icon-label">{{currentAccount().message_count}}</span>
         </a>
-        <ul class="dropdown-menu">
-          <li>
-            <a href="">You have {{messageCount()}} messages</a>
-          </li>
-        </ul>
       </li>
 
-      <li class="dropdown messages-menu" ng-if="isSignedin()">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-          <i class="forms">To-Dos</i>
-          <span class="icon-label">{{notificationCount()}}</span>
+      <li class="messages-menu" ng-if="isSignedin() && currentRole() && !inAdminPanel()">
+        <a href="/accounts/{{accountSlug()}}/{{currentRole()}}/activities">
+          <i class="forms">Activities</i>
+          <span class="icon-label">{{currentAccount().activity_count}}</span>
         </a>
-        <ul class="dropdown-menu">
-          <li>
-            <a href="">You have {{notificationCount()}} to-dos</a>
-          </li>
-        </ul>
       </li>
 
       <li ng-if="firstName()" class="dropdown">

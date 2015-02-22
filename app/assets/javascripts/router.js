@@ -145,6 +145,14 @@ congoApp.config([
         templateUrl: congo.assets['applications/index.html'],
         controller: 'ApplicationsIndexController'
       })
+      .when('/accounts/:slug/:role/messages', {
+        templateUrl: congo.assets['messages/index.html'],
+        controller: 'MessagesIndexController'
+      })
+      .when('/accounts/:slug/:role/activities', {
+        templateUrl: congo.assets['activities/index.html'],
+        controller: 'ActivitiesIndexController'
+      })
   }
 ]);
 
