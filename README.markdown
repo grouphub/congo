@@ -16,6 +16,6 @@ Getting started
 7. Verify the settings in `config/database.yml` look correct.
 8. Run `script/sweep_database`.
 9. You can run the tests via `bundle exec rspec spec`.
-10. Run the server using `foreman start`.
+10. Run the server using `bundle exec foreman start`.
 11. Visit the site locally at [http://localhost:3000].
 

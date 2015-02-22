@@ -14,7 +14,7 @@ congoApp.config([
   function ($routeProvider) {
     $routeProvider
       .when('/', {
-        templateUrl: '<%= asset_path 'landing.html' %>',
+        templateUrl: congo.assets['landing.html'],
         controller: 'LandingController'
       })
   }
@@ -26,118 +26,123 @@ congoApp.config([
   function ($routeProvider) {
     $routeProvider
       .when('/admin', {
-        templateUrl: '<%= asset_path 'home.html' %>',
+        templateUrl: congo.assets['home.html'],
         controller: 'HomeController'
       })
       .when('/admin/carriers', {
-        templateUrl: '<%= asset_path 'admin/carriers/index.html' %>',
+        templateUrl: congo.assets['admin/carriers/index.html'],
         controller: 'AdminCarriersIndexController'
       })
       .when('/admin/carriers/new', {
-        templateUrl: '<%= asset_path 'admin/carriers/new.html' %>',
+        templateUrl: congo.assets['admin/carriers/new.html'],
         controller: 'AdminCarriersNewController'
       })
       .when('/admin/carriers/:carrier_slug', {
-        templateUrl: '<%= asset_path 'admin/carriers/show.html' %>',
+        templateUrl: congo.assets['admin/carriers/show.html'],
         controller: 'AdminCarriersShowController'
       })
       .when('/admin/invitations', {
-        templateUrl: '<%= asset_path 'admin/invitations/index.html' %>',
+        templateUrl: congo.assets['admin/invitations/index.html'],
         controller: 'AdminInvitationsIndexController'
       })
       .when('/admin/accounts', {
-        templateUrl: '<%= asset_path 'admin/accounts/index.html' %>',
+        templateUrl: congo.assets['admin/accounts/index.html'],
         controller: 'AdminAccountsIndexController'
       })
       .when('/admin/groups', {
-        templateUrl: '<%= asset_path 'admin/groups/index.html' %>',
+        templateUrl: congo.assets['admin/groups/index.html'],
         controller: 'AdminGroupsIndexController'
+      })
+      .when('/admin/features', {
+        templateUrl: congo.assets['admin/features/index.html'],
+        controller: 'AdminFeaturesIndexController'
       })
   }
 ]);
 
+// Other routes
 congoApp.config([
   '$routeProvider',
   function ($routeProvider) {
     $routeProvider
       .when('/users/new_manager', {
-        templateUrl: '<%= asset_path 'users/new_manager.html' %>',
+        templateUrl: congo.assets['users/new_manager.html'],
         controller: 'UsersNewManagerController'
       })
       .when('/users/new_plan', {
-        templateUrl: '<%= asset_path 'users/new_plan.html' %>',
+        templateUrl: congo.assets['users/new_plan.html'],
         controller: 'UsersNewPlanController'
       })
       .when('/users/new_billing', {
-        templateUrl: '<%= asset_path 'users/new_billing.html' %>',
+        templateUrl: congo.assets['users/new_billing.html'],
         controller: 'UsersNewBillingController'
       })
       .when('/users/new_account', {
-        templateUrl: '<%= asset_path 'users/new_account.html' %>',
+        templateUrl: congo.assets['users/new_account.html'],
         controller: 'UsersNewAccountController'
       })
       .when('/users/new_customer', {
-        templateUrl: '<%= asset_path 'users/new_customer.html' %>',
+        templateUrl: congo.assets['users/new_customer.html'],
         controller: 'UsersNewCustomerController'
       })
       .when('/users/signin', {
-        templateUrl: '<%= asset_path 'users/signin.html' %>',
+        templateUrl: congo.assets['users/signin.html'],
         controller: 'UsersSigninController'
       })
       .when('/users/:id', {
-        templateUrl: '<%= asset_path 'users/show.html' %>',
+        templateUrl: congo.assets['users/show.html'],
         controller: 'UsersShowController'
       })
       .when('/accounts/:slug/:role', {
-        templateUrl: '<%= asset_path 'home.html' %>',
+        templateUrl: congo.assets['home.html'],
         controller: 'HomeController'
       })
       .when('/accounts/:slug/:role/carrier_accounts', {
-        templateUrl: '<%= asset_path 'carrier_accounts/index.html' %>',
+        templateUrl: congo.assets['carrier_accounts/index.html'],
         controller: 'CarrierAccountsIndexController'
       })
       .when('/accounts/:slug/:role/carrier_accounts/new', {
-        templateUrl: '<%= asset_path 'carrier_accounts/new.html' %>',
+        templateUrl: congo.assets['carrier_accounts/new.html'],
         controller: 'CarrierAccountsNewController'
       })
       .when('/accounts/:slug/:role/carrier_accounts/:carrier_account_id', {
-        templateUrl: '<%= asset_path 'carrier_accounts/show.html' %>',
+        templateUrl: congo.assets['carrier_accounts/show.html'],
         controller: 'CarrierAccountsShowController'
       })
       .when('/accounts/:slug/:role/benefit_plans', {
-        templateUrl: '<%= asset_path 'benefit_plans/index.html' %>',
+        templateUrl: congo.assets['benefit_plans/index.html'],
         controller: 'BenefitPlansIndexController'
       })
       .when('/accounts/:slug/:role/benefit_plans/new', {
-        templateUrl: '<%= asset_path 'benefit_plans/new.html' %>',
+        templateUrl: congo.assets['benefit_plans/new.html'],
         controller: 'BenefitPlansNewController'
       })
       .when('/accounts/:slug/:role/benefit_plans/:benefit_plan_id', {
-        templateUrl: '<%= asset_path 'benefit_plans/show.html' %>',
+        templateUrl: congo.assets['benefit_plans/show.html'],
         controller: 'BenefitPlansShowController'
       })
       .when('/accounts/:slug/:role/groups', {
-        templateUrl: '<%= asset_path 'groups/index.html' %>',
+        templateUrl: congo.assets['groups/index.html'],
         controller: 'GroupsIndexController'
       })
       .when('/accounts/:slug/:role/groups/new', {
-        templateUrl: '<%= asset_path 'groups/new.html' %>',
+        templateUrl: congo.assets['groups/new.html'],
         controller: 'GroupsNewController'
       })
       .when('/accounts/:slug/:role/groups/:group_slug', {
-        templateUrl: '<%= asset_path 'groups/show.html' %>',
+        templateUrl: congo.assets['groups/show.html'],
         controller: 'GroupsShowController'
       })
       .when('/accounts/:slug/:role/groups/:group_slug/benefit_plans/:benefit_plan_id/applications/new', {
-        templateUrl: '<%= asset_path 'applications/new.html' %>',
+        templateUrl: congo.assets['applications/new.html'],
         controller: 'ApplicationsNewController'
       })
       .when('/accounts/:slug/:role/applications/:application_id', {
-        templateUrl: '<%= asset_path 'applications/new.html' %>',
+        templateUrl: congo.assets['applications/new.html'],
         controller: 'ApplicationsShowController'
       })
       .when('/accounts/:slug/:role/applications', {
-        templateUrl: '<%= asset_path 'applications/index.html' %>',
+        templateUrl: congo.assets['applications/index.html'],
         controller: 'ApplicationsIndexController'
       })
   }

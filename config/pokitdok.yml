@@ -1,0 +1,12 @@
+development:
+  client_id: 'ZzzUk4r9DMbV0F9xfuxG'
+  client_secret: 'A1IsnMpkaQrqdSR9DTVOMQwCTswUMUOhaO69yLsP'
+
+test:
+  client_id: 'ZzzUk4r9DMbV0F9xfuxG'
+  client_secret: 'A1IsnMpkaQrqdSR9DTVOMQwCTswUMUOhaO69yLsP'
+
+production:
+  client_id: 'ZzzUk4r9DMbV0F9xfuxG'
+  client_secret: 'A1IsnMpkaQrqdSR9DTVOMQwCTswUMUOhaO69yLsP'
+

@@ -13,9 +13,12 @@
  *= require_self
  *= require bootstrap
  *= require bootstrap-datepicker
- *= require pricing
- *= require forms
+ *= require admin-lte
  *= require font-awesome
  *= require pricing
+ *= require global
+ *= require navigation
+ *= require spinner
  *= require home
+ *= require forms
  */

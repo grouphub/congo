@@ -1,0 +1,27 @@
+{
+  "name": "congo",
+  "version": "1.0.0",
+  "description": "Congo =====",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/grouphub/congo.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/grouphub/congo/issues"
+  },
+  "homepage": "https://github.com/grouphub/congo",
+  "devDependencies": {
+    "jasmine-core": "^2.2.0",
+    "karma": "^0.12.31",
+    "karma-chrome-launcher": "^0.1.7",
+    "karma-jasmine": "^0.3.5",
+    "karma-ng-html2js-preprocessor": "git://github.com/monterail/karma-ng-html2js-preprocessor#feature/strip-sufix",
+    "karma-phantomjs-launcher": "^0.1.4"
+  }
+}

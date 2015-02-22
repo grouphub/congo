@@ -2,19 +2,6 @@ module UsersHelper
   class AuthenticationException < StandardError
   end
 
-  # Move to ApplicationHelper
-  def error_response(message, status = :bad_request)
-    respond_to do |format|
-      format.json {
-        render \
-          status: status,
-          json: {
-            error: message
-          }
-      }
-    end
-  end
-
   def signin!(email, password)
     user = User.find_by_email(email)
 
@@ -61,7 +48,8 @@ module UsersHelper
       .includes(:account)
       .map { |role|
         role.account.as_json.merge({
-          'role' => role
+          'role' => role,
+          'enabled_features' => role.account.enabled_features.map(&:name)
         })
       }
 

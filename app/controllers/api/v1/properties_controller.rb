@@ -14,6 +14,7 @@ class Api::V1::PropertiesController < ApplicationController
               type: 'list',
               name: 'carrier_name',
               title: 'Carrier',
+              value: Carrier.first.slug,
               items: Carrier.all.map { |carrier|
                 {
                   name: carrier.slug,
@@ -49,6 +50,7 @@ class Api::V1::PropertiesController < ApplicationController
               type: 'list',
               name: 'account_type',
               title: 'Account Type',
+              value: 'broker',
               items: [
                 {
                   name: 'broker',
@@ -122,13 +124,13 @@ class Api::V1::PropertiesController < ApplicationController
               type: 'text',
               name: 'name',
               title: 'Name',
-              placeholder: 'Enter a Carrier Name…'
+              placeholder: 'Enter a Carrier Organization Name…'
             },
             {
               type: 'text',
-              name: 'carrier_number',
-              title: 'Carrier Number',
-              placeholder: 'Enter a Carrier Number…'
+              name: 'npi',
+              title: 'NPI',
+              placeholder: 'Enter an NPI…'
             },
             {
               type: 'text',
@@ -138,15 +140,27 @@ class Api::V1::PropertiesController < ApplicationController
             },
             {
               type: 'text',
+              name: 'service_types',
+              title: 'Service Types (comma-separated, underscored_text)',
+              placeholder: 'Enter the Carrier\'s service types…'
+            },
+            {
+              type: 'text',
               name: 'tax_id',
               title: 'Tax ID',
               placeholder: 'Enter the Carrier\'s Tax ID…'
             },
             {
               type: 'text',
-              name: 'carrier_contact',
-              title: 'Carrier Contact',
-              placeholder: 'Enter the Primary Contact\'s Name for the Carrier…'
+              name: 'first_name',
+              title: 'Carrier Contact First Name',
+              placeholder: 'Enter the Primary Contact\'s First Name for the Carrier…'
+            },
+            {
+              type: 'text',
+              name: 'last_name',
+              title: 'Carrier Contact Last Name',
+              placeholder: 'Enter the Primary Contact\'s First Name for the Carrier…'
             },
             {
               type: 'text',

@@ -1,0 +1,432 @@
+// Hamburger icon styling for large screens.
+a.sidebar-toggle {
+  border: 0;
+  background: none;
+
+  // TODO: Don't use `!important`
+  padding-top: 17px !important;
+  padding-bottom: 18px !important;
+
+  .icon-bar {
+    display: block;
+    width: 22px;
+    height: 2px;
+    margin-top: 3px;
+    border: 1px solid #82c2fd;
+  }
+}
+
+// Hamburger icon additional styling for small screens.
+a.sidebar-toggle-small {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 10px 15px;
+}
+
+// Logo in navbar (shows up in sidebar on small screens).
+header,
+.sidebar-nav {
+  .logo {
+    $width: 145px;
+    $height: 22px;
+
+    display: inline-block;
+    width: $width;
+    height: $height;
+    background: asset_url('logo.png');
+    background-size: $width $height;
+
+    margin-bottom: -7px;
+
+    position: relative;
+    top: -6px;
+  }
+
+  .logo-link {
+    padding-bottom: 8px;
+  }
+
+  .logo-link:hover {
+    background: rgba(255, 255, 255, 0.1) !important;
+  }
+}
+
+// Basic navbar styling.
+header {
+  $background-color: #333333;
+  $color: #82c2fd;
+
+  background-color: $background-color;
+
+  position: fixed;
+  left: 0;
+  right: 0;
+
+  // Logo positioning for large screens when sidebar is hidden.
+  .logo {
+    margin-top: 6px;
+  }
+
+  ul.nav {
+    height: 50px;
+  }
+
+  .navbar-nav {
+    > li,
+    > li.dropdown {
+      > a {
+        color: $color;
+      }
+
+      > a:hover,
+      > a:focus {
+        background: rgba(255, 255, 255, 0.1);
+        color: $color;
+      }
+
+      > a,
+      > a:blur,
+      > a:unfocus {
+        background: none !important;
+      }
+    }
+  }
+
+  .navbar-header {
+    > a:hover,
+    > a:focus {
+      background: rgba(255, 255, 255, 0.1);
+      color: $color;
+    }
+  }
+}
+
+// Header dropdown styling.
+header {
+  .dropdown .dropdown-menu .heading {
+    &:hover {
+      background-color: initial;
+      color: #333;
+      cursor: default;
+    }
+
+    font-weight: bold;
+  }
+}
+
+// Specify widths of sidebar and main content within "wrapper".
+#wrapper {
+  position: relative;
+  padding-left: 250px;
+
+  #sidebar-wrapper {
+    left: 250px;
+  }
+
+  #page-content-wrapper {
+    .logo-link {
+      display: none;
+    }
+  }
+}
+
+// Specify widths when navigation is toggled.
+#wrapper.toggled {
+  padding-left: 0;
+
+  #sidebar-wrapper {
+    left: 0;
+  }
+
+  #page-content-wrapper {
+    .logo-link {
+      display: block;
+    }
+  }
+}
+
+// Sidebar positioning.
+#sidebar-wrapper {
+  position: absolute;
+  left: 250px;
+  width: 0;
+  height: 100%;
+  margin-left: -250px;
+  background: #333;
+  width: 250px;
+
+  .heading {
+    font-weight: bold;
+    color: #6fc0ff;
+  }
+}
+
+// Wrapper positioning.
+#page-content-wrapper {
+  width: 100%;
+  padding: 15px;
+  padding: 0;
+}
+
+// Sidebar styling.
+.sidebar-nav {
+  position: absolute;
+  top: 0;
+  width: 250px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  background: #333;
+
+  li {
+    text-indent: 20px;
+    line-height: 40px;
+  }
+
+  li a {
+    display: block;
+    text-decoration: none;
+    color: #999999;
+
+    i {
+      margin-left: -20px;
+      margin-right: 12px;
+    }
+  }
+
+  li a:hover {
+    text-decoration: none;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  li a:active,
+  li a:focus {
+    text-decoration: none;
+  }
+
+  > .sidebar-brand {
+    height: 52px;
+    font-size: 18px;
+    line-height: 60px;
+    border-bottom: 1px solid #444;
+    margin-bottom: 13px;
+
+    a {
+      height: 51px;
+    }
+  }
+}
+
+nav {
+  margin-right: 15px;
+}
+
+.sidebar-nav > .sidebar-brand a {
+  color: #999999;
+}
+
+.sidebar-nav > .sidebar-brand a:hover {
+  color: #fff;
+  background: none;
+}
+
+main [ng-controller=HomeController] .col-md-12 {
+  float: initial;
+}
+
+header {
+  margin-bottom: 0 !important;
+}
+
+main {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+  margin-top: 0;
+}
+
+#wrapper {
+  main {
+    [ng-view],
+    footer {
+      margin-right: 250px;
+    }
+  }
+}
+
+#wrapper.toggled {
+  main {
+    [ng-view],
+    footer {
+      margin-right: 0;
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  header .navbar-nav > li.dropdown > ul > li {
+    $color: #82c2fd;
+    $hover-color: #2064a6;
+
+    > a:hover,
+    > a:focus {
+      background-color: $hover-color;
+    }
+
+    a {
+      color: $color;
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  #wrapper {
+    position: initial;
+    padding-left: initial;
+
+    main {
+      [ng-view],
+      footer {
+        margin-right: 0;
+      }
+    }
+  }
+
+  #sidebar-wrapper {
+    height: initial;
+    position: initial;
+    margin-left: initial;
+    width: 100%;
+
+    ul {
+      position: initial;
+    }
+  }
+
+  header.navbar {
+    display: none;
+  }
+
+  .sidebar-nav {
+    width: 100%;
+  }
+
+  .sidebar-nav .sidebar-brand {
+    height: 51px;
+  }
+}
+
+// Put margin-bottom between navbar and navbar content on small screens, without
+// putting extra margin under the navbar.
+@media (max-width: 767px) {
+  #wrapper .sidebar-brand {
+    margin-bottom: 0;
+  }
+
+  #wrapper.toggled .sidebar-brand {
+    margin-bottom: 13px;
+  }
+}
+
+// Show small sidebar when in intermediate screen size.
+@media (max-width: 900px) {
+  @media (min-width: 767px) {
+    #wrapper {
+      position: relative;
+      padding-left: 75px;
+
+      #sidebar-wrapper {
+        width: 75px;
+
+        .logo {
+          $width: 18px;
+          $height: 22px;
+
+          display: inline-block;
+          width: $width;
+          height: $height;
+          background: asset_url('logo-small.png');
+          background-size: $width $height;
+
+          margin-bottom: -7px;
+          
+          position: relative;
+          left: 7px;
+        }
+
+        .heading {
+          display: none;
+        }
+
+        .sidebar-nav {
+          > li:not(.sidebar-brand) {
+            a {
+              padding-left: 9px;
+            }
+
+            .caption {
+              display: none;
+            }
+          }
+        }
+      }
+
+      #page-content-wrapper {
+        .logo-link {
+          display: block;
+        }
+      }
+
+      main {
+        [ng-view],
+        footer {
+          margin-right: 75px;
+        }
+      }
+
+      .sidebar-nav {
+        width: 75px;
+      }
+    }
+  }
+}
+
+// Show second hamburger icon on small screen sizes.
+@media (max-width: 767px) {
+  #wrapper {
+    #sidebar-wrapper {
+      margin-bottom: 0;
+    }
+
+    ul.sidebar-nav {
+      > li.sidebar-item {
+        display: block;
+      }
+    }
+  }
+
+  #wrapper.toggled {
+    #sidebar-wrapper {
+      margin-bottom: -14px;
+    }
+
+    ul.sidebar-nav {
+      > li.sidebar-item {
+        display: none;
+      }
+    }
+  }
+}
+
+// Hide second hamburger icon when screen is big.
+@media (min-width: 768px) {
+  #wrapper {
+    .sidebar-toggle-small {
+      display: none;
+    }
+  }
+}
+
