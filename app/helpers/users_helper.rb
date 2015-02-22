@@ -43,6 +43,8 @@ module UsersHelper
   # Render methods
 
   def render_user(user)
+    return nil unless user
+
     accounts = user
       .roles
       .includes(:account)
