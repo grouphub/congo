@@ -34,6 +34,9 @@ Rails.application.routes.draw do
     # Invitations
     '/admin/invitations',
 
+    # Features
+    '/admin/features',
+
     # Account home
     '/accounts/:slug/:role',
     '/accounts/:slug/:role/home',
@@ -68,6 +71,7 @@ Rails.application.routes.draw do
         resources :invitations
         resources :accounts
         resources :groups
+        resources :features
       end
 
       resources :accounts do

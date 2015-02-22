@@ -44,6 +44,7 @@
 //= require controllers/admin-carriers-show-controller
 //= require controllers/admin-groups-index-controller
 //= require controllers/admin-invitations-index-controller
+//= require controllers/admin-features-index-controller
 //= require controllers/applications-index-controller
 //= require controllers/applications-new-controller
 //= require controllers/applications-show-controller

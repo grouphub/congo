@@ -99,6 +99,14 @@
     </a>
   </li>
 
+  <!-- Admin Features -->
+  <li class="sidebar-item" ng-if="inAdminPanel()">
+    <a ng-href="/admin/features" title="Features">
+      <i class="fa fa-trophy"></i>
+      <span class="caption">Features</span>
+    </a>
+  </li>
+
   <li class="sidebar-item" ng-if="currentRole() === 'customer'">
     <a ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/applications" title="Applications">
       <i class="fa fa-file-text"></i>

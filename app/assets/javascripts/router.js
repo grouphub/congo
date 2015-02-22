@@ -53,9 +53,14 @@ congoApp.config([
         templateUrl: congo.assets['admin/groups/index.html'],
         controller: 'AdminGroupsIndexController'
       })
+      .when('/admin/features', {
+        templateUrl: congo.assets['admin/features/index.html'],
+        controller: 'AdminFeaturesIndexController'
+      })
   }
 ]);
 
+// Other routes
 congoApp.config([
   '$routeProvider',
   function ($routeProvider) {

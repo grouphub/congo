@@ -30,5 +30,17 @@ class Account < ActiveRecord::Base
     current_time.month > created_at_month &&
       current_time.day >= created_at_day
   end
+
+  def enabled_features
+    @enabled_features ||= Feature.all.to_a.select { |feature|
+      feature.enabled_for_all? || feature.account_slugs.include?(self.slug)
+    }
+  end
+
+  def feature_enabled?(feature_name)
+    self.enabled_features.any? { |feature|
+      feature.name == feature_name
+    }
+  end
 end
 

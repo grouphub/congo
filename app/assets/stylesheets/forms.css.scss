@@ -43,3 +43,7 @@
   margin-bottom: 10px;
 }
 
+// Make sure textareas only resize vertically.
+textarea {
+  resize: vertical;
+}
