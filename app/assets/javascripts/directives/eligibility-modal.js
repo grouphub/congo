@@ -60,7 +60,7 @@ congoApp.directive('eligibilityModal', [
               function (response) {
                 var error = (response.data && response.data.error) ?
                   response.data.error :
-                  'An error occurred. Please try submitting the form again.'
+                  'An error occurred. Please try submitting the form again.';
 
                 $scope.settings.error = error;
               }

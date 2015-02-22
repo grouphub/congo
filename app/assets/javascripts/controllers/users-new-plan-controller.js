@@ -26,7 +26,11 @@ congoApp.controller('UsersNewPlanController', [
           $location.path('/users/new_account');
         })
         .error(function (data, status, headers, config) {
-          flashesFactory.add('danger', 'There was a problem setting up your plan.');
+          var error = (response.data && response.data.error) ?
+            response.data.error :
+            'There was a problem setting up your plan.';
+
+          flashesFactory.add('danger', error);
         });
     };
 
