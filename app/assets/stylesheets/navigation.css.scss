@@ -63,6 +63,11 @@ header {
   left: 0;
   right: 0;
 
+  // Logo positioning for large screens when sidebar is hidden.
+  .logo {
+    margin-top: 6px;
+  }
+
   ul.nav {
     height: 50px;
   }
