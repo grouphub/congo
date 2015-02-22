@@ -19,7 +19,7 @@ class Api::V1::Admin::FeaturesController < ApplicationController
 
     feature.name = params[:name]
     feature.description = params[:description]
-    feature.account_ids = params[:account_ids].map(&:to_i)
+    feature.account_slugs = params[:account_slugs]
     feature.enabled_for_all = params[:enabled_for_all]
 
     feature.save!
@@ -40,7 +40,7 @@ class Api::V1::Admin::FeaturesController < ApplicationController
 
     feature.name = params[:name]
     feature.description = params[:description]
-    feature.account_ids = params[:account_ids].map(&:to_i)
+    feature.account_slugs = params[:account_slugs]
     feature.enabled_for_all = params[:enabled_for_all]
 
     feature.save!

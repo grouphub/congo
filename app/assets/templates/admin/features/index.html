@@ -6,7 +6,7 @@
       <tr>
         <th>Name</th>
         <th>Description</th>
-        <th>Account IDs</th>
+        <th>Account Slugs</th>
         <th>Actions</th>
       </tr>
     </thead>
@@ -24,7 +24,7 @@
         <td>
           <form ng-submit="updateFeatureAt($index)">
             <div class="form-group">
-              <input class="form-control" type="text" ng-model="feature.account_ids" ng-disabled="feature.enabled_for_all" ng-list>
+              <textarea class="form-control" ng-model="feature.account_slugs" ng-disabled="feature.enabled_for_all" ng-list></textarea>
             </div>
 
             <div class="checkbox">
@@ -58,8 +58,8 @@
     </div>
 
     <div class="form-group">
-      <label for="account_ids">Account IDs</label>
-      <input class="form-control" id="account_ids" placeholder="Enter account IDs&hellip;" ng-model="feature.account_ids" ng-disabled="feature.enabled_for_all">
+      <label for="account_slugs">Account Slugs</label>
+      <input class="form-control" id="account_slugs" placeholder="Enter account slugs&hellip;" ng-model="feature.account_slugs" ng-disabled="feature.enabled_for_all">
     </div>
 
     <div class="checkbox">

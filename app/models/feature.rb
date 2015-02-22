@@ -1,17 +1,17 @@
 class Feature < ActiveRecord::Base
 
-  after_create :ensure_account_ids
+  after_create :ensure_account_slugs
 
-  def ensure_account_ids
-    self.account_ids ||= []
+  def ensure_account_slugs
+    self.account_slugs ||= []
   end
 
-  def account_ids=(list)
-    self.account_id_data = list.to_json
+  def account_slugs=(list)
+    self.account_slug_data = (list || []).join(', ')
   end
 
-  def account_ids
-    JSON.load(self.account_id_data)
+  def account_slugs
+    (self.account_slug_data || '').split(', ')
   end
 
 end

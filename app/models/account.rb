@@ -33,7 +33,7 @@ class Account < ActiveRecord::Base
 
   def enabled_features
     @enabled_features ||= Feature.all.to_a.select { |feature|
-      feature.enabled_for_all? || feature.account_ids.include?(self.id)
+      feature.enabled_for_all? || feature.account_slugs.include?(self.slug)
     }
   end
 

@@ -170,7 +170,7 @@ ActiveRecord::Schema.define(version: 20150222080715) do
     t.string   "name"
     t.text     "description"
     t.boolean  "enabled_for_all"
-    t.text     "account_id_data"
+    t.text     "account_slug_data"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

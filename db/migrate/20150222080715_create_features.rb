@@ -4,7 +4,7 @@ class CreateFeatures < ActiveRecord::Migration
       t.string :name
       t.text :description
       t.boolean :enabled_for_all
-      t.text :account_id_data
+      t.text :account_slug_data
 
       t.timestamps
     end
