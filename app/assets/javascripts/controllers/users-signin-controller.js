@@ -4,9 +4,11 @@ congoApp.controller('UsersSigninController', [
   '$scope','$http', '$location', 'flashesFactory',
   function ($scope, $http, $location, flashesFactory) {
     $scope.submit = function () {
-       $scope.$broadcast('show-errors-check-validity');
+      $scope.$broadcast('show-errors-check-validity');
 
-      if ($scope.signinForm.$invalid) { return; }
+      if ($scope.signinForm.$invalid) {
+        return;
+      }
 
       $http
         .post('/api/v1/users/signin.json', {
@@ -14,9 +16,30 @@ congoApp.controller('UsersSigninController', [
           password: $scope.password
         })
         .success(function (data, status, headers, config) {
+          var accounts;
+          var account;
+
           congo.currentUser = data.user;
 
-          $location.path('/');
+          accounts = $scope.accounts();
+
+          if (accounts) {
+            account = accounts[0];
+
+            if (account) {
+              if (account.slug === 'admin') {
+                $location
+                  .path('/admin')
+                  .replace();;
+              } else {
+                $location
+                  .path('/accounts/' + account.slug + '/' + account.role.name)
+                  .replace();;
+              }
+
+              return;
+            }
+          }
 
           flashesFactory.add('success', 'Welcome back, ' + congo.currentUser.first_name + ' ' + congo.currentUser.last_name + '!');
         })
