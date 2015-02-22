@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 gem 'rails', github: 'rails/rails', branch: '4-1-stable'
 
 gem 'pg'
-gem 'sprockets-rails', github: 'rails/sprockets-rails', branch: '2-1-stable'
+gem 'sprockets-rails', github: 'rails/sprockets-rails', branch: '2.x'
 
 gem 'sass-rails', github: 'rails/sass-rails'
 
@@ -27,6 +27,7 @@ gem 'rack-livereload', group: :development
 
 gem 'clockwork'
 gem 'delayed_job_active_record'
+gem 'daemons'
 gem 'stripe'
 
 gem 'pokitdok-ruby', github: 'pokitdok/pokitdok-ruby'
@@ -49,5 +50,5 @@ group :production do
   gem 'rails_12factor'
 end
 
-ruby '2.1.4'
+ruby '2.1.5'
 
