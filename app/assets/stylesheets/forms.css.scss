@@ -1,3 +1,5 @@
+@import 'mixins.css.scss';
+
 //Form error message style
 .form-group .help-block {
   display: none;
@@ -46,4 +48,15 @@
 // Make sure textareas only resize vertically.
 textarea {
   resize: vertical;
+}
+
+@media (min-width: 768px) {
+  form[name=signinForm],
+  form[name=userForm],
+  form[name=billingForm],
+  form[name=accountForm],
+  form[name=memberForm]
+  {
+    @include faux-modal();
+  }
 }

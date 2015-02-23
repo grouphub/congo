@@ -1,0 +1,17 @@
+@mixin faux-modal {
+  margin-left: 20%;
+  margin-right: 20%;
+
+  border: 1px solid #ccc;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-top: 15px;
+  padding-bottom: 15px;
+  background-color: white;
+  border-radius: 4px;
+
+  -webkit-box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.2);
+     -moz-box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.2);
+          box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.2);
+}
+
