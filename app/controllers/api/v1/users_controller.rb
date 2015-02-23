@@ -1,4 +1,5 @@
 class Api::V1::UsersController < ApplicationController
+  include ApplicationHelper
   include UsersHelper
   include CustomerCreatable
   include BrokerCreatable
@@ -45,7 +46,12 @@ class Api::V1::UsersController < ApplicationController
 
     plan_name = params[:plan_name]
 
-    if invite_code
+    if plan_name
+      unless invite_code
+        error_response("#{invite_code} is not a valid invite code")
+        return
+      end
+
       invitation = Invitation.where(uuid: invite_code).first
 
       if !invitation
