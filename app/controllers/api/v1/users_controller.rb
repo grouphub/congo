@@ -42,7 +42,8 @@ class Api::V1::UsersController < ApplicationController
     account_properties = params[:account_properties] || {}
     account_name = account_properties['name']
     account_tagline = account_properties['tagline']
-    account = user.roles.first.account
+    role = user.roles.first
+    account = nil
 
     plan_name = params[:plan_name]
 
@@ -82,11 +83,15 @@ class Api::V1::UsersController < ApplicationController
     end
 
     if account_properties
+      account = user.roles.first.account
       account.properties = (account.properties || {}).merge(account_properties)
     end
 
     user.save!
-    account.save!
+
+    if account
+      account.save!
+    end
 
     respond_to do |format|
       format.json {
