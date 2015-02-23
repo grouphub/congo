@@ -17,6 +17,10 @@ congoApp.config([
         templateUrl: congo.assets['landing.html'],
         controller: 'LandingController'
       })
+      .when('/accounts', {
+        templateUrl: congo.assets['accounts.html'],
+        controller: 'AccountsController'
+      })
   }
 ]);
 

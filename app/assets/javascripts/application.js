@@ -37,6 +37,7 @@
 //
 //= require controllers/main-controller
 //= require controllers/landing-controller
+//= require controllers/accounts-controller
 //= require controllers/home-controller
 //= require controllers/activities-index-controller
 //= require controllers/messages-index-controller
