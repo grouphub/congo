@@ -127,6 +127,13 @@
     </a>
   </li>
 
+  <li class="sidebar-item" ng-if="currentRole() === 'broker' || currentRole() === 'group_admin' || featureEnabled('eligibility_modal')">
+    <a href="#" data-toggle="modal" data-target="#eligibility-modal" title="Check Eligibility">
+      <i class="fa fa-question"></i>
+      <span class="caption">Check Eligibility</span>
+    </a>
+  </li>
+
   <!-- Admin Accounts -->
   <li class="sidebar-item" ng-if="inAdminPanel()">
     <a ng-href="/admin/accounts" title="Accounts">
