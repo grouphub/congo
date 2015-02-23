@@ -37,6 +37,7 @@ class Api::V1::UsersController < ApplicationController
   def update
     id = params[:id]
     user = User.where(id: id).first
+    is_invite = params[:is_invite]
     invite_code = params[:invite_code]
     user_properties = params[:user_properties] || {}
     account_properties = params[:account_properties] || {}
@@ -47,9 +48,9 @@ class Api::V1::UsersController < ApplicationController
 
     plan_name = params[:plan_name]
 
-    if plan_name
+    if is_invite
       unless invite_code
-        error_response("#{invite_code} is not a valid invite code")
+        error_response("An invite code must be provided or a plan must be picked")
         return
       end
 
