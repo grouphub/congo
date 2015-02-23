@@ -1,5 +1,5 @@
 <ul class="sidebar-nav">
-  <li class="pull-right">
+  <li class="pull-right" ng-if="isSignedin() && currentRole()">
     <a href="" ng-click="drawerToggle()" class="sidebar-toggle sidebar-toggle-small">
       <span class="sr-only">Toggle navigation</span>
       <span class="icon-bar"></span>
@@ -9,16 +9,46 @@
   </li>
 
   <li class="pull-right" ng-if="isSignedin() && currentRole() && !inAdminPanel()">
-    <a class="activities-menu activities-menu-small" href="/accounts/{{accountSlug()}}/{{currentRole()}}/activities">
-      <i class="forms">Activities</i>
+    <a class="activities-menu sidebar-item-small" href="/accounts/{{accountSlug()}}/{{currentRole()}}/activities">
+      <i class="fa fa-th-list"></i>
       <span class="icon-label">{{currentAccount().activity_count}}</span>
     </a>
   </li>
 
   <li class="pull-right" ng-if="isSignedin() && currentRole() && !inAdminPanel()">
-    <a class="messages-menu messages-menu-small" href="/accounts/{{accountSlug()}}/{{currentRole()}}/messages">
-      <i class="envelope">Messages</i>
+    <a class="messages-menu sidebar-item-small" href="/accounts/{{accountSlug()}}/{{currentRole()}}/messages">
+      <i class="fa fa-newspaper-o"></i>
       <span class="icon-label">{{currentAccount().message_count}}</span>
+    </a>
+  </li>
+
+  <li class="pull-right" ng-if="isSignedin() && !currentRole()">
+    <a class="sidebar-item-small" href="" ng-click="signout()" title="Sign Out">
+      <i class="fa fa-sign-out"></i>
+    </a>
+  </li>
+
+  <li class="pull-right" ng-if="isSignedin() && !currentRole()">
+    <a class="sidebar-item-small" href="/accounts" title="Accounts">
+      <i class="fa fa-building-o"></i>
+    </a>
+  </li>
+
+  <li class="pull-right" ng-if="isSignedin() && !currentRole()">
+    <a class="sidebar-item-small" href="/users/{{currentUserId()}}" title="My Profile">
+      <i class="fa fa-user"></i>
+    </a>
+  </li>
+
+  <li class="pull-right" ng-if="!isSignedin()">
+    <a class="sidebar-item-small" href="/users/signin" title="Sign In">
+      <i class="fa fa-sign-in"></i>
+    </a>
+  </li>
+
+  <li class="pull-right" ng-if="!isSignedin()">
+    <a class="sidebar-item-small" href="/users/new_manager" title="Sign Up">
+      <i class="fa fa-plus"></i>
     </a>
   </li>
 

@@ -21,24 +21,44 @@ a.sidebar-toggle-small {
   padding: 10px 15px;
 }
 
-a.messages-menu-small,
-a.activities-menu-small
-{
+a.sidebar-item-small {
   position: relative;
   padding: 10px 15px;
   width: 52px;
   height: 50px;
+  text-indent: initial;
 
-  i.envelope,
-  i.forms
-  {
+  i.fa {
     margin: 0;
-    margin-left: -19px;
-    margin-top: 6px;
+    margin-left: 5px;
+    color: #82c2fd;
   }
 
   .icon-label {
     text-indent: initial;
+  }
+}
+
+li > a.sidebar-item-small {
+  text-indent: initial;
+  height: 50px;
+  line-height: 35px;
+  padding-left: 10px;
+  padding-right: 10px;
+  width: 52px;
+
+  i.fa {
+    margin-left: 10px;
+  }
+}
+
+.messages-menu {
+  width: 52px;
+  text-align: center;
+
+  i.fa {
+    margin-left: 0 !important;
+    -webkit-font-smoothing: none;
   }
 }
 
@@ -437,6 +457,12 @@ main {
         display: none;
       }
     }
+  }
+}
+
+@media (min-width: 768px) {
+  li > a.sidebar-item-small {
+    display: none;
   }
 }
 
