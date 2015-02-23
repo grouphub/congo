@@ -23,6 +23,7 @@ congoApp.controller('UsersSigninController', [
 
           accounts = $scope.accounts();
 
+          // Redirect the user to their first account.
           if (accounts) {
             account = accounts[0];
 
