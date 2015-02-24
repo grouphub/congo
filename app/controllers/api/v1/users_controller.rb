@@ -50,7 +50,7 @@ class Api::V1::UsersController < ApplicationController
 
     if is_invite
       unless invite_code
-        error_response("An invite code must be provided or a plan must be picked")
+        error_response('An invite code must be provided or a plan must be picked.')
         return
       end
 

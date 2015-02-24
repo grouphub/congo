@@ -2,12 +2,19 @@ class Api::V1::AccountsController < ApplicationController
   include ApplicationHelper
 
   def update
-    # TODO: Bail if not signed in
+    unless current_user
+      error_response('Sorry, it appears you are not signed in.')
+      return
+    end
 
     account_slug = params[:account_id]
     account = Account.where(slug: account_slug).first
 
-    # TODO: Bail if not valid account
+    unless account
+      error_response('Could not find a matching account.')
+      return
+    end
+
     # TODO: Make sure name is unique
 
     name = params[:name]
@@ -41,12 +48,11 @@ class Api::V1::AccountsController < ApplicationController
       properties['last_name'] = last_name
     end
 
-    # TODO : Make sure plan name is valid
     if phone
       properties['phone'] = phone
     end
 
-    if plan_name
+    if Account::PLAN_NAMES.include?(plan_name)
       account.plan_name = plan_name
     end
 
