@@ -22,7 +22,7 @@ class User < ActiveRecord::Base
   end
 
   def admin?
-    User.first.roles.any? { |role| role.name == 'admin' }
+    self.roles.any? { |role| role.name == 'admin' }
   end
 end
 

@@ -75,17 +75,22 @@ class Api::V1::UsersController < ApplicationController
     if plan_name
       account = user.roles.first.account
       account.plan_name = plan_name
+      account.save!
     end
 
     if account_name
       account = user.roles.first.account
-      account.name = account_name
-      account.tagline = account_tagline
+      account.name ||= account_name
+      account.tagline ||= account_tagline
+      account.save!
     end
 
     if account_properties
       account = user.roles.first.account
       account.properties = (account.properties || {}).merge(account_properties)
+      account.name ||= account.properties['name']
+      account.tagline ||= account.properties['tagline']
+      account.save!
     end
 
     user.save!
