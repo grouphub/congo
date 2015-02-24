@@ -64,7 +64,7 @@ congoApp.config([
   }
 ]);
 
-// Other routes
+// User routes
 congoApp.config([
   '$routeProvider',
   function ($routeProvider) {
@@ -96,10 +96,22 @@ congoApp.config([
       .when('/users/:id', {
         templateUrl: congo.assets['users/show.html'],
         controller: 'UsersShowController'
-      })
+      });
+  }
+]);
+
+// Account routes
+congoApp.config([
+  '$routeProvider',
+  function ($routeProvider) {
+    $routeProvider
       .when('/accounts/:slug/:role', {
         templateUrl: congo.assets['home.html'],
         controller: 'HomeController'
+      })
+      .when('/accounts/:slug/:role/edit', {
+        templateUrl: congo.assets['accounts/edit.html'],
+        controller: 'AccountsEditController'
       })
       .when('/accounts/:slug/:role/carrier_accounts', {
         templateUrl: congo.assets['carrier_accounts/index.html'],

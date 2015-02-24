@@ -41,6 +41,7 @@ Rails.application.routes.draw do
     # Account home
     '/accounts/:slug/:role',
     '/accounts/:slug/:role/home',
+    '/accounts/:slug/:role/edit',
 
     # Account carriers
     '/accounts/:slug/:role/carrier_accounts',
