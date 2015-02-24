@@ -87,6 +87,8 @@ Rails.application.routes.draw do
           resources :eligibilities
           resources :applications
 
+          put '/', to: 'accounts#update'
+
           resources :groups do
             resources :memberships do
               post '/confirmations', to: 'memberships#send_confirmation'

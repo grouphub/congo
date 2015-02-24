@@ -55,7 +55,8 @@ textarea {
   form[name=userForm],
   form[name=billingForm],
   form[name=accountForm],
-  form[name=memberForm]
+  form[name=memberForm],
+  form[name=accountEditForm],
   {
     @include faux-modal();
   }
