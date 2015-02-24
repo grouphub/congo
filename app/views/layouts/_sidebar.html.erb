@@ -127,6 +127,13 @@
     </a>
   </li>
 
+  <li class="sidebar-item" ng-if="currentRole() === 'broker'">
+    <a ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/edit" title="Account Settings">
+      <i class="fa fa-group"></i>
+      <span class="caption">Account Settings</span>
+    </a>
+  </li>
+
   <li class="sidebar-item" ng-if="currentRole() === 'broker' || currentRole() === 'group_admin' || featureEnabled('eligibility_modal')">
     <a href="#" data-toggle="modal" data-target="#eligibility-modal" title="Check Eligibility">
       <i class="fa fa-question"></i>

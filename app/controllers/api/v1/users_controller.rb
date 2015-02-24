@@ -37,18 +37,20 @@ class Api::V1::UsersController < ApplicationController
   def update
     id = params[:id]
     user = User.where(id: id).first
+    is_invite = params[:is_invite]
     invite_code = params[:invite_code]
     user_properties = params[:user_properties] || {}
     account_properties = params[:account_properties] || {}
     account_name = account_properties['name']
     account_tagline = account_properties['tagline']
-    account = user.roles.first.account
+    role = user.roles.first
+    account = nil
 
     plan_name = params[:plan_name]
 
-    if plan_name
+    if is_invite
       unless invite_code
-        error_response("#{invite_code} is not a valid invite code")
+        error_response('An invite code must be provided or a plan must be picked.')
         return
       end
 
@@ -73,20 +75,29 @@ class Api::V1::UsersController < ApplicationController
     if plan_name
       account = user.roles.first.account
       account.plan_name = plan_name
+      account.save!
     end
 
     if account_name
       account = user.roles.first.account
-      account.name = account_name
-      account.tagline = account_tagline
+      account.name ||= account_name
+      account.tagline ||= account_tagline
+      account.save!
     end
 
     if account_properties
+      account = user.roles.first.account
       account.properties = (account.properties || {}).merge(account_properties)
+      account.name ||= account.properties['name']
+      account.tagline ||= account.properties['tagline']
+      account.save!
     end
 
     user.save!
-    account.save!
+
+    if account
+      account.save!
+    end
 
     respond_to do |format|
       format.json {

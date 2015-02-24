@@ -8,4 +8,3 @@ congoApp.controller('AccountsController', [
   }
 ]);
 
-

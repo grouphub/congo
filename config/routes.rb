@@ -41,6 +41,7 @@ Rails.application.routes.draw do
     # Account home
     '/accounts/:slug/:role',
     '/accounts/:slug/:role/home',
+    '/accounts/:slug/:role/edit',
 
     # Account carriers
     '/accounts/:slug/:role/carrier_accounts',
@@ -85,6 +86,8 @@ Rails.application.routes.draw do
           resources :benefit_plans
           resources :eligibilities
           resources :applications
+
+          put '/', to: 'accounts#update'
 
           resources :groups do
             resources :memberships do

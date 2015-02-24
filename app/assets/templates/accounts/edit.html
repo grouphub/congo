@@ -1,0 +1,30 @@
+<div class="col-md-12">
+  <form name="accountEditForm" ng-submit="submit()">
+    <h1>Account Settings</h1>
+
+    <properties:form x-elements="{{elements}}" x-data="{{data}}"></properties:form>
+
+    <div class="form-group">
+      <label class="control-label">Plan Type</label><br>
+
+      <label class="radio-inline">
+        <input type="radio" name="plan_type" value="free" ng-model="planName"> Free
+      </label>
+
+      <label class="radio-inline">
+        <input type="radio" name="plan_type" value="basic" ng-model="planName"> Basic
+      </label>
+
+      <label class="radio-inline">
+        <input type="radio" name="plan_type" value="standard" ng-model="planName"> Standard
+      </label>
+
+      <label class="radio-inline">
+        <input type="radio" name="plan_type" value="premiere" ng-model="planName"> Premiere
+      </label>
+    </div>
+
+    <input type="submit" class="btn btn-primary" value="Update">
+  </form>
+</div>
+

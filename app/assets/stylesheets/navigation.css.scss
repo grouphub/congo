@@ -228,9 +228,10 @@ header {
     text-decoration: none;
     color: #999999;
 
-    i {
+    i.fa {
       margin-left: -20px;
       margin-right: 12px;
+      min-width: 35px;
     }
   }
 

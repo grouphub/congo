@@ -20,6 +20,7 @@ congoApp.controller('UsersNewPlanController', [
       $http
         .put('/api/v1/users/' + congo.currentUser.id + '.json', {
           plan_name: 'premier',
+          is_invite: true,
           invite_code: $scope.invitation
         })
         .success(function (data, status, headers, config) {
