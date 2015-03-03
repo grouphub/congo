@@ -1,8 +1,9 @@
 .jumbotron-splash {
 	color: #fff;
-	text-shadow: 1px 1px rgba(76, 76, 154, 0.44);
+	text-shadow: 1px 2px rgba(76, 112, 154, 0.4);
 	padding: 0;
-	background: #0b83dd;
+	background: linear-gradient(#50b4ff, #035898);
+	
 	.form-control {
 		border-radius: 2px !important;
 	}
@@ -11,11 +12,11 @@
 			padding: 0 40px 15px 40px;
 			h1 {
 				line-height: 1;
-				font-size: 47px;
+				font-size: 55px;
 			}
 			h2 {
 				line-height: 1.1;
-				font-size: 22px;
+				font-size: 27px;
 				color: #bcdff7;
 				margin-top: 0px;
 				margin-bottom: 25px;
@@ -24,13 +25,12 @@
 		.form-splash {
 			margin-bottom: 20px;
 			.form-group {
-				margin-top: -15px;
+				margin-top: -10px;
 				margin-bottom: 0;
 			}
 		}
 		.btn-splash {
-			margin-top: -15px;
-			margin-left: 3px;
+			margin-top: -10px;
 			font-size: 16px;
 			background-color: #85c51e;
 			color: #fff;
