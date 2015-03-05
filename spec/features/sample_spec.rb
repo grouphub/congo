@@ -51,7 +51,45 @@ describe 'Authentication', js: true do
   end
 
   describe 'as a broker' do
-    it 'allows a broker to sign in and out'
+    it 'allows a broker to sign in and out' do
+      account = Account.create \
+        name: 'First Account',
+        tagline: '#1 Account',
+        plan_name: 'basic'
+
+      user = User.create \
+        first_name: 'Barry',
+        last_name: 'Broker',
+        email: 'barry@broker.com',
+        password: 'barry'
+
+      Role.create \
+        user_id: user.id,
+        account_id: account.id,
+        name: 'broker'
+
+      visit '/'
+
+      all('a', text: 'Sign In').first.click
+
+      expect(page).to have_content('Email')
+
+      fill_in 'Email', with: 'barry@broker.com'
+      fill_in 'Password', with: 'barry'
+
+      all('button', text: 'Sign In').first.click
+
+      expect(page).to have_content('Broker Dashboard: First Account')
+
+      all('a', text: 'Barry').first.click
+
+      expect(page).to have_content('Sign Out')
+
+      all('a', text: 'Sign Out').first.click
+
+      expect(page).to have_content('You have signed out.')
+      expect(page).to have_content('The next generation')
+    end
 
     it 'allows a broker to sign up' do
       page.driver.browser.manage.window.resize_to(1024, 768)
@@ -129,7 +167,7 @@ describe 'Authentication', js: true do
         expect(tds.length).to eq(4)
         expect(tds[1].text).to eq('First Invitation')
 
-        expect(invitation_code).to match(/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/)
+        expect(invitation_code).to be_a_uuid
       end
 
       admin_signout!
@@ -151,8 +189,6 @@ describe 'Authentication', js: true do
       fill_in 'Invitation Code', with: invitation_code
 
       all('input[type=submit]').first.click
-
-      page.execute_script "window.scrollBy(0, -10000)"
 
       expect(page).to have_content('Create Account')
 
