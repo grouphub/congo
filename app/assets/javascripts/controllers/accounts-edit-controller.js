@@ -26,7 +26,11 @@ congoApp.controller('AccountsEditController', [
           congo.currentUser = data.user;
         })
         .error(function (data, status, headers, config) {
-          debugger;
+          var error = (data && data.error) ?
+            data.error :
+            'There was a problem setting up your plan.';
+
+          flashesFactory.add('danger', error);
         })
     };
 

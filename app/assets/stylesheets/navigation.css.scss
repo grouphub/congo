@@ -229,7 +229,7 @@ header {
     color: #999999;
 
     i.fa {
-      margin-left: -20px;
+      margin-left: 10px;
       margin-right: 12px;
       min-width: 35px;
     }
@@ -406,6 +406,15 @@ main {
         }
 
         .sidebar-nav {
+          .logo {
+            position: relative;
+            left: 12px;
+          }
+
+          .sidebar-item a {
+            margin-left: -30px;
+          }
+
           > li:not(.sidebar-brand) {
             a {
               padding-left: 9px;
@@ -449,6 +458,18 @@ main {
       > li.sidebar-item {
         display: block;
       }
+
+      > li.sidebar-item a {
+        text-indent: 6px;
+
+        i {
+          margin-right: 0;
+        }
+      }
+
+      > li.sidebar-item a.heading {
+        text-indent: 20px;
+      }
     }
   }
 
@@ -479,6 +500,26 @@ main {
     a.activities-menu-small
     {
       display: none;
+    }
+  }
+}
+
+@media (min-width: 901px) {
+  #wrapper {
+    #sidebar-wrapper {
+      ul.sidebar-nav {
+        > li.sidebar-item {
+          text-indent: 6px;
+
+          i {
+            margin-right: 0;
+          }
+        }
+
+        > li.sidebar-item .heading {
+          text-indent: 20px;
+        }
+      }
     }
   }
 }
