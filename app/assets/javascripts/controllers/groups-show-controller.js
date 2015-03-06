@@ -210,7 +210,7 @@ congoApp.controller('GroupsShowController', [
     $scope.reviewApplication = function (application) {
       $('#review-application-modal').modal('show');
 
-      $scope.vent.emit('review-application', application);
+      $scope.vent.emit('review-application', application, $scope.customerMemberships);
     };
 
     $scope.showApplicationStatus = function (application) {

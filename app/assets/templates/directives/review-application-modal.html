@@ -12,57 +12,56 @@
 
           <dl class="dl-horizontal">
             <dt>First Name</dt>
-            <dd>{{application.properties.first_name}}</dd>
+            <dd>{{properties.first_name}}</dd>
 
             <dt>Middle Name</dt>
-            <dd>{{application.properties.middle_name}}</dd>
+            <dd>{{properties.middle_name}}</dd>
 
             <dt>Last Name</dt>
-            <dd>{{application.properties.last_name}}</dd>
+            <dd>{{properties.last_name}}</dd>
 
             <dt>Sex</dt>
-            <dd>{{application.properties.sex_indicate}}</dd>
+            <dd>{{properties.sex_indicate}}</dd>
 
             <dt>Social Security Number</dt>
-            <dd>{{application.properties.sex_indicate}}</dd>
+            <dd>{{properties.sex_indicate}}</dd>
 
             <dt>Date of Birth</dt>
-            <dd>{{application.properties.date_of_birth}}</dd>
+            <dd>{{properties.date_of_birth}}</dd>
           </dl>
 
           <h2>Contact Information</h2>
 
           <dl class="dl-horizontal">
             <dt>Street Address</dt>
-            <dd>{{application.properties.street_address}}</dd>
+            <dd>{{properties.street_address}}</dd>
 
             <dt>Apt. #</dt>
-            <dd>{{application.properties.apartment_number}}</dd>
+            <dd>{{properties.apartment_number}}</dd>
 
             <dt>City</dt>
-            <dd>{{application.properties.city}}</dd>
+            <dd>{{properties.city}}</dd>
 
             <dt>State</dt>
-            <dd>{{application.properties.state}}</dd>
+            <dd>{{properties.state}}</dd>
 
             <dt>ZIP</dt>
-            <dd>{{application.properties.zip}}</dd>
+            <dd>{{properties.zip}}</dd>
 
             <dt>County</dt>
-            <dd>{{application.properties.county}}</dd>
+            <dd>{{properties.county}}</dd>
 
             <dt>Phone</dt>
-            <dd>{{application.properties.phone}}</dd>
+            <dd>{{properties.phone}}</dd>
 
             <dt>Other Phone</dt>
-            <dd>{{application.properties.other_phone}}</dd>
+            <dd>{{properties.other_phone}}</dd>
           </dl>
         </div>
       </div>
 
       <div class="modal-footer">
-        <input type="submit" class="btn btn-primary" value="Approve Application">
-        <input type="button" class="btn btn-danger" value="Reject Application">
+        <input type="submit" class="btn btn-primary" value="Approve Application" ng-click="approveApplication(application)">
       </div>
     </div>
   </div>
