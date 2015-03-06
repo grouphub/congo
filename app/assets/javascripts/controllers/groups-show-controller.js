@@ -214,7 +214,9 @@ congoApp.controller('GroupsShowController', [
     };
 
     $scope.showApplicationStatus = function (application) {
+      $('#enrollment-status-modal').modal('show');
 
+      $scope.vent.emit('enrollment-status', application);
     };
 
     $scope.addBenefitPlan = function (benefitPlan) {

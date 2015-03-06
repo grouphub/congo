@@ -99,6 +99,8 @@ class Api::V1::ApplicationsController < ApplicationController
         approved_on: DateTime.now
     end
 
+    # TODO: Add PokitDok API here
+    # TODO: Return activity log from PokitDok and show it in the eligibility status modal
     if submitted_by_id
       application.update_attributes \
         submitted_by_id: submitted_by_id,

@@ -93,6 +93,7 @@
 //= require directives/properties-form
 //= require directives/eligibility-modal
 //= require directives/review-application-modal
+//= require directives/enrollment-status-modal
 //
 //  --------------
 //  Test Libraries

@@ -10,7 +10,6 @@ congoApp.directive('reviewApplicationModal', [
       templateUrl: congo.assets['directives/review-application-modal.html'],
       link: function ($scope, $element, $attrs) {
         $scope.approveApplication = function (application) {
-          console.log(application);
           var data = {
             approved_by_id: $scope.userId()
           }
@@ -54,5 +53,4 @@ congoApp.directive('reviewApplicationModal', [
     };
   }
 ]);
-
 
