@@ -1,99 +1,22 @@
 require 'rails_helper'
 
 describe 'Authentication', js: true do
-  def admin_signin!
-    account = Account.create \
-      name: 'Admin',
-      tagline: 'GroupHub administrative account',
-      plan_name: 'admin'
-
-    user = User.create \
-      first_name: 'GroupHub',
-      last_name: 'Admin',
-      email: 'admin@grouphub.io',
-      password: 'testtest'
-
-    Role.create \
-      user_id: user.id,
-      account_id: account.id,
-      name: 'admin'
-
-    visit '/'
-
-    all('a', text: 'Sign In').first.click
-
-    expect(page).to have_content('Email')
-
-    fill_in 'Email', with: 'admin@grouphub.io'
-    fill_in 'Password', with: 'testtest'
-
-    all('button', text: 'Sign In').first.click
-
-    expect(page).to have_content('Administrator Dashboard')
-  end
-
-  def admin_signout!
-    all('a', text: 'GroupHub').first.click
-
-    expect(page).to have_content('Sign Out')
-
-    all('a', text: 'Sign Out').first.click
-
-    expect(page).to have_content('You have signed out.')
-    expect(page).to have_content('The next generation')
-  end
-
   describe 'as an administrator' do
     it 'allows an administrator to sign in and out' do
-      admin_signin!
-      admin_signout!
+      create_admin
+      signin_admin
+      signout_admin
     end
   end
 
   describe 'as a broker' do
     it 'allows a broker to sign in and out' do
-      account = Account.create \
-        name: 'First Account',
-        tagline: '#1 Account',
-        plan_name: 'basic'
-
-      user = User.create \
-        first_name: 'Barry',
-        last_name: 'Broker',
-        email: 'barry@broker.com',
-        password: 'barry'
-
-      Role.create \
-        user_id: user.id,
-        account_id: account.id,
-        name: 'broker'
-
-      visit '/'
-
-      all('a', text: 'Sign In').first.click
-
-      expect(page).to have_content('Email')
-
-      fill_in 'Email', with: 'barry@broker.com'
-      fill_in 'Password', with: 'barry'
-
-      all('button', text: 'Sign In').first.click
-
-      expect(page).to have_content('Broker Dashboard: First Account')
-
-      all('a', text: 'Barry').first.click
-
-      expect(page).to have_content('Sign Out')
-
-      all('a', text: 'Sign Out').first.click
-
-      expect(page).to have_content('You have signed out.')
-      expect(page).to have_content('The next generation')
+      create_broker
+      signin_broker
+      signout_broker
     end
 
     it 'allows a broker to sign up' do
-      page.driver.browser.manage.window.resize_to(1024, 768)
-
       visit '/'
 
       all('a', text: 'Sign Up').first.click
@@ -135,8 +58,7 @@ describe 'Authentication', js: true do
       expect(page).to have_content('Welcome, Barry Broker!')
       expect(page).to have_content('Broker Dashboard: First Account')
 
-      current_user = page.evaluate_script('window.congo.currentUser')
-
+      current_user = current_user_data
       expect(current_user['first_name']).to eq('Barry')
       expect(current_user['last_name']).to eq('Broker')
       expect(current_user['email']).to eq('barry@broker.com')
@@ -146,9 +68,8 @@ describe 'Authentication', js: true do
     end
 
     it 'allows a broker to sign up with an invitation code' do
-      page.driver.browser.manage.window.resize_to(1024, 768)
-
-      admin_signin!
+      create_admin
+      signin_admin
 
       all('a', text: 'Manage Invitations').first.click
 
@@ -170,7 +91,7 @@ describe 'Authentication', js: true do
         expect(invitation_code).to be_a_uuid
       end
 
-      admin_signout!
+      signout_admin
 
       visit '/'
 
@@ -184,7 +105,7 @@ describe 'Authentication', js: true do
 
       all('button', text: 'Add User').first.click
 
-      page.execute_script "window.scrollBy(0, 10000)"
+      scroll_to_bottom
 
       fill_in 'Invitation Code', with: invitation_code
 
@@ -204,8 +125,7 @@ describe 'Authentication', js: true do
       expect(page).to have_content('Welcome, Barry Broker!')
       expect(page).to have_content('Broker Dashboard: First Account')
 
-      current_user = page.evaluate_script('window.congo.currentUser')
-
+      current_user = current_user_data
       expect(current_user['first_name']).to eq('Barry')
       expect(current_user['last_name']).to eq('Broker')
       expect(current_user['email']).to eq('barry@broker.com')
@@ -219,8 +139,31 @@ describe 'Authentication', js: true do
     it 'allows a group admin to sign in and out'
   end
 
-  describe 'as a customer' do
-    it 'allows a customer to sign in and out'
-  end
+  # describe 'as a customer' do
+  #   it 'allows a customer to sign in and out' do
+  #     create_customer
+  #     signin_customer
+  #     signout_customer
+  #   end
+
+  #   it 'allows a customer to be invited to an account' do
+  #     create_broker
+
+  #     account = Account.first
+  #     create_group_for(account)
+
+  #     signin_broker
+
+  #     all('a', text: 'Manage Groups').first.click
+
+  #     expect(page).to have_content('Select benefits options')
+
+  #     all('a', text: 'My Group').first.click
+
+  #     expect(page).to have_content('Benefit Plans')
+
+  #     scroll_by(500)
+  #   end
+  # end
 end
 

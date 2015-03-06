@@ -9,6 +9,28 @@ congoApp.controller('ApplicationsNewController', [
     $scope.group = null;
     $scope.benefitPlan = null;
 
+    $scope.getNumber = function (number) {
+      var array = []
+      var i = 0;
+
+      for (; i < number; i++) {
+        array.push(i);
+      }
+
+      return array;
+    }
+
+    $scope.addDependent = function () {
+      $scope.form.numberOfDependents++;
+    };
+
+    $scope.form = {
+      previousCoverage: 'No',
+      parentOrLegalGuardian: 'No',
+      authorizedRepresentative: 'No',
+      numberOfDependents: 0
+    };
+
     $scope.submit = function () {
       var properties = _.reduce(
         $('#enrollment-form form').serializeArray(),

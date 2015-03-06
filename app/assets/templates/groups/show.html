@@ -119,11 +119,11 @@
                   {{application.created_at | date}}
                 </span>
 
-                <a class="btn btn-danger btn-xs disabled" href="" ng-if="application.state == 'declined'" ng-click="submitApplication(application)">Declined</a>
+                <a class="btn btn-danger btn-xs disabled" href="" ng-if="application.state == 'declined'">Declined</a>
                 <a class="btn btn-warning btn-xs disabled" href="" ng-if="application.state == 'selected'" ng-click="">Remind</a>
-                <a class="btn btn-info btn-xs" href="" ng-if="application.state == 'applied'" ng-click="approveApplication(application)">Approve</a>
+                <a class="btn btn-info btn-xs" href="" ng-if="application.state == 'applied'" ng-click="reviewApplication(application)">Review</a>
                 <a class="btn btn-primary btn-xs" href="" ng-if="application.state == 'approved'" ng-click="submitApplication(application)">Submit</a>
-                <a class="btn btn-success btn-xs disabled" href="" ng-if="application.state == 'submitted'">Submitted</a>
+                <a class="btn btn-success btn-xs" href="" ng-if="application.state == 'submitted'" ng-click="showApplicationStatus(application)">Submitted</a>
               </li>
             </ul>
           </td>
