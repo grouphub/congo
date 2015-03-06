@@ -1,0 +1,70 @@
+<div class="modal fade" id="review-application-modal" tabindex="-1" role="dialog" aria-labelledby="review-application-modal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="eligibility-modal">Review Application</h4>
+      </div>
+
+      <div class="modal-body">
+        <div class="widget review-application">
+          <h2>Primary Applicant</h2>
+
+          <dl class="dl-horizontal">
+            <dt>First Name</dt>
+            <dd>{{application.properties.first_name}}</dd>
+
+            <dt>Middle Name</dt>
+            <dd>{{application.properties.middle_name}}</dd>
+
+            <dt>Last Name</dt>
+            <dd>{{application.properties.last_name}}</dd>
+
+            <dt>Sex</dt>
+            <dd>{{application.properties.sex_indicate}}</dd>
+
+            <dt>Social Security Number</dt>
+            <dd>{{application.properties.sex_indicate}}</dd>
+
+            <dt>Date of Birth</dt>
+            <dd>{{application.properties.date_of_birth}}</dd>
+          </dl>
+
+          <h2>Contact Information</h2>
+
+          <dl class="dl-horizontal">
+            <dt>Street Address</dt>
+            <dd>{{application.properties.street_address}}</dd>
+
+            <dt>Apt. #</dt>
+            <dd>{{application.properties.apartment_number}}</dd>
+
+            <dt>City</dt>
+            <dd>{{application.properties.city}}</dd>
+
+            <dt>State</dt>
+            <dd>{{application.properties.state}}</dd>
+
+            <dt>ZIP</dt>
+            <dd>{{application.properties.zip}}</dd>
+
+            <dt>County</dt>
+            <dd>{{application.properties.county}}</dd>
+
+            <dt>Phone</dt>
+            <dd>{{application.properties.phone}}</dd>
+
+            <dt>Other Phone</dt>
+            <dd>{{application.properties.other_phone}}</dd>
+          </dl>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <input type="submit" class="btn btn-primary" value="Approve Application">
+        <input type="button" class="btn btn-danger" value="Reject Application">
+      </div>
+    </div>
+  </div>
+</div>
+

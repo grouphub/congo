@@ -92,6 +92,7 @@
 //= require directives/show-errors
 //= require directives/properties-form
 //= require directives/eligibility-modal
+//= require directives/review-application-modal
 //
 //  --------------
 //  Test Libraries
