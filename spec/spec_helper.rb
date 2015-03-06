@@ -1,5 +1,10 @@
 require 'rails_helper'
-require 'database_cleaner'
+
+RSpec::Matchers.define :be_a_uuid do
+  match do |actual|
+    actual.match(/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/)
+  end
+end
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
@@ -8,17 +13,6 @@ RSpec.configure do |config|
 
   config.mock_with :rspec do |mocks|
     mocks.verify_partial_doubles = true
-  end
-
-  config.before(:suite) do
-    DatabaseCleaner.strategy = :transaction
-    DatabaseCleaner.clean_with(:truncation)
-  end
-
-  config.around(:each) do |example|
-    DatabaseCleaner.cleaning do
-      example.run
-    end
   end
 end
 

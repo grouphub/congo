@@ -14,7 +14,9 @@ class Api::V1::UsersController < ApplicationController
     email_token = params[:email_token]
 
     if password != password_confirmation
-      # TODO: Handle this
+      # TODO: Test this
+      error_response('Password and confirmation must match.')
+      return
     end
 
     # If user came in from an email then they are a customer.

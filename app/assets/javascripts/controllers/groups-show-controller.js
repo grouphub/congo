@@ -206,32 +206,17 @@ congoApp.controller('GroupsShowController', [
         });
     };
 
-    $scope.approveApplication = function (application) {
-      var data = {
-        approved_by_id: $scope.userId()
-      }
+    // TODO: Change eligibility modal to use this format
+    $scope.reviewApplication = function (application) {
+      $('#review-application-modal').modal('show');
 
-      $http
-        .put('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/applications/' + application.id + '.json', data)
-        .success(function (data, status, headers, config) {
-          var memberships = $scope.customerMemberships();
-          var membership = _(memberships).find(function (membership) {
-            return _(membership.applications).find(function (application) {
-              return data.application.id === application.id;
-            });
-          });
+      $scope.vent.emit('review-application', application, $scope.customerMemberships);
+    };
 
-          var application = _(membership.applications).find(function (application) {
-            return data.application.id === application.id;
-          });
+    $scope.showApplicationStatus = function (application) {
+      $('#enrollment-status-modal').modal('show');
 
-          var applicationIndex = membership.applications.indexOf(application);
-
-          membership.applications[applicationIndex] = data.application;
-        })
-        .error(function (data, status, headers, config) {
-          debugger
-        });
+      $scope.vent.emit('enrollment-status', application);
     };
 
     $scope.addBenefitPlan = function (benefitPlan) {

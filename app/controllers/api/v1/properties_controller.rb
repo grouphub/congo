@@ -95,13 +95,13 @@ class Api::V1::PropertiesController < ApplicationController
               type: 'text',
               name: 'first_name',
               title: 'Account Contact',
-              placeholder: 'Account Contact'
+              placeholder: 'Account Contact First Name'
             },
             {
               type: 'text',
               name: 'last_name',
               title: 'Last Name',
-              placeholder: 'Account Contact'
+              placeholder: 'Account Contact Last Name'
             },
             {
               type: 'text',

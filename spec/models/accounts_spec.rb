@@ -117,7 +117,8 @@ describe Account do
         billing_day: sign_up_date.day
 
       Payment.create! \
-        account_id: account.id
+        account_id: account.id,
+        created_at: sign_up_date
 
       expect(account.needs_to_pay?).to eq true
     end

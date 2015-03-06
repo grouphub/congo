@@ -41,9 +41,11 @@ group :development do
   gem 'letter_opener'
 end
 
-group :test do
+group :development, :test do
   gem 'rspec-rails'
   gem 'database_cleaner'
+  gem 'capybara'
+  gem 'selenium-webdriver'
 end
 
 group :production do
