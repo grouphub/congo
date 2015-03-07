@@ -1,15 +1,9 @@
 require 'rails_helper'
 
 describe 'Authentication', js: true do
-  describe 'as an administrator' do
-    it 'allows an administrator to sign in and out' do
-      create_admin
-      signin_admin
-      signout_admin
-    end
-  end
 
   describe 'as a broker' do
+
     it 'allows a broker to sign in and out' do
       create_broker
       signin_broker
@@ -133,37 +127,10 @@ describe 'Authentication', js: true do
       expect(current_user['is_admin']).to be_falsey
       expect(current_user['accounts'].length).to eq(1)
     end
+
+    it 'prevents a broker from creating a new account with an existing email address'
+    it 'allows a broker to create a second broker account'
   end
 
-  describe 'as a group admin' do
-    it 'allows a group admin to sign in and out'
-  end
-
-  # describe 'as a customer' do
-  #   it 'allows a customer to sign in and out' do
-  #     create_customer
-  #     signin_customer
-  #     signout_customer
-  #   end
-
-  #   it 'allows a customer to be invited to an account' do
-  #     create_broker
-
-  #     account = Account.first
-  #     create_group_for(account)
-
-  #     signin_broker
-
-  #     all('a', text: 'Manage Groups').first.click
-
-  #     expect(page).to have_content('Select benefits options')
-
-  #     all('a', text: 'My Group').first.click
-
-  #     expect(page).to have_content('Benefit Plans')
-
-  #     scroll_by(500)
-  #   end
-  # end
 end
 

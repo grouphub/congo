@@ -141,7 +141,7 @@
 
   <hr>
 
-  <form ng-if="isGroupAdmin()" ng-submit="inviteMember()">
+  <form class="invite-member" ng-if="isGroupAdmin()" ng-submit="inviteMember()">
     <div class="form-group">
       <label for="email">Invite a new member</label>
       <input type="email" class="form-control" id="email" placeholder="Enter email&hellip;" ng-model="inviteMemberFormData.email" auto-focus>
@@ -184,13 +184,13 @@
   </div>
 
 
-  <form ng-if="currentRole() === 'broker'" ng-submit="inviteGroupAdmin()">
+  <form class="invite-group-admin" ng-if="currentRole() === 'broker'" ng-submit="inviteGroupAdmin()">
     <div class="form-group">
       <label for="email">Invite a new group admin</label>
       <input type="email" class="form-control" id="email" placeholder="Enter email&hellip;" ng-model="inviteGroupAdminFormData.email">
     </div>
 
-    <input type="submit" class="btn btn-default" value="Invite a Group Member">
+    <input type="submit" class="btn btn-default" value="Invite a Group Admin">
   </form>
 </div>
 

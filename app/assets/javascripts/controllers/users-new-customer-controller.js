@@ -1,8 +1,8 @@
 var congoApp = angular.module('congoApp');
 
 congoApp.controller('UsersNewCustomerController', [
-  '$scope', '$http', '$location',
-  function ($scope, $http, $location) {
+  '$scope', '$http', '$location', 'flashesFactory',
+  function ($scope, $http, $location, flashesFactory) {
     var emailToken = $location.search().email_token;
 
     congo.currentUser = null;
@@ -53,7 +53,11 @@ congoApp.controller('UsersNewCustomerController', [
         .success(function (data, status, headers, config) {
           congo.currentUser = data.user;
 
-          $location.path('/');
+          account = congo.currentUser.accounts[0];
+
+          $location.path('/accounts/' + account.slug + '/' + account.role.name);
+
+          flashesFactory.add('success', 'Welcome, ' + congo.currentUser.first_name + ' ' + congo.currentUser.last_name + '!');
         })
         .error(function (data, status, headers, config) {
           debugger
