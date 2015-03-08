@@ -57,6 +57,7 @@ textarea {
   form[name=accountForm],
   form[name=memberForm],
   form[name=accountEditForm],
+  .existing-account,
   {
     @include faux-modal();
   }
