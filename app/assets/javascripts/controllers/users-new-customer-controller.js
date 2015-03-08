@@ -8,10 +8,9 @@ congoApp.controller('UsersNewCustomerController', [
     congo.currentUser = null;
 
     $scope.signin = function () {
-
       $scope.$broadcast('show-errors-check-validity');
 
-      if ($scope.memberForm.$invalid) {
+      if ($scope.existingAccountForm.$invalid) {
         return;
       }
 
@@ -27,7 +26,11 @@ congoApp.controller('UsersNewCustomerController', [
         .success(function (data, status, headers, config) {
           congo.currentUser = data.user;
 
-          $location.path('/');
+          account = _(congo.currentUser.accounts).last();
+
+          $location.path('/accounts/' + account.slug + '/' + account.role.name);
+
+          flashesFactory.add('success', 'Welcome, ' + congo.currentUser.first_name + ' ' + congo.currentUser.last_name + '!');
         })
         .error(function (data, status, headers, config) {
           debugger
@@ -53,7 +56,7 @@ congoApp.controller('UsersNewCustomerController', [
         .success(function (data, status, headers, config) {
           congo.currentUser = data.user;
 
-          account = congo.currentUser.accounts[0];
+          account = _(congo.currentUser.accounts).last();
 
           $location.path('/accounts/' + account.slug + '/' + account.role.name);
 

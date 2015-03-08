@@ -11,6 +11,9 @@ describe 'Authentication', js: true do
     end
 
     it 'allows a customer to be invited to an account' do
+      # Empty any emails
+      ActionMailer::Base.deliveries = []
+
       create_broker
 
       account = Account.first
@@ -49,13 +52,15 @@ describe 'Authentication', js: true do
 
       expect(page).to have_content('Member Activation')
 
-      fill_in 'First Name', with: 'Alice'
-      fill_in 'Last Name', with: 'Foo'
-      fill_in 'Email', with: 'alice@first-account.com'
-      fill_in 'Password', with: 'testtest'
-      fill_in 'Confirm Password', with: 'testtest'
+      within 'form.member' do
+        fill_in 'First Name', with: 'Alice'
+        fill_in 'Last Name', with: 'Foo'
+        fill_in 'Email', with: 'alice@first-account.com'
+        fill_in 'Password', with: 'testtest'
+        fill_in 'Confirm Password', with: 'testtest'
 
-      all('button', text: 'Activate').first.click
+        all('button', text: 'Activate').first.click
+      end
 
       # Welcome flash should be present
       expect(page).to have_content('Welcome, Alice Foo!')
@@ -65,6 +70,9 @@ describe 'Authentication', js: true do
     end
 
     it 'allows an existing user to be invited to an account as a customer' do
+      # Empty any emails
+      ActionMailer::Base.deliveries = []
+
       create_broker
 
       account = Account.first
@@ -103,23 +111,28 @@ describe 'Authentication', js: true do
 
       expect(page).to have_content('Member Activation')
 
-      all('a', text: 'Sign In').first.click
+      scroll_to_bottom
 
-      expect(page).to have_content('Sign In')
+      within 'form.existing-account' do
+        expect(page).to have_content('Already have an account?')
 
-      fill_in 'Email', with: 'barry@broker.com'
-      fill_in 'Password', with: 'barry'
+        fill_in 'Email', with: 'barry@broker.com'
+        fill_in 'Password', with: 'barry'
 
-      all('button', text: 'Sign In').first.click
+        all('button', text: 'Sign In').first.click
+      end
 
-      # TODO: Should have a sign in flash
+      # Welcome flash should be present
+      expect(page).to have_content('Welcome, Barry Broker!')
 
-      # Barry is already a broker, so it goes to his broker page
-      expect(page).to have_content('Broker Dashboard: First Account')
+      # Dashboard heading should be present
+      expect(page).to have_content('Welcome, Barry!')
 
       all('a', text: 'Barry').first.click
 
-      # TODO: Make sure that customer account appears in list
+      # Make sure that customer account appears in list
+      expect(all('ul.dropdown-menu').first.text).to \
+        eq('Accounts First Account Broker First Account Customer My Profile Sign Out')
     end
 
     it 'prevents a customer from creating a new account with an existing email address'
