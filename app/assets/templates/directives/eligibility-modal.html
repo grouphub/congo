@@ -8,19 +8,19 @@
 
       <div class="modal-body">
         <div class="widget eligibility">
-          <form ng-if="!settings.eligibility">
-            <div class="alert alert-danger alert-dismissable" role="alert" ng-if="settings.error">
+          <form ng-if="!eligibilityFormSettings.eligibility">
+            <div class="alert alert-danger alert-dismissable" role="alert" ng-if="eligibilityFormSettings.error">
               <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
 
-              {{settings.error}}
+              {{eligibilityFormSettings.error}}
             </div>
 
             <div class="form-group">
               <label for="carrier-account">Trading Partner/Carrier</label>
               <select class="form-control" id="carrier-account" name="carrier-account" ng-model="eligibilityForm.carrier_account_id">
-                <option value="{{carrier_account.id}}" ng-repeat="carrier_account in settings.carrier_accounts">{{carrier_account.name}}</option>
+                <option value="{{carrier_account.id}}" ng-repeat="carrier_account in eligibilityFormSettings.carrier_accounts">{{carrier_account.name}}</option>
               </select>
             </div>
 
@@ -69,8 +69,8 @@
       </div>
 
       <div class="modal-footer">
-        <input ng-if="!settings.eligibility" type="submit" class="btn btn-primary" value="Check Eligibility" ng-click="submitEligibilityForm()">
-        <input ng-if="settings.eligibility" type="button" class="btn btn-danger" value="Reset" ng-click="resetEligibilityForm()">
+        <input ng-if="!eligibilityFormSettings.eligibility" type="submit" class="btn btn-primary" value="Check Eligibility" ng-click="submitEligibilityForm()">
+        <input ng-if="eligibilityFormSettings.eligibility" type="button" class="btn btn-danger" value="Reset" ng-click="resetEligibilityForm()">
       </div>
     </div>
   </div>

@@ -31,7 +31,7 @@ congoApp.directive('eligibilityModal', [
         // TODO: Using JQuery in a controller is poor style. Find a way to solve
         // this using $scope variables or a directive.
         $('body').delegate('[data-target="#eligibility-modal"]', 'click', function (e) {
-          $scope.reset();
+          $scope.resetEligibilityForm();
 
           $('#date-of-birth').datepicker();
 
@@ -40,8 +40,8 @@ congoApp.directive('eligibilityModal', [
               function (response) {
                 var carrierAccount = response.data.carrier_accounts[0];
 
-                $scope.settings.carrier_accounts = response.data.carrier_accounts;
-                $scope.form.carrier_account_id = (carrierAccount ? carrierAccount.id : undefined);
+                $scope.eligibilityFormSettings.carrier_accounts = response.data.carrier_accounts;
+                $scope.eligibilityForm.carrier_account_id = (carrierAccount ? carrierAccount.id : undefined);
               },
               function (response) {
                 debugger;
@@ -50,33 +50,33 @@ congoApp.directive('eligibilityModal', [
         });
 
         $scope.submitEligibilityForm = function () {
-          $scope.settings.error = undefined;
+          $scope.eligibilityFormSettings.error = undefined;
 
           $http.post('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/eligibilities.json', $scope.form)
             .then(
               function (response) {
-                $scope.settings.eligibility = response.data.eligibility;
+                $scope.eligibilityFormSettings.eligibility = response.data.eligibility;
               },
               function (response) {
                 var error = (response.data && response.data.error) ?
                   response.data.error :
                   'An error occurred. Please try submitting the form again.';
 
-                $scope.settings.error = error;
+                $scope.eligibilityFormSettings.error = error;
               }
             );
         };
 
         $scope.resetEligibilityForm = function () {
-          var carrierAccount = $scope.settings.carrier_accounts[0];
+          var carrierAccount = $scope.eligibilityFormSettings.carrier_accounts[0];
 
-          $scope.settings.eligibility = undefined;
+          $scope.eligibilityFormSettings.eligibility = undefined;
 
-          $scope.form.carrier_account_id = (carrierAccount ? carrierAccount.id : undefined);
-          $scope.form.member_id = '';
-          $scope.form.date_of_birth = '';
-          $scope.form.first_name = '';
-          $scope.form.last_name = '';
+          $scope.eligibilityForm.carrier_account_id = (carrierAccount ? carrierAccount.id : undefined);
+          $scope.eligibilityForm.member_id = '';
+          $scope.eligibilityForm.date_of_birth = '';
+          $scope.eligibilityForm.first_name = '';
+          $scope.eligibilityForm.last_name = '';
         };
       }
     };
