@@ -38,9 +38,9 @@
         </li>
       </ul>
     </div>
-  </div>
 
-  <hr>
+    <hr>
+  </div>
 
   <div ng-if="currentRole() === 'customer'" class="benefit-plans">
     <h1>{{group.name}}</h1>
@@ -83,9 +83,9 @@
         </tr>
       </tbody>
     </table>
-  </div>
 
-  <hr>
+    <hr>
+  </div>
 
   <div ng-if="isGroupAdmin()" class="members">
     <h2>Members</h2>
@@ -137,9 +137,9 @@
     </table>
 
     <a class="btn btn-primary" href="" ng-if="!membership.user" ng-click="sendConfirmations()">Send Invitations to All Pending Members</a>
-  </div>
 
-  <hr>
+    <hr>
+  </div>
 
   <form class="invite-member" ng-if="isGroupAdmin()" ng-submit="inviteMember()">
     <div class="form-group">
@@ -148,9 +148,9 @@
     </div>
 
     <input type="submit" class="btn btn-default" value="Invite a Member">
-  </form>
 
-  <hr>
+    <hr>
+  </form>
 
   <div ng-if="isGroupAdmin()" class="members">
     <h2>Group Admins</h2>
@@ -182,7 +182,6 @@
         </tr>
     </table>
   </div>
-
 
   <form class="invite-group-admin" ng-if="currentRole() === 'broker'" ng-submit="inviteGroupAdmin()">
     <div class="form-group">

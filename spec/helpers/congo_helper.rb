@@ -2,7 +2,7 @@ require 'rails_helper'
 
 module CongoHelper
   def create_admin
-    puts 'Creating an admin account...'.light_blue
+    test_debug 'Creating an admin account...'
 
     account = Account.create \
       name: 'Admin',
@@ -22,7 +22,7 @@ module CongoHelper
   end
 
   def signin_admin
-    puts 'Signing in as an admin...'.light_blue
+    test_debug 'Signing in as an admin...'
 
     visit '/'
 
@@ -39,7 +39,7 @@ module CongoHelper
   end
 
   def signout_admin
-    puts 'Signing out as an admin...'.light_blue
+    test_debug 'Signing out as an admin...'
 
     all('a', text: 'GroupHub').first.click
 
@@ -52,7 +52,7 @@ module CongoHelper
   end
 
   def create_broker
-    puts 'Creating a broker account...'.light_blue
+    test_debug 'Creating a broker account...'
 
     account = Account.create \
       name: 'First Account',
@@ -72,7 +72,7 @@ module CongoHelper
   end
 
   def signin_broker
-    puts 'Signing in as a broker...'.light_blue
+    test_debug 'Signing in as a broker...'
 
     visit '/'
 
@@ -89,7 +89,7 @@ module CongoHelper
   end
 
   def signout_broker
-    puts 'Signing out as a broker...'.light_blue
+    test_debug 'Signing out as a broker...'
 
     all('a', text: 'Barry').first.click
 
@@ -102,7 +102,7 @@ module CongoHelper
   end
 
   def create_customer
-    puts 'Creating a customer account...'.light_blue
+    test_debug 'Creating a customer account...'
 
     account = Account.create \
       name: 'First Account',
@@ -122,7 +122,7 @@ module CongoHelper
   end
 
   def signin_customer
-    puts 'Signing in as a customer...'.light_blue
+    test_debug 'Signing in as a customer...'
 
     visit '/'
 
@@ -139,7 +139,7 @@ module CongoHelper
   end
 
   def signout_customer
-    puts 'Signing out as a customer...'.light_blue
+    test_debug 'Signing out as a customer...'
 
     all('a', text: 'Candice').first.click
 
@@ -152,7 +152,7 @@ module CongoHelper
   end
 
   def create_group_for(account)
-    puts 'Creating a carrier, carrier account, benefit plan, group, and group benefit plan...'.light_blue
+    test_debug 'Creating a carrier, carrier account, benefit plan, group, and group benefit plan...'
 
     carrier = Carrier.create! \
       name: 'Blue Cross',

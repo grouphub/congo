@@ -1,5 +1,6 @@
 require 'rails_helper'
 
+# TODO: Finish this
 describe 'As a group admin', js: true do
 
   it 'allows a group admin to sign in and out'

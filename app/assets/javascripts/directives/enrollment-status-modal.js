@@ -14,7 +14,7 @@ congoApp.directive('enrollmentStatusModal', [
         // TODO: Change eligibility modal to use this format
         $scope.vent.on($scope, 'review-application', function (application) {
           $http
-            .get('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/applications/' + application.id + '/last_activity.json')
+            .get('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/applications/' + application.id + '/last_attempt.json')
             .success(function (response) {
               debugger;
             })

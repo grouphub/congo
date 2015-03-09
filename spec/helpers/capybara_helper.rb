@@ -2,6 +2,10 @@ require 'rails_helper'
 
 module CapybaraHelper
 
+  def test_debug(msg)
+    puts(msg.light_blue) if ENV['TEST_DEBUG']
+  end
+
   def scroll_by(y)
     page.execute_script "window.scrollBy(0, #{y})"
   end
