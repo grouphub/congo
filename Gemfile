@@ -30,6 +30,9 @@ gem 'delayed_job_active_record'
 gem 'daemons'
 gem 'stripe'
 
+# For colorizing console output in specs.
+gem 'colorize'
+
 gem 'pokitdok-ruby', github: 'pokitdok/pokitdok-ruby'
 
 gem 'newrelic_rpm'

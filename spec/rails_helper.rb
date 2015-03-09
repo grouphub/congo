@@ -5,6 +5,7 @@ require 'rspec/rails'
 require 'database_cleaner'
 require 'capybara/rails'
 require 'capybara/rspec'
+require_relative 'helpers/capybara_helper'
 require_relative 'helpers/congo_helper'
 
 ActiveRecord::Migration.maintain_test_schema!
@@ -18,6 +19,7 @@ end
 
 # Helpers
 RSpec.configure do |config|
+  config.include(CapybaraHelper)
   config.include(CongoHelper)
 end
 

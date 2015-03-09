@@ -2,6 +2,8 @@ require 'rails_helper'
 
 module CongoHelper
   def create_admin
+    puts 'Creating an admin account...'.light_blue
+
     account = Account.create \
       name: 'Admin',
       tagline: 'GroupHub administrative account',
@@ -20,6 +22,8 @@ module CongoHelper
   end
 
   def signin_admin
+    puts 'Signing in as an admin...'.light_blue
+
     visit '/'
 
     all('a', text: 'Sign In').first.click
@@ -35,6 +39,8 @@ module CongoHelper
   end
 
   def signout_admin
+    puts 'Signing out as an admin...'.light_blue
+
     all('a', text: 'GroupHub').first.click
 
     expect(page).to have_content('Sign Out')
@@ -46,6 +52,8 @@ module CongoHelper
   end
 
   def create_broker
+    puts 'Creating a broker account...'.light_blue
+
     account = Account.create \
       name: 'First Account',
       tagline: '#1 Account',
@@ -64,6 +72,8 @@ module CongoHelper
   end
 
   def signin_broker
+    puts 'Signing in as a broker...'.light_blue
+
     visit '/'
 
     all('a', text: 'Sign In').first.click
@@ -79,6 +89,8 @@ module CongoHelper
   end
 
   def signout_broker
+    puts 'Signing out as a broker...'.light_blue
+
     all('a', text: 'Barry').first.click
 
     expect(page).to have_content('Sign Out')
@@ -90,6 +102,8 @@ module CongoHelper
   end
 
   def create_customer
+    puts 'Creating a customer account...'.light_blue
+
     account = Account.create \
       name: 'First Account',
       tagline: '#1 Account',
@@ -108,6 +122,8 @@ module CongoHelper
   end
 
   def signin_customer
+    puts 'Signing in as a customer...'.light_blue
+
     visit '/'
 
     all('a', text: 'Sign In').first.click
@@ -123,6 +139,8 @@ module CongoHelper
   end
 
   def signout_customer
+    puts 'Signing out as a customer...'.light_blue
+
     all('a', text: 'Candice').first.click
 
     expect(page).to have_content('Sign Out')
@@ -134,6 +152,8 @@ module CongoHelper
   end
 
   def create_group_for(account)
+    puts 'Creating a carrier, carrier account, benefit plan, group, and group benefit plan...'.light_blue
+
     carrier = Carrier.create! \
       name: 'Blue Cross',
       properties: {
@@ -165,25 +185,9 @@ module CongoHelper
       benefit_plan_id: benefit_plan.id
   end
 
-  def scroll_by(y)
-    page.execute_script "window.scrollBy(0, #{y})"
-  end
-
-  def scroll_to_bottom
-    scroll_by(10000)
-  end
-
   def current_user_data
     page.evaluate_script('window.congo.currentUser')
   end
 
-  def wait_for(message, seconds = 5, &block)
-    (seconds * 10).times do |i|
-      break if yield
-      sleep(i * 0.1)
-    end
-
-    fail("Expected #{message}") unless yield
-  end
 end
 

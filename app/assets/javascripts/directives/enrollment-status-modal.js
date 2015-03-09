@@ -13,7 +13,14 @@ congoApp.directive('enrollmentStatusModal', [
 
         // TODO: Change eligibility modal to use this format
         $scope.vent.on($scope, 'review-application', function (application) {
-          console.log(1);
+          $http
+            .get('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/applications/' + application.id + '/last_activity.json')
+            .success(function (response) {
+              debugger;
+            })
+            .error(function (response) {
+              debugger;
+            });
         });
       }
     };

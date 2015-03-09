@@ -8,6 +8,9 @@ class CreateApplications < ActiveRecord::Migration
       # TODO: What fields do we need?
       t.text :properties_data
 
+      # Error state
+      t.boolean :errored_by_id
+
       # Customer selects
       t.integer :selected_by_id
       t.datetime :selected_on

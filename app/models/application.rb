@@ -5,8 +5,13 @@ class Application < ActiveRecord::Base
   belongs_to :benefit_plan
   belongs_to :membership
 
+  has_many :attempts
+
+  # TODO: Finish erroring
   def state
-    if self.submitted_by_id
+    if self.errored_by_id
+      'errored'
+    elsif self.submitted_by_id
       'submitted'
     elsif self.approved_by_id
       'approved'
@@ -23,6 +28,8 @@ class Application < ActiveRecord::Base
 
   def state_label
     case self.state
+    when 'errored'
+      'danger'
     when 'submitted'
       'success'
     when 'approved'

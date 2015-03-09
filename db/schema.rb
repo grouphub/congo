@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150222080715) do
+ActiveRecord::Schema.define(version: 20150309110518) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -81,6 +81,7 @@ ActiveRecord::Schema.define(version: 20150222080715) do
     t.integer  "benefit_plan_id"
     t.integer  "membership_id"
     t.text     "properties_data"
+    t.boolean  "errored_by_id"
     t.integer  "selected_by_id"
     t.datetime "selected_on"
     t.integer  "applied_by_id"
@@ -91,6 +92,15 @@ ActiveRecord::Schema.define(version: 20150222080715) do
     t.datetime "approved_on"
     t.integer  "submitted_by_id"
     t.datetime "submitted_on"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "attempts", force: true do |t|
+    t.integer  "application_id"
+    t.string   "activity_id"
+    t.text     "response_data"
+    t.text     "properties_data"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -1,10 +1,10 @@
 development:
-  client_id: 'ZzzUk4r9DMbV0F9xfuxG'
-  client_secret: 'A1IsnMpkaQrqdSR9DTVOMQwCTswUMUOhaO69yLsP'
+  client_id: 'RKH2S5iecrOcrGroqrx9'
+  client_secret: '1eEx7fl95Deqz0Y9w3StPfMT8oXoRS8XR4oU2xLH'
 
 test:
-  client_id: 'ZzzUk4r9DMbV0F9xfuxG'
-  client_secret: 'A1IsnMpkaQrqdSR9DTVOMQwCTswUMUOhaO69yLsP'
+  client_id: 'RKH2S5iecrOcrGroqrx9'
+  client_secret: '1eEx7fl95Deqz0Y9w3StPfMT8oXoRS8XR4oU2xLH'
 
 production:
   client_id: 'ZzzUk4r9DMbV0F9xfuxG'
