@@ -52,7 +52,7 @@ congoApp.directive('eligibilityModal', [
         $scope.submitEligibilityForm = function () {
           $scope.eligibilityFormSettings.error = undefined;
 
-          $http.post('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/eligibilities.json', $scope.form)
+          $http.post('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/eligibilities.json', $scope.eligibilityForm)
             .then(
               function (response) {
                 $scope.eligibilityFormSettings.eligibility = response.data.eligibility;
