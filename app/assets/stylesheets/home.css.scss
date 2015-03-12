@@ -96,6 +96,37 @@
     font-size: 17px;
   }
 }
+.footer-landing {
+  margin-top: 30px;
+  margin-bottom: 10px;
+  
+  h2 {
+    color: #bcdff7;
+    //vertically align to center
+  }
+  img {
+    margin: 5px 0 15px 0;
+  }
+  ul {
+    padding-left: 0;
+  }
+  li {
+    list-style: none;
+    text-decoration: underline;
+  }
+  a {
+    font-size: 16px;
+    color: gray;
+  }
+  .footer-links {
+    h4 {
+      margin-top: -5px;
+      color: dimgray;
+    }
+    margin-top: 10px;
+  }
+}
+
 
 @media screen and (max-width: 765px) {
   .block-2 .well-last-element {
