@@ -31,7 +31,7 @@
 // Hide the form labels for a cleaner look, except for screen readers
 #enrollment-form {
   .form-group > label {
-    display: none;
+    color: #666;
   }
 
   h4.box-title {
@@ -62,3 +62,4 @@ textarea {
     @include faux-modal();
   }
 }
+

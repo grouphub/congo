@@ -98,6 +98,7 @@ ActiveRecord::Schema.define(version: 20150309110518) do
 
   create_table "attempts", force: true do |t|
     t.integer  "application_id"
+    t.string   "error_type"
     t.string   "activity_id"
     t.text     "response_data"
     t.text     "properties_data"

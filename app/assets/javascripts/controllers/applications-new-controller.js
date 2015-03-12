@@ -21,14 +21,30 @@ congoApp.controller('ApplicationsNewController', [
     }
 
     $scope.addDependent = function () {
+      var newDependent = {
+        previousCoverage: 'No'
+      }
+
+      $scope.form.dependents.push(newDependent);
+
       $scope.form.numberOfDependents++;
+    };
+
+    $scope.removeDependent = function () {
+      $scope.form.dependents.pop();
+
+      if ($scope.form.numberOfDependents > 0) {
+        $scope.form.numberOfDependents--;
+      }
     };
 
     $scope.form = {
       previousCoverage: 'No',
       parentOrLegalGuardian: 'No',
+      parentOrLegalGuardianSameAddress: 'Yes',
       authorizedRepresentative: 'No',
-      numberOfDependents: 0
+      numberOfDependents: 0,
+      dependents: [],
     };
 
     $scope.submit = function () {

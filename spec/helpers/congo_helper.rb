@@ -189,5 +189,9 @@ module CongoHelper
     page.evaluate_script('window.congo.currentUser')
   end
 
+  def sample_application
+    JSON.load File.read("#{Rails.root}/spec/data/application.json")
+  end
+
 end
 

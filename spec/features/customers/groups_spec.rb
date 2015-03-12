@@ -120,6 +120,8 @@ describe 'As a customer', js: true do
           choose 'No'
         end
 
+        scroll_by 500, 'main'
+
         fill_in 'Street Address', with: '444 Carrie Ct.'
         fill_in 'Apt. #', with: '44'
         fill_in 'City', with: 'Cambridge'
@@ -162,64 +164,9 @@ describe 'As a customer', js: true do
       application = Application.last
       properties = application.properties
 
-      expect(properties['first_name']).to eq('Candice')
-      expect(properties['middle_name']).to eq('C.')
-      expect(properties['last_name']).to eq('Customer')
-      expect(properties['sex_indicate']).to eq('Female')
-      expect(properties['social_security_number']).to eq('444-44-4444')
-      expect(properties['date_of_birth']).to eq('04/04/1984')
-      expect(properties['street_address']).to eq('444 Carrie Ct.')
-      expect(properties['apartment_number']).to eq('44')
-      expect(properties['city']).to eq('Cambridge')
-      expect(properties['state']).to eq('CA')
-      expect(properties['zip']).to eq('44444')
-      expect(properties['county']).to eq('Contra Costa')
-      expect(properties['phone']).to eq('(444) 444-4444')
-      expect(properties['other_phone']).to eq('(444) 444-5555')
-      expect(properties['coverage_experience']).to eq('Yes')
-      expect(properties['medical_record_number']).to eq('4444444')
-      expect(properties['if_yes_most_recent_insurance_carrier']).to eq('Anthem Blue Cross')
-      expect(properties['dates_of_coverage']).to eq('04/2014-08/2014')
-      expect(properties['dependent_1_first_name']).to eq('Corwin')
-      expect(properties['dependent_1_middle_name']).to eq('C.')
-      expect(properties['dependent_1_last_name']).to eq('Customer')
-      expect(properties['dependent_1_sex_indicate']).to eq('Male')
-      expect(properties['dependent_1_medical_record_number_if_any']).to eq('4444444')
-      expect(properties['dependent_1_social_security_number']).to eq('444-44-4445')
-      expect(properties['dependent_1_date_of_birth']).to eq('04/04/2004')
-      expect(properties['dependent_1_coverage_experience']).to eq('Yes')
-      expect(properties['dependent_1_if_yes_most_recent_insurance_carrier']).to eq('Anthem Blue Cross')
-      expect(properties['dependent_1_dates_of_coverage']).to eq('04/2014-08/2014')
-      expect(properties['parent_or_legal_guardian_first_name']).to eq('Cal')
-      expect(properties['parent_or_legal_guardian_middle_name']).to eq('C.')
-      expect(properties['parent_or_legal_guardian_last_name']).to eq('Customer')
-      expect(properties['parent_or_legal_guardian_sex_indicate']).to eq('Male')
-      expect(properties['parent_or_legal_guardian_medical_record_number_if_any']).to eq('4444444')
-      expect(properties['parent_or_legal_guardian_social_security_number']).to eq('444-44-4443')
-      expect(properties['parent_or_legal_guardian_date_of_birth']).to eq('04/04/1982')
-      expect(properties['parent_or_legal_guardian_rel_to_applicant']).to eq('Spouse')
-      expect(properties['parent_or_legal_guardian_language_spoken']).to eq('Spanish')
-      expect(properties['parent_or_legal_guardian_language_read']).to eq('Spanish')
-      expect(properties['parent_or_legal_guardian_same_address']).to eq('No')
-      expect(properties['parent_or_legal_guardian_street_address']).to eq('444 Carrie Ct.')
-      expect(properties['parent_or_legal_guardian_apartment_number']).to eq('44')
-      expect(properties['parent_or_legal_guardian_city']).to eq('Cambridge')
-      expect(properties['parent_or_legal_guardian_state']).to eq('CA')
-      expect(properties['parent_or_legal_guardian_zip']).to eq('44444')
-      expect(properties['parent_or_legal_guardian_county']).to eq('Contra Costa')
-      expect(properties['parent_or_legal_guardian_phone']).to eq('(444) 444-4444')
-      expect(properties['parent_or_legal_guardian_other_phone']).to eq('(444) 444-5555')
-      expect(properties['authorized_representative_first_name']).to eq('Cal')
-      expect(properties['authorized_representative_middle_name']).to eq('C.')
-      expect(properties['authorized_representative_last_name']).to eq('Customer')
-      expect(properties['authorized_representative_street_address']).to eq('444 Carrie Ct.')
-      expect(properties['authorized_representative_apartment_number']).to eq('44')
-      expect(properties['authorized_representative_city']).to eq('Cambridge')
-      expect(properties['authorized_representative_street']).to eq('CA')
-      expect(properties['authorized_representative_zip']).to eq('44444')
-      expect(properties['authorized_representative_phone']).to eq('(444) 444-4444')
-      expect(properties['authorized_representative_primary_applicant']).to eq('Cal C. Customer')
-      expect(properties['authorized_representative_date']).to eq('03/10/2015')
+      sample_application.each do |key, value|
+        expect(properties[key]).to eq(value)
+      end
     end
 
   end
