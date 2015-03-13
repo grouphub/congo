@@ -1,4 +1,4 @@
-describe Api::V1::UsersController do
+describe Api::Internal::UsersController do
   describe 'POST /api/v1/users.json' do
     it 'creates a broker' do
       post :create, \

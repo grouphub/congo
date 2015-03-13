@@ -4,7 +4,7 @@ development:
   period_in_milliseconds: 3600000 # One hour
 
 test:
-  enabled: true
+  enabled: false
   requests_per_period: 50
   period_in_milliseconds: 3600000 # One hour
 

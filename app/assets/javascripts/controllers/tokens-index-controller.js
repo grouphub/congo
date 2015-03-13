@@ -4,7 +4,8 @@ congoApp.controller('TokensIndexController', [
   '$scope',
   '$location',
   '$http',
-  function ($scope, $location, $http) {
+  'flashesFactory',
+  function ($scope, $location, $http, flashesFactory) {
     $scope.tokens = null;
 
     $scope.form = {
@@ -21,7 +22,7 @@ congoApp.controller('TokensIndexController', [
           $scope.form.name = '';
         })
         .error(function (data, status, headers, config) {
-          debugger
+          flashesFactory.add('danger', 'There was a problem creating a new token.');
         });
     };
 
@@ -29,7 +30,7 @@ congoApp.controller('TokensIndexController', [
       var token = $scope.tokens[index];
 
       if (!token) {
-        debugger;
+        flashesFactory.add('danger', 'There was a problem deleting the token.');
       }
 
       $http
@@ -38,7 +39,7 @@ congoApp.controller('TokensIndexController', [
           $scope.tokens.splice(index, 1);
         })
         .error(function (data, status, headers, config) {
-          debugger
+          flashesFactory.add('danger', 'There was a problem deleting the token.');
         });
     };
 
@@ -50,7 +51,7 @@ congoApp.controller('TokensIndexController', [
         $scope.ready();
       })
       .error(function (data, status, headers, config) {
-        debugger
+        flashesFactory.add('danger', 'There was a problem fetching the tokens.');
       });
   }
 ]);
