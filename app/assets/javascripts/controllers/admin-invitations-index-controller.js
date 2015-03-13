@@ -10,7 +10,7 @@ congoApp.controller('AdminInvitationsIndexController', [
 
     $scope.deleteInvitation = function (invitationId) {
       $http
-        .delete('/api/v1/admin/invitations/' + invitationId + '.json')
+        .delete('/api/internal/admin/invitations/' + invitationId + '.json')
         .success(function (data, status, headers, config) {
           $scope.invitations = _($scope.invitations).reject(function (invitation) {
             return invitation.id === invitationId; 
@@ -23,7 +23,7 @@ congoApp.controller('AdminInvitationsIndexController', [
 
     $scope.newInvitation = function () {
       $http
-        .post('/api/v1/admin/invitations.json', {
+        .post('/api/internal/admin/invitations.json', {
           description: $scope.description     
         })
         .success(function (data, status, headers, config) {
@@ -36,7 +36,7 @@ congoApp.controller('AdminInvitationsIndexController', [
     };
 
     $http
-      .get('/api/v1/admin/invitations.json')
+      .get('/api/internal/admin/invitations.json')
       .success(function (data, status, headers, config) {
         $scope.invitations = data.invitations;
 

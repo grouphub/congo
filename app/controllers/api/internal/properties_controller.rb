@@ -1,4 +1,4 @@
-class Api::V1::PropertiesController < ApplicationController
+class Api::Internal::PropertiesController < ApplicationController
   protect_from_forgery
 
   def carrier_accounts

@@ -18,7 +18,7 @@ congoApp.controller('UsersNewCustomerController', [
       var password = $scope.signin_password;
 
       $http
-        .post('/api/v1/users/signin.json', {
+        .post('/api/internal/users/signin.json', {
           email: email,
           password: password,
           email_token: emailToken
@@ -45,7 +45,7 @@ congoApp.controller('UsersNewCustomerController', [
       }
 
       $http
-        .post('/api/v1/users.json', {
+        .post('/api/internal/users.json', {
           first_name: $scope.first_name,
           last_name: $scope.last_name,
           email: $scope.email,

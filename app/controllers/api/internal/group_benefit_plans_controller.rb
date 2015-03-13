@@ -1,4 +1,4 @@
-class Api::V1::GroupBenefitPlansController < ApplicationController
+class Api::Internal::GroupBenefitPlansController < ApplicationController
   protect_from_forgery
 
   def create

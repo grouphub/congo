@@ -1,4 +1,4 @@
-class Api::V1::Admin::GroupsController < ApplicationController
+class Api::Internal::Admin::GroupsController < ApplicationController
   protect_from_forgery
 
   before_filter :authenticate_admin!, except: :index

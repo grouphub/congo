@@ -1,4 +1,4 @@
-class Api::V1::Admin::InvitationsController < ApplicationController
+class Api::Internal::Admin::InvitationsController < ApplicationController
   protect_from_forgery
 
   def index

@@ -1,4 +1,4 @@
-class Api::V1::BenefitPlansController < ApplicationController
+class Api::Internal::BenefitPlansController < ApplicationController
   protect_from_forgery
 
   def index

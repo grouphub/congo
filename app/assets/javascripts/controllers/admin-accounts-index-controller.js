@@ -9,7 +9,7 @@ congoApp.controller('AdminAccountsIndexController', [
     $scope.accounts = null;
 
     $http
-      .get('/api/v1/admin/accounts.json')
+      .get('/api/internal/admin/accounts.json')
       .success(function (data, status, headers, config) {
         $scope.accounts = data.accounts;
 

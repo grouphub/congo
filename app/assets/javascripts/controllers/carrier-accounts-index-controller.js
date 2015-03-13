@@ -16,7 +16,7 @@ congoApp.controller('CarrierAccountsIndexController', [
       }
 
       $http
-        .delete('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/carrier_accounts/' + carrierAccount.id + '.json')
+        .delete('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/carrier_accounts/' + carrierAccount.id + '.json')
         .success(function (data, status, headers, config) {
           $scope.carrierAccounts.splice(index, 1);
         })
@@ -26,7 +26,7 @@ congoApp.controller('CarrierAccountsIndexController', [
     };
 
     $http
-      .get('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/carrier_accounts.json')
+      .get('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/carrier_accounts.json')
       .success(function (data, status, headers, config) {
         $scope.carrierAccounts = data.carrier_accounts;
 

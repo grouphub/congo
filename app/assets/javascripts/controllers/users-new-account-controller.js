@@ -27,7 +27,7 @@ congoApp.controller('UsersNewAccountController', [
       };
 
       $http
-        .put('/api/v1/users/' + congo.currentUser.id + '.json', data)
+        .put('/api/internal/users/' + congo.currentUser.id + '.json', data)
         .success(function (data, status, headers, config) {
           var account;
 
@@ -45,7 +45,7 @@ congoApp.controller('UsersNewAccountController', [
     };
 
     $http
-      .get('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/properties/accounts.json')
+      .get('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/properties/accounts.json')
       .success(function (data, status, headers, config) {
         $scope.elements = data.elements;
 

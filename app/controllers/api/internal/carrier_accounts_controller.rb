@@ -1,4 +1,4 @@
-class Api::V1::CarrierAccountsController < ApplicationController
+class Api::Internal::CarrierAccountsController < ApplicationController
   protect_from_forgery
 
   def index

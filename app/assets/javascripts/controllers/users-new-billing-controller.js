@@ -9,7 +9,7 @@ congoApp.controller('UsersNewBillingController', [
       if ($scope.billingForm.$invalid) { return; }
 
       $http
-        .put('/api/v1/users/' + congo.currentUser.id + '.json', {
+        .put('/api/internal/users/' + congo.currentUser.id + '.json', {
           user_properties: {
             card_number: $scope.cardNumber,
             month: $scope.month,

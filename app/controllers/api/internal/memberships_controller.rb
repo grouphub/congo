@@ -1,4 +1,4 @@
-class Api::V1::MembershipsController < ApplicationController
+class Api::Internal::MembershipsController < ApplicationController
   protect_from_forgery
 
   def index

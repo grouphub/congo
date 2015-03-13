@@ -12,7 +12,7 @@ congoApp.controller('GroupsNewController', [
       var properties = propertiesFactory.getPropertiesFromElements($scope.elements);
 
       $http
-        .post('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups.json', {
+        .post('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups.json', {
           name: $scope.name,
           properties: properties
         })
@@ -27,7 +27,7 @@ congoApp.controller('GroupsNewController', [
     };
 
     $http
-      .get('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/properties/groups.json')
+      .get('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/properties/groups.json')
       .success(function (data, status, headers, config) {
         $scope.elements = data.elements;
 

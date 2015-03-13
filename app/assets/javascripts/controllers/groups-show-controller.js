@@ -47,7 +47,7 @@ congoApp.controller('GroupsShowController', [
       };
 
       $http
-        .post('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/applications.json', data)
+        .post('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/applications.json', data)
         .success(function (data, status, headers, config) {
           $cookieStore.put('current-application-id', data.application.id);
 
@@ -70,7 +70,7 @@ congoApp.controller('GroupsShowController', [
       };
 
       $http
-        .post('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/applications.json', data)
+        .post('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/applications.json', data)
         .success(function (data, status, headers, config) {
           $scope.group.applications.push(data.application);
 
@@ -87,7 +87,7 @@ congoApp.controller('GroupsShowController', [
       }
 
       $http
-        .delete('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/applications/' + application.id + '.json')
+        .delete('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/applications/' + application.id + '.json')
         .success(function (data, status, headers, config) {
           $scope.group.applications = _($scope.group.applications).reject(function (groupApplication) {
             return application.id === groupApplication.id;
@@ -105,7 +105,7 @@ congoApp.controller('GroupsShowController', [
         email: email
       };
       $http
-        .post('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups/' + $scope.groupSlug() + '/memberships.json', data)
+        .post('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups/' + $scope.groupSlug() + '/memberships.json', data)
         .success(function (data, status, headers, config) {
           $scope.inviteMemberFormData.email = '';
           $scope.group.memberships.push(data.membership);
@@ -124,7 +124,7 @@ congoApp.controller('GroupsShowController', [
       };
 
       $http
-        .post('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups/' + $scope.groupSlug() + '/memberships.json', data)
+        .post('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups/' + $scope.groupSlug() + '/memberships.json', data)
         .success(function (data, status, headers, config) {
           $scope.inviteGroupAdminFormData.email = '';
           $scope.group.memberships.push(data.membership);
@@ -137,7 +137,7 @@ congoApp.controller('GroupsShowController', [
 
     $scope.sendConfirmation = function (membership) {
       $http
-        .post('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups/' + $scope.groupSlug() + '/memberships/' + membership.id + '/confirmations.json')
+        .post('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups/' + $scope.groupSlug() + '/memberships/' + membership.id + '/confirmations.json')
         .success(function (data, status, headers, config) {
           // TODO: Do something...
         })
@@ -148,7 +148,7 @@ congoApp.controller('GroupsShowController', [
 
     $scope.sendConfirmations = function () {
       $http
-        .post('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups/' + $scope.groupSlug() + '/confirmations_all.json')
+        .post('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups/' + $scope.groupSlug() + '/confirmations_all.json')
         .success(function (data, status, headers, config) {
           // TODO: Do something...
         })
@@ -159,7 +159,7 @@ congoApp.controller('GroupsShowController', [
 
     $scope.revokeMembership = function (membership) {
       $http
-        .delete('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups/' + $scope.groupSlug() + '/memberships/' + membership.id + '.json')
+        .delete('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups/' + $scope.groupSlug() + '/memberships/' + membership.id + '.json')
         .success(function (data, status, headers, config) {
           $scope.group.memberships = _($scope.group.memberships).reject(function (m) {
             return membership.id === m.id;
@@ -184,7 +184,7 @@ congoApp.controller('GroupsShowController', [
       }
 
       $http
-        .put('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/applications/' + application.id + '.json', data)
+        .put('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/applications/' + application.id + '.json', data)
         .success(function (data, status, headers, config) {
           var memberships = $scope.customerMemberships();
           var membership = _(memberships).find(function (membership) {
@@ -225,7 +225,7 @@ congoApp.controller('GroupsShowController', [
       }
 
       $http
-        .post('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups/' + $scope.groupSlug() + '/group_benefit_plans.json', data)
+        .post('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups/' + $scope.groupSlug() + '/group_benefit_plans.json', data)
         .success(function (data, status, headers, config) {
           benefitPlan.isEnabled = true;
         })
@@ -242,7 +242,7 @@ congoApp.controller('GroupsShowController', [
 
     $scope.removeBenefitPlan = function (benefitPlan) {
       $http
-        .delete('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups/' + $scope.groupSlug() + '/group_benefit_plans.json?benefit_plan_id=' + benefitPlan.id)
+        .delete('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups/' + $scope.groupSlug() + '/group_benefit_plans.json?benefit_plan_id=' + benefitPlan.id)
         .success(function (data, status, headers, config) {
           benefitPlan.isEnabled = false;
         })
@@ -262,7 +262,7 @@ congoApp.controller('GroupsShowController', [
     }
 
     $http
-      .get('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/benefit_plans.json')
+      .get('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/benefit_plans.json')
       .success(function (data, status, headers, config) {
         $scope.benefitPlans = data.benefit_plans;
         done();
@@ -272,7 +272,7 @@ congoApp.controller('GroupsShowController', [
       });
 
     $http
-      .get('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups/' + $scope.groupSlug() + '.json')
+      .get('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups/' + $scope.groupSlug() + '.json')
       .success(function (data, status, headers, config) {
         $scope.group = data.group;
         done();

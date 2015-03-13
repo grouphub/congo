@@ -12,7 +12,7 @@ congoApp.controller('ApplicationsIndexController', [
       }
 
       $http
-        .delete('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/applications/' + application.id + '.json')
+        .delete('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/applications/' + application.id + '.json')
         .success(function (data, status, headers, config) {
           $scope.applications = _($scope.applications).reject(function (a) {
             return application.id === a.id;
@@ -24,7 +24,7 @@ congoApp.controller('ApplicationsIndexController', [
     };
 
     $http
-      .get('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/applications.json')
+      .get('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/applications.json')
       .success(function (data, status, headers, config) {
         $scope.applications = data.applications;
 

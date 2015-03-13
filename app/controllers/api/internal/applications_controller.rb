@@ -1,4 +1,4 @@
-class Api::V1::ApplicationsController < ApplicationController
+class Api::Internal::ApplicationsController < ApplicationController
   protect_from_forgery
 
   # TODO: Implement this

@@ -15,7 +15,7 @@ congoApp.directive('reviewApplicationModal', [
           }
 
           $http
-            .put('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/applications/' + application.id + '.json', data)
+            .put('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/applications/' + application.id + '.json', data)
             .success(function (data, status, headers, config) {
               var memberships = $scope.memberships();
               var membership = _(memberships).find(function (membership) {
