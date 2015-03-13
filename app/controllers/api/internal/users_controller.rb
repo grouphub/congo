@@ -1,3 +1,4 @@
+# TODO: Secure this controller
 class Api::Internal::UsersController < ApplicationController
   include ApplicationHelper
   include UsersHelper

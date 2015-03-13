@@ -1,6 +1,10 @@
 class Api::Internal::CarrierAccountsController < ApplicationController
   protect_from_forgery
 
+  before_filter :ensure_user!
+  before_filter :ensure_account!
+  before_filter :ensure_broker!, only: [:create, :destroy]
+
   def index
     # TODO: Check for current user
 

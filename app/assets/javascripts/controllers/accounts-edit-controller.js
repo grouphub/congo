@@ -16,8 +16,6 @@ congoApp.controller('AccountsEditController', [
 
       data.plan_name = $scope.planName;
 
-      console.log(data);
-
       $http
         .put('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '.json', data)
         .success(function (data, status, headers, config) {
@@ -44,13 +42,17 @@ congoApp.controller('AccountsEditController', [
         $scope.planName = currentAccount.plan_name;
 
         _($scope.elements).each(function (element) {
-          element.value = currentAccountProperties[element.name];
+          element.value = currentAccountProperties[element.name] || currentAccount[element.name];
         });
 
         $scope.ready();
       })
       .error(function (data, status, headers, config) {
-        debugger
+        var error = (data && data.error) ?
+          data.error :
+          'There was a problem setting up your plan.';
+
+        flashesFactory.add('danger', error);
       });
   }
 ]);

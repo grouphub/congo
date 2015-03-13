@@ -5,6 +5,10 @@ class Api::Internal::EligibilitiesController < ApplicationController
 
   protect_from_forgery
 
+  before_filter :ensure_user!
+  before_filter :ensure_account!
+  before_filter :ensure_broker_or_group_admin!
+
   def create
     account_slug = params[:account_id]
     account = Account.where(slug: account_slug).first

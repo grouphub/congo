@@ -1,7 +1,9 @@
 class Api::Internal::AccountsController < ApplicationController
-  include ApplicationHelper
-
   protect_from_forgery
+
+  before_filter :ensure_user!
+  before_filter :ensure_account!
+  before_filter :ensure_broker!
 
   def update
     unless current_user

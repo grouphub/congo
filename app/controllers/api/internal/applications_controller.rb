@@ -3,7 +3,9 @@ require 'pokitdok'
 class Api::Internal::ApplicationsController < ApplicationController
   protect_from_forgery
 
-  # TODO: Implement this
+  before_filter :ensure_user!
+  before_filter :ensure_account!
+
   def index
     applications = Membership
       .where(user_id: current_user.id)
@@ -69,7 +71,6 @@ class Api::Internal::ApplicationsController < ApplicationController
     end
   end
 
-  # NOTE: Only supports setting approved_by or submitted_by
   # TODO: Finish this
   # TODO: Optimize this
   # TODO: Add some logging in here

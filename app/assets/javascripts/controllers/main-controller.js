@@ -1,7 +1,13 @@
 var congoApp = angular.module('congoApp');
 
 congoApp.controller('MainController', [
-  '$scope', '$http', '$location', '$timeout', 'userDataFactory', 'flashesFactory', 'eventsFactory',
+  '$scope',
+  '$http',
+  '$location',
+  '$timeout',
+  'userDataFactory',
+  'flashesFactory',
+  'eventsFactory',
   function ($scope, $http, $location, $timeout, userDataFactory, flashesFactory, eventsFactory) {
     // Expose an event emitter to all controllers for messaging
     $scope.vent = eventsFactory;

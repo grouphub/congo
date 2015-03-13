@@ -77,6 +77,13 @@ module UsersHelper
     end
   end
 
+  def ensure_broker_or_group_admin!
+    unless current_role && (current_role.name == 'broker' || current_role.name == 'group_admin')
+      error_response('You must be a broker or group admin to continue.')
+      return
+    end
+  end
+
   # Make sure the user is totally signed up
   def ensure_signed_up!
     # current_user

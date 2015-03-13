@@ -1,7 +1,6 @@
 class Api::Internal::TokensController < ApplicationController
   protect_from_forgery
 
-  # TODO: Move other controllers over to this style
   before_filter :ensure_user!
   before_filter :ensure_account!
   before_filter :ensure_broker!
