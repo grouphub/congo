@@ -4,10 +4,11 @@ Dir.glob("#{Rails.root}/config/*.yml").each do |path|
   next if path.match(/secrets\.yml$/)
 
   key = File.basename(path)[0...-File.extname(path).length]
-  file = File.open(path)
-  yaml = YAML::load(file)[Rails.env]
+  contents = File.read(path)
+  erb = ERB.new(contents).result
+  yaml = YAML::load(erb)[Rails.env]
   struct = OpenStruct.new(yaml)
 
-  Congo2::Application.config.send("#{key}=", struct)
+  Rails.application.config.send("#{key}=", struct)
 end
 
