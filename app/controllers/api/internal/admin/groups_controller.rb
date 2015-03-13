@@ -1,7 +1,7 @@
 class Api::Internal::Admin::GroupsController < ApplicationController
   protect_from_forgery
 
-  before_filter :authenticate_admin!, except: :index
+  before_filter :ensure_admin!, except: :index
 
   def index
     respond_to do |format|

@@ -161,6 +161,10 @@ congoApp.config([
         templateUrl: congo.assets['applications/index.html'],
         controller: 'ApplicationsIndexController'
       })
+      .when('/accounts/:slug/:role/tokens', {
+        templateUrl: congo.assets['tokens/index.html'],
+        controller: 'TokensIndexController'
+      })
       .when('/accounts/:slug/:role/messages', {
         templateUrl: congo.assets['messages/index.html'],
         controller: 'MessagesIndexController'

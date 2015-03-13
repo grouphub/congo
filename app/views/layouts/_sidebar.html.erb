@@ -129,8 +129,15 @@
 
   <li class="sidebar-item" ng-if="currentRole() === 'broker'">
     <a ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/edit" title="Account Settings">
-      <i class="fa fa-group"></i>
+      <i class="fa fa-user"></i>
       <span class="caption">Account Settings</span>
+    </a>
+  </li>
+
+  <li class="sidebar-item" ng-if="currentRole() === 'broker'">
+    <a ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/tokens" title="API Tokens">
+      <i class="fa fa-ticket"></i>
+      <span class="caption">API Tokens</span>
     </a>
   </li>
 
@@ -165,6 +172,7 @@
     </a>
   </li>
 
+  <!-- Customer Applications -->
   <li class="sidebar-item" ng-if="currentRole() === 'customer'">
     <a ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/applications" title="Applications">
       <i class="fa fa-file-text"></i>

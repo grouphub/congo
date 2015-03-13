@@ -64,6 +64,9 @@ Rails.application.routes.draw do
     '/accounts/:slug/:role/applications/new',
     '/accounts/:slug/:role/applications/:application_id',
 
+    # Tokens
+    '/accounts/:slug/:role/tokens',
+
     # Notifications
     '/accounts/:slug/:role/messages',
     '/accounts/:slug/:role/activities'
@@ -86,6 +89,7 @@ Rails.application.routes.draw do
           resources :benefit_plans
           resources :eligibilities
           resources :applications
+          resources :tokens
 
           put '/', to: 'accounts#update'
 
