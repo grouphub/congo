@@ -4,6 +4,13 @@ development:
 test:
   url: 'redis://localhost:6379'
 
+<% if ENV['REDISTOGO_URL'] %>
+# Setup for Heroku
 production:
-  url: 'redis://localhost:6379'
+  url: <%= ENV['REDISTOGO_URL'] %>
+<% elsif ENV['REDIS_URL'] %>
+# Setup for Elasticache
+production:
+  url: <%= ENV['REDIS_URL'] %>
+<% end %>
 
