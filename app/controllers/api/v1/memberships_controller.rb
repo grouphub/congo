@@ -1,4 +1,6 @@
 class Api::V1::MembershipsController < ApplicationController
+  protect_from_forgery
+
   def index
     group_slug = params[:group_id]
     group = Group.where(slug: group_slug).first

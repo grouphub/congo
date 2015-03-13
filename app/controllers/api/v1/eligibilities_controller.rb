@@ -3,6 +3,8 @@ require 'pokitdok'
 class Api::V1::EligibilitiesController < ApplicationController
   include ApplicationHelper
 
+  protect_from_forgery
+
   def create
     account_slug = params[:account_id]
     account = Account.where(slug: account_slug).first

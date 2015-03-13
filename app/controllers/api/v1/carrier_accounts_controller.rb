@@ -1,4 +1,6 @@
 class Api::V1::CarrierAccountsController < ApplicationController
+  protect_from_forgery
+
   def index
     # TODO: Check for current user
 

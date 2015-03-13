@@ -1,4 +1,6 @@
 class Api::V1::Admin::CarriersController < ApplicationController
+  protect_from_forgery
+
   before_filter :authenticate_admin!, except: :index
 
   def index

@@ -48,5 +48,9 @@ window.congo.assets = <%=
     .to_json
 %>;
 
-var congoApp = angular.module('congoApp', ['ngRoute', 'ngCookies']);
+var congoApp = angular.module('congoApp', [
+  'ngRoute',
+  'ngCookies',
+  'ng-rails-csrf'
+]);
 

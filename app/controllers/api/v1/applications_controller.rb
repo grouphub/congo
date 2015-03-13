@@ -1,4 +1,6 @@
 class Api::V1::ApplicationsController < ApplicationController
+  protect_from_forgery
+
   # TODO: Implement this
   def index
     applications = Membership

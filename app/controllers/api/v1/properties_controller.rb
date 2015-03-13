@@ -1,4 +1,6 @@
 class Api::V1::PropertiesController < ApplicationController
+  protect_from_forgery
+
   def carrier_accounts
     respond_to do |format|
       format.json {

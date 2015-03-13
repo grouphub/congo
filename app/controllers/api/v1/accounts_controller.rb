@@ -1,6 +1,8 @@
 class Api::V1::AccountsController < ApplicationController
   include ApplicationHelper
 
+  protect_from_forgery
+
   def update
     unless current_user
       error_response('Sorry, it appears you are not signed in.')

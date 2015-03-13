@@ -4,6 +4,8 @@ class Api::V1::UsersController < ApplicationController
   include CustomerCreatable
   include BrokerCreatable
 
+  protect_from_forgery
+
   def create
     first_name = params[:first_name]
     last_name = params[:last_name]
