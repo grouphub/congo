@@ -1,5 +1,9 @@
-class Api::V1::ApplicationsController < ApplicationController
-  # TODO: Implement this
+class Api::Internal::ApplicationsController < ApplicationController
+  protect_from_forgery
+
+  before_filter :ensure_user!
+  before_filter :ensure_account!
+
   def index
     applications = Membership
       .where(user_id: current_user.id)
@@ -65,7 +69,6 @@ class Api::V1::ApplicationsController < ApplicationController
     end
   end
 
-  # NOTE: Only supports setting approved_by or submitted_by
   # TODO: Finish this
   # TODO: Optimize this
   def update

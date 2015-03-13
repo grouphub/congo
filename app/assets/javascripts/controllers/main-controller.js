@@ -1,7 +1,13 @@
 var congoApp = angular.module('congoApp');
 
 congoApp.controller('MainController', [
-  '$scope', '$http', '$location', '$timeout', 'userDataFactory', 'flashesFactory', 'eventsFactory',
+  '$scope',
+  '$http',
+  '$location',
+  '$timeout',
+  'userDataFactory',
+  'flashesFactory',
+  'eventsFactory',
   function ($scope, $http, $location, $timeout, userDataFactory, flashesFactory, eventsFactory) {
     // Expose an event emitter to all controllers for messaging
     $scope.vent = eventsFactory;
@@ -58,7 +64,7 @@ congoApp.controller('MainController', [
     // Signout functionality
     $scope.signout = function () {
       $http
-        .delete('/api/v1/users/signout.json')
+        .delete('/api/internal/users/signout.json')
         .success(function (data, status, headers, config) {
           congo.currentUser = null;
 
@@ -97,6 +103,10 @@ congoApp.controller('MainController', [
         flashesFactory.add('danger', 'You must be an admin to continue.');
         $location.path('/');
       }
+    };
+
+    // TODO: Change eligibility modal to use this format
+    $scope.showReviewApplicationModal = function (application) {
     };
 
     $(function () {

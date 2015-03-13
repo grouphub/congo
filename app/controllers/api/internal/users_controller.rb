@@ -1,8 +1,11 @@
-class Api::V1::UsersController < ApplicationController
+# TODO: Secure this controller
+class Api::Internal::UsersController < ApplicationController
   include ApplicationHelper
   include UsersHelper
   include CustomerCreatable
   include BrokerCreatable
+
+  protect_from_forgery
 
   def create
     first_name = params[:first_name]

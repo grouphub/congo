@@ -14,7 +14,7 @@ congoApp.controller('GroupsIndexController', [
       }
 
       $http
-        .put('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups/' + group.id + '.json', {
+        .put('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups/' + group.id + '.json', {
           is_enabled: !group.is_enabled    
         })
         .success(function (data, status, headers, config) {
@@ -33,7 +33,7 @@ congoApp.controller('GroupsIndexController', [
       }
 
       $http
-        .delete('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups/' + group.id + '.json')
+        .delete('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups/' + group.id + '.json')
         .success(function (data, status, headers, config) {
           $scope.groups.splice(index, 1);
         })
@@ -43,7 +43,7 @@ congoApp.controller('GroupsIndexController', [
     };
 
     $http
-      .get('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups.json')
+      .get('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups.json')
       .success(function (data, status, headers, config) {
         $scope.groups = data.groups;
 

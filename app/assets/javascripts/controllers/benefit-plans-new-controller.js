@@ -14,7 +14,7 @@ congoApp.controller('BenefitPlansNewController', [
       var properties = propertiesFactory.getPropertiesFromElements($scope.elements);
 
       $http
-        .post('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/benefit_plans.json', {
+        .post('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/benefit_plans.json', {
           name: $scope.name,
           carrier_account_id: $scope.selectedCarrierAccount.id,
           properties: properties
@@ -34,7 +34,7 @@ congoApp.controller('BenefitPlansNewController', [
     }
 
     $http
-      .get('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/properties/accounts.json')
+      .get('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/properties/accounts.json')
       .success(function (data, status, headers, config) {
         $scope.elements = data.elements;
 
@@ -45,7 +45,7 @@ congoApp.controller('BenefitPlansNewController', [
       });
 
     $http
-      .get('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/carrier_accounts.json')
+      .get('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/carrier_accounts.json')
       .success(function (data, status, headers, config) {
         $scope.carrierAccounts = data.carrier_accounts;
         $scope.selectedCarrierAccount = data.carrier_accounts[0];

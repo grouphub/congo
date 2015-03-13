@@ -51,7 +51,7 @@ congoApp.controller('ApplicationsNewController', [
       var id = $cookieStore.get('current-application-id');
 
       $http
-        .put('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/applications/' + id  + '.json', data)
+        .put('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/applications/' + id  + '.json', data)
         .success(function (data, status, headers, config) {
           $cookieStore.remove('current-application-id');
 
@@ -69,7 +69,7 @@ congoApp.controller('ApplicationsNewController', [
     }
 
     $http
-      .get('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups/' + $scope.groupSlug() + '.json')
+      .get('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups/' + $scope.groupSlug() + '.json')
       .success(function (data, status, headers, config) {
         $scope.group = data.group;
 
@@ -80,7 +80,7 @@ congoApp.controller('ApplicationsNewController', [
       });
 
     $http
-      .get('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/benefit_plans/' + $scope.benefitPlanId() + '.json')
+      .get('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/benefit_plans/' + $scope.benefitPlanId() + '.json')
       .success(function (data, status, headers, config) {
         $scope.benefitPlan = data.benefit_plan;
 

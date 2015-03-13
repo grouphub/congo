@@ -7,6 +7,7 @@ group = Group.create! \
 
 alice = User.where(email: 'alice@first-account.com').first
 bob = User.where(email: 'bob@first-account.com').first
+garol = User.where(email: 'garol@first-account.com').first
 benefit_plan = BenefitPlan.first
 
 GroupBenefitPlan.create! \
@@ -24,4 +25,10 @@ Membership.create! \
   user_id: bob.id,
   role_id: bob.roles.first.id,
   email: bob.email
+
+Membership.create! \
+  group_id: group.id,
+  user_id: garol.id,
+  role_id: garol.roles.first.id,
+  email: garol.email
 

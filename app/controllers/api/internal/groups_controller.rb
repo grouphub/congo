@@ -1,5 +1,11 @@
-class Api::V1::GroupsController < ApplicationController
+class Api::Internal::GroupsController < ApplicationController
   include UsersHelper
+
+  protect_from_forgery
+
+  before_filter :ensure_user!
+  before_filter :ensure_account!
+  before_filter :ensure_broker_or_group_admin!, only: [:create, :update, :destroy]
 
   def index
     account_slug = params[:account_id]

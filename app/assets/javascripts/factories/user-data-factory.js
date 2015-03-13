@@ -1,8 +1,8 @@
 var congoApp = angular.module('congoApp');
 
 congoApp.factory('userDataFactory', [
-  '$location', '$cookieStore',
-  function ($location, $cookieStore) {
+  '$location', '$cookieStore', '$routeParams',
+  function ($location, $cookieStore, $routeParams) {
     var userDataFactory = {
       drawerToggle: function () {
         $cookieStore.put('show-drawer', !$cookieStore.get('show-drawer'));
@@ -15,53 +15,25 @@ congoApp.factory('userDataFactory', [
         return $cookieStore.get('show-drawer');
       },
       accountSlug: function () {
-        var match = $location.path().match(/\/accounts\/([^\/]+)/);
-
-        if (match && match[1] && match[1].length > 0) {
-          return match[1];
-        }
+        return $routeParams.slug;
       },
       groupSlug: function () {
-        var match = $location.path().match(/\/groups\/([^\/]+)/);
-
-        if (match && match[1] && match[1].length > 0) {
-          return match[1];
-        }
+        return $routeParams.group_slug;
       },
       carrierSlug: function () {
-        var match = $location.path().match(/\/carriers\/([^\/]+)/);
-
-        if (match && match[1] && match[1].length > 0) {
-          return match[1];
-        }
+        return $routeParams.carrier_slug;
       },
       carrierAccountId: function () {
-        var match = $location.path().match(/carrier_accounts\/([^\/])+/);
-
-        if (match && match[1] && match[1].length > 0) {
-          return match[1];
-        }
+        return $routeParams.carrier_account_id;
       },
       benefitPlanId: function () {
-        var match = $location.path().match(/benefit_plans\/([^\/])+/);
-
-        if (match && match[1] && match[1].length > 0) {
-          return match[1];
-        }
+        return $routeParams.benefit_plan_id;
       },
       applicationId: function () {
-        var match = $location.path().match(/applications\/([^\/])+/);
-
-        if (match && match[1] && match[1].length > 0) {
-          return match[1];
-        }
+        return $routeParams.application_id;
       },
       userId: function () {
-        var match = $location.path().match(/\/users\/(\d+)/);
-
-        if (match && match[1] && match[1].length > 0) {
-          return match[1];
-        }
+        return $routeParams.id;
       },
       currentRole: function () {
         var match;
@@ -72,11 +44,7 @@ congoApp.factory('userDataFactory', [
           return 'admin';
         }
 
-        match = $location.path().match(/\/accounts\/[^\/]+\/([^\/]+)/);
-
-        if (match && match[1] && match[1].length > 0) {
-          return match[1];
-        }
+        return $routeParams.role;
       },
       isGroupAdmin: function () {
         switch (userDataFactory.currentRole()) { 
@@ -108,11 +76,7 @@ congoApp.factory('userDataFactory', [
           return;
         }
 
-        if (
-          !currentRole &&
-          inAdmin &&
-          currentUser.is_admin
-        ) {
+        if (!currentRole && inAdmin && currentUser.is_admin) {
           return true; 
         }
       },

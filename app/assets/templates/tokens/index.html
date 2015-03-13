@@ -1,0 +1,39 @@
+<div class="col-md-12">
+  <h1>API Tokens</h1>
+
+  <table class="tokens table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Unique ID</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr ng-repeat="token in tokens">
+        <td>{{token.name}}</td>
+
+        <td>
+          <code>{{token.unique_id}}</code>
+        </td>
+
+        <td>
+          <a href="" class="btn btn-xs btn-danger" ng-click="deleteTokenAt($index)">Delete</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <form class="form" ng-submit="newToken()">
+    <h2>New Token</h2>
+
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" class="form-control" id="name" placeholder="Enter name&hellip;" ng-model="form.name" auto-focus></textarea>
+    </div>
+
+    <input type="submit" class="btn btn-default" value="New invitation">
+  </form>
+</div>
+

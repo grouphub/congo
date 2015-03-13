@@ -16,10 +16,8 @@ congoApp.controller('AccountsEditController', [
 
       data.plan_name = $scope.planName;
 
-      console.log(data);
-
       $http
-        .put('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '.json', data)
+        .put('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '.json', data)
         .success(function (data, status, headers, config) {
           flashesFactory.add('success', 'Successfully updated account!');
 
@@ -35,7 +33,7 @@ congoApp.controller('AccountsEditController', [
     };
 
     $http
-      .get('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/properties/accounts.json')
+      .get('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/properties/accounts.json')
       .success(function (data, status, headers, config) {
         var currentAccount = $scope.currentAccount();
         var currentAccountProperties = JSON.parse(currentAccount.properties_data);
@@ -44,13 +42,17 @@ congoApp.controller('AccountsEditController', [
         $scope.planName = currentAccount.plan_name;
 
         _($scope.elements).each(function (element) {
-          element.value = currentAccountProperties[element.name];
+          element.value = currentAccountProperties[element.name] || currentAccount[element.name];
         });
 
         $scope.ready();
       })
       .error(function (data, status, headers, config) {
-        debugger
+        var error = (data && data.error) ?
+          data.error :
+          'There was a problem setting up your plan.';
+
+        flashesFactory.add('danger', error);
       });
   }
 ]);

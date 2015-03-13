@@ -11,7 +11,7 @@ congoApp.controller('UsersSigninController', [
       }
 
       $http
-        .post('/api/v1/users/signin.json', {
+        .post('/api/internal/users/signin.json', {
           email: $scope.email,
           password: $scope.password
         })

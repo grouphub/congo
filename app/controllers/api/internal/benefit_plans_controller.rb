@@ -1,4 +1,10 @@
-class Api::V1::BenefitPlansController < ApplicationController
+class Api::Internal::BenefitPlansController < ApplicationController
+  protect_from_forgery
+
+  before_filter :ensure_user!
+  before_filter :ensure_account!
+  before_filter :ensure_broker_or_group_admin!, only: [:create, :update, :destroy]
+
   def index
     account_slug = params[:account_id]
     account = Account.where(slug: account_slug).first

@@ -25,7 +25,7 @@ end
 RSpec.configure do |config|
   Capybara.javascript_driver = :selenium
 
-  config.before(:each) do
+  config.before(:each, js: true) do
     page.driver.browser.manage.window.resize_to(1024, 768)
   end
 end
@@ -40,7 +40,7 @@ RSpec.configure do |config|
     DatabaseCleaner.strategy = :transaction
   end
 
-  config.before(:each, :js => true) do
+  config.before(:each, js: true) do
     DatabaseCleaner.strategy = :truncation, { pre_count: true }
   end
 

@@ -34,6 +34,12 @@ gem 'pokitdok-ruby', github: 'pokitdok/pokitdok-ruby'
 
 gem 'newrelic_rpm'
 
+# Protect internal endpoints from the world.
+gem 'ng-rails-csrf'
+
+# Throttle external endpoints.
+gem 'rack-defense'
+
 group :doc do
   gem 'sdoc', '~> 0.4.0'
 end

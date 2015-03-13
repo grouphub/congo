@@ -7,7 +7,7 @@ congoApp.controller('ApplicationsShowController', [
     $scope.enforceValidAccount();
 
     $http
-      .get('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/applications/' + $scope.applicationId() + '.json')
+      .get('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/applications/' + $scope.applicationId() + '.json')
       .success(function (data, status, headers, config) {
         $scope.application = data.application;
 
