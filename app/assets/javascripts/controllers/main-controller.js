@@ -6,7 +6,7 @@ congoApp.controller('MainController', [
     // Expose an event emitter to all controllers for messaging
     $scope.vent = eventsFactory;
 
-    $scope.assetPaths = congo.assetPaths;
+    $scope.assets = congo.assets;
 
     // Loading behavior
     $scope.$on('$locationChangeStart', function(event) {

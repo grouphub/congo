@@ -21,13 +21,27 @@ body {
 }
 
 footer {
-  text-align: center;
   margin-top: 40px;
   border-top: 1px solid #ccc;
   padding-top: 40px;
   padding-bottom: 40px;
-  height: 150px;
   clear: both;
+  p {
+    text-align: center;
+    font-size: 16px;
+  }
+  img {
+    padding: 0 270px 15px 270px;
+  }
+  
+  // !Remove - Forcing the height because of scrolling problem.
+  height: 400px;
+}
+
+@media screen and (max-width: 765px) {
+  footer {
+    img { padding: 0 20px 10px 20px; }
+  }
 }
 
 i.envelope {
