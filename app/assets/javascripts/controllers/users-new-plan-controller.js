@@ -5,7 +5,7 @@ congoApp.controller('UsersNewPlanController', [
   function ($scope, $http, $location, flashesFactory) {
     $scope.pickPlan = function (planName) {
       $http
-        .put('/api/v1/users/' + congo.currentUser.id + '.json', {
+        .put('/api/internal/users/' + congo.currentUser.id + '.json', {
           plan_name: planName
         })
         .success(function (data, status, headers, config) {
@@ -18,7 +18,7 @@ congoApp.controller('UsersNewPlanController', [
 
     $scope.addInviteCode = function () {
       $http
-        .put('/api/v1/users/' + congo.currentUser.id + '.json', {
+        .put('/api/internal/users/' + congo.currentUser.id + '.json', {
           plan_name: 'premier',
           is_invite: true,
           invite_code: $scope.invitation

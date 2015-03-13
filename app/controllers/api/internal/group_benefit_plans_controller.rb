@@ -1,4 +1,6 @@
-class Api::V1::GroupBenefitPlansController < ApplicationController
+class Api::Internal::GroupBenefitPlansController < ApplicationController
+  protect_from_forgery
+
   def create
     account_slug = params[:account_id]
     group_slug = params[:group_id]

@@ -9,7 +9,7 @@ congoApp.controller('CarrierAccountsShowController', [
     $scope.carrierAccount = null;
 
     $http
-      .get('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/carrier_accounts/' + $scope.carrierAccountId() + '.json')
+      .get('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/carrier_accounts/' + $scope.carrierAccountId() + '.json')
       .success(function (data, status, headers, config) {
         $scope.carrierAccount = data.carrier_account;
 

@@ -9,7 +9,7 @@ congoApp.controller('BenefitPlansShowController', [
     $scope.benefitPlan = null;
 
     $http
-      .get('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/benefit_plans/' + $scope.benefitPlanId() + '.json', {
+      .get('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/benefit_plans/' + $scope.benefitPlanId() + '.json', {
         name: $scope.name
       })
       .success(function (data, status, headers, config) {

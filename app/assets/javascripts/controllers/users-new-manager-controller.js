@@ -17,7 +17,7 @@ congoApp.controller('UsersNewManagerController', [
 
       if ($scope.userForm.$invalid) { return; }
       $http
-        .post('/api/v1/users.json', {
+        .post('/api/internal/users.json', {
           first_name: $scope.first_name,
           last_name: $scope.last_name,
           email: $scope.email,

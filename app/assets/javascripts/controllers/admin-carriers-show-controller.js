@@ -7,7 +7,7 @@ congoApp.controller('AdminCarriersShowController', [
     $scope.enforceAdmin();
 
     $http
-      .get('/api/v1/admin/carriers/' + $scope.carrierSlug() + '.json')
+      .get('/api/internal/admin/carriers/' + $scope.carrierSlug() + '.json')
       .success(function (data, status, headers, config) {
         $scope.carrier = data.carrier;
 

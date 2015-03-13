@@ -14,7 +14,7 @@ congoApp.controller('BenefitPlansIndexController', [
       }
 
       $http
-        .put('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/benefit_plans/' + benefitPlan.id + '.json', {
+        .put('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/benefit_plans/' + benefitPlan.id + '.json', {
           is_enabled: !benefitPlan.is_enabled    
         })
         .success(function (data, status, headers, config) {
@@ -33,7 +33,7 @@ congoApp.controller('BenefitPlansIndexController', [
       }
 
       $http
-        .delete('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/benefit_plans/' + benefitPlan.id + '.json')
+        .delete('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/benefit_plans/' + benefitPlan.id + '.json')
         .success(function (data, status, headers, config) {
           $scope.benefitPlans.splice(index, 1);
         })
@@ -43,7 +43,7 @@ congoApp.controller('BenefitPlansIndexController', [
     };
 
     $http
-      .get('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/benefit_plans.json')
+      .get('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/benefit_plans.json')
       .success(function (data, status, headers, config) {
         $scope.benefitPlans = data.benefit_plans;
 

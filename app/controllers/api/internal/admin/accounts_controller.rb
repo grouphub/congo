@@ -1,5 +1,7 @@
-class Api::V1::Admin::AccountsController < ApplicationController
-  before_filter :authenticate_admin!, except: :index
+class Api::Internal::Admin::AccountsController < ApplicationController
+  protect_from_forgery
+
+  before_filter :ensure_admin!, except: :index
 
   def index
     respond_to do |format|

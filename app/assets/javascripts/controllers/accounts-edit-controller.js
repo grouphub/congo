@@ -19,7 +19,7 @@ congoApp.controller('AccountsEditController', [
       console.log(data);
 
       $http
-        .put('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '.json', data)
+        .put('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '.json', data)
         .success(function (data, status, headers, config) {
           flashesFactory.add('success', 'Successfully updated account!');
 
@@ -35,7 +35,7 @@ congoApp.controller('AccountsEditController', [
     };
 
     $http
-      .get('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/properties/accounts.json')
+      .get('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/properties/accounts.json')
       .success(function (data, status, headers, config) {
         var currentAccount = $scope.currentAccount();
         var currentAccountProperties = JSON.parse(currentAccount.properties_data);

@@ -1,7 +1,9 @@
 require 'pokitdok'
 
-class Api::V1::EligibilitiesController < ApplicationController
+class Api::Internal::EligibilitiesController < ApplicationController
   include ApplicationHelper
+
+  protect_from_forgery
 
   def create
     account_slug = params[:account_id]

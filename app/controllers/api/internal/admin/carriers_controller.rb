@@ -1,5 +1,7 @@
-class Api::V1::Admin::CarriersController < ApplicationController
-  before_filter :authenticate_admin!, except: :index
+class Api::Internal::Admin::CarriersController < ApplicationController
+  protect_from_forgery
+
+  before_filter :ensure_admin!, except: :index
 
   def index
     # TODO: Check for current user and admin

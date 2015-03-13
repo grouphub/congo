@@ -1,5 +1,7 @@
-class Api::V1::Admin::FeaturesController < ApplicationController
-  before_filter :authenticate_admin!, except: :index
+class Api::Internal::Admin::FeaturesController < ApplicationController
+  protect_from_forgery
+
+  before_filter :ensure_admin!, except: :index
 
   # TODO: Ensure admin.
   def index

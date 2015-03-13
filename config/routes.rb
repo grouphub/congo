@@ -64,13 +64,17 @@ Rails.application.routes.draw do
     '/accounts/:slug/:role/applications/new',
     '/accounts/:slug/:role/applications/:application_id',
 
+    # Tokens
+    '/accounts/:slug/:role/tokens',
+
     # Notifications
     '/accounts/:slug/:role/messages',
     '/accounts/:slug/:role/activities'
   ]
 
   namespace :api do
-    namespace :v1 do
+    # Internal API for Angular app
+    namespace :internal do
       # Admin routes
       namespace :admin do
         resources :carriers
@@ -85,6 +89,7 @@ Rails.application.routes.draw do
           resources :carrier_accounts
           resources :benefit_plans
           resources :eligibilities
+          resources :tokens
 
           resources :applications do
             get '/last_attempt', to: 'applications#last_attempt'
@@ -116,6 +121,11 @@ Rails.application.routes.draw do
       post '/users/signin', to: 'users#signin'
       delete '/users/signout', to: 'users#signout'
       resources :users
+    end
+
+    # External API for third parties
+    namespace :v1 do
+      resource :sample
     end
   end
 end

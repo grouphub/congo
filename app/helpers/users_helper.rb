@@ -1,4 +1,6 @@
 module UsersHelper
+  include ApplicationHelper
+
   class AuthenticationException < StandardError
   end
 
@@ -27,12 +29,52 @@ module UsersHelper
     @current_user ||= User.where(id: session[:current_user_id]).first
   end
 
-  def authenticate!
-    raise AuthenticationException unless current_user
+  def current_account
+    @current_account ||= Account.where(slug: params[:account_id]).first
   end
 
-  def authenticate_admin!
-    raise AuthenticationException unless admin?
+  def current_role
+    @current_role ||= Role
+      .where(
+        name: params[:role_id],
+        account_id: current_account.id,
+        user_id: current_user.id
+      )
+      .first
+  end
+
+  # TODO: Need `current_role` and `ensure_broker!` methods
+
+  def ensure_user!
+    unless current_user
+      error_response('You must be signed in.')
+      return
+    end
+  end
+
+  def ensure_account!
+    unless current_account
+      error_response('Could not find a matching account.')
+      return
+    end
+
+    unless current_user.roles.map(&:account).include?(current_account)
+      error_response('User does not have access to this account.')
+    end
+  end
+
+  def ensure_admin!
+    unless admin?
+      error_response('You must be an admin to continue.')
+      return
+    end
+  end
+
+  def ensure_broker!
+    unless current_role && current_role.name == 'broker'
+      error_response('You must be a broker to continue.')
+      return
+    end
   end
 
   # Make sure the user is totally signed up

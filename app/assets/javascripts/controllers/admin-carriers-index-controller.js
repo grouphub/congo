@@ -14,7 +14,7 @@ congoApp.controller('AdminCarriersIndexController', [
       }
 
       $http
-        .delete('/api/v1/admin/carriers/' + carrier.id + '.json')
+        .delete('/api/internal/admin/carriers/' + carrier.id + '.json')
         .success(function (data, status, headers, config) {
           $scope.carriers.splice(index, 1);
         })
@@ -24,7 +24,7 @@ congoApp.controller('AdminCarriersIndexController', [
     };
 
     $http
-      .get('/api/v1/admin/carriers.json')
+      .get('/api/internal/admin/carriers.json')
       .success(function (data, status, headers, config) {
         $scope.carriers = data.carriers;
 

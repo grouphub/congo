@@ -1,4 +1,6 @@
-class Api::V1::GroupsController < ApplicationController
+class Api::Internal::GroupsController < ApplicationController
+  protect_from_forgery
+
   include UsersHelper
 
   def index

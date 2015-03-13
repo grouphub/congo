@@ -35,7 +35,7 @@ congoApp.directive('eligibilityModal', [
 
           $('#date-of-birth').datepicker();
 
-          $http.get('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/carrier_accounts.json')
+          $http.get('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/carrier_accounts.json')
             .then(
               function (response) {
                 var carrierAccount = response.data.carrier_accounts[0];
@@ -52,7 +52,7 @@ congoApp.directive('eligibilityModal', [
         $scope.submitEligibilityForm = function () {
           $scope.eligibilityFormSettings.error = undefined;
 
-          $http.post('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/eligibilities.json', $scope.eligibilityForm)
+          $http.post('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/eligibilities.json', $scope.eligibilityForm)
             .then(
               function (response) {
                 $scope.eligibilityFormSettings.eligibility = response.data.eligibility;

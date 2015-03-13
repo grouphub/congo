@@ -9,7 +9,7 @@ congoApp.controller('AdminGroupsIndexController', [
     $scope.groups = null;
 
     $http
-      .get('/api/v1/admin/groups.json')
+      .get('/api/internal/admin/groups.json')
       .success(function (data, status, headers, config) {
         $scope.groups = data.groups;
 

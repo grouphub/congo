@@ -1,4 +1,8 @@
-class Api::V1::Admin::InvitationsController < ApplicationController
+class Api::Internal::Admin::InvitationsController < ApplicationController
+  protect_from_forgery
+
+  before_filter :ensure_admin!
+
   def index
     invitations = Invitation.all.includes(:user)
 

@@ -1,5 +1,7 @@
-class Api::V1::AccountsController < ApplicationController
+class Api::Internal::AccountsController < ApplicationController
   include ApplicationHelper
+
+  protect_from_forgery
 
   def update
     unless current_user

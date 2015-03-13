@@ -9,7 +9,7 @@ congoApp.controller('AdminCarriersNewController', [
       var properties = propertiesFactory.getPropertiesFromElements($scope.elements);
 
       $http
-        .post('/api/v1/admin/carriers.json', {
+        .post('/api/internal/admin/carriers.json', {
           name: $scope.name,
           properties: properties
         })
@@ -22,7 +22,7 @@ congoApp.controller('AdminCarriersNewController', [
     };
 
     $http
-      .get('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/properties/carriers.json')
+      .get('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/properties/carriers.json')
       .success(function (data, status, headers, config) {
         $scope.elements = data.elements;
 

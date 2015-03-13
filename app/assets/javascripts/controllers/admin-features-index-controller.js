@@ -15,7 +15,7 @@ congoApp.controller('AdminFeaturesIndexController', [
       };
 
       $http
-        .post('/api/v1/admin/features.json', feature)
+        .post('/api/internal/admin/features.json', feature)
         .success(function (data, status, headers, config) {
           var feature = data.feature;
 
@@ -32,7 +32,7 @@ congoApp.controller('AdminFeaturesIndexController', [
       var feature = $scope.features[index];
 
       $http
-        .put('/api/v1/admin/features/' + feature.id + '.json', feature)
+        .put('/api/internal/admin/features/' + feature.id + '.json', feature)
         .success(function (data, status, headers, config) {
           data.feature.account_slugs = data.feature.account_slug_data.split(', ');
 
@@ -47,7 +47,7 @@ congoApp.controller('AdminFeaturesIndexController', [
       var feature = $scope.features[index];
 
       $http
-        .delete('/api/v1/admin/features/' + feature.id + '.json')
+        .delete('/api/internal/admin/features/' + feature.id + '.json')
         .success(function (data, status, headers, config) {
           $scope.features.splice(index, 1);
         })
@@ -68,7 +68,7 @@ congoApp.controller('AdminFeaturesIndexController', [
     $scope.features = null;
 
     $http
-      .get('/api/v1/admin/features.json')
+      .get('/api/internal/admin/features.json')
       .success(function (data, status, headers, config) {
         $scope.features = _(data.features).map(function (feature) {
           feature.account_slugs = feature.account_slug_data.split(', ');

@@ -8,7 +8,7 @@ congoApp.controller('UsersShowController', [
     $scope.$watch('user');
 
     $http
-      .get('/api/v1/users/' + $scope.userId() + '.json')
+      .get('/api/internal/users/' + $scope.userId() + '.json')
       .success(function (data, status, headers, config) {
         $scope.user = data.user;
 

@@ -58,7 +58,7 @@ congoApp.controller('MainController', [
     // Signout functionality
     $scope.signout = function () {
       $http
-        .delete('/api/v1/users/signout.json')
+        .delete('/api/internal/users/signout.json')
         .success(function (data, status, headers, config) {
           congo.currentUser = null;
 
@@ -97,6 +97,10 @@ congoApp.controller('MainController', [
         flashesFactory.add('danger', 'You must be an admin to continue.');
         $location.path('/');
       }
+    };
+
+    // TODO: Change eligibility modal to use this format
+    $scope.showReviewApplicationModal = function (application) {
     };
 
     $(function () {
