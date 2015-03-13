@@ -1,6 +1,10 @@
 class Api::Internal::MembershipsController < ApplicationController
   protect_from_forgery
 
+  before_filter :ensure_user!
+  before_filter :ensure_account!
+  before_filter :ensure_broker_or_group_admin!
+
   def index
     group_slug = params[:group_id]
     group = Group.where(slug: group_slug).first

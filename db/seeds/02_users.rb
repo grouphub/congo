@@ -1,4 +1,13 @@
+# ========
+# Accounts
+# ========
+
 admin_account = Account.where(name: 'Admin').first
+first_account = Account.where(name: 'First Account').first
+
+# =====
+# Admin
+# =====
 
 admin = User.create! \
   first_name: 'GroupHub',
@@ -6,18 +15,21 @@ admin = User.create! \
   email: 'admin@grouphub.io',
   password: 'testtest'
 
+# They're a system admin
 Role.create! \
   user_id: admin.id,
   account_id: admin_account.id,
   name: 'admin'
 
-first_account = Account.where(name: 'First Account').first
+# They're a broker
+Role.create! \
+  user_id: admin.id,
+  account_id: first_account.id,
+  name: 'broker'
 
-bob = User.create! \
-  first_name: 'Bob',
-  last_name: 'Smith',
-  email: 'bob@first-account.com',
-  password: 'testtest'
+# =====
+# Alice
+# =====
 
 alice = User.create! \
   first_name: 'Alice',
@@ -25,18 +37,41 @@ alice = User.create! \
   email: 'alice@first-account.com',
   password: 'testtest'
 
+# She's a customer
 Role.create! \
-  user_id: admin.id,
+  user_id: alice.id,
   account_id: first_account.id,
-  name: 'broker'
+  name: 'customer'
 
+# ===
+# Bob
+# ===
+
+bob = User.create! \
+  first_name: 'Bob',
+  last_name: 'Smith',
+  email: 'bob@first-account.com',
+  password: 'testtest'
+
+# He's a customer
 Role.create! \
   user_id: bob.id,
   account_id: first_account.id,
   name: 'customer'
 
+# =====
+# Garol
+# =====
+
+garol = User.create! \
+  first_name: 'Garol',
+  last_name: 'Groupadmin',
+  email: 'garol@first-account.com',
+  password: 'testtest'
+
+# She's a group admin
 Role.create! \
-  user_id: alice.id,
+  user_id: garol.id,
   account_id: first_account.id,
-  name: 'customer'
+  name: 'group_admin'
 
