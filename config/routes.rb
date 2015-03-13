@@ -73,6 +73,7 @@ Rails.application.routes.draw do
   ]
 
   namespace :api do
+    # Internal API for Angular app
     namespace :internal do
       # Admin routes
       namespace :admin do
@@ -117,6 +118,11 @@ Rails.application.routes.draw do
       post '/users/signin', to: 'users#signin'
       delete '/users/signout', to: 'users#signout'
       resources :users
+    end
+
+    # External API for third parties
+    namespace :v1 do
+      resource :sample
     end
   end
 end
