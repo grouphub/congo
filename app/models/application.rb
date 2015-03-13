@@ -85,6 +85,7 @@ class Application < ActiveRecord::Base
     # TODO: Validation
     # TODO: Form validation
 
+    # TODO: See if there are other action types
     output_data['action'] = 'Change'
 
     # TODO: Fill this in
@@ -108,15 +109,17 @@ class Application < ActiveRecord::Base
       }
 
     # TODO: Fill this in
+    # On carrier, not account_carrier
     output_data['payer'] = {
       'tax_id' => '111222333'
     }
 
     output_data['purpose'] = 'Original'
-    output_data['reference_number'] = '12456' # TODO: Do we need this?
-    output_data['trading_partner_id'] = 'MOCKPAYER' # TODO: Fill this in
+    output_data['reference_number'] = '12456' # TODO: We specify this. Generate this server-side automatically
+    output_data['trading_partner_id'] = 'MOCKPAYER' # TODO: Per carrier. Make sure eligibility uses this too
 
     # TODO: Fill this in
+    # Group basis
     output_data['sponsor'] = {
       'name' => 'Acme, Inc.' # TODO: Fill this in
       'tax_id' => '999888777' # TODO: Fill this in
@@ -129,18 +132,27 @@ class Application < ActiveRecord::Base
     output_data['subscriber']['gender'] = properties['sex_indicate']
     output_data['subscriber']['ssn'] = properties['social_security_number']
     output_data['subscriber']['birth_date'] = properties['date_of_birth'].gsub('/', '-')
-    output_data['subscriber']['benefit_status'] = 'Active' # TODO: Fill this in
-    output_data['subscriber']['eligibility_begin_date'] = '2014-01-01' # TODO: Fill these in
-    output_data['subscriber']['employment_status'] = 'Full-time' # TODO: Fill these in
-    output_data['subscriber']['group_or_policy_number'] = '123456001' # TODO: Fill these in
-    output_data['subscriber']['handicapped'] = false # TODO: Fill these in
-    output_data['subscriber']['maintenance_reason'] = 'Active' # TODO: Fill these in
-    output_data['subscriber']['maintenance_type'] = 'Addition' # TODO: Fill these in
-    output_data['subscriber']['member_id'] = '123456789' # TODO: Fill these in
-    output_data['subscriber']['relationship'] = 'Self' # TODO: Fill these in. Dependent on authorized representative
-    output_data['subscriber']['subscriber_number'] = '123456789' # TODO: Fill these in
-    output_data['subscriber']['substance_abuse'] = false # TODO: Fill these in
-    output_data['subscriber']['tobacco_use'] = false # TODO: Fill these in
+
+    # TODO: We may not need to fill these in? Leave blank for now
+    output_data['subscriber']['benefit_status'] = 'Active'
+    output_data['subscriber']['member_id'] = '123456789'
+    output_data['subscriber']['subscriber_number'] = '123456789'
+
+    # TODO: These are for change events? Leave blank for now?
+    output_data['subscriber']['maintenance_reason'] = 'Active'
+    output_data['subscriber']['maintenance_type'] = 'Addition'
+
+    # TODO: Leave blank? Or current time? Needs figuring out
+    output_data['subscriber']['eligibility_begin_date'] = '2014-01-01'
+
+    output_data['subscriber']['group_or_policy_number'] = '123456001' # TODO: Add fields to benefit_plan, confusingly called "group_id"
+
+    output_data['subscriber']['relationship'] = 'Self' # TODO: Assume "Self" for now
+
+    output_data['subscriber']['employment_status'] = 'Full-time' # TODO: Add fields to application
+    output_data['subscriber']['substance_abuse'] = false # TODO: Add fields to application
+    output_data['subscriber']['tobacco_use'] = false # TODO: Add fields to application
+    output_data['subscriber']['handicapped'] = false # TODO: Add fields to application
 
     output_data['subscriber']['address'] = {}
     output_data['subscriber']['address']['city'] = properties['city']
@@ -161,7 +173,7 @@ class Application < ActiveRecord::Base
       }
     ]
 
-    # TODO: Fill this in
+    # TODO: These are just the phone numbers
     output_data['subscriber']['contacts'] = [
       {
         'primary_communication_number' => '7172343334',
@@ -170,6 +182,10 @@ class Application < ActiveRecord::Base
         'communication_type2' => 'Work Phone Number'
       }
     ]
+
+    # Authorized representative data is not sent to PokitDok, I think. Maybe ask PokitDok about it?
+    # Comment out parent or legal guardian. Maybe ask PokitDok about it?
+    # TODO: Ask PokitDok about spouse etc. Sounds like we enroll "Self", get a member_id back, and then fill out spouse's form with relationship "Spouse"
 
     output_data
   end
