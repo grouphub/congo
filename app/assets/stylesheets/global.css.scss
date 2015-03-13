@@ -23,19 +23,21 @@ body {
 footer {
   margin-top: 40px;
   border-top: 1px solid #ccc;
+  margin-bottom: 40px;
   padding-top: 40px;
   padding-bottom: 40px;
   clear: both;
+
   p {
     text-align: center;
     font-size: 16px;
   }
-  img {
-    padding: 0 270px 15px 270px;
+
+  .footer-logo {
+    height: 45px;
+    margin-top: 15px;
+    margin-bottom: 10px;
   }
-  
-  // !Remove - Forcing the height because of scrolling problem.
-  height: 400px;
 }
 
 @media screen and (max-width: 765px) {
