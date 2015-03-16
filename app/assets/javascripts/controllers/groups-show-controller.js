@@ -1,7 +1,7 @@
 var congoApp = angular.module('congoApp');
 
 congoApp.controller('GroupsShowController', [
-  '$scope', '$http', '$location', '$cookieStore', 'eventsFactory'
+  '$scope', '$http', '$location', '$cookieStore', 'eventsFactory',
   function ($scope, $http, $location, $cookieStore, eventsFactory) {
     // Make sure user is totally signed up before continuing.
     $scope.enforceValidAccount();
