@@ -210,7 +210,7 @@ describe 'Authentication', js: true do
         all('a', text: 'Delete').first.click
 
         wait_for('AJAX to finish') do
-          page.evaluate_script('$.active') == 0
+          !page.text.match(/Token #1/)
         end
 
         expect(page).to have_no_content('Token #1')
