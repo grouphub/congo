@@ -136,35 +136,6 @@ class Api::Internal::PropertiesController < ApplicationController
     end
   end
 
-  def benefit_plans
-    respond_to do |format|
-      format.json {
-        render json: {
-          elements: [
-            {
-              type: 'text',
-              name: 'plan_type',
-              title: 'Plan type',
-              placeholder: 'Enter a plan type…'
-            },
-            {
-              type: 'text',
-              name: 'exchange_plan',
-              title: 'Exchange plan',
-              placeholder: 'Enter an exchange plan…'
-            },
-            {
-              type: 'text',
-              name: 'small_group',
-              title: 'Small group',
-              placeholder: 'Enter a small group…'
-            }
-          ]
-        }
-      }
-    end
-  end
-
   def groups
     respond_to do |format|
       format.json {

@@ -6,19 +6,32 @@
   <form ng-submit="submit()">
     <div class="form-group">
       <label for="name">Name</label>
-      <input type="text" class="form-control" id="name" placeholder="Enter name&hellip;" ng-model="name" auto-focus>
+      <input type="text" class="form-control" id="name" placeholder="Enter name&hellip;" ng-model="form.name" auto-focus>
     </div>
 
     <div class="form-group">
       <label for="carrier">Carrier</label>
-      <select class="form-control" id="carrier_account" name="carrier_account" ng-model="selectedCarrierAccount.id">
-        <option ng-repeat="carrierAccount in carrierAccounts" value="{{carrierAccount.id}}">{{carrierAccount.name}}&mdash;{{carrierAccount.carrier.name}}</option>
+      <select class="form-control" id="carrier_account" name="carrier_account" ng-model="form.carrier_account_id">
+        <option ng-repeat="carrier_account in carrierAccounts" value="{{carrier_account.id}}">{{carrier_account.name}}&mdash;{{carrier_account.carrier.name}}</option>
       </select>
     </div>
 
-    <properties:form x-elements="{{elements}}" x-data="{{data}}"></properties:form>
+    <div class="form-group">
+      <label for="plan_type">Plan Type</label>
+      <input type="text" class="form-control" id="plan_type" placeholder="Enter a Plan Type&hellip;" ng-model="form.plan_type">
+    </div>
 
-    <input type="submit" class="btn btn-default" value="New benefit plan">
+    <div class="form-group">
+      <label for="exchange_plan">Exchange Plan</label>
+      <input type="text" class="form-control" id="exchange_plan" placeholder="Enter an Exchange Plan&hellip;" ng-model="form.exchange_plan">
+    </div>
+
+    <div class="form-group">
+      <label for="small_group">Small Group</label>
+      <input type="text" class="form-control" id="small_group" placeholder="Enter a Small Group&hellip;" ng-model="form.small_group">
+    </div>
+
+    <input type="submit" class="btn btn-default" value="New Benefit Plan">
   </form>
 </div>
 

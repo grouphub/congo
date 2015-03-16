@@ -38,7 +38,7 @@ congoApp.controller('CarrierAccountsNewController', [
           $location.path('/accounts/' + $scope.accountSlug() + '/' + $scope.currentRole() + '/carrier_accounts');
         })
         .error(function (data, status, headers, config) {
-          debugger
+          flashesFactory.add('danger', 'There was a problem saving your carrier account.');
         });
     };
 
@@ -52,7 +52,7 @@ congoApp.controller('CarrierAccountsNewController', [
         $scope.ready();
       })
       .error(function (data, status, headers, config) {
-        debugger
+        flashesFactory.add('danger', 'There was a problem loading carriers.');
       });
   }
 ]);
