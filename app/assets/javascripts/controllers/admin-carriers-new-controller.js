@@ -1,8 +1,8 @@
 var congoApp = angular.module('congoApp');
 
 congoApp.controller('AdminCarriersNewController', [
-  '$scope', '$http', '$location', 'propertiesFactory',
-  function ($scope, $http, $location, propertiesFactory) {
+  '$scope', '$http', '$location', 'flashesFactory', 'propertiesFactory',
+  function ($scope, $http, $location, flashesFactory, propertiesFactory) {
     $scope.elements = [];
 
     $scope.submit = function () {
@@ -17,7 +17,11 @@ congoApp.controller('AdminCarriersNewController', [
           $location.path('/admin/carriers');
         })
         .error(function (data, status, headers, config) {
-          debugger
+          var error = (data && data.error) ?
+            data.error :
+            'There was a problem creating the carrier.';
+
+          flashesFactory.add('danger', error);
         });
     };
 
@@ -29,7 +33,11 @@ congoApp.controller('AdminCarriersNewController', [
         $scope.ready();
       })
       .error(function (data, status, headers, config) {
-        debugger
+        var error = (data && data.error) ?
+          data.error :
+          'There was a problem fetching carrier properties.';
+
+        flashesFactory.add('danger', error);
       });
   }
 ]);

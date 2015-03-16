@@ -28,7 +28,11 @@ congoApp.controller('BenefitPlansShowController', [
           $location.path('/accounts/' + $scope.accountSlug() + '/' + $scope.currentRole() + '/benefit_plans');
         })
         .error(function (data, status, headers, config) {
-          flashesFactory.add('danger', 'There was a problem saving your benefit plan.');
+          var error = (data && data.error) ?
+            data.error :
+            'There was a problem loading your benefit plan.';
+
+          flashesFactory.add('danger', error);
         });
     };
 
@@ -52,11 +56,19 @@ congoApp.controller('BenefitPlansShowController', [
             $scope.ready();
           })
           .error(function (data, status, headers, config) {
-            flashesFactory.add('danger', 'There was a problem loading carrier accounts.');
+            var error = (data && data.error) ?
+              data.error :
+              'There was a problem loading the list of carrier accounts.';
+
+            flashesFactory.add('danger', error);
           });
       })
       .error(function (data, status, headers, config) {
-        flashesFactory.add('danger', 'There was a problem loading the benefit plan.');
+        var error = (data && data.error) ?
+          data.error :
+          'There was a problem loading your benefit plan.';
+
+        flashesFactory.add('danger', error);
       });
   }
 ]);

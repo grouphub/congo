@@ -1,6 +1,5 @@
 var congoApp = angular.module('congoApp');
 
-// TODO: Make sure we output the server error if provided, otherwise show the canned error message.
 congoApp.controller('GroupsShowController', [
   '$scope', '$http', '$location', '$cookieStore', 'eventsFactory', 'flashesFactory',
   function ($scope, $http, $location, $cookieStore, eventsFactory, flashesFactory) {
@@ -24,7 +23,11 @@ congoApp.controller('GroupsShowController', [
             .replace();
         })
         .error(function (data, status, headers, config) {
-          flashesFactory.add('danger', 'There was a problem saving your group.');
+          var error = (data && data.error) ?
+            data.error :
+            'There was a problem saving your group.';
+
+          flashesFactory.add('danger', error);
         });
     };
 
@@ -59,7 +62,7 @@ congoApp.controller('GroupsShowController', [
 
     $scope.selectBenefitPlan = function (benefitPlan) {
       if (!benefitPlan) {
-        debugger
+        flashesFactory.add('danger', 'We could not find a matching benefit plan.');
       }
 
       var data = {
@@ -76,7 +79,11 @@ congoApp.controller('GroupsShowController', [
           $location.path('/accounts/' + $scope.accountSlug() + '/' + $scope.currentRole() + '/groups/' + $scope.groupSlug() + '/benefit_plans/' + benefitPlan.id + '/applications/new');
         })
         .error(function (data, status, headers, config) {
-          flashesFactory.add('danger', 'There was a problem creating your application.');
+          var error = (data && data.error) ?
+            data.error :
+            'There was a problem creating your application.';
+
+          flashesFactory.add('danger', error);
         });
     };
 
@@ -99,7 +106,11 @@ congoApp.controller('GroupsShowController', [
           $location.path('/accounts/' + $scope.accountSlug() + '/' + $scope.currentRole() + '/groups/' + $scope.groupSlug());
         })
         .error(function (data, status, headers, config) {
-          flashesFactory.add('danger', 'There was a problem declining your application.');
+          var error = (data && data.error) ?
+            data.error :
+            'There was a problem declining your application.';
+
+          flashesFactory.add('danger', error);
         });
     };
 
@@ -116,7 +127,11 @@ congoApp.controller('GroupsShowController', [
           });
         })
         .error(function (data, status, headers, config) {
-          flashesFactory.add('danger', 'There was a problem deleting your application.');
+          var error = (data && data.error) ?
+            data.error :
+            'There was a problem revoking your current application.';
+
+          flashesFactory.add('danger', error);
         });
     };
 
@@ -134,7 +149,11 @@ congoApp.controller('GroupsShowController', [
           $scope.group.customer_memberships.push(data.membership);
         })
         .error(function (data, status, headers, config) {
-          flashesFactory.add('danger', 'There was a problem inviting a new member.');
+          var error = (data && data.error) ?
+            data.error :
+            'There was a problem inviting a new member.';
+
+          flashesFactory.add('danger', error);
         });
     };
 
@@ -153,7 +172,11 @@ congoApp.controller('GroupsShowController', [
           $scope.group.group_admin_memberships.push(data.membership);
         })
         .error(function (data, status, headers, config) {
-          flashesFactory.add('danger', 'There was a problem inviting a new group admin.');
+          var error = (data && data.error) ?
+            data.error :
+            'There was a problem inviting a new group admin.';
+
+          flashesFactory.add('danger', error);
         });
     };
 
@@ -164,7 +187,11 @@ congoApp.controller('GroupsShowController', [
           // TODO: Do something...
         })
         .error(function (data, status, headers, config) {
-          flashesFactory.add('danger', 'There was a problem sending a confirmation.');
+          var error = (data && data.error) ?
+            data.error :
+            'There was a problem sending the confirmation.';
+
+          flashesFactory.add('danger', error);
         });
     };
 
@@ -175,7 +202,11 @@ congoApp.controller('GroupsShowController', [
           // TODO: Do something...
         })
         .error(function (data, status, headers, config) {
-          flashesFactory.add('danger', 'There was a problem sending the confirmations.');
+          var error = (data && data.error) ?
+            data.error :
+            'There was a problem sending the confirmations.';
+
+          flashesFactory.add('danger', error);
         });
     };
 
@@ -196,7 +227,11 @@ congoApp.controller('GroupsShowController', [
           });
         })
         .error(function (data, status, headers, config) {
-          flashesFactory.add('danger', 'There was a problem revoking the membership.');
+          var error = (data && data.error) ?
+            data.error :
+            'There was a problem revoking the membership.';
+
+          flashesFactory.add('danger', error);
         });
     };
 
@@ -224,7 +259,11 @@ congoApp.controller('GroupsShowController', [
           membership.applications[applicationIndex] = data.application;
         })
         .error(function (data, status, headers, config) {
-          flashesFactory.add('danger', 'There was a problem submitting the application.');
+          var error = (data && data.error) ?
+            data.error :
+            'There was a problem submitting the application.';
+
+          flashesFactory.add('danger', error);
         });
     };
 
@@ -252,7 +291,11 @@ congoApp.controller('GroupsShowController', [
           benefitPlan.isEnabled = true;
         })
         .error(function (data, status, headers, config) {
-          flashesFactory.add('danger', 'There was a problem adding the benefit plan.');
+          var error = (data && data.error) ?
+            data.error :
+            'There was a problem adding the benefit plan.';
+
+          flashesFactory.add('danger', error);
         });
     };
 
@@ -269,7 +312,11 @@ congoApp.controller('GroupsShowController', [
           benefitPlan.isEnabled = false;
         })
         .error(function (data, status, headers, config) {
-          flashesFactory.add('danger', 'There was a problem removing the benefit plan.');
+          var error = (data && data.error) ?
+            data.error :
+            'There was a problem removing the benefit plan.';
+
+          flashesFactory.add('danger', error);
         });
     };
 
@@ -290,7 +337,11 @@ congoApp.controller('GroupsShowController', [
         done();
       })
       .error(function (data, status, headers, config) {
-        flashesFactory.add('danger', 'There was a problem fetching the benefit plans.');
+        var error = (data && data.error) ?
+          data.error :
+          'There was a problem fetching the benefit plans.';
+
+        flashesFactory.add('danger', error);
       });
 
     $http
@@ -301,7 +352,11 @@ congoApp.controller('GroupsShowController', [
         done();
       })
       .error(function (data, status, headers, config) {
-        flashesFactory.add('danger', 'There was a problem fetching the group data.');
+        var error = (data && data.error) ?
+          data.error :
+          'There was a problem fetching the group data.';
+
+        flashesFactory.add('danger', error);
       });
   }
 ]);

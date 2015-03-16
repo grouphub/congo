@@ -40,7 +40,11 @@ congoApp.controller('UsersNewAccountController', [
           flashesFactory.add('success', 'Welcome, ' + congo.currentUser.first_name + ' ' + congo.currentUser.last_name + '!');
         })
         .error(function (data, status, headers, config) {
-          flashesFactory.add('danger', 'There was a problem creating your account.');
+          var error = (data && data.error) ?
+            data.error :
+            'There was a problem creating your account.';
+
+          flashesFactory.add('danger', error);
         });
     };
 
@@ -52,7 +56,11 @@ congoApp.controller('UsersNewAccountController', [
         $scope.ready();
       })
       .error(function (data, status, headers, config) {
-        debugger
+        var error = (data && data.error) ?
+          data.error :
+          'There was a problem fetching accounts.';
+
+        flashesFactory.add('danger', error);
       });
   }
 ]);

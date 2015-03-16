@@ -16,7 +16,11 @@ congoApp.controller('AdminAccountsIndexController', [
         $scope.ready();
       })
       .error(function (data, status, headers, config) {
-        debugger
+        var error = (data && data.error) ?
+          data.error :
+          'There was a problem fetching accounts.';
+
+        flashesFactory.add('danger', error);
       });
   }
 ]);

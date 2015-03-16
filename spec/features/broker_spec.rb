@@ -194,13 +194,14 @@ describe 'Authentication', js: true do
 
     it 'allows a broker to remove an existing API token' do
       create_broker
-      signin_broker
 
       account = Account.find_by_name('First Account')
 
       Token.create! \
         account_id: account.id,
         name: "Token #1"
+
+      signin_broker
 
       all('a', text: 'Manage API Tokens').first.click
 

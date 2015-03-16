@@ -24,7 +24,11 @@ congoApp.controller('GroupsNewController', [
           $scope.ready();
         })
         .error(function (data, status, headers, config) {
-          flashesFactory.add('danger', 'There was a problem creating the group.');
+          var error = (data && data.error) ?
+            data.error :
+            'There was a problem creating the group.';
+
+          flashesFactory.add('danger', error);
         });
     };
 

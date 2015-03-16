@@ -1,8 +1,8 @@
 var congoApp = angular.module('congoApp');
 
 congoApp.controller('AdminCarriersIndexController', [
-  '$scope', '$http', '$location',
-  function ($scope, $http, $location) {
+  '$scope', '$http', '$location', 'flashesFactory',
+  function ($scope, $http, $location, flashesFactory) {
     // Make sure user is admin before continuing.
     $scope.enforceAdmin();
 
@@ -10,7 +10,7 @@ congoApp.controller('AdminCarriersIndexController', [
       var carrier = $scope.carriers[index];
 
       if (!carrier) {
-        debugger
+        flashesFactory.add('danger', 'We could not find a matching carrier.');
       }
 
       $http
@@ -19,7 +19,11 @@ congoApp.controller('AdminCarriersIndexController', [
           $scope.carriers.splice(index, 1);
         })
         .error(function (data, status, headers, config) {
-          debugger
+          var error = (data && data.error) ?
+            data.error :
+            'There was a problem deleting the carrier.';
+
+          flashesFactory.add('danger', error);
         });
     };
 
@@ -31,7 +35,11 @@ congoApp.controller('AdminCarriersIndexController', [
         $scope.ready();
       })
       .error(function (data, status, headers, config) {
-        debugger
+        var error = (data && data.error) ?
+          data.error :
+          'There was a problem fetching the list of carriers.';
+
+        flashesFactory.add('danger', error);
       });
   }
 ]);

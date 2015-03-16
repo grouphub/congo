@@ -1,7 +1,7 @@
 var congoApp = angular.module('congoApp');
 
 congoApp.controller('AdminFeaturesIndexController', [
-  '$scope', '$http', '$location',
+  '$scope', '$http', '$location', 'flashesFactory',
   function ($scope, $http, $location) {
     // Make sure user is admin before continuing.
     $scope.enforceAdmin();
@@ -24,7 +24,11 @@ congoApp.controller('AdminFeaturesIndexController', [
           $scope.features.push(feature);
         })
         .error(function (data, status, headers, config) {
-          debugger
+          var error = (data && data.error) ?
+            data.error :
+            'There was a problem creating a new feature.';
+
+          flashesFactory.add('danger', error);
         });
     };
     
@@ -39,7 +43,11 @@ congoApp.controller('AdminFeaturesIndexController', [
           $scope.features[index] = data.feature;
         })
         .error(function (data, status, headers, config) {
-          debugger
+          var error = (data && data.error) ?
+            data.error :
+            'There was a problem updating the feature.';
+
+          flashesFactory.add('danger', error);
         });
     };
 
@@ -52,10 +60,12 @@ congoApp.controller('AdminFeaturesIndexController', [
           $scope.features.splice(index, 1);
         })
         .error(function (data, status, headers, config) {
-          debugger
-        });
+          var error = (data && data.error) ?
+            data.error :
+            'There was a problem deleting the feature.';
 
-      console.log(feature);
+          flashesFactory.add('danger', error);
+        });
     };
 
     $scope.feature = {
@@ -79,7 +89,11 @@ congoApp.controller('AdminFeaturesIndexController', [
         $scope.ready();
       })
       .error(function (data, status, headers, config) {
-        debugger
+        var error = (data && data.error) ?
+          data.error :
+          'There was a problem fetching the list of features.';
+
+        flashesFactory.add('danger', error);
       });
   }
 ]);

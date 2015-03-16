@@ -40,7 +40,11 @@ congoApp.controller('CarrierAccountsShowController', [
           $location.path('/accounts/' + $scope.accountSlug() + '/' + $scope.currentRole() + '/carrier_accounts');
         })
         .error(function (data, status, headers, config) {
-          flashesFactory.add('danger', 'There was a problem saving your carrier account.');
+          var error = (data && data.error) ?
+            data.error :
+            'There was a problem saving your carrier account.';
+
+          flashesFactory.add('danger', error);
         });
     };
 
@@ -58,11 +62,19 @@ congoApp.controller('CarrierAccountsShowController', [
             $scope.ready();
           })
           .error(function (data, status, headers, config) {
-            flashesFactory.add('danger', 'There was a problem fetching the carriers.');
+            var error = (data && data.error) ?
+              data.error :
+              'There was a problem fetching the carriers.';
+
+            flashesFactory.add('danger', error);
           });
       })
       .error(function (data, status, headers, config) {
-        flashesFactory.add('danger', 'There was a problem fetching the carrier account.');
+        var error = (data && data.error) ?
+          data.error :
+          'There was a problem fetching the carrier account.';
+
+        flashesFactory.add('danger', error);
       });
   }
 ]);
