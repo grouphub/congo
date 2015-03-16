@@ -1,8 +1,8 @@
 var congoApp = angular.module('congoApp');
 
 congoApp.controller('GroupsShowController', [
-  '$scope', '$http', '$location', '$cookieStore',
-  function ($scope, $http, $location, $cookieStore) {
+  '$scope', '$http', '$location', '$cookieStore', 'eventsFactory'
+  function ($scope, $http, $location, $cookieStore, eventsFactory) {
     // Make sure user is totally signed up before continuing.
     $scope.enforceValidAccount();
 
@@ -210,13 +210,13 @@ congoApp.controller('GroupsShowController', [
     $scope.reviewApplication = function (application) {
       $('#review-application-modal').modal('show');
 
-      $scope.vent.emit('review-application', application, $scope.customerMemberships);
+      eventsFactory.emit('review-application', application, $scope.customerMemberships);
     };
 
     $scope.showApplicationStatus = function (application) {
       $('#enrollment-status-modal').modal('show');
 
-      $scope.vent.emit('enrollment-status', application);
+      eventsFactory.emit('enrollment-status', application);
     };
 
     $scope.addBenefitPlan = function (benefitPlan) {
