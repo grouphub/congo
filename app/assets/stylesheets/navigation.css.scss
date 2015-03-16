@@ -486,6 +486,13 @@ main {
   }
 }
 
+// Disable fixed navbar on mobile layouts.
+@media (max-width: 767px) {
+  main {
+    position: static;
+  }
+}
+
 @media (min-width: 768px) {
   li > a.sidebar-item-small {
     display: none;
@@ -523,4 +530,6 @@ main {
     }
   }
 }
+
+
 

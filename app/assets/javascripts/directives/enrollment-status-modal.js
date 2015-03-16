@@ -12,7 +12,7 @@ congoApp.directive('enrollmentStatusModal', [
         $scope.date = new Date();
 
         // TODO: Change eligibility modal to use this format
-        $scope.vent.on($scope, 'review-application', function (application) {
+        eventsFactory.on($scope, 'review-application', function (application) {
           console.log(1);
         });
       }

@@ -9,9 +9,6 @@ congoApp.controller('MainController', [
   'flashesFactory',
   'eventsFactory',
   function ($scope, $http, $location, $timeout, userDataFactory, flashesFactory, eventsFactory) {
-    // Expose an event emitter to all controllers for messaging
-    $scope.vent = eventsFactory;
-
     $scope.assets = congo.assets;
 
     // Loading behavior
@@ -32,7 +29,7 @@ congoApp.controller('MainController', [
     }
 
     // Setup flashes
-    $scope.vent.on($scope, 'flashes:changed', function (flashes) {
+    eventsFactory.on($scope, 'flashes:changed', function (flashes) {
       $scope.flashes = flashes;
     });
 

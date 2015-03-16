@@ -44,7 +44,7 @@ congoApp.directive('reviewApplicationModal', [
         $scope.memberships = undefined;
 
         // TODO: Change eligibility modal to use this format
-        $scope.vent.on($scope, 'review-application', function (application, memberships) {
+        eventsFactory.on($scope, 'review-application', function (application, memberships) {
           $scope.application = application;
           $scope.properties = JSON.parse($scope.application.properties_data);
           $scope.memberships = memberships;
