@@ -13,25 +13,28 @@ gem 'coffee-rails', github: 'rails/coffee-rails'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
-gem 'puma'
 
 gem 'jquery-rails'
 gem 'jbuilder', '~> 2.0'
 
 gem 'bcrypt', '~> 3.1.7'
 
-gem 'pry'
+# For running the server.
 gem 'foreman'
-gem 'guard-livereload', group: :development
-gem 'rack-livereload', group: :development
+gem 'puma'
 
+# For background worker processes.
 gem 'clockwork'
 gem 'delayed_job_active_record'
 gem 'daemons'
+
+# For the payment system.
 gem 'stripe'
 
+# For health insurance enrollment and other concerns.
 gem 'pokitdok-ruby', github: 'pokitdok/pokitdok-ruby'
 
+# For monitoring.
 gem 'newrelic_rpm'
 
 # Protect internal endpoints from the world.
@@ -45,10 +48,27 @@ group :doc do
 end
 
 group :development do
+  # To speed up booting.
   gem 'spring'
+
+  # When an email gets sent in development, it opens in a new window.
   gem 'letter_opener'
+
+  # When loading a page, do not show all the assets loaded in the logs.
+  gem 'quiet_assets'
+
+  # For debugging.
+  gem 'pry'
+  gem 'pry-remote'
+  gem 'pry-nav'
+  gem 'pry-rails'
+
+  # For front-end live reloading.
+  gem 'guard-livereload', group: :development
+  gem 'rack-livereload', group: :development
 end
 
+# Testing gems.
 group :development, :test do
   gem 'rspec-rails'
   gem 'database_cleaner'
