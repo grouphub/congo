@@ -40,6 +40,10 @@ gem 'ng-rails-csrf'
 # Throttle external endpoints.
 gem 'rack-defense'
 
+# For Amazon S3 attachments
+gem 'aws-s3'
+gem 'fakes3'
+
 group :doc do
   gem 'sdoc', '~> 0.4.0'
 end

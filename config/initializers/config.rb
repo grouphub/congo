@@ -6,7 +6,15 @@ Dir.glob("#{Rails.root}/config/*.yml").each do |path|
   key = File.basename(path)[0...-File.extname(path).length]
   contents = File.read(path)
   erb = ERB.new(contents).result
-  yaml = YAML::load(erb)[Rails.env]
+
+  begin
+    yaml = YAML::load(erb)[Rails.env]
+  rescue StandardError => e
+    STDERR.puts "An error occurred parsing YAML config file \"#{path}\"."
+    STDERR.puts erb
+    raise e
+  end
+
   struct = OpenStruct.new(yaml)
 
   Rails.application.config.send("#{key}=", struct)
