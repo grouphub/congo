@@ -135,22 +135,5 @@ class Api::Internal::PropertiesController < ApplicationController
       }
     end
   end
-
-  def groups
-    respond_to do |format|
-      format.json {
-        render json: {
-          elements: [
-            {
-              type: 'text',
-              name: 'group_id',
-              title: 'Group ID',
-              placeholder: 'Enter a group ID…'
-            }
-          ]
-        }
-      }
-    end
-  end
 end
 

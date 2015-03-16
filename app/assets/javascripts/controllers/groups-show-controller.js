@@ -1,10 +1,32 @@
 var congoApp = angular.module('congoApp');
 
+// TODO: Make sure we output the server error if provided, otherwise show the canned error message.
 congoApp.controller('GroupsShowController', [
-  '$scope', '$http', '$location', '$cookieStore', 'eventsFactory',
-  function ($scope, $http, $location, $cookieStore, eventsFactory) {
+  '$scope', '$http', '$location', '$cookieStore', 'eventsFactory', 'flashesFactory',
+  function ($scope, $http, $location, $cookieStore, eventsFactory, flashesFactory) {
     // Make sure user is totally signed up before continuing.
     $scope.enforceValidAccount();
+
+    $scope.form = {
+      name: null,
+      group_id: null
+    };
+
+    $scope.submit = function () {
+      $http
+        .put('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups/' + $scope.groupSlug() + '.json', {
+          name: $scope.form.name,
+          properties: $scope.form
+        })
+        .success(function (data, status, headers, config) {
+          $location
+            .path('/accounts/' + $scope.accountSlug() + '/' + $scope.currentRole() + '/groups/' + data.group.slug)
+            .replace();
+        })
+        .error(function (data, status, headers, config) {
+          flashesFactory.add('danger', 'There was a problem saving your group.');
+        });
+    };
 
     $scope.inviteMemberFormData = {
       email: null
@@ -54,13 +76,13 @@ congoApp.controller('GroupsShowController', [
           $location.path('/accounts/' + $scope.accountSlug() + '/' + $scope.currentRole() + '/groups/' + $scope.groupSlug() + '/benefit_plans/' + benefitPlan.id + '/applications/new');
         })
         .error(function (data, status, headers, config) {
-          debugger
+          flashesFactory.add('danger', 'There was a problem creating your application.');
         });
     };
 
     $scope.declineBenefitPlan = function (benefitPlan) {
       if (!benefitPlan) {
-        debugger
+        flashesFactory.add('danger', 'We could not find a matching benefit plan.');
       }
 
       var data = {
@@ -77,13 +99,13 @@ congoApp.controller('GroupsShowController', [
           $location.path('/accounts/' + $scope.accountSlug() + '/' + $scope.currentRole() + '/groups/' + $scope.groupSlug());
         })
         .error(function (data, status, headers, config) {
-          debugger
+          flashesFactory.add('danger', 'There was a problem declining your application.');
         });
     };
 
     $scope.revokeApplication = function (application) {
       if (!application) {
-        debugger
+        flashesFactory.add('danger', 'We could not find a matching application.');
       }
 
       $http
@@ -94,7 +116,7 @@ congoApp.controller('GroupsShowController', [
           });
         })
         .error(function (data, status, headers, config) {
-          debugger
+          flashesFactory.add('danger', 'There was a problem deleting your application.');
         });
     };
 
@@ -112,7 +134,7 @@ congoApp.controller('GroupsShowController', [
           $scope.group.customer_memberships.push(data.membership);
         })
         .error(function (data, status, headers, config) {
-          debugger
+          flashesFactory.add('danger', 'There was a problem inviting a new member.');
         });
     };
 
@@ -131,7 +153,7 @@ congoApp.controller('GroupsShowController', [
           $scope.group.group_admin_memberships.push(data.membership);
         })
         .error(function (data, status, headers, config) {
-          debugger
+          flashesFactory.add('danger', 'There was a problem inviting a new group admin.');
         });
     };
 
@@ -142,7 +164,7 @@ congoApp.controller('GroupsShowController', [
           // TODO: Do something...
         })
         .error(function (data, status, headers, config) {
-          debugger
+          flashesFactory.add('danger', 'There was a problem sending a confirmation.');
         });
     };
 
@@ -153,7 +175,7 @@ congoApp.controller('GroupsShowController', [
           // TODO: Do something...
         })
         .error(function (data, status, headers, config) {
-          debugger
+          flashesFactory.add('danger', 'There was a problem sending the confirmations.');
         });
     };
 
@@ -174,7 +196,7 @@ congoApp.controller('GroupsShowController', [
           });
         })
         .error(function (data, status, headers, config) {
-          debugger
+          flashesFactory.add('danger', 'There was a problem revoking the membership.');
         });
     };
 
@@ -202,7 +224,7 @@ congoApp.controller('GroupsShowController', [
           membership.applications[applicationIndex] = data.application;
         })
         .error(function (data, status, headers, config) {
-          debugger
+          flashesFactory.add('danger', 'There was a problem submitting the application.');
         });
     };
 
@@ -230,7 +252,7 @@ congoApp.controller('GroupsShowController', [
           benefitPlan.isEnabled = true;
         })
         .error(function (data, status, headers, config) {
-          debugger
+          flashesFactory.add('danger', 'There was a problem adding the benefit plan.');
         });
     };
 
@@ -247,7 +269,7 @@ congoApp.controller('GroupsShowController', [
           benefitPlan.isEnabled = false;
         })
         .error(function (data, status, headers, config) {
-          debugger
+          flashesFactory.add('danger', 'There was a problem removing the benefit plan.');
         });
     };
 
@@ -268,17 +290,18 @@ congoApp.controller('GroupsShowController', [
         done();
       })
       .error(function (data, status, headers, config) {
-        debugger
+        flashesFactory.add('danger', 'There was a problem fetching the benefit plans.');
       });
 
     $http
       .get('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups/' + $scope.groupSlug() + '.json')
       .success(function (data, status, headers, config) {
         $scope.group = data.group;
+        $scope.form = JSON.parse($scope.group.properties_data);
         done();
       })
       .error(function (data, status, headers, config) {
-        debugger
+        flashesFactory.add('danger', 'There was a problem fetching the group data.');
       });
   }
 ]);
