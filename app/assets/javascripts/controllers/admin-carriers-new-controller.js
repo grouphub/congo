@@ -3,15 +3,27 @@ var congoApp = angular.module('congoApp');
 congoApp.controller('AdminCarriersNewController', [
   '$scope', '$http', '$location', 'flashesFactory', 'propertiesFactory',
   function ($scope, $http, $location, flashesFactory, propertiesFactory) {
-    $scope.elements = [];
+    $scope.form = {
+      name: null,
+      npi: null,
+      trading_partner_id: null,
+      service_types: null,
+      tax_id: null,
+      first_name: null,
+      last_name: null,
+      address_1: null,
+      address_2: null,
+      city: null,
+      state: null,
+      zip: null,
+      phone: null
+    };
 
     $scope.submit = function () {
-      var properties = propertiesFactory.getPropertiesFromElements($scope.elements);
-
       $http
         .post('/api/internal/admin/carriers.json', {
-          name: $scope.name,
-          properties: properties
+          name: $scope.form.name,
+          properties: $scope.form
         })
         .success(function (data, status, headers, config) {
           $location.path('/admin/carriers');
@@ -25,20 +37,7 @@ congoApp.controller('AdminCarriersNewController', [
         });
     };
 
-    $http
-      .get('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/properties/carriers.json')
-      .success(function (data, status, headers, config) {
-        $scope.elements = data.elements;
-
-        $scope.ready();
-      })
-      .error(function (data, status, headers, config) {
-        var error = (data && data.error) ?
-          data.error :
-          'There was a problem fetching carrier properties.';
-
-        flashesFactory.add('danger', error);
-      });
+    $scope.ready();
   }
 ]);
 

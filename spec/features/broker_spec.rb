@@ -192,6 +192,7 @@ describe 'Authentication', js: true do
       end
     end
 
+    # TODO: This test is still wobbling!!!
     it 'allows a broker to remove an existing API token' do
       create_broker
 
