@@ -43,8 +43,8 @@ describe 'Authentication', js: true do
       fill_in 'Name', with: 'First Account'
       fill_in 'Company Tagline', with: '#1 Account'
       fill_in 'Tax ID', with: '1234'
-      fill_in 'Account Contact First Name', with: 'Barry'
-      fill_in 'Account Contact Last Name', with: 'Barry Broker'
+      fill_in 'First Name', with: 'Barry'
+      fill_in 'Last Name', with: 'Barry Broker'
       fill_in 'Phone Number', with: '(555) 555-5555'
 
       all('input[type=submit]').first.click
@@ -110,8 +110,8 @@ describe 'Authentication', js: true do
       fill_in 'Name', with: 'First Account'
       fill_in 'Company Tagline', with: '#1 Account'
       fill_in 'Tax ID', with: '1234'
-      fill_in 'Account Contact First Name', with: 'Barry'
-      fill_in 'Account Contact Last Name', with: 'Barry Broker'
+      fill_in 'First Name', with: 'Barry'
+      fill_in 'Last Name', with: 'Barry Broker'
       fill_in 'Phone Number', with: '(555) 555-5555'
 
       all('input[type=submit]').first.click
@@ -192,8 +192,11 @@ describe 'Authentication', js: true do
       end
     end
 
-    # TODO: This test is still wobbling!!!
     it 'allows a broker to remove an existing API token' do
+      # Should not need this. This is to fix test wobbles. Token from previous
+      # test is sometimes sticking around.
+      Token.destroy_all
+
       create_broker
 
       account = Account.find_by_name('First Account')

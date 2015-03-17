@@ -5,7 +5,12 @@ module CongoHelper
     account = Account.create \
       name: 'Admin',
       tagline: 'GroupHub administrative account',
-      plan_name: 'admin'
+      plan_name: 'admin',
+      properties: {
+        name: 'Admin',
+        tagline: 'GroupHub administrative account',
+        plan_name: 'admin'
+      }
 
     user = User.create \
       first_name: 'GroupHub',
@@ -49,7 +54,12 @@ module CongoHelper
     account = Account.create \
       name: 'First Account',
       tagline: '#1 Account',
-      plan_name: 'basic'
+      plan_name: 'basic',
+      properties: {
+        name: 'First Account',
+        tagline: '#1 Account',
+        plan_name: 'basic'
+      }
 
     user = User.create \
       first_name: 'Barry',
@@ -93,7 +103,12 @@ module CongoHelper
     account = Account.create \
       name: 'First Account',
       tagline: '#1 Account',
-      plan_name: 'basic'
+      plan_name: 'basic',
+      properties: {
+        name: 'First Account',
+        tagline: '#1 Account',
+        plan_name: 'basic'
+      }
 
     user = User.create \
       first_name: 'Candice',

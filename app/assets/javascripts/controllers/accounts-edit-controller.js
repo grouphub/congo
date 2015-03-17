@@ -6,15 +6,22 @@ congoApp.controller('AccountsEditController', [
   '$http',
   'flashesFactory',
   function ($scope, $location, $http, flashesFactory) {
-    $scope.elements = [];
+    var currentAccount = $scope.currentAccount();
+
+    $scope.form = {
+      name: null,
+      tagline: null,
+      tax_id: null,
+      first_name: null,
+      last_name: null,
+      phone: null,
+      plan_type: null
+    };
 
     $scope.submit = function () {
-      var data = _($scope.elements).reduce(function (hash, element) {
-        hash[element.name] = element.value;
-        return hash;
-      }, {});
-
-      data.plan_name = $scope.planName;
+      var data = {
+        properties: $scope.form
+      };
 
       $http
         .put('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '.json', data)
@@ -32,28 +39,9 @@ congoApp.controller('AccountsEditController', [
         })
     };
 
-    $http
-      .get('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/properties/accounts.json')
-      .success(function (data, status, headers, config) {
-        var currentAccount = $scope.currentAccount();
-        var currentAccountProperties = JSON.parse(currentAccount.properties_data);
+    $scope.form = JSON.parse(currentAccount.properties_data);
 
-        $scope.elements = data.elements;
-        $scope.planName = currentAccount.plan_name;
-
-        _($scope.elements).each(function (element) {
-          element.value = currentAccountProperties[element.name] || currentAccount[element.name];
-        });
-
-        $scope.ready();
-      })
-      .error(function (data, status, headers, config) {
-        var error = (data && data.error) ?
-          data.error :
-          'There was a problem setting up your plan.';
-
-        flashesFactory.add('danger', error);
-      });
+    $scope.ready();
   }
 ]);
 
