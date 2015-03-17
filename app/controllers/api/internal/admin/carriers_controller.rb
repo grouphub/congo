@@ -4,8 +4,6 @@ class Api::Internal::Admin::CarriersController < ApplicationController
   before_filter :ensure_admin!, except: :index
 
   def index
-    # TODO: Check for current user and admin
-
     respond_to do |format|
       format.json {
         render json: {
@@ -17,17 +15,13 @@ class Api::Internal::Admin::CarriersController < ApplicationController
   end
 
   def create
-    # TODO: Check for current user and admin
-
     properties = params[:properties]
     name = properties['name']
 
-    # Split service types
-    properties['service_types'] ||= ''
-    properties['service_types'] = properties['service_types'].split(/,\s*/)
-
     unless name
-      # TODO: Handle this
+      # TODO: Test this
+      error_response('Name must be provided.')
+      return
     end
 
     carrier = Carrier.create! \
@@ -44,10 +38,46 @@ class Api::Internal::Admin::CarriersController < ApplicationController
   end
 
   def show
-    # TODO: Check for current user and admin
-
     slug = params[:id]
     carrier = Carrier.where(slug: slug).first
+
+    unless carrier
+      # TODO: Test this
+      error_response('Could not find a matching carrier.')
+      return
+    end
+
+    respond_to do |format|
+      format.json {
+        render json: {
+          carrier: carrier
+        }
+      }
+    end
+  end
+
+  def update
+    slug = params[:id]
+    carrier = Carrier.where(slug: slug).first
+
+    unless carrier
+      # TODO: Test this
+      error_response('Could not find a matching carrier.')
+      return
+    end
+
+    properties = params[:properties]
+    name = properties['name']
+
+    unless name
+      # TODO: Test this
+      error_response('Name must be provided.')
+      return
+    end
+
+    carrier.update_attributes! \
+      name: name,
+      properties: properties
 
     respond_to do |format|
       format.json {
@@ -59,15 +89,20 @@ class Api::Internal::Admin::CarriersController < ApplicationController
   end
 
   def destroy
-    # TODO: Check for current user and admin
-
     carrier = Carrier.find(params[:id])
+
+    unless carrier
+      # TODO: Test this
+      error_response('Could not find a matching carrier.')
+      return
+    end
+
     carrier.destroy!
 
     respond_to do |format|
       format.json {
         render json: {
-          carrier: {}
+          carrier: carrier
         }
       }
     end
