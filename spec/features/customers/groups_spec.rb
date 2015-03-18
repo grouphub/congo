@@ -61,6 +61,10 @@ describe 'As a customer', js: true do
         choose 'Female'
         fill_in 'Social Security Number', with: '444-44-4444'
         fill_in 'Date of Birth (mm/dd/yyyy)', with: '04/04/1984'
+        fill_in 'Employment Status', with: 'Full-Time'
+        check 'Substance Abuse'
+        check 'Tobacco Use'
+        check 'Handicapped'
       end
 
       scroll_to_element_in('h3:contains("Contact Information")', 'main')
@@ -74,7 +78,9 @@ describe 'As a customer', js: true do
         fill_in 'ZIP', with: '44444'
         fill_in 'County', with: 'Contra Costa'
         fill_in 'Phone', with: '(444) 444-4444'
+        fill_in 'Phone Type', with: 'Home'
         fill_in 'Other Phone', with: '(444) 444-5555'
+        fill_in 'Other Phone Type', with: 'Work'
       end
 
       scroll_to_element_in('h3:contains("Previous Coverage")', 'main')

@@ -20,14 +20,21 @@ class Application < ActiveRecord::Base
   #   "sex_indicate": "Female",
   #   "social_security_number": "444-44-4444",
   #   "date_of_birth": "04/04/1984",
+  #   "employment_status": "Full-Time",
+  #   "substance_use": null,
+  #   "tobacco_use": null,
+  #   "handicapped": null,
+  #
   #   "street_address": "444 Carrie Ct.",
   #   "apartment_number": "44",
   #   "city": "Cambridge",
   #   "state": "CA",
   #   "zip": "44444",
   #   "county": "Contra Costa",
-  #   "phone": "(444) 444-4444", // TODO: ?
-  #   "other_phone": "(444) 444-5555", // TODO: ?
+  #   "phone": "(444) 444-4444",
+  #   "phone_type": "Home",
+  #   "other_phone": "(444) 444-5555",
+  #   "other_phone_type": "Work",
   #   "coverage_experience": "Yes", // TODO: ?
   #   "medical_record_number": "4444444", // TODO: ?
   #   "if_yes_most_recent_insurance_carrier": "Anthem Blue Cross", // TODO: ?
@@ -139,26 +146,14 @@ class Application < ActiveRecord::Base
     output_data['subscriber']['ssn'] = properties['social_security_number']
     output_data['subscriber']['birth_date'] = properties['date_of_birth'].gsub('/', '-')
 
-    # TODO: We may not need to fill these in? Leave blank for now
-    output_data['subscriber']['benefit_status'] = 'Active'
-    output_data['subscriber']['member_id'] = '123456789'
-    output_data['subscriber']['subscriber_number'] = '123456789'
-
-    # TODO: These are for change events? Leave blank for now?
-    output_data['subscriber']['maintenance_reason'] = 'Active'
-    output_data['subscriber']['maintenance_type'] = 'Addition'
-
-    # TODO: Leave blank? Or current time? Needs figuring out
-    output_data['subscriber']['eligibility_begin_date'] = '2014-01-01'
-
     output_data['subscriber']['group_or_policy_number'] = '123456001' # TODO: Add fields to benefit_plan, confusingly called "group_id"
 
     output_data['subscriber']['relationship'] = 'Self' # TODO: Assume "Self" for now
 
-    output_data['subscriber']['employment_status'] = 'Full-time' # TODO: Add fields to application
-    output_data['subscriber']['substance_abuse'] = false # TODO: Add fields to application
-    output_data['subscriber']['tobacco_use'] = false # TODO: Add fields to application
-    output_data['subscriber']['handicapped'] = false # TODO: Add fields to application
+    output_data['subscriber']['employment_status'] = properties['employment_status']
+    output_data['subscriber']['substance_abuse'] = properties['substance_abuse'] == 'Yes'
+    output_data['subscriber']['tobacco_use'] = properties['tobacco_use'] == 'Yes'
+    output_data['subscriber']['handicapped'] = properties['handicapped'] == 'Yes'
 
     output_data['subscriber']['address'] = {}
     output_data['subscriber']['address']['city'] = properties['city']
@@ -179,15 +174,34 @@ class Application < ActiveRecord::Base
       }
     ]
 
-    # TODO: These are just the phone numbers
     output_data['subscriber']['contacts'] = [
       {
-        'primary_communication_number' => '7172343334',
-        'primary_communication_type' => 'Home Phone Number',
-        'communication_number2' => '7172341240',
-        'communication_type2' => 'Work Phone Number'
+        'primary_communication_number' => properties['phone'],
+        'primary_communication_type' => "#{properties['phone_type']} Phone Number",
+        'communication_number2' => properties['other_phone'],
+        'communication_type2' => "#{properties['other_phone_type']} Phone Number"
       }
     ]
+
+    # ===========
+    # Leave Blank
+    # ===========
+
+    # # TODO: We may not need to fill these in? Leave blank for now
+    # output_data['subscriber']['benefit_status'] = 'Active'
+    # output_data['subscriber']['member_id'] = '123456789'
+    # output_data['subscriber']['subscriber_number'] = '123456789'
+
+    # # TODO: These are for change events? Leave blank for now?
+    # output_data['subscriber']['maintenance_reason'] = 'Active'
+    # output_data['subscriber']['maintenance_type'] = 'Addition'
+
+    # # TODO: Leave blank? Or current time? Needs figuring out
+    # output_data['subscriber']['eligibility_begin_date'] = '2014-01-01'
+
+    # =====
+    # Other
+    # =====
 
     # Authorized representative data is not sent to PokitDok, I think. Maybe ask PokitDok about it?
     # Comment out parent or legal guardian. Maybe ask PokitDok about it?
