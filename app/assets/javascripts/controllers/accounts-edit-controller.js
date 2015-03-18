@@ -40,7 +40,7 @@ congoApp.controller('AccountsEditController', [
             id: previousAccountId
           });
 
-          $location.path('/accounts/' + currentAccount.slug + '/' + $scope.currentRole() + '/edit');
+          $location.path('/accounts/' + currentAccount.slug + '/' + $scope.currentRole());
         })
         .error(function (data, status, headers, config) {
           var error = (data && data.error) ?

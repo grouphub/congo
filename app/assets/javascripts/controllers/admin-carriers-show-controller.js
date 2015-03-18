@@ -29,7 +29,7 @@ congoApp.controller('AdminCarriersShowController', [
           properties: $scope.form
         })
         .success(function (data, status, headers, config) {
-          $location.path('/admin/carriers/' + data.carrier.slug).replace();
+          $location.path('/admin/carriers');
 
           flashesFactory.add('success', 'Successfully updated the carrier.');
         })

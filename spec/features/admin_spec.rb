@@ -104,6 +104,7 @@ describe 'Authentication', js: true do
       within('main') do
         expect(page).to have_content('Carrier Management')
 
+        # TODO: Why is this wobbling?
         find('a', text: 'Blue Cross').click
 
         expect(page).to have_content('Blue Cross')

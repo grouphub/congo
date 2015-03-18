@@ -19,8 +19,10 @@ congoApp.controller('GroupsShowController', [
         })
         .success(function (data, status, headers, config) {
           $location
-            .path('/accounts/' + $scope.accountSlug() + '/' + $scope.currentRole() + '/groups/' + data.group.slug)
+            .path('/accounts/' + $scope.accountSlug() + '/' + $scope.currentRole() + '/groups')
             .replace();
+
+          flashesFactory.add('success', 'Successfully updated the group.');
         })
         .error(function (data, status, headers, config) {
           var error = (data && data.error) ?

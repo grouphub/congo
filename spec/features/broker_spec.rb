@@ -174,7 +174,7 @@ describe 'Authentication', js: true do
       expect(page).to have_content('Successfully updated account!')
 
       expect(page.evaluate_script('window.location.pathname')).to \
-        eq('/accounts/second_account/broker/edit')
+        eq('/accounts/second_account/broker')
 
       accounts = page.evaluate_script('congo.currentUser.accounts')
       expect(accounts.length).to eq(1)
@@ -289,6 +289,24 @@ describe 'Authentication', js: true do
         expect(page).to have_no_content('Token #1')
       end
     end
+
+  end
+
+  describe 'Benefit Plans' do
+
+    it 'allows a broker to create a benefit plan'
+    it 'allows a broker to list benefit plans'
+    it 'allows a broker to edit a benefit plan'
+    it 'allows a broker to delete a benefit plan'
+
+  end
+
+  describe 'Groups' do
+
+    it 'allows a broker to create a group'
+    it 'allows a broker to list groups'
+    it 'allows a broker to edit a group'
+    it 'allows a broker to delete a group'
 
   end
 
