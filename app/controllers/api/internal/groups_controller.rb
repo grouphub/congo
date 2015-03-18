@@ -52,11 +52,15 @@ class Api::Internal::GroupsController < ApplicationController
     properties = params[:properties]
 
     unless name
-      # TODO: Handle this
+      # TODO: Test this
+      error_response('A name must be provided.')
+      return
     end
 
     unless account
-      # TODO: Handle this
+      # TODO: Test this
+      error_response('A matching account could not be found.')
+      return
     end
 
     group = Group.create! \
@@ -87,10 +91,24 @@ class Api::Internal::GroupsController < ApplicationController
   end
 
   def update
-    group = Group.find(params[:id])
+    group = Group.where(slug: params[:id]).last
+
+    unless group
+      # TODO: Test this
+      error_response('Could not find a matching group.')
+      return
+    end
+
+    properties = params[:properties]
 
     unless params[:group]['is_enabled'].nil?
-      group.update_attribute(:is_enabled, params[:is_enabled])
+      group.update_attribute!(:is_enabled, params[:is_enabled])
+    end
+
+    unless properties.nil?
+      group.update_attributes! \
+        name: properties['name'],
+        properties: properties
     end
 
     respond_to do |format|

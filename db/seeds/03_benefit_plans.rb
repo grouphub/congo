@@ -3,6 +3,7 @@ account = Account.where(name: 'First Account').first
 carrier = Carrier.create! \
   name: 'Blue Cross',
   properties: {
+    name: 'Blue Cross',
     npi: '1467560003',
     first_name: 'Brad',
     last_name: 'Bluecross',

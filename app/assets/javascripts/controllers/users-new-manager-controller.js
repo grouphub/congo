@@ -7,15 +7,20 @@ congoApp.controller('UsersNewManagerController', [
     $scope.save = function() {
       $scope.$broadcast('show-errors-check-validity');
 
-        if ($scope.userForm.$invalid) { return; }
-      // code to add the user
+      if ($scope.userForm.$invalid) {
+        return;
+      }
+
+      // TODO: Add code to add the user...?
     };
 
     $scope.submit = function () {
-     
       $scope.$broadcast('show-errors-check-validity');
 
-      if ($scope.userForm.$invalid) { return; }
+      if ($scope.userForm.$invalid) {
+        return;
+      }
+
       $http
         .post('/api/internal/users.json', {
           first_name: $scope.first_name,
@@ -31,7 +36,11 @@ congoApp.controller('UsersNewManagerController', [
           $location.path('/users/new_plan');
         })
         .error(function (data, status, headers, config) {
-          flashesFactory.add('danger', 'There was a problem creating your account.');
+          var error = (data && data.error) ?
+            data.error :
+            'There was a problem creating your account.';
+
+          flashesFactory.add('danger', error);
         });
     };
 

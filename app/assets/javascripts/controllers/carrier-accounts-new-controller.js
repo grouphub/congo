@@ -1,8 +1,8 @@
 var congoApp = angular.module('congoApp');
 
 congoApp.controller('CarrierAccountsNewController', [
-  '$scope', '$http', '$location',
-  function ($scope, $http, $location) {
+  '$scope', '$http', '$location', 'flashesFactory',
+  function ($scope, $http, $location, flashesFactory) {
     // Make sure user is totally signed up before continuing.
     $scope.enforceValidAccount();
 
@@ -38,7 +38,11 @@ congoApp.controller('CarrierAccountsNewController', [
           $location.path('/accounts/' + $scope.accountSlug() + '/' + $scope.currentRole() + '/carrier_accounts');
         })
         .error(function (data, status, headers, config) {
-          debugger
+          var error = (data && data.error) ?
+            data.error :
+            'There was a problem creating the carrier account.';
+
+          flashesFactory.add('danger', error);
         });
     };
 
@@ -52,7 +56,11 @@ congoApp.controller('CarrierAccountsNewController', [
         $scope.ready();
       })
       .error(function (data, status, headers, config) {
-        debugger
+        var error = (data && data.error) ?
+          data.error :
+          'There was a problem fetching the list of carriers.';
+
+        flashesFactory.add('danger', error);
       });
   }
 ]);

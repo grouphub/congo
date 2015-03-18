@@ -84,7 +84,6 @@
 //= require factories/events-factory
 //= require factories/flashes-factory
 //= require factories/user-data-factory
-//= require factories/properties-factory
 //
 //  ----------
 //  Directives
@@ -92,7 +91,6 @@
 //
 //= require directives/auto-focus
 //= require directives/show-errors
-//= require directives/properties-form
 //= require directives/eligibility-modal
 //= require directives/review-application-modal
 //= require directives/enrollment-status-modal

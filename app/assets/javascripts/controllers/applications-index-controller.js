@@ -1,14 +1,14 @@
 var congoApp = angular.module('congoApp');
 
 congoApp.controller('ApplicationsIndexController', [
-  '$scope', '$http', '$location',
-  function ($scope, $http, $location) {
+  '$scope', '$http', '$location', 'flashesFactory',
+  function ($scope, $http, $location, flashesFactory) {
     // Make sure user is totally signed up before continuing.
     $scope.enforceValidAccount();
 
     $scope.revokeApplication = function (application) {
       if (!application) {
-        debugger
+        flashesFactory.add('danger', 'We could not find a matching invitation.');
       }
 
       $http
@@ -19,7 +19,11 @@ congoApp.controller('ApplicationsIndexController', [
           });
         })
         .error(function (data, status, headers, config) {
-          debugger
+          var error = (data && data.error) ?
+            data.error :
+            'There was a problem revoking the application.';
+
+          flashesFactory.add('danger', error);
         });
     };
 
@@ -31,7 +35,11 @@ congoApp.controller('ApplicationsIndexController', [
         $scope.ready();
       })
       .error(function (data, status, headers, config) {
-        debugger
+        var error = (data && data.error) ?
+          data.error :
+          'There was a problem fetching the list of applications.';
+
+        flashesFactory.add('danger', error);
       });
   }
 ]);

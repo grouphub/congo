@@ -22,7 +22,11 @@ congoApp.controller('TokensIndexController', [
           $scope.form.name = '';
         })
         .error(function (data, status, headers, config) {
-          flashesFactory.add('danger', 'There was a problem creating a new token.');
+          var error = (data && data.error) ?
+            data.error :
+            'There was a problem creating a new token.';
+
+          flashesFactory.add('danger', error);
         });
     };
 
@@ -30,7 +34,7 @@ congoApp.controller('TokensIndexController', [
       var token = $scope.tokens[index];
 
       if (!token) {
-        flashesFactory.add('danger', 'There was a problem deleting the token.');
+        flashesFactory.add('danger', 'We could not find a matching token.');
       }
 
       $http
@@ -39,7 +43,11 @@ congoApp.controller('TokensIndexController', [
           $scope.tokens.splice(index, 1);
         })
         .error(function (data, status, headers, config) {
-          flashesFactory.add('danger', 'There was a problem deleting the token.');
+          var error = (data && data.error) ?
+            data.error :
+            'There was a problem deleting the token.';
+
+          flashesFactory.add('danger', error);
         });
     };
 
@@ -51,7 +59,11 @@ congoApp.controller('TokensIndexController', [
         $scope.ready();
       })
       .error(function (data, status, headers, config) {
-        flashesFactory.add('danger', 'There was a problem fetching the tokens.');
+        var error = (data && data.error) ?
+          data.error :
+          'There was a problem fetching the tokens.';
+
+        flashesFactory.add('danger', error);
       });
   }
 ]);
