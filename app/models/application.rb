@@ -7,6 +7,12 @@ class Application < ActiveRecord::Base
 
   has_many :attempts
 
+  before_save :populate_reference_number
+
+  def populate_reference_number
+    self.reference_number = SecureRandom.uuid.gsub('-', '')
+  end
+
   # {
   #   "first_name": "Candice",
   #   "middle_name": "C.",
@@ -115,7 +121,7 @@ class Application < ActiveRecord::Base
     }
 
     output_data['purpose'] = 'Original'
-    output_data['reference_number'] = '12456' # TODO: We specify this. Generate this server-side automatically
+    output_data['reference_number'] = self.reference_number
     output_data['trading_partner_id'] = 'MOCKPAYER' # TODO: Per carrier. Make sure eligibility uses this too
 
     # TODO: Fill this in

@@ -5,6 +5,9 @@ class CreateApplications < ActiveRecord::Migration
       t.integer :benefit_plan_id
       t.integer :membership_id
 
+      # This gets sent to PokitDok
+      t.string :reference_number
+
       # TODO: What fields do we need?
       t.text :properties_data
 

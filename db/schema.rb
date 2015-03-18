@@ -80,6 +80,7 @@ ActiveRecord::Schema.define(version: 20150313015002) do
     t.integer  "account_id"
     t.integer  "benefit_plan_id"
     t.integer  "membership_id"
+    t.string   "reference_number"
     t.text     "properties_data"
     t.boolean  "errored_by_id"
     t.integer  "selected_by_id"
