@@ -91,6 +91,8 @@ class Application < ActiveRecord::Base
   def to_pokitdok
     account = self.account
     benefit_plan = self.benefit_plan
+    carrier_account = benefit_plan.carrier_account
+    carrier = carrier_account.carrier
     membership = self.membership
     properties = self.properties
     output_data = {}
@@ -121,15 +123,13 @@ class Application < ActiveRecord::Base
         {}
       }
 
-    # TODO: Fill this in
-    # On carrier, not account_carrier
     output_data['payer'] = {
-      'tax_id' => '111222333'
+      'tax_id' => carrier.properties['tax_id']
     }
 
     output_data['purpose'] = 'Original'
     output_data['reference_number'] = self.reference_number
-    output_data['trading_partner_id'] = 'MOCKPAYER' # TODO: Per carrier. Make sure eligibility uses this too
+    output_data['trading_partner_id'] = carrier.properties['trading_partner_id']
 
     # TODO: Fill this in
     # Group basis
@@ -146,9 +146,11 @@ class Application < ActiveRecord::Base
     output_data['subscriber']['ssn'] = properties['social_security_number']
     output_data['subscriber']['birth_date'] = properties['date_of_birth'].gsub('/', '-')
 
-    output_data['subscriber']['group_or_policy_number'] = '123456001' # TODO: Add fields to benefit_plan, confusingly called "group_id"
+    # TODO: Add fields to benefit_plan, confusingly called "group_id"
+    output_data['subscriber']['group_or_policy_number'] = '123456001'
 
-    output_data['subscriber']['relationship'] = 'Self' # TODO: Assume "Self" for now
+    # TODO: Assume "Self" for now
+    output_data['subscriber']['relationship'] = 'Self'
 
     output_data['subscriber']['employment_status'] = properties['employment_status']
     output_data['subscriber']['substance_abuse'] = properties['substance_abuse'] == 'Yes'
@@ -163,6 +165,15 @@ class Application < ActiveRecord::Base
     output_data['subscriber']['address']['postal_code'] = properties['zip']
     output_data['subscriber']['address']['state'] = properties['state']
 
+    output_data['subscriber']['contacts'] = [
+      {
+        'primary_communication_number' => properties['phone'],
+        'primary_communication_type' => "#{properties['phone_type']} Phone Number",
+        'communication_number2' => properties['other_phone'],
+        'communication_type2' => "#{properties['other_phone_type']} Phone Number"
+      }
+    ]
+
     # TODO: Fill this in
     output_data['subscriber']['benefits'] = [
       {
@@ -171,15 +182,6 @@ class Application < ActiveRecord::Base
         'coverage_level' => 'Employee Only',
         'late_enrollment' => false,
         'maintenance_type' => 'Addition'
-      }
-    ]
-
-    output_data['subscriber']['contacts'] = [
-      {
-        'primary_communication_number' => properties['phone'],
-        'primary_communication_type' => "#{properties['phone_type']} Phone Number",
-        'communication_number2' => properties['other_phone'],
-        'communication_type2' => "#{properties['other_phone_type']} Phone Number"
       }
     ]
 
