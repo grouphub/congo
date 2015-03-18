@@ -28,7 +28,19 @@ congoApp.controller('AccountsEditController', [
         .success(function (data, status, headers, config) {
           flashesFactory.add('success', 'Successfully updated account!');
 
+          var previousAccountId = _(congo.currentUser.accounts)
+            .findWhere({
+              slug: $scope.accountSlug()
+            })
+            .id;
+
           congo.currentUser = data.user;
+
+          var currentAccount = _(congo.currentUser.accounts).findWhere({
+            id: previousAccountId
+          });
+
+          $location.path('/accounts/' + currentAccount.slug + '/' + $scope.currentRole() + '/edit');
         })
         .error(function (data, status, headers, config) {
           var error = (data && data.error) ?
