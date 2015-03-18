@@ -3,7 +3,12 @@ account = Account.where(name: 'First Account').first
 group = Group.create! \
   account_id: account.id,
   name: 'My Group',
-  is_enabled: true
+  is_enabled: true,
+  properties: {
+    name: 'My Group',
+    group_id: '234',
+    tax_id: '345',
+  }
 
 alice = User.where(email: 'alice@first-account.com').first
 bob = User.where(email: 'bob@first-account.com').first

@@ -94,6 +94,7 @@ class Application < ActiveRecord::Base
     carrier_account = benefit_plan.carrier_account
     carrier = carrier_account.carrier
     membership = self.membership
+    group = membership.group
     properties = self.properties
     output_data = {}
 
@@ -131,11 +132,9 @@ class Application < ActiveRecord::Base
     output_data['reference_number'] = self.reference_number
     output_data['trading_partner_id'] = carrier.properties['trading_partner_id']
 
-    # TODO: Fill this in
-    # Group basis
     output_data['sponsor'] = {
-      'name' => 'Acme, Inc.', # TODO: Fill this in
-      'tax_id' => '999888777' # TODO: Fill this in
+      'name' => group.name
+      'tax_id' => group.properties['tax_id']
     }
 
     output_data['subscriber'] = {}
@@ -146,7 +145,8 @@ class Application < ActiveRecord::Base
     output_data['subscriber']['ssn'] = properties['social_security_number']
     output_data['subscriber']['birth_date'] = properties['date_of_birth'].gsub('/', '-')
 
-    # TODO: Add fields to benefit_plan, confusingly called "group_id"
+    # TODO: Add fields to benefit_plan, confusingly called "group_id". This
+    # field currently seems to be on group instead. Verify this.
     output_data['subscriber']['group_or_policy_number'] = '123456001'
 
     # TODO: Assume "Self" for now

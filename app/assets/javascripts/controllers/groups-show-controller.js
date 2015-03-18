@@ -8,7 +8,8 @@ congoApp.controller('GroupsShowController', [
 
     $scope.form = {
       name: null,
-      group_id: null
+      group_id: null,
+      tax_id: null
     };
 
     $scope.submit = function () {
