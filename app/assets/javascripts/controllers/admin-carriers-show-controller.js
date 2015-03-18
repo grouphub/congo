@@ -30,6 +30,8 @@ congoApp.controller('AdminCarriersShowController', [
         })
         .success(function (data, status, headers, config) {
           $location.path('/admin/carriers/' + data.carrier.slug).replace();
+
+          flashesFactory.add('success', 'Successfully updated the carrier.');
         })
         .error(function (data, status, headers, config) {
           var error = (data && data.error) ?

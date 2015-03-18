@@ -1,8 +1,8 @@
 var congoApp = angular.module('congoApp');
 
 congoApp.controller('AdminCarriersNewController', [
-  '$scope', '$http', '$location', 'flashesFactory', 'propertiesFactory',
-  function ($scope, $http, $location, flashesFactory, propertiesFactory) {
+  '$scope', '$http', '$location', 'flashesFactory',
+  function ($scope, $http, $location, flashesFactory) {
     $scope.form = {
       name: null,
       npi: null,
@@ -27,6 +27,8 @@ congoApp.controller('AdminCarriersNewController', [
         })
         .success(function (data, status, headers, config) {
           $location.path('/admin/carriers');
+
+          flashesFactory.add('success', 'Successfully created the carrier.');
         })
         .error(function (data, status, headers, config) {
           var error = (data && data.error) ?
