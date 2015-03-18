@@ -121,7 +121,7 @@ class Application < ActiveRecord::Base
     # TODO: Fill this in
     # Group basis
     output_data['sponsor'] = {
-      'name' => 'Acme, Inc.' # TODO: Fill this in
+      'name' => 'Acme, Inc.', # TODO: Fill this in
       'tax_id' => '999888777' # TODO: Fill this in
     }
 
@@ -165,11 +165,11 @@ class Application < ActiveRecord::Base
     # TODO: Fill this in
     output_data['subscriber']['benefits'] = [
       {
-        'begin_date': '2014-01-01',
-        'benefit_type': 'Health',
-        'coverage_level': 'Employee Only',
-        'late_enrollment': false,
-        'maintenance_type': 'Addition'
+        'begin_date' => '2014-01-01',
+        'benefit_type' => 'Health',
+        'coverage_level' => 'Employee Only',
+        'late_enrollment' => false,
+        'maintenance_type' => 'Addition'
       }
     ]
 

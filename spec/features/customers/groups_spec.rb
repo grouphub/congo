@@ -16,11 +16,19 @@ describe 'As a customer', js: true do
       account = Account.find_by_name('First Account')
 
       create_group_for(account)
-      create_customer
 
       group = Group.find_by_name('My Group')
-      role = Role.find_by_name('customer')
-      customer = role.user
+
+      customer = User.create \
+        first_name: 'Candice',
+        last_name: 'Customer',
+        email: 'candice@customer.com',
+        password: 'candice'
+
+      role = Role.create \
+        user_id: customer.id,
+        account_id: account.id,
+        name: 'customer'
 
       Membership.create! \
         group_id: group.id,
