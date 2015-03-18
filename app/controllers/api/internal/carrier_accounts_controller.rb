@@ -6,11 +6,7 @@ class Api::Internal::CarrierAccountsController < ApplicationController
   before_filter :ensure_broker!, only: [:create, :destroy]
 
   def index
-    # TODO: Check for current user
-
-    account_slug = params[:account_id]
-    account = Account.where(slug: account_slug).first
-    carrier_accounts = CarrierAccount.where(account_id: account.id)
+    carrier_accounts = CarrierAccount.where(account_id: current_account.id)
 
     respond_to do |format|
       format.json {
@@ -24,29 +20,25 @@ class Api::Internal::CarrierAccountsController < ApplicationController
   end
 
   def create
-    # TODO: Check for current user
-
-    account_slug = params[:account_id]
-    account = Account.where(slug: account_slug).first
     properties = params[:properties]
     name = properties['name']
-    carrier_slug = properties['carrier_name']
+    carrier_slug = properties['carrier_slug']
     carrier = Carrier.where(slug: carrier_slug).first
 
     unless name
-      # TODO: Handle this
-    end
-
-    unless account
-      # TODO: Handle this
+      # TODO: Test this
+      error_response('Name must be provided.')
+      return
     end
 
     unless carrier
-      # TODO: Handle this
+      # TODO: Test this
+      error_response('Could not find a matching carrier.')
+      return
     end
 
     carrier_account = CarrierAccount.create! \
-      account_id: account.id,
+      account_id: current_account.id,
       carrier_id: carrier.id,
       properties: properties,
       name: name
@@ -62,13 +54,38 @@ class Api::Internal::CarrierAccountsController < ApplicationController
 
   def show
     id = params[:id]
-    account_slug = params[:account_id]
-    account = Account.where(slug: account_slug).first
-    carrier_account = CarrierAccount.where(account_id: account.id, id: id).first
+    carrier_account = CarrierAccount.where(account_id: current_account.id, id: id).first
 
     unless carrier_account
-      # TODO: Handle this
+      # TODO: Test this
+      error_response('Could not find a matching carrier.')
+      return
     end
+
+    respond_to do |format|
+      format.json {
+        render json: {
+          carrier_account: render_carrier_account(carrier_account)
+        }
+      }
+    end
+  end
+
+  def update
+    id = params[:id]
+    properties = params[:properties]
+    name = properties['name']
+    carrier_account = CarrierAccount.where(account_id: current_account.id, id: id).first
+
+    unless carrier_account
+      # TODO: Test this
+      error_response('Could not find a matching carrier.')
+      return
+    end
+
+    carrier_account.update_attributes! \
+      name: name,
+      properties: properties
 
     respond_to do |format|
       format.json {
@@ -81,12 +98,12 @@ class Api::Internal::CarrierAccountsController < ApplicationController
 
   def destroy
     id = params[:id]
-    account_slug = params[:account_id]
-    account = Account.where(slug: account_slug).first
-    carrier_account = CarrierAccount.where(account_id: account.id, id: id).first
+    carrier_account = CarrierAccount.where(account_id: current_account.id, id: id).first
 
     unless carrier_account
-      # TODO: Handle this
+      # TODO: Test this
+      error_response('Could not find a matching carrier.')
+      return
     end
 
     carrier_account.destroy!

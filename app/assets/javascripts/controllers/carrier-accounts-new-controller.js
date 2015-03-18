@@ -1,59 +1,66 @@
 var congoApp = angular.module('congoApp');
 
 congoApp.controller('CarrierAccountsNewController', [
-  '$scope', '$http', '$location', 'propertiesFactory',
-  function ($scope, $http, $location, propertiesFactory) {
+  '$scope', '$http', '$location', 'flashesFactory',
+  function ($scope, $http, $location, flashesFactory) {
     // Make sure user is totally signed up before continuing.
     $scope.enforceValidAccount();
 
-    $scope.elements = [];
     $scope.carriers = [];
-    $scope.selectedCarrier = null;
+
+    $scope.accountTypes = [
+      {
+        slug: 'broker',
+        name: 'Broker'
+      },
+      {
+        slug: 'tpa',
+        name: 'TPA'
+      }
+    ];
+
+    $scope.form = {
+      name: null,
+      carrier_slug: null,
+      broker_number: null,
+      brokerage_name: null,
+      tax_id: null,
+      account_type: null
+    };
 
     $scope.submit = function () {
-      var properties = propertiesFactory.getPropertiesFromElements($scope.elements);
-
       $http
         .post('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/carrier_accounts.json', {
           name: $scope.name,
-          carrier_slug: $scope.selectedCarrier.slug,
-          properties: properties
+          properties: $scope.form
         })
         .success(function (data, status, headers, config) {
           $location.path('/accounts/' + $scope.accountSlug() + '/' + $scope.currentRole() + '/carrier_accounts');
         })
         .error(function (data, status, headers, config) {
-          debugger
+          var error = (data && data.error) ?
+            data.error :
+            'There was a problem creating the carrier account.';
+
+          flashesFactory.add('danger', error);
         });
     };
-
-    function done () {
-      if ($scope.elements && $scope.carriers) {
-        $scope.ready();
-      }
-    }
-
-    $http
-      .get('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/properties/carrier_accounts.json')
-      .success(function (data, status, headers, config) {
-        $scope.elements = data.elements;
-
-        done();
-      })
-      .error(function (data, status, headers, config) {
-        debugger
-      });
 
     $http
       .get('/api/internal/admin/carriers.json')
       .success(function (data, status, headers, config) {
         $scope.carriers = data.carriers;
-        $scope.selectedCarrier = data.carriers[0];
+        $scope.form.carrier_slug = data.carriers[0].slug;
+        $scope.form.account_type = $scope.accountTypes[0].slug;
 
-        done();
+        $scope.ready();
       })
       .error(function (data, status, headers, config) {
-        debugger
+        var error = (data && data.error) ?
+          data.error :
+          'There was a problem fetching the list of carriers.';
+
+        flashesFactory.add('danger', error);
       });
   }
 ]);

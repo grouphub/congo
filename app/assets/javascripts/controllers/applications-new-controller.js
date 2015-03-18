@@ -1,8 +1,8 @@
 var congoApp = angular.module('congoApp');
 
 congoApp.controller('ApplicationsNewController', [
-  '$scope', '$http', '$location', '$cookieStore',
-  function ($scope, $http, $location, $cookieStore) {
+  '$scope', '$http', '$location', '$cookieStore', 'flashesFactory',
+  function ($scope, $http, $location, $cookieStore, flashesFactory) {
     // Make sure user is totally signed up before continuing.
     $scope.enforceValidAccount();
 
@@ -74,7 +74,11 @@ congoApp.controller('ApplicationsNewController', [
           $location.path('/accounts/' + $scope.accountSlug() + '/' + $scope.currentRole());
         })
         .error(function (data, status, headers, config) {
-          debugger
+          var error = (data && data.error) ?
+            data.error :
+            'There was a problem updating the application.';
+
+          flashesFactory.add('danger', error);
         });
     }
 
@@ -92,7 +96,11 @@ congoApp.controller('ApplicationsNewController', [
         done();
       })
       .error(function (data, status, headers, config) {
-        debugger
+        var error = (data && data.error) ?
+          data.error :
+          'There was a problem fetching the group.';
+
+        flashesFactory.add('danger', error);
       });
 
     $http
@@ -103,7 +111,11 @@ congoApp.controller('ApplicationsNewController', [
         done();
       })
       .error(function (data, status, headers, config) {
-        debugger
+        var error = (data && data.error) ?
+          data.error :
+          'There was a problem fetching the benefit plan.';
+
+        flashesFactory.add('danger', error);
       });
   }
 ]);

@@ -37,15 +37,21 @@ class Api::Internal::BenefitPlansController < ApplicationController
     properties = params[:properties]
 
     unless name
-      # TODO: Handle this
+      # TODO: Test this
+      error_response('Name must be provided.')
+      return
     end
 
     unless account
-      # TODO: Handle this
+      # TODO: Test this
+      error_response('Could not find a matching account.')
+      return
     end
 
     unless carrier_account
-      # TODO: Handle this
+      # TODO: Test this
+      error_response('Could not find a matching carrier account.')
+      return
     end
 
     benefit_plan = BenefitPlan.create! \
@@ -65,9 +71,27 @@ class Api::Internal::BenefitPlansController < ApplicationController
 
   def update
     benefit_plan = BenefitPlan.find(params[:id])
+    properties = params[:properties]
+    name = properties['name']
+    carrier_account_id = properties['carrier_account_id'].to_i
 
+    unless benefit_plan
+      # TODO: Test this
+      error_response('Could not find a matching benefit plan.')
+      return
+    end
+
+    # Only modify `is_enabled` if it is passed as a parameter.
     unless params[:is_enabled].nil?
-      benefit_plan.update_attribute(:is_enabled, params[:is_enabled])
+      benefit_plan.update_attribute!(:is_enabled, params[:is_enabled])
+    end
+
+    # Only modify `properties` if it is passed as a parameter.
+    unless properties.nil?
+      benefit_plan.update_attributes! \
+        name: name,
+        carrier_account_id: carrier_account_id,
+        properties: properties
     end
 
     respond_to do |format|

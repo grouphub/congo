@@ -1,8 +1,8 @@
 var congoApp = angular.module('congoApp');
 
 congoApp.controller('AdminInvitationsIndexController', [
-  '$scope', '$http', '$location',
-  function ($scope, $http, $location) {
+  '$scope', '$http', '$location', 'flashesFactory',
+  function ($scope, $http, $location, flashesFactory) {
     // Make sure user is admin before continuing.
     $scope.enforceAdmin();
 
@@ -17,7 +17,11 @@ congoApp.controller('AdminInvitationsIndexController', [
           });
         })
         .error(function (data, status, headers, config) {
-          debugger
+          var error = (data && data.error) ?
+            data.error :
+            'There was a problem deleting the invitation.';
+
+          flashesFactory.add('danger', error);
         });
     };
 
@@ -31,7 +35,11 @@ congoApp.controller('AdminInvitationsIndexController', [
           $scope.description = '';
         })
         .error(function (data, status, headers, config) {
-          debugger
+          var error = (data && data.error) ?
+            data.error :
+            'There was a problem creating a new invitation.';
+
+          flashesFactory.add('danger', error);
         });
     };
 
@@ -43,7 +51,11 @@ congoApp.controller('AdminInvitationsIndexController', [
         $scope.ready();
       })
       .error(function (data, status, headers, config) {
-        debugger
+        var error = (data && data.error) ?
+          data.error :
+          'There was a problem fetching the list of invitations.';
+
+        flashesFactory.add('danger', error);
       });
   }
 ]);

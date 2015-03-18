@@ -108,12 +108,6 @@ Rails.application.routes.draw do
             post '/group_benefit_plans', to: 'group_benefit_plans#create'
             delete '/group_benefit_plans', to: 'group_benefit_plans#destroy'
           end
-
-          get '/properties/carrier_accounts', to: 'properties#carrier_accounts'
-          get '/properties/accounts', to: 'properties#accounts'
-          get '/properties/carriers', to: 'properties#carriers'
-          get '/properties/benefit_plans', to: 'properties#benefit_plans'
-          get '/properties/groups', to: 'properties#groups'
         end
       end
 

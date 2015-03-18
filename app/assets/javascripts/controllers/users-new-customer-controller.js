@@ -33,7 +33,11 @@ congoApp.controller('UsersNewCustomerController', [
           flashesFactory.add('success', 'Welcome, ' + congo.currentUser.first_name + ' ' + congo.currentUser.last_name + '!');
         })
         .error(function (data, status, headers, config) {
-          debugger
+          var error = (data && data.error) ?
+            data.error :
+            'There was a problem signing your in.';
+
+          flashesFactory.add('danger', error);
         });
     }
 
@@ -63,7 +67,11 @@ congoApp.controller('UsersNewCustomerController', [
           flashesFactory.add('success', 'Welcome, ' + congo.currentUser.first_name + ' ' + congo.currentUser.last_name + '!');
         })
         .error(function (data, status, headers, config) {
-          debugger
+          var error = (data && data.error) ?
+            data.error :
+            'There was a problem signing you up.';
+
+          flashesFactory.add('danger', error);
         });
     };
 

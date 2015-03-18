@@ -4,7 +4,39 @@
   <p>Add new carrier account connections.</p>
 
   <form ng-submit="submit()">
-    <properties:form x-elements="{{elements}}" x-data="{{data}}"></properties:form>
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" class="form-control" id="name" placeholder="Enter name&hellip;" ng-model="form.name" auto-focus>
+    </div>
+
+    <div class="form-group">
+      <label for="name">Carrier</label>
+      <select class="form-control" id="carrier_name" name="carrier_name" ng-model="form.carrier_slug">
+        <option ng-repeat="carrier in carriers" value="{{carrier.slug}}">{{carrier.name}}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="broker_number">Broker Number</label>
+      <input type="text" class="form-control" id="broker_number" placeholder="Enter Broker Number&hellip;" ng-model="form.broker_number">
+    </div>
+
+    <div class="form-group">
+      <label for="brokerage_name">Brokerage Name</label>
+      <input type="text" class="form-control" id="brokerage_name" placeholder="Enter Brokerage Name&hellip;" ng-model="form.brokerage_name">
+    </div>
+
+    <div class="form-group">
+      <label for="tax_id">Tax ID</label>
+      <input type="text" class="form-control" id="tax_id" placeholder="Enter Tax ID&hellip;" ng-model="form.tax_id">
+    </div>
+
+    <div class="form-group">
+      <label for="name">Account Type</label>
+      <select class="form-control" id="account_type" name="account_type" ng-model="form.account_type">
+        <option ng-repeat="account_type in accountTypes" value="{{account_type.slug}}">{{account_type.name}}</option>
+      </select>
+    </div>
 
     <input type="submit" class="btn btn-default" value="Link Account">
   </form>
