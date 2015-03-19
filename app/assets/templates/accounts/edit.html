@@ -2,25 +2,53 @@
   <form name="accountEditForm" ng-submit="submit()">
     <h1>Account Settings</h1>
 
-    <properties:form x-elements="{{elements}}" x-data="{{data}}"></properties:form>
+    <div class="form-group">
+      <label class="control-label" for="name">Name</label>
+      <input type="text" class="form-control" id="name" name="name" ng-model="form.name" placeholder="Enter a Company Name&hellip;" auto-focus>
+    </div>
+
+    <div class="form-group">
+      <label class="control-label" for="tagline">Tagline</label>
+      <input type="text" class="form-control" id="tagline" name="tagline" ng-model="form.tagline" placeholder="Enter a Company Tagline&hellip;">
+    </div>
+
+    <div class="form-group">
+      <label class="control-label" for="tax_id">Tax ID</label>
+      <input type="text" class="form-control" id="tax_id" name="tax_id" ng-model="form.tax_id" placeholder="Enter a Tax ID&hellip;">
+    </div>
+
+    <div class="form-group">
+      <label class="control-label" for="first_name">First Name</label>
+      <input type="text" class="form-control" id="first_name" name="first_name" ng-model="form.first_name" placeholder="Enter a First Name&hellip;">
+    </div>
+
+    <div class="form-group">
+      <label class="control-label" for="last_name">Last Name</label>
+      <input type="text" class="form-control" id="last_name" name="last_name" ng-model="form.last_name" placeholder="Enter a Last Name&hellip;">
+    </div>
+
+    <div class="form-group">
+      <label class="control-label" for="phone">Phone Number</label>
+      <input type="text" class="form-control" id="phone" name="phone" ng-model="form.phone" placeholder="Enter a Phone Number&hellip;">
+    </div>
 
     <div class="form-group">
       <label class="control-label">Plan Type</label><br>
 
       <label class="radio-inline">
-        <input type="radio" name="plan_type" value="free" ng-model="planName"> Free
+        <input type="radio" name="plan_type" value="free" ng-model="form.plan_name"> Free
       </label>
 
       <label class="radio-inline">
-        <input type="radio" name="plan_type" value="basic" ng-model="planName"> Basic
+        <input type="radio" name="plan_type" value="basic" ng-model="form.plan_name"> Basic
       </label>
 
       <label class="radio-inline">
-        <input type="radio" name="plan_type" value="standard" ng-model="planName"> Standard
+        <input type="radio" name="plan_type" value="standard" ng-model="form.plan_name"> Standard
       </label>
 
       <label class="radio-inline">
-        <input type="radio" name="plan_type" value="premiere" ng-model="planName"> Premiere
+        <input type="radio" name="plan_type" value="premier" ng-model="form.plan_name"> Premier
       </label>
     </div>
 

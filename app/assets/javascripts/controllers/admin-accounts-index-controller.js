@@ -1,8 +1,8 @@
 var congoApp = angular.module('congoApp');
 
 congoApp.controller('AdminAccountsIndexController', [
-  '$scope', '$http', '$location',
-  function ($scope, $http, $location) {
+  '$scope', '$http', '$location', 'flashesFactory',
+  function ($scope, $http, $location, flashesFactory) {
     // Make sure user is admin before continuing.
     $scope.enforceAdmin();
 
@@ -16,7 +16,11 @@ congoApp.controller('AdminAccountsIndexController', [
         $scope.ready();
       })
       .error(function (data, status, headers, config) {
-        debugger
+        var error = (data && data.error) ?
+          data.error :
+          'There was a problem fetching accounts.';
+
+        flashesFactory.add('danger', error);
       });
   }
 ]);

@@ -61,12 +61,6 @@ group :development do
   # When loading a page, do not show all the assets loaded in the logs.
   gem 'quiet_assets'
 
-  # For debugging.
-  gem 'pry'
-  gem 'pry-remote'
-  gem 'pry-nav'
-  gem 'pry-rails'
-
   # For front-end live reloading.
   gem 'guard-livereload', group: :development
   gem 'rack-livereload', group: :development
@@ -78,6 +72,12 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'capybara'
   gem 'selenium-webdriver'
+
+  # For debugging.
+  gem 'pry'
+  gem 'pry-remote'
+  gem 'pry-nav'
+  gem 'pry-rails'
 end
 
 group :production do

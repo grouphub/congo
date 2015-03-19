@@ -1,8 +1,8 @@
 var congoApp = angular.module('congoApp');
 
 congoApp.controller('CarrierAccountsIndexController', [
-  '$scope', '$http', '$location',
-  function ($scope, $http, $location) {
+  '$scope', '$http', '$location', 'flashesFactory',
+  function ($scope, $http, $location, flashesFactory) {
     // Make sure user is totally signed up before continuing.
     $scope.enforceValidAccount();
 
@@ -21,7 +21,11 @@ congoApp.controller('CarrierAccountsIndexController', [
           $scope.carrierAccounts.splice(index, 1);
         })
         .error(function (data, status, headers, config) {
-          debugger
+          var error = (data && data.error) ?
+            data.error :
+            'There was a problem deleting your carrier account.';
+
+          flashesFactory.add('danger', error);
         });
     };
 
@@ -33,7 +37,11 @@ congoApp.controller('CarrierAccountsIndexController', [
         $scope.ready();
       })
       .error(function (data, status, headers, config) {
-        debugger
+        var error = (data && data.error) ?
+          data.error :
+          'There was a problem fetching your carrier accounts.';
+
+        flashesFactory.add('danger', error);
       });
   }
 ]);
