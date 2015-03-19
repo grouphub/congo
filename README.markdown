@@ -23,5 +23,6 @@ Getting started
 10. Run `script/sweep_database`.
 11. You can run the tests via `bundle exec rspec spec`.
 12. Run the server using `bundle exec foreman start`.
-13. Visit the site locally at http://localhost:5000.
+13. Visit the site locally at
+    <a href="http://localhost:5000">http://localhost:5000</a>.
 
