@@ -44,6 +44,9 @@ gem 'rack-defense'
 gem 'aws-s3'
 gem 'fakes3'
 
+# For rich text in groups and benefit plans
+gem 'kramdown'
+
 group :doc do
   gem 'sdoc', '~> 0.4.0'
 end

@@ -162,6 +162,7 @@ GEM
       thor (>= 0.14, < 2.0)
     json (1.8.1)
     jwt (1.2.1)
+    kramdown (1.6.0)
     launchy (2.4.2)
       addressable (~> 2.3)
     letter_opener (1.2.0)
@@ -295,6 +296,7 @@ DEPENDENCIES
   guard-livereload
   jbuilder (~> 2.0)
   jquery-rails
+  kramdown
   letter_opener
   newrelic_rpm
   ng-rails-csrf
