@@ -104,6 +104,8 @@ class Api::Internal::GroupsController < ApplicationController
     end
 
     properties = params[:properties]
+    description_markdown = properties['description_markdown']
+    description_html = properties['description_html']
 
     unless params[:group]['is_enabled'].nil?
       group.update_attribute!(:is_enabled, params[:is_enabled])
@@ -112,7 +114,9 @@ class Api::Internal::GroupsController < ApplicationController
     unless properties.nil?
       group.update_attributes! \
         name: properties['name'],
-        properties: properties
+        properties: properties,
+        description_markdown: description_markdown,
+        description_html: description_html
     end
 
     respond_to do |format|

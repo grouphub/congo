@@ -77,6 +77,8 @@ class Api::Internal::BenefitPlansController < ApplicationController
     benefit_plan = BenefitPlan.find(params[:id])
     properties = params[:properties]
     name = properties['name']
+    description_markdown = properties['description_markdown']
+    description_html = properties['description_html']
     carrier_account_id = properties['carrier_account_id'].to_i
 
     unless benefit_plan
@@ -95,7 +97,9 @@ class Api::Internal::BenefitPlansController < ApplicationController
       benefit_plan.update_attributes! \
         name: name,
         carrier_account_id: carrier_account_id,
-        properties: properties
+        properties: properties,
+        description_markdown: description_markdown,
+        description_html: description_html
     end
 
     respond_to do |format|

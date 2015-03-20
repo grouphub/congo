@@ -1,8 +1,8 @@
 var congoApp = angular.module('congoApp');
 
 congoApp.controller('BenefitPlansShowController', [
-  '$scope', '$http', '$location', '$timeout',
-  function ($scope, $http, $location, $timeout) {
+  '$scope', '$http', '$location', '$timeout', '$sce', 'flashesFactory',
+  function ($scope, $http, $location, $timeout, $sce, flashesFactory) {
     // Make sure user is totally signed up before continuing.
     $scope.enforceValidAccount();
 
@@ -12,17 +12,25 @@ congoApp.controller('BenefitPlansShowController', [
       carrier_account_id: null,
       plan_type: null,
       exchange_plan: null,
-      small_group: null
+      small_group: null,
+      description_markdown: null,
+      description_html: null,
+      description_trusted: null
     };
 
     $scope.benefitPlan = null;
+
+    $scope.$watch('form.description_markdown', function (string) {
+      $scope.form.description_html = marked(string || '');
+      $scope.form.description_trusted = $sce.trustAsHtml($scope.form.description_html);
+    });
 
     $scope.submit = function () {
       $http
         .put('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/benefit_plans/' + $scope.benefitPlanId() + '.json', {
           name: $scope.form.name,
           carrier_account_id: $scope.form.carrier_account_id,
-          properties: $scope.form
+          properties: _($scope.form).omit('description_trusted')
         })
         .success(function (data, status, headers, config) {
           $location.path('/accounts/' + $scope.accountSlug() + '/' + $scope.currentRole() + '/benefit_plans');
