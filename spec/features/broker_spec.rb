@@ -43,8 +43,8 @@ describe 'Authentication', js: true do
       fill_in 'Name', with: 'First Account'
       fill_in 'Company Tagline', with: '#1 Account'
       fill_in 'Tax ID', with: '1234'
-      fill_in 'Account Contact First Name', with: 'Barry'
-      fill_in 'Account Contact Last Name', with: 'Barry Broker'
+      fill_in 'First Name', with: 'Barry'
+      fill_in 'Last Name', with: 'Barry Broker'
       fill_in 'Phone Number', with: '(555) 555-5555'
 
       all('input[type=submit]').first.click
@@ -110,8 +110,8 @@ describe 'Authentication', js: true do
       fill_in 'Name', with: 'First Account'
       fill_in 'Company Tagline', with: '#1 Account'
       fill_in 'Tax ID', with: '1234'
-      fill_in 'Account Contact First Name', with: 'Barry'
-      fill_in 'Account Contact Last Name', with: 'Barry Broker'
+      fill_in 'First Name', with: 'Barry'
+      fill_in 'Last Name', with: 'Barry Broker'
       fill_in 'Phone Number', with: '(555) 555-5555'
 
       all('input[type=submit]').first.click
@@ -130,6 +130,74 @@ describe 'Authentication', js: true do
 
     it 'prevents a broker from creating a new account with an existing email address'
     it 'allows a broker to create a second broker account'
+  end
+
+  describe 'Account Settings' do
+
+    it 'allows a broker to edit their account' do
+      create_broker
+
+      account = Account.find_by_name('First Account')
+      account_properties = account.properties
+      account_properties['tax_id'] = '123'
+      account_properties['first_name'] = 'Felice'
+      account_properties['last_name'] = 'Felton'
+      account_properties['phone'] = '555-555-5555'
+      account.update_attributes!(properties: account_properties)
+
+      signin_broker
+
+      all('a', text: 'Account Settings').first.click
+
+      within 'main' do
+        expect(page).to have_content('Account Settings')
+
+        selected_radio = all('input[type="radio"]').find { |radio| radio.checked? }
+        expect(selected_radio.value).to eq('basic')
+
+        values = all('input[type="text"]').map(&:value)
+        expect(values).to eq(['First Account', '#1 Account', '123', 'Felice', 'Felton', '555-555-5555'])
+
+        fill_in 'Name', with: 'Second Account'
+        fill_in 'Tagline', with: '#2 Account'
+        fill_in 'Tax ID', with: '234'
+        fill_in 'First Name', with: 'Barry'
+        fill_in 'Last Name', with: 'Belton'
+        fill_in 'Phone Number', with: '444-444-4444'
+        choose 'Premier'
+
+        all('input[type="submit"]').first.click
+
+        expect(page).to have_content('Account Settings')
+      end
+
+      expect(page).to have_content('Successfully updated account!')
+
+      expect(page.evaluate_script('window.location.pathname')).to \
+        eq('/accounts/second_account/broker')
+
+      accounts = page.evaluate_script('congo.currentUser.accounts')
+      expect(accounts.length).to eq(1)
+
+      account = accounts.first
+      account_properties = JSON.parse(account['properties_data'])
+      expect(account_properties['name']).to eq('Second Account')
+      expect(account_properties['tagline']).to eq('#2 Account')
+      expect(account_properties['plan_name']).to eq('premier')
+      expect(account_properties['tax_id']).to eq('234')
+      expect(account_properties['first_name']).to eq('Barry')
+      expect(account_properties['last_name']).to eq('Belton')
+      expect(account_properties['phone']).to eq('444-444-4444')
+
+      within 'main' do
+        selected_radio = all('input[type="radio"]').find { |radio| radio.checked? }
+        expect(selected_radio.value).to eq('premier')
+
+        values = all('input[type="text"]').map(&:value)
+        expect(values).to eq(['Second Account', '#2 Account', '234', 'Barry', 'Belton', '444-444-4444'])
+      end
+    end
+
   end
 
   describe 'API Tokens' do
@@ -193,14 +261,19 @@ describe 'Authentication', js: true do
     end
 
     it 'allows a broker to remove an existing API token' do
+      # Should not need this. This is to fix test wobbles. Token from previous
+      # test is sometimes sticking around.
+      Token.destroy_all
+
       create_broker
-      signin_broker
 
       account = Account.find_by_name('First Account')
 
       Token.create! \
         account_id: account.id,
         name: "Token #1"
+
+      signin_broker
 
       all('a', text: 'Manage API Tokens').first.click
 
@@ -210,12 +283,30 @@ describe 'Authentication', js: true do
         all('a', text: 'Delete').first.click
 
         wait_for('AJAX to finish') do
-          page.evaluate_script('$.active') == 0
+          !page.text.match(/Token \#1/)
         end
 
         expect(page).to have_no_content('Token #1')
       end
     end
+
+  end
+
+  describe 'Benefit Plans' do
+
+    it 'allows a broker to create a benefit plan'
+    it 'allows a broker to list benefit plans'
+    it 'allows a broker to edit a benefit plan'
+    it 'allows a broker to delete a benefit plan'
+
+  end
+
+  describe 'Groups' do
+
+    it 'allows a broker to create a group'
+    it 'allows a broker to list groups'
+    it 'allows a broker to edit a group'
+    it 'allows a broker to delete a group'
 
   end
 

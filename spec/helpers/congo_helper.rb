@@ -5,7 +5,12 @@ module CongoHelper
     account = Account.create \
       name: 'Admin',
       tagline: 'GroupHub administrative account',
-      plan_name: 'admin'
+      plan_name: 'admin',
+      properties: {
+        name: 'Admin',
+        tagline: 'GroupHub administrative account',
+        plan_name: 'admin'
+      }
 
     user = User.create \
       first_name: 'GroupHub',
@@ -49,7 +54,12 @@ module CongoHelper
     account = Account.create \
       name: 'First Account',
       tagline: '#1 Account',
-      plan_name: 'basic'
+      plan_name: 'basic',
+      properties: {
+        name: 'First Account',
+        tagline: '#1 Account',
+        plan_name: 'basic'
+      }
 
     user = User.create \
       first_name: 'Barry',
@@ -93,7 +103,12 @@ module CongoHelper
     account = Account.create \
       name: 'First Account',
       tagline: '#1 Account',
-      plan_name: 'basic'
+      plan_name: 'basic',
+      properties: {
+        name: 'First Account',
+        tagline: '#1 Account',
+        plan_name: 'basic'
+      }
 
     user = User.create \
       first_name: 'Candice',
@@ -165,25 +180,8 @@ module CongoHelper
       benefit_plan_id: benefit_plan.id
   end
 
-  def scroll_by(y)
-    page.execute_script "window.scrollBy(0, #{y})"
-  end
-
-  def scroll_to_bottom
-    scroll_by(10000)
-  end
-
   def current_user_data
     page.evaluate_script('window.congo.currentUser')
-  end
-
-  def wait_for(message, seconds = 5, &block)
-    (seconds * 10).times do |i|
-      break if yield
-      sleep(i * 0.1)
-    end
-
-    fail("Expected #{message}") unless yield
   end
 end
 

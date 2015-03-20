@@ -1,8 +1,8 @@
 var congoApp = angular.module('congoApp');
 
 congoApp.controller('UsersShowController', [
-  '$scope', '$http', '$location',
-  function ($scope, $http, $location) {
+  '$scope', '$http', '$location', 'flashesFactory',
+  function ($scope, $http, $location, flashesFactory) {
     $scope.user = null;
 
     $scope.$watch('user');
@@ -15,7 +15,11 @@ congoApp.controller('UsersShowController', [
         $scope.ready();
       })
       .error(function (data, status, headers, config) {
-        debugger
+        var error = (data && data.error) ?
+          data.error :
+          'There was a problem fetching your user data.';
+
+        flashesFactory.add('danger', error);
       });
   }
 ]);

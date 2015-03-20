@@ -1,41 +1,38 @@
 var congoApp = angular.module('congoApp');
 
 congoApp.controller('GroupsNewController', [
-  '$scope', '$http', '$location', 'propertiesFactory',
-  function ($scope, $http, $location, propertiesFactory) {
+  '$scope', '$http', '$location', 'flashesFactory',
+  function ($scope, $http, $location, flashesFactory) {
     // Make sure user is totally signed up before continuing.
     $scope.enforceValidAccount();
 
-    $scope.elements = [];
+    $scope.form = {
+      name: null,
+      group_id: null
+    };
 
     $scope.submit = function () {
-      var properties = propertiesFactory.getPropertiesFromElements($scope.elements);
-
       $http
         .post('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups.json', {
-          name: $scope.name,
-          properties: properties
+          name: $scope.form.name,
+          properties: $scope.form
         })
         .success(function (data, status, headers, config) {
           $location.path('/accounts/' + $scope.accountSlug() + '/' + $scope.currentRole() + '/groups');
 
+          // TODO: Does this need to be here?
           $scope.ready();
         })
         .error(function (data, status, headers, config) {
-          debugger
+          var error = (data && data.error) ?
+            data.error :
+            'There was a problem creating the group.';
+
+          flashesFactory.add('danger', error);
         });
     };
 
-    $http
-      .get('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/properties/groups.json')
-      .success(function (data, status, headers, config) {
-        $scope.elements = data.elements;
-
-        $scope.ready();
-      })
-      .error(function (data, status, headers, config) {
-        debugger
-      });
+    $scope.ready();
   }
 ]);
 

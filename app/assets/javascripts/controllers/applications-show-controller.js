@@ -1,8 +1,8 @@
 var congoApp = angular.module('congoApp');
 
 congoApp.controller('ApplicationsShowController', [
-  '$scope', '$http', '$location',
-  function ($scope, $http, $location) {
+  '$scope', '$http', '$location', 'flashesFactory',
+  function ($scope, $http, $location, flashesFactory) {
     // Make sure user is totally signed up before continuing.
     $scope.enforceValidAccount();
 
@@ -35,7 +35,11 @@ congoApp.controller('ApplicationsShowController', [
         $scope.ready();
       })
       .error(function (data, status, headers, config) {
-        debugger
+        var error = (data && data.error) ?
+          data.error :
+          'There was a problem fetching the application.';
+
+        flashesFactory.add('danger', error);
       });
   }
 ]);

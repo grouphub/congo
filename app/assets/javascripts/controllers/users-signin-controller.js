@@ -45,7 +45,11 @@ congoApp.controller('UsersSigninController', [
           flashesFactory.add('success', 'Welcome back, ' + congo.currentUser.first_name + ' ' + congo.currentUser.last_name + '!');
         })
         .error(function (data, status, headers, config) {
-          flashesFactory.add('danger', 'There was a problem signing you in.');
+          var error = (data && data.error) ?
+            data.error :
+            'There was a problem signing you in.';
+
+          flashesFactory.add('danger', error);
         });
     };
 

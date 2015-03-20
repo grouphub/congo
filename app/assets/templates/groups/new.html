@@ -4,10 +4,13 @@
   <form ng-submit="submit()">
     <div class="form-group">
       <label for="name">Name</label>
-      <input type="text" class="form-control" id="name" placeholder="Enter name&hellip;" ng-model="name" auto-focus>
+      <input type="text" class="form-control" id="name" placeholder="Enter name&hellip;" ng-model="form.name" auto-focus>
     </div>
 
-    <properties:form x-elements="{{elements}}" x-data="{{data}}"></properties:form>
+    <div class="form-group">
+      <label for="group_id">Group ID</label>
+      <input type="text" class="form-control" id="group_id" placeholder="Enter a Group ID&hellip;" ng-model="form.group_id">
+    </div>
 
     <input type="submit" class="btn btn-default" value="New group">
   </form>
