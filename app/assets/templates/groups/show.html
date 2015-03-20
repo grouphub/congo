@@ -1,8 +1,8 @@
 <!-- Form for brokers and group admins -->
 <div ng-if="isGroupAdmin()" class="col-md-12">
-  <div class="benefit-plans">
-    <h1>{{group.name}}</h1>
+  <h1>{{group.name}}</h1>
 
+  <div class="group-information">
     <h2>Group Information</h2>
 
     <form ng-submit="submit()">
@@ -37,9 +37,61 @@
         </div>
       </div>
     </form>
+  </div>
+
+  <hr>
+
+  <div class="attachments">
+    <h2>Attachments</h2>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Description</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr ng-repeat="attachment in group.attachments">
+          <td>{{attachment.title}}</td>
+
+          <td>{{attachment.description}}</td>
+
+          <td>
+            <a class="btn btn-default btn-xs" target="_blank" ng-href="{{attachment.url}}">Preview</a>
+            <a href="" class="btn btn-danger btn-xs" ng-click="deleteAttachmentAt($index)">Delete</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
 
     <hr>
 
+    <form id="new-attachment" class="new-attachment" ng-submit="newAttachment()">
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input type="title" class="form-control" id="title" placeholder="Enter a Title&hellip;" ng-model="attachmentFormData.title">
+      </div>
+
+      <div class="form-group">
+        <label for="description">Description</label>
+        <input type="description" class="form-control" id="description" placeholder="Enter a Description&hellip;" ng-model="attachmentFormData.description">
+      </div>
+
+      <div class="form-group">
+        <label for="file">File</label>
+        <input type="file" class="form-control" id="file" onchange="angular.element(this).scope().fileChanged(this)">
+      </div>
+
+      <input type="submit" class="btn btn-primary" value="Add Attachment">
+    </form>
+  </div>
+
+  <hr>
+
+  <div class="benefit-plans">
     <h2>Benefit Plans</h2>
 
     <table class="table">
@@ -136,11 +188,11 @@
 
   <form class="invite-member" ng-submit="inviteMember()">
     <div class="form-group">
-      <label for="email">Invite a new member</label>
+      <label for="email">Invite a New Member</label>
       <input type="email" class="form-control" id="email" placeholder="Enter email&hellip;" ng-model="inviteMemberFormData.email">
     </div>
 
-    <input type="submit" class="btn btn-default" value="Invite a Member">
+    <input type="submit" class="btn btn-primary" value="Invite a Member">
   </form>
 
   <hr>
@@ -180,11 +232,11 @@
 
   <form class="invite-group-admin" ng-if="currentRole() === 'broker'" ng-submit="inviteGroupAdmin()">
     <div class="form-group">
-      <label for="email">Invite a new group admin</label>
+      <label for="email">Invite a New Group Admin</label>
       <input type="email" class="form-control" id="email" placeholder="Enter email&hellip;" ng-model="inviteGroupAdminFormData.email">
     </div>
 
-    <input type="submit" class="btn btn-default" value="Invite a Group Admin">
+    <input type="submit" class="btn btn-primary" value="Invite a Group Admin">
   </form>
 </div>
 

@@ -1,4 +1,13 @@
 GIT
+  remote: git://github.com/bartoszkopinski/aws-s3.git
+  revision: 6d8525e5f69d4d46ff51a30ca8976c7584b68f36
+  specs:
+    aws-s3 (0.6.3)
+      builder
+      mime-types
+      xml-simple
+
+GIT
   remote: git://github.com/pokitdok/pokitdok-ruby.git
   revision: fe2a6a984958a66250402189c35ee20726c705f9
   specs:
@@ -86,10 +95,6 @@ GEM
   specs:
     addressable (2.3.6)
     arel (5.0.1.20140414130214)
-    aws-s3 (0.6.3)
-      builder
-      mime-types
-      xml-simple
     bcrypt (3.1.7)
     builder (3.2.2)
     capybara (2.4.4)
@@ -296,7 +301,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  aws-s3
+  aws-s3!
   bcrypt (~> 3.1.7)
   capybara
   clockwork

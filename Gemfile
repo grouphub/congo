@@ -44,7 +44,7 @@ gem 'ng-rails-csrf'
 gem 'rack-defense'
 
 # For Amazon S3 attachments
-gem 'aws-s3'
+gem 'aws-s3', github: 'bartoszkopinski/aws-s3'
 gem 'fakes3'
 
 # For rich text in groups and benefit plans

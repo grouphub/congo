@@ -206,7 +206,8 @@ class Api::Internal::GroupsController < ApplicationController
       'customer_memberships' => customer_memberships,
       'group_admin_memberships' => group_admin_memberships,
       'benefit_plans' => benefit_plans,
-      'applications' => applications
+      'applications' => applications,
+      'attachments' => group.attachments
     })
   end
 end

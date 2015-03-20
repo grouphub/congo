@@ -380,6 +380,74 @@ congoApp.controller('GroupsShowController', [
 
         flashesFactory.add('danger', error);
       });
+
+    // ===========
+    // Attachments
+    // ===========
+    $scope.attachmentFormData = {
+      title: null,
+      description: null
+    };
+
+    $scope.file = {
+      name: ''
+    };
+
+    $scope.fileChanged = function (e) {
+      $scope.$apply(function () {
+        $scope.file.name = (e.files && e.files[0]) ? e.files[0].name : '';
+      });
+    };
+
+    $scope.newAttachment = function () {
+      var fileInput = $('#new-attachment').find('[type="file"]');
+      var file = fileInput[0].files[0];
+      var formData = new FormData();
+
+      formData.append('file', file);
+      formData.append('properties', JSON.stringify($scope.attachmentFormData));
+
+      $http
+        .post('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups/' + $scope.groupSlug() + '/attachments.json', formData, {
+          withCredentials: true,
+          headers: {
+            'Content-Type': undefined
+          },
+          transformRequest: angular.identity
+        })
+        .success(function (data, status, headers, config) {
+          $scope.group.attachments.push(data.attachment);
+      
+          fileInput[0].value = null;
+          $scope.file.name = '';
+        })
+        .error(function (data, status, headers, config) {
+          var error = (data && data.error) ?
+            data.error :
+            'There was a problem uploading the file.';
+
+          flashesFactory.add('danger', error);
+        });
+    };
+
+    $scope.deleteAttachmentAt = function (index) {
+      var attachment = $scope.group.attachments[index];
+
+      $http
+        .delete('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups/' + $scope.groupSlug() + '/attachments/' + attachment.id + '.json')
+        .success(function (data, status, headers, config) {
+          $scope.group.attachments = _($scope.group.attachments).reject(function (deletedAttachment) {
+            return attachment.id === deletedAttachment.id;
+          });
+        })
+        .error(function (data, status, headers, config) {
+          var error = (data && data.error) ?
+            data.error :
+            'There was a problem deleting the attachment.';
+
+          flashesFactory.add('danger', error);
+        });
+    }
   }
 ]);
 

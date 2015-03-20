@@ -294,7 +294,9 @@ describe 'Authentication', js: true do
 
   describe 'Benefit Plans' do
 
+    # TODO: Make sure to test descriptions
     it 'allows a broker to create a benefit plan'
+
     it 'allows a broker to list benefit plans'
     it 'allows a broker to edit a benefit plan'
     it 'allows a broker to delete a benefit plan'
@@ -303,7 +305,9 @@ describe 'Authentication', js: true do
 
   describe 'Groups' do
 
+    # TODO: Make sure to test descriptions
     it 'allows a broker to create a group'
+
     it 'allows a broker to list groups'
     it 'allows a broker to edit a group'
     it 'allows a broker to delete a group'

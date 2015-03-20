@@ -15,8 +15,13 @@ class S3
     AWS::S3::S3Object.find(name, self.bucket_name)
   end
 
-  def self.store(name, file)
-    AWS::S3::S3Object.store(name, file, self.bucket_name, access: :public_read)
+  def self.store(name, file, content_type)
+    AWS::S3::S3Object.store \
+      name,
+      file,
+      self.bucket_name,
+      access: :public_read,
+      content_type: content_type
   end
 
   def self.public_url(name)
