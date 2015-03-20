@@ -4,7 +4,7 @@ class Token < ActiveRecord::Base
   before_save :ensure_unique_id
 
   def ensure_unique_id
-    self.unique_id = SecureRandom.uuid.gsub('-', '')
+    self.unique_id = ThirtySix.generate
   end
 end
 
