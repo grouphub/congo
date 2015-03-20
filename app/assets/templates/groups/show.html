@@ -263,12 +263,32 @@
 
 <!-- Form for customers -->
 <div ng-if="currentRole() === 'customer'" class="col-md-12">
-  <div class="benefit-plans">
-    <h1>{{group.name}}</h1>
+  <h1>{{group.name}}</h1>
+
+
+  <div class="description">
+    <p>You can find more information about the group by clicking "View Description" below.</p>
 
     <a class="btn btn-default" href="" ng-click="showGroupDescription(group)">View Description</a>
+  </div>
 
-    <hr>
+  <hr>
+
+  <div class="attachments" ng-if="group.attachments && group.attachments.length > 0">
+    <p>View the attached documents to learn more about the group. Hold your mouse over an attachment to view a description.</p>
+
+    <ul class="list-inline">
+      <li ng-repeat="attachment in group.attachments">
+        <a ng-href="{{attachment.url}}" target="_blank" class="btn btn-default btn-xs" title="{{attachment.description}}">
+          {{attachment.title}}
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <hr ng-if="group.attachments && group.attachments.length > 0">
+
+  <div class="benefit-plans">
 
     <h2>Benefit Plans</h2>
 
@@ -310,7 +330,23 @@
           </td>
 
           <td ng-if="applications(benefitPlan).length < 1">
-            <a class="btn btn-default btn-xs" ng-click="showBenefitPlanDescription(benefitPlan)" ng-href="">View Description</a>
+            <a class="btn btn-default btn-xs" ng-click="showBenefitPlanDescription(benefitPlan)" ng-href="">Description</a>
+
+            <span class="dropdown" ng-if="benefitPlan.attachments && benefitPlan.attachments.length > 0">
+              <a class="btn btn-default btn-xs dropdown-toggle" id="attachments-{{$index}}" data-target="" href="" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
+                Attachments
+                <span class="caret"></span>
+              </a>
+
+              <ul class="dropdown-menu" role="menu" aria-labelledby="attachments-{{$index}}">
+                <li ng-repeat="attachment in benefitPlan.attachments">
+                  <a ng-href="{{attachment.url}}" target="_blank" title="{{attachment.description}}">
+                    {{attachment.title}}
+                  </a>
+                <li>
+              </ul>
+            </span>
+
             <a class="btn btn-warning btn-xs" ng-click="selectBenefitPlan(benefitPlan)" ng-href="">Select</a>
             <a class="btn btn-danger btn-xs" ng-click="declineBenefitPlan(benefitPlan)" ng-href="">Decline</a>
           </td>
