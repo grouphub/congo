@@ -290,6 +290,18 @@ congoApp.controller('GroupsShowController', [
       eventsFactory.emit('enrollment-status', application);
     };
 
+    $scope.showGroupDescription = function (group) {
+      $('#description-modal').modal('show');
+
+      eventsFactory.emit('description', group);
+    };
+
+    $scope.showBenefitPlanDescription = function (benefitPlan) {
+      $('#description-modal').modal('show');
+
+      eventsFactory.emit('description', benefitPlan);
+    };
+
     $scope.addBenefitPlan = function (benefitPlan) {
       var data = {
         benefit_plan_id: benefitPlan.id

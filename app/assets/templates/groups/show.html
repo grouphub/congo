@@ -193,12 +193,16 @@
   <div class="benefit-plans">
     <h1>{{group.name}}</h1>
 
+    <a class="btn btn-default" href="" ng-click="showGroupDescription(group)">View Description</a>
+
+    <hr>
+
     <h2>Benefit Plans</h2>
 
     <table class="table">
       <thead>
         <tr>
-          <th>Benefit Plan name</th>
+          <th>Benefit Plan Name</th>
           <th>Current Application</th>
           <th>Actions</th>
         </tr>
@@ -233,6 +237,7 @@
           </td>
 
           <td ng-if="applications(benefitPlan).length < 1">
+            <a class="btn btn-default btn-xs" ng-click="showBenefitPlanDescription(benefitPlan)" ng-href="">View Description</a>
             <a class="btn btn-warning btn-xs" ng-click="selectBenefitPlan(benefitPlan)" ng-href="">Select</a>
             <a class="btn btn-danger btn-xs" ng-click="declineBenefitPlan(benefitPlan)" ng-href="">Decline</a>
           </td>
