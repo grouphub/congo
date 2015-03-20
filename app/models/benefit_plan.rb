@@ -1,7 +1,6 @@
 class BenefitPlan < ActiveRecord::Base
   include Sluggable
   include Propertied
-  include Bodied
 
   has_many :group_benefit_plans
   has_many :applications

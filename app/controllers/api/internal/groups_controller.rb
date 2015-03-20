@@ -50,6 +50,8 @@ class Api::Internal::GroupsController < ApplicationController
     account_slug = params[:account_id]
     account = Account.where(slug: account_slug).first
     properties = params[:properties]
+    description_markdown = properties['description_markdown']
+    description_html = properties['description_html']
 
     unless name
       # TODO: Test this
@@ -66,7 +68,9 @@ class Api::Internal::GroupsController < ApplicationController
     group = Group.create! \
       name: name,
       account_id: account.id,
-      properties: properties
+      properties: properties,
+      description_markdown: description_markdown,
+      description_html: description_html
 
     respond_to do |format|
       format.json {

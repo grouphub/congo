@@ -35,6 +35,8 @@ class Api::Internal::BenefitPlansController < ApplicationController
     carrier_account_id = params[:carrier_account_id]
     carrier_account = CarrierAccount.where(id: carrier_account_id, account_id: account.id).first
     properties = params[:properties]
+    description_markdown = properties['description_markdown']
+    description_html = properties['description_html']
 
     unless name
       # TODO: Test this
@@ -58,7 +60,9 @@ class Api::Internal::BenefitPlansController < ApplicationController
       name: name,
       account_id: account.id,
       carrier_account_id: carrier_account.id,
-      properties: properties
+      properties: properties,
+      description_markdown: description_markdown,
+      description_html: description_html
 
     respond_to do |format|
       format.json {
