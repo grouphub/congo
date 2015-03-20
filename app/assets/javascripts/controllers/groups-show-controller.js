@@ -6,6 +6,9 @@ congoApp.controller('GroupsShowController', [
     // Make sure user is totally signed up before continuing.
     $scope.enforceValidAccount();
 
+    // Not the greatest place to put a selector, but c'est la vie.
+    $('#show-group-tabs').tab();
+
     $scope.form = {
       name: null,
       group_id: null,

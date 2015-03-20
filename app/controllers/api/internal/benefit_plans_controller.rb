@@ -149,7 +149,8 @@ class Api::Internal::BenefitPlansController < ApplicationController
       'carrier_account' => carrier_account.as_json.merge({
         'account' => carrier_account.account,
         'carrier' => carrier_account.carrier
-      })
+      }),
+      'attachments' => benefit_plan.attachments
     })
   end
 end

@@ -12,6 +12,7 @@ class Api::Internal::AttachmentsController < ApplicationController
 
     unless file
       error_response('File object must be provided.')
+      return
     end
 
     tempfile = file.tempfile
@@ -24,6 +25,7 @@ class Api::Internal::AttachmentsController < ApplicationController
 
     unless title.present?
       error_response('Title must be provided.')
+      return
     end
 
     attributes = {
@@ -35,8 +37,8 @@ class Api::Internal::AttachmentsController < ApplicationController
 
     group_slug = params[:group_id]
     group = Group.where(account_id: current_account.id, slug: group_slug).first
-    benefit_plan_slug = params[:benefit_plan_id]
-    benefit_plan = BenefitPlan.where(account_id: current_account.id, slug: benefit_plan_slug).first
+    benefit_plan_id = params[:benefit_plan_id]
+    benefit_plan = BenefitPlan.where(account_id: current_account.id, id: benefit_plan_id).first
 
     if group
       attributes[:group_id] = group.id
@@ -44,6 +46,7 @@ class Api::Internal::AttachmentsController < ApplicationController
       attributes[:benefit_plan_id] = benefit_plan.id
     else
       error_response('Could not find an object to attach to')
+      return
     end
 
     S3.store(name, tempfile, content_type)
@@ -64,8 +67,8 @@ class Api::Internal::AttachmentsController < ApplicationController
   def destroy
     group_slug = params[:group_id]
     group = Group.where(account_id: current_account.id, slug: group_slug).first
-    benefit_plan_slug = params[:benefit_plan_id]
-    benefit_plan = BenefitPlan.where(account_id: current_account.id, slug: benefit_plan_slug).first
+    benefit_plan_id = params[:benefit_plan_id]
+    benefit_plan = BenefitPlan.where(account_id: current_account.id, id: benefit_plan_id).first
     attributes = {
       id: params[:id]
     }
@@ -76,13 +79,17 @@ class Api::Internal::AttachmentsController < ApplicationController
       attributes[:benefit_plan_id] = benefit_plan.id
     else
       error_response('Could not find an object to attach to')
+      return
     end
 
     attachment = Attachment.where(attributes).first
 
     unless attachment
       error_response('Could not find a matching attachment to delete.')
+      return
     end
+
+    S3.delete(attachment.filename)
 
     attachment.destroy!
 
