@@ -6,6 +6,8 @@ class CreateBenefitPlans < ActiveRecord::Migration
       t.string :name
       t.string :slug
       t.boolean :is_enabled
+      t.text :description_markdown
+      t.text :description_html
 
       # Fields:
       #
