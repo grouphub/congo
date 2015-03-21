@@ -1,5 +1,3 @@
-require 'pokitdok'
-
 class Api::Internal::EligibilitiesController < ApplicationController
   include ApplicationHelper
 

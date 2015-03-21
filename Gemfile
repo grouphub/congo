@@ -32,7 +32,7 @@ gem 'daemons'
 gem 'stripe'
 
 # For health insurance enrollment and other concerns.
-gem 'pokitdok-ruby', github: 'pokitdok/pokitdok-ruby'
+gem 'pokitdok-ruby', github: 'pokitdok/pokitdok-ruby', require: 'pokitdok'
 
 # For monitoring.
 gem 'newrelic_rpm'
