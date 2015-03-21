@@ -31,7 +31,74 @@
       <input type="text" class="form-control" id="small_group" placeholder="Enter a Small Group&hellip;" ng-model="form.small_group">
     </div>
 
-    <input type="submit" class="btn btn-primary" value="Update Benefit Plan">
+    <div class="row">
+      <div class="form-group col-md-6">
+        <label for="description">Description</label>
+        <textarea class="form-control markdown" id="description" placeholder="Enter a Description&hellip;" ng-model="form.description_markdown"></textarea>
+        <small>
+          Enter a description using Markdown. <a href="">Click here</a> for a Markdown reference.
+        </small>
+      </div>
+
+      <div class="form-group col-md-6">
+        <label for="markdown">Preview</label>
+        <div id="markdown" ng-bind-html="form.description_trusted"></div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <input type="submit" class="btn btn-primary" value="Update Benefit Plan">
+      </div>
+    </div>
+  </form>
+
+  <hr>
+
+  <h2>Attachments</h2>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr ng-repeat="attachment in benefitPlan.attachments">
+        <td>{{attachment.title}}</td>
+
+        <td>{{attachment.description}}</td>
+
+        <td>
+          <a class="btn btn-default btn-xs" target="_blank" ng-href="{{attachment.url}}">Preview</a>
+          <a href="" class="btn btn-danger btn-xs" ng-click="deleteAttachmentAt($index)">Delete</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr>
+
+  <form id="new-attachment" class="new-attachment" ng-submit="newAttachment()">
+    <div class="form-group">
+      <label for="title">Title</label>
+      <input type="title" class="form-control" id="title" placeholder="Enter a Title&hellip;" ng-model="attachmentFormData.title">
+    </div>
+
+    <div class="form-group">
+      <label for="description">Description</label>
+      <input type="description" class="form-control" id="description" placeholder="Enter a Description&hellip;" ng-model="attachmentFormData.description">
+    </div>
+
+    <div class="form-group">
+      <label for="file">File</label>
+      <input type="file" class="form-control" id="file" onchange="angular.element(this).scope().fileChanged(this)">
+    </div>
+
+    <input type="submit" class="btn btn-primary" value="Add Attachment">
   </form>
 </div>
 

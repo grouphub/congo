@@ -50,6 +50,8 @@ class Api::Internal::GroupsController < ApplicationController
     account_slug = params[:account_id]
     account = Account.where(slug: account_slug).first
     properties = params[:properties]
+    description_markdown = properties['description_markdown']
+    description_html = properties['description_html']
 
     unless name
       # TODO: Test this
@@ -66,7 +68,9 @@ class Api::Internal::GroupsController < ApplicationController
     group = Group.create! \
       name: name,
       account_id: account.id,
-      properties: properties
+      properties: properties,
+      description_markdown: description_markdown,
+      description_html: description_html
 
     respond_to do |format|
       format.json {
@@ -99,16 +103,21 @@ class Api::Internal::GroupsController < ApplicationController
       return
     end
 
-    properties = params[:properties]
-
     unless params[:group]['is_enabled'].nil?
-      group.update_attribute!(:is_enabled, params[:is_enabled])
+      group.update_attributes!(is_enabled: params[:is_enabled])
     end
 
+    properties = params[:properties]
+
     unless properties.nil?
+      description_markdown = properties['description_markdown']
+      description_html = properties['description_html']
+
       group.update_attributes! \
         name: properties['name'],
-        properties: properties
+        properties: properties,
+        description_markdown: description_markdown,
+        description_html: description_html
     end
 
     respond_to do |format|
@@ -197,7 +206,8 @@ class Api::Internal::GroupsController < ApplicationController
       'customer_memberships' => customer_memberships,
       'group_admin_memberships' => group_admin_memberships,
       'benefit_plans' => benefit_plans,
-      'applications' => applications
+      'applications' => applications,
+      'attachments' => group.attachments
     })
   end
 end

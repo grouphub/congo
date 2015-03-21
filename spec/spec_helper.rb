@@ -6,6 +6,12 @@ RSpec::Matchers.define :be_a_uuid do
   end
 end
 
+RSpec::Matchers.define :be_a_thirty_six do
+  match do |actual|
+    actual.match(/[0-9a-z]{22,25}/)
+  end
+end
+
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true

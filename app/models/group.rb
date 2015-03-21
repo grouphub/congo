@@ -4,6 +4,7 @@ class Group < ActiveRecord::Base
 
   has_many :memberships
   has_many :group_benefit_plans
+  has_many :attachments
 
   belongs_to :account
 end

@@ -1,21 +1,29 @@
 var congoApp = angular.module('congoApp');
 
 congoApp.controller('GroupsNewController', [
-  '$scope', '$http', '$location', 'flashesFactory',
-  function ($scope, $http, $location, flashesFactory) {
+  '$scope', '$http', '$location', '$sce', 'flashesFactory',
+  function ($scope, $http, $location, $sce, flashesFactory) {
     // Make sure user is totally signed up before continuing.
     $scope.enforceValidAccount();
 
     $scope.form = {
       name: null,
-      group_id: null
+      group_id: null,
+      description_markdown: null,
+      description_html: null,
+      description_trusted: null
     };
+
+    $scope.$watch('form.description_markdown', function (string) {
+      $scope.form.description_html = marked(string || '');
+      $scope.form.description_trusted = $sce.trustAsHtml($scope.form.description_html);
+    });
 
     $scope.submit = function () {
       $http
         .post('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups.json', {
           name: $scope.form.name,
-          properties: $scope.form
+          properties: _($scope.form).omit('description_trusted')
         })
         .success(function (data, status, headers, config) {
           $location.path('/accounts/' + $scope.accountSlug() + '/' + $scope.currentRole() + '/groups');

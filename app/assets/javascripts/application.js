@@ -18,6 +18,7 @@
 //= require jquery_ujs
 //= require underscore
 //= require eventemitter-2
+//= require marked
 //= require bootstrap
 //= require bootstrap-datepicker
 //= require angular
@@ -94,4 +95,5 @@
 //= require directives/eligibility-modal
 //= require directives/review-application-modal
 //= require directives/enrollment-status-modal
+//= require directives/description-modal
 

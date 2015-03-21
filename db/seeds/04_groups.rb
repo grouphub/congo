@@ -3,7 +3,13 @@ account = Account.where(name: 'First Account').first
 group = Group.create! \
   account_id: account.id,
   name: 'My Group',
-  is_enabled: true
+  is_enabled: true,
+  description_html: "<h1>My Group</h1>\n<p>An example group.</p>",
+  description_markdown: "# My Group\n\nAn example group.",
+  properties: {
+    description_html: "<h1>My Group</h1>\n<p>An example group.</p>",
+    description_markdown: "# My Group\n\nAn example group."
+  }
 
 alice = User.where(email: 'alice@first-account.com').first
 bob = User.where(email: 'bob@first-account.com').first

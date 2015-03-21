@@ -20,5 +20,11 @@ BenefitPlan.create! \
   account_id: account.id,
   carrier_account_id: carrier_account.id,
   name: 'Best Health Insurance PPO',
-  is_enabled: true
+  is_enabled: true,
+  description_html: "<h1>Best Health Insurance PPO</h1>\n<p>An example plan.</p>",
+  description_markdown: "# Best Health Insurance PPO\n\nAn example plan.",
+  properties: {
+    description_html: "<h1>Best Health Insurance PPO</h1>\n<p>An example plan.</p>",
+    description_markdown: "# Best Health Insurance PPO\n\nAn example plan."
+  }
 

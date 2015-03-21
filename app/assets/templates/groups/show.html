@@ -1,74 +1,301 @@
-<div class="col-md-12">
-  <div ng-if="isGroupAdmin()" class="benefit-plans">
-    <h1>{{group.name}}</h1>
+<!-- Form for brokers and group admins -->
+<div ng-if="isGroupAdmin()" class="col-md-12">
+  <h1>{{group.name}}</h1>
 
-    <h2>Group Information</h2>
+  <div id="show-group-tabs" role="tabpanel">
+    <!-- Tabs -->
+    <ul class="nav nav-tabs" role "tablist">
+      <li role="presentation" class="active">
+        <a href="" data-target="#basics" aria-controls="basics" role="tab" data-toggle="tab">Basics</a>
+      </li>
 
-    <form ng-submit="submit()">
-      <div class="form-group">
-        <label for="name">Name</label>
-        <input type="text" class="form-control" id="name" placeholder="Enter name&hellip;" ng-model="form.name" auto-focus>
+      <li role="presentation">
+        <a href="" data-target="#attachments" aria-controls="attachments" role="tab" data-toggle="tab">Attachments</a>
+      </li>
+
+      <li role="presentation">
+        <a href="" data-target="#benefit-plans" aria-controls="benefit-plans" role="tab" data-toggle="tab">Benefit Plans</a>
+      </li>
+
+      <li role="presentation">
+        <a href="" data-target="#group-admins" aria-controls="group-admins" role="tab" data-toggle="tab">Group Admins</a>
+      </li>
+
+      <li role="presentation">
+        <a href="" data-target="#members" aria-controls="members" role="tab" data-toggle="tab">Members</a>
+      </li>
+    </ul>
+
+    <!-- Panes -->
+    <div class="tab-content">
+      <div role="tabpanel" class="tab-pane active" id="basics">
+        <h2>Basic Info</h2>
+
+        <form ng-submit="submit()">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" placeholder="Enter name&hellip;" ng-model="form.name" auto-focus>
+          </div>
+
+          <div class="form-group">
+            <label for="group_id">Group ID</label>
+            <input type="text" class="form-control" id="group_id" placeholder="Enter a Group ID&hellip;" ng-model="form.group_id">
+          </div>
+
+          <div class="row">
+            <div class="form-group col-md-6">
+              <label for="description">Description</label>
+              <textarea class="form-control markdown" id="description" placeholder="Enter a Description&hellip;" ng-model="form.description_markdown"></textarea>
+              <small>
+                Enter a description using Markdown. <a href="">Click here</a> for a Markdown reference.
+              </small>
+            </div>
+
+            <div class="form-group col-md-6">
+              <label for="markdown">Preview</label>
+              <div id="markdown" ng-bind-html="form.description_trusted"></div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12">
+              <input type="submit" class="btn btn-primary" value="Update Group">
+            </div>
+          </div>
+        </form>
       </div>
 
-      <div class="form-group">
-        <label for="group_id">Group ID</label>
-        <input type="text" class="form-control" id="group_id" placeholder="Enter a Group ID&hellip;" ng-model="form.group_id">
+      <div role="tabpanel" class="tab-pane" id="attachments">
+        <h2>Attachments</h2>
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Description</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr ng-repeat="attachment in group.attachments">
+              <td>{{attachment.title}}</td>
+
+              <td>{{attachment.description}}</td>
+
+              <td>
+                <a class="btn btn-default btn-xs" target="_blank" ng-href="{{attachment.url}}">Preview</a>
+                <a href="" class="btn btn-danger btn-xs" ng-click="deleteAttachmentAt($index)">Delete</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <hr>
+
+        <form id="new-attachment" class="new-attachment" ng-submit="newAttachment()">
+          <div class="form-group">
+            <label for="title">Title</label>
+            <input type="title" class="form-control" id="title" placeholder="Enter a Title&hellip;" ng-model="attachmentFormData.title">
+          </div>
+
+          <div class="form-group">
+            <label for="description">Description</label>
+            <input type="description" class="form-control" id="description" placeholder="Enter a Description&hellip;" ng-model="attachmentFormData.description">
+          </div>
+
+          <div class="form-group">
+            <label for="file">File</label>
+            <input type="file" class="form-control" id="file" onchange="angular.element(this).scope().fileChanged(this)">
+          </div>
+
+          <input type="submit" class="btn btn-primary" value="Add Attachment">
+        </form>
       </div>
 
-      <input type="submit" class="btn btn-default" value="Update Group">
-    </form>
+      <div role="tabpanel" class="tab-pane" id="benefit-plans">
+        <h2>Benefit Plans</h2>
 
-    <hr>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Benefit Plan name</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
 
-    <h2>Benefit Plans</h2>
+          <tbody>
+            <tr ng-repeat="benefitPlan in benefitPlans" ng-if="benefitPlan.isEnabled">
+              <td>{{benefitPlan.name}}</td>
+              <td>
+                <a href="" class="btn btn-danger btn-xs" ng-click="removeBenefitPlan(benefitPlan)">
+                  Remove
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
 
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Benefit Plan name</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
+        <div class="dropdown" ng-if="disabledBenefitPlans().length > 0">
+          <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+            Add a benefit plan
+            <span class="caret"></span>
+          </button>
 
-      <tbody>
-        <tr ng-repeat="benefitPlan in benefitPlans" ng-if="benefitPlan.isEnabled">
-          <td>{{benefitPlan.name}}</td>
-          <td>
-            <a href="" class="btn btn-danger btn-xs" ng-click="removeBenefitPlan(benefitPlan)">
-              Remove
-            </a>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+          <ul class="dropdown-menu" role="menu">
+            <li ng-repeat="benefitPlan in disabledBenefitPlans()">
+              <a role="menuitem" tabindex="-1" href="" ng-click="addBenefitPlan(benefitPlan)">
+                {{benefitPlan.name}}
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
 
-    <div class="dropdown" ng-if="disabledBenefitPlans().length > 0">
-      <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
-        Add a benefit plan
-        <span class="caret"></span>
-      </button>
+      <div role="tabpanel" class="tab-pane" id="group-admins">
+        <h2>Group Admins</h2>
 
-      <ul class="dropdown-menu" role="menu">
-        <li ng-repeat="benefitPlan in disabledBenefitPlans()">
-          <a role="menuitem" tabindex="-1" href="" ng-click="addBenefitPlan(benefitPlan)">
-            {{benefitPlan.name}}
-          </a>
-        </li>
-      </ul>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr ng-repeat="membership in groupAdminMemberships()">
+              <td>
+                <a ng-href="/users/{{membership.user.id}}" ng-if="membership.user">
+                  {{membership.user.first_name}} {{membership.user.last_name}}
+                </a>
+              </td>
+
+              <td>
+                <a ng-href="mailto:{{membership.email}}">{{membership.email}}</a>
+              </td>
+
+              <td>
+                <a class="btn btn-danger btn-xs" href="" ng-if="currentRole() === 'broker'" ng-click="revokeMembership(membership)">Revoke membership</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <hr ng-if="currentRole() === 'broker'">
+
+        <form class="invite-group-admin" ng-if="currentRole() === 'broker'" ng-submit="inviteGroupAdmin()">
+          <div class="form-group">
+            <label for="email">Invite a New Group Admin</label>
+            <input type="email" class="form-control" id="email" placeholder="Enter email&hellip;" ng-model="inviteGroupAdminFormData.email">
+          </div>
+
+          <input type="submit" class="btn btn-primary" value="Invite a Group Admin">
+        </form>
+      </div>
+
+      <div role="tabpanel" class="tab-pane" id="members">
+        <h2>Members</h2>
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Applications</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr ng-repeat="membership in customerMemberships()">
+              <td>
+                <a ng-href="/users/{{membership.user.id}}" ng-if="membership.user">
+                  {{membership.user.first_name}} {{membership.user.last_name}}
+                </a>
+              </td>
+
+              <td>
+                <a ng-href="mailto:{{membership.email}}">{{membership.email}}</a>
+              </td>
+
+              <td>
+                <ul class="simple-list">
+                  <li class="application" ng-repeat="application in membership.applications">
+                    <span class="selected-date">
+                      {{application.created_at | date}}
+                    </span>
+
+                    <a class="btn btn-danger btn-xs disabled" href="" ng-if="application.state == 'declined'">Declined</a>
+                    <a class="btn btn-warning btn-xs disabled" href="" ng-if="application.state == 'selected'" ng-click="">Remind</a>
+                    <a class="btn btn-info btn-xs" href="" ng-if="application.state == 'applied'" ng-click="reviewApplication(application)">Review</a>
+                    <a class="btn btn-primary btn-xs" href="" ng-if="application.state == 'approved'" ng-click="submitApplication(application)">Submit</a>
+                    <a class="btn btn-success btn-xs" href="" ng-if="application.state == 'submitted'" ng-click="showApplicationStatus(application)">Submitted</a>
+                  </li>
+                </ul>
+              </td>
+
+              <td>
+                <a class="btn btn-danger btn-xs" href="" ng-click="revokeMembership(membership)">Revoke Membership</a>
+                <a class="btn btn-primary btn-xs" href="" ng-if="!membership.user" ng-click="sendConfirmation(membership)">Send Invitation</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <a class="btn btn-primary" href="" ng-if="!membership.user" ng-click="sendConfirmations()">Send Invitations to All Pending Members</a>
+
+        <hr>
+
+        <form class="invite-member" ng-submit="inviteMember()">
+          <div class="form-group">
+            <label for="email">Invite a New Member</label>
+            <input type="email" class="form-control" id="email" placeholder="Enter email&hellip;" ng-model="inviteMemberFormData.email">
+          </div>
+
+          <input type="submit" class="btn btn-primary" value="Invite a Member">
+        </form>
+      </div>
     </div>
+  </div>
+</div>
+
+<!-- Form for customers -->
+<div ng-if="currentRole() === 'customer'" class="col-md-12">
+  <h1>{{group.name}}</h1>
+
+
+  <div class="description">
+    <p>You can find more information about the group by clicking "View Description" below.</p>
+
+    <a class="btn btn-default" href="" ng-click="showGroupDescription(group)">View Description</a>
   </div>
 
   <hr>
 
-  <div ng-if="currentRole() === 'customer'" class="benefit-plans">
-    <h1>{{group.name}}</h1>
+  <div class="attachments" ng-if="group.attachments && group.attachments.length > 0">
+    <p>View the attached documents to learn more about the group. Hold your mouse over an attachment to view a description.</p>
+
+    <ul class="list-inline">
+      <li ng-repeat="attachment in group.attachments">
+        <a ng-href="{{attachment.url}}" target="_blank" class="btn btn-default btn-xs" title="{{attachment.description}}">
+          {{attachment.title}}
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <hr ng-if="group.attachments && group.attachments.length > 0">
+
+  <div class="benefit-plans">
 
     <h2>Benefit Plans</h2>
 
     <table class="table">
       <thead>
         <tr>
-          <th>Benefit Plan name</th>
+          <th>Benefit Plan Name</th>
           <th>Current Application</th>
           <th>Actions</th>
         </tr>
@@ -79,7 +306,15 @@
           <td>{{benefitPlan.name}}</td>
 
           <td>
-            <ul class="simple-list" ng-repeat="application in applications(benefitPlan)">
+            <!-- No Application -->
+            <ul class="simple-list" ng-if="!application(benefitPlan) || application(benefitPlan).length === 0">
+              <span class="state">
+                <a href="" class="btn btn-default btn-xs disabled">No Application</a>
+              </span>
+            </ul>
+
+            <!-- Application -->
+            <ul class="simple-list" ng-if="applications(benefitPlan).length > 0" ng-repeat="application in applications(benefitPlan)">
               <li class="application">
                 <span class="selected-date">
                   {{application.created_at | date : 'short'}}
@@ -95,6 +330,23 @@
           </td>
 
           <td ng-if="applications(benefitPlan).length < 1">
+            <a class="btn btn-default btn-xs" ng-click="showBenefitPlanDescription(benefitPlan)" ng-href="">Description</a>
+
+            <span class="dropdown" ng-if="benefitPlan.attachments && benefitPlan.attachments.length > 0">
+              <a class="btn btn-default btn-xs dropdown-toggle" id="attachments-{{$index}}" data-target="" href="" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
+                Attachments
+                <span class="caret"></span>
+              </a>
+
+              <ul class="dropdown-menu" role="menu" aria-labelledby="attachments-{{$index}}">
+                <li ng-repeat="attachment in benefitPlan.attachments">
+                  <a ng-href="{{attachment.url}}" target="_blank" title="{{attachment.description}}">
+                    {{attachment.title}}
+                  </a>
+                <li>
+              </ul>
+            </span>
+
             <a class="btn btn-warning btn-xs" ng-click="selectBenefitPlan(benefitPlan)" ng-href="">Select</a>
             <a class="btn btn-danger btn-xs" ng-click="declineBenefitPlan(benefitPlan)" ng-href="">Decline</a>
           </td>
@@ -102,113 +354,5 @@
       </tbody>
     </table>
   </div>
-
-  <hr>
-
-  <div ng-if="isGroupAdmin()" class="members">
-    <h2>Members</h2>
-
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Email</th>
-          <th>Applications</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-
-      <tbody>
-        <tr ng-repeat="membership in customerMemberships()">
-          <td>
-            <a ng-href="/users/{{membership.user.id}}" ng-if="membership.user">
-              {{membership.user.first_name}} {{membership.user.last_name}}
-            </a>
-          </td>
-
-          <td>
-            <a ng-href="mailto:{{membership.email}}">{{membership.email}}</a>
-          </td>
-
-          <td>
-            <ul class="simple-list">
-              <li class="application" ng-repeat="application in membership.applications">
-                <span class="selected-date">
-                  {{application.created_at | date}}
-                </span>
-
-                <a class="btn btn-danger btn-xs disabled" href="" ng-if="application.state == 'declined'">Declined</a>
-                <a class="btn btn-warning btn-xs disabled" href="" ng-if="application.state == 'selected'" ng-click="">Remind</a>
-                <a class="btn btn-info btn-xs" href="" ng-if="application.state == 'applied'" ng-click="reviewApplication(application)">Review</a>
-                <a class="btn btn-primary btn-xs" href="" ng-if="application.state == 'approved'" ng-click="submitApplication(application)">Submit</a>
-                <a class="btn btn-success btn-xs" href="" ng-if="application.state == 'submitted'" ng-click="showApplicationStatus(application)">Submitted</a>
-              </li>
-            </ul>
-          </td>
-
-          <td>
-            <a class="btn btn-danger btn-xs" href="" ng-click="revokeMembership(membership)">Revoke Membership</a>
-            <a class="btn btn-primary btn-xs" href="" ng-if="!membership.user" ng-click="sendConfirmation(membership)">Send Invitation</a>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-
-    <a class="btn btn-primary" href="" ng-if="!membership.user" ng-click="sendConfirmations()">Send Invitations to All Pending Members</a>
-  </div>
-
-  <hr>
-
-  <form class="invite-member" ng-if="isGroupAdmin()" ng-submit="inviteMember()">
-    <div class="form-group">
-      <label for="email">Invite a new member</label>
-      <input type="email" class="form-control" id="email" placeholder="Enter email&hellip;" ng-model="inviteMemberFormData.email">
-    </div>
-
-    <input type="submit" class="btn btn-default" value="Invite a Member">
-  </form>
-
-  <hr>
-
-  <div ng-if="isGroupAdmin()" class="members">
-    <h2>Group Admins</h2>
-
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Email</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-
-      <tbody>
-        <tr ng-repeat="membership in groupAdminMemberships()">
-          <td>
-            <a ng-href="/users/{{membership.user.id}}" ng-if="membership.user">
-              {{membership.user.first_name}} {{membership.user.last_name}}
-            </a>
-          </td>
-
-          <td>
-            <a ng-href="mailto:{{membership.email}}">{{membership.email}}</a>
-          </td>
-
-          <td>
-            <a class="btn btn-danger btn-xs" href="" ng-if="currentRole() === 'broker'" ng-click="revokeMembership(membership)">Revoke membership</a>
-          </td>
-        </tr>
-    </table>
-  </div>
-
-
-  <form class="invite-group-admin" ng-if="currentRole() === 'broker'" ng-submit="inviteGroupAdmin()">
-    <div class="form-group">
-      <label for="email">Invite a new group admin</label>
-      <input type="email" class="form-control" id="email" placeholder="Enter email&hellip;" ng-model="inviteGroupAdminFormData.email">
-    </div>
-
-    <input type="submit" class="btn btn-default" value="Invite a Group Admin">
-  </form>
 </div>
 
