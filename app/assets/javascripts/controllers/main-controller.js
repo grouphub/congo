@@ -13,6 +13,9 @@ congoApp.controller('MainController', [
 
     // Loading behavior
     $scope.$on('$locationChangeStart', function(event) {
+      // Scroll to top of page
+      $('main').scrollTop(0);
+
       $scope.loading = true;
     });
 

@@ -87,7 +87,6 @@ Rails.application.routes.draw do
       resources :accounts do
         resources :roles do
           resources :carrier_accounts
-          resources :benefit_plans
           resources :eligibilities
           resources :tokens
 
@@ -97,7 +96,13 @@ Rails.application.routes.draw do
 
           put '/', to: 'accounts#update'
 
+          resources :benefit_plans do
+            resources :attachments
+          end
+
           resources :groups do
+            resources :attachments
+
             resources :memberships do
               post '/confirmations', to: 'memberships#send_confirmation'
             end

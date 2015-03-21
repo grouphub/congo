@@ -82,7 +82,7 @@ describe 'As a broker', js: true do
         expect(tds.length).to eq(4)
         expect(tds[1].text).to eq('First Invitation')
 
-        expect(invitation_code).to be_a_uuid
+        expect(invitation_code).to be_a_thirty_six
       end
 
       signout_admin
@@ -173,6 +173,7 @@ describe 'As a broker', js: true do
       end
 
       expect(page).to have_content('Successfully updated account!')
+      expect(page).to have_content('Broker Dashboard: Second Account')
 
       expect(page.evaluate_script('window.location.pathname')).to \
         eq('/accounts/second_account/broker')
@@ -190,13 +191,18 @@ describe 'As a broker', js: true do
       expect(account_properties['last_name']).to eq('Belton')
       expect(account_properties['phone']).to eq('444-444-4444')
 
-      within 'main' do
-        selected_radio = all('input[type="radio"]').find { |radio| radio.checked? }
-        expect(selected_radio.value).to eq('premier')
-
-        values = all('input[type="text"]').map(&:value)
-        expect(values).to eq(['Second Account', '#2 Account', '234', 'Barry', 'Belton', '444-444-4444'])
-      end
+      account = Account.find_by_name('Second Account')
+      account_properties = account.properties
+      expect(account.name).to eq('Second Account')
+      expect(account.tagline).to eq('#2 Account')
+      expect(account.plan_name).to eq('premier')
+      expect(account_properties['name']).to eq('Second Account')
+      expect(account_properties['tagline']).to eq('#2 Account')
+      expect(account_properties['plan_name']).to eq('premier')
+      expect(account_properties['tax_id']).to eq('234')
+      expect(account_properties['first_name']).to eq('Barry')
+      expect(account_properties['last_name']).to eq('Belton')
+      expect(account_properties['phone']).to eq('444-444-4444')
     end
 
   end
@@ -230,9 +236,9 @@ describe 'As a broker', js: true do
         unique_id_2 = tds[4]
 
         expect(name_1).to have_content('Token #1')
-        expect(unique_id_1.text).to match(/[0-9a-f]{32,}/)
+        expect(unique_id_1.text).to be_a_thirty_six
         expect(name_2).to have_content('Token #2')
-        expect(unique_id_2.text).to match(/[0-9a-f]{32,}/)
+        expect(unique_id_2.text).to be_a_thirty_six
       end
     end
 
@@ -257,7 +263,7 @@ describe 'As a broker', js: true do
         unique_id = tds[1]
 
         expect(name).to have_content('For Enrollment')
-        expect(unique_id.text).to match(/[0-9a-f]{32,}/)
+        expect(unique_id.text).to be_a_thirty_six
       end
     end
 
@@ -295,7 +301,9 @@ describe 'As a broker', js: true do
 
   describe 'Benefit Plans' do
 
+    # TODO: Make sure to test descriptions
     it 'allows a broker to create a benefit plan'
+
     it 'allows a broker to list benefit plans'
     it 'allows a broker to edit a benefit plan'
     it 'allows a broker to delete a benefit plan'
@@ -304,7 +312,9 @@ describe 'As a broker', js: true do
 
   describe 'Groups' do
 
+    # TODO: Make sure to test descriptions
     it 'allows a broker to create a group'
+
     it 'allows a broker to list groups'
     it 'allows a broker to edit a group'
     it 'allows a broker to delete a group'

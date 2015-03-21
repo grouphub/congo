@@ -1,4 +1,13 @@
 GIT
+  remote: git://github.com/bartoszkopinski/aws-s3.git
+  revision: 6d8525e5f69d4d46ff51a30ca8976c7584b68f36
+  specs:
+    aws-s3 (0.6.3)
+      builder
+      mime-types
+      xml-simple
+
+GIT
   remote: git://github.com/pokitdok/pokitdok-ruby.git
   revision: fe2a6a984958a66250402189c35ee20726c705f9
   specs:
@@ -120,6 +129,9 @@ GEM
     erubis (2.7.0)
     eventmachine (1.0.7)
     execjs (2.2.2)
+    fakes3 (0.2.0)
+      builder
+      thor
     faraday (0.9.1)
       multipart-post (>= 1.2, < 3)
     ffi (1.9.6)
@@ -152,6 +164,7 @@ GEM
       thor (>= 0.14, < 2.0)
     json (1.8.1)
     jwt (1.2.1)
+    kramdown (1.6.0)
     launchy (2.4.2)
       addressable (~> 2.3)
     letter_opener (1.2.0)
@@ -281,6 +294,7 @@ GEM
       execjs (>= 0.3.0)
       json (>= 1.8.0)
     websocket (1.2.1)
+    xml-simple (1.1.5)
     xpath (2.0.0)
       nokogiri (~> 1.3)
 
@@ -288,6 +302,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  aws-s3!
   bcrypt (~> 3.1.7)
   capybara
   clockwork
@@ -295,10 +310,12 @@ DEPENDENCIES
   colorize
   daemons
   database_cleaner
+  fakes3
   foreman
   guard-livereload
   jbuilder (~> 2.0)
   jquery-rails
+  kramdown
   letter_opener
   newrelic_rpm
   ng-rails-csrf

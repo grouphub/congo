@@ -29,6 +29,9 @@ module Congo2
 
     # For throttling external API requests.
     config.middleware.use Rack::Defense
+
+    # Auto-require items in "lib"
+    config.autoload_paths << Rails.root.join('lib')
   end
 end
 

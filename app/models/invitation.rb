@@ -4,7 +4,7 @@ class Invitation < ActiveRecord::Base
   before_save :add_uuid
 
   def add_uuid
-    self.uuid = SecureRandom.uuid
+    self.uuid = ThirtySix.generate
   end
 end
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150313015002) do
+ActiveRecord::Schema.define(version: 20150316023510) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -97,6 +97,18 @@ ActiveRecord::Schema.define(version: 20150313015002) do
     t.datetime "updated_at"
   end
 
+  create_table "attachments", force: true do |t|
+    t.integer  "benefit_plan_id"
+    t.integer  "group_id"
+    t.string   "filename"
+    t.string   "content_type"
+    t.string   "title"
+    t.string   "url"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "attempts", force: true do |t|
     t.integer  "application_id"
     t.string   "error_type"
@@ -113,6 +125,8 @@ ActiveRecord::Schema.define(version: 20150313015002) do
     t.string   "name"
     t.string   "slug"
     t.boolean  "is_enabled"
+    t.text     "description_markdown"
+    t.text     "description_html"
     t.text     "properties_data"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -185,6 +199,8 @@ ActiveRecord::Schema.define(version: 20150313015002) do
     t.string   "name"
     t.string   "slug"
     t.boolean  "is_enabled"
+    t.text     "description_markdown"
+    t.text     "description_html"
     t.text     "properties_data"
     t.datetime "created_at"
     t.datetime "updated_at"

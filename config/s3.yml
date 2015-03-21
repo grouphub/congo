@@ -1,0 +1,22 @@
+development:
+  access_key: ''
+  secret_key: ''
+  host: 'localhost'
+  port: '5001'
+  bucket: 'congo-attachments'
+  endpoint: 'http://localhost:5001/congo-attachments'
+
+test:
+  access_key: ''
+  secret_key: ''
+  host: 'localhost'
+  port: '5001'
+  bucket: 'congo-attachments-test'
+  endpoint: 'http://localhost:5001/congo-attachments-test'
+
+production:
+  access_key: "<%= ENV['AWS_ACCESS_KEY_ID'] %>"
+  secret_key: "<%= ENV['AWS_SECRET_ACCESS_KEY'] %>"
+  bucket: 'congo-attachments'
+  endpoint: 'http://congo-attachments.s3.amazonaws.com'
+

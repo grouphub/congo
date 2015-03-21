@@ -35,7 +35,7 @@ gem 'stripe'
 gem 'colorize'
 
 # For health insurance enrollment and other concerns.
-gem 'pokitdok-ruby', github: 'pokitdok/pokitdok-ruby'
+gem 'pokitdok-ruby', github: 'pokitdok/pokitdok-ruby', require: 'pokitdok'
 
 # For monitoring.
 gem 'newrelic_rpm'
@@ -45,6 +45,13 @@ gem 'ng-rails-csrf'
 
 # Throttle external endpoints.
 gem 'rack-defense'
+
+# For Amazon S3 attachments
+gem 'aws-s3', github: 'bartoszkopinski/aws-s3'
+gem 'fakes3'
+
+# For rich text in groups and benefit plans
+gem 'kramdown'
 
 group :doc do
   gem 'sdoc', '~> 0.4.0'

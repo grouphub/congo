@@ -133,7 +133,7 @@ class Application < ActiveRecord::Base
     output_data['trading_partner_id'] = carrier.properties['trading_partner_id']
 
     output_data['sponsor'] = {
-      'name' => group.name
+      'name' => group.name,
       'tax_id' => group.properties['tax_id']
     }
 

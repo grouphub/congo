@@ -12,7 +12,7 @@ congoApp.directive('enrollmentStatusModal', [
         $scope.date = new Date();
 
         // TODO: Change eligibility modal to use this format
-        eventsFactory.on($scope, 'review-application', function (application) {
+        eventsFactory.on($scope, 'enrollment-status', function (application) {
           $http
             .get('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/applications/' + application.id + '/last_attempt.json')
             .success(function (response) {
