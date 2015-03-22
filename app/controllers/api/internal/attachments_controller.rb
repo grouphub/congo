@@ -20,7 +20,7 @@ class Api::Internal::AttachmentsController < ApplicationController
 
     properties = JSON.parse(params[:properties] || '{}')
     title = properties['title']
-    name = SecureRandom.uuid
+    name = ThirtySix.generate
     description = properties['description']
 
     unless title.present?

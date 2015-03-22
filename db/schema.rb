@@ -92,8 +92,6 @@ ActiveRecord::Schema.define(version: 20150316023510) do
     t.datetime "approved_on"
     t.integer  "submitted_by_id"
     t.datetime "submitted_on"
-    t.integer  "sent_by_id"
-    t.datetime "sent_on"
     t.integer  "completed_by_id"
     t.datetime "completed_on"
     t.boolean  "errored_by_id"
