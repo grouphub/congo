@@ -3,7 +3,8 @@ var congoApp = angular.module('congoApp');
 congoApp.directive('enrollmentStatusModal', [
   '$http',
   'eventsFactory',
-  function ($http, eventsFactory) {
+  'flashesFactory',
+  function ($http, eventsFactory, flashesFactory) {
     return {
       restrict: 'E',
       replace: true,
@@ -14,12 +15,16 @@ congoApp.directive('enrollmentStatusModal', [
         // TODO: Change eligibility modal to use this format
         eventsFactory.on($scope, 'enrollment-status', function (application) {
           $http
-            .get('/api/v1/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/applications/' + application.id + '/last_attempt.json')
+            .get('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/applications/' + application.id + '/last_attempt.json')
             .success(function (response) {
-              debugger;
+              // TODO: Fill this in...
             })
             .error(function (response) {
-              debugger;
+              var error = (response.data && response.data.error) ?
+                response.data.error :
+                'There was a problem saving your group.';
+
+              flashesFactory.add('danger', error);
             });
         });
       }

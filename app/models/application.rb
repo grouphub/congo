@@ -216,6 +216,10 @@ class Application < ActiveRecord::Base
   def state
     if self.errored_by_id
       'errored'
+    elsif self.completed_by_id
+      'completed'
+    elsif self.sent_by_id
+      'sent'
     elsif self.submitted_by_id
       'submitted'
     elsif self.approved_by_id
@@ -235,6 +239,10 @@ class Application < ActiveRecord::Base
     case self.state
     when 'errored'
       'danger'
+    when 'completed'
+      'success'
+    when 'sent'
+      'success'
     when 'submitted'
       'success'
     when 'approved'

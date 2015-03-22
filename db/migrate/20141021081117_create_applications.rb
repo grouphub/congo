@@ -11,9 +11,6 @@ class CreateApplications < ActiveRecord::Migration
       # TODO: What fields do we need?
       t.text :properties_data
 
-      # Error state
-      t.boolean :errored_by_id
-
       # Customer selects
       t.integer :selected_by_id
       t.datetime :selected_on
@@ -33,6 +30,18 @@ class CreateApplications < ActiveRecord::Migration
       # Broker submits
       t.integer :submitted_by_id
       t.datetime :submitted_on
+
+      # Sent to PokitDok
+      t.integer :sent_by_id
+      t.datetime :sent_on
+
+      # System completes
+      t.integer :completed_by_id
+      t.datetime :completed_on
+
+      # Error state
+      t.boolean :errored_by_id
+      t.datetime :errored_on
 
       t.timestamps
     end

@@ -236,7 +236,9 @@
                     <a class="btn btn-warning btn-xs disabled" href="" ng-if="application.state == 'selected'" ng-click="">Remind</a>
                     <a class="btn btn-info btn-xs" href="" ng-if="application.state == 'applied'" ng-click="reviewApplication(application)">Review</a>
                     <a class="btn btn-primary btn-xs" href="" ng-if="application.state == 'approved'" ng-click="submitApplication(application)">Submit</a>
-                    <a class="btn btn-success btn-xs" href="" ng-if="application.state == 'submitted'" ng-click="showApplicationStatus(application)">Submitted</a>
+                    <a class="btn btn-success btn-xs" href="" ng-if="application.state == 'submitted' || application.state == 'sent'" ng-click="showApplicationStatus(application)">Submitted</a>
+                    <a class="btn btn-success btn-xs disabled" href="" ng-if="application.state == 'completed'">Completed</a>
+                    <a class="btn btn-danger btn-xs disabled" href="" ng-if="application.state == 'errored'">Errored</a>
                   </li>
                 </ul>
               </td>
@@ -310,7 +312,7 @@
 
           <td>
             <!-- No Application -->
-            <ul class="simple-list" ng-if="!application(benefitPlan) || application(benefitPlan).length === 0">
+            <ul class="simple-list" ng-if="application(benefitPlan).length === 0">
               <span class="state">
                 <a href="" class="btn btn-default btn-xs disabled">No Application</a>
               </span>
