@@ -142,7 +142,7 @@ class Api::Internal::ApplicationsController < ApplicationController
     application = Application.find(params[:application_id])
 
     # Application has been submitted to PokitDok.
-    if application.sent_on
+    if application.completed_on || application.errored_on
       last_attempt = application.attempts.last
       pokitdok = PokitDok::PokitDok.new \
         Rails.application.config.pokitdok.client_id,
@@ -177,7 +177,24 @@ class Api::Internal::ApplicationsController < ApplicationController
       format.json {
         render json: {
           attempt: {
-            state: 'pending'
+            meta: {
+
+            },
+            data: [
+              {
+                parameters: {
+                  state: {
+                    name: 'pending',
+                    title: 'Pending'
+                  },
+                  history: [
+                    record_dt: application.submitted_on,
+                    name: 'pending',
+                    title: 'Pending delivery'
+                  ]
+                }
+              }
+            ]
           }
         }
       }

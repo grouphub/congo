@@ -8,80 +8,17 @@
 
       <div class="modal-body">
         <div class="widget enrollment-status">
-          <h2>Status: Completed</h2>
+          <h2>Status: {{lastAttempt.parameters.state.title}}</h2>
 
           <table class="table">
             <tbody>
-              <tr>
+              <tr ng-repeat="point in lastAttempt.parameters.history">
                 <td>
                   <i class="fa fa-check activity-check"></i>
-                  <span class="activity-state">Initializing</span>
+                  <span class="activity-state {{point.name}}">{{point.title}}</span>
                 </td>
 
-                <td>{{date | date: 'medium'}}</td>
-              </tr>
-
-              <tr>
-                <td>
-                  <i class="fa fa-check activity-check"></i>
-                  <span class="activity-state">Generating and storing transactions in a batch for transmission</span>
-                </td>
-
-                <td>{{date | date: 'medium'}}</td>
-              </tr>
-
-              <tr>
-                <td>
-                  <i class="fa fa-check activity-check"></i>
-                  <span class="activity-state">Scheduling for transmission to trading partner</span>
-                </td>
-
-                <td>{{date | date: 'medium'}}</td>
-              </tr>
-
-              <tr>
-                <td>
-                  <i class="fa fa-check activity-check"></i>
-                  <span class="activity-state">Transmitting batch to trading partner</span>
-                </td>
-
-                <td>{{date | date: 'medium'}}</td>
-              </tr>
-
-              <tr>
-                <td>
-                  <i class="fa fa-check activity-check"></i>
-                  <span class="activity-state">Waiting for trading partner response</span>
-                </td>
-
-                <td>{{date | date: 'medium'}}</td>
-              </tr>
-
-              <tr>
-                <td>
-                  <i class="fa fa-check activity-check"></i>
-                  <span class="activity-state">Receiving response from trading partner</span>
-                </td>
-
-                <td>{{date | date: 'medium'}}</td>
-              </tr>
-
-              <tr>
-                <td>
-                  <i class="fa fa-check activity-check"></i>
-                  <span class="activity-state">Processing response from trading partner</span>
-                </td>
-
-                <td>{{date | date: 'medium'}}</td>
-              </tr>
-
-              <tr>
-                <td>
-                  <i class="fa fa-check activity-check"></i>
-                  <span class="activity-state">Completed</span>
-                </td>
-
-                <td>{{date | date: 'medium'}}</td>
+                <td>{{point.record_dt | date: 'medium'}}</td>
               </tr>
             </tbody>
           </table>
