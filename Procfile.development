@@ -2,6 +2,7 @@ web: bundle exec rails server Puma --port=$PORT
 fakes3: bundle exec fakes3 --root tmp/fakes3 --port 5001
 guard: guard --no-interactions
 worker: bundle exec sidekiq
-# clock: bundle exec clockwork lib/payment_clock_runner.rb
+# enrollment_clock: bundle exec clockwork lib/enrollment_clock_runner.rb
+# payment_clock: bundle exec clockwork lib/payment_clock_runner.rb
 # karma: bundle exec rake karma:start
 

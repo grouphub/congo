@@ -1,9 +1,9 @@
-require 'stripe'
-
 class PaymentJob
   include Sidekiq::Worker
 
-  def perform(account)
+  def perform(account_id)
+    account = Account.find(account_id)
+
     begin
       data = {
         amount: 0,
