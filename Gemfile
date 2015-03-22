@@ -26,6 +26,7 @@ gem 'puma'
 # For background worker processes.
 gem 'clockwork'
 gem 'sidekiq'
+gem 'redlock'
 gem 'daemons'
 
 # For the payment system.

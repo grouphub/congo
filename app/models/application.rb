@@ -10,7 +10,7 @@ class Application < ActiveRecord::Base
   before_save :populate_reference_number
 
   def populate_reference_number
-    self.reference_number = SecureRandom.uuid.gsub('-', '')
+    self.reference_number ||= ThirtySix.generate
   end
 
   # {
@@ -214,21 +214,19 @@ class Application < ActiveRecord::Base
 
   # TODO: Finish erroring
   def state
-    if self.errored_by_id
+    if self.errored_on
       'errored'
-    elsif self.completed_by_id
+    elsif self.completed_on
       'completed'
-    elsif self.sent_by_id
-      'sent'
-    elsif self.submitted_by_id
+    elsif self.submitted_on
       'submitted'
-    elsif self.approved_by_id
+    elsif self.approved_on
       'approved'
-    elsif self.applied_by_id
+    elsif self.applied_on
       'applied'
-    elsif self.declined_by_id
+    elsif self.declined_on
       'declined'
-    elsif self.selected_by_id
+    elsif self.selected_on
       'selected'
     else
       'not_applied'

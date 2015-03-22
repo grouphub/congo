@@ -23,17 +23,13 @@ class CreateApplications < ActiveRecord::Migration
       t.integer :declined_by_id
       t.datetime :declined_on
 
-      # Group admin approves (TODO: Add this)
+      # Group admin approves
       t.integer :approved_by_id
       t.datetime :approved_on
 
       # Broker submits
       t.integer :submitted_by_id
       t.datetime :submitted_on
-
-      # Sent to PokitDok
-      t.integer :sent_by_id
-      t.datetime :sent_on
 
       # System completes
       t.integer :completed_by_id

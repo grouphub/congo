@@ -1,7 +1,18 @@
 class PaymentJob
   include Sidekiq::Worker
 
+  # TODO: May need a lock
   def perform(application_id)
+    redlock = Redlock.new(Rails.application.config.redis.url)
+
+    # Lock will expire in five minutes if not relinquished.
+    lock = redlock.lock("application_#{application_id}_enrollment", 5 * 60 * 1000)
+
+    if lock
+      Rails.logger.info("Another worker is attempting to enroll application with ID #{application_id}")
+      return
+    end
+
     application = Application.find(application_id)
     pokitdok = PokitDok::PokitDok.new \
       Rails.application.config.pokitdok.client_id,
@@ -35,6 +46,8 @@ class PaymentJob
       application.update_attributes \
         errored_by_id: submitted_by_id
     end
+
+    redlock.unlock(lock)
   end
 
   # TODO: Get rid of this

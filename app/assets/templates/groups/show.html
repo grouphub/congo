@@ -236,7 +236,7 @@
                     <a class="btn btn-warning btn-xs disabled" href="" ng-if="application.state == 'selected'" ng-click="">Remind</a>
                     <a class="btn btn-info btn-xs" href="" ng-if="application.state == 'applied'" ng-click="reviewApplication(application)">Review</a>
                     <a class="btn btn-primary btn-xs" href="" ng-if="application.state == 'approved'" ng-click="submitApplication(application)">Submit</a>
-                    <a class="btn btn-success btn-xs" href="" ng-if="application.state == 'submitted' || application.state == 'sent'" ng-click="showApplicationStatus(application)">Submitted</a>
+                    <a class="btn btn-success btn-xs" href="" ng-if="application.state == 'submitted'" ng-click="showApplicationStatus(application)">Submitted</a>
                     <a class="btn btn-success btn-xs disabled" href="" ng-if="application.state == 'completed'">Completed</a>
                     <a class="btn btn-danger btn-xs disabled" href="" ng-if="application.state == 'errored'">Errored</a>
                   </li>
