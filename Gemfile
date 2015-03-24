@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', github: 'rails/rails', branch: '4-1-stable'
+gem 'rails', github: 'rails/rails', branch: '4-2-stable'
 
 gem 'pg'
 gem 'sprockets-rails', github: 'rails/sprockets-rails', branch: '2.x'
