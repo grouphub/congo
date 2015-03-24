@@ -25,17 +25,31 @@ Rails.application.routes.draw do
     # Admin home
     '/admin',
 
-    # Carriers
+    # Admin Carriers
     '/admin/carriers',
     '/admin/carriers/new',
     '/admin/carriers/:carrier_slug',
+
+    # Admin Carrier Accounts
+    '/admin/carrier_accounts',
+    '/admin/carrier_accounts/new',
+    '/admin/carrier_accounts/:carrier_slug',
+
+    # Admin Benefit Plans
+    '/admin/benefit_plans',
+    '/admin/benefit_plans/new',
+    '/admin/benefit_plans/:carrier_slug',
+
+    # Admin All Accounts
     '/admin/accounts',
+
+    # Admin All Groups
     '/admin/groups',
 
-    # Invitations
+    # Admin Invitations
     '/admin/invitations',
 
-    # Features
+    # Admin Features
     '/admin/features',
 
     # Account home
@@ -78,6 +92,8 @@ Rails.application.routes.draw do
       # Admin routes
       namespace :admin do
         resources :carriers
+        resources :carrier_accounts
+        resources :benefit_plans
         resources :invitations
         resources :accounts
         resources :groups

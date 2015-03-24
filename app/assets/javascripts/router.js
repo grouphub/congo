@@ -45,6 +45,30 @@ congoApp.config([
         templateUrl: congo.assets['admin/carriers/show.html'],
         controller: 'AdminCarriersShowController'
       })
+      .when('/admin/carrier_accounts', {
+        templateUrl: congo.assets['admin/carrier_accounts/index.html'],
+        controller: 'AdminCarrierAccountsIndexController'
+      })
+      .when('/admin/carriers_account/new', {
+        templateUrl: congo.assets['admin/carrier_accounts/new.html'],
+        controller: 'AdminCarrierAccountsNewController'
+      })
+      .when('/admin/carrier_accounts/:carrier_slug', {
+        templateUrl: congo.assets['admin/carrier_accounts/show.html'],
+        controller: 'AdminCarrierAccountsShowController'
+      })
+      .when('/admin/benefit_plans', {
+        templateUrl: congo.assets['admin/benefit_plans/index.html'],
+        controller: 'AdminBenefitPlansIndexController'
+      })
+      .when('/admin/benefit_plans/new', {
+        templateUrl: congo.assets['admin/benefit_plans/new.html'],
+        controller: 'AdminBenefitPlansNewController'
+      })
+      .when('/admin/benefit_plans/:carrier_slug', {
+        templateUrl: congo.assets['admin/benefit_plans/show.html'],
+        controller: 'AdminBenefitPlansShowController'
+      })
       .when('/admin/invitations', {
         templateUrl: congo.assets['admin/invitations/index.html'],
         controller: 'AdminInvitationsIndexController'

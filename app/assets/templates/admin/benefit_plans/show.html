@@ -1,0 +1,13 @@
+<div class="col-md-12">
+  <!-- Carrier account may be null if it was deleted by the user. -->
+  <h1 ng-if="!benefitPlan.carrier_account.name">
+    {{benefitPlan.name}}
+  </h1>
+
+  <h1 ng-if="benefitPlan.carrier_account.name">
+    {{benefitPlan.carrier_account.name}}: {{benefitPlan.name}}
+  </h1>
+
+  <p>Edit your benefit plan.</p>
+</div>
+
