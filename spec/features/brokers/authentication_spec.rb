@@ -1,16 +1,16 @@
 require 'rails_helper'
 
-describe 'Authentication', js: true do
+describe 'As a broker', js: true do
 
-  describe 'as a broker' do
+  describe 'Authentication' do
 
-    it 'allows a broker to sign in and out' do
+    it 'allows them to sign in and out' do
       create_broker
       signin_broker
       signout_broker
     end
 
-    it 'allows a broker to sign up' do
+    it 'allows them to sign up' do
       visit '/'
 
       all('a', text: 'Sign Up').first.click
@@ -61,7 +61,7 @@ describe 'Authentication', js: true do
       expect(current_user['accounts'].length).to eq(1)
     end
 
-    it 'allows a broker to sign up with an invitation code' do
+    it 'allows them to sign up with an invitation code' do
       create_admin
       signin_admin
 
@@ -128,8 +128,9 @@ describe 'Authentication', js: true do
       expect(current_user['accounts'].length).to eq(1)
     end
 
-    it 'prevents a broker from creating a new account with an existing email address'
-    it 'allows a broker to create a second broker account'
+    it 'prevents them from creating a new account with an existing email address'
+    it 'allows them to create a second broker account'
+
   end
 
   describe 'Account Settings' do

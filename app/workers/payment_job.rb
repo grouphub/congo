@@ -1,9 +1,19 @@
-require 'stripe'
+class PaymentJob < ActiveJob::Base
+  queue_as :default
 
-class PaymentJob
-  include Sidekiq::Worker
+  def perform(account_id)
+    redlock = Redlock.new(Rails.application.config.redis.url)
 
-  def perform(account)
+    # Lock will expire in five minutes if not relinquished.
+    lock = redlock.lock("account_#{application_id}_payment", 5 * 60 * 1000)
+
+    if lock
+      Rails.logger.info("Another worker is attempting to handle payment for account with ID #{application_id}")
+      return
+    end
+
+    account = Account.find(account_id)
+
     begin
       data = {
         amount: 0,
@@ -40,6 +50,7 @@ class PaymentJob
       Rails.logger.error e.backtrace.join("\n")
     end
 
+    redlock.unlock(lock)
   end
 end
 

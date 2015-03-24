@@ -1,8 +1,9 @@
 require 'rails_helper'
 
-describe 'Authentication', js: true do
+# TODO: Finish this
+describe 'As a group admin', js: true do
 
-  describe 'as a group admin' do
+  describe 'Authentication' do
 
     it 'allows a group admin to sign in and out'
     it 'allows a group admin to be invited to an account'

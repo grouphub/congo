@@ -94,6 +94,7 @@ class Api::Internal::GroupsController < ApplicationController
     end
   end
 
+  # TODO: Customers should only have limited access to this
   def update
     group = Group.where(slug: params[:id]).last
 

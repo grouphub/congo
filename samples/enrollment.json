@@ -1,0 +1,144 @@
+{
+  "meta": {
+    "rate_limit_amount": 3,
+    "rate_limit_reset": 1425892313,
+    "application_mode": "test",
+    "processing_time": 87,
+    "rate_limit_cap": 1000,
+    "credits_remaining": 9991,
+    "activity_id": "54fd576b9dce610056ff6d85",
+    "credits_billed": 1
+  },
+  "data": {
+    "units_of_work": 1,
+    "_type": "PlatformActivityModel",
+    "name": "enrollment",
+    "parameters": {
+      "reference_number": "12456",
+      "master_policy_number": "ABCD012354",
+      "payer": {
+        "tax_id": "654456654"
+      },
+      "update_dt": "Mon Mar  9 08:18:51 2015",
+      "deleted": false,
+      "major_version": "4",
+      "broker": {
+        "tax_id": "123356799",
+        "account_numbers": [
+          "123",
+          "456"
+        ],
+        "name": "MONEY TALKS BROKERAGE"
+      },
+      "subscriber": {
+        "maintenance_type": "Addition",
+        "first_name": "JOHN",
+        "last_name": "DOE",
+        "benefits": [
+          {
+            "maintenance_type": "Addition",
+            "late_enrollment": false,
+            "begin_date": "Sat Jun  1 00:00:00 1996",
+            "benefit_type": "Health",
+            "coordination_of_benefits": [
+              {
+                "status": "Unknown",
+                "group_or_policy_number": "890111",
+                "payer_responsibility": "Primary"
+              }
+            ]
+          },
+          {
+            "maintenance_type": "Addition",
+            "late_enrollment": false,
+            "begin_date": "Sat Jun  1 00:00:00 1996",
+            "benefit_type": "Dental"
+          },
+          {
+            "maintenance_type": "Addition",
+            "late_enrollment": false,
+            "begin_date": "Sat Jun  1 00:00:00 1996",
+            "benefit_type": "Vision"
+          }
+        ],
+        "relationship": "Self",
+        "contacts": [
+          {
+            "communication_type2": "Work Phone Number",
+            "primary_communication_type": "Home Phone Number",
+            "communication_number2": "7172341240",
+            "primary_communication_number": "7172343334"
+          }
+        ],
+        "benefit_status": "Active",
+        "gender": "Male",
+        "employment_status": "Full-time",
+        "subscriber_number": "123456789",
+        "group_or_policy_number": "123456001",
+        "maintenance_reason": "Active",
+        "handicapped": false,
+        "eligibility_begin_date": "Thu May 23 00:00:00 1996",
+        "ssn": "123456789",
+        "tobacco_use": false,
+        "member_id": "123456789",
+        "birth_date": "Fri Aug 16 00:00:00 1940",
+        "middle_name": "P",
+        "substance_abuse": false,
+        "address": {
+          "city": "CAMP HILL",
+          "line2": "APT 3G",
+          "county": "CUMBERLAND",
+          "state": "PA",
+          "postal_code": "17011",
+          "line": "100 MARKET ST"
+        }
+      },
+      "correlation_id": "8aaa24a5-feaa-4bd8-9e45-41fc13f04aa8",
+      "version": "4.0.0",
+      "trading_partner_id": "MOCKPAYER",
+      "purpose": "Original",
+      "client_id": "RKH2S5iecrOcrGroqrx9",
+      "action": "Change",
+      "dependents": [
+
+      ],
+      "insert_dt": "Mon Mar  9 08:18:51 2015",
+      "sponsor": {
+        "tax_id": "999888777"
+      }
+    },
+    "remaining_transitions": [
+      "generate",
+      "store",
+      "transmit",
+      "wait",
+      "receive",
+      "process",
+      "complete"
+    ],
+    "_uuid": "9292a63b-a640-42db-a901-101785eaf739",
+    "state": {
+      "name": "scheduled",
+      "title": "Scheduled for next available transmission to Trading Partner"
+    },
+    "trading_partner_id": "MOCKPAYER",
+    "id": "54fd576b9dce610056ff6d85",
+    "transition_path": [
+      "schedule",
+      "generate",
+      "store",
+      "transmit",
+      "wait",
+      "receive",
+      "process",
+      "complete"
+    ],
+    "history": [
+      {
+        "record_dt": "2015-03-09T08:18:51.857404",
+        "name": "init",
+        "title": "Initializing"
+      }
+    ]
+  }
+}

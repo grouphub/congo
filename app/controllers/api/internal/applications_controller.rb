@@ -34,7 +34,7 @@ class Api::Internal::ApplicationsController < ApplicationController
     group = Group.where(slug: group_slug).first
     benefit_plan = BenefitPlan.where(id: benefit_plan_id).first
     membership = Membership.where(group_id: group.id, user_id: current_user.id).first
-    selected_by_id = params[:declined_by_id]
+    selected_by_id = params[:selected_by_id]
     declined_by_id = params[:declined_by_id]
     properties = params[:properties]
 
@@ -71,6 +71,7 @@ class Api::Internal::ApplicationsController < ApplicationController
 
   # TODO: Finish this
   # TODO: Optimize this
+  # TODO: Add some logging in here
   def update
     application = Application.find(params[:id])
     benefit_plan_id = params[:benefit_plan_id]
@@ -102,12 +103,12 @@ class Api::Internal::ApplicationsController < ApplicationController
         approved_on: DateTime.now
     end
 
-    # TODO: Add PokitDok API here
-    # TODO: Return activity log from PokitDok and show it in the eligibility status modal
+    # TODO: Return activity log from PokitDok and show it in the eligibility status modal.
     if submitted_by_id
       application.update_attributes \
         submitted_by_id: submitted_by_id,
         submitted_on: DateTime.now
+
     end
 
     if properties
@@ -132,6 +133,69 @@ class Api::Internal::ApplicationsController < ApplicationController
       format.json {
         render json: {
           application: {}
+        }
+      }
+    end
+  end
+
+  def last_attempt
+    application = Application.find(params[:application_id])
+
+    # Application has been submitted to PokitDok.
+    if application.completed_on || application.errored_on
+      last_attempt = application.attempts.last
+      pokitdok = PokitDok::PokitDok.new \
+        Rails.application.config.pokitdok.client_id,
+        Rails.application.config.pokitdok.client_secret
+
+      response = nil
+
+      if last_attempt && last_attempt.activity_id
+        begin
+          response = pokitdok.activities({
+            activity_id: last_attempt.activity_id
+          })
+        rescue StandardError => e
+          # TODO: Do something
+          response = nil
+        end
+      end
+
+      respond_to do |format|
+        format.json {
+          render json: {
+            attempt: response
+          }
+        }
+      end
+
+      return
+    end
+
+    # Application has not yet been submitted to PokitDok.
+    respond_to do |format|
+      format.json {
+        render json: {
+          attempt: {
+            meta: {
+
+            },
+            data: [
+              {
+                parameters: {
+                  state: {
+                    name: 'pending',
+                    title: 'Pending'
+                  },
+                  history: [
+                    record_dt: application.submitted_on,
+                    name: 'pending',
+                    title: 'Pending delivery'
+                  ]
+                }
+              }
+            ]
+          }
         }
       }
     end

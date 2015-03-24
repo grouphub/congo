@@ -88,8 +88,11 @@ Rails.application.routes.draw do
         resources :roles do
           resources :carrier_accounts
           resources :eligibilities
-          resources :applications
           resources :tokens
+
+          resources :applications do
+            get '/last_attempt', to: 'applications#last_attempt'
+          end
 
           put '/', to: 'accounts#update'
 

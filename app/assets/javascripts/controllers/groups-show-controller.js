@@ -12,6 +12,7 @@ congoApp.controller('GroupsShowController', [
     $scope.form = {
       name: null,
       group_id: null,
+      tax_id: null,
       description_markdown: null,
       description_html: null,
       description_trusted: null
@@ -21,6 +22,15 @@ congoApp.controller('GroupsShowController', [
       $scope.form.description_html = marked(string || '');
       $scope.form.description_trusted = $sce.trustAsHtml($scope.form.description_html);
     });
+
+    $scope.currentTab = function () {
+      console.log($cookieStore.get('groups-show-tab') || 'basics');
+      return $cookieStore.get('groups-show-tab') || 'basics';
+    };
+
+    $scope.changeTab = function (tabName) {
+      $cookieStore.put('groups-show-tab', tabName);
+    };
 
     $scope.submit = function () {
       $http

@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', github: 'rails/rails', branch: '4-1-stable'
+gem 'rails', github: 'rails/rails', branch: '4-2-stable'
 
 gem 'pg'
 gem 'sprockets-rails', github: 'rails/sprockets-rails', branch: '2.x'
@@ -26,10 +26,14 @@ gem 'puma'
 # For background worker processes.
 gem 'clockwork'
 gem 'sidekiq'
+gem 'redlock'
 gem 'daemons'
 
 # For the payment system.
 gem 'stripe'
+
+# For colorizing console output in specs.
+gem 'colorize'
 
 # For health insurance enrollment and other concerns.
 gem 'pokitdok-ruby', github: 'pokitdok/pokitdok-ruby', require: 'pokitdok'

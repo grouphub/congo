@@ -10,38 +10,74 @@
           </div>
 
           <div class="box-body">
-            <div class="form-group">
-              <label class="control-label">First Name</label>
-              <input type="text" class="form-control" id="first_name" name="first_name" placeholder="First Name">
-            </div>
-            <div class="form-group">
-              <label class="control-label">Middle Name</label>
-              <input type="text" class="form-control" id="middle_name" name="middle_name" placeholder="Middle Name">
-            </div>
-            <div class="form-group">
-              <label class="control-label">Last Name</label>
-              <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Last Name">
-            </div>
-            <div class="form-group">
-              <label class="control-label">Sex</label>
-              <fieldset>
-                <label class="radio-inline">
-                  <input type="radio" name="sex_indicate" id="" value="Male">
-                  Male
-                </label>
-                <label class="radio-inline">
-                  <input type="radio" name="sex_indicate" id="" value="Female">
-                  Female
-                </label>
-              </fieldset>
-            </div>
-            <div class="form-group">
-              <label class="control-label">Social Security Number</label>
-              <input type="password" name="social_security_number" class="form-control" id="social_security_number" placeholder="Social Security number">
-            </div>
-            <div class="form-group">
-              <label class="control-label">Date of Birth (mm/dd/yy)</label>
-              <input type="text" name="date_of_birth" class="form-control" id="date_of_birth" placeholder="Date of birth (mm/dd/yy)">
+            <div class="row">
+              <div class="form-group col-sm-4">
+                <label class="control-label">First Name</label>
+                <input type="text" class="form-control" name="first_name" placeholder="First Name">
+              </div>
+
+              <div class="form-group col-sm-3">
+                <label class="control-label">Middle Name</label>
+                <input type="text" class="form-control" name="middle_name" placeholder="Middle Name">
+              </div>
+
+              <div class="form-group col-sm-5">
+                <label class="control-label">Last Name</label>
+                <input type="text" class="form-control" name="last_name" placeholder="Last Name">
+              </div>
+
+              <div class="form-group col-sm-12">
+                <label class="control-label">Sex</label>
+                <fieldset>
+                  <label class="radio-inline">
+                    <input type="radio" name="sex_indicate" value="Male">
+                    Male
+                  </label>
+                  <label class="radio-inline">
+                    <input type="radio" name="sex_indicate" value="Female">
+                    Female
+                  </label>
+                </fieldset>
+              </div>
+
+              <div class="form-group col-sm-6">
+                <label class="control-label">Social Security Number</label>
+                <input type="password" name="social_security_number" class="form-control" placeholder="Social Security Number">
+              </div>
+
+              <div class="form-group col-sm-6">
+                <label class="control-label">Date of Birth (mm/dd/yyyy)</label>
+                <input type="text" name="date_of_birth" class="form-control" placeholder="Date of Birth (mm/dd/yyyy)">
+              </div>
+
+              <div class="form-group col-sm-12">
+                <label class="control-label">Employment Status</label>
+                <input type="text" name="employment_status" class="form-control" placeholder="Employment Status" value="Full-Time">
+              </div>
+
+              <div class="form-group col-sm-4">
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" name="substance_abuse" value="Yes"> Substance Abuse
+                  </label>
+                </div>
+              </div>
+
+              <div class="form-group col-sm-4">
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" name="tobacco_use" value="Yes"> Tobacco Use
+                  </label>
+                </div>
+              </div>
+
+              <div class="form-group col-sm-4">
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" name="handicapped" value="Yes"> Handicapped
+                  </label>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -50,386 +86,439 @@
           <div class="box-header">
             <h3 class="box-title">Contact Information</h3>
           </div>
+
           <div class="box-body">
-            <div class="form-group">
-              <label class="control-label">Street Address</label>
-              <input type="text" name="street_address" class="form-control" id="street_address" placeholder="Street address">
-            </div>
-            <div class="form-group">
-              <label class="control-label">Apt. #</label>
-              <input type="text" class="form-control" name="apartment_number" id="apartment_number" placeholder="Apt. #">
-            </div>
-            <div class="form-group">
-              <label class="control-label">City</label>
-              <input type="text" name="city" class="form-control" id="city" placeholder="City">
-            </div>
-            <div class="form-group">
-              <label class="control-label">State</label>
-              <input type="text" name="state" class="form-control" id="state" placeholder="State">
-            </div>
-            <div class="form-group">
-              <label class="control-label">ZIP</label>
-              <input type="text" name="zip" class="form-control" id="zip" placeholder="ZIP">
-            </div>
-            <div class="form-group">
-              <label class="control-label">County</label>
-              <input type="text" name="county" class="form-control" id="county" placeholder="County">
-            </div>
-            <div class="form-group">
-              <label class="control-label">Phone</label>
-              <input type="tel" name="phone" class="form-control" id="phone" placeholder="Phone">
-            </div>
-            <div class="form-group">
-              <label class="control-label">Other phone</label>
-              <input type="tel" name="other_phone" class="form-control" id="other_phone" placeholder="Other phone">
+            <div class="row">
+              <div class="form-group col-sm-9">
+                <label class="control-label">Street Address</label>
+                <input type="text" name="street_address" class="form-control" placeholder="Street Address">
+              </div>
+
+              <div class="form-group col-sm-3">
+                <label class="control-label">Apt. #</label>
+                <input type="text" class="form-control" name="apartment_number" placeholder="Apt. #">
+              </div>
+
+              <div class="form-group col-sm-6">
+                <label class="control-label">City</label>
+                <input type="text" name="city" class="form-control" placeholder="City">
+              </div>
+
+              <div class="form-group col-sm-3">
+                <label class="control-label">State</label>
+                <input type="text" name="state" class="form-control" placeholder="State">
+              </div>
+
+              <div class="form-group col-sm-3">
+                <label class="control-label">ZIP</label>
+                <input type="text" name="zip" class="form-control" placeholder="ZIP">
+              </div>
+
+              <div class="form-group col-sm-12">
+                <label class="control-label">County</label>
+                <input type="text" name="county" class="form-control" placeholder="County">
+              </div>
+
+              <div class="form-group col-sm-6">
+                <label class="control-label">Phone</label>
+                <input type="tel" name="phone" class="form-control" placeholder="Phone">
+              </div>
+
+              <div class="form-group col-sm-6">
+                <label class="control-label">Phone Type</label>
+                <input type="tel" name="phone_type" class="form-control" placeholder="Phone Type" value="Home">
+              </div>
+
+              <div class="form-group col-sm-6">
+                <label class="control-label">Other Phone</label>
+                <input type="tel" name="other_phone" class="form-control" placeholder="Other Phone">
+              </div>
+
+              <div class="form-group col-sm-6">
+                <label class="control-label">Other Phone Type</label>
+                <input type="tel" name="other_phone_type" class="form-control" placeholder="Other Phone Type" value="Cell">
+              </div>
             </div>
           </div>
         </div>
 
-        <div class="box box-warning">
+        <div class="box box-warning" name="previousCoverage">
           <div class="box-header">
             <h3 class="box-title">Previous Coverage</h3>
           </div>
+
           <div class="box-body">
             <div class="form-group">
               <label class="control-label">Have you previously had insurance coverage?</label>
               <fieldset>
                 <label class="radio-inline">
-                  <input type="radio" name="coverage_experience" id="" value="Yes" ng-model="form.previousCoverage">
+                  <input type="radio" name="coverage_experience" value="Yes" ng-model="form.previousCoverage">
                   Yes
                 </label>
                 <label class="radio-inline">
-                  <input type="radio" name="coverage_experience" id="" value="No" ng-model="form.previousCoverage">
+                  <input type="radio" name="coverage_experience" value="No" ng-model="form.previousCoverage">
                   No
                 </label>
               </fieldset>
             </div>
 
             <div class="form-group" ng-if="form.previousCoverage === 'Yes'">
-              <label class="control-label">Medical record # (if any)</label>
-              <input type="text" name="medical_record_number" class="form-control" id="medical_record_number" placeholder="Medical record # (if any)">
+              <label class="control-label">Medical record # (If Any)</label>
+              <input type="text" name="medical_record_number" class="form-control" placeholder="Medical Record # (If Any)">
             </div>
 
             <div class="form-group" ng-if="form.previousCoverage === 'Yes'">
-              <label class="control-label">If Yes, most recent insurance carrier:</label>
-              <input type="text" name="if_yes_most_recent_insurance_carrier" class="form-control" id="if_yes_most_recent_insurance_carrier" placeholder="If Yes, most recent insurance carrier:">
+              <label class="control-label">If Yes, Most Recent Insurance Carrier</label>
+              <input type="text" name="if_yes_most_recent_insurance_carrier" class="form-control" placeholder="If Yes, Most Recent Insurance Carrier">
             </div>
 
             <div class="form-group" ng-if="form.previousCoverage === 'Yes'">
-              <label class="control-label">Dates of coverage:</label>
-              <input type="text" name="dates_of_coverage" class="form-control" id="dates_of_coverage" placeholder="Dates of coverage:">
+              <label class="control-label">Dates of Coverage</label>
+              <input type="text" name="dates_of_coverage" class="form-control" placeholder="Dates of Coverage">
             </div>
           </div>
         </div>
 
-        <div class="box box-warning">
-
+        <div class="box box-warning" name="dependents">
           <div class="box box-warning">
             <div class="box-header">
               <h3 class="box-title">Dependents to be Covered</h3>
             </div>
 
             <div class="box-body">
-              <p>All members must reside in our California service area.</p>
-
-              <a href="" class="btn btn-default" ng-click="addDependent()">Add Dependent</a>
-            </div>
-
-            <div class="dependent" ng-repeat="i in getNumber(form.numberOfDependents)">
-              <div class="box-header">
+              <div class="dependent" ng-repeat="i in getNumber(form.numberOfDependents)">
                 <h4 class="text-center">Dependent {{$index + 1}}</h4>
-              </div>
 
-              <div class="box-body">
                 <div class="row">
-                  <div class="form-group col-sm-12">
-                    <label class="control-label">First name</label>
-                    <input type="text" name="dependent_{{$index + 1}}_first_name" class="form-control" id="apartment_number" placeholder="First name">
+                  <div class="form-group col-sm-4">
+                    <label class="control-label">First Name</label>
+                    <input type="text" name="dependent_{{$index + 1}}_first_name" class="form-control" placeholder="First Name">
                   </div>
 
-                  <div class="form-group col-sm-12">
-                    <label class="control-label">Middle name</label>
-                    <input type="text" name="dependent_{{$index + 1}}_middle_name" class="form-control" id="apartment_number" placeholder="Middle name">
-                  </div>
-
-                  <div class="form-group col-sm-12">
-                    <label class="control-label">Last name</label>
-                    <input type="text" name="dependent_{{$index + 1}}_last_name" class="form-control" id="apartment_number" placeholder="Last name">
-                  </div>
-
-                  <div class="form-group col-sm-12">
-                    <label class="control-label">Medical record # (if any)</label>
-                    <input type="text" name="dependent_{{$index + 1}}_medical_record_number_if_any" class="form-control" id="apartment_number" placeholder="Medical record # (if any)">
+                  <div class="form-group col-sm-3">
+                    <label class="control-label">Middle Name</label>
+                    <input type="text" name="dependent_{{$index + 1}}_middle_name" class="form-control" placeholder="Middle Name">
                   </div>
 
                   <div class="form-group col-sm-5">
-                    <label class="control-label">Social Security number</label>
-                    <input type="text" name="dependent_{{$index + 1}}_social_security_number" class="form-control" id="apartment_number" placeholder="Social Security number">
+                    <label class="control-label">Last Name</label>
+                    <input type="text" name="dependent_{{$index + 1}}_last_name" class="form-control" placeholder="Last Name">
                   </div>
 
-                  <div class="form-group col-sm-4">
-                    <label class="control-label">Date of birth (mm/dd/yy)</label>
-                    <input type="text" name="dependent_{{$index + 1}}_date_of_birth" class="form-control" id="apartment_number" placeholder="Date of birth (mm/dd/yy)">
-                  </div>
-
-                  <div class="form-group">
+                  <div class="form-group col-sm-12">
                     <label class="control-label">Sex</label>
                     <fieldset>
                       <label class="radio-inline">
-                        <input type="radio" name="dependent_{{$index + 1}}_sex_indicate" id="" value="Male">
+                        <input type="radio" name="dependent_{{$index + 1}}_sex_indicate" value="Male">
                         Male
                       </label>
 
                       <label class="radio-inline">
-                        <input type="radio" name="dependent_{{$index + 1}}_sex_indicate" id="" value="Female">
+                        <input type="radio" name="dependent_{{$index + 1}}_sex_indicate" value="Female">
                         Female
                       </label>
                     </fieldset>
                   </div>
 
-                  <div class="form-group col-sm-4 col-md-3">
+                  <div class="form-group col-sm-12">
+                    <label class="control-label">Medical Record # (If Any)</label>
+                    <input type="text" name="dependent_{{$index + 1}}_medical_record_number_if_any" class="form-control" placeholder="Medical Record # (If Any)">
+                  </div>
+
+                  <div class="form-group col-sm-6">
+                    <label class="control-label">Social Security Number</label>
+                    <input type="text" name="dependent_{{$index + 1}}_social_security_number" class="form-control" placeholder="Social Security Number">
+                  </div>
+
+                  <div class="form-group col-sm-6">
+                    <label class="control-label">Date of Birth (mm/dd/yyyy)</label>
+                    <input type="text" name="dependent_{{$index + 1}}_date_of_birth" class="form-control" placeholder="Date of Birth (mm/dd/yyyy)">
+                  </div>
+
+                  <div class="form-group col-sm-12">
                     <label class="control-label">Has this dependent previously had insurance coverage?</label>
                     <fieldset>
                       <label class="radio-inline">
-                        <input type="radio" name="dependent_{{$index + 1}}_coverage_experience" id="" value="Yes">
+                        <input type="radio" name="dependent_{{$index + 1}}_coverage_experience" value="Yes" ng-model="form.dependents[$index].previousCoverage">
                         Yes
                       </label>
                       <label class="radio-inline">
-                        <input type="radio" name="dependent_{{$index + 1}}_coverage_experience" id="" value="No">
+                        <input type="radio" name="dependent_{{$index + 1}}_coverage_experience" value="No" ng-model="form.dependents[$index].previousCoverage">
                         No
                       </label>
                     </fieldset>
                   </div>
 
-                  <div class="form-group col-sm-4 col-md-5">
-                    <label class="control-label">If Yes, most recent insurance carrier:</label>
-                    <input type="text" name="dependent_{{$index + 1}}_if_yes_most_recent_insurance_carrier" class="form-control" id="apartment_number" placeholder="If Yes, most recent insurance carrier:">
+                  <div class="form-group col-sm-12" ng-if="form.dependents[$index].previousCoverage === 'Yes'">
+                    <label class="control-label">If Yes, Most Recent Insurance Carrier</label>
+                    <input type="text" name="dependent_{{$index + 1}}_if_yes_most_recent_insurance_carrier" class="form-control" placeholder="If Yes, Most Recent Insurance Carrier">
                   </div>
 
-                  <div class="form-group col-sm-4">
-                    <label class="control-label">Dates of coverage:</label>
-                    <input type="text" name="dependent_{{$index + 1}}_dates_of_coverage" class="form-control" id="apartment_number" placeholder="Dates of coverage:">
+                  <div class="form-group col-sm-12" ng-if="form.dependents[$index].previousCoverage === 'Yes'">
+                    <label class="control-label">Dates of Coverage</label>
+                    <input type="text" name="dependent_{{$index + 1}}_dates_of_coverage" class="form-control" placeholder="Dates of Coverage">
                   </div>
                 </div>
+
+                <hr>
+              </div>
+
+              <div class="notes">
+                <p>All members must reside in our California service area.</p>
+
+                <a href="" class="btn btn-default" ng-click="addDependent()">Add Dependent</a>
+                <a href="" class="btn btn-danger" ng-if="form.numberOfDependents > 0" ng-click="removeDependent()">Remove Dependent</a>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="box box-warning">
-          <div class="box-header">
-            <h3 class="box-title">Parent or Legal Guardian</h3>
-          </div>
-          <div class="box-body">
-            <div class="row">
+        <!-- TODO: This is temporarily disabled until we figure out how to get it to work with PokitDok -->
+        <!-- <div class="box box&#45;warning" name="parentOrGuardian"> -->
+        <!--   <div class="box&#45;header"> -->
+        <!--     <h3 class="box&#45;title">Parent or Legal Guardian</h3> -->
+        <!--   </div> -->
 
-              <div class="form-group col-sm-12">
-                <label class="control-label">Do you have a parent or legal guardian you wish to cover?</label>
-                <fieldset>
-                  <label class="radio-inline">
-                    <input type="radio" id="" value="Yes" ng-model="form.parentOrLegalGuardian">
-                    Yes
-                  </label>
-                  <label class="radio-inline">
-                    <input type="radio" id="" value="No" ng-model="form.parentOrLegalGuardian">
-                    No
-                  </label>
-                </fieldset>
-              </div>
+        <!--   <div class="box&#45;body"> -->
+        <!--     <div class="row"> -->
+        <!--       <div class="form&#45;group col&#45;sm&#45;12"> -->
+        <!--         <label class="control&#45;label">Do you have a parent or legal guardian you wish to cover?</label> -->
+        <!--         <fieldset> -->
+        <!--           <label class="radio&#45;inline"> -->
+        <!--             <input type="radio" name="parent_or_legal_guardian_covered" value="Yes" ng&#45;model="form.parentOrLegalGuardian"> -->
+        <!--             Yes -->
+        <!--           </label> -->
+        <!--           <label class="radio&#45;inline"> -->
+        <!--             <input type="radio" name="parent_or_legal_guardian_covered" value="No" ng&#45;model="form.parentOrLegalGuardian"> -->
+        <!--             No -->
+        <!--           </label> -->
+        <!--         </fieldset> -->
+        <!--       </div> -->
 
-              <div ng-if="form.parentOrLegalGuardian === 'Yes'" class="form-group col-sm-12">
-                <label class="control-label">First name</label>
-                <input type="text" name="parent_or_legal_guardian_first_name" class="form-control" id="apartment_number" placeholder="First name">
-              </div>
-              <div ng-if="form.parentOrLegalGuardian === 'Yes'" class="form-group col-sm-12">
-                <label class="control-label">Middle name</label>
-                <input type="text" name="parent_or_legal_guardian_middle_name" class="form-control" id="apartment_number" placeholder="Middle name">
-              </div>
-              <div ng-if="form.parentOrLegalGuardian === 'Yes'" class="form-group col-sm-12">
-                <label class="control-label">Last name</label>
-                <input type="text" name="parent_or_legal_guardian_last_name" class="form-control" id="apartment_number" placeholder="Last name">
-              </div>
-              <div ng-if="form.parentOrLegalGuardian === 'Yes'" class="form-group col-sm-12">
-                <label class="control-label">Parent/Legal Guardian Social Security number</label>
-                <input type="text" name="parent_or_legal_guardian_social_security_number" class="form-control" id="apartment_number" placeholder="Parent/Legal Guardian Social Security number">
-              </div>
+        <!--       <div ng&#45;if="form.parentOrLegalGuardian === 'Yes'" class="form&#45;group col&#45;sm&#45;4"> -->
+        <!--         <label class="control&#45;label">First Name</label> -->
+        <!--         <input type="text" name="parent_or_legal_guardian_first_name" class="form&#45;control" placeholder="First Name"> -->
+        <!--       </div> -->
 
-              <div ng-if="form.parentOrLegalGuardian === 'Yes'" class="form-group col-sm-8">
-                <label class="control-label">Relationship to applicant</label>
-                <fieldset>
-                  <label class="radio-inline">
-                    <input type="radio" name="parent_or_legal_guardian_rel_to_applicant" value="Parent/Guardian">
-                    Parent/Guardian
-                  </label>
-                  <label class="radio-inline">
-                    <input type="radio" name="parent_or_legal_guardian_rel_to_applicant" value="Spouse">
-                    Spouse
-                  </label>
-                  <label class="radio-inline">
-                    <input type="radio" name="parent_or_legal_guardian_rel_to_applicant" value="Domestic partner">
-                    Domestic partner
-                  </label>
-                  <label class="radio-inline">
-                    <input type="radio" name="parent_or_legal_guardian_rel_to_applicant" value="Other">
-                    Other
-                  </label>
-                </fieldset>
-              </div>
-              <div ng-if="form.parentOrLegalGuardian === 'Yes'" class="form-group col-sm-4">
-                <label class="control-label">Same address as primary applicant?</label>
-                <fieldset>
-                  <label class="radio-inline">
-                    <input type="radio" name="parent_or_legal_guardian_same_address" value="Yes">
-                    Yes
-                  </label>
-                  <label class="radio-inline">
-                    <input type="radio" name="parent_or_legal_guardian_same_address" value="No">
-                    No
-                  </label>
-                </fieldset>
-              </div>
+        <!--       <div ng&#45;if="form.parentOrLegalGuardian === 'Yes'" class="form&#45;group col&#45;sm&#45;3"> -->
+        <!--         <label class="control&#45;label">Middle Name</label> -->
+        <!--         <input type="text" name="parent_or_legal_guardian_middle_name" class="form&#45;control" placeholder="Middle Name"> -->
+        <!--       </div> -->
 
-              <div ng-if="form.parentOrLegalGuardian === 'Yes'" class="form-group col-sm-12">
-                <label class="control-label">Street address</label>
-                <input type="text" name="parent_or_legal_guardian_street_address" class="form-control" id="apartment_number" placeholder="Street address">
-              </div>
-              <div ng-if="form.parentOrLegalGuardian === 'Yes'" class="form-group col-sm-12">
-                <label class="control-label">Apt. #</label>
-                <input type="text" name="parent_or_legal_guardian_apartment_number" class="form-control" id="apartment_number" placeholder="Apt. #">
-              </div>
-              <div ng-if="form.parentOrLegalGuardian === 'Yes'" class="form-group col-sm-5">
-                <label class="control-label">City</label>
-                <input type="text" name="parent_or_legal_guardian_city" class="form-control" id="apartment_number" placeholder="City">
-              </div>
-              <div ng-if="form.parentOrLegalGuardian === 'Yes'" class="form-group col-sm-2">
-                <label class="control-label">State</label>
-                <input type="text" name="parent_or_legal_guardian_state" class="form-control" id="apartment_number" placeholder="State">
-              </div>
-              <div ng-if="form.parentOrLegalGuardian === 'Yes'" class="form-group col-sm-2">
-                <label class="control-label">ZIP</label>
-                <input type="text" name="parent_or_legal_guardian_zip" class="form-control" id="apartment_number" placeholder="ZIP">
-              </div>
-              <div ng-if="form.parentOrLegalGuardian === 'Yes'" class="form-group col-sm-12">
-                <label class="control-label">County</label>
-                <input type="text" name="parent_or_legal_guardian_county" class="form-control" id="apartment_number" placeholder="County">
-              </div>
-              <div ng-if="form.parentOrLegalGuardian === 'Yes'" class="form-group col-sm-6">
-                <label class="control-label">Phone</label>
-                <input type="tel" name="parent_or_legal_guardian_phone" class="form-control" id="apartment_number" placeholder="Phone">
-              </div>
-              <div ng-if="form.parentOrLegalGuardian === 'Yes'" class="form-group col-sm-6">
-                <label class="control-label">Other phone</label>
-                <input type="tel" name="parent_or_legal_guardian_other_phone" class="form-control" id="apartment_number" placeholder="Other phone">
-              </div>
-              <div ng-if="form.parentOrLegalGuardian === 'Yes'" class="form-group col-sm-8">
-                <label class="control-label">Parent/Legal guardian date of birth (mm/dd/yy)</label>
-                <input type="text" name="parent_or_legal_guardian_date_of_birth" class="form-control" id="apartment_number" placeholder="Parent/Legal guardian date of birth (mm/dd/yy)">
-              </div>
+        <!--       <div ng&#45;if="form.parentOrLegalGuardian === 'Yes'" class="form&#45;group col&#45;sm&#45;5"> -->
+        <!--         <label class="control&#45;label">Last Name</label> -->
+        <!--         <input type="text" name="parent_or_legal_guardian_last_name" class="form&#45;control" placeholder="Last Name"> -->
+        <!--       </div> -->
 
-              <div ng-if="form.parentOrLegalGuardian === 'Yes'" class="form-group col-sm-4">
-                <label class="control-label">Parent/Legal guardian Sex</label>
-                <fieldset>
-                  <label class="radio-inline">
-                    <input type="radio" name="parent_or_legal_guardian_sex_indicate" id="" value="Male">
-                    Male
-                  </label>
-                  <label class="radio-inline">
-                    <input type="radio" name="parent_or_legal_guardian_sex_indicate" id="" value="Female">
-                    Female
-                  </label>
-                </fieldset>
-              </div>
+        <!--       <div ng&#45;if="form.parentOrLegalGuardian === 'Yes'" class="form&#45;group col&#45;sm&#45;12"> -->
+        <!--         <label class="control&#45;label">Sex</label> -->
+        <!--         <fieldset> -->
+        <!--           <label class="radio&#45;inline"> -->
+        <!--             <input type="radio" name="parent_or_legal_guardian_sex_indicate" value="Male"> -->
+        <!--             Male -->
+        <!--           </label> -->
 
-              <div ng-if="form.parentOrLegalGuardian === 'Yes'" class="form-group col-sm-6">
-                <label class="control-label">Preferred language spoken (if not English)</label>
-                <input type="text" class="form-control" name="parent_or_legal_guardian_language_spoken" id="apartment_number" placeholder="Preferred language spoken (if not English)">
-              </div>
-              <div ng-if="form.parentOrLegalGuardian === 'Yes'" class="form-group col-sm-6">
-                <label class="control-label">Preferred language read (if not English)</label>
-                <input type="text" class="form-control" name="parent_or_legal_guardian_language_read" id="apartment_number" placeholder="Preferred language read (if not English)">
-              </div>
-            </div>
-          </div>
-        </div>
+        <!--           <label class="radio&#45;inline"> -->
+        <!--             <input type="radio" name="parent_or_legal_guardian_sex_indicate" value="Female"> -->
+        <!--             Female -->
+        <!--           </label> -->
+        <!--         </fieldset> -->
+        <!--       </div> -->
 
-        <div class="box box-warning">
-          <div class="box-header">
-            <h3 class="box-title">You can choose an authorized representative</h3>
-          </div>
-          <div class="box-body">
-            <div class="row">
+        <!--       <div ng&#45;if="form.parentOrLegalGuardian === 'Yes'" class="form&#45;group col&#45;sm&#45;12"> -->
+        <!--         <label class="control&#45;label">Medical Record # (If Any)</label> -->
+        <!--         <input type="text" name="parent_or_legal_guardian_medical_record_number_if_any" class="form&#45;control" placeholder="Medical Record # (If Any)"> -->
+        <!--       </div> -->
 
-              <div class="form-group col-sm-12">
-                <label class="control-label">Do you wish to choose an authorized representative?</label>
-                <fieldset>
-                  <label class="radio-inline">
-                    <input type="radio" id="" value="Yes" ng-model="form.authorizedRepresentative">
-                    Yes
-                  </label>
-                  <label class="radio-inline">
-                    <input type="radio" id="" value="No" ng-model="form.authorizedRepresentative">
-                    No
-                  </label>
-                </fieldset>
-              </div>
+        <!--       <div ng&#45;if="form.parentOrLegalGuardian === 'Yes'" class="form&#45;group col&#45;sm&#45;6"> -->
+        <!--         <label class="control&#45;label">Social Security Number</label> -->
+        <!--         <input type="text" name="parent_or_legal_guardian_social_security_number" class="form&#45;control" placeholder="Social Security Number"> -->
+        <!--       </div> -->
 
-              <div ng-if="form.authorizedRepresentative === 'Yes'" class="form-group col-sm-4">
-                <label class="control-label">First name of authorized representative</label>
-                <input type="text" name="authorized_representative_first_name" class="form-control" id="apartment_number" placeholder="First name of authorized representative">
-              </div>
-              <div ng-if="form.authorizedRepresentative === 'Yes'" class="form-group col-sm-4">
-                <label class="control-label">Middle name</label>
-                <input type="text" name="authorized_representative_middle_name" class="form-control" id="apartment_number" placeholder="Middle name">
-              </div>
-              <div ng-if="form.authorizedRepresentative === 'Yes'" class="form-group col-sm-4">
-                <label class="control-label">Last name</label>
-                <input type="text" name="authorized_representative_last_name" class="form-control" id="apartment_number" placeholder="Last name">
-              </div>
+        <!--       <div ng&#45;if="form.parentOrLegalGuardian === 'Yes'" class="form&#45;group col&#45;sm&#45;6"> -->
+        <!--         <label class="control&#45;label">Date of Birth (mm/dd/yyyy)</label> -->
+        <!--         <input type="text" name="parent_or_legal_guardian_date_of_birth" class="form&#45;control" placeholder="Date of Birth (mm/dd/yyyy)"> -->
+        <!--       </div> -->
 
-              <div ng-if="form.authorizedRepresentative === 'Yes'" class="form-group col-sm-12">
-                <label class="control-label">Street address</label>
-                <input type="text" name="authorized_representative_street_address" class="form-control" id="apartment_number" placeholder="Street address">
-              </div>
-              <div ng-if="form.authorizedRepresentative === 'Yes'" class="form-group col-sm-12">
-                <label class="control-label">Apt. #</label>
-                <input type="text" name="authorized_representative_apartment_number" class="form-control" id="apartment_number" placeholder="Apt. #">
-              </div>
-              <div ng-if="form.authorizedRepresentative === 'Yes'" class="form-group col-sm-6">
-                <label class="control-label">City</label>
-                <input type="text" name="authorized_representative_city" class="form-control" id="apartment_number" placeholder="City">
-              </div>
-              <div ng-if="form.authorizedRepresentative === 'Yes'" class="form-group col-sm-12">
-                <label class="control-label">State</label>
-                <input type="text" name="authorized_representative_street" class="form-control" id="apartment_number" placeholder="State">
-              </div>
-              <div ng-if="form.authorizedRepresentative === 'Yes'" class="form-group col-sm-12">
-                <label class="control-label">ZIP</label>
-                <input type="text" name="authorized_representative_zip" class="form-control" id="apartment_number" placeholder="ZIP">
-              </div>
+        <!--       <div ng&#45;if="form.parentOrLegalGuardian === 'Yes'" class="form&#45;group col&#45;sm&#45;12"> -->
+        <!--         <label class="control&#45;label">Relationship to Applicant</label> -->
+        <!--         <fieldset> -->
+        <!--           <label class="radio&#45;inline"> -->
+        <!--             <input type="radio" name="parent_or_legal_guardian_rel_to_applicant" value="Parent/Guardian"> -->
+        <!--             Parent/Guardian -->
+        <!--           </label> -->
 
-              <div ng-if="form.authorizedRepresentative === 'Yes'" class="form-group col-sm-6">
-                <label class="control-label">Phone</label>
-                <input type="tel" name="authorized_representative_phone" class="form-control" id="apartment_number" placeholder="Phone">
-              </div>
+        <!--           <label class="radio&#45;inline"> -->
+        <!--             <input type="radio" name="parent_or_legal_guardian_rel_to_applicant" value="Spouse"> -->
+        <!--             Spouse -->
+        <!--           </label> -->
 
-            </div>
+        <!--           <label class="radio&#45;inline"> -->
+        <!--             <input type="radio" name="parent_or_legal_guardian_rel_to_applicant" value="Domestic Partner"> -->
+        <!--             Domestic Partner -->
+        <!--           </label> -->
 
-            <div class="row">
-              <div class="form-group col-sm-12">
-                <p>By signing, you allow this person to sign your application, to get official information about this application, and to act for you on matters related to this application.</p>
-              </div>
-              <div class="form-group col-sm-8">
-                <label class="control-label">Primary applicant or parent or legal guardian for applicants under age 18</label>
-                <input type="text" name="authorized_representative_primary_applicant" class="form-control" id="apartment_number" placeholder="Primary applicant or parent or legal guardian for applicants under age 18">
-              </div>
-              <div class="form-group col-sm-4">
-                <label class="control-label">Date (mm/dd/yyyy)</label>
-                <input type="text" name="authorized_representative_date" class="form-control" id="apartment_number" placeholder="Date (mm/dd/yyyy)">
-              </div>
-            </div>
+        <!--           <label class="radio&#45;inline"> -->
+        <!--             <input type="radio" name="parent_or_legal_guardian_rel_to_applicant" value="Other"> -->
+        <!--             Other -->
+        <!--           </label> -->
+        <!--         </fieldset> -->
+        <!--       </div> -->
 
-          </div>
-        </div>
+        <!--       <div ng&#45;if="form.parentOrLegalGuardian === 'Yes'" class="form&#45;group col&#45;sm&#45;6"> -->
+        <!--         <label class="control&#45;label">Preferred Language Spoken (If Not English)</label> -->
+        <!--         <input type="text" class="form&#45;control" name="parent_or_legal_guardian_language_spoken" placeholder="Preferred Language Spoken (If Not English)"> -->
+        <!--       </div> -->
+
+        <!--       <div ng&#45;if="form.parentOrLegalGuardian === 'Yes'" class="form&#45;group col&#45;sm&#45;6"> -->
+        <!--         <label class="control&#45;label">Preferred Language Read (If Not English)</label> -->
+        <!--         <input type="text" class="form&#45;control" name="parent_or_legal_guardian_language_read" placeholder="Preferred Language Read (If Not English)"> -->
+        <!--       </div> -->
+
+        <!--       <div ng&#45;if="form.parentOrLegalGuardian === 'Yes'" class="form&#45;group col&#45;sm&#45;12 same&#45;address"> -->
+        <!--         <label class="control&#45;label">Same Address as Primary Applicant?</label> -->
+        <!--         <fieldset> -->
+        <!--           <label class="radio&#45;inline"> -->
+        <!--             <input type="radio" name="parent_or_legal_guardian_same_address" value="Yes" ng&#45;model="form.parentOrLegalGuardianSameAddress"> -->
+        <!--             Yes -->
+        <!--           </label> -->
+
+        <!--           <label class="radio&#45;inline"> -->
+        <!--             <input type="radio" name="parent_or_legal_guardian_same_address" value="No" ng&#45;model="form.parentOrLegalGuardianSameAddress"> -->
+        <!--             No -->
+        <!--           </label> -->
+        <!--         </fieldset> -->
+        <!--       </div> -->
+
+        <!--       <div ng&#45;if="form.parentOrLegalGuardian === 'Yes' &#38;&#38; form.parentOrLegalGuardianSameAddress === 'No'" class="form&#45;group col&#45;sm&#45;9"> -->
+        <!--         <label class="control&#45;label">Street Address</label> -->
+        <!--         <input type="text" name="parent_or_legal_guardian_street_address" class="form&#45;control" placeholder="Street Address"> -->
+        <!--       </div> -->
+
+        <!--       <div ng&#45;if="form.parentOrLegalGuardian === 'Yes' &#38;&#38; form.parentOrLegalGuardianSameAddress === 'No'" class="form&#45;group col&#45;sm&#45;3"> -->
+        <!--         <label class="control&#45;label">Apt. #</label> -->
+        <!--         <input type="text" name="parent_or_legal_guardian_apartment_number" class="form&#45;control" placeholder="Apt. #"> -->
+        <!--       </div> -->
+
+        <!--       <div ng&#45;if="form.parentOrLegalGuardian === 'Yes' &#38;&#38; form.parentOrLegalGuardianSameAddress === 'No'" class="form&#45;group col&#45;sm&#45;6"> -->
+        <!--         <label class="control&#45;label">City</label> -->
+        <!--         <input type="text" name="parent_or_legal_guardian_city" class="form&#45;control" placeholder="City"> -->
+        <!--       </div> -->
+
+        <!--       <div ng&#45;if="form.parentOrLegalGuardian === 'Yes' &#38;&#38; form.parentOrLegalGuardianSameAddress === 'No'" class="form&#45;group col&#45;sm&#45;3"> -->
+        <!--         <label class="control&#45;label">State</label> -->
+        <!--         <input type="text" name="parent_or_legal_guardian_state" class="form&#45;control" placeholder="State"> -->
+        <!--       </div> -->
+
+        <!--       <div ng&#45;if="form.parentOrLegalGuardian === 'Yes' &#38;&#38; form.parentOrLegalGuardianSameAddress === 'No'" class="form&#45;group col&#45;sm&#45;3"> -->
+        <!--         <label class="control&#45;label">ZIP</label> -->
+        <!--         <input type="text" name="parent_or_legal_guardian_zip" class="form&#45;control" placeholder="ZIP"> -->
+        <!--       </div> -->
+
+        <!--       <div ng&#45;if="form.parentOrLegalGuardian === 'Yes' &#38;&#38; form.parentOrLegalGuardianSameAddress === 'No'" class="form&#45;group col&#45;sm&#45;12"> -->
+        <!--         <label class="control&#45;label">County</label> -->
+        <!--         <input type="text" name="parent_or_legal_guardian_county" class="form&#45;control" placeholder="County"> -->
+        <!--       </div> -->
+
+        <!--       <div ng&#45;if="form.parentOrLegalGuardian === 'Yes' &#38;&#38; form.parentOrLegalGuardianSameAddress === 'No'" class="form&#45;group col&#45;sm&#45;6"> -->
+        <!--         <label class="control&#45;label">Phone</label> -->
+        <!--         <input type="tel" name="parent_or_legal_guardian_phone" class="form&#45;control" placeholder="Phone"> -->
+        <!--       </div> -->
+
+        <!--       <div ng&#45;if="form.parentOrLegalGuardian === 'Yes' &#38;&#38; form.parentOrLegalGuardianSameAddress === 'No'" class="form&#45;group col&#45;sm&#45;6"> -->
+        <!--         <label class="control&#45;label">Other Phone</label> -->
+        <!--         <input type="tel" name="parent_or_legal_guardian_other_phone" class="form&#45;control" placeholder="Other Phone"> -->
+        <!--       </div> -->
+        <!--     </div> -->
+        <!--   </div> -->
+        <!-- </div> -->
+
+        <!-- TODO: This is temporarily disabled until we figure out how to get it to work with PokitDok -->
+        <!-- <div class="box box&#45;warning" name="authorizedRepresentative"> -->
+        <!--   <div class="box&#45;header"> -->
+        <!--     <h3 class="box&#45;title">You Can Choose an Authorized Representative</h3> -->
+        <!--   </div> -->
+
+        <!--   <div class="box&#45;body"> -->
+        <!--     <div class="row"> -->
+        <!--       <div class="form&#45;group col&#45;sm&#45;12"> -->
+        <!--         <label class="control&#45;label">Do you wish to choose an authorized representative?</label> -->
+        <!--         <fieldset> -->
+        <!--           <label class="radio&#45;inline"> -->
+        <!--             <input type="radio" value="Yes" name="authorized_representative" ng&#45;model="form.authorizedRepresentative"> -->
+        <!--             Yes -->
+        <!--           </label> -->
+        <!--           <label class="radio&#45;inline"> -->
+        <!--             <input type="radio" value="No" name="authorized_representative" ng&#45;model="form.authorizedRepresentative"> -->
+        <!--             No -->
+        <!--           </label> -->
+        <!--         </fieldset> -->
+        <!--       </div> -->
+
+        <!--       <div ng&#45;if="form.authorizedRepresentative === 'Yes'" class="form&#45;group col&#45;sm&#45;4"> -->
+        <!--         <label class="control&#45;label">First Name</label> -->
+        <!--         <input type="text" name="authorized_representative_first_name" class="form&#45;control" placeholder="First Name"> -->
+        <!--       </div> -->
+
+        <!--       <div ng&#45;if="form.authorizedRepresentative === 'Yes'" class="form&#45;group col&#45;sm&#45;3"> -->
+        <!--         <label class="control&#45;label">Middle Name</label> -->
+        <!--         <input type="text" name="authorized_representative_middle_name" class="form&#45;control" placeholder="Middle Name"> -->
+        <!--       </div> -->
+
+        <!--       <div ng&#45;if="form.authorizedRepresentative === 'Yes'" class="form&#45;group col&#45;sm&#45;5"> -->
+        <!--         <label class="control&#45;label">Last Name</label> -->
+        <!--         <input type="text" name="authorized_representative_last_name" class="form&#45;control" placeholder="Last Name"> -->
+        <!--       </div> -->
+
+        <!--       <div ng&#45;if="form.authorizedRepresentative === 'Yes'" class="form&#45;group col&#45;sm&#45;9"> -->
+        <!--         <label class="control&#45;label">Street Address</label> -->
+        <!--         <input type="text" name="authorized_representative_street_address" class="form&#45;control" placeholder="Street Address"> -->
+        <!--       </div> -->
+
+        <!--       <div ng&#45;if="form.authorizedRepresentative === 'Yes'" class="form&#45;group col&#45;sm&#45;3"> -->
+        <!--         <label class="control&#45;label">Apt. #</label> -->
+        <!--         <input type="text" name="authorized_representative_apartment_number" class="form&#45;control" placeholder="Apt. #"> -->
+        <!--       </div> -->
+
+        <!--       <div ng&#45;if="form.authorizedRepresentative === 'Yes'" class="form&#45;group col&#45;sm&#45;6"> -->
+        <!--         <label class="control&#45;label">City</label> -->
+        <!--         <input type="text" name="authorized_representative_city" class="form&#45;control" placeholder="City"> -->
+        <!--       </div> -->
+
+        <!--       <div ng&#45;if="form.authorizedRepresentative === 'Yes'" class="form&#45;group col&#45;sm&#45;3"> -->
+        <!--         <label class="control&#45;label">State</label> -->
+        <!--         <input type="text" name="authorized_representative_street" class="form&#45;control" placeholder="State"> -->
+        <!--       </div> -->
+
+        <!--       <div ng&#45;if="form.authorizedRepresentative === 'Yes'" class="form&#45;group col&#45;sm&#45;3"> -->
+        <!--         <label class="control&#45;label">ZIP</label> -->
+        <!--         <input type="text" name="authorized_representative_zip" class="form&#45;control" placeholder="ZIP"> -->
+        <!--       </div> -->
+
+        <!--       <div ng&#45;if="form.authorizedRepresentative === 'Yes'" class="form&#45;group col&#45;sm&#45;12"> -->
+        <!--         <label class="control&#45;label">Phone</label> -->
+        <!--         <input type="tel" name="authorized_representative_phone" class="form&#45;control" placeholder="Phone"> -->
+        <!--       </div> -->
+        <!--     </div> -->
+
+        <!--     <div class="row"> -->
+        <!--       <div class="form&#45;group col&#45;sm&#45;12"> -->
+        <!--         <p>By signing, you allow this person to sign your application, to get official information about this application, and to act for you on matters related to this application.</p> -->
+        <!--       </div> -->
+
+        <!--       <div class="form&#45;group col&#45;sm&#45;8"> -->
+        <!--         <label class="control&#45;label">Primary Applicant, Parent, or Legal Guardian for Applicants Under Age 18</label> -->
+        <!--         <input type="text" name="authorized_representative_primary_applicant" class="form&#45;control" placeholder="Primary Applicant, Parent, or Legal Guardian for Applicants Under Age 18"> -->
+        <!--       </div> -->
+
+        <!--       <div class="form&#45;group col&#45;sm&#45;4"> -->
+        <!--         <label class="control&#45;label">Date (mm/dd/yyyy)</label> -->
+        <!--         <input type="text" name="authorized_representative_date" class="form&#45;control" placeholder="Date (mm/dd/yyyy)"> -->
+        <!--       </div> -->
+        <!--     </div> -->
+
+        <!--   </div> -->
+        <!-- </div> -->
 
         <input type="submit" class="btn btn-primary" ng-click="submit()" value="Apply">
       </div>

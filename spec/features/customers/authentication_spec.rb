@@ -1,16 +1,16 @@
 require 'rails_helper'
 
-describe 'Authentication', js: true do
+describe 'As a customer', js: true do
 
-  describe 'as a customer' do
+  describe 'Authentication' do
 
-    it 'allows a customer to sign in and out' do
+    it 'allows them to sign in and out' do
       create_customer
       signin_customer
       signout_customer
     end
 
-    it 'allows a customer to be invited to an account' do
+    it 'allows them to be invited to an account' do
       # Empty any emails
       ActionMailer::Base.deliveries = []
 
@@ -69,7 +69,7 @@ describe 'Authentication', js: true do
       expect(page).to have_content('Welcome, Alice!')
     end
 
-    it 'allows an existing user to be invited to an account as a customer' do
+    it 'allows them user to be invited to an account as a customer' do
       # Empty any emails
       ActionMailer::Base.deliveries = []
 
@@ -135,7 +135,7 @@ describe 'Authentication', js: true do
         eq('Accounts First Account Broker First Account Customer My Profile Sign Out')
     end
 
-    it 'prevents a customer from creating a new account with an existing email address'
+    it 'prevents them from creating a new account with an existing email address'
 
   end
 

@@ -1,18 +1,12 @@
 require 'rails_helper'
 
-describe 'Authentication', js: true do
+describe 'As an admin', js: true do
 
-  describe 'as an administrator' do
+  describe 'Carriers' do
 
-    it 'allows an administrator to sign in and out' do
-      create_admin
-      signin_admin
-      signout_admin
-    end
+    it 'allows them to list carriers'
 
-    it 'allows an administrator to list carriers'
-
-    it 'allows an administrator to create a carrier' do
+    it 'allows them to create a carrier' do
       create_admin
       signin_admin
 
@@ -74,7 +68,7 @@ describe 'Authentication', js: true do
       expect(carrier_properties['phone']).to eq('444-444-4444')
     end
 
-    it 'allows an administrator to edit a carrier' do
+    it 'allows them to show and edit a carrier' do
       create_admin
 
       Carrier.create! \
@@ -169,7 +163,7 @@ describe 'Authentication', js: true do
       expect(carrier_properties['phone']).to eq('555-555-5555')
     end
 
-    it 'allows an administrator to delete a carrier'
+    it 'allows them to delete a carrier'
 
   end
 

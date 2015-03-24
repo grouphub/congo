@@ -5,6 +5,9 @@ class CreateApplications < ActiveRecord::Migration
       t.integer :benefit_plan_id
       t.integer :membership_id
 
+      # This gets sent to PokitDok
+      t.string :reference_number
+
       # TODO: What fields do we need?
       t.text :properties_data
 
@@ -20,13 +23,21 @@ class CreateApplications < ActiveRecord::Migration
       t.integer :declined_by_id
       t.datetime :declined_on
 
-      # Group admin approves (TODO: Add this)
+      # Group admin approves
       t.integer :approved_by_id
       t.datetime :approved_on
 
       # Broker submits
       t.integer :submitted_by_id
       t.datetime :submitted_on
+
+      # System completes
+      t.integer :completed_by_id
+      t.datetime :completed_on
+
+      # Error state
+      t.boolean :errored_by_id
+      t.datetime :errored_on
 
       t.timestamps
     end

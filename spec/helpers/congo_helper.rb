@@ -2,6 +2,8 @@ require 'rails_helper'
 
 module CongoHelper
   def create_admin
+    test_debug 'Creating an admin account...'
+
     account = Account.create \
       name: 'Admin',
       tagline: 'GroupHub administrative account',
@@ -25,6 +27,8 @@ module CongoHelper
   end
 
   def signin_admin
+    test_debug 'Signing in as an admin...'
+
     visit '/'
 
     all('a', text: 'Sign In').first.click
@@ -40,6 +44,8 @@ module CongoHelper
   end
 
   def signout_admin
+    test_debug 'Signing out as an admin...'
+
     all('a', text: 'GroupHub').first.click
 
     expect(page).to have_content('Sign Out')
@@ -51,6 +57,8 @@ module CongoHelper
   end
 
   def create_broker
+    test_debug 'Creating a broker account...'
+
     account = Account.create \
       name: 'First Account',
       tagline: '#1 Account',
@@ -74,6 +82,8 @@ module CongoHelper
   end
 
   def signin_broker
+    test_debug 'Signing in as a broker...'
+
     visit '/'
 
     all('a', text: 'Sign In').first.click
@@ -89,6 +99,8 @@ module CongoHelper
   end
 
   def signout_broker
+    test_debug 'Signing out as a broker...'
+
     all('a', text: 'Barry').first.click
 
     expect(page).to have_content('Sign Out')
@@ -100,6 +112,8 @@ module CongoHelper
   end
 
   def create_customer
+    test_debug 'Creating a customer account...'
+
     account = Account.create \
       name: 'First Account',
       tagline: '#1 Account',
@@ -123,6 +137,8 @@ module CongoHelper
   end
 
   def signin_customer
+    test_debug 'Signing in as a customer...'
+
     visit '/'
 
     all('a', text: 'Sign In').first.click
@@ -138,6 +154,8 @@ module CongoHelper
   end
 
   def signout_customer
+    test_debug 'Signing out as a customer...'
+
     all('a', text: 'Candice').first.click
 
     expect(page).to have_content('Sign Out')
@@ -149,6 +167,8 @@ module CongoHelper
   end
 
   def create_group_for(account)
+    test_debug 'Creating a carrier, carrier account, benefit plan, group, and group benefit plan...'
+
     carrier = Carrier.create! \
       name: 'Blue Cross',
       properties: {
@@ -182,6 +202,10 @@ module CongoHelper
 
   def current_user_data
     page.evaluate_script('window.congo.currentUser')
+  end
+
+  def sample_application
+    JSON.load File.read("#{Rails.root}/spec/data/application.json")
   end
 end
 

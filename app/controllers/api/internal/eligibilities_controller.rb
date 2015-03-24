@@ -87,18 +87,18 @@ class Api::Internal::EligibilitiesController < ApplicationController
     if member_id.nil?
       eligibility_query = {
         member: {
-            birth_date: date_of_birth,
-            first_name: first_name,
-            last_name: last_name,
+          birth_date: date_of_birth,
+          first_name: first_name,
+          last_name: last_name,
         },
         trading_partner_id: carrier_trading_partner_id
       }
     else
       eligibility_query = {
         member: {
-            first_name: first_name,
-            last_name: last_name,
-            id: member_id
+          first_name: first_name,
+          last_name: last_name,
+          id: member_id
         },
         trading_partner_id: carrier_trading_partner_id
       }

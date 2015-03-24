@@ -80,6 +80,7 @@ ActiveRecord::Schema.define(version: 20150316023510) do
     t.integer  "account_id"
     t.integer  "benefit_plan_id"
     t.integer  "membership_id"
+    t.string   "reference_number"
     t.text     "properties_data"
     t.integer  "selected_by_id"
     t.datetime "selected_on"
@@ -91,6 +92,10 @@ ActiveRecord::Schema.define(version: 20150316023510) do
     t.datetime "approved_on"
     t.integer  "submitted_by_id"
     t.datetime "submitted_on"
+    t.integer  "completed_by_id"
+    t.datetime "completed_on"
+    t.boolean  "errored_by_id"
+    t.datetime "errored_on"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -103,6 +108,16 @@ ActiveRecord::Schema.define(version: 20150316023510) do
     t.string   "title"
     t.string   "url"
     t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "attempts", force: true do |t|
+    t.integer  "application_id"
+    t.string   "error_type"
+    t.string   "activity_id"
+    t.text     "response_data"
+    t.text     "properties_data"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

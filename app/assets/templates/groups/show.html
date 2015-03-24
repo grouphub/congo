@@ -5,30 +5,30 @@
   <div id="show-group-tabs" role="tabpanel">
     <!-- Tabs -->
     <ul class="nav nav-tabs" role "tablist">
-      <li role="presentation" class="active">
-        <a href="" data-target="#basics" aria-controls="basics" role="tab" data-toggle="tab">Basics</a>
+      <li role="presentation" ng-class="{active: currentTab() === 'basics'}">
+        <a href="" data-target="#basics" aria-controls="basics" role="tab" data-toggle="tab" ng-click="changeTab('basics')">Basics</a>
       </li>
 
-      <li role="presentation">
-        <a href="" data-target="#attachments" aria-controls="attachments" role="tab" data-toggle="tab">Attachments</a>
+      <li role="presentation" ng-class="{active: currentTab() === 'attachments'}">
+        <a href="" data-target="#attachments" aria-controls="attachments" role="tab" data-toggle="tab" ng-click="changeTab('attachments')">Attachments</a>
       </li>
 
-      <li role="presentation">
-        <a href="" data-target="#benefit-plans" aria-controls="benefit-plans" role="tab" data-toggle="tab">Benefit Plans</a>
+      <li role="presentation" ng-class="{active: currentTab() === 'benefit-plans'}">
+        <a href="" data-target="#benefit-plans" aria-controls="benefit-plans" role="tab" data-toggle="tab" ng-click="changeTab('benefit-plans')">Benefit Plans</a>
       </li>
 
-      <li role="presentation">
-        <a href="" data-target="#group-admins" aria-controls="group-admins" role="tab" data-toggle="tab">Group Admins</a>
+      <li role="presentation" ng-class="{active: currentTab() === 'group-admins'}">
+        <a href="" data-target="#group-admins" aria-controls="group-admins" role="tab" data-toggle="tab" ng-click="changeTab('group-admins')">Group Admins</a>
       </li>
 
-      <li role="presentation">
-        <a href="" data-target="#members" aria-controls="members" role="tab" data-toggle="tab">Members</a>
+      <li role="presentation" ng-class="{active: currentTab() === 'members'}">
+        <a href="" data-target="#members" aria-controls="members" role="tab" data-toggle="tab" ng-click="changeTab('members')">Members</a>
       </li>
     </ul>
 
     <!-- Panes -->
     <div class="tab-content">
-      <div role="tabpanel" class="tab-pane active" id="basics">
+      <div role="tabpanel" class="tab-pane" ng-class="{active: currentTab() === 'basics'}" id="basics">
         <h2>Basic Info</h2>
 
         <form ng-submit="submit()">
@@ -40,6 +40,11 @@
           <div class="form-group">
             <label for="group_id">Group ID</label>
             <input type="text" class="form-control" id="group_id" placeholder="Enter a Group ID&hellip;" ng-model="form.group_id">
+          </div>
+
+          <div class="form-group">
+            <label for="tax_id">Tax ID</label>
+            <input type="text" class="form-control" id="tax_id" placeholder="Enter a Tax ID&hellip;" ng-model="form.tax_id">
           </div>
 
           <div class="row">
@@ -65,7 +70,7 @@
         </form>
       </div>
 
-      <div role="tabpanel" class="tab-pane" id="attachments">
+      <div role="tabpanel" class="tab-pane" ng-class="{active: currentTab() === 'attachments'}" id="attachments">
         <h2>Attachments</h2>
 
         <table class="table">
@@ -113,7 +118,7 @@
         </form>
       </div>
 
-      <div role="tabpanel" class="tab-pane" id="benefit-plans">
+      <div role="tabpanel" class="tab-pane" ng-class="{active: currentTab() === 'benefit-plans'}" id="benefit-plans">
         <h2>Benefit Plans</h2>
 
         <table class="table">
@@ -152,7 +157,7 @@
         </div>
       </div>
 
-      <div role="tabpanel" class="tab-pane" id="group-admins">
+      <div role="tabpanel" class="tab-pane" ng-class="{active: currentTab() === 'group-admins'}" id="group-admins">
         <h2>Group Admins</h2>
 
         <table class="table">
@@ -195,7 +200,7 @@
         </form>
       </div>
 
-      <div role="tabpanel" class="tab-pane" id="members">
+      <div role="tabpanel" class="tab-pane" ng-class="{active: currentTab() === 'members'}" id="members">
         <h2>Members</h2>
 
         <table class="table">
@@ -232,6 +237,8 @@
                     <a class="btn btn-info btn-xs" href="" ng-if="application.state == 'applied'" ng-click="reviewApplication(application)">Review</a>
                     <a class="btn btn-primary btn-xs" href="" ng-if="application.state == 'approved'" ng-click="submitApplication(application)">Submit</a>
                     <a class="btn btn-success btn-xs" href="" ng-if="application.state == 'submitted'" ng-click="showApplicationStatus(application)">Submitted</a>
+                    <a class="btn btn-success btn-xs disabled" href="" ng-if="application.state == 'completed'">Completed</a>
+                    <a class="btn btn-danger btn-xs disabled" href="" ng-if="application.state == 'errored'">Errored</a>
                   </li>
                 </ul>
               </td>
@@ -265,7 +272,6 @@
 <div ng-if="currentRole() === 'customer'" class="col-md-12">
   <h1>{{group.name}}</h1>
 
-
   <div class="description">
     <p>You can find more information about the group by clicking "View Description" below.</p>
 
@@ -289,7 +295,6 @@
   <hr ng-if="group.attachments && group.attachments.length > 0">
 
   <div class="benefit-plans">
-
     <h2>Benefit Plans</h2>
 
     <table class="table">
@@ -307,7 +312,7 @@
 
           <td>
             <!-- No Application -->
-            <ul class="simple-list" ng-if="!application(benefitPlan) || application(benefitPlan).length === 0">
+            <ul class="simple-list" ng-if="application(benefitPlan).length === 0">
               <span class="state">
                 <a href="" class="btn btn-default btn-xs disabled">No Application</a>
               </span>

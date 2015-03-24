@@ -5,10 +5,11 @@ carrier = Carrier.create! \
   properties: {
     name: 'Blue Cross',
     npi: '1467560003',
-    first_name: 'Brad',
-    last_name: 'Bluecross',
+    trading_partner_id: 'MOCKPAYER',
     service_types: ['health_benefit_plan_coverage'],
-    trading_partner_id: 'MOCKPAYER'
+    tax_id: '123',
+    first_name: 'Brad',
+    last_name: 'Bluecross'
   }
 
 carrier_account = CarrierAccount.create! \

@@ -15,7 +15,7 @@ class PaymentClock
 
       # Account.find_each do |account|
       #   if account.needs_to_pay?
-      #     PaymentJob.perform_async(account)
+      #     PaymentJob.perform_later(account)
       #   end
       # end
     end
