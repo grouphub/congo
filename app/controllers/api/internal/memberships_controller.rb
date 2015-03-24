@@ -58,6 +58,7 @@ class Api::Internal::MembershipsController < ApplicationController
     membership_id = params[:membership_id]
     membership = Membership.where(id: membership_id).first
 
+    # TODO: Use deliver_later to send via Sidekiq. https://github.com/mperham/sidekiq/wiki/Active-Job
     MembershipMailer.confirmation_email(membership, request).deliver
 
     respond_to do |format|
@@ -77,6 +78,7 @@ class Api::Internal::MembershipsController < ApplicationController
     memberships.each do |membership|
       next if membership.user
 
+      # TODO: Use deliver_later to send via Sidekiq. https://github.com/mperham/sidekiq/wiki/Active-Job
       MembershipMailer.confirmation_email(membership, request).deliver
     end
 

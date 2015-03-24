@@ -1,5 +1,5 @@
-class PaymentJob
-  include Sidekiq::Worker
+class PaymentJob < ActiveJob::Base
+  queue_as :default
 
   def perform(account_id)
     redlock = Redlock.new(Rails.application.config.redis.url)

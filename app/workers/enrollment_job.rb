@@ -1,5 +1,5 @@
-class PaymentJob
-  include Sidekiq::Worker
+class PaymentJob < ActiveJob::Base
+  queue_as :default
 
   # TODO: May need a lock
   def perform(application_id)

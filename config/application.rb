@@ -32,6 +32,9 @@ module Congo2
 
     # Auto-require items in "lib"
     config.autoload_paths << Rails.root.join('lib')
+
+    # Use Sidekiq to process queues by default.
+    config.active_job.queue_adapter = :sidekiq
   end
 end
 
