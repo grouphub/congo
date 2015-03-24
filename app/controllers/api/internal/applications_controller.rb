@@ -34,7 +34,7 @@ class Api::Internal::ApplicationsController < ApplicationController
     group = Group.where(slug: group_slug).first
     benefit_plan = BenefitPlan.where(id: benefit_plan_id).first
     membership = Membership.where(group_id: group.id, user_id: current_user.id).first
-    selected_by_id = params[:declined_by_id]
+    selected_by_id = params[:selected_by_id]
     declined_by_id = params[:declined_by_id]
     properties = params[:properties]
 
