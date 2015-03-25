@@ -1,6 +1,11 @@
 class PaymentJob < ActiveJob::Base
   queue_as :default
 
+  rescue_from ActiveJob::DeserializationError do |e|
+    Shoryuken.logger.error ex
+    Shoryuken.logger.error ex.backtrace.join("\n")
+  end
+
   # TODO: May need a lock
   def perform(application_id)
     redlock = Redlock.new(Rails.application.config.redis.url)

@@ -13,19 +13,17 @@ gem 'coffee-rails', github: 'rails/coffee-rails'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
-
 gem 'jquery-rails'
 gem 'jbuilder', '~> 2.0'
 
 gem 'bcrypt', '~> 3.1.7'
 
 # For running the server.
+gem 'shoryuken'
 gem 'foreman'
 gem 'puma'
 
 # For background worker processes.
-gem 'clockwork'
-gem 'sidekiq'
 gem 'redlock'
 gem 'daemons'
 
@@ -71,6 +69,9 @@ group :development do
   # For front-end live reloading.
   gem 'guard-livereload', group: :development
   gem 'rack-livereload', group: :development
+
+  # Only need clock in development.
+  gem 'clockwork'
 end
 
 # Testing gems.
