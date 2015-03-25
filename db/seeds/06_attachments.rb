@@ -23,37 +23,41 @@ def upload_to_fakes3(name, tempfile, content_type)
   end
 end
 
-title = 'Sample Attachment'
-description = 'An attachment for a group.'
-name = ThirtySix.generate
-tempfile = File.open("#{Rails.root}/spec/data/sample-attachment.png")
-content_type = 'image/png'
-url = S3.public_url(name)
+if Rails.env.development?
+  title = 'Sample Attachment'
+  description = 'An attachment for a group.'
+  name = ThirtySix.generate
+  tempfile = File.open("#{Rails.root}/spec/data/sample-attachment.png")
+  content_type = 'image/png'
+  url = S3.public_url(name)
 
-upload_to_fakes3(name, tempfile, 'image/png')
+  upload_to_fakes3(name, tempfile, 'image/png')
 
-Attachment.create! \
-  group_id: Group.where(name: 'My Group').first.id,
-  title: title,
-  filename: name,
-  description: description,
-  content_type: content_type,
-  url: url
+  Attachment.create! \
+    group_id: Group.where(name: 'My Group').first.id,
+    title: title,
+    filename: name,
+    description: description,
+    content_type: content_type,
+    url: url
+end
 
-title = 'Sample Attachment'
-description = 'An attachment for a benefit plan.'
-name = ThirtySix.generate
-tempfile = File.open("#{Rails.root}/spec/data/sample-attachment-2.png")
-content_type = 'image/png'
-url = S3.public_url(name)
+if Rails.env.development?
+  title = 'Sample Attachment'
+  description = 'An attachment for a benefit plan.'
+  name = ThirtySix.generate
+  tempfile = File.open("#{Rails.root}/spec/data/sample-attachment-2.png")
+  content_type = 'image/png'
+  url = S3.public_url(name)
 
-upload_to_fakes3(name, tempfile, 'image/png')
+  upload_to_fakes3(name, tempfile, 'image/png')
 
-Attachment.create! \
-  benefit_plan_id: BenefitPlan.where(name: 'Best Health Insurance PPO').first.id,
-  title: title,
-  filename: name,
-  description: description,
-  content_type: content_type,
-  url: url
+  Attachment.create! \
+    benefit_plan_id: BenefitPlan.where(name: 'Best Health Insurance PPO').first.id,
+    title: title,
+    filename: name,
+    description: description,
+    content_type: content_type,
+    url: url
+end
 
