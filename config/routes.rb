@@ -46,6 +46,9 @@ Rails.application.routes.draw do
     # Admin All Groups
     '/admin/groups',
 
+    # Admin All Users
+    '/admin/users',
+
     # Admin Invitations
     '/admin/invitations',
 
@@ -97,6 +100,11 @@ Rails.application.routes.draw do
         resources :invitations
         resources :accounts
         resources :groups
+
+        resources :users do
+          post '/crystal_ball', to: 'users#crystal_ball'
+        end
+
         resources :features
       end
 

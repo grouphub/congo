@@ -81,6 +81,10 @@ congoApp.config([
         templateUrl: congo.assets['admin/groups/index.html'],
         controller: 'AdminGroupsIndexController'
       })
+      .when('/admin/users', {
+        templateUrl: congo.assets['admin/users/index.html'],
+        controller: 'AdminUsersIndexController'
+      })
       .when('/admin/features', {
         templateUrl: congo.assets['admin/features/index.html'],
         controller: 'AdminFeaturesIndexController'
