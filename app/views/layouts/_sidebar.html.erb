@@ -180,6 +180,14 @@
     </a>
   </li>
 
+  <!-- Admin All Users -->
+  <li class="sidebar-item" ng-if="inAdminPanel()">
+    <a ng-href="/admin/users" title="Users">
+      <i class="fa fa-group"></i>
+      <span class="caption">All Users</span>
+    </a>
+  </li>
+
   <!-- Admin Features -->
   <li class="sidebar-item" ng-if="inAdminPanel()">
     <a ng-href="/admin/features" title="Features">

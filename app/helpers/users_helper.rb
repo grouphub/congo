@@ -16,6 +16,18 @@ module UsersHelper
     user
   end
 
+  def crystal_ball!(id)
+    user = User.find(id)
+
+    raise AuthenticationException unless current_user
+    raise AuthenticationException unless current_user.admin?
+
+    @current_user = user
+    session[:current_user_id] = user.id
+
+    user
+  end
+
   def signout!
     @current_user = nil
     session[:current_user_id] = nil
