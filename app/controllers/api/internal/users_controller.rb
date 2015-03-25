@@ -66,7 +66,8 @@ class Api::Internal::UsersController < ApplicationController
         return
       end
 
-      user.invitation_id = invitation.id
+      role.update_attributes! \
+        invitation_id: invitation.id
     end
 
     # Bail if the plan name is not correct

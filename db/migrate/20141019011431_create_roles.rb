@@ -6,6 +6,9 @@ class CreateRoles < ActiveRecord::Migration
       t.string :name
       t.string :english_name
 
+      # Invitation system
+      t.integer :invitation_id
+
       t.timestamps
     end
   end

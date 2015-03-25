@@ -240,6 +240,7 @@ ActiveRecord::Schema.define(version: 20150316023510) do
     t.integer  "user_id"
     t.string   "name"
     t.string   "english_name"
+    t.integer  "invitation_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

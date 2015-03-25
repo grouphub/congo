@@ -15,6 +15,9 @@ admin = User.create! \
   email: 'admin@grouphub.io',
   password: 'testtest'
 
+invitation = Invitation.create! \
+  description: 'For GroupHub Admin'
+
 # They're a system admin
 Role.create! \
   user_id: admin.id,
@@ -25,7 +28,8 @@ Role.create! \
 Role.create! \
   user_id: admin.id,
   account_id: first_account.id,
-  name: 'broker'
+  name: 'broker',
+  invitation_id: invitation.id
 
 # =====
 # Alice

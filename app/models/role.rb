@@ -1,6 +1,7 @@
 class Role < ActiveRecord::Base
   belongs_to :account
   belongs_to :user
+  belongs_to :invitation
 
   has_many :memberships
 

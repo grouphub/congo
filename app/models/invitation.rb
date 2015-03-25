@@ -1,5 +1,5 @@
 class Invitation < ActiveRecord::Base
-  has_one :user
+  has_one :role
 
   before_save :add_uuid
 
