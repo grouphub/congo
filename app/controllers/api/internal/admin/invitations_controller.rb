@@ -4,7 +4,7 @@ class Api::Internal::Admin::InvitationsController < ApplicationController
   before_filter :ensure_admin!
 
   def index
-    invitations = Invitation.all.includes(:user)
+    invitations = Invitation.all.includes(role: :user)
 
     respond_to do |format|
       format.json {
@@ -47,7 +47,7 @@ class Api::Internal::Admin::InvitationsController < ApplicationController
 
   def render_invitation(invitation)
     invitation.as_json.merge({
-      user: invitation.user
+      user: render_user(invitation.role.user)
     })
   end
 
