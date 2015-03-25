@@ -1,12 +1,10 @@
-class Api::Internal::CarrierAccountsController < ApplicationController
+class Api::Internal::Admin::CarrierAccountsController < ApplicationController
   protect_from_forgery
 
-  before_filter :ensure_user!
-  before_filter :ensure_account!
-  before_filter :ensure_broker!, only: [:create, :destroy]
+  before_filter :ensure_admin!
 
   def index
-    carrier_accounts = CarrierAccount.where('account_id IS NULL OR account_id = ?', current_account.id)
+    carrier_accounts = CarrierAccount.where('account_id IS NULL')
 
     respond_to do |format|
       format.json {
@@ -38,7 +36,7 @@ class Api::Internal::CarrierAccountsController < ApplicationController
     end
 
     carrier_account = CarrierAccount.create! \
-      account_id: current_account.id,
+      account_id: nil,
       carrier_id: carrier.id,
       properties: properties,
       name: name
@@ -54,10 +52,7 @@ class Api::Internal::CarrierAccountsController < ApplicationController
 
   def show
     id = params[:id]
-    carrier_account = CarrierAccount
-      .where('account_id IS NULL OR account_id = ?', current_account.id)
-      .where(id: id)
-      .first
+    carrier_account = CarrierAccount.find(id)
 
     unless carrier_account
       # TODO: Test this
@@ -78,7 +73,7 @@ class Api::Internal::CarrierAccountsController < ApplicationController
     id = params[:id]
     properties = params[:properties]
     name = properties['name']
-    carrier_account = CarrierAccount.where(account_id: current_account.id, id: id).first
+    carrier_account = CarrierAccount.where(id: id).first
 
     unless carrier_account
       # TODO: Test this
@@ -101,7 +96,7 @@ class Api::Internal::CarrierAccountsController < ApplicationController
 
   def destroy
     id = params[:id]
-    carrier_account = CarrierAccount.where(account_id: current_account.id, id: id).first
+    carrier_account = CarrierAccount.where(id: id).first
 
     unless carrier_account
       # TODO: Test this

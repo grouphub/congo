@@ -1,10 +1,10 @@
 var congoApp = angular.module('congoApp');
 
-congoApp.controller('CarrierAccountsShowController', [
+congoApp.controller('AdminCarrierAccountsShowController', [
   '$scope', '$http', '$location', 'flashesFactory',
   function ($scope, $http, $location, flashesFactory) {
-    // Make sure user is totally signed up before continuing.
-    $scope.enforceValidAccount();
+    // Make sure user is admin before continuing.
+    $scope.enforceAdmin();
 
     $scope.carrierAccount = null;
     $scope.carriers = [];
@@ -30,12 +30,12 @@ congoApp.controller('CarrierAccountsShowController', [
 
     $scope.submit = function () {
       $http
-        .put('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/carrier_accounts/' + $scope.carrierAccountId() + '.json', {
+        .put('/api/internal/admin/carrier_accounts/' + $scope.carrierAccountId() + '.json', {
           name: $scope.name,
           properties: $scope.form
         })
         .success(function (data, status, headers, config) {
-          $location.path('/accounts/' + $scope.accountSlug() + '/' + $scope.currentRole() + '/carrier_accounts');
+          $location.path('/admin/carrier_accounts');
         })
         .error(function (data, status, headers, config) {
           var error = (data && data.error) ?
@@ -47,7 +47,7 @@ congoApp.controller('CarrierAccountsShowController', [
     };
 
     $http
-      .get('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/carrier_accounts/' + $scope.carrierAccountId() + '.json')
+      .get('/api/internal/admin/carrier_accounts/' + $scope.carrierAccountId() + '.json')
       .success(function (data, status, headers, config) {
         $scope.carrierAccount = data.carrier_account;
         $scope.form = JSON.parse($scope.carrierAccount.properties_data);

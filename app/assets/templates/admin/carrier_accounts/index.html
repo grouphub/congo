@@ -1,0 +1,31 @@
+<div class="col-md-12">
+  <h1>Carrier Accounts</h1>
+
+  <p>Add and update carrier connections and account details.</p>
+
+  <table class="account-carriers table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr ng-repeat="carrierAccount in carrierAccounts">
+        <td>
+          <a ng-href="/admin/carrier_accounts/{{carrierAccount.id}}">{{carrierAccount.name}}</a>
+        </td>
+
+        <td>
+          <a class="btn btn-danger btn-xs" href="" ng-click="deleteCarrierAccountAt($index)">Delete</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>
+    <a class="btn btn-primary" href="/admin/carrier_accounts/new">Link up with a Carrier</a>
+  </p>
+</div>
+

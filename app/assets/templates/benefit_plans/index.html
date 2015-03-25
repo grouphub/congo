@@ -15,11 +15,12 @@
       <tr ng-repeat="benefitPlan in benefitPlans">
         <td>
           <a href="/accounts/{{accountSlug()}}/{{currentRole()}}/benefit_plans/{{benefitPlan.id}}">{{benefitPlan.name}}</a>
+          <a class="btn btn-info btn-xs disabled" href="" ng-if="benefitPlan.account_id">Owned</a>
         </td>
 
         <td>
-          <a class="btn btn-info btn-xs" href="" ng-click="toggleBenefitPlanAt($index)">{{benefitPlan.is_enabled ? 'Disable' : 'Enable'}}</a>
-          <a class="btn btn-danger btn-xs" href="" ng-click="deleteBenefitPlanAt($index)">Delete</a>
+          <a class="btn btn-info btn-xs" href="" ng-click="toggleBenefitPlanAt($index)" ng-if="benefitPlan.account_id">{{benefitPlan.is_enabled ? 'Disable' : 'Enable'}}</a>
+          <a class="btn btn-danger btn-xs" href="" ng-click="deleteBenefitPlanAt($index)" ng-if="benefitPlan.account_id">Delete</a>
         </td>
       </tr>
     </tbody>

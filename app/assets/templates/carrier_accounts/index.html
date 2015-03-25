@@ -15,10 +15,11 @@
       <tr ng-repeat="carrierAccount in carrierAccounts">
         <td>
           <a ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/carrier_accounts/{{carrierAccount.id}}">{{carrierAccount.name}}</a>
+          <a class="btn btn-info btn-xs disabled" href="" ng-if="carrierAccount.account_id">Owned</a>
         </td>
 
         <td ng-if="currentRole() === 'broker'">
-          <a class="btn btn-danger btn-xs" href="" ng-click="deleteCarrierAccountAt($index)">Delete</a>
+          <a class="btn btn-danger btn-xs" href="" ng-click="deleteCarrierAccountAt($index)" ng-if="carrierAccount.account_id">Delete</a>
         </td>
       </tr>
     </tbody>

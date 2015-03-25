@@ -47,6 +47,12 @@
 //= require controllers/admin-carriers-index-controller
 //= require controllers/admin-carriers-new-controller
 //= require controllers/admin-carriers-show-controller
+//= require controllers/admin-carrier-accounts-index-controller
+//= require controllers/admin-carrier-accounts-new-controller
+//= require controllers/admin-carrier-accounts-show-controller
+//= require controllers/admin-benefit-plans-index-controller
+//= require controllers/admin-benefit-plans-new-controller
+//= require controllers/admin-benefit-plans-show-controller
 //= require controllers/admin-groups-index-controller
 //= require controllers/admin-invitations-index-controller
 //= require controllers/admin-features-index-controller

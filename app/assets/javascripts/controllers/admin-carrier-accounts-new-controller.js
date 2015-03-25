@@ -1,10 +1,10 @@
 var congoApp = angular.module('congoApp');
 
-congoApp.controller('CarrierAccountsNewController', [
+congoApp.controller('AdminCarrierAccountsNewController', [
   '$scope', '$http', '$location', 'flashesFactory',
   function ($scope, $http, $location, flashesFactory) {
-    // Make sure user is totally signed up before continuing.
-    $scope.enforceValidAccount();
+    // Make sure user is admin before continuing.
+    $scope.enforceAdmin();
 
     $scope.carriers = [];
     $scope.accountTypes = [
@@ -29,12 +29,12 @@ congoApp.controller('CarrierAccountsNewController', [
 
     $scope.submit = function () {
       $http
-        .post('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/carrier_accounts.json', {
+        .post('/api/internal/admin/carrier_accounts.json', {
           name: $scope.name,
           properties: $scope.form
         })
         .success(function (data, status, headers, config) {
-          $location.path('/accounts/' + $scope.accountSlug() + '/' + $scope.currentRole() + '/carrier_accounts');
+          $location.path('/admin/carrier_accounts');
         })
         .error(function (data, status, headers, config) {
           var error = (data && data.error) ?

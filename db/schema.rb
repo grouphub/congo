@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 20150316023510) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "accounts", force: true do |t|
+  create_table "accounts", force: :cascade do |t|
     t.string   "name"
     t.string   "slug"
     t.string   "tagline"
@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 20150316023510) do
     t.datetime "updated_at"
   end
 
-  create_table "application_details", force: true do |t|
+  create_table "application_details", force: :cascade do |t|
     t.integer  "application_id"
     t.integer  "carrier_id"
     t.string   "master_policy_number"
@@ -76,7 +76,7 @@ ActiveRecord::Schema.define(version: 20150316023510) do
     t.datetime "updated_at"
   end
 
-  create_table "applications", force: true do |t|
+  create_table "applications", force: :cascade do |t|
     t.integer  "account_id"
     t.integer  "benefit_plan_id"
     t.integer  "membership_id"
@@ -100,7 +100,7 @@ ActiveRecord::Schema.define(version: 20150316023510) do
     t.datetime "updated_at"
   end
 
-  create_table "attachments", force: true do |t|
+  create_table "attachments", force: :cascade do |t|
     t.integer  "benefit_plan_id"
     t.integer  "group_id"
     t.string   "filename"
@@ -112,7 +112,7 @@ ActiveRecord::Schema.define(version: 20150316023510) do
     t.datetime "updated_at"
   end
 
-  create_table "attempts", force: true do |t|
+  create_table "attempts", force: :cascade do |t|
     t.integer  "application_id"
     t.string   "error_type"
     t.string   "activity_id"
@@ -122,7 +122,7 @@ ActiveRecord::Schema.define(version: 20150316023510) do
     t.datetime "updated_at"
   end
 
-  create_table "benefit_plans", force: true do |t|
+  create_table "benefit_plans", force: :cascade do |t|
     t.integer  "account_id"
     t.integer  "carrier_account_id"
     t.string   "name"
@@ -135,7 +135,7 @@ ActiveRecord::Schema.define(version: 20150316023510) do
     t.datetime "updated_at"
   end
 
-  create_table "carrier_accounts", force: true do |t|
+  create_table "carrier_accounts", force: :cascade do |t|
     t.integer  "account_id"
     t.integer  "carrier_id"
     t.string   "name"
@@ -144,7 +144,7 @@ ActiveRecord::Schema.define(version: 20150316023510) do
     t.datetime "updated_at"
   end
 
-  create_table "carriers", force: true do |t|
+  create_table "carriers", force: :cascade do |t|
     t.string   "name"
     t.string   "slug"
     t.text     "properties_data"
@@ -152,7 +152,7 @@ ActiveRecord::Schema.define(version: 20150316023510) do
     t.datetime "updated_at"
   end
 
-  create_table "dependents", force: true do |t|
+  create_table "dependents", force: :cascade do |t|
     t.integer  "application_id"
     t.integer  "carrier_id"
     t.string   "master_policy_number"
@@ -181,7 +181,7 @@ ActiveRecord::Schema.define(version: 20150316023510) do
     t.datetime "updated_at"
   end
 
-  create_table "features", force: true do |t|
+  create_table "features", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
     t.boolean  "enabled_for_all"
@@ -190,14 +190,14 @@ ActiveRecord::Schema.define(version: 20150316023510) do
     t.datetime "updated_at"
   end
 
-  create_table "group_benefit_plans", force: true do |t|
+  create_table "group_benefit_plans", force: :cascade do |t|
     t.integer  "group_id"
     t.integer  "benefit_plan_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "groups", force: true do |t|
+  create_table "groups", force: :cascade do |t|
     t.integer  "account_id"
     t.string   "name"
     t.string   "slug"
@@ -209,14 +209,14 @@ ActiveRecord::Schema.define(version: 20150316023510) do
     t.datetime "updated_at"
   end
 
-  create_table "invitations", force: true do |t|
+  create_table "invitations", force: :cascade do |t|
     t.string   "uuid"
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "memberships", force: true do |t|
+  create_table "memberships", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "group_id"
     t.string   "role_name"
@@ -227,7 +227,7 @@ ActiveRecord::Schema.define(version: 20150316023510) do
     t.datetime "updated_at"
   end
 
-  create_table "payments", force: true do |t|
+  create_table "payments", force: :cascade do |t|
     t.integer  "account_id"
     t.integer  "cents"
     t.text     "properties"
@@ -235,7 +235,7 @@ ActiveRecord::Schema.define(version: 20150316023510) do
     t.datetime "updated_at"
   end
 
-  create_table "roles", force: true do |t|
+  create_table "roles", force: :cascade do |t|
     t.integer  "account_id"
     t.integer  "user_id"
     t.string   "name"
@@ -244,7 +244,7 @@ ActiveRecord::Schema.define(version: 20150316023510) do
     t.datetime "updated_at"
   end
 
-  create_table "subscriber_benefits", force: true do |t|
+  create_table "subscriber_benefits", force: :cascade do |t|
     t.integer  "carrier_id"
     t.string   "master_policy_number"
     t.integer  "group_id"
@@ -262,7 +262,7 @@ ActiveRecord::Schema.define(version: 20150316023510) do
     t.datetime "updated_at"
   end
 
-  create_table "subscriber_dependents", force: true do |t|
+  create_table "subscriber_dependents", force: :cascade do |t|
     t.integer  "application_id"
     t.integer  "carrier_id"
     t.string   "master_policy_number"
@@ -276,7 +276,7 @@ ActiveRecord::Schema.define(version: 20150316023510) do
     t.datetime "updated_at"
   end
 
-  create_table "tokens", force: true do |t|
+  create_table "tokens", force: :cascade do |t|
     t.string   "name"
     t.string   "unique_id"
     t.integer  "account_id"
@@ -284,7 +284,7 @@ ActiveRecord::Schema.define(version: 20150316023510) do
     t.datetime "updated_at"
   end
 
-  create_table "users", force: true do |t|
+  create_table "users", force: :cascade do |t|
     t.string   "first_name"
     t.string   "last_name"
     t.string   "email"

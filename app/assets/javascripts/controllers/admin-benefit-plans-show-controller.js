@@ -1,10 +1,10 @@
 var congoApp = angular.module('congoApp');
 
-congoApp.controller('BenefitPlansShowController', [
-  '$scope', '$http', '$location', '$timeout', '$sce', 'flashesFactory',
-  function ($scope, $http, $location, $timeout, $sce, flashesFactory) {
-    // Make sure user is totally signed up before continuing.
-    $scope.enforceValidAccount();
+congoApp.controller('AdminBenefitPlansShowController', [
+  '$scope', '$http', '$location', '$sce', '$timeout', 'flashesFactory',
+  function ($scope, $http, $location, $sce, $timeout, flashesFactory) {
+    // Make sure user is admin before continuing.
+    $scope.enforceAdmin();
 
     $scope.benefitPlan = null;
     $scope.carrierAccounts = null;
@@ -26,13 +26,13 @@ congoApp.controller('BenefitPlansShowController', [
 
     $scope.submit = function () {
       $http
-        .put('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/benefit_plans/' + $scope.benefitPlanId() + '.json', {
+        .put('/api/internal/admin/benefit_plans/' + $scope.benefitPlanId() + '.json', {
           name: $scope.form.name,
           carrier_account_id: $scope.form.carrier_account_id,
           properties: _($scope.form).omit('description_trusted')
         })
         .success(function (data, status, headers, config) {
-          $location.path('/accounts/' + $scope.accountSlug() + '/' + $scope.currentRole() + '/benefit_plans');
+          $location.path('/admin/benefit_plans');
 
           flashesFactory.add('success', 'Successfully updated the benefit plan.');
         })
@@ -46,14 +46,14 @@ congoApp.controller('BenefitPlansShowController', [
     };
 
     $http
-      .get('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/benefit_plans/' + $scope.benefitPlanId() + '.json')
+      .get('/api/internal/admin/benefit_plans/' + $scope.benefitPlanId() + '.json')
       .success(function (data, status, headers, config) {
         $scope.benefitPlan = data.benefit_plan;
         $scope.form = JSON.parse($scope.benefitPlan.properties_data);
         $scope.form.carrier_account_id = $scope.benefitPlan.carrier_account_id;
 
         $http
-          .get('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/carrier_accounts.json')
+          .get('/api/internal/admin/carrier_accounts.json')
           .success(function (data, status, headers, config) {
             $scope.carrierAccounts = data.carrier_accounts;
 
@@ -100,54 +100,12 @@ congoApp.controller('BenefitPlansShowController', [
     };
 
     $scope.newAttachment = function () {
-      var fileInput = $('#new-attachment').find('[type="file"]');
-      var file = fileInput[0].files[0];
-      var formData = new FormData();
-
-      formData.append('file', file);
-      formData.append('properties', JSON.stringify($scope.attachmentFormData));
-
-      $http
-        .post('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/benefit_plans/' + $scope.benefitPlanId() + '/attachments.json', formData, {
-          withCredentials: true,
-          headers: {
-            'Content-Type': undefined
-          },
-          transformRequest: angular.identity
-        })
-        .success(function (data, status, headers, config) {
-          $scope.benefitPlan.attachments.push(data.attachment);
-      
-          fileInput[0].value = null;
-          $scope.file.name = '';
-        })
-        .error(function (data, status, headers, config) {
-          var error = (data && data.error) ?
-            data.error :
-            'There was a problem uploading the file.';
-
-          flashesFactory.add('danger', error);
-        });
+      // TODO: Fill this in
     };
 
     $scope.deleteAttachmentAt = function (index) {
-      var attachment = $scope.benefitPlan.attachments[index];
-
-      $http
-        .delete('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/benefit_plans/' + $scope.benefitPlanId() + '/attachments/' + attachment.id + '.json')
-        .success(function (data, status, headers, config) {
-          $scope.benefitPlan.attachments = _($scope.benefitPlan.attachments).reject(function (deletedAttachment) {
-            return attachment.id === deletedAttachment.id;
-          });
-        })
-        .error(function (data, status, headers, config) {
-          var error = (data && data.error) ?
-            data.error :
-            'There was a problem deleting the attachment.';
-
-          flashesFactory.add('danger', error);
-        });
-    }
+      // TODO: Fill this in
+    };
   }
 ]);
 
