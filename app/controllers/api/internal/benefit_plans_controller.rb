@@ -76,10 +76,6 @@ class Api::Internal::BenefitPlansController < ApplicationController
   def update
     benefit_plan = BenefitPlan.find(params[:id])
     properties = params[:properties]
-    name = properties['name']
-    description_markdown = properties['description_markdown']
-    description_html = properties['description_html']
-    carrier_account_id = properties['carrier_account_id'].to_i
 
     unless benefit_plan
       # TODO: Test this
@@ -89,11 +85,17 @@ class Api::Internal::BenefitPlansController < ApplicationController
 
     # Only modify `is_enabled` if it is passed as a parameter.
     unless params[:is_enabled].nil?
-      benefit_plan.update_attribute!(:is_enabled, params[:is_enabled])
+      benefit_plan.update_attributes! \
+        is_enabled: params[:is_enabled]
     end
 
     # Only modify `properties` if it is passed as a parameter.
     unless properties.nil?
+      name = properties['name']
+      description_markdown = properties['description_markdown']
+      description_html = properties['description_html']
+      carrier_account_id = properties['carrier_account_id'].to_i
+
       benefit_plan.update_attributes! \
         name: name,
         carrier_account_id: carrier_account_id,
@@ -115,7 +117,10 @@ class Api::Internal::BenefitPlansController < ApplicationController
     id = params[:id]
     account_slug = params[:account_id]
     account = Account.where(slug: account_slug).first
-    benefit_plan = BenefitPlan.where(id: params[:id]).first
+    benefit_plan = BenefitPlan
+      .where('account_id IS NULL OR account_id = ?', account.id)
+      .where(id: params[:id])
+      .first
 
     respond_to do |format|
       format.json {
@@ -126,6 +131,7 @@ class Api::Internal::BenefitPlansController < ApplicationController
     end
   end
 
+  # TODO: Scope benefit plan by account
   def destroy
     id = params[:id]
 

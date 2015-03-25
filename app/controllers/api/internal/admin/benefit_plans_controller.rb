@@ -18,16 +18,32 @@ class Api::Internal::Admin::BenefitPlansController < ApplicationController
   end
 
   def create
-    # TODO: Fill this in
-  end
+    name = params[:name]
+    carrier_account_id = params[:carrier_account_id]
+    carrier_account = CarrierAccount.where(id: carrier_account_id).first
+    properties = params[:properties]
+    description_markdown = properties['description_markdown']
+    description_html = properties['description_html']
 
-  def update
-    # TODO: Fill this in
-  end
+    unless name
+      # TODO: Test this
+      error_response('Name must be provided.')
+      return
+    end
 
-  def show
-    id = params[:id]
-    benefit_plan = BenefitPlan.where('account_id IS NULL and id = ?', id).first
+    unless carrier_account
+      # TODO: Test this
+      error_response('Could not find a matching carrier account.')
+      return
+    end
+
+    benefit_plan = BenefitPlan.create! \
+      name: name,
+      account_id: nil,
+      carrier_account_id: carrier_account.id,
+      properties: properties,
+      description_markdown: description_markdown,
+      description_html: description_html
 
     respond_to do |format|
       format.json {
@@ -39,7 +55,108 @@ class Api::Internal::Admin::BenefitPlansController < ApplicationController
   end
 
   def update
-    # TODO: Fill this in
+    benefit_plan = BenefitPlan.find(params[:id])
+    properties = params[:properties]
+    name = properties['name']
+    description_markdown = properties['description_markdown']
+    description_html = properties['description_html']
+    carrier_account_id = properties['carrier_account_id'].to_i
+
+    unless benefit_plan
+      # TODO: Test this
+      error_response('Could not find a matching benefit plan.')
+      return
+    end
+
+    # Only modify `is_enabled` if it is passed as a parameter.
+    unless params[:is_enabled].nil?
+      benefit_plan.update_attribute!(:is_enabled, params[:is_enabled])
+    end
+
+    # Only modify `properties` if it is passed as a parameter.
+    unless properties.nil?
+      benefit_plan.update_attributes! \
+        name: name,
+        carrier_account_id: carrier_account_id,
+        properties: properties,
+        description_markdown: description_markdown,
+        description_html: description_html
+    end
+
+    respond_to do |format|
+      format.json {
+        render json: {
+          benefit_plan: render_benefit_plan(benefit_plan)
+        }
+      }
+    end
+  end
+
+  def update
+    benefit_plan = BenefitPlan.find(params[:id])
+    properties = params[:properties]
+
+    unless benefit_plan
+      # TODO: Test this
+      error_response('Could not find a matching benefit plan.')
+      return
+    end
+
+    # Only modify `is_enabled` if it is passed as a parameter.
+    unless params[:is_enabled].nil?
+      benefit_plan.update_attributes! \
+        is_enabled: params[:is_enabled]
+    end
+
+    # Only modify `properties` if it is passed as a parameter.
+    unless properties.nil?
+      name = properties['name']
+      description_markdown = properties['description_markdown']
+      description_html = properties['description_html']
+      carrier_account_id = properties['carrier_account_id'].to_i
+
+      benefit_plan.update_attributes! \
+        name: name,
+        carrier_account_id: carrier_account_id,
+        properties: properties,
+        description_markdown: description_markdown,
+        description_html: description_html
+    end
+
+    respond_to do |format|
+      format.json {
+        render json: {
+          benefit_plan: render_benefit_plan(benefit_plan)
+        }
+      }
+    end
+  end
+
+  def show
+    id = params[:id]
+    benefit_plan = BenefitPlan.find(id)
+
+    respond_to do |format|
+      format.json {
+        render json: {
+          benefit_plan: render_benefit_plan(benefit_plan)
+        }
+      }
+    end
+  end
+
+  def destroy
+    id = params[:id]
+
+    benefit_plan = BenefitPlan.find(id).destroy
+
+    respond_to do |format|
+      format.json {
+        render json: {
+          benefit_plan: render_benefit_plan(benefit_plan)
+        }
+      }
+    end
   end
 
   # Render methods

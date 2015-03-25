@@ -9,7 +9,24 @@ congoApp.controller('AdminCarrierAccountsIndexController', [
     $scope.carrierAccounts = null;
 
     $scope.deleteCarrierAccountAt = function (index) {
-      // TODO: Fill this in
+      var carrierAccount = $scope.carrierAccounts[index];
+
+      if (!carrierAccount) {
+        debugger
+      }
+
+      $http
+        .delete('/api/internal/admin/carrier_accounts/' + carrierAccount.id + '.json')
+        .success(function (data, status, headers, config) {
+          $scope.carrierAccounts.splice(index, 1);
+        })
+        .error(function (data, status, headers, config) {
+          var error = (data && data.error) ?
+            data.error :
+            'There was a problem deleting your carrier account.';
+
+          flashesFactory.add('danger', error);
+        });
     };
 
     $http

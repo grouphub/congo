@@ -22,16 +22,18 @@ carrier_account = CarrierAccount.create! \
     carrier_slug: 'blue_shield',
     broker_number: '123',
     brokerage_name: 'Example Brokerage',
-    tax_id: '234'
+    tax_id: '234',
+    account_type: 'broker'
   }
 
 BenefitPlan.create! \
   carrier_account_id: carrier_account.id,
-  name: 'Admin Health Insurance PPO',
   is_enabled: true,
+  name: 'Admin Health Insurance PPO',
   description_html: "<h1>Admin Health Insurance PPO</h1>\n<p>An example plan.</p>",
   description_markdown: "# Admin Health Insurance PPO\n\nAn example plan.",
   properties: {
+    name: 'Admin Health Insurance PPO',
     description_html: "<h1>Admin Health Insurance PPO</h1>\n<p>An example plan.</p>",
     description_markdown: "# Admin Health Insurance PPO\n\nAn example plan."
   }
@@ -59,17 +61,19 @@ carrier_account = CarrierAccount.create! \
     carrier_slug: 'blue_cross',
     broker_number: '234',
     brokerage_name: 'Example Brokerage',
-    tax_id: '345'
+    tax_id: '345',
+    account_type: 'broker'
   }
 
 BenefitPlan.create! \
   account_id: account.id,
   carrier_account_id: carrier_account.id,
-  name: 'Best Health Insurance PPO',
   is_enabled: true,
+  name: 'Best Health Insurance PPO',
   description_html: "<h1>Best Health Insurance PPO</h1>\n<p>An example plan.</p>",
   description_markdown: "# Best Health Insurance PPO\n\nAn example plan.",
   properties: {
+    name: 'Best Health Insurance PPO',
     description_html: "<h1>Best Health Insurance PPO</h1>\n<p>An example plan.</p>",
     description_markdown: "# Best Health Insurance PPO\n\nAn example plan."
   }

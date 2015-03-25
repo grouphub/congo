@@ -7,7 +7,6 @@ congoApp.controller('CarrierAccountsNewController', [
     $scope.enforceValidAccount();
 
     $scope.carriers = [];
-
     $scope.accountTypes = [
       {
         slug: 'broker',

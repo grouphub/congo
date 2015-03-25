@@ -29,7 +29,21 @@ congoApp.controller('AdminCarrierAccountsShowController', [
     };
 
     $scope.submit = function () {
-      // TODO: Fill this in
+      $http
+        .put('/api/internal/admin/carrier_accounts/' + $scope.carrierAccountId() + '.json', {
+          name: $scope.name,
+          properties: $scope.form
+        })
+        .success(function (data, status, headers, config) {
+          $location.path('/admin/carrier_accounts');
+        })
+        .error(function (data, status, headers, config) {
+          var error = (data && data.error) ?
+            data.error :
+            'There was a problem saving your carrier account.';
+
+          flashesFactory.add('danger', error);
+        });
     };
 
     $http

@@ -18,12 +18,41 @@ class Api::Internal::Admin::CarrierAccountsController < ApplicationController
   end
 
   def create
-    # TODO: Fill this in
+    properties = params[:properties]
+    name = properties['name']
+    carrier_slug = properties['carrier_slug']
+    carrier = Carrier.where(slug: carrier_slug).first
+
+    unless name
+      # TODO: Test this
+      error_response('Name must be provided.')
+      return
+    end
+
+    unless carrier
+      # TODO: Test this
+      error_response('Could not find a matching carrier.')
+      return
+    end
+
+    carrier_account = CarrierAccount.create! \
+      account_id: nil,
+      carrier_id: carrier.id,
+      properties: properties,
+      name: name
+
+    respond_to do |format|
+      format.json {
+        render json: {
+          carrier_account: render_carrier_account(carrier_account)
+        }
+      }
+    end
   end
 
   def show
     id = params[:id]
-    carrier_account = CarrierAccount.where('account_id is NULL and id = ?', id).first
+    carrier_account = CarrierAccount.find(id)
 
     unless carrier_account
       # TODO: Test this
@@ -41,11 +70,47 @@ class Api::Internal::Admin::CarrierAccountsController < ApplicationController
   end
 
   def update
-    # TODO: Fill this in
+    id = params[:id]
+    properties = params[:properties]
+    name = properties['name']
+    carrier_account = CarrierAccount.where(id: id).first
+
+    unless carrier_account
+      # TODO: Test this
+      error_response('Could not find a matching carrier.')
+      return
+    end
+
+    carrier_account.update_attributes! \
+      name: name,
+      properties: properties
+
+    respond_to do |format|
+      format.json {
+        render json: {
+          carrier_account: render_carrier_account(carrier_account)
+        }
+      }
+    end
   end
 
   def destroy
-    # TODO: Fill this in
+    id = params[:id]
+    carrier_account = CarrierAccount.where(id: id).first
+
+    unless carrier_account
+      # TODO: Test this
+      error_response('Could not find a matching carrier.')
+      return
+    end
+
+    carrier_account.destroy!
+
+    respond_to do |format|
+      format.json {
+        render json: {}
+      }
+    end
   end
 
   # Render methods

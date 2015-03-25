@@ -1,8 +1,8 @@
 var congoApp = angular.module('congoApp');
 
 congoApp.controller('AdminBenefitPlansShowController', [
-  '$scope', '$http', '$location', '$timeout', 'flashesFactory',
-  function ($scope, $http, $location, $timeout, flashesFactory) {
+  '$scope', '$http', '$location', '$sce', '$timeout', 'flashesFactory',
+  function ($scope, $http, $location, $sce, $timeout, flashesFactory) {
     // Make sure user is admin before continuing.
     $scope.enforceAdmin();
 
@@ -25,7 +25,24 @@ congoApp.controller('AdminBenefitPlansShowController', [
     });
 
     $scope.submit = function () {
-      // TODO: Fill this in
+      $http
+        .put('/api/internal/admin/benefit_plans/' + $scope.benefitPlanId() + '.json', {
+          name: $scope.form.name,
+          carrier_account_id: $scope.form.carrier_account_id,
+          properties: _($scope.form).omit('description_trusted')
+        })
+        .success(function (data, status, headers, config) {
+          $location.path('/admin/benefit_plans');
+
+          flashesFactory.add('success', 'Successfully updated the benefit plan.');
+        })
+        .error(function (data, status, headers, config) {
+          var error = (data && data.error) ?
+            data.error :
+            'There was a problem loading your benefit plan.';
+
+          flashesFactory.add('danger', error);
+        });
     };
 
     $http
