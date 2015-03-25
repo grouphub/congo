@@ -8,6 +8,8 @@ congoApp.controller('AdminCarrierAccountsShowController', [
 
     $scope.carrierAccount = null;
 
+    $scope.ready();
+
     // ...
   }
 ]);

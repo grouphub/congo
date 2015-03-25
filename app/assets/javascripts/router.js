@@ -49,11 +49,11 @@ congoApp.config([
         templateUrl: congo.assets['admin/carrier_accounts/index.html'],
         controller: 'AdminCarrierAccountsIndexController'
       })
-      .when('/admin/carriers_account/new', {
+      .when('/admin/carrier_accounts/new', {
         templateUrl: congo.assets['admin/carrier_accounts/new.html'],
         controller: 'AdminCarrierAccountsNewController'
       })
-      .when('/admin/carrier_accounts/:carrier_slug', {
+      .when('/admin/carrier_accounts/:carrier_account_id', {
         templateUrl: congo.assets['admin/carrier_accounts/show.html'],
         controller: 'AdminCarrierAccountsShowController'
       })
@@ -65,7 +65,7 @@ congoApp.config([
         templateUrl: congo.assets['admin/benefit_plans/new.html'],
         controller: 'AdminBenefitPlansNewController'
       })
-      .when('/admin/benefit_plans/:carrier_slug', {
+      .when('/admin/benefit_plans/:benefit_plan_id', {
         templateUrl: congo.assets['admin/benefit_plans/show.html'],
         controller: 'AdminBenefitPlansShowController'
       })

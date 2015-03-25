@@ -1,10 +1,20 @@
-class Api::Internal::CarrierAccountsController < ApplicationController
+class Api::Internal::Admin::CarrierAccountsController < ApplicationController
   protect_from_forgery
 
   before_filter :ensure_admin!
 
   def index
-    # TODO: Fill this in
+    carrier_accounts = CarrierAccount.where('account_id IS NULL')
+
+    respond_to do |format|
+      format.json {
+        render json: {
+          carrier_accounts: carrier_accounts.map { |carrier_account|
+            render_carrier_account(carrier_account)
+          }
+        }
+      }
+    end
   end
 
   def create

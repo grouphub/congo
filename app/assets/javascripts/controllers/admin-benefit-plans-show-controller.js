@@ -8,6 +8,8 @@ congoApp.controller('AdminBenefitPlansShowController', [
 
     $scope.benefitPlan = null;
 
+    $scope.ready();
+
     // ...
   }
 ]);

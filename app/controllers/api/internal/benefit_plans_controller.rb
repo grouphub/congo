@@ -12,9 +12,9 @@ class Api::Internal::BenefitPlansController < ApplicationController
     benefit_plans = nil
 
     if role_slug == 'group_admin' || role_slug == 'broker'
-      benefit_plans = BenefitPlan.where(account_id: account.id)
+      benefit_plans = BenefitPlan.where('account_id IS NULL or account_id = ?', current_account.id)
     else
-      benefit_plans = BenefitPlan.where(account_id: account.id, is_enabled: true)
+      benefit_plans = BenefitPlan.where('is_enabled = TRUE and (account_id IS NULL or account_id = ?)', current_account.id)
     end
 
     respond_to do |format|

@@ -1,10 +1,20 @@
-class Api::Internal::BenefitPlansController < ApplicationController
+class Api::Internal::Admin::BenefitPlansController < ApplicationController
   protect_from_forgery
 
   before_filter :ensure_admin!
 
   def index
-    # TODO: Fill this in
+    benefit_plans = BenefitPlan.where('account_id IS NULL')
+
+    respond_to do |format|
+      format.json {
+        render json: {
+          benefit_plans: benefit_plans.map { |benefit_plan|
+            render_benefit_plan(benefit_plan)
+          }
+        }
+      }
+    end
   end
 
   def create

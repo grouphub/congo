@@ -6,6 +6,8 @@ congoApp.controller('AdminCarrierAccountsNewController', [
     // Make sure user is admin before continuing.
     $scope.enforceAdmin();
 
+    $scope.ready();
+
     // ...
   }
 ]);

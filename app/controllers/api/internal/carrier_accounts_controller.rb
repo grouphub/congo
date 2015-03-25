@@ -6,7 +6,7 @@ class Api::Internal::CarrierAccountsController < ApplicationController
   before_filter :ensure_broker!, only: [:create, :destroy]
 
   def index
-    carrier_accounts = CarrierAccount.where(account_id: current_account.id)
+    carrier_accounts = CarrierAccount.where('account_id IS NULL or account_id = ?', current_account.id)
 
     respond_to do |format|
       format.json {
