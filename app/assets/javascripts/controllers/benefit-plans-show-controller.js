@@ -6,6 +6,7 @@ congoApp.controller('BenefitPlansShowController', [
     // Make sure user is totally signed up before continuing.
     $scope.enforceValidAccount();
 
+    $scope.benefitPlan = null;
     $scope.carrierAccounts = null;
     $scope.form = {
       name: null,
@@ -17,8 +18,6 @@ congoApp.controller('BenefitPlansShowController', [
       description_html: null,
       description_trusted: null
     };
-
-    $scope.benefitPlan = null;
 
     $scope.$watch('form.description_markdown', function (string) {
       $scope.form.description_html = marked(string || '');

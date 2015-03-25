@@ -16,7 +16,14 @@ carrier = Carrier.create! \
 
 carrier_account = CarrierAccount.create! \
   name: 'Admin Blue Shield',
-  carrier_id: carrier.id
+  carrier_id: carrier.id,
+  properties: {
+    name: 'Admin Blue Shield',
+    carrier_slug: 'blue_shield',
+    broker_number: '123',
+    brokerage_name: 'Example Brokerage',
+    tax_id: '234'
+  }
 
 BenefitPlan.create! \
   carrier_account_id: carrier_account.id,
@@ -46,7 +53,14 @@ carrier = Carrier.create! \
 carrier_account = CarrierAccount.create! \
   name: 'My Broker Blue Cross',
   carrier_id: carrier.id,
-  account_id: account.id
+  account_id: account.id,
+  properties: {
+    name: 'My Broker Blue Cross',
+    carrier_slug: 'blue_cross',
+    broker_number: '234',
+    brokerage_name: 'Example Brokerage',
+    tax_id: '345'
+  }
 
 BenefitPlan.create! \
   account_id: account.id,

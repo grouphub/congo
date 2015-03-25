@@ -22,7 +22,22 @@ class Api::Internal::Admin::CarrierAccountsController < ApplicationController
   end
 
   def show
-    # TODO: Fill this in
+    id = params[:id]
+    carrier_account = CarrierAccount.where('account_id is NULL and id = ?', id).first
+
+    unless carrier_account
+      # TODO: Test this
+      error_response('Could not find a matching carrier.')
+      return
+    end
+
+    respond_to do |format|
+      format.json {
+        render json: {
+          carrier_account: render_carrier_account(carrier_account)
+        }
+      }
+    end
   end
 
   def update

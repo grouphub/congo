@@ -26,7 +26,16 @@ class Api::Internal::Admin::BenefitPlansController < ApplicationController
   end
 
   def show
-    # TODO: Fill this in
+    id = params[:id]
+    benefit_plan = BenefitPlan.where('account_id IS NULL and id = ?', id).first
+
+    respond_to do |format|
+      format.json {
+        render json: {
+          benefit_plan: render_benefit_plan(benefit_plan)
+        }
+      }
+    end
   end
 
   def update

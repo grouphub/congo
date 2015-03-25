@@ -6,8 +6,8 @@ congoApp.controller('CarrierAccountsShowController', [
     // Make sure user is totally signed up before continuing.
     $scope.enforceValidAccount();
 
+    $scope.carrierAccount = null;
     $scope.carriers = [];
-
     $scope.accountTypes = [
       {
         slug: 'broker',
@@ -27,8 +27,6 @@ congoApp.controller('CarrierAccountsShowController', [
       tax_id: null,
       account_type: null
     };
-
-    $scope.carrierAccount = null;
 
     $scope.submit = function () {
       $http
