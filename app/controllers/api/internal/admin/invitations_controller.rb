@@ -46,8 +46,12 @@ class Api::Internal::Admin::InvitationsController < ApplicationController
   # Render methods
 
   def render_invitation(invitation)
+    role = invitation.role
+    user = role.try(:user)
+    user_data = user ? render_user(user) : nil
+
     invitation.as_json.merge({
-      user: render_user(invitation.role.user)
+      user: user_data
     })
   end
 
