@@ -96,6 +96,7 @@ ActiveRecord::Schema.define(version: 20150316023510) do
     t.datetime "completed_on"
     t.boolean  "errored_by_id"
     t.datetime "errored_on"
+    t.string   "activity_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -108,16 +109,6 @@ ActiveRecord::Schema.define(version: 20150316023510) do
     t.string   "title"
     t.string   "url"
     t.text     "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "attempts", force: :cascade do |t|
-    t.integer  "application_id"
-    t.string   "error_type"
-    t.string   "activity_id"
-    t.text     "response_data"
-    t.text     "properties_data"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

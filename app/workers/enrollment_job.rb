@@ -26,22 +26,13 @@ class PaymentJob < ActiveJob::Base
       meta = attempt['meta'] || {}
       activity_id = meta['activity_id']
 
-      attempt.create! \
-        response: response,
-        activity_id: activity_id,
-        application_id: application_id
-
       application.update_attributes \
         submitted_by_id: submitted_by_id,
-        submitted_on: DateTime.now
+        submitted_on: DateTime.now,
+        activity_id: activity_id
     rescue StandardError => e
       response = JSON.parse(e.response.body)
       error_type = e.class
-
-      attempt.create! \
-        response: response,
-        error_type: error_type,
-        application_id: application_id
 
       application.update_attributes \
         errored_by_id: submitted_by_id

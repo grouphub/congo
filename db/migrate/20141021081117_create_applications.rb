@@ -39,6 +39,9 @@ class CreateApplications < ActiveRecord::Migration
       t.boolean :errored_by_id
       t.datetime :errored_on
 
+      # The activity_id we get from PokitDok
+      t.string :activity_id
+
       t.timestamps
     end
   end
