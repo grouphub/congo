@@ -141,8 +141,8 @@ Rails.application.routes.draw do
       end
 
       # User routes
-      post '/signin', to: 'users#signin'
-      delete '/signout', to: 'users#signout'
+      post '/users/signin', to: 'users#signin'
+      delete '/users/signout', to: 'users#signout'
       resources :users do
         put '/invitation', to: 'users#update_invitation'
         put '/account', to: 'users#update_account'
