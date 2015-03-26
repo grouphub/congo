@@ -137,9 +137,9 @@ congoApp.config([
         templateUrl: congo.assets['home.html'],
         controller: 'HomeController'
       })
-      .when('/accounts/:slug/:role/edit', {
-        templateUrl: congo.assets['accounts/edit.html'],
-        controller: 'AccountsEditController'
+      .when('/accounts/:slug/:role/settings', {
+        templateUrl: congo.assets['settings/show.html'],
+        controller: 'SettingsShowController'
       })
       .when('/accounts/:slug/:role/carrier_accounts', {
         templateUrl: congo.assets['carrier_accounts/index.html'],

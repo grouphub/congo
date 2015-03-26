@@ -1,6 +1,0 @@
-#!/bin/sh
-
-rm -rf tmp/fakes3
-bundle exec rake db:drop db:create db:migrate db:seed --trace
-bundle exec rake db:test:prepare --trace
-

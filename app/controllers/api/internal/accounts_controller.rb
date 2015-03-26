@@ -25,13 +25,38 @@ class Api::Internal::AccountsController < ApplicationController
     last_name = properties['last_name']
     phone = properties['phone']
     plan_name = properties['plan_name']
+    card_number = properties['card_number']
+    month = properties['month']
+    year = properties['year']
+    cvc = properties['cvc']
 
+    # Only change name if it is non-empty
     if name.present?
       account.name = name
     end
 
     if tagline
       account.tagline = tagline
+    end
+
+    if plan_name
+      account.plan_name = properties['plan_name']
+    end
+
+    if card_number
+      account.card_number = properties['card_number']
+    end
+
+    if month
+      account.month = properties['month']
+    end
+
+    if year
+      account.year = properties['year']
+    end
+
+    if cvc
+      account.cvc = properties['cvc']
     end
 
     if Account::PLAN_NAMES.include?(plan_name)

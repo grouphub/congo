@@ -1,6 +1,6 @@
 var congoApp = angular.module('congoApp');
 
-congoApp.controller('AccountsEditController', [
+congoApp.controller('SettingsShowController', [
   '$scope',
   '$location',
   '$http',
@@ -15,7 +15,11 @@ congoApp.controller('AccountsEditController', [
       first_name: null,
       last_name: null,
       phone: null,
-      plan_type: null
+      plan_name: null,
+      card_number: null,
+      month: null,
+      year: null,
+      cvc: null
     };
 
     $scope.submit = function () {
