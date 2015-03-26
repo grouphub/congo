@@ -23,10 +23,20 @@ class Api::Internal::UsersController < ApplicationController
     end
 
     # If user came in from an email then they are a customer.
-    attempt_to_create_customer!
+    begin
+      attempt_to_create_customer!
+    rescue ActiveRecord::RecordInvalid => e
+      error_response(e.message)
+      return
+    end
 
     # If user came from a manual signup, then they're a broker.
-    attempt_to_create_broker!
+    begin
+      attempt_to_create_broker!
+    rescue ActiveRecord::RecordInvalid => e
+      error_response(e.message)
+      return
+    end
 
     user = signin! email, password
 
@@ -77,6 +87,7 @@ class Api::Internal::UsersController < ApplicationController
     end
 
     user.properties = (user.properties || {}).merge(user_properties)
+    user.save!
 
     if plan_name
       account = user.roles.first.account
@@ -88,7 +99,18 @@ class Api::Internal::UsersController < ApplicationController
       account = user.roles.first.account
       account.name ||= account_name
       account.tagline ||= account_tagline
-      account.save!
+
+      begin
+        account.save!
+      rescue ActiveRecord::RecordInvalid => e
+        if e.record.errors.messages[:slug]
+          error_response('Validation Failed: Name has already been taken.')
+          return
+        end
+
+        error_response(e.message)
+        return
+      end
     end
 
     if account_properties
@@ -96,13 +118,18 @@ class Api::Internal::UsersController < ApplicationController
       account.properties = (account.properties || {}).merge(account_properties)
       account.name ||= account.properties['name']
       account.tagline ||= account.properties['tagline']
-      account.save!
-    end
 
-    user.save!
+      begin
+        account.save!
+      rescue ActiveRecord::RecordInvalid => e
+        if e.record.errors.messages[:slug]
+          error_response('Validation Failed: Name has already been taken.')
+          return
+        end
 
-    if account
-      account.save!
+        error_response(e.message)
+        return
+      end
     end
 
     respond_to do |format|

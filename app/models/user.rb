@@ -7,6 +7,8 @@ class User < ActiveRecord::Base
   has_many :roles
   has_many :memberships
 
+  validates_uniqueness_of :email
+
   def password
     @password = BCrypt::Password.new(self.encrypted_password)
   end
