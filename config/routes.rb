@@ -115,7 +115,7 @@ Rails.application.routes.draw do
           resources :tokens
 
           resources :applications do
-            get '/last_attempt', to: 'applications#last_attempt'
+            get '/activities', to: 'applications#activities'
           end
 
           put '/', to: 'accounts#update'

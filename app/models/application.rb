@@ -5,8 +5,6 @@ class Application < ActiveRecord::Base
   belongs_to :benefit_plan
   belongs_to :membership
 
-  has_many :attempts
-
   before_save :populate_reference_number
 
   def populate_reference_number
