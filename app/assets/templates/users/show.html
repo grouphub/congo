@@ -4,24 +4,40 @@
 
     <div class="form-group" show-errors='{showSuccess: true}'>
       <label class="control-label">First Name</label>
-      <input type="text" class="form-control" id="first_name" name="first_name" ng-model="first_name" placeholder="{{user.first_name}}" />
+      <input type="text" class="form-control" id="first_name" name="first_name" ng-model="user.first_name" placeholder="Enter a First Name&hellip;">
       <p class="help-block" ng-if="userForm.first_name.$error.required">The user's first name is required</p>
     </div>
 
     <div class="form-group" show-errors='{showSuccess: true}'>
       <label class="control-label">Last Name</label>
-      <input type="text" class="form-control" id="last_name" name="last_name" ng-model="last_name" placeholder="{{user.last_name}}" />
+      <input type="text" class="form-control" id="last_name" name="last_name" ng-model="user.last_name" placeholder="Enter a Last Name&hellip;">
       <p class="help-block" ng-if="userForm.last_name.$error.required">The user's last name is required</p>
     </div>
 
     <div class="form-group" show-errors='{showSuccess: true}'>
       <label class="control-label">Email</label>
-      <input type="email" class="form-control" id="email" name="email" ng-model="email" placeholder="{{user.email}}" />
+      <input type="email" class="form-control" id="email" name="email" ng-model="user.email" placeholder="Enter an Email&hellip;">
       <p class="help-block" ng-if="userForm.email.$error.required">The user's email is required</p>
       <p class="help-block" ng-if="userForm.email.$error.email">The email address is invalid</p>
     </div>
 
     <button class="btn btn-primary" ng-click="submit()">Save</button>
+  </form>
+
+  <form name="passwordForm">
+    <h1>Change Your Password</h1>
+
+    <div class="form-group">
+      <label class="control-label">Password</label>
+      <input type="password" class="form-control" id="password" name="password" ng-model="passwordData.password" placeholder="Enter a Password&hellip;">
+    </div>
+
+    <div class="form-group">
+      <label class="control-label">Password Confirmation</label>
+      <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" ng-model="passwordData.password_confirmation" placeholder="Confirm Your Password&hellip;">
+    </div>
+
+    <button class="btn btn-primary" ng-click="submitPassword()">Save</button>
   </form>
 </div>
 
