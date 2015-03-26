@@ -74,5 +74,26 @@ class Api::Internal::AccountsController < ApplicationController
       }
     end
   end
+
+  def destroy
+    account_slug = params[:account_id]
+    account = Account.where(slug: account_slug).first
+    role = Role.where(account_id: account.id, user_id: current_user.id)
+
+    unless role.present?
+      error_response('Could not find a matching account.')
+      return
+    end
+
+    account.nuke!
+
+    respond_to do |format|
+      format.json {
+        render json: {
+          user: render_user(current_user)
+        }
+      }
+    end
+  end
 end
 

@@ -79,5 +79,158 @@ describe Account do
 
   end
 
+  describe '#nuke!' do
+
+    it 'destroys all account data' do
+      account = Account.create! \
+        name: 'First Account',
+        tagline: 'First account is best account!',
+        plan_name: 'premier',
+        properties: {
+          name: 'First Account',
+          tagline: 'First account is best account!',
+          plan_name: 'premier',
+          tax_id: '123',
+          first_name: 'Barry',
+          last_name: 'Broker',
+          phone: '(555) 555-5555'
+        }
+
+      broker_user = User.create! \
+        first_name: 'Bob',
+        last_name: 'Broker',
+        email: 'bob@broker.io',
+        password: 'testtest'
+
+      broker_invitation = Invitation.create! \
+        description: 'For the broker'
+
+      broker_role = Role.create! \
+        user_id: broker_user.id,
+        account_id: account.id,
+        name: 'broker',
+        invitation_id: broker_invitation.id
+
+      customer_user = User.create! \
+        first_name: 'Alice',
+        last_name: 'Doe',
+        email: 'alice@first-account.com',
+        password: 'testtest'
+
+      customer_role = Role.create! \
+        user_id: customer_user.id,
+        account_id: account.id,
+        name: 'customer'
+
+      carrier = Carrier.create! \
+        name: 'Blue Cross',
+        properties: {
+          name: 'Blue Cross',
+          npi: '1467560003',
+          trading_partner_id: 'MOCKPAYER',
+          service_types: ['health_benefit_plan_coverage'],
+          tax_id: '123',
+          first_name: 'Brad',
+          last_name: 'Bluecross'
+        }
+
+      carrier_account = CarrierAccount.create! \
+        name: 'My Broker Blue Cross',
+        carrier_id: carrier.id,
+        account_id: account.id,
+        properties: {
+          name: 'My Broker Blue Cross',
+          carrier_slug: 'blue_cross',
+          broker_number: '234',
+          brokerage_name: 'Example Brokerage',
+          tax_id: '345',
+          account_type: 'broker'
+        }
+
+      benefit_plan = BenefitPlan.create! \
+        account_id: account.id,
+        carrier_account_id: carrier_account.id,
+        is_enabled: true,
+        name: 'Best Health Insurance PPO',
+        description_html: "<h1>Best Health Insurance PPO</h1>\n<p>An example plan.</p>",
+        description_markdown: "# Best Health Insurance PPO\n\nAn example plan.",
+        properties: {
+          name: 'Best Health Insurance PPO',
+          description_html: "<h1>Best Health Insurance PPO</h1>\n<p>An example plan.</p>",
+          description_markdown: "# Best Health Insurance PPO\n\nAn example plan."
+        }
+
+      benefit_plan_attachment = Attachment.create! \
+        benefit_plan_id: benefit_plan.id,
+        title: 'Sample Attachment',
+        filename: '123',
+        description: 'Just a sample attachment',
+        content_type: 'image/png',
+        url: 'http://localhost:5001/some_bucket/123'
+
+      group = Group.create! \
+        account_id: account.id,
+        name: 'My Group',
+        is_enabled: true,
+        description_html: "<h1>My Group</h1>\n<p>An example group.</p>",
+        description_markdown: "# My Group\n\nAn example group.",
+        properties: {
+          name: 'My Group',
+          group_id: '234',
+          tax_id: '345',
+          description_html: "<h1>My Group</h1>\n<p>An example group.</p>",
+          description_markdown: "# My Group\n\nAn example group."
+        }
+
+      group_benefit_plan = GroupBenefitPlan.create! \
+        group_id: group.id,
+        benefit_plan_id: benefit_plan.id
+
+      group_attachment = Attachment.create! \
+        group_id: group.id,
+        title: 'Sample Attachment 2',
+        filename: '124',
+        description: 'Another sample attachment',
+        content_type: 'image/jpg',
+        url: 'http://localhost:5001/some_bucket/124'
+
+      token = Token.create! \
+        account_id: account.id,
+        name: 'Example API Token'
+
+      customer_membership = Membership.create! \
+        group_id: group.id,
+        user_id: customer_user.id,
+        role_id: customer_role.id,
+        email: customer_user.email
+
+      customer_application = Application.create! \
+        account_id: account.id,
+        benefit_plan_id: benefit_plan.id,
+        membership_id: customer_membership.id
+
+      account.nuke!
+
+      expect(Account.where(id: account.id)).to_not be_present
+      expect(Invitation.where(id: broker_invitation.id)).to_not be_present
+      expect(Role.where(id: broker_role.id)).to_not be_present
+      expect(Role.where(id: customer_role.id)).to_not be_present
+      expect(CarrierAccount.where(id: carrier_account.id)).to_not be_present
+      expect(BenefitPlan.where(id: benefit_plan.id)).to_not be_present
+      expect(Attachment.where(id: benefit_plan_attachment.id)).to_not be_present
+      expect(Group.where(id: group.id)).to_not be_present
+      expect(GroupBenefitPlan.where(id: group_benefit_plan.id)).to_not be_present
+      expect(Attachment.where(id: group_attachment.id)).to_not be_present
+      expect(Token.where(id: token.id)).to_not be_present
+      expect(Membership.where(id: customer_membership.id)).to_not be_present
+      expect(Application.where(id: customer_application.id)).to_not be_present
+
+      expect(User.where(id: broker_user.id)).to be_present
+      expect(User.where(id: customer_user.id)).to be_present
+      expect(Carrier.where(id: carrier.id)).to be_present
+    end
+
+  end
+
 end
 

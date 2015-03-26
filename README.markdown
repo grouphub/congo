@@ -26,6 +26,15 @@ Getting started
 13. Visit the site locally at
     <a href="http://localhost:5000">http://localhost:5000</a>.
 
+Generate an ERD Diagram
+-----------------------
+
+    brew install graphviz
+    rake diagram:all
+    open doc/models_complete.svg
+
+You can find the generated SVG files in `doc/**/*.svg`.
+
 Deployment
 ----------
 
