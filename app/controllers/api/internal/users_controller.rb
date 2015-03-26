@@ -23,10 +23,20 @@ class Api::Internal::UsersController < ApplicationController
     end
 
     # If user came in from an email then they are a customer.
-    attempt_to_create_customer!
+    begin
+      attempt_to_create_customer!
+    rescue ActiveRecord::RecordInvalid => e
+      error_response(e.message)
+      return
+    end
 
     # If user came from a manual signup, then they're a broker.
-    attempt_to_create_broker!
+    begin
+      attempt_to_create_broker!
+    rescue ActiveRecord::RecordInvalid => e
+      error_response(e.message)
+      return
+    end
 
     user = signin! email, password
 
@@ -42,16 +52,48 @@ class Api::Internal::UsersController < ApplicationController
   def update
     id = params[:id]
     user = User.where(id: id).first
+    first_name = params[:first_name]
+    last_name = params[:last_name]
+    email = params[:email]
+    password = params[:password]
+    password_confirmation = params[:password_confirmation]
+    user_properties = params[:user_properties] || {}
+
+    # User "My Profile" form
+    if first_name && last_name && email
+      user.first_name = first_name
+      user.last_name = last_name
+      user.email = email
+    end
+
+    # User password change form
+    if password || password_confirmation
+      if password == password_confirmation
+        user.password = password
+      else
+        error_response('Password and password confirmation must match')
+        return
+      end
+    end
+
+    user.properties = (user.properties || {}).merge(user_properties)
+    user.save!
+
+    respond_to do |format|
+      format.json {
+        render json: {
+          user: render_user(user)
+        }
+      }
+    end
+  end
+
+  def update_invitation
+    id = params[:id]
+    user = User.where(id: id).first
     is_invite = params[:is_invite]
     invite_code = params[:invite_code]
-    user_properties = params[:user_properties] || {}
-    account_properties = params[:account_properties] || {}
-    account_name = account_properties['name']
-    account_tagline = account_properties['tagline']
     role = user.roles.first
-    account = nil
-
-    plan_name = params[:plan_name]
 
     if is_invite
       unless invite_code
@@ -70,13 +112,28 @@ class Api::Internal::UsersController < ApplicationController
         invitation_id: invitation.id
     end
 
+    respond_to do |format|
+      format.json {
+        render json: {
+          user: render_user(user)
+        }
+      }
+    end
+  end
+
+  def update_account
+    user = User.where(id: id).first
+    account_properties = params[:account_properties] || {}
+    account_name = account_properties['name']
+    account_tagline = account_properties['tagline']
+    account = nil
+    plan_name = params[:plan_name]
+
     # Bail if the plan name is not correct
     if plan_name && !Account::PLAN_NAMES.include?(plan_name)
       error_response("#{plan_name} is not a valid plan type")
       return
     end
-
-    user.properties = (user.properties || {}).merge(user_properties)
 
     if plan_name
       account = user.roles.first.account
@@ -88,7 +145,18 @@ class Api::Internal::UsersController < ApplicationController
       account = user.roles.first.account
       account.name ||= account_name
       account.tagline ||= account_tagline
-      account.save!
+
+      begin
+        account.save!
+      rescue ActiveRecord::RecordInvalid => e
+        if e.record.errors.messages[:slug]
+          error_response('Validation Failed: Name has already been taken.')
+          return
+        end
+
+        error_response(e.message)
+        return
+      end
     end
 
     if account_properties
@@ -96,13 +164,18 @@ class Api::Internal::UsersController < ApplicationController
       account.properties = (account.properties || {}).merge(account_properties)
       account.name ||= account.properties['name']
       account.tagline ||= account.properties['tagline']
-      account.save!
-    end
 
-    user.save!
+      begin
+        account.save!
+      rescue ActiveRecord::RecordInvalid => e
+        if e.record.errors.messages[:slug]
+          error_response('Validation Failed: Name has already been taken.')
+          return
+        end
 
-    if account
-      account.save!
+        error_response(e.message)
+        return
+      end
     end
 
     respond_to do |format|

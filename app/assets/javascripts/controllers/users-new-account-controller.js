@@ -26,7 +26,7 @@ congoApp.controller('UsersNewAccountController', [
       };
 
       $http
-        .put('/api/internal/users/' + congo.currentUser.id + '.json', data)
+        .put('/api/internal/users/' + congo.currentUser.id + '/account.json', data)
         .success(function (data, status, headers, config) {
           var account;
 

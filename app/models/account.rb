@@ -11,6 +11,8 @@ class Account < ActiveRecord::Base
 
   before_save :set_billing_start_and_day
 
+  validates_uniqueness_of :slug
+
   DEMO_PERIOD = 30
   PLAN_NAMES = %[free basic standard premier admin]
 

@@ -143,7 +143,10 @@ Rails.application.routes.draw do
       # User routes
       post '/users/signin', to: 'users#signin'
       delete '/users/signout', to: 'users#signout'
-      resources :users
+      resources :users do
+        put '/invitation', to: 'users#update_invitation'
+        put '/account', to: 'users#update_account'
+      end
     end
 
     # External API for third parties
