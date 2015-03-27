@@ -20,11 +20,20 @@ Getting started
 7.  `cd congo`
 8.  `bundle`
 9.  Verify the settings in `config/database.yml` look correct.
-10. Run `script/sweep_database`.
+10. Run `script/bootstrap`.
 11. You can run the tests via `bundle exec rspec spec`.
 12. Run the server using `script/start`.
 13. Visit the site locally at
     <a href="http://localhost:5000">http://localhost:5000</a>.
+
+Generate an ERD Diagram
+-----------------------
+
+    brew install graphviz
+    rake diagram:all
+    open doc/models_complete.svg
+
+You can find the generated SVG files in `doc/**/*.svg`.
 
 Deployment
 ----------

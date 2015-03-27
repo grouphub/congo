@@ -40,7 +40,7 @@
 //= require controllers/landing-controller
 //= require controllers/home-controller
 //= require controllers/accounts-controller
-//= require controllers/accounts-edit-controller
+//= require controllers/settings-show-controller
 //= require controllers/activities-index-controller
 //= require controllers/messages-index-controller
 //= require controllers/admin-accounts-index-controller
@@ -102,6 +102,7 @@
 //= require directives/review-application-modal
 //= require directives/enrollment-status-modal
 //= require directives/description-modal
+//= require directives/account-delete-modal
 //
 //  --------------
 //  Test Libraries

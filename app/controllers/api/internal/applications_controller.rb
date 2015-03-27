@@ -138,33 +138,30 @@ class Api::Internal::ApplicationsController < ApplicationController
     end
   end
 
-  def last_attempt
+  def activities
     application = Application.find(params[:application_id])
 
     # Application has been submitted to PokitDok.
     if application.completed_on || application.errored_on
-      last_attempt = application.attempts.last
       pokitdok = PokitDok::PokitDok.new \
         Rails.application.config.pokitdok.client_id,
         Rails.application.config.pokitdok.client_secret
 
       response = nil
 
-      if last_attempt && last_attempt.activity_id
-        begin
-          response = pokitdok.activities({
-            activity_id: last_attempt.activity_id
-          })
-        rescue StandardError => e
-          # TODO: Do something
-          response = nil
-        end
+      begin
+        response = pokitdok.activities({
+          activity_id: application.activity_id
+        })
+      rescue StandardError => e
+        # TODO: Do something
+        response = nil
       end
 
       respond_to do |format|
         format.json {
           render json: {
-            attempt: response
+            activities: response
           }
         }
       end
@@ -176,7 +173,7 @@ class Api::Internal::ApplicationsController < ApplicationController
     respond_to do |format|
       format.json {
         render json: {
-          attempt: {
+          activities: {
             meta: {
 
             },

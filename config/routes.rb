@@ -58,7 +58,7 @@ Rails.application.routes.draw do
     # Account home
     '/accounts/:slug/:role',
     '/accounts/:slug/:role/home',
-    '/accounts/:slug/:role/edit',
+    '/accounts/:slug/:role/settings',
 
     # Account carriers
     '/accounts/:slug/:role/carrier_accounts',
@@ -115,7 +115,7 @@ Rails.application.routes.draw do
           resources :tokens
 
           resources :applications do
-            get '/last_attempt', to: 'applications#last_attempt'
+            get '/activities', to: 'applications#activities'
           end
 
           put '/', to: 'accounts#update'

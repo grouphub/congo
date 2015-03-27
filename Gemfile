@@ -71,6 +71,9 @@ group :development do
   # For front-end live reloading.
   gem 'guard-livereload', group: :development
   gem 'rack-livereload', group: :development
+
+  # For model diagrams.
+  gem 'railroady'
 end
 
 # Testing gems.

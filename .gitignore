@@ -15,6 +15,9 @@
 /log/*.log
 /tmp
 
+# Auto-generated diagrams
+/doc/**/*.svg
+
 # OS X artifacts.
 .DS_Store
 
