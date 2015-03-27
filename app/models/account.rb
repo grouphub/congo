@@ -4,6 +4,7 @@ class Account < ActiveRecord::Base
   include Sluggable
   include Propertied
 
+  has_many :groups
   has_many :roles
   has_many :applications
   has_many :carrier_accounts
@@ -11,8 +12,47 @@ class Account < ActiveRecord::Base
 
   before_save :set_billing_start_and_day
 
+  validates_uniqueness_of :slug
+
   DEMO_PERIOD = 30
   PLAN_NAMES = %[free basic standard premier admin]
+
+  # TODO: Move to a background job
+  def nuke!
+    self.carrier_accounts
+      .includes(benefit_plans: :attachments)
+      .each { |carrier_account|
+        carrier_account.benefit_plans.each { |benefit_plan|
+          benefit_plan.attachments.destroy_all
+        }
+
+        carrier_account.benefit_plans.destroy_all
+      }
+
+    self.groups
+      .includes(:group_benefit_plans, :attachments)
+      .each { |group|
+        group.group_benefit_plans.destroy_all
+        group.attachments.destroy_all
+      }
+
+    self.roles
+      .includes({ memberships: :applications }, :invitation)
+      .each { |role|
+        role.memberships.each { |membership|
+          membership.applications.destroy_all
+        }
+
+        role.memberships.destroy_all
+        role.invitation.try(:destroy!)
+      }
+
+    self.carrier_accounts.destroy_all
+    self.groups.destroy_all
+    self.tokens.destroy_all
+    self.roles.destroy_all
+    self.destroy!
+  end
 
   def set_billing_start_and_day
     date = Date.today + DEMO_PERIOD

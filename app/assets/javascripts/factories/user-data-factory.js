@@ -172,6 +172,9 @@ congoApp.factory('userDataFactory', [
         });
 
         return emptyBrokerAccounts.length > 0;
+      },
+      hasBrokerAccount: function () {
+        return JSON.parse(congo.currentUser.properties_data).is_broker;
       }
     };
 

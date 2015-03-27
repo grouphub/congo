@@ -13,7 +13,10 @@ admin = User.create! \
   first_name: 'GroupHub',
   last_name: 'Admin',
   email: 'admin@grouphub.io',
-  password: 'testtest'
+  password: 'testtest',
+  properties: {
+    is_broker: true
+  }
 
 invitation = Invitation.create! \
   description: 'For GroupHub Admin'

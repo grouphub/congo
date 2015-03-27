@@ -67,6 +67,10 @@
             <a href="/users/{{currentUserId()}}">My Profile</a>
           </li>
 
+          <li ng-if="hasBrokerAccount()">
+            <a href="/accounts/new">New Broker Account&hellip;</a>
+          </li>
+
           <li>
             <a href="" ng-click="signout()" title="Sign Out">
               Sign Out

@@ -41,7 +41,8 @@
 //= require controllers/landing-controller
 //= require controllers/home-controller
 //= require controllers/accounts-controller
-//= require controllers/accounts-edit-controller
+//= require controllers/accounts-new-controller
+//= require controllers/settings-show-controller
 //= require controllers/activities-index-controller
 //= require controllers/messages-index-controller
 //= require controllers/admin-accounts-index-controller
@@ -55,6 +56,7 @@
 //= require controllers/admin-benefit-plans-new-controller
 //= require controllers/admin-benefit-plans-show-controller
 //= require controllers/admin-groups-index-controller
+//= require controllers/admin-users-index-controller
 //= require controllers/admin-invitations-index-controller
 //= require controllers/admin-features-index-controller
 //= require controllers/applications-index-controller
@@ -102,4 +104,5 @@
 //= require directives/review-application-modal
 //= require directives/enrollment-status-modal
 //= require directives/description-modal
+//= require directives/account-delete-modal
 

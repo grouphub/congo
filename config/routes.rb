@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     '/',
     '/home',
     '/accounts',
+    '/accounts/new',
 
     # Users
     '/users/signin',
@@ -46,6 +47,9 @@ Rails.application.routes.draw do
     # Admin All Groups
     '/admin/groups',
 
+    # Admin All Users
+    '/admin/users',
+
     # Admin Invitations
     '/admin/invitations',
 
@@ -55,7 +59,7 @@ Rails.application.routes.draw do
     # Account home
     '/accounts/:slug/:role',
     '/accounts/:slug/:role/home',
-    '/accounts/:slug/:role/edit',
+    '/accounts/:slug/:role/settings',
 
     # Account carriers
     '/accounts/:slug/:role/carrier_accounts',
@@ -97,6 +101,11 @@ Rails.application.routes.draw do
         resources :invitations
         resources :accounts
         resources :groups
+
+        resources :users do
+          post '/crystal_ball', to: 'users#crystal_ball'
+        end
+
         resources :features
       end
 
@@ -107,7 +116,7 @@ Rails.application.routes.draw do
           resources :tokens
 
           resources :applications do
-            get '/last_attempt', to: 'applications#last_attempt'
+            get '/activities', to: 'applications#activities'
           end
 
           put '/', to: 'accounts#update'
@@ -135,7 +144,10 @@ Rails.application.routes.draw do
       # User routes
       post '/users/signin', to: 'users#signin'
       delete '/users/signout', to: 'users#signout'
-      resources :users
+      resources :users do
+        put '/invitation', to: 'users#update_invitation'
+        put '/account', to: 'users#update_account'
+      end
     end
 
     # External API for third parties

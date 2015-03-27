@@ -21,6 +21,10 @@ congoApp.config([
         templateUrl: congo.assets['accounts.html'],
         controller: 'AccountsController'
       })
+      .when('/accounts/new', {
+        templateUrl: congo.assets['accounts-new.html'],
+        controller: 'AccountsNewController'
+      });
   }
 ]);
 
@@ -81,6 +85,10 @@ congoApp.config([
         templateUrl: congo.assets['admin/groups/index.html'],
         controller: 'AdminGroupsIndexController'
       })
+      .when('/admin/users', {
+        templateUrl: congo.assets['admin/users/index.html'],
+        controller: 'AdminUsersIndexController'
+      })
       .when('/admin/features', {
         templateUrl: congo.assets['admin/features/index.html'],
         controller: 'AdminFeaturesIndexController'
@@ -133,9 +141,9 @@ congoApp.config([
         templateUrl: congo.assets['home.html'],
         controller: 'HomeController'
       })
-      .when('/accounts/:slug/:role/edit', {
-        templateUrl: congo.assets['accounts/edit.html'],
-        controller: 'AccountsEditController'
+      .when('/accounts/:slug/:role/settings', {
+        templateUrl: congo.assets['settings/show.html'],
+        controller: 'SettingsShowController'
       })
       .when('/accounts/:slug/:role/carrier_accounts', {
         templateUrl: congo.assets['carrier_accounts/index.html'],

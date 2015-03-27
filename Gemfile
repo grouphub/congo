@@ -72,6 +72,9 @@ group :development do
 
   # Only need clock in development.
   gem 'clockwork'
+
+  # For model diagrams.
+  gem 'railroady'
 end
 
 # Testing gems.
