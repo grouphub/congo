@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     '/',
     '/home',
     '/accounts',
+    '/accounts/new',
 
     # Users
     '/users/signin',

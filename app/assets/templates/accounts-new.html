@@ -1,0 +1,88 @@
+<div class="col-md-12">
+  <form name="accountNewForm" ng-submit="submit()">
+    <h1>New Account</h1>
+
+    <h2>Basic Info</h2>
+
+    <div class="form-group">
+      <label class="control-label" for="name">Name</label>
+      <input type="text" class="form-control" id="name" name="name" ng-model="form.name" placeholder="Enter a Company Name&hellip;" auto-focus>
+    </div>
+
+    <div class="form-group">
+      <label class="control-label" for="tagline">Company Tagline</label>
+      <input type="text" class="form-control" id="tagline" name="tagline" ng-model="form.tagline" placeholder="Enter a Company Tagline&hellip;">
+    </div>
+
+    <div class="form-group">
+      <label class="control-label" for="tax_id">Tax ID</label>
+      <input type="text" class="form-control" id="tax_id" name="tax_id" ng-model="form.tax_id" placeholder="Enter a Tax ID&hellip;">
+    </div>
+
+    <div class="form-group">
+      <label class="control-label" for="first_name">First Name</label>
+      <input type="text" class="form-control" id="first_name" name="first_name" ng-model="form.first_name" placeholder="Enter a First Name&hellip;">
+    </div>
+
+    <div class="form-group">
+      <label class="control-label" for="last_name">Last Name</label>
+      <input type="text" class="form-control" id="last_name" name="last_name" ng-model="form.last_name" placeholder="Enter a Last Name&hellip;">
+    </div>
+
+    <div class="form-group">
+      <label class="control-label" for="phone">Phone Number</label>
+      <input type="text" class="form-control" id="phone" name="phone" ng-model="form.phone" placeholder="Enter a Phone Number&hellip;">
+    </div>
+
+    <hr>
+
+    <h2>Plan Type</h2>
+
+    <div class="form-group">
+      <label class="control-label">Plan Type</label><br>
+
+      <label class="radio-inline">
+        <input type="radio" name="plan_name" value="free" ng-model="form.plan_name"> Free
+      </label>
+
+      <label class="radio-inline">
+        <input type="radio" name="plan_name" value="basic" ng-model="form.plan_name"> Basic
+      </label>
+
+      <label class="radio-inline">
+        <input type="radio" name="plan_name" value="standard" ng-model="form.plan_name"> Standard
+      </label>
+
+      <label class="radio-inline">
+        <input type="radio" name="plan_name" value="premier" ng-model="form.plan_name"> Premier
+      </label>
+    </div>
+
+    <hr>
+
+    <h2>Payment Info</h2>
+
+    <div class="form-group">
+      <label class="control-label">Card Number</label>
+      <input type="text" class="form-control" id="card_number" name="card_number" ng-model="form.card_number" placeholder="Card Number">
+    </div>
+
+    <div class="form-group">
+      <label class="control-label">Expiration Month</label>
+      <input type="text" class="form-control" id="month" name="month" ng-model="form.month" placeholder="Expiration Month">
+    </div>
+
+    <div class="form-group">
+      <label class="control-label">Expiration Year</label>
+      <input type="text" class="form-control" id="year" name="year" ng-model="form.year" placeholder="Expiration Year">
+    </div>
+
+    <div class="form-group">
+      <label class="control-label">CVC</label>
+      <input type="password" class="form-control" id="cvc" name="cvc" ng-model="form.cvc" placeholder="CVC Code">
+    </div>
+
+    <input type="submit" class="btn btn-primary" value="Create Account">
+  </form>
+</div>
+
