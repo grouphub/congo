@@ -2,8 +2,8 @@ class Api::Internal::AccountsController < ApplicationController
   protect_from_forgery
 
   before_filter :ensure_user!
-  before_filter :ensure_account!
-  before_filter :ensure_broker!
+  before_filter :ensure_account!, except: :destroy
+  before_filter :ensure_broker!, except: :destroy
 
   def update
     account_slug = params[:account_id]
@@ -76,7 +76,7 @@ class Api::Internal::AccountsController < ApplicationController
   end
 
   def destroy
-    account_slug = params[:account_id]
+    account_slug = params[:id]
     account = Account.where(slug: account_slug).first
     role = Role.where(account_id: account.id, user_id: current_user.id)
 

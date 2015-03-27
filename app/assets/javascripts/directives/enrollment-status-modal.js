@@ -18,7 +18,6 @@ congoApp.directive('enrollmentStatusModal', [
           $http
             .get('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/applications/' + application.id + '/activities.json')
             .then(function (response) {
-              console.log(response);
               $scope.activities = response.data.activities;
               $scope.lastActivity = _($scope.activities.data).last();
             })

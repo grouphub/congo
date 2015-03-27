@@ -5,7 +5,8 @@ congoApp.controller('SettingsShowController', [
   '$location',
   '$http',
   'flashesFactory',
-  function ($scope, $location, $http, flashesFactory) {
+  'eventsFactory',
+  function ($scope, $location, $http, flashesFactory, eventsFactory) {
     var currentAccount = $scope.currentAccount();
 
     $scope.form = {
@@ -20,6 +21,10 @@ congoApp.controller('SettingsShowController', [
       month: null,
       year: null,
       cvc: null
+    };
+
+    $scope.showAccountDeleteModal = function () {
+      $('#account-delete-modal').modal('show');
     };
 
     $scope.submit = function () {
