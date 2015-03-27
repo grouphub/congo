@@ -2,8 +2,50 @@ class Api::Internal::AccountsController < ApplicationController
   protect_from_forgery
 
   before_filter :ensure_user!
-  before_filter :ensure_account!, except: :destroy
-  before_filter :ensure_broker!, except: :destroy
+  before_filter :ensure_account!, except: [:create, :destroy]
+  before_filter :ensure_broker!, except: [:create, :destroy]
+
+  def create
+    properties = params[:properties] || {}
+    name = properties['name']
+    tagline = properties['tagline']
+    plan_name = properties['plan_name']
+
+    # TODO: What if a customer wants to create a broker account?
+    unless current_user.properties['is_broker']
+      error_response('You must be a broker to create an account.')
+      return
+    end
+
+    unless name.present?
+      error_response('Name must be provided.')
+      return
+    end
+
+    unless Account::PLAN_NAMES.include?(plan_name)
+      error_response('Plan name must be valid.')
+      return
+    end
+
+    account = Account.create! \
+      name: name,
+      tagline: tagline,
+      plan_name: plan_name,
+      properties: properties
+
+    Role.create! \
+      user_id: current_user.id,
+      account_id: account.id,
+      name: 'broker'
+
+    respond_to do |format|
+      format.json {
+        render json: {
+          user: render_user(current_user)
+        }
+      }
+    end
+  end
 
   def update
     account_slug = params[:account_id]

@@ -14,6 +14,10 @@ class HomeController < ApplicationController
         return
       end
 
+      if account_slug == 'new'
+        return
+      end
+
       current_account = Account.where(slug: account_slug).first
       unless current_account
         flash[:error] = 'We could not find an appropriate account.'

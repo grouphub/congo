@@ -19,7 +19,10 @@ module BrokerCreatable
       first_name: first_name,
       last_name: last_name,
       email: email,
-      password: password
+      password: password,
+      properties: {
+        is_broker: true
+      }
 
     account = Account.create!
 
