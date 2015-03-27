@@ -2,5 +2,5 @@
 
 require "#{File.dirname(__FILE__)}/enrollment_clock"
 
-EnrollmentClock.new(*ARGV).start
+Clock.new(*ARGV).start
 

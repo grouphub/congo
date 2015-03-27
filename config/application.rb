@@ -33,8 +33,12 @@ module Congo2
     # Auto-require items in "lib"
     config.autoload_paths << Rails.root.join('lib')
 
-    # Use Sidekiq to process queues by default.
-    config.active_job.queue_adapter = :sidekiq
+    # Process jobs using Shoryuken on AWS
+    if ENV['AWS_ACCESS_KEY_ID']
+      config.active_job.queue_adapter = :shoryuken
+    else
+      config.active_job.queue_adapter = :inline
+    end
   end
 end
 
