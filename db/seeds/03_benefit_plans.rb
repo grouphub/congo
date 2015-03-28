@@ -11,7 +11,13 @@ carrier = Carrier.create! \
     service_types: ['health_benefit_plan_coverage'],
     tax_id: '234',
     first_name: 'Billy',
-    last_name: 'Blueshield'
+    last_name: 'Blueshield',
+    address_1: '123 Somewhere Lane',
+    address_2: 'Apt. 123',
+    city: 'Somewhereville',
+    state: 'CA',
+    zip: '94444',
+    phone: '444-444-4444'
   }
 
 carrier_account = CarrierAccount.create! \
@@ -53,7 +59,13 @@ carrier = Carrier.create! \
     service_types: ['health_benefit_plan_coverage'],
     tax_id: '123',
     first_name: 'Brad',
-    last_name: 'Bluecross'
+    last_name: 'Bluecross',
+    address_1: '123 Somewhere Lane',
+    address_2: 'Apt. 123',
+    city: 'Somewhereville',
+    state: 'CA',
+    zip: '94444',
+    phone: '444-444-4444'
   }
 
 carrier_account = CarrierAccount.create! \
