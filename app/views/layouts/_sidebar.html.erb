@@ -110,19 +110,11 @@
     </a>
   </li>
 
-  <!-- Admin Benefit Plans -->
-  <li class="sidebar-item" ng-if="inAdminPanel()">
-    <a ng-href="/admin/benefit_plans" title="Benefit Plans">
-      <i class="fa fa-heart"></i>
-      <span class="caption">Benefit Plans</span>
-    </a>
-  </li>
-
   <!-- Admin Accounts -->
   <li class="sidebar-item" ng-if="inAdminPanel()">
     <a ng-href="/admin/accounts" title="Accounts">
       <i class="fa fa-cubes"></i>
-      <span class="caption">Accounts, Users, and Groups</span>
+      <span class="caption">Accounts, Users, &amp; Groups</span>
     </a>
   </li>
 
@@ -163,7 +155,7 @@
     </a>
   </li>
 
-  <li class="sidebar-item" ng-if="currentRole() === 'broker'">
+  <li class="sidebar-item" ng-if="currentRole() === 'broker' && featureEnabled('api_tokens')">
     <a ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/tokens" title="API Tokens">
       <i class="fa fa-ticket"></i>
       <span class="caption">API Tokens</span>
