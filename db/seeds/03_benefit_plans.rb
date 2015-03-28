@@ -35,7 +35,11 @@ BenefitPlan.create! \
   properties: {
     name: 'Admin Health Insurance PPO',
     description_html: "<h1>Admin Health Insurance PPO</h1>\n<p>An example plan.</p>",
-    description_markdown: "# Admin Health Insurance PPO\n\nAn example plan."
+    description_markdown: "# Admin Health Insurance PPO\n\nAn example plan.",
+    plan_type: 'foo',
+    exchange_plan: 'bar',
+    small_group: 'baz',
+    group_id: '234'
   }
 
 # Broker-created carrier account and benefit plan
@@ -75,6 +79,10 @@ BenefitPlan.create! \
   properties: {
     name: 'Best Health Insurance PPO',
     description_html: "<h1>Best Health Insurance PPO</h1>\n<p>An example plan.</p>",
-    description_markdown: "# Best Health Insurance PPO\n\nAn example plan."
+    description_markdown: "# Best Health Insurance PPO\n\nAn example plan.",
+    plan_type: 'foo',
+    exchange_plan: 'bar',
+    small_group: 'baz',
+    group_id: '235'
   }
 

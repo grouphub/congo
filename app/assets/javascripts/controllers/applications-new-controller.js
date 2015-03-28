@@ -38,6 +38,38 @@ congoApp.controller('ApplicationsNewController', [
       }
     };
 
+    $scope.relationships = [
+      'Spouse',
+      'Father or Mother',
+      'Grandfather or Grandmother',
+      'Grandson or Granddaughter',
+      'Uncle or Aunt',
+      'Nephew or Niece',
+      'Cousin',
+      'Adopted Child',
+      'Foster Child',
+      'Son-in-law or Daughter-in-law',
+      'Brother-in-law or Sister-in-law',
+      'Mother-in-law or Father-in-law',
+      'Brother or Sister',
+      'Ward',
+      'Stepparent',
+      'Stepson or Stepdaughter',
+      'Self',
+      'Child',
+      'Sponsored Dependent',
+      'Dependent of a Minor Dependent',
+      'Ex-spouse',
+      'Guardian',
+      'Court Appointed Guardian',
+      'Collateral Dependent',
+      'Life Partner',
+      'Annuitant',
+      'Trustee',
+      'Other Relationship',
+      'Other Relative'
+    ];
+
     $scope.form = {
       previousCoverage: 'No',
       parentOrLegalGuardian: 'No',
