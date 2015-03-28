@@ -117,6 +117,7 @@ Rails.application.routes.draw do
 
           resources :applications do
             get '/activities', to: 'applications#activities'
+            post '/callback', to: 'applications#callback'
           end
 
           put '/', to: 'accounts#update'

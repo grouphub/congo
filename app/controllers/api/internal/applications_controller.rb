@@ -1,8 +1,8 @@
 class Api::Internal::ApplicationsController < ApplicationController
   protect_from_forgery
 
-  before_filter :ensure_user!
-  before_filter :ensure_account!
+  before_filter :ensure_user!, except: :callback
+  before_filter :ensure_account!, except: :callback
 
   def index
     applications = Membership
@@ -196,6 +196,10 @@ class Api::Internal::ApplicationsController < ApplicationController
         }
       }
     end
+  end
+
+  def callback
+    binding.remote_pry
   end
 
   # Render methods

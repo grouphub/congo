@@ -16,14 +16,20 @@ Getting started
     follow the instructions.
 5.  Make sure you have Redis installed. Run `brew install redis` and follow the
     instructions.
-6.  Clone the repo. `git clone https://github.com/grouphub/congo.git`.
-7.  `cd congo`
-8.  `bundle`
-9.  Verify the settings in `config/database.yml` look correct.
-10. Run `script/bootstrap`.
-11. You can run the tests via `bundle exec rspec spec`.
-12. Run the server using `script/start`.
-13. Visit the site locally at
+6.  You will need ngrok in order to test enrollment locally. Visit
+    <a href="http://ngrok.com">http://ngrok.com</a> and sign up. Under your
+    Dashboard, make note of your "auth token". Then, in the Terminal,
+    `brew install ngrok`, and run `ngrok -authtoken YOUR_AUTH_TOKEN`. Hit
+    `ctrl-c` to quit.
+7.  Clone the repo. `git clone https://github.com/grouphub/congo.git`.
+8.  `cd congo`
+9.  `bundle`
+10. Verify the settings in `config/database.yml` look correct.
+11. Run `script/bootstrap`.
+12. Run `script/ngrok` if you would like to receive callbacks from PokitDok.
+13. You can run the tests via `bundle exec rspec spec`.
+14. Run the server using `script/start`.
+15. Visit the site locally at
     <a href="http://localhost:5000">http://localhost:5000</a>.
 
 Generate an ERD Diagram

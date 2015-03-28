@@ -1,0 +1,130 @@
+{
+  "meta": {
+    "rate_limit_amount": 2,
+    "rate_limit_reset": 1427576450,
+    "application_mode": "test",
+    "processing_time": 190,
+    "rate_limit_cap": 1000,
+    "credits_remaining": 9979,
+    "activity_id": "5517096f80de1d0068a8cec5",
+    "credits_billed": 1
+  },
+  "data": {
+    "units_of_work": 1,
+    "_type": "PlatformActivityModel",
+    "name": "enrollment",
+    "parameters": {
+      "reference_number": "4aueb8vr2z5es3gpu78alq3yt",
+      "version": "4.0.0",
+      "payer": {
+        "tax_id": "234"
+      },
+      "update_dt": "Sat Mar 28 20:05:03 2015",
+      "deleted": false,
+      "major_version": "4",
+      "subscriber": {
+        "first_name": "Candice",
+        "last_name": "Customer",
+        "middle_name": "C.",
+        "relationship": "Self",
+        "contacts": [
+          {
+            "primary_communication_type": "Home Phone Number",
+            "communication_type2": "Work Phone Number",
+            "communication_number2": "(444) 444-5555",
+            "primary_communication_number": "(444) 444-4444"
+          }
+        ],
+        "gender": "Female",
+        "employment_status": "Full-time",
+        "group_or_policy_number": "234",
+        "handicapped": true,
+        "ssn": "444-44-4444",
+        "address": {
+          "city": "Cambridge",
+          "line2": "44",
+          "county": "Contra Costa",
+          "state": "CA",
+          "postal_code": "44444",
+          "line": "444 Carrie Ct."
+        },
+        "birth_date": "Wed Apr  4 00:00:00 1984",
+        "benefits": [
+          {
+            "maintenance_type": "Addition",
+            "begin_date": "Wed Jan  1 00:00:00 2014",
+            "coverage_level": "Employee Only",
+            "benefit_type": "Health",
+            "late_enrollment": false
+          }
+        ],
+        "substance_abuse": true,
+        "tobacco_use": true
+      },
+      "correlation_id": "75c9afb5-f914-4f1a-9d64-c71afdff977e",
+      "insert_dt": "Sat Mar 28 20:05:03 2015",
+      "trading_partner_id": "MOCKPAYER",
+      "purpose": "Original",
+      "client_id": "RKH2S5iecrOcrGroqrx9",
+      "action": "Change",
+      "dependents": [
+        {
+          "first_name": "Corwin",
+          "last_name": "Customer",
+          "middle_name": "C.",
+          "relationship": "Child",
+          "gender": "Male",
+          "substance_abuse": false,
+          "handicapped": false,
+          "ssn": "444-44-4445",
+          "address": {
+            "city": "Cambridge",
+            "line2": "44",
+            "county": "Contra Costa",
+            "state": "CA",
+            "postal_code": "44444",
+            "line": "444 Carrie Ct."
+          },
+          "birth_date": "Sun Apr  4 00:00:00 2004",
+          "tobacco_use": false
+        }
+      ],
+      "sponsor": {
+      }
+    },
+    "remaining_transitions": [
+      "generate",
+      "store",
+      "transmit",
+      "wait",
+      "receive",
+      "process",
+      "complete"
+    ],
+    "_uuid": "1e113790-6a74-43da-add0-a9589d545353",
+    "state": {
+      "name": "scheduled",
+      "title": "Scheduled for next available transmission to Trading Partner"
+    },
+    "trading_partner_id": "MOCKPAYER",
+    "id": "5517096f80de1d0068a8cec5",
+    "transition_path": [
+      "schedule",
+      "generate",
+      "store",
+      "transmit",
+      "wait",
+      "receive",
+      "process",
+      "complete"
+    ],
+    "history": [
+      {
+        "record_dt": "2015-03-28T20:05:03.903774",
+        "name": "init",
+        "title": "Initializing"
+      }
+    ]
+  }
+}
+

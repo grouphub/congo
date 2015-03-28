@@ -23,8 +23,7 @@ class PaymentJob < ActiveJob::Base
       Rails.application.config.pokitdok.client_id,
       Rails.application.config.pokitdok.client_secret
 
-    # TODO: Write a method to translate application properties into PokitDok request data.
-    data = sample_data
+    data = application.to_pokitdok
 
     begin
       response = pokitdok.enrollment(data)

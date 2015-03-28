@@ -24,6 +24,14 @@ class Application < ActiveRecord::Base
     # TODO: Validation
     # TODO: Form validation
 
+    output_data['async'] = true
+    output_data['callback_url'] = sprintf \
+      '%s/api/internal/accounts/%s/roles/%s/applications/%s/callback.json',
+      Rails.application.config.pokitdok.callback_host,
+      account.slug,
+      membership.role.name,
+      application.id
+
     output_data['action'] = 'Change'
 
     output_data['payer'] = {}

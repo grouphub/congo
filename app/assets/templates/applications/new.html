@@ -52,7 +52,9 @@
 
               <div class="form-group col-sm-12">
                 <label class="control-label">Employment Status</label>
-                <input type="text" name="employment_status" class="form-control" placeholder="Employment Status" value="Full-Time">
+                <select class="form-control" name="employment_status">
+                  <option ng-repeat="employmentStatus in employmentStatuses" value="{{employmentStatus}}">{{employmentStatus}}</option>
+                </select>
               </div>
 
               <div class="form-group col-sm-4">

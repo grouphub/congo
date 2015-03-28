@@ -38,6 +38,17 @@ congoApp.controller('ApplicationsNewController', [
       }
     };
 
+    $scope.employmentStatuses = [
+      'Full-time',
+      'Part-time',
+      'Leave of Absence',
+      'Terminated',
+      'Retired',
+      'Active',
+      'Active Military - Overseas',
+      'Active Military - USA'
+    ];
+
     $scope.relationships = [
       'Spouse',
       'Father or Mother',

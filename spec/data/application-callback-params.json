@@ -1,0 +1,164 @@
+{
+  "units_of_work": 1,
+  "_type": "PlatformActivityModel",
+  "callback_url": "https://rjungemann-grouphub.ngrok.com/api/internal/accounts/first_account/roles/customer/applications/1/callback.json",
+  "major_version": "4",
+  "name": "enrollment",
+  "parameters": {
+    "reference_number": "4aueb8vr2z5es3gpu78alq3yt",
+    "version": "4.0.0",
+    "payer": {
+      "tax_id": "234"
+    },
+    "update_dt": "Sat Mar 28 21:17:14 2015",
+    "deleted": false,
+    "major_version": "4",
+    "subscriber": {
+      "first_name": "Candice",
+      "last_name": "Customer",
+      "middle_name": "C.",
+      "relationship": "Self",
+      "contacts": [
+        {
+          "primary_communication_type": "Home Phone Number",
+          "communication_type2": "Work Phone Number",
+          "communication_number2": "(444) 444-5555",
+          "primary_communication_number": "(444) 444-4444"
+        }
+      ],
+      "gender": "Female",
+      "employment_status": "Full-time",
+      "group_or_policy_number": "234",
+      "handicapped": true,
+      "ssn": "444-44-4444",
+      "address": {
+        "city": "Cambridge",
+        "line2": "44",
+        "county": "Contra Costa",
+        "state": "CA",
+        "postal_code": "44444",
+        "line": "444 Carrie Ct."
+      },
+      "birth_date": "Wed Apr  4 00:00:00 1984",
+      "benefits": [
+        {
+          "maintenance_type": "Addition",
+          "begin_date": "Wed Jan  1 00:00:00 2014",
+          "coverage_level": "Employee Only",
+          "benefit_type": "Health",
+          "late_enrollment": false
+        }
+      ],
+      "substance_abuse": true,
+      "tobacco_use": true
+    },
+    "correlation_id": "816e9778-0cff-4381-b37f-e2bf017533c5",
+    "insert_dt": "Sat Mar 28 21:17:14 2015",
+    "trading_partner_id": "MOCKPAYER",
+    "purpose": "Original",
+    "client_id": "RKH2S5iecrOcrGroqrx9",
+    "action": "Change",
+    "dependents": [
+      {
+        "first_name": "Corwin",
+        "last_name": "Customer",
+        "middle_name": "C.",
+        "relationship": "Child",
+        "gender": "Male",
+        "substance_abuse": false,
+        "handicapped": false,
+        "ssn": "444-44-4445",
+        "address": {
+          "city": "Cambridge",
+          "line2": "44",
+          "county": "Contra Costa",
+          "state": "CA",
+          "postal_code": "44444",
+          "line": "444 Carrie Ct."
+        },
+        "birth_date": "Sun Apr  4 00:00:00 2004",
+        "tobacco_use": false
+      }
+    ],
+    "sponsor": {
+    }
+  },
+  "update_dt": "Sat Mar 28 21:20:00 2015",
+  "remaining_transitions": [
+    "complete"
+  ],
+  "_uuid": "a8a5439d-2f14-4960-b693-32f658464f3b",
+  "state": {
+    "name": "notifying",
+    "title": "Notifying client application of activity results"
+  },
+  "deleted": false,
+  "correlation_id": "816e9778-0cff-4381-b37f-e2bf017533c5",
+  "version": "4.0.0",
+  "client_id": "RKH2S5iecrOcrGroqrx9",
+  "trading_partner_id": "MOCKPAYER",
+  "_id": "55171a5a80de1d006e8791d8",
+  "insert_dt": "Sat Mar 28 21:17:14 2015",
+  "transition_path": [
+    "schedule",
+    "generate",
+    "store",
+    "transmit",
+    "wait",
+    "receive",
+    "process",
+    "notify",
+    "complete"
+  ],
+  "history": [
+    {
+      "record_dt": "Sat Mar 28 21:17:14 2015",
+      "name": "init",
+      "title": "Initializing"
+    },
+    {
+      "record_dt": "Sat Mar 28 21:20:00 2015",
+      "name": "scheduled",
+      "title": "Scheduled for next available transmission to Trading Partner"
+    },
+    {
+      "record_dt": "Sat Mar 28 21:20:00 2015",
+      "name": "generating",
+      "title": "Generating transactions"
+    },
+    {
+      "record_dt": "Sat Mar 28 21:20:00 2015",
+      "name": "stored",
+      "title": "Batch transactions stored for later processing"
+    },
+    {
+      "record_dt": "Sat Mar 28 21:20:00 2015",
+      "name": "transmitting",
+      "title": "Transmitting transactions to Trading Partner"
+    },
+    {
+      "record_dt": "Sat Mar 28 21:20:00 2015",
+      "name": "waiting",
+      "title": "Waiting on Trading Partner Response"
+    },
+    {
+      "record_dt": "Sat Mar 28 21:20:00 2015",
+      "name": "receiving",
+      "title": "Receiving transactions from Trading Partner"
+    },
+    {
+      "record_dt": "Sat Mar 28 21:20:00 2015",
+      "name": "processing",
+      "title": "Processing transactions"
+    }
+  ],
+  "controller": "api/internal/applications",
+  "action": "callback",
+  "account_id": "first_account",
+  "role_id": "customer",
+  "application_id": "1",
+  "format": "json",
+  "application": {
+  }
+}
+
