@@ -50,6 +50,11 @@ textarea {
   resize: vertical;
 }
 
+// Nested tables should be transparent
+.table .table {
+  background-color: transparent;
+}
+
 @media (min-width: 768px) {
   form[name=signinForm],
   form[name=userForm],

@@ -94,6 +94,7 @@
     </a>
   </li>
 
+  <!-- Admin Carriers -->
   <li class="sidebar-item" ng-if="inAdminPanel()">
     <a ng-href="/admin/carriers" title="Carriers">
       <i class="fa fa-institution"></i>
@@ -101,6 +102,7 @@
     </a>
   </li>
 
+  <!-- Admin Carrier Accounts -->
   <li class="sidebar-item" ng-if="inAdminPanel()">
     <a ng-href="/admin/carrier_accounts" title="Carrier Accounts">
       <i class="fa fa-institution"></i>
@@ -108,6 +110,7 @@
     </a>
   </li>
 
+  <!-- Admin Benefit Plans -->
   <li class="sidebar-item" ng-if="inAdminPanel()">
     <a ng-href="/admin/benefit_plans" title="Benefit Plans">
       <i class="fa fa-heart"></i>
@@ -115,10 +118,27 @@
     </a>
   </li>
 
+  <!-- Admin Accounts -->
+  <li class="sidebar-item" ng-if="inAdminPanel()">
+    <a ng-href="/admin/accounts" title="Accounts">
+      <i class="fa fa-cubes"></i>
+      <span class="caption">Accounts, Users, and Groups</span>
+    </a>
+  </li>
+
+  <!-- Admin Invitations -->
   <li class="sidebar-item" ng-if="inAdminPanel()">
     <a ng-href="/admin/invitations" title="Invitations">
       <i class="fa fa-gift"></i>
       <span class="caption">Invitations</span>
+    </a>
+  </li>
+
+  <!-- Admin Features -->
+  <li class="sidebar-item" ng-if="inAdminPanel()">
+    <a ng-href="/admin/features" title="Features">
+      <i class="fa fa-trophy"></i>
+      <span class="caption">Features</span>
     </a>
   </li>
 
@@ -164,38 +184,6 @@
     </a>
   </li>
 
-  <!-- Admin Accounts -->
-  <li class="sidebar-item" ng-if="inAdminPanel()">
-    <a ng-href="/admin/accounts" title="Accounts">
-      <i class="fa fa-cubes"></i>
-      <span class="caption">All Accounts</span>
-    </a>
-  </li>
-
-  <!-- Admin All Groups -->
-  <li class="sidebar-item" ng-if="inAdminPanel()">
-    <a ng-href="/admin/groups" title="Groups">
-      <i class="fa fa-group"></i>
-      <span class="caption">All Groups</span>
-    </a>
-  </li>
-
-  <!-- Admin All Users -->
-  <li class="sidebar-item" ng-if="inAdminPanel()">
-    <a ng-href="/admin/users" title="Users">
-      <i class="fa fa-group"></i>
-      <span class="caption">All Users</span>
-    </a>
-  </li>
-
-  <!-- Admin Features -->
-  <li class="sidebar-item" ng-if="inAdminPanel()">
-    <a ng-href="/admin/features" title="Features">
-      <i class="fa fa-trophy"></i>
-      <span class="caption">Features</span>
-    </a>
-  </li>
-
   <!-- Customer Applications -->
   <li class="sidebar-item" ng-if="currentRole() === 'customer'">
     <a ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/applications" title="Applications">
@@ -218,7 +206,8 @@
     </a>
   </li>
 
-  <li class="sidebar-item">
+  <!-- Show Support Link for everyone except admins -->
+  <li class="sidebar-item" ng-if="!inAdminPanel()">
     <a href="mailto:info@grouphub.io" title="Support">
       <i class="fa fa-question-circle"></i>
       <span class="caption">Get Help</span>

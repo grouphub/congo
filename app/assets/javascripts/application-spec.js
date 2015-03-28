@@ -54,8 +54,6 @@
 //= require controllers/admin-benefit-plans-index-controller
 //= require controllers/admin-benefit-plans-new-controller
 //= require controllers/admin-benefit-plans-show-controller
-//= require controllers/admin-groups-index-controller
-//= require controllers/admin-users-index-controller
 //= require controllers/admin-invitations-index-controller
 //= require controllers/admin-features-index-controller
 //= require controllers/applications-index-controller
