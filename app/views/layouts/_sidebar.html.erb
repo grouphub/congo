@@ -149,13 +149,6 @@
     </a>
   </li>
 
-  <li class="sidebar-item" ng-if="isGroupAdmin()">
-    <a ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/benefit_plans" title="Benefit Plans">
-      <i class="fa fa-heart"></i>
-      <span class="caption">Benefit Plans</span>
-    </a>
-  </li>
-
   <li class="sidebar-item" ng-if="currentRole() === 'broker' || currentRole() === 'group_admin' || currentRole() === 'customer'">
     <a ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/groups" title="Groups">
       <i class="fa fa-group"></i>

@@ -60,7 +60,6 @@
 //= require controllers/applications-index-controller
 //= require controllers/applications-new-controller
 //= require controllers/applications-show-controller
-//= require controllers/benefit-plans-index-controller
 //= require controllers/benefit-plans-new-controller
 //= require controllers/benefit-plans-show-controller
 //= require controllers/carrier-accounts-index-controller
