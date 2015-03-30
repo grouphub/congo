@@ -24,13 +24,14 @@ class PaymentJob < ActiveJob::Base
       Rails.application.config.pokitdok.client_secret
 
     data = application.to_pokitdok
+    response = nil
 
     begin
       response = pokitdok.enrollment(data)
       meta = attempt['meta'] || {}
       activity_id = meta['activity_id']
 
-      application.update_attributes \
+      application.update_attributes! \
         submitted_by_id: submitted_by_id,
         submitted_on: DateTime.now,
         activity_id: activity_id
@@ -40,6 +41,15 @@ class PaymentJob < ActiveJob::Base
 
       application.update_attributes \
         errored_by_id: submitted_by_id
+    end
+
+    if application.application_status
+      application.application_status.update_attributes! \
+        payload: response.to_json
+    else
+      ApplicationStatus.create! \
+        application_id: application,
+        payload: response.to_json
     end
 
     redlock.unlock(lock)

@@ -199,7 +199,27 @@ class Api::Internal::ApplicationsController < ApplicationController
   end
 
   def callback
-    binding.remote_pry
+    account_slug = params[:account_slug]
+    application_id = params[:application_id].to_i
+
+    account = Account.where(slug: account_slug).first
+    application = Application.find(application_id)
+
+    unless application.account_id == account.id
+      error_response('Account does not contain this application.')
+      return
+    end
+
+    if application.application_status
+      application.application_status.update_attributes! \
+        payload: response.to_json
+    else
+      ApplicationStatus.create! \
+        application_id: application,
+        payload: response.to_json
+    end
+
+    render :nothing => true
   end
 
   # Render methods

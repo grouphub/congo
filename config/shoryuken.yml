@@ -20,5 +20,5 @@ concurrency: 25
 delay: 25
 
 queues:
-  - [default, 1]
+  - [<%= ENV['AWS_SQS_QUEUE_NAME'] || 'default' %>, 1]
 

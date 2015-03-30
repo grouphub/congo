@@ -7,6 +7,9 @@ class Application < ActiveRecord::Base
 
   before_save :populate_reference_number
 
+  # Has one for now...
+  has_one :application_status
+
   def populate_reference_number
     self.reference_number ||= ThirtySix.generate
   end
