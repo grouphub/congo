@@ -63,14 +63,23 @@ Deployment
 3. Merge your code into master.
 4. `eb congo`
 
+Setting up Servers
+------------------
+
+### Front-ends
+
+Front ends are auto-scaled by Elastic Beanstalk and should not need to be
+provisioned manually. I will put more documentation here eventually.
+
 ### Workers
 
 Setup an EC2 instance using the control panel or the CLI tool.
 
-Make sure you can shell into the server.
-`ssh -i ~/.ssh/grouphub-congo ec2-user@ec2-52-1-31-195.compute-1.amazonaws.com`
+Make sure you can shell into the server. For example:
 
-Prepare the server.
+    ssh -i ~/.ssh/grouphub-congo ec2-user@ec2-52-1-31-195.compute-1.amazonaws.com
+
+Prepare the server. Make sure you're ssh'ed in, and run:
 
     sudo su
     yum install --assumeyes \
@@ -88,3 +97,38 @@ Prepare the server.
     mv ~/bin ~/bin.old
     gem install bundler
     rbenv rehash
+
+Test that everything is correct:
+
+    which ruby # ~/.rbenv/shims/ruby
+    which bundle # ~/.rbenv/shims/bundle
+    bundle -v # Bundler version 1.9.1
+
+Set the environment variables. Make sure you're ssh'ed in, fill in the following
+lines with your variables, then run:
+
+    echo 'export AWS_SECRET_KEY="..."'
+    echo 'export AWS_ACCESS_KEY_ID="..."'
+    echo 'export AWS_REGION="..."'
+    echo 'export RDS_HOSTNAME="..."'
+    echo 'export RDS_PORT="..."'
+    echo 'export RDS_DB_NAME="..."'
+    echo 'export RDS_USERNAME="..."'
+    echo 'export RDS_PASSWORD="..."'
+    echo 'export RACK_ENV="production"'
+
+Test that everything is correct:
+
+    ruby -e "puts ENV.inspect"
+
+In the Congo project on your local machine, edit "config/workers.rb" so that the
+"boxes" list also contains your new server's info.
+
+Then try deploying:
+
+    bundle exec rake workers:deploy_one[...] # Replace the ellipsis with your worker name
+
+To deploy all:
+
+    bundle exec rake workers:deploy
+
