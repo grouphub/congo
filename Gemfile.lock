@@ -114,6 +114,7 @@ GEM
     aws-sdk-resources (2.0.21.pre)
       aws-sdk-core (= 2.0.21)
     bcrypt (3.1.10)
+    blockenspiel (0.4.5)
     builder (3.2.2)
     capybara (2.4.4)
       mime-types (>= 1.16)
@@ -167,6 +168,7 @@ GEM
       em-websocket (~> 0.5)
       guard (~> 2.8)
       multi_json (~> 1.8)
+    hashie (3.4.0)
     hike (1.2.3)
     hitimes (1.2.2)
     http_parser.rb (0.6.0)
@@ -204,6 +206,14 @@ GEM
     multi_xml (0.5.5)
     multipart-post (2.0.0)
     nenv (0.2.0)
+    net-scp (1.2.1)
+      net-ssh (>= 2.6.5)
+    net-ssh (2.9.2)
+    net-ssh-simple (1.6.8)
+      blockenspiel (= 0.4.5)
+      hashie (= 3.4.0)
+      net-scp (= 1.2.1)
+      net-ssh (= 2.9.2)
     netrc (0.10.3)
     newrelic_rpm (3.11.1.284)
     ng-rails-csrf (0.1.0)
@@ -285,6 +295,7 @@ GEM
       rspec-mocks (~> 3.2.0)
       rspec-support (~> 3.2.0)
     rspec-support (3.2.2)
+    ruby-progressbar (1.7.1)
     rubyzip (1.1.7)
     sass (3.4.13)
     sdoc (0.4.1)
@@ -345,6 +356,7 @@ DEPENDENCIES
   jquery-rails
   kramdown
   letter_opener
+  net-ssh-simple
   newrelic_rpm
   ng-rails-csrf
   pg
@@ -362,6 +374,7 @@ DEPENDENCIES
   rails_12factor
   redlock
   rspec-rails
+  ruby-progressbar
   sass-rails!
   sdoc (~> 0.4.0)
   selenium-webdriver

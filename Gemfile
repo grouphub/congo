@@ -52,6 +52,10 @@ gem 'fakes3'
 # For rich text in groups and benefit plans
 gem 'kramdown'
 
+# For worker deployment
+gem 'net-ssh-simple'
+gem 'ruby-progressbar'
+
 group :doc do
   gem 'sdoc', '~> 0.4.0'
 end

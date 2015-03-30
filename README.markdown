@@ -63,3 +63,28 @@ Deployment
 3. Merge your code into master.
 4. `eb congo`
 
+### Workers
+
+Setup an EC2 instance using the control panel or the CLI tool.
+
+Make sure you can shell into the server.
+`ssh -i ~/.ssh/grouphub-congo ec2-user@ec2-52-1-31-195.compute-1.amazonaws.com`
+
+Prepare the server.
+
+    sudo su
+    yum install --assumeyes \
+      gcc-c++ patch readline readline-devel zlib zlib-devel \
+      libyaml-devel libffi-devel openssl-devel make \
+      bzip2 autoconf automake libtool bison iconv-devel \
+      git postgresql-libs postgresql-devel
+    exit
+    git clone https://github.com/sstephenson/rbenv.git ~/.rbenv
+    echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
+    echo 'eval "$(rbenv init -)"' >> ~/.bashrc
+    git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
+    rbenv install 2.2.0
+    rbenv global 2.2.0
+    mv ~/bin ~/bin.old
+    gem install bundler
+    rbenv rehash
