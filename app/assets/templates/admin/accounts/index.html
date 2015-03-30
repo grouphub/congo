@@ -4,23 +4,55 @@
   <table class="accounts table">
     <thead>
       <tr>
-        <th>Name</th>
-        <th>Brokers</th>
+        <th>Account</th>
+        <th>Users and Groups</th>
       </tr>
     </thead>
 
     <tbody>
       <tr ng-repeat="account in accounts">
         <td>
-          <a ng-href="">{{account.name}}</a>
+          <a href="">{{account.name}}</a>
         </td>
 
         <td>
-          <ul class="list-unstyled">
-            <li ng-repeat="broker in account.brokers">
-              <a ng-href="mailto:{{broker.email}}">{{broker.full_name}}</a>
-            </li>
-          </ul>
+          <table class="table users">
+            <thead>
+              <tr>
+                <th>Users</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr ng-repeat="role in account.roles">
+                <td>
+                  {{role.user.full_name}}
+                  <span class="label label-default role">{{role.english_name}}</span>
+                </td>
+
+                <td>
+                  <a class="btn btn-danger btn-xs" href="" ng-click="crystalBall(role.user)">Crystal Ball</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <table class="table groups" ng-if="account.groups.length > 0">
+            <thead>
+              <tr>
+                <th>Groups</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr ng-repeat="group in account.groups">
+                <td>
+                  <a href="">{{group.name}}</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </td>
       </tr>
     </tbody>

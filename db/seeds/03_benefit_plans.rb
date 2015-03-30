@@ -11,7 +11,13 @@ carrier = Carrier.create! \
     service_types: ['health_benefit_plan_coverage'],
     tax_id: '234',
     first_name: 'Billy',
-    last_name: 'Blueshield'
+    last_name: 'Blueshield',
+    address_1: '123 Somewhere Lane',
+    address_2: 'Apt. 123',
+    city: 'Somewhereville',
+    state: 'CA',
+    zip: '94444',
+    phone: '444-444-4444'
   }
 
 carrier_account = CarrierAccount.create! \
@@ -35,7 +41,11 @@ BenefitPlan.create! \
   properties: {
     name: 'Admin Health Insurance PPO',
     description_html: "<h1>Admin Health Insurance PPO</h1>\n<p>An example plan.</p>",
-    description_markdown: "# Admin Health Insurance PPO\n\nAn example plan."
+    description_markdown: "# Admin Health Insurance PPO\n\nAn example plan.",
+    plan_type: 'foo',
+    exchange_plan: 'bar',
+    small_group: 'baz',
+    group_id: '234'
   }
 
 # Broker-created carrier account and benefit plan
@@ -49,7 +59,13 @@ carrier = Carrier.create! \
     service_types: ['health_benefit_plan_coverage'],
     tax_id: '123',
     first_name: 'Brad',
-    last_name: 'Bluecross'
+    last_name: 'Bluecross',
+    address_1: '123 Somewhere Lane',
+    address_2: 'Apt. 123',
+    city: 'Somewhereville',
+    state: 'CA',
+    zip: '94444',
+    phone: '444-444-4444'
   }
 
 carrier_account = CarrierAccount.create! \
@@ -75,6 +91,10 @@ BenefitPlan.create! \
   properties: {
     name: 'Best Health Insurance PPO',
     description_html: "<h1>Best Health Insurance PPO</h1>\n<p>An example plan.</p>",
-    description_markdown: "# Best Health Insurance PPO\n\nAn example plan."
+    description_markdown: "# Best Health Insurance PPO\n\nAn example plan.",
+    plan_type: 'foo',
+    exchange_plan: 'bar',
+    small_group: 'baz',
+    group_id: '235'
   }
 

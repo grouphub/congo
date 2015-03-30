@@ -1,0 +1,75 @@
+{
+  "action": "Change",
+  "payer": {
+    "tax_id": "234"
+  },
+  "purpose": "Original",
+  "reference_number": "4aueb8vr2z5es3gpu78alq3yt",
+  "trading_partner_id": "MOCKPAYER",
+  "sponsor": {
+  },
+  "tax_id": "345",
+  "name": [
+    "My Group",
+    "345"
+  ],
+  "subscriber": {
+    "first_name": "Candice",
+    "middle_name": "C.",
+    "last_name": "Customer",
+    "gender": "Female",
+    "ssn": "444-44-4444",
+    "birth_date": "04-04-1984",
+    "group_or_policy_number": "234",
+    "relationship": "Self",
+    "employment_status": "Full-time",
+    "substance_abuse": true,
+    "tobacco_use": true,
+    "handicapped": true,
+    "address": {
+      "city": "Cambridge",
+      "county": "Contra Costa",
+      "line": "444 Carrie Ct.",
+      "line2": "44",
+      "postal_code": "44444",
+      "state": "CA"
+    },
+    "contacts": [
+      {
+        "primary_communication_number": "(444) 444-4444",
+        "primary_communication_type": "Home Phone Number",
+        "communication_number2": "(444) 444-5555",
+        "communication_type2": "Work Phone Number"
+      }
+    ],
+    "benefits": [
+      {
+        "begin_date": "2014-01-01",
+        "benefit_type": "Health",
+        "coverage_level": "Employee Only",
+        "late_enrollment": false,
+        "maintenance_type": "Addition"
+      }
+    ]
+  },
+  "dependents": [
+    {
+      "address": {
+        "city": "Cambridge",
+        "county": "Contra Costa",
+        "line": "444 Carrie Ct.",
+        "line2": "44",
+        "postal_code": "44444",
+        "state": "CA"
+      },
+      "first_name": "Corwin",
+      "middle_name": "C.",
+      "last_name": "Customer",
+      "gender": "Male",
+      "ssn": "444-44-4445",
+      "birth_date": "04-04-2004",
+      "relationship": "Child"
+    }
+  ]
+}
+

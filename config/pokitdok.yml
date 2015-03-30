@@ -1,12 +1,15 @@
 development:
   client_id: 'RKH2S5iecrOcrGroqrx9'
   client_secret: '1eEx7fl95Deqz0Y9w3StPfMT8oXoRS8XR4oU2xLH'
+  callback_host: <%= "https://#{ENV['USER']}-grouphub.ngrok.com" %>
 
 test:
   client_id: 'RKH2S5iecrOcrGroqrx9'
   client_secret: '1eEx7fl95Deqz0Y9w3StPfMT8oXoRS8XR4oU2xLH'
+  callback_host: 'http://test.host'
 
 production:
-  client_id: 'ZzzUk4r9DMbV0F9xfuxG'
-  client_secret: 'A1IsnMpkaQrqdSR9DTVOMQwCTswUMUOhaO69yLsP'
+  client_id: <%= ENV['POKITDOK_CLIENT_ID'] %>
+  client_secret: <%= ENV['POKITDOK_CLIENT_SECRET'] %>
+  callback_host: <%= ENV['POKITDOK_CALLBACK_HOST'] %>
 

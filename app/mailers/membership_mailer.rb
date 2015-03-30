@@ -1,7 +1,8 @@
 class MembershipMailer < ActionMailer::Base
   default from: 'info@grouphub.io'
 
-  def confirmation_email(membership, request)
+  def confirmation_email(membership_id, protocol, host)
+    membership = Membership.find(membership_id)
     email = membership.email
     email_token = membership.email_token
     group_name = membership.group.name
@@ -10,7 +11,7 @@ class MembershipMailer < ActionMailer::Base
     @group = membership.group.name
     @group_domain = 'broker'
     @group_admin = 'GroupHub Admin'
-    @url = "#{request.protocol}#{request.host_with_port}/users/new_customer?email_token=#{email_token}"
+    @url = "#{protocol}#{host}/users/new_customer?email_token=#{email_token}"
 
     # TODO: Add account name
     # TODO: Finish laying out email

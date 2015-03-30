@@ -94,6 +94,7 @@
     </a>
   </li>
 
+  <!-- Admin Carriers -->
   <li class="sidebar-item" ng-if="inAdminPanel()">
     <a ng-href="/admin/carriers" title="Carriers">
       <i class="fa fa-institution"></i>
@@ -101,6 +102,7 @@
     </a>
   </li>
 
+  <!-- Admin Carrier Accounts -->
   <li class="sidebar-item" ng-if="inAdminPanel()">
     <a ng-href="/admin/carrier_accounts" title="Carrier Accounts">
       <i class="fa fa-institution"></i>
@@ -108,13 +110,15 @@
     </a>
   </li>
 
+  <!-- Admin Accounts -->
   <li class="sidebar-item" ng-if="inAdminPanel()">
-    <a ng-href="/admin/benefit_plans" title="Benefit Plans">
-      <i class="fa fa-heart"></i>
-      <span class="caption">Benefit Plans</span>
+    <a ng-href="/admin/accounts" title="Accounts">
+      <i class="fa fa-cubes"></i>
+      <span class="caption">Accounts, Users, &amp; Groups</span>
     </a>
   </li>
 
+  <!-- Admin Invitations -->
   <li class="sidebar-item" ng-if="inAdminPanel()">
     <a ng-href="/admin/invitations" title="Invitations">
       <i class="fa fa-gift"></i>
@@ -122,17 +126,18 @@
     </a>
   </li>
 
+  <!-- Admin Features -->
+  <li class="sidebar-item" ng-if="inAdminPanel()">
+    <a ng-href="/admin/features" title="Features">
+      <i class="fa fa-trophy"></i>
+      <span class="caption">Features</span>
+    </a>
+  </li>
+
   <li class="sidebar-item" ng-if="currentRole() === 'broker'">
     <a ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/carrier_accounts" title="Carrier Accounts">
       <i class="fa fa-institution"></i>
       <span class="caption">Carrier Accounts</span>
-    </a>
-  </li>
-
-  <li class="sidebar-item" ng-if="isGroupAdmin()">
-    <a ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/benefit_plans" title="Benefit Plans">
-      <i class="fa fa-heart"></i>
-      <span class="caption">Benefit Plans</span>
     </a>
   </li>
 
@@ -150,7 +155,7 @@
     </a>
   </li>
 
-  <li class="sidebar-item" ng-if="currentRole() === 'broker'">
+  <li class="sidebar-item" ng-if="currentRole() === 'broker' && featureEnabled('api_tokens')">
     <a ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/tokens" title="API Tokens">
       <i class="fa fa-ticket"></i>
       <span class="caption">API Tokens</span>
@@ -161,38 +166,6 @@
     <a href="#" data-toggle="modal" data-target="#eligibility-modal" title="Check Eligibility">
       <i class="fa fa-question"></i>
       <span class="caption">Check Eligibility</span>
-    </a>
-  </li>
-
-  <!-- Admin Accounts -->
-  <li class="sidebar-item" ng-if="inAdminPanel()">
-    <a ng-href="/admin/accounts" title="Accounts">
-      <i class="fa fa-cubes"></i>
-      <span class="caption">All Accounts</span>
-    </a>
-  </li>
-
-  <!-- Admin All Groups -->
-  <li class="sidebar-item" ng-if="inAdminPanel()">
-    <a ng-href="/admin/groups" title="Groups">
-      <i class="fa fa-group"></i>
-      <span class="caption">All Groups</span>
-    </a>
-  </li>
-
-  <!-- Admin All Users -->
-  <li class="sidebar-item" ng-if="inAdminPanel()">
-    <a ng-href="/admin/users" title="Users">
-      <i class="fa fa-group"></i>
-      <span class="caption">All Users</span>
-    </a>
-  </li>
-
-  <!-- Admin Features -->
-  <li class="sidebar-item" ng-if="inAdminPanel()">
-    <a ng-href="/admin/features" title="Features">
-      <i class="fa fa-trophy"></i>
-      <span class="caption">Features</span>
     </a>
   </li>
 
@@ -218,7 +191,8 @@
     </a>
   </li>
 
-  <li class="sidebar-item">
+  <!-- Show Support Link for everyone except admins -->
+  <li class="sidebar-item" ng-if="!inAdminPanel()">
     <a href="mailto:info@grouphub.io" title="Support">
       <i class="fa fa-question-circle"></i>
       <span class="caption">Get Help</span>

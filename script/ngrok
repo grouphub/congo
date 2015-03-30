@@ -1,0 +1,14 @@
+#!/bin/bash
+
+if [ ! -x "$(command -v ngrok)" ]; then
+  echo 'Please install ngrok before continuing.'
+  exit 1
+fi
+
+if [[ ! -n $(grep 'auth_token: ' ~/.ngrok) ]]; then
+  echo 'Please run ngrok once with the --authToken argument to populate its auth token.'
+  exit 1
+fi
+
+ngrok --subdomain=$(whoami)-grouphub 5000
+

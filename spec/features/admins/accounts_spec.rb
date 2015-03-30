@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe 'As an admin', js: true do
 
-  describe 'All Accounts' do
+  describe 'Account, Users, & Groups' do
 
     it 'allows them to view all accounts'
 

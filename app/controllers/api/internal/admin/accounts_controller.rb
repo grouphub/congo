@@ -4,15 +4,22 @@ class Api::Internal::Admin::AccountsController < ApplicationController
   before_filter :ensure_admin!, except: :index
 
   def index
+    accounts = Account.all.includes({ roles: :user }, :groups)
+
     respond_to do |format|
       format.json {
         render json: {
-          accounts: Account.all.includes(:roles).map { |account|
+          accounts: accounts.map { |account|
             account.as_json.merge({
-              brokers: account.roles.includes(:user).where(name: 'broker').map { |role|
-                role.user.as_json.merge({
-                  full_name: role.user.full_name,
-                  role: role
+              'groups' => account.groups,
+              'roles' => account.roles.map { |role|
+                role.as_json.merge({
+                  'user' => role.user.as_json
+                    .except(:encrypted_password)
+                    .merge({
+                      'is_admin' => role.user.admin?,
+                      'full_name' => role.user.full_name
+                    })
                 })
               }
             })

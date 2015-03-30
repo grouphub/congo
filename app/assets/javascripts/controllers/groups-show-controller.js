@@ -24,7 +24,6 @@ congoApp.controller('GroupsShowController', [
     });
 
     $scope.currentTab = function () {
-      console.log($cookieStore.get('groups-show-tab') || 'basics');
       return $cookieStore.get('groups-show-tab') || 'basics';
     };
 

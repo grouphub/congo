@@ -157,10 +157,6 @@ congoApp.config([
         templateUrl: congo.assets['carrier_accounts/show.html'],
         controller: 'CarrierAccountsShowController'
       })
-      .when('/accounts/:slug/:role/benefit_plans', {
-        templateUrl: congo.assets['benefit_plans/index.html'],
-        controller: 'BenefitPlansIndexController'
-      })
       .when('/accounts/:slug/:role/benefit_plans/new', {
         templateUrl: congo.assets['benefit_plans/new.html'],
         controller: 'BenefitPlansNewController'

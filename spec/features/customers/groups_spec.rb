@@ -111,63 +111,8 @@ describe 'As a customer', js: true do
         choose 'Yes'
         fill_in 'If Yes, Most Recent Insurance Carrier', with: 'Anthem Blue Cross'
         fill_in 'Dates of Coverage', with: '04/2014-08/2014'
+        select 'Child', from: 'dependent_1_relationship'
       end
-
-      # scroll_to_element_in('h3:contains("Parent or Legal Guardian")', 'main')
-      # within '[name="parentOrGuardian"]' do
-      #   expect(page).to have_content('Parent or Legal Guardian')
-
-      #   choose 'Yes'
-
-      #   fill_in 'First Name', with: 'Cal'
-      #   fill_in 'Middle Name', with: 'C.'
-      #   fill_in 'Last Name', with: 'Customer'
-      #   choose 'Male'
-      #   fill_in 'Medical Record # (If Any)', with: '4444444'
-      #   fill_in 'Social Security Number', with: '444-44-4443'
-      #   fill_in 'Date of Birth (mm/dd/yyyy)', with: '04/04/1982'
-      #   choose 'Spouse'
-      #   fill_in 'Preferred Language Spoken (If Not English)', with: 'Spanish'
-      #   fill_in 'Preferred Language Read (If Not English)', with: 'Spanish'
-
-      #   within '.same-address' do
-      #     choose 'No'
-      #   end
-
-      #   scroll_by 500, 'main'
-
-      #   fill_in 'Street Address', with: '444 Carrie Ct.'
-      #   fill_in 'Apt. #', with: '44'
-      #   fill_in 'City', with: 'Cambridge'
-      #   fill_in 'State', with: 'CA'
-      #   fill_in 'ZIP', with: '44444'
-      #   fill_in 'County', with: 'Contra Costa'
-      #   fill_in 'Phone', with: '(444) 444-4444'
-      #   fill_in 'Other Phone', with: '(444) 444-5555'
-      # end
-
-      # scroll_to_element_in('h3:contains("You Can Choose an Authorized Representative")', 'main')
-      # within '[name="authorizedRepresentative"]' do
-      #   expect(page).to have_content('You Can Choose an Authorized Representative')
-
-      #   choose 'Yes'
-
-      #   fill_in 'First Name', with: 'Cal'
-      #   fill_in 'Middle Name', with: 'C.'
-      #   fill_in 'Last Name', with: 'Customer'
-      #   fill_in 'Street Address', with: '444 Carrie Ct.'
-      #   fill_in 'Apt. #', with: '44'
-      #   fill_in 'City', with: 'Cambridge'
-      #   fill_in 'State', with: 'CA'
-
-      #   scroll_by 500, 'main'
-
-      #   fill_in 'ZIP', with: '44444'
-      #   fill_in 'Phone', with: '(444) 444-4444'
-
-      #   fill_in 'Primary Applicant, Parent, or Legal Guardian for Applicants Under Age 18', with: 'Cal C. Customer'
-      #   fill_in 'Date (mm/dd/yyyy)', with: '03/10/2015'
-      # end
 
       all('input[type=submit]').first.click
 

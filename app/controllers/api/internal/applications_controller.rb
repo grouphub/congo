@@ -1,8 +1,8 @@
 class Api::Internal::ApplicationsController < ApplicationController
   protect_from_forgery
 
-  before_filter :ensure_user!
-  before_filter :ensure_account!
+  before_filter :ensure_user!, except: :callback
+  before_filter :ensure_account!, except: :callback
 
   def index
     applications = Membership
@@ -196,6 +196,30 @@ class Api::Internal::ApplicationsController < ApplicationController
         }
       }
     end
+  end
+
+  def callback
+    account_slug = params[:account_slug]
+    application_id = params[:application_id].to_i
+
+    account = Account.where(slug: account_slug).first
+    application = Application.find(application_id)
+
+    unless application.account_id == account.id
+      error_response('Account does not contain this application.')
+      return
+    end
+
+    if application.application_status
+      application.application_status.update_attributes! \
+        payload: response.to_json
+    else
+      ApplicationStatus.create! \
+        application_id: application,
+        payload: response.to_json
+    end
+
+    render :nothing => true
   end
 
   # Render methods
