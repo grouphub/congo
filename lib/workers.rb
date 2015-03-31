@@ -2,9 +2,9 @@
 class Workers
   attr_reader :config, :timestamp
 
-  def initialize
+  def initialize(timestamp = nil)
     @config = eval(File.read("#{Rails.root}/config/workers.rb"))
-    @timestamp = Time.now.to_i
+    @timestamp = timestamp || Time.now.to_i
   end
 
   def with_zip!(&block)

@@ -1,4 +1,27 @@
 namespace :workers do
+  stop_worker = lambda { |worker|
+    puts %[Stopping the existing worker...]
+    worker.ssh! %[
+      cd #{worker.to_directory} &&
+        [ -a #{worker.pid_file} ] &&
+        [ $(cat #{worker.pid_file}) -gt 0 ] &&
+        cat #{worker.pid_file} &&
+        #{worker.ruby_env} &&
+        #{worker.kill_command} &&
+        rm #{worker.pid_file}
+    ]
+  }
+
+  start_worker = lambda { |worker|
+    puts %[Starting the new existing worker...]
+    worker.ssh! %[
+      cd #{worker.to_directory} &&
+        #{worker.ruby_env} &&
+        touch #{worker.pid_file}
+        #{worker.run_command}
+    ]
+  }
+
   default_deploy = lambda { |worker, zip_path|
     puts %[Deploying to "#{worker.name} at "#{worker.ssh_host}"...]
 
@@ -22,24 +45,8 @@ namespace :workers do
         bundle
     ]
 
-    puts %[Killing the existing worker...]
-    worker.ssh! %[
-      cd #{worker.to_directory} &&
-        [ -a #{worker.pid_file} ] &&
-        [ $(cat #{worker.pid_file}) -gt 0 ] &&
-        cat #{worker.pid_file} &&
-        #{worker.ruby_env} &&
-        #{worker.kill_command} &&
-        rm #{worker.pid_file}
-    ]
-
-    puts %[Starting the new existing worker...]
-    worker.ssh! %[
-      cd #{worker.to_directory} &&
-        #{worker.ruby_env} &&
-        touch #{worker.pid_file}
-        #{worker.run_command}
-    ]
+    stop_worker.call(worker)
+    start_worker.call(worker)
 
     puts %[Removing the current "current" symlink and link it to the new project...]
     worker.ssh! %[
@@ -87,10 +94,53 @@ namespace :workers do
     end
   end
 
-  task :log => :environment do |t, args|
+  run_on_box_or_boxes = lambda { |callback|
+    name = ENV['WORKER_NAME']
+    workers = Workers.new('current')
+
+    if name
+      puts %[Preparing to run task on box named "#{name}"...]
+
+      Net::SSH::Simple.sync do |s|
+        ec2_config = workers.boxes.find { |ec2_config|
+          ec2_config[:name] == name
+        }
+
+        raise %[Could not find box with name "#{name}"] unless ec2_config
+
+        worker = Workers::Worker.new(workers, ec2_config, s)
+        callback.call(worker)
+      end
+    else
+      puts %[Preparing to run task on all boxes...]
+
+      workers.boxes.each do |ec2_config|
+        Net::SSH::Simple.sync do |s|
+          worker = Workers::Worker.new(workers, ec2_config, s)
+          callback.call(worker)
+        end
+      end
+    end
+  }
+
+  task :stop => :environment do
+    run_on_box_or_boxes.call(lambda { |worker|
+      stop_worker.call(worker)
+    })
+  end
+
+  task :restart => [:stop] do
+    run_on_box_or_boxes.call(lambda { |worker|
+      stop_worker.call(worker)
+    })
+  end
+
+  task :start => [:restart]
+
+  task :log => :environment do
     name = ENV['WORKER_NAME']
 
-    raise %[WORKER_NAME environment variable must be set.]
+    raise %[WORKER_NAME environment variable must be set.] unless name
 
     workers = Workers.new
 
