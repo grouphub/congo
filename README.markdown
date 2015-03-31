@@ -73,7 +73,8 @@ provisioned manually. I will put more documentation here eventually.
 
 ### Workers
 
-Setup an EC2 instance using the control panel or the CLI tool.
+Setup an EC2 instance using the control panel or the CLI tool. Use an "Amazon
+Linux" 64-bit AMI.
 
 Make sure you can shell into the server. For example:
 
@@ -92,6 +93,7 @@ Prepare the server. Make sure you're ssh'ed in, and run:
     echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
     echo 'eval "$(rbenv init -)"' >> ~/.bashrc
     git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
+    source ~/.bashrc
     rbenv install 2.2.0
     rbenv global 2.2.0
     mv ~/bin ~/bin.old
@@ -107,18 +109,25 @@ Test that everything is correct:
 Set the environment variables. Make sure you're ssh'ed in, fill in the following
 lines with your variables, then run:
 
-    echo 'export AWS_SECRET_KEY="..."'
-    echo 'export AWS_ACCESS_KEY_ID="..."'
-    echo 'export AWS_REGION="..."'
-    echo 'export RDS_HOSTNAME="..."'
-    echo 'export RDS_PORT="..."'
-    echo 'export RDS_DB_NAME="..."'
-    echo 'export RDS_USERNAME="..."'
-    echo 'export RDS_PASSWORD="..."'
-    echo 'export RACK_ENV="production"'
+    echo '' >> ~/.bashrc
+    echo '# Environment variables' >> ~/.bashrc
+    echo 'export SECRET_TOKEN="..."' >> ~/.bashrc
+    echo 'export SECRET_KEY_BASE="..."' >> ~/.bashrc
+    echo 'export AWS_ACCESS_KEY_ID="..."' >> ~/.bashrc
+    echo 'export AWS_SECRET_ACCESS_KEY="..."' >> ~/.bashrc
+    echo 'export AWS_ACCESS_KEY=$AWS_ACCESS_KEY_ID' >> ~/.bashrc
+    echo 'export AWS_SECRET_KEY=$AWS_SECRET_ACCESS_KEY' >> ~/.bashrc
+    echo 'export AWS_REGION="..."' >> ~/.bashrc
+    echo 'export RDS_HOSTNAME="..."' >> ~/.bashrc
+    echo 'export RDS_PORT="..."' >> ~/.bashrc
+    echo 'export RDS_DB_NAME="..."' >> ~/.bashrc
+    echo 'export RDS_USERNAME="..."' >> ~/.bashrc
+    echo 'export RDS_PASSWORD="..."' >> ~/.bashrc
+    echo 'export RACK_ENV="production"' >> ~/.bashrc
 
 Test that everything is correct:
 
+    cat ~/.bashrc
     ruby -e "puts ENV.inspect"
 
 In the Congo project on your local machine, edit "config/workers.rb" so that the

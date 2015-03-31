@@ -25,7 +25,6 @@ gem 'puma'
 
 # For background worker processes.
 gem 'redlock'
-gem 'daemons'
 
 # For the payment system.
 gem 'stripe'
@@ -55,6 +54,7 @@ gem 'kramdown'
 # For worker deployment
 gem 'net-ssh-simple'
 gem 'ruby-progressbar'
+gem 'unindent'
 
 group :doc do
   gem 'sdoc', '~> 0.4.0'
@@ -73,9 +73,6 @@ group :development do
   # For front-end live reloading.
   gem 'guard-livereload', group: :development
   gem 'rack-livereload', group: :development
-
-  # Only need clock in development.
-  gem 'clockwork'
 
   # For model diagrams.
   gem 'railroady'
