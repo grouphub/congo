@@ -123,7 +123,7 @@ To SSH into a front-end box:
     tail -n 50 -f log/production.log
 
     # To sweep the database, first log into the AWS console, reboot RDS, then
-    script/sweep_database
+    script/bootstrap
 
 ### Workers
 

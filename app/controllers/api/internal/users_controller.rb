@@ -122,12 +122,14 @@ class Api::Internal::UsersController < ApplicationController
   end
 
   def update_account
-    user = User.where(id: params[:id]).first
+    user = User.where(id: params[:user_id]).first
     account_properties = params[:account_properties] || {}
     account_name = account_properties['name']
     account_tagline = account_properties['tagline']
     account = nil
     plan_name = params[:plan_name]
+
+    binding.remote_pry
 
     # Bail if the plan name is not correct
     if plan_name && !Account::PLAN_NAMES.include?(plan_name)

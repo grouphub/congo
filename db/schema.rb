@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150316023510) do
+ActiveRecord::Schema.define(version: 20150328223705) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,13 @@ ActiveRecord::Schema.define(version: 20150316023510) do
     t.string   "cvc"
     t.datetime "billing_start"
     t.integer  "billing_day"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "application_statuses", force: :cascade do |t|
+    t.integer  "application_id"
+    t.text     "payload"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
