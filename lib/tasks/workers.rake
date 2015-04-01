@@ -99,8 +99,6 @@ namespace :workers do
     workers = Workers.new('current')
 
     if name
-      puts %[Preparing to run task on box named "#{name}"...]
-
       Net::SSH::Simple.sync do |s|
         ec2_config = workers.boxes.find { |ec2_config|
           ec2_config[:name] == name
@@ -109,6 +107,7 @@ namespace :workers do
         raise %[Could not find box with name "#{name}"] unless ec2_config
 
         worker = Workers::Worker.new(workers, ec2_config, s)
+        puts %[Preparing to run task on box named "#{name}" at "#{worker.ssh_host}"...]
         callback.call(worker)
       end
     else
@@ -117,6 +116,7 @@ namespace :workers do
       workers.boxes.each do |ec2_config|
         Net::SSH::Simple.sync do |s|
           worker = Workers::Worker.new(workers, ec2_config, s)
+          puts %[Preparing to run task on box named "#{name}" at "#{worker.ssh_host}"...]
           callback.call(worker)
         end
       end
@@ -129,35 +129,12 @@ namespace :workers do
     })
   end
 
-  task :restart => [:stop] do
+  task :start => [:stop] do
     run_on_box_or_boxes.call(lambda { |worker|
-      stop_worker.call(worker)
+      start_worker.call(worker)
     })
   end
 
-  task :start => [:restart]
-
-  task :log => :environment do
-    name = ENV['WORKER_NAME']
-
-    raise %[WORKER_NAME environment variable must be set.] unless name
-
-    workers = Workers.new
-
-    Net::SSH::Simple.sync do |s|
-      ec2_config = workers.boxes.find { |ec2_config|
-        ec2_config[:name] == name
-      }
-
-      raise %[Could not find box with name "#{name}"] unless ec2_config
-
-      worker = Workers::Worker.new(workers, ec2_config, s)
-
-      puts %[Tailng log for "#{name}"...]
-      worker.ssh! %[
-        tail -f #{worker.deploy_directory}/current/#{worker.log_file}
-      ]
-    end
-  end
+  task :restart => [:start]
 end
 

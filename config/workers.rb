@@ -18,6 +18,7 @@
       run_command: 'bundle exec shoryuken ' +
         '--pidfile=tmp/pids/shoryuken.pid ' +
         '--logfile=log/shoryuken.log ' +
+        '--config=config/shoryuken.yml ' +
         '--rails ' +
         '--daemon'
     },
