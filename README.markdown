@@ -191,7 +191,6 @@ lines with your variables, then run:
 
 Make sure you have SQS, Postgres on RDS, and Redis on Elasticache setup and
 permissioned properly.
->>>>>>> master
 
 Test that everything is correct:
 
