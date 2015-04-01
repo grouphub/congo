@@ -122,7 +122,7 @@ class Api::Internal::UsersController < ApplicationController
   end
 
   def update_account
-    user = User.where(id: id).first
+    user = User.where(id: params[:id]).first
     account_properties = params[:account_properties] || {}
     account_name = account_properties['name']
     account_tagline = account_properties['tagline']
