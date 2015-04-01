@@ -61,6 +61,36 @@ namespace :workers do
     ]
   }
 
+  run_on_box_or_boxes = lambda { |callback|
+    name = ENV['WORKER_NAME']
+    workers = Workers.new('current')
+
+    if name
+      Net::SSH::Simple.sync do |s|
+        ec2_config = workers.boxes.find { |ec2_config|
+          ec2_config[:name] == name
+        }
+
+        raise %[Could not find box with name "#{name}"] unless ec2_config
+
+        worker = Workers::Worker.new(workers, ec2_config, s)
+        puts %[Preparing to run task on box named "#{name}" at "#{worker.ssh_host}"...]
+        callback.call(worker)
+      end
+    else
+      puts %[Preparing to run task on all boxes...]
+
+      workers.boxes.each do |ec2_config|
+        Net::SSH::Simple.sync do |s|
+          worker = Workers::Worker.new(workers, ec2_config, s)
+          puts %[Preparing to run task on box named "#{name}" at "#{worker.ssh_host}"...]
+          callback.call(worker)
+        end
+      end
+    end
+  }
+
+  desc 'Deploy application to all boxes or a specific box'
   task :deploy => :environment do
     name = ENV['WORKER_NAME']
     workers = Workers.new
@@ -94,47 +124,26 @@ namespace :workers do
     end
   end
 
-  run_on_box_or_boxes = lambda { |callback|
-    name = ENV['WORKER_NAME']
-    workers = Workers.new('current')
-
-    if name
-      Net::SSH::Simple.sync do |s|
-        ec2_config = workers.boxes.find { |ec2_config|
-          ec2_config[:name] == name
-        }
-
-        raise %[Could not find box with name "#{name}"] unless ec2_config
-
-        worker = Workers::Worker.new(workers, ec2_config, s)
-        puts %[Preparing to run task on box named "#{name}" at "#{worker.ssh_host}"...]
-        callback.call(worker)
-      end
-    else
-      puts %[Preparing to run task on all boxes...]
-
-      workers.boxes.each do |ec2_config|
-        Net::SSH::Simple.sync do |s|
-          worker = Workers::Worker.new(workers, ec2_config, s)
-          puts %[Preparing to run task on box named "#{name}" at "#{worker.ssh_host}"...]
-          callback.call(worker)
-        end
-      end
-    end
-  }
-
+  desc 'Stop all workers or a specific worker'
   task :stop => :environment do
     run_on_box_or_boxes.call(lambda { |worker|
       stop_worker.call(worker)
     })
   end
 
+  desc 'Stop then start all workers or a specific worker'
   task :start => [:stop] do
     run_on_box_or_boxes.call(lambda { |worker|
       start_worker.call(worker)
     })
   end
 
+  desc 'Stop then start all workers or a specific worker'
   task :restart => [:start]
+
+  desc 'Get info about all worker boxes'
+  task :info => :environment do
+    pp Workers.new('current').config
+  end
 end
 
