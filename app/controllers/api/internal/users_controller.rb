@@ -129,8 +129,6 @@ class Api::Internal::UsersController < ApplicationController
     account = nil
     plan_name = params[:plan_name]
 
-    binding.remote_pry
-
     # Bail if the plan name is not correct
     if plan_name && !Account::PLAN_NAMES.include?(plan_name)
       error_response("#{plan_name} is not a valid plan type")
