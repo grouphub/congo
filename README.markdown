@@ -111,6 +111,7 @@ lines with your variables, then run:
 
     echo '' >> ~/.bashrc
     echo '# Environment variables' >> ~/.bashrc
+    echo 'export RACK_ENV="production"' >> ~/.bashrc
     echo 'export SECRET_TOKEN="..."' >> ~/.bashrc
     echo 'export SECRET_KEY_BASE="..."' >> ~/.bashrc
     echo 'export AWS_ACCESS_KEY_ID="..."' >> ~/.bashrc
@@ -123,7 +124,8 @@ lines with your variables, then run:
     echo 'export RDS_DB_NAME="..."' >> ~/.bashrc
     echo 'export RDS_USERNAME="..."' >> ~/.bashrc
     echo 'export RDS_PASSWORD="..."' >> ~/.bashrc
-    echo 'export RACK_ENV="production"' >> ~/.bashrc
+    echo 'export CONGO_ENROLLMENT_CLOCK_SECONDS=300' >> ~/.bashrc
+    echo 'export CONGO_PAYMENT_CLOCK_SECONDS=300' >> ~/.bashrc
 
 Test that everything is correct:
 

@@ -38,7 +38,7 @@
       pid_file: 'tmp/pids/clock.pid',
       log_file: 'log/clock.log',
       kill_command: 'kill -KILL $(cat tmp/pids/clock.pid)',
-      run_command: 'script/clock'
+      run_command: 'script/enrollment_clock; script/payment_clock'
     }
   ]
 }

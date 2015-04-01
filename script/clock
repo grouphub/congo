@@ -1,5 +1,9 @@
 #!/bin/sh
 
-nohup ruby lib/clock.rb --log-file=log/clock.log --frequency=60 >/dev/null 2>&1 &
-echo $! > tmp/pids/clock.pid
+nohup ruby lib/enrollment_clock.rb \
+  --log-file=log/enrollment_clock.log \
+  --frequency=$CONGO_ENROLLMENT_CLOCK_SECONDS \
+  >/dev/null 2>&1 &
+
+echo $! > tmp/pids/enrollment_clock.pid
 
