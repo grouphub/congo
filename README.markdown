@@ -104,6 +104,27 @@ To deploy to production:
 Front ends are auto-scaled by Elastic Beanstalk and should not need to be
 provisioned manually. I will put more documentation here eventually.
 
+To SSH into a front-end box:
+
+    # On your machine
+    eb ssh
+
+    # Once SSH'ed in
+    cd /var/app/current
+    bundle
+
+    # Run the Rails console
+    bundle exec rails console
+
+    # Run the Postgres console
+    PGPASSWORD=$RDS_PASSWORD bundle exec rails dbconsole
+
+    # Tail the logs
+    tail -n 50 -f log/production.log
+
+    # To sweep the database, first log into the AWS console, reboot RDS, then
+    script/sweep_database
+
 ### Workers
 
 #### Provisioning a New Server
@@ -146,7 +167,7 @@ Test that everything is correct:
     which bundle # ~/.rbenv/shims/bundle
     bundle -v # Bundler version 1.9.1
 
-Set the environment variables. Make sure you're ssh'ed in, fill in the following
+Set the environment variables. Make sure you're SSH'ed in, fill in the following
 lines with your variables, then run:
 
     echo '' >> ~/.bashrc
@@ -164,6 +185,10 @@ lines with your variables, then run:
     echo 'export RDS_DB_NAME="..."' >> ~/.bashrc
     echo 'export RDS_USERNAME="..."' >> ~/.bashrc
     echo 'export RDS_PASSWORD="..."' >> ~/.bashrc
+    echo 'export REDIS_URL="..."' >> ~/.bashrc
+
+Make sure you have SQS, Postgres on RDS, and Redis on Elasticache setup and
+permissioned properly.
 
 Test that everything is correct:
 
