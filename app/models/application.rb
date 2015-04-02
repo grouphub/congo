@@ -33,7 +33,7 @@ class Application < ActiveRecord::Base
       Rails.application.config.pokitdok.callback_host,
       account.slug,
       membership.role.name,
-      application.id
+      self.id
 
     output_data['action'] = 'Change'
 
