@@ -31,6 +31,8 @@
                 <a href="/accounts/{{accountSlug()}}/{{currentRole()}}/carriers/{{carrier.slug}}">
                   {{carrier.name}}
                 </a>
+
+                <span ng-if="carrier.account_id" class="label label-default owned">Owned</span>
               </td>
 
               <td>
@@ -63,6 +65,8 @@
                 <a href="/accounts/{{accountSlug()}}/{{currentRole()}}/benefit_plans/{{benefitPlan.slug}}">
                   {{benefitPlan.name}}
                 </a>
+
+                <span ng-if="benefitPlan.account_id" class="label label-default owned">Owned</span>
               </td>
 
               <td>
