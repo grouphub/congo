@@ -1,11 +1,8 @@
 var congoApp = angular.module('congoApp');
 
-congoApp.controller('AdminBenefitPlansShowController', [
-  '$scope', '$http', '$location', '$sce', '$timeout', 'flashesFactory',
-  function ($scope, $http, $location, $sce, $timeout, flashesFactory) {
-    // Make sure user is admin before continuing.
-    $scope.enforceAdmin();
-
+congoApp.controller('BenefitPlansShowController', [
+  '$scope', '$http', '$location', '$timeout', '$sce', 'flashesFactory',
+  function ($scope, $http, $location, $timeout, $sce, flashesFactory) {
     $scope.benefitPlan = null;
     $scope.carriers = null;
     $scope.form = {
@@ -20,6 +17,10 @@ congoApp.controller('AdminBenefitPlansShowController', [
       description_trusted: null
     };
 
+    $scope.accountBenefitPlanForm = {
+
+    };
+
     $scope.$watch('form.description_markdown', function (string) {
       $scope.form.description_html = marked(string || '');
       $scope.form.description_trusted = $sce.trustAsHtml($scope.form.description_html);
@@ -27,13 +28,14 @@ congoApp.controller('AdminBenefitPlansShowController', [
 
     $scope.submit = function () {
       $http
-        .put('/api/internal/admin/benefit_plans/' + $scope.benefitPlanSlug() + '.json', {
+        .put('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/benefit_plans/' + $scope.benefitPlanSlug() + '.json', {
           name: $scope.form.name,
           carrier_id: $scope.form.carrier_id,
-          properties: _($scope.form).omit('description_trusted')
+          properties: _($scope.form).omit('description_trusted'),
+          account_benefit_plan_properties: $scope.accountBenefitPlanForm
         })
         .success(function (data, status, headers, config) {
-          $location.path('/admin/carriers');
+          $location.path('/accounts/' + $scope.accountSlug() + '/' + $scope.currentRole() + '/carriers');
 
           flashesFactory.add('success', 'Successfully updated the benefit plan.');
         })
@@ -47,7 +49,7 @@ congoApp.controller('AdminBenefitPlansShowController', [
     };
 
     $http
-      .get('/api/internal/admin/benefit_plans/' + $scope.benefitPlanSlug() + '.json')
+      .get('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/benefit_plans/' + $scope.benefitPlanSlug() + '.json')
       .success(function (data, status, headers, config) {
         $scope.benefitPlan = data.benefit_plan;
         $scope.form = JSON.parse($scope.benefitPlan.properties_data);
@@ -80,33 +82,6 @@ congoApp.controller('AdminBenefitPlansShowController', [
 
         flashesFactory.add('danger', error);
       });
-
-    // ===========
-    // Attachments
-    // ===========
-
-    $scope.attachmentFormData = {
-      title: null,
-      description: null
-    };
-
-    $scope.file = {
-      name: ''
-    };
-
-    $scope.fileChanged = function (e) {
-      $scope.$apply(function () {
-        $scope.file.name = (e.files && e.files[0]) ? e.files[0].name : '';
-      });
-    };
-
-    $scope.newAttachment = function () {
-      // TODO: Fill this in
-    };
-
-    $scope.deleteAttachmentAt = function (index) {
-      // TODO: Fill this in
-    };
   }
 ]);
 

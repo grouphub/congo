@@ -1,11 +1,8 @@
 var congoApp = angular.module('congoApp');
 
-congoApp.controller('AdminCarriersShowController', [
+congoApp.controller('CarriersShowController', [
   '$scope', '$http', '$location', 'flashesFactory',
   function ($scope, $http, $location, flashesFactory) {
-    // Make sure user is admin before continuing.
-    $scope.enforceAdmin();
-
     $scope.carrier = null;
     $scope.form = {
       name: null,
@@ -23,14 +20,19 @@ congoApp.controller('AdminCarriersShowController', [
       phone: null
     };
 
+    $scope.carrierAccountForm = {
+
+    };
+
     $scope.submit = function () {
       $http
-        .put('/api/internal/admin/carriers/' + $scope.carrierSlug() + '.json', {
+        .put('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/carriers/' + $scope.carrierSlug() + '.json', {
           name: $scope.form.name,
-          properties: $scope.form
+          properties: $scope.form,
+          carrier_account_properties: $scope.carrierAccountForm
         })
         .success(function (data, status, headers, config) {
-          $location.path('/admin/carriers');
+          $location.path('/accounts/' + $scope.accountSlug() + '/' + $scope.currentRole() + '/carriers');
 
           flashesFactory.add('success', 'Successfully updated the carrier.');
         })
@@ -44,7 +46,7 @@ congoApp.controller('AdminCarriersShowController', [
     };
 
     $http
-      .get('/api/internal/admin/carriers/' + $scope.carrierSlug() + '.json')
+      .get('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/carriers/' + $scope.carrierSlug() + '.json')
       .success(function (data, status, headers, config) {
         $scope.carrier = data.carrier;
         $scope.form = JSON.parse($scope.carrier.properties_data);

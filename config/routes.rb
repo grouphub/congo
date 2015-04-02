@@ -51,6 +51,12 @@ Rails.application.routes.draw do
 
     # Carriers
     '/accounts/:slug/:role/carriers',
+    '/accounts/:slug/:role/carriers/new',
+    '/accounts/:slug/:role/carriers/:carrier_id',
+
+    # Benefit Plans
+    '/accounts/:slug/:role/benefit_plans/new',
+    '/accounts/:slug/:role/benefit_plans/:benefit_plan_id',
 
     # Groups
     '/accounts/:slug/:role/groups',
@@ -93,13 +99,13 @@ Rails.application.routes.draw do
       resources :accounts do
         resources :roles do
           resources :carriers do
-            post '/activate' do 'carriers#activate'
-            delete '/activate' do 'carriers#deactivate'
+            post '/activate', to: 'carriers#activate'
+            delete '/activate', to: 'carriers#deactivate'
           end
 
           resources :benefit_plans do
-            post '/activate' do 'carriers#activate'
-            delete '/activate' do 'carriers#deactivate'
+            post '/activate', to: 'carriers#activate'
+            delete '/activate', to: 'carriers#deactivate'
 
             resources :attachments
           end

@@ -1,11 +1,8 @@
 var congoApp = angular.module('congoApp');
 
-congoApp.controller('AdminBenefitPlansNewController', [
+congoApp.controller('BenefitPlansNewController', [
   '$scope', '$http', '$location', '$sce', 'flashesFactory',
   function ($scope, $http, $location, $sce, flashesFactory) {
-    // Make sure user is admin before continuing.
-    $scope.enforceAdmin();
-
     $scope.carriers = null;
     $scope.form = {
       name: null,
@@ -19,6 +16,10 @@ congoApp.controller('AdminBenefitPlansNewController', [
       description_trusted: null
     };
 
+    $scope.accountBenefitPlanForm = {
+
+    };
+
     $scope.$watch('form.description_markdown', function (string) {
       $scope.form.description_html = marked(string || '');
       $scope.form.description_trusted = $sce.trustAsHtml($scope.form.description_html);
@@ -26,13 +27,16 @@ congoApp.controller('AdminBenefitPlansNewController', [
     
     $scope.submit = function () {
       $http
-        .post('/api/internal/admin/benefit_plans.json', {
+        .post('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/benefit_plans.json', {
           name: $scope.form.name,
           carrier_id: $scope.form.carrier_id,
-          properties: _($scope.form).omit('description_trusted')
+          properties: _($scope.form).omit('description_trusted'),
+          account_benefit_plan_properties: $scope.accountBenefitPlanForm
         })
         .success(function (data, status, headers, config) {
-          $location.path('/admin/carriers');
+          $location.path('/accounts/' + $scope.accountSlug() + '/' + $scope.currentRole() + '/carriers');
+
+          flashesFactory.add('success', 'Successfully created the benefit plan.');
         })
         .error(function (data, status, headers, config) {
           var error = (data && data.error) ?
@@ -44,7 +48,7 @@ congoApp.controller('AdminBenefitPlansNewController', [
     };
 
     $http
-      .get('/api/internal/admin/carriers.json')
+      .get('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/carriers.json')
       .success(function (data, status, headers, config) {
         $scope.carriers = data.carriers;
         $scope.form.carrier_id = $scope.carriers[0].id;

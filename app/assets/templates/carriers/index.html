@@ -34,8 +34,7 @@
               </td>
 
               <td>
-                <a href="" class="btn btn-success btn-xs" ng-if="carrierCanBeActivated(carrier)" ng-click="activateCarrierAt($index)">Activate</a>
-                <a href="" class="btn btn-danger btn-xs" ng-if="carrierCanBeDeactivated(carrier)" ng-click="deactivateCarrierAt($index)">Deactivate</a>
+                <a href="/accounts/{{accountSlug()}}/{{currentRole()}}/carriers/{{carrier.slug}}" class="btn btn-success btn-xs" ng-if="carrierCanBeActivated(carrier)">Activate</a>
                 <a href="" class="btn btn-danger btn-xs" ng-if="carrierCanBeDeleted(carrier)" ng-click="deleteCarrierAt($index)">Delete</a>
               </td>
             </tr>
@@ -67,8 +66,7 @@
               </td>
 
               <td>
-                <a href="" class="btn btn-success btn-xs" ng-if="benefitPlanCanBeActivated(benefitPlan)" ng-click="activateBenefitPlanAt($index)">Activate</a>
-                <a href="" class="btn btn-danger btn-xs" ng-if="benefitPlanCanBeDeactivated(benefitPlan)" ng-click="deactivateBenefitPlanAt($index)">Deactivate</a>
+                <a href="/accounts/{{accountSlug()}}/{{currentRole()}}/benefit_plans/{{benefitPlan.slug}}" class="btn btn-success btn-xs" ng-if="benefitPlanCanBeActivated(benefitPlan)">Activate</a>
                 <a href="" class="btn btn-danger btn-xs" ng-if="benefitPlanCanBeDeleted(benefitPlan)" ng-click="deleteBenefitPlanAt($index)">Delete</a>
               </td>
             </tr>

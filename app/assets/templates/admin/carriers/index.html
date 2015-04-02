@@ -61,7 +61,7 @@
           <tbody>
             <tr ng-repeat="benefitPlan in benefitPlans">
               <td>
-                <a href="/admin/benefit_plans/{{benefitPlan.id}}">{{benefitPlan.name}}</a>
+                <a href="/admin/benefit_plans/{{benefitPlan.slug}}">{{benefitPlan.name}}</a>
                 <a class="btn btn-info btn-xs disabled" href="" ng-if="benefitPlan.account_id">Owned</a>
               </td>
 

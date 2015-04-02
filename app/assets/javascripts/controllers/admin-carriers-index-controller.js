@@ -56,7 +56,7 @@ congoApp.controller('AdminCarriersIndexController', [
       }
 
       $http
-        .put('/api/internal/admin/benefit_plans/' + benefitPlan.id + '.json', {
+        .put('/api/internal/admin/benefit_plans/' + benefitPlan.slug + '.json', {
           is_enabled: !benefitPlan.is_enabled
         })
         .success(function (data, status, headers, config) {
@@ -79,7 +79,7 @@ congoApp.controller('AdminCarriersIndexController', [
       }
 
       $http
-        .delete('/api/internal/admin/benefit_plans/' + benefitPlan.id + '.json')
+        .delete('/api/internal/admin/benefit_plans/' + benefitPlan.slug + '.json')
         .success(function (data, status, headers, config) {
           $scope.benefitPlans.splice(index, 1);
         })

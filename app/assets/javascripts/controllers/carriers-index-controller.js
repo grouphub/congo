@@ -24,24 +24,30 @@ congoApp.controller('CarriersIndexController', [
       return !carrier.carrier_account;
     };
 
-    $scope.carrierCanBeDeactivated = function (carrier) {
-      return !carrier.account_id && carrier.carrier_account;
-    };
-
     $scope.carrierCanBeDeleted = function (carrier) {
-      return carrier.account_id;
-    };
-
-    $scope.activateCarrierAt = function (index) {
-      console.log('yes');
-    };
-
-    $scope.deactivateCarrierAt = function (index) {
-      console.log('si');
+      return carrier.carrier_account;
     };
 
     $scope.deleteCarrierAt = function (index) {
-      console.log('aye');
+      var carrier = $scope.carriers[index];
+
+      $http
+        .delete('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/carriers/' + carrier.slug + '.json')
+        .success(function (data, status, headers, config) {
+          // Only delete the carrier if it was created by the account.
+          if (carrier.account_id) {
+            $scope.carriers.splice(index, 1);
+          } else {
+            carrier.carrier_account = null;
+          }
+        })
+        .error(function (data, status, headers, config) {
+          var error = (data && data.error) ?
+            data.error :
+            'There was a problem deleting the carrier.';
+
+          flashesFactory.add('danger', error);
+        });
     };
 
     // -------------
@@ -54,24 +60,30 @@ congoApp.controller('CarriersIndexController', [
       return !benefitPlan.account_benefit_plan;
     };
 
-    $scope.benefitPlanCanBeDeactivated = function (benefitPlan) {
-      return !benefitPlan.account_id && benefitPlan.account_benefit_plan;
-    };
-
     $scope.benefitPlanCanBeDeleted = function (benefitPlan) {
-      return benefitPlan.account_id;
-    };
-
-    $scope.activateBenefitPlanAt = function (index) {
-      console.log('yes');
-    };
-
-    $scope.deactivateBenefitPlanAt = function (index) {
-      console.log('si');
+      return benefitPlan.account_benefit_plan;
     };
 
     $scope.deleteBenefitPlanAt = function (index) {
-      console.log('aye');
+      var benefitPlan = $scope.benefitPlans[index];
+
+      $http
+        .delete('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/benefit_plans/' + benefitPlan.slug + '.json')
+        .success(function (data, status, headers, config) {
+          // Only delete the benefit plan if it was created by the account.
+          if (benefitPlan.account_id) {
+            $scope.benefitPlans.splice(index, 1);
+          } else {
+            benefitPlan.account_benefit_plan = null;
+          }
+        })
+        .error(function (data, status, headers, config) {
+          var error = (data && data.error) ?
+            data.error :
+            'There was a problem deleting the carrier.';
+
+          flashesFactory.add('danger', error);
+        });
     };
 
     // -------

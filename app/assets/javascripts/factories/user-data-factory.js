@@ -26,8 +26,8 @@ congoApp.factory('userDataFactory', [
       carrierAccountId: function () {
         return $routeParams.carrier_account_id;
       },
-      benefitPlanId: function () {
-        return $routeParams.benefit_plan_id;
+      benefitPlanSlug: function () {
+        return $routeParams.benefit_plan_slug;
       },
       applicationId: function () {
         return $routeParams.application_id;
