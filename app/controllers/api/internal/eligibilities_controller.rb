@@ -16,13 +16,19 @@ class Api::Internal::EligibilitiesController < ApplicationController
       return
     end
 
-    carrier_account_id = params[:carrier_account_id]
-    carrier_account = CarrierAccount
-      .where(id: carrier_account_id, account_id: account.id)
-      .includes(:carrier)
+    carrier = Carrier
+      .where('account_id IS NULL OR account_id = ?', current_account.id)
+      .where(id: params[:carrier_id])
       .first
 
-    carrier = carrier_account.carrier
+    unless carrier
+      error_response('An appropriate carrier could not be found.')
+      return
+    end
+
+    carrier_account = CarrierAccount
+      .where(carrier_id: carrier.id, account_id: account.id)
+      .first
 
     unparsed_date_of_birth = params[:date_of_birth]
 
@@ -68,16 +74,12 @@ class Api::Internal::EligibilitiesController < ApplicationController
       Rails.application.config.pokitdok.client_id,
       Rails.application.config.pokitdok.client_secret
 
-    # Populate either the carrier name or the carrier first and last names
-    #
-    # TODO: Add separate organization name to carrier and use instead of "name".
-    #
-    carrier_name = nil
+    # Populate either the carrier first and last names, or the carrier name.
+    carrier_name = carrier.properties['name']
     carrier_first_name = carrier.properties['first_name']
     carrier_last_name = carrier.properties['last_name']
-    unless carrier_first_name && carrier_last_name
-      carrier_first_name = carrier.properties['first_name']
-      carrier_last_name = carrier.properties['last_name']
+    if carrier_first_name && carrier_last_name
+      carrier_name = [carrier_first_name, carrier_last_name].join(' ')
     end
 
     carrier_npi = carrier.properties['npi']
@@ -114,22 +116,88 @@ class Api::Internal::EligibilitiesController < ApplicationController
 
     eligibility = pokitdok.eligibility(eligibility_query)
 
-    # TODO: Return these fields:
-    #
-    #   * SSN
-    #   * Member Name
-    #   * Member Date of Birth
-    #   * Member Zip Code
-    #   * Member Sex
-    #   * Health Insurance ID
-    #   * Plan Name
-    #   * Plan Number
-    #   * Rx IIN/BIN
-    #
+    Rails.logger.info('')
+    Rails.logger.info('=================')
+    Rails.logger.info('Pokitdok returned:')
+    Rails.logger.info('=================')
+    Rails.logger.info(eligibility.to_json)
+    Rails.logger.info('')
+    Rails.logger.info('')
+
+    # ---------------------
+    # Eligibility Transform
+    # ---------------------
+
+    data = eligibility['data'] || {}
+    subscriber_data = data['subscriber'] || {}
+    subscriber_address_data = subscriber_data['address'] || {}
+    coverage_data = data['coverage'] || {}
+
+    # TODO: SSN
+
+    member_first_name = subscriber_data['first_name']
+    member_last_name = subscriber_data['last_name']
+    member_name = [member_first_name, member_last_name].compact.join(' ')
+
+    member_raw_date_of_birth = subscriber_data['birth_date']
+    member_date_of_birth_components = member_raw_date_of_birth.split('-')
+    member_date_of_birth = [
+      member_date_of_birth_components[1],
+      member_date_of_birth_components[2],
+      member_date_of_birth_components[0]
+    ].join('/')
+
+    member_zip_code = subscriber_address_data['zipcode']
+
+    member_gender = subscriber_data['gender'].capitalize
+
+    # TODO: Health insurance ID
+
+    carrier = coverage_data['contacts']
+      .find { |contact| contact['contact_type'] == 'payer' }
+    carrier_name = carrier['name']
+    plan_description = coverage_data['plan_description']
+    group_description = coverage_data['group_description']
+    insurance_type = coverage_data['insurance_type'].upcase
+
+    group_number = coverage_data['group_number']
+    plan_number = coverage_data['plan_number']
+
+    # TODO: RX IIN/BIN
+
+    raw_eligibility_begin_date = coverage_data['eligibility_begin_date']
+    eligibility_begin_date_components = raw_eligibility_begin_date.split('-')
+    eligibility_begin_date = [
+      eligibility_begin_date_components[1],
+      eligibility_begin_date_components[2],
+      eligibility_begin_date_components[0]
+    ].join('/')
+
+    raw_plan_begin_date = coverage_data['plan_begin_date']
+    plan_begin_date_components = raw_plan_begin_date.split('-')
+    plan_begin_date = [
+      plan_begin_date_components[1],
+      plan_begin_date_components[2],
+      plan_begin_date_components[0]
+    ].join('/')
+
     respond_to do |format|
       format.json {
         render json: {
-          eligibility: JSON.pretty_generate(eligibility)
+          eligibility: {
+            member_name: member_name,
+            member_date_of_birth: member_date_of_birth,
+            member_zip_code: member_zip_code,
+            member_gender: member_gender,
+            carrier_name: carrier_name,
+            plan_description: plan_description,
+            group_description: group_description,
+            insurance_type: insurance_type,
+            group_number: group_number,
+            plan_number: plan_number,
+            eligibility_begin_date: eligibility_begin_date,
+            plan_begin_date: plan_begin_date
+          }
         }
       }
     end

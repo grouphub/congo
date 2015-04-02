@@ -1,8 +1,8 @@
 var congoApp = angular.module('congoApp');
 
 congoApp.directive('eligibilityModal', [
-  '$http',
-  function ($http) {
+  '$http', '$timeout',
+  function ($http, $timeout) {
     return {
       restrict: 'E',
       replace: true,
@@ -33,7 +33,10 @@ congoApp.directive('eligibilityModal', [
         $('body').delegate('[data-target="#eligibility-modal"]', 'click', function (e) {
           $scope.resetEligibilityForm();
 
-          $('#date-of-birth').datepicker();
+          // TODO: Hacky!
+          $timeout(function () {
+            $('#date-of-birth').datepicker();
+          }, 100);
 
           $http.get('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/carriers.json')
             .then(
