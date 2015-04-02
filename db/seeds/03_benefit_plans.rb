@@ -40,6 +40,7 @@ BenefitPlan.create! \
 
 carrier = Carrier.create! \
   name: 'Blue Cross',
+  account_id: account.id,
   properties: {
     name: 'Blue Cross',
     npi: '1467560003',
@@ -69,7 +70,7 @@ carrier_account = CarrierAccount.create! \
     account_type: 'broker'
   }
 
-BenefitPlan.create! \
+benefit_plan = BenefitPlan.create! \
   account_id: account.id,
   carrier_account_id: carrier_account.id,
   is_enabled: true,
@@ -84,5 +85,14 @@ BenefitPlan.create! \
     exchange_plan: 'bar',
     small_group: 'baz',
     group_id: '235'
+  }
+
+account_benefit_plan = AccountBenefitPlan.create! \
+  account_id: account.id,
+  carrier_id: carrier.id,
+  carrier_account_id: carrier_account.id,
+  benefit_plan_id: benefit_plan.id,
+  properties: {
+
   }
 

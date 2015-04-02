@@ -3,6 +3,7 @@ class CreateCarriers < ActiveRecord::Migration
     create_table :carriers do |t|
       t.string :name
       t.string :slug
+      t.integer :account_id
 
       # Fields:
       #

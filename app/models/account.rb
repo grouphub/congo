@@ -7,7 +7,9 @@ class Account < ActiveRecord::Base
   has_many :groups
   has_many :roles
   has_many :applications
+  has_many :carriers
   has_many :carrier_accounts
+  has_many :benefit_plans
   has_many :tokens
 
   before_save :set_billing_start_and_day

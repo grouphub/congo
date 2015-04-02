@@ -145,25 +145,9 @@ congoApp.config([
         templateUrl: congo.assets['settings/show.html'],
         controller: 'SettingsShowController'
       })
-      .when('/accounts/:slug/:role/carrier_accounts', {
-        templateUrl: congo.assets['carrier_accounts/index.html'],
-        controller: 'CarrierAccountsIndexController'
-      })
-      .when('/accounts/:slug/:role/carrier_accounts/new', {
-        templateUrl: congo.assets['carrier_accounts/new.html'],
-        controller: 'CarrierAccountsNewController'
-      })
-      .when('/accounts/:slug/:role/carrier_accounts/:carrier_account_id', {
-        templateUrl: congo.assets['carrier_accounts/show.html'],
-        controller: 'CarrierAccountsShowController'
-      })
-      .when('/accounts/:slug/:role/benefit_plans/new', {
-        templateUrl: congo.assets['benefit_plans/new.html'],
-        controller: 'BenefitPlansNewController'
-      })
-      .when('/accounts/:slug/:role/benefit_plans/:benefit_plan_id', {
-        templateUrl: congo.assets['benefit_plans/show.html'],
-        controller: 'BenefitPlansShowController'
+      .when('/accounts/:slug/:role/carriers', {
+        templateUrl: congo.assets['carriers/index.html'],
+        controller: 'CarriersIndexController'
       })
       .when('/accounts/:slug/:role/groups', {
         templateUrl: congo.assets['groups/index.html'],

@@ -56,11 +56,7 @@
 //= require controllers/applications-index-controller
 //= require controllers/applications-new-controller
 //= require controllers/applications-show-controller
-//= require controllers/benefit-plans-new-controller
-//= require controllers/benefit-plans-show-controller
-//= require controllers/carrier-accounts-index-controller
-//= require controllers/carrier-accounts-new-controller
-//= require controllers/carrier-accounts-show-controller
+//= require controllers/carriers-index-controller
 //= require controllers/groups-index-controller
 //= require controllers/groups-new-controller
 //= require controllers/groups-show-controller
