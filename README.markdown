@@ -32,6 +32,28 @@ Getting started
 15. Visit the site locally at
     <a href="http://localhost:5000">http://localhost:5000</a>.
 
+Debugging
+---------
+
+### Debugging Ruby code
+
+1. Somewhere in your Ruby code, place a `binding.remote_pry` statement on its
+   own line.
+2. Trigger that section of code.
+3. From your Terminal, run `pry-remote`. You will get a Ruby console whose
+   context is the block containing your `binding.remote_pry` call.
+4. To exit, type `exit` and hit Enter.
+
+### Debugging JavaScript
+
+1. Open your developer console (in Firefox or Chrome, it is `command-shift-i`).
+2. In your JavaScript code, place a `debugger` statement on its own line.
+3. Refresh the page.
+4. Trigger that section of code.
+5. The window will go grey, and your console will be open to your line of code.
+6. To exit the debugger, click the icon that looks like a vertical bar followed
+   by a "play" triangle.
+
 Generate an ERD Diagram
 -----------------------
 
