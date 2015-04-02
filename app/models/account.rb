@@ -11,6 +11,7 @@ class Account < ActiveRecord::Base
   has_many :carrier_accounts
   has_many :benefit_plans
   has_many :group_benefit_plans
+  has_many :account_benefit_plans
   has_many :tokens
   has_many :payments
   has_many :invitations
