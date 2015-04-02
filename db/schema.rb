@@ -75,6 +75,7 @@ ActiveRecord::Schema.define(version: 20150402002142) do
   end
 
   create_table "attachments", force: :cascade do |t|
+    t.integer  "account_id"
     t.integer  "benefit_plan_id"
     t.integer  "group_id"
     t.string   "filename"
@@ -128,6 +129,7 @@ ActiveRecord::Schema.define(version: 20150402002142) do
   end
 
   create_table "group_benefit_plans", force: :cascade do |t|
+    t.integer  "account_id"
     t.integer  "group_id"
     t.integer  "benefit_plan_id"
     t.datetime "created_at"
@@ -147,6 +149,7 @@ ActiveRecord::Schema.define(version: 20150402002142) do
   end
 
   create_table "invitations", force: :cascade do |t|
+    t.integer  "account_id"
     t.string   "uuid"
     t.text     "description"
     t.datetime "created_at"
@@ -154,6 +157,7 @@ ActiveRecord::Schema.define(version: 20150402002142) do
   end
 
   create_table "memberships", force: :cascade do |t|
+    t.integer  "account_id"
     t.integer  "user_id"
     t.integer  "group_id"
     t.string   "role_name"

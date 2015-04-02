@@ -34,6 +34,10 @@ Role.create! \
   name: 'broker',
   invitation_id: invitation.id
 
+# Note that invitations only get an account ID once a role is created.
+invitation.update_attributes! \
+  account_id: first_account.id
+
 # =====
 # Alice
 # =====

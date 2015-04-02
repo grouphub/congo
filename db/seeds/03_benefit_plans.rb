@@ -3,6 +3,7 @@ account = Account.where(name: 'First Account').first
 # Admin-created carrier account and benefit plan
 
 carrier = Carrier.create! \
+  account_id: nil, # Admin carrier
   name: 'Blue Shield',
   properties: {
     name: 'Blue Shield',
@@ -21,6 +22,7 @@ carrier = Carrier.create! \
   }
 
 BenefitPlan.create! \
+  account_id: nil, # Admin benefit plan
   carrier_id: carrier.id,
   is_enabled: true,
   name: 'Admin Health Insurance PPO',
@@ -39,8 +41,8 @@ BenefitPlan.create! \
 # Broker-created carrier account and benefit plan
 
 carrier = Carrier.create! \
-  name: 'Blue Cross',
   account_id: account.id,
+  name: 'Blue Cross',
   properties: {
     name: 'Blue Cross',
     npi: '1467560003',
@@ -58,9 +60,9 @@ carrier = Carrier.create! \
   }
 
 carrier_account = CarrierAccount.create! \
-  name: 'My Broker Blue Cross',
-  carrier_id: carrier.id,
   account_id: account.id,
+  carrier_id: carrier.id,
+  name: 'My Broker Blue Cross',
   properties: {
     name: 'My Broker Blue Cross',
     carrier_slug: 'blue_cross',

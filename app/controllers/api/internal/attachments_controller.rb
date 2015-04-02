@@ -29,6 +29,7 @@ class Api::Internal::AttachmentsController < ApplicationController
     end
 
     attributes = {
+      account_id: current_account.id,
       title: title,
       filename: name,
       description: description,
