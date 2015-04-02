@@ -20,20 +20,8 @@ carrier = Carrier.create! \
     phone: '444-444-4444'
   }
 
-carrier_account = CarrierAccount.create! \
-  name: 'Admin Blue Shield',
-  carrier_id: carrier.id,
-  properties: {
-    name: 'Admin Blue Shield',
-    carrier_slug: 'blue_shield',
-    broker_number: '123',
-    brokerage_name: 'Example Brokerage',
-    tax_id: '234',
-    account_type: 'broker'
-  }
-
 BenefitPlan.create! \
-  carrier_account_id: carrier_account.id,
+  carrier_id: carrier.id,
   is_enabled: true,
   name: 'Admin Health Insurance PPO',
   description_html: "<h1>Admin Health Insurance PPO</h1>\n<p>An example plan.</p>",

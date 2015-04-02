@@ -7,6 +7,7 @@ class BenefitPlan < ActiveRecord::Base
   has_many :attachments
 
   belongs_to :account
-  belongs_to :carrier_account
+  belongs_to :carrier_account # TODO: Delete this?
+  belongs_to :carrier
 end
 

@@ -1,11 +1,11 @@
 <div class="col-md-12">
-  <!-- Carrier account may be null if it was deleted by the user. -->
-  <h1 ng-if="!benefitPlan.carrier_account.name">
+  <!-- Carrier may be null if it was deleted by the user. -->
+  <h1 ng-if="!benefitPlan.carrier.name">
     {{benefitPlan.name}}
   </h1>
 
-  <h1 ng-if="benefitPlan.carrier_account.name">
-    {{benefitPlan.carrier_account.name}}: {{benefitPlan.name}}
+  <h1 ng-if="benefitPlan.carrier.name">
+    {{benefitPlan.carrier.name}}: {{benefitPlan.name}}
   </h1>
 
   <p>Edit your benefit plan.</p>
@@ -17,9 +17,9 @@
     </div>
 
     <div class="form-group">
-      <label for="carrier_account">Carrier</label>
-      <select class="form-control" id="carrier_account" name="carrier_account" ng-model="form.carrier_account_id">
-        <option ng-repeat="carrier_account in carrierAccounts" value="{{carrier_account.id}}">{{carrier_account.name}}&mdash;{{carrier_account.carrier.name}}</option>
+      <label for="carrier">Carrier</label>
+      <select class="form-control" id="carrier" name="carrier" ng-model="form.carrier_id">
+        <option ng-repeat="carrier in carriers" value="{{carrier.id}}">{{carrier.name}}</option>
       </select>
     </div>
 

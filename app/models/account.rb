@@ -12,7 +12,8 @@ class Account < ActiveRecord::Base
 
   before_save :set_billing_start_and_day
 
-  validates_uniqueness_of :slug
+  # # TODO: Slug will be blank for new accounts, which means that this won't work
+  # validates_uniqueness_of :slug
 
   DEMO_PERIOD = 30
   PLAN_NAMES = %[free basic standard premier admin]
