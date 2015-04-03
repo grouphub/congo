@@ -186,6 +186,8 @@ lines with your variables, then run:
     echo 'export RDS_USERNAME="..."' >> ~/.bashrc
     echo 'export RDS_PASSWORD="..."' >> ~/.bashrc
     echo 'export REDIS_URL="..."' >> ~/.bashrc
+    echo 'export CONGO_ENROLLMENT_CLOCK_SECONDS=300' >> ~/.bashrc
+    echo 'export CONGO_PAYMENT_CLOCK_SECONDS=300' >> ~/.bashrc
 
 Make sure you have SQS, Postgres on RDS, and Redis on Elasticache setup and
 permissioned properly.
