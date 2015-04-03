@@ -1,8 +1,8 @@
 var congoApp = angular.module('congoApp');
 
 congoApp.directive('eligibilityModal', [
-  '$http',
-  function ($http) {
+  '$http', '$timeout',
+  function ($http, $timeout) {
     return {
       restrict: 'E',
       replace: true,
@@ -10,7 +10,7 @@ congoApp.directive('eligibilityModal', [
       link: function ($scope, $element, $attrs) {
         // Data that the user populates.
         $scope.eligibilityForm = {
-          carrier_account_id: undefined,
+          carrier_id: undefined,
           member_id: '',
           date_of_birth: '',
           first_name: '',
@@ -21,8 +21,8 @@ congoApp.directive('eligibilityModal', [
           // Eligibility data from the response.
           eligibility: undefined,
 
-          // List of carrier accounts to populate the dropdown.
-          carrier_accounts: [],
+          // List of carriers to populate the dropdown.
+          carriers: [],
 
           // If an error occurs when submitting the form.
           error: undefined
@@ -33,15 +33,18 @@ congoApp.directive('eligibilityModal', [
         $('body').delegate('[data-target="#eligibility-modal"]', 'click', function (e) {
           $scope.resetEligibilityForm();
 
-          $('#date-of-birth').datepicker();
+          // TODO: Hacky!
+          $timeout(function () {
+            $('#date-of-birth').datepicker();
+          }, 100);
 
-          $http.get('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/carrier_accounts.json')
+          $http.get('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/carriers.json')
             .then(
               function (response) {
-                var carrierAccount = response.data.carrier_accounts[0];
+                var carrier = response.data.carriers[0];
 
-                $scope.eligibilityFormSettings.carrier_accounts = response.data.carrier_accounts;
-                $scope.eligibilityForm.carrier_account_id = (carrierAccount ? carrierAccount.id : undefined);
+                $scope.eligibilityFormSettings.carriers = response.data.carriers;
+                $scope.eligibilityForm.carrier_id = (carrier ? carrier.id : undefined);
               },
               function (response) {
                 debugger;
@@ -68,11 +71,11 @@ congoApp.directive('eligibilityModal', [
         };
 
         $scope.resetEligibilityForm = function () {
-          var carrierAccount = $scope.eligibilityFormSettings.carrier_accounts[0];
+          var carrier = $scope.eligibilityFormSettings.carriers[0];
 
           $scope.eligibilityFormSettings.eligibility = undefined;
 
-          $scope.eligibilityForm.carrier_account_id = (carrierAccount ? carrierAccount.id : undefined);
+          $scope.eligibilityForm.carrier_id = (carrier ? carrier.id : undefined);
           $scope.eligibilityForm.member_id = '';
           $scope.eligibilityForm.date_of_birth = '';
           $scope.eligibilityForm.first_name = '';

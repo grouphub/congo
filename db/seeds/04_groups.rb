@@ -20,22 +20,26 @@ garol = User.where(email: 'garol@first-account.com').first
 benefit_plan = BenefitPlan.first
 
 GroupBenefitPlan.create! \
+  account_id: account.id,
   group_id: group.id,
   benefit_plan_id: benefit_plan.id
 
 Membership.create! \
+  account_id: account.id,
   group_id: group.id,
   user_id: alice.id,
   role_id: alice.roles.first.id,
   email: alice.email
 
 Membership.create! \
+  account_id: account.id,
   group_id: group.id,
   user_id: bob.id,
   role_id: bob.roles.first.id,
   email: bob.email
 
 Membership.create! \
+  account_id: account.id,
   group_id: group.id,
   user_id: garol.id,
   role_id: garol.roles.first.id,

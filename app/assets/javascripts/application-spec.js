@@ -48,9 +48,6 @@
 //= require controllers/admin-carriers-index-controller
 //= require controllers/admin-carriers-new-controller
 //= require controllers/admin-carriers-show-controller
-//= require controllers/admin-carrier-accounts-index-controller
-//= require controllers/admin-carrier-accounts-new-controller
-//= require controllers/admin-carrier-accounts-show-controller
 //= require controllers/admin-benefit-plans-new-controller
 //= require controllers/admin-benefit-plans-show-controller
 //= require controllers/admin-invitations-index-controller
@@ -58,11 +55,11 @@
 //= require controllers/applications-index-controller
 //= require controllers/applications-new-controller
 //= require controllers/applications-show-controller
+//= require controllers/carriers-index-controller
+//= require controllers/carriers-new-controller
+//= require controllers/carriers-show-controller
 //= require controllers/benefit-plans-new-controller
 //= require controllers/benefit-plans-show-controller
-//= require controllers/carrier-accounts-index-controller
-//= require controllers/carrier-accounts-new-controller
-//= require controllers/carrier-accounts-show-controller
 //= require controllers/groups-index-controller
 //= require controllers/groups-new-controller
 //= require controllers/groups-show-controller

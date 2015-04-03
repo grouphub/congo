@@ -102,19 +102,11 @@
     </a>
   </li>
 
-  <!-- Admin Carrier Accounts -->
-  <li class="sidebar-item" ng-if="inAdminPanel()">
-    <a ng-href="/admin/carrier_accounts" title="Carrier Accounts">
-      <i class="fa fa-institution"></i>
-      <span class="caption">Carrier Accounts</span>
-    </a>
-  </li>
-
   <!-- Admin Accounts -->
   <li class="sidebar-item" ng-if="inAdminPanel()">
     <a ng-href="/admin/accounts" title="Accounts">
       <i class="fa fa-cubes"></i>
-      <span class="caption">Accounts, Users, &amp; Groups</span>
+      <span class="caption">Accounts</span>
     </a>
   </li>
 
@@ -134,10 +126,10 @@
     </a>
   </li>
 
-  <li class="sidebar-item" ng-if="currentRole() === 'broker'">
-    <a ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/carrier_accounts" title="Carrier Accounts">
+  <li class="sidebar-item" ng-if="currentRole() === 'broker' || currentRole() === 'group_admin'">
+    <a ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/carriers" title="Carriers">
       <i class="fa fa-institution"></i>
-      <span class="caption">Carrier Accounts</span>
+      <span class="caption">Carriers</span>
     </a>
   </li>
 

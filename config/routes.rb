@@ -31,24 +31,12 @@ Rails.application.routes.draw do
     '/admin/carriers/new',
     '/admin/carriers/:carrier_slug',
 
-    # Admin Carrier Accounts
-    '/admin/carrier_accounts',
-    '/admin/carrier_accounts/new',
-    '/admin/carrier_accounts/:carrier_slug',
-
     # Admin Benefit Plans
-    '/admin/benefit_plans',
     '/admin/benefit_plans/new',
     '/admin/benefit_plans/:carrier_slug',
 
     # Admin All Accounts
     '/admin/accounts',
-
-    # Admin All Groups
-    '/admin/groups',
-
-    # Admin All Users
-    '/admin/users',
 
     # Admin Invitations
     '/admin/invitations',
@@ -61,13 +49,12 @@ Rails.application.routes.draw do
     '/accounts/:slug/:role/home',
     '/accounts/:slug/:role/settings',
 
-    # Account carriers
-    '/accounts/:slug/:role/carrier_accounts',
-    '/accounts/:slug/:role/carrier_accounts/new',
-    '/accounts/:slug/:role/carrier_accounts/:carrier_accounts_id',
+    # Carriers
+    '/accounts/:slug/:role/carriers',
+    '/accounts/:slug/:role/carriers/new',
+    '/accounts/:slug/:role/carriers/:carrier_id',
 
-    # Benefit plans
-    '/accounts/:slug/:role/benefit_plans',
+    # Benefit Plans
     '/accounts/:slug/:role/benefit_plans/new',
     '/accounts/:slug/:role/benefit_plans/:benefit_plan_id',
 
@@ -111,7 +98,18 @@ Rails.application.routes.draw do
 
       resources :accounts do
         resources :roles do
-          resources :carrier_accounts
+          resources :carriers do
+            post '/activate', to: 'carriers#activate'
+            delete '/activate', to: 'carriers#deactivate'
+          end
+
+          resources :benefit_plans do
+            post '/activate', to: 'carriers#activate'
+            delete '/activate', to: 'carriers#deactivate'
+
+            resources :attachments
+          end
+
           resources :eligibilities
           resources :tokens
 
@@ -121,10 +119,6 @@ Rails.application.routes.draw do
           end
 
           put '/', to: 'accounts#update'
-
-          resources :benefit_plans do
-            resources :attachments
-          end
 
           resources :groups do
             resources :attachments

@@ -1,5 +1,5 @@
 <div class="col-md-12">
-  <h1>New benefit plan</h1>
+  <h1>New Benefit Plan</h1>
 
   <p>Add a new benefit plan from a connected carrier.</p>
 
@@ -11,8 +11,8 @@
 
     <div class="form-group">
       <label for="carrier">Carrier</label>
-      <select class="form-control" id="carrier_account" name="carrier_account" ng-model="form.carrier_account_id">
-        <option ng-repeat="carrier_account in carrierAccounts" value="{{carrier_account.id}}">{{carrier_account.name}}&mdash;{{carrier_account.carrier.name}}</option>
+      <select class="form-control" id="carrier" name="carrier" ng-model="form.carrier_id">
+        <option ng-repeat="carrier in carriers" value="{{carrier.id}}">{{carrier.name}}</option>
       </select>
     </div>
 

@@ -18,9 +18,9 @@
             </div>
 
             <div class="form-group">
-              <label for="carrier-account">Trading Partner/Carrier</label>
-              <select class="form-control" id="carrier-account" name="carrier-account" ng-model="eligibilityForm.carrier_account_id">
-                <option value="{{carrier_account.id}}" ng-repeat="carrier_account in eligibilityFormSettings.carrier_accounts">{{carrier_account.name}}</option>
+              <label for="carrier">Trading Partner/Carrier</label>
+              <select class="form-control" id="carrier" name="carrier" ng-model="eligibilityForm.carrier_id">
+                <option value="{{carrier.id}}" ng-repeat="carrier in eligibilityFormSettings.carriers">{{carrier.name}}</option>
               </select>
             </div>
 
@@ -63,7 +63,43 @@
           </form>
 
           <form ng-if="eligibilityFormSettings.eligibility">
-            <pre>{{eligibilityFormSettings.eligibility}}
+            <dl class="dl-horizontal">
+              <dt>Member Name</dt>
+              <dd>{{eligibilityFormSettings.eligibility.member_name}}</dd>
+
+              <dt>Member Date of Birth</dt>
+              <dd>{{eligibilityFormSettings.eligibility.member_date_of_birth}}</dd>
+
+              <dt>Member Zip Code</dt>
+              <dd>{{eligibilityFormSettings.eligibility.member_zip_code}}</dd>
+
+              <dt>Member Gender</dt>
+              <dd>{{eligibilityFormSettings.eligibility.member_gender}}</dd>
+
+              <dt>Carrier Name</dt>
+              <dd>{{eligibilityFormSettings.eligibility.carrier_name}}</dd>
+
+              <dt>Plan Description</dt>
+              <dd>{{eligibilityFormSettings.eligibility.plan_description}}</dd>
+
+              <dt>Group Description</dt>
+              <dd>{{eligibilityFormSettings.eligibility.group_description}}</dd>
+
+              <dt>Insurance Type</dt>
+              <dd>{{eligibilityFormSettings.eligibility.insurance_type}}</dd>
+
+              <dt>Group Number</dt>
+              <dd>{{eligibilityFormSettings.eligibility.group_number}}</dd>
+
+              <dt>Plan Number</dt>
+              <dd>{{eligibilityFormSettings.eligibility.plan_number}}</dd>
+
+              <dt>Eligibility Begin Date</dt>
+              <dd>{{eligibilityFormSettings.eligibility.eligibility_begin_date}}</dd>
+
+              <dt>Plan Begin Date</dt>
+              <dd>{{eligibilityFormSettings.eligibility.plan_begin_date}}</dd>
+            </dl>
           </form>
         </div>
       </div>

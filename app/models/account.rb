@@ -7,50 +7,43 @@ class Account < ActiveRecord::Base
   has_many :groups
   has_many :roles
   has_many :applications
+  has_many :carriers
   has_many :carrier_accounts
+  has_many :benefit_plans
+  has_many :group_benefit_plans
+  has_many :account_benefit_plans
   has_many :tokens
+  has_many :payments
+  has_many :invitations
+  has_many :memberships
+  has_many :attachments
 
   before_save :set_billing_start_and_day
 
-  validates_uniqueness_of :slug
+  # NOTE: Slug will be nil for new accounts.
+  validates_uniqueness_of :slug, allow_nil: true
 
   DEMO_PERIOD = 30
   PLAN_NAMES = %[free basic standard premier admin]
 
   # TODO: Move to a background job
   def nuke!
-    self.carrier_accounts
-      .includes(benefit_plans: :attachments)
-      .each { |carrier_account|
-        carrier_account.benefit_plans.each { |benefit_plan|
-          benefit_plan.attachments.destroy_all
-        }
-
-        carrier_account.benefit_plans.destroy_all
-      }
-
-    self.groups
-      .includes(:group_benefit_plans, :attachments)
-      .each { |group|
-        group.group_benefit_plans.destroy_all
-        group.attachments.destroy_all
-      }
-
-    self.roles
-      .includes({ memberships: :applications }, :invitation)
-      .each { |role|
-        role.memberships.each { |membership|
-          membership.applications.destroy_all
-        }
-
-        role.memberships.destroy_all
-        role.invitation.try(:destroy!)
-      }
-
+    self.account_benefit_plans.destroy_all
+    self.group_benefit_plans.destroy_all
+    self.attachments.destroy_all
+    self.applications.destroy_all
+    self.benefit_plans.destroy_all
+    self.memberships.destroy_all
     self.carrier_accounts.destroy_all
     self.groups.destroy_all
-    self.tokens.destroy_all
     self.roles.destroy_all
+    self.tokens.destroy_all
+    self.carriers.destroy_all
+    self.invitations.destroy_all
+
+    # TODO: Do we actually want to destroy payments?
+    self.payments.destroy_all
+
     self.destroy!
   end
 

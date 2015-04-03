@@ -3,6 +3,7 @@ account = Account.where(name: 'First Account').first
 # Admin-created carrier account and benefit plan
 
 carrier = Carrier.create! \
+  account_id: nil, # Admin carrier
   name: 'Blue Shield',
   properties: {
     name: 'Blue Shield',
@@ -20,20 +21,9 @@ carrier = Carrier.create! \
     phone: '444-444-4444'
   }
 
-carrier_account = CarrierAccount.create! \
-  name: 'Admin Blue Shield',
-  carrier_id: carrier.id,
-  properties: {
-    name: 'Admin Blue Shield',
-    carrier_slug: 'blue_shield',
-    broker_number: '123',
-    brokerage_name: 'Example Brokerage',
-    tax_id: '234',
-    account_type: 'broker'
-  }
-
 BenefitPlan.create! \
-  carrier_account_id: carrier_account.id,
+  account_id: nil, # Admin benefit plan
+  carrier_id: carrier.id,
   is_enabled: true,
   name: 'Admin Health Insurance PPO',
   description_html: "<h1>Admin Health Insurance PPO</h1>\n<p>An example plan.</p>",
@@ -51,6 +41,7 @@ BenefitPlan.create! \
 # Broker-created carrier account and benefit plan
 
 carrier = Carrier.create! \
+  account_id: account.id,
   name: 'Blue Cross',
   properties: {
     name: 'Blue Cross',
@@ -69,9 +60,9 @@ carrier = Carrier.create! \
   }
 
 carrier_account = CarrierAccount.create! \
-  name: 'My Broker Blue Cross',
-  carrier_id: carrier.id,
   account_id: account.id,
+  carrier_id: carrier.id,
+  name: 'My Broker Blue Cross',
   properties: {
     name: 'My Broker Blue Cross',
     carrier_slug: 'blue_cross',
@@ -81,8 +72,9 @@ carrier_account = CarrierAccount.create! \
     account_type: 'broker'
   }
 
-BenefitPlan.create! \
+benefit_plan = BenefitPlan.create! \
   account_id: account.id,
+  carrier_id: carrier.id,
   carrier_account_id: carrier_account.id,
   is_enabled: true,
   name: 'Best Health Insurance PPO',
@@ -96,5 +88,14 @@ BenefitPlan.create! \
     exchange_plan: 'bar',
     small_group: 'baz',
     group_id: '235'
+  }
+
+account_benefit_plan = AccountBenefitPlan.create! \
+  account_id: account.id,
+  carrier_id: carrier.id,
+  carrier_account_id: carrier_account.id,
+  benefit_plan_id: benefit_plan.id,
+  properties: {
+
   }
 

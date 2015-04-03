@@ -26,6 +26,7 @@ class Api::Internal::MembershipsController < ApplicationController
     role_name = params[:role_name]
 
     membership = Membership.create! \
+      account_id: group.account_id,
       group_id: group.id,
       email: email,
       role_name: role_name

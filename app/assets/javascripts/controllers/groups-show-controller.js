@@ -98,7 +98,7 @@ congoApp.controller('GroupsShowController', [
         .success(function (data, status, headers, config) {
           $cookieStore.put('current-application-id', data.application.id);
 
-          $location.path('/accounts/' + $scope.accountSlug() + '/' + $scope.currentRole() + '/groups/' + $scope.groupSlug() + '/benefit_plans/' + benefitPlan.id + '/applications/new');
+          $location.path('/accounts/' + $scope.accountSlug() + '/' + $scope.currentRole() + '/groups/' + $scope.groupSlug() + '/benefit_plans/' + benefitPlan.slug + '/applications/new');
         })
         .error(function (data, status, headers, config) {
           var error = (data && data.error) ?
@@ -340,6 +340,7 @@ congoApp.controller('GroupsShowController', [
     }
 
     $scope.removeBenefitPlan = function (benefitPlan) {
+      // TODO: Can we pass a data hash instead of a query parameter?
       $http
         .delete('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups/' + $scope.groupSlug() + '/group_benefit_plans.json?benefit_plan_id=' + benefitPlan.id)
         .success(function (data, status, headers, config) {

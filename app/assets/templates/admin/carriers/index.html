@@ -1,31 +1,83 @@
 <div class="col-md-12">
   <h1>Carrier Management</h1>
 
-  <p>Add new carriers to the system or update existing carriers listed below.</p>
+  <div id="admin-index-carriers-tabs" role="tabpanel">
+    <!-- Tabs -->
+    <ul class="nav nav-tabs" role "tablist">
+      <li role="presentation" ng-class="{active: currentTab() === 'carriers'}">
+        <a href="" data-target="#carriers" aria-controls="carriers" role="tab" data-toggle="tab" ng-click="changeTab('carriers')">Carriers</a>
+      </li>
 
-  <table class="carriers table">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th ng-if="isAdmin()">Actions</th>
-      </tr>
-    </thead>
+      <li role="presentation" ng-class="{active: currentTab() === 'benefit-plans'}">
+        <a href="" data-target="#benefit-plans" aria-controls="benefit-plans" role="tab" data-toggle="tab" ng-click="changeTab('benefit-plans')">Benefit Plans</a>
+      </li>
+    </ul>
 
-    <tbody>
-      <tr ng-repeat="carrier in carriers">
-        <td>
-          <a ng-if="isAdmin()" ng-href="/admin/carriers/{{carrier.slug}}">{{carrier.name}}</a>
-        </td>
+    <div class="tab-content">
+      <div role="tabpanel" class="tab-pane" ng-class="{active: currentTab() === 'carriers'}" id="carriers">
+        <h2>Carriers</h2>
 
-        <td>
-          <a class="btn btn-danger btn-xs" ng-if="isAdmin()" ng-click="deleteCarrierAt($index)">Delete</a>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+        <p>Add new carriers to the system or update existing carriers listed below.</p>
 
-  <p ng-if="isAdmin()">
-    <a class="btn btn-primary" href="/admin/carriers/new">New Carrier</a>
-  </p>
+        <table class="carriers table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th ng-if="isAdmin()">Actions</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr ng-repeat="carrier in carriers">
+              <td>
+                <a ng-if="isAdmin()" ng-href="/admin/carriers/{{carrier.slug}}">{{carrier.name}}</a>
+              </td>
+
+              <td>
+                <a class="btn btn-danger btn-xs" ng-if="isAdmin()" ng-click="deleteCarrierAt($index)">Delete</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p ng-if="isAdmin()">
+          <a class="btn btn-primary" href="/admin/carriers/new">New Carrier</a>
+        </p>
+      </div>
+
+      <div role="tabpanel" class="tab-pane" ng-class="{active: currentTab() === 'benefit-plans'}" id="benefit-plans">
+        <h2>Benefit Plans</h2>
+
+        <p>Add and update benefits plans available from connected carriers.</p>
+
+        <table class="benefit-plans table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr ng-repeat="benefitPlan in benefitPlans">
+              <td>
+                <a href="/admin/benefit_plans/{{benefitPlan.slug}}">{{benefitPlan.name}}</a>
+                <a class="btn btn-info btn-xs disabled" href="" ng-if="benefitPlan.account_id">Owned</a>
+              </td>
+
+              <td>
+                <a class="btn btn-info btn-xs" href="" ng-click="toggleBenefitPlanAt($index)" ng-if="!benefitPlan.account_id">{{benefitPlan.is_enabled ? 'Disable' : 'Enable'}}</a>
+                <a class="btn btn-danger btn-xs" href="" ng-click="deleteBenefitPlanAt($index)" ng-if="!benefitPlan.account_id">Delete</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>
+          <a class="btn btn-primary" href="/admin/benefit_plans/new">New Benefit Plan</a>
+        </p>
+      </div>
+    </div>
+  </div>
 </div>
 

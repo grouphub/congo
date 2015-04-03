@@ -1,0 +1,87 @@
+<div class="col-md-12">
+  <h1>Carrier Management</h1>
+
+  <div id="index-carriers-tabs" role="tabpanel">
+    <!-- Tabs -->
+    <ul class="nav nav-tabs" role "tablist">
+      <li role="presentation" ng-class="{active: currentTab() === 'carriers'}">
+        <a href="" data-target="#carriers" aria-controls="carriers" role="tab" data-toggle="tab" ng-click="changeTab('carriers')">Carriers</a>
+      </li>
+
+      <li role="presentation" ng-class="{active: currentTab() === 'benefit-plans'}">
+        <a href="" data-target="#benefit-plans" aria-controls="benefit-plans" role="tab" data-toggle="tab" ng-click="changeTab('benefit-plans')">Benefit Plans</a>
+      </li>
+    </ul>
+
+    <div class="tab-content">
+      <div role="tabpanel" class="tab-pane" ng-class="{active: currentTab() === 'carriers'}" id="carriers">
+        <h2>Carriers</h2>
+
+        <p>Add new carriers to your account or update existing carriers listed below.</p>
+
+        <table class="table carriers">
+          <thead>
+            <th>Name</th>
+            <th>Actions</th>
+          </thead>
+
+          <tbody>
+            <tr ng-repeat="carrier in carriers">
+              <td>
+                <a href="/accounts/{{accountSlug()}}/{{currentRole()}}/carriers/{{carrier.slug}}">
+                  {{carrier.name}}
+                </a>
+
+                <span ng-if="carrier.account_id" class="label label-default owned">Owned</span>
+              </td>
+
+              <td>
+                <a href="/accounts/{{accountSlug()}}/{{currentRole()}}/carriers/{{carrier.slug}}" class="btn btn-success btn-xs" ng-if="carrierCanBeActivated(carrier)">Activate</a>
+                <a href="" class="btn btn-danger btn-xs" ng-if="carrierCanBeDeleted(carrier)" ng-click="deleteCarrierAt($index)">Delete</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p ng-if="currentRole() === 'broker' || currentRole() === 'group_admin'">
+          <a class="btn btn-primary" href="/accounts/{{accountSlug()}}/{{currentRole()}}/carriers/new">New Carrier</a>
+        </p>
+      </div>
+
+      <div role="tabpanel" class="tab-pane" ng-class="{active: currentTab() === 'benefit-plans'}" id="benefit-plans">
+        <h2>Benefit Plans</h2>
+
+        <p>Add and update benefits plans available from connected carriers.</p>
+
+        <table class="table benefit-plans">
+          <thead>
+            <th>Name</th>
+            <th>Actions</th>
+          </thead>
+
+          <tbody>
+            <tr ng-repeat="benefitPlan in benefitPlans">
+              <td>
+                <a href="/accounts/{{accountSlug()}}/{{currentRole()}}/benefit_plans/{{benefitPlan.slug}}">
+                  {{benefitPlan.name}}
+                </a>
+
+                <span ng-if="benefitPlan.account_id" class="label label-default owned">Owned</span>
+              </td>
+
+              <td>
+                <a href="/accounts/{{accountSlug()}}/{{currentRole()}}/benefit_plans/{{benefitPlan.slug}}" class="btn btn-success btn-xs" ng-if="benefitPlanCanBeActivated(benefitPlan)">Activate</a>
+                <a href="" class="btn btn-danger btn-xs" ng-if="benefitPlanCanBeDeleted(benefitPlan)" ng-click="deleteBenefitPlanAt($index)">Delete</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p ng-if="currentRole() === 'broker' || currentRole() === 'group_admin'">
+          <a class="btn btn-primary" href="/accounts/{{accountSlug()}}/{{currentRole()}}/benefit_plans/new">New Benefit Plan</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+

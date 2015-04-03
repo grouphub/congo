@@ -102,7 +102,7 @@ congoApp.controller('ApplicationsNewController', [
 
       var data = {
         group_slug: $scope.groupSlug(),
-        benefit_plan_id: $scope.benefitPlanId(),
+        benefit_plan_slug: $scope.benefitPlanSlug(),
         properties: properties,
         applied_by_id: congo.currentUser.id
       };
@@ -147,7 +147,7 @@ congoApp.controller('ApplicationsNewController', [
       });
 
     $http
-      .get('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/benefit_plans/' + $scope.benefitPlanId() + '.json')
+      .get('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/benefit_plans/' + $scope.benefitPlanSlug() + '.json')
       .success(function (data, status, headers, config) {
         $scope.benefitPlan = data.benefit_plan;
 

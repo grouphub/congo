@@ -111,6 +111,9 @@ describe Account do
         name: 'broker',
         invitation_id: broker_invitation.id
 
+      broker_invitation.update_attributes! \
+        account_id: account.id
+
       customer_user = User.create! \
         first_name: 'Alice',
         last_name: 'Doe',
@@ -123,6 +126,7 @@ describe Account do
         name: 'customer'
 
       carrier = Carrier.create! \
+        account_id: account.id,
         name: 'Blue Cross',
         properties: {
           name: 'Blue Cross',
@@ -166,7 +170,17 @@ describe Account do
           description_markdown: "# Best Health Insurance PPO\n\nAn example plan."
         }
 
+      account_benefit_plan = AccountBenefitPlan.create! \
+        account_id: account.id,
+        carrier_id: carrier.id,
+        carrier_account_id: carrier_account.id,
+        benefit_plan_id: benefit_plan.id,
+        properties: {
+
+        }
+
       benefit_plan_attachment = Attachment.create! \
+        account_id: account.id,
         benefit_plan_id: benefit_plan.id,
         title: 'Sample Attachment',
         filename: '123',
@@ -189,10 +203,12 @@ describe Account do
         }
 
       group_benefit_plan = GroupBenefitPlan.create! \
+        account_id: account.id,
         group_id: group.id,
         benefit_plan_id: benefit_plan.id
 
       group_attachment = Attachment.create! \
+        account_id: account.id,
         group_id: group.id,
         title: 'Sample Attachment 2',
         filename: '124',
@@ -205,6 +221,7 @@ describe Account do
         name: 'Example API Token'
 
       customer_membership = Membership.create! \
+        account_id: account.id,
         group_id: group.id,
         user_id: customer_user.id,
         role_id: customer_role.id,
@@ -223,6 +240,7 @@ describe Account do
       expect(Role.where(id: customer_role.id)).to_not be_present
       expect(CarrierAccount.where(id: carrier_account.id)).to_not be_present
       expect(BenefitPlan.where(id: benefit_plan.id)).to_not be_present
+      expect(AccountBenefitPlan.where(id: account_benefit_plan.id)).to_not be_present
       expect(Attachment.where(id: benefit_plan_attachment.id)).to_not be_present
       expect(Group.where(id: group.id)).to_not be_present
       expect(GroupBenefitPlan.where(id: group_benefit_plan.id)).to_not be_present
@@ -230,10 +248,87 @@ describe Account do
       expect(Token.where(id: token.id)).to_not be_present
       expect(Membership.where(id: customer_membership.id)).to_not be_present
       expect(Application.where(id: customer_application.id)).to_not be_present
+      expect(Carrier.where(id: carrier.id)).to_not be_present
 
       expect(User.where(id: broker_user.id)).to be_present
       expect(User.where(id: customer_user.id)).to be_present
+    end
+
+    it 'preserves carriers and benefit plans created by an admin' do
+      account = Account.create! \
+        name: 'First Account',
+        tagline: 'First account is best account!',
+        plan_name: 'premier',
+        properties: {
+          name: 'First Account',
+          tagline: 'First account is best account!',
+          plan_name: 'premier',
+          tax_id: '123',
+          first_name: 'Barry',
+          last_name: 'Broker',
+          phone: '(555) 555-5555'
+        }
+
+      carrier = Carrier.create! \
+        name: 'Blue Cross',
+        properties: {
+          name: 'Blue Cross',
+          npi: '1467560003',
+          trading_partner_id: 'MOCKPAYER',
+          service_types: ['health_benefit_plan_coverage'],
+          tax_id: '123',
+          first_name: 'Brad',
+          last_name: 'Bluecross',
+          address_1: '123 Somewhere Lane',
+          address_2: 'Apt. 123',
+          city: 'Somewhereville',
+          state: 'CA',
+          zip: '94444',
+          phone: '444-444-4444'
+        }
+
+      carrier_account = CarrierAccount.create! \
+        name: 'My Broker Blue Cross',
+        carrier_id: carrier.id,
+        account_id: account.id,
+        properties: {
+          name: 'My Broker Blue Cross',
+          carrier_slug: 'blue_cross',
+          broker_number: '234',
+          brokerage_name: 'Example Brokerage',
+          tax_id: '345',
+          account_type: 'broker'
+        }
+
+      benefit_plan = BenefitPlan.create! \
+        carrier_id: carrier.id,
+        carrier_account_id: carrier_account.id,
+        is_enabled: true,
+        name: 'Best Health Insurance PPO',
+        description_html: "<h1>Best Health Insurance PPO</h1>\n<p>An example plan.</p>",
+        description_markdown: "# Best Health Insurance PPO\n\nAn example plan.",
+        properties: {
+          name: 'Best Health Insurance PPO',
+          description_html: "<h1>Best Health Insurance PPO</h1>\n<p>An example plan.</p>",
+          description_markdown: "# Best Health Insurance PPO\n\nAn example plan."
+        }
+
+      account_benefit_plan = AccountBenefitPlan.create! \
+        account_id: account.id,
+        carrier_id: carrier.id,
+        carrier_account_id: carrier_account.id,
+        benefit_plan_id: benefit_plan.id,
+        properties: {
+
+        }
+
+      account.nuke!
+
+      expect(CarrierAccount.where(id: carrier_account.id)).to_not be_present
+      expect(AccountBenefitPlan.where(id: account_benefit_plan.id)).to_not be_present
+
       expect(Carrier.where(id: carrier.id)).to be_present
+      expect(BenefitPlan.where(id: benefit_plan.id)).to be_present
     end
 
   end

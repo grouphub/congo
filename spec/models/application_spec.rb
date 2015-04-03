@@ -35,6 +35,7 @@ describe Application do
 
       carrier_account = CarrierAccount.create! \
         name: 'Admin Blue Shield',
+        account_id: account.id,
         carrier_id: carrier.id,
         properties: {
           name: 'Admin Blue Shield',
@@ -46,6 +47,8 @@ describe Application do
         }
 
       benefit_plan = BenefitPlan.create! \
+        account_id: account.id,
+        carrier_id: carrier.id,
         carrier_account_id: carrier_account.id,
         is_enabled: true,
         name: 'Admin Health Insurance PPO',
@@ -87,6 +90,7 @@ describe Application do
         name: 'customer'
 
       membership = Membership.create! \
+        account_id: account.id,
         group_id: group.id,
         user_id: alice.id,
         role_id: alice.roles.first.id,
@@ -95,13 +99,15 @@ describe Application do
       properties = JSON.parse(File.read("#{Rails.root}/spec/data/application.json"))
 
       application = Application.create! \
-        account_id: nil,
+        account_id: account.id,
         benefit_plan_id: benefit_plan.id,
         membership_id: membership.id,
         reference_number: '4aueb8vr2z5es3gpu78alq3yt',
         properties: properties
 
       application_pokitdok = JSON.parse(File.read("#{Rails.root}/spec/data/application-pokitdok.json"))
+      application_pokitdok['async'] = true
+      application_pokitdok['callback_url'] = "http://test.host/api/internal/accounts/first_account/roles/customer/applications/#{application.id}/callback.json"
 
       expect(application.to_pokitdok).to eq(application_pokitdok)
     end

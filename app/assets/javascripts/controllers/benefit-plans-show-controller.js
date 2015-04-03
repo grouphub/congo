@@ -7,10 +7,10 @@ congoApp.controller('BenefitPlansShowController', [
     $scope.enforceValidAccount();
 
     $scope.benefitPlan = null;
-    $scope.carrierAccounts = null;
+    $scope.carriers = null;
     $scope.form = {
       name: null,
-      carrier_account_id: null,
+      carrier_id: null,
       plan_type: null,
       exchange_plan: null,
       small_group: null,
@@ -20,6 +20,10 @@ congoApp.controller('BenefitPlansShowController', [
       description_trusted: null
     };
 
+    $scope.accountBenefitPlanForm = {
+
+    };
+
     $scope.$watch('form.description_markdown', function (string) {
       $scope.form.description_html = marked(string || '');
       $scope.form.description_trusted = $sce.trustAsHtml($scope.form.description_html);
@@ -27,13 +31,14 @@ congoApp.controller('BenefitPlansShowController', [
 
     $scope.submit = function () {
       $http
-        .put('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/benefit_plans/' + $scope.benefitPlanId() + '.json', {
+        .put('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/benefit_plans/' + $scope.benefitPlanSlug() + '.json', {
           name: $scope.form.name,
-          carrier_account_id: $scope.form.carrier_account_id,
-          properties: _($scope.form).omit('description_trusted')
+          carrier_id: $scope.form.carrier_id,
+          properties: _($scope.form).omit('description_trusted'),
+          account_benefit_plan_properties: $scope.accountBenefitPlanForm
         })
         .success(function (data, status, headers, config) {
-          $location.path('/accounts/' + $scope.accountSlug() + '/' + $scope.currentRole() + '/benefit_plans');
+          $location.path('/accounts/' + $scope.accountSlug() + '/' + $scope.currentRole() + '/carriers');
 
           flashesFactory.add('success', 'Successfully updated the benefit plan.');
         })
@@ -47,20 +52,20 @@ congoApp.controller('BenefitPlansShowController', [
     };
 
     $http
-      .get('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/benefit_plans/' + $scope.benefitPlanId() + '.json')
+      .get('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/benefit_plans/' + $scope.benefitPlanSlug() + '.json')
       .success(function (data, status, headers, config) {
         $scope.benefitPlan = data.benefit_plan;
         $scope.form = JSON.parse($scope.benefitPlan.properties_data);
-        $scope.form.carrier_account_id = $scope.benefitPlan.carrier_account_id;
+        $scope.form.carrier_id = $scope.benefitPlan.carrier_id;
 
         $http
-          .get('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/carrier_accounts.json')
+          .get('/api/internal/admin/carriers.json')
           .success(function (data, status, headers, config) {
-            $scope.carrierAccounts = data.carrier_accounts;
+            $scope.carriers = data.carriers;
 
             // TODO: This is not the right way to do this, but I can't get the select to behave.
             $timeout(function () {
-              $('.benefit-plans-show form #carrier_account').val($scope.benefitPlan.carrier_account_id);
+              $('.benefit-plans-show form #carrier').val($scope.benefitPlan.carrier_id);
             });
 
             $scope.ready();
@@ -68,7 +73,7 @@ congoApp.controller('BenefitPlansShowController', [
           .error(function (data, status, headers, config) {
             var error = (data && data.error) ?
               data.error :
-              'There was a problem loading the list of carrier accounts.';
+              'There was a problem loading the list of carriers.';
 
             flashesFactory.add('danger', error);
           });
@@ -80,75 +85,6 @@ congoApp.controller('BenefitPlansShowController', [
 
         flashesFactory.add('danger', error);
       });
-
-    // ===========
-    // Attachments
-    // ===========
-
-    $scope.attachmentFormData = {
-      title: null,
-      description: null
-    };
-
-    $scope.file = {
-      name: ''
-    };
-
-    $scope.fileChanged = function (e) {
-      $scope.$apply(function () {
-        $scope.file.name = (e.files && e.files[0]) ? e.files[0].name : '';
-      });
-    };
-
-    $scope.newAttachment = function () {
-      var fileInput = $('#new-attachment').find('[type="file"]');
-      var file = fileInput[0].files[0];
-      var formData = new FormData();
-
-      formData.append('file', file);
-      formData.append('properties', JSON.stringify($scope.attachmentFormData));
-
-      $http
-        .post('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/benefit_plans/' + $scope.benefitPlanId() + '/attachments.json', formData, {
-          withCredentials: true,
-          headers: {
-            'Content-Type': undefined
-          },
-          transformRequest: angular.identity
-        })
-        .success(function (data, status, headers, config) {
-          $scope.benefitPlan.attachments.push(data.attachment);
-      
-          fileInput[0].value = null;
-          $scope.file.name = '';
-        })
-        .error(function (data, status, headers, config) {
-          var error = (data && data.error) ?
-            data.error :
-            'There was a problem uploading the file.';
-
-          flashesFactory.add('danger', error);
-        });
-    };
-
-    $scope.deleteAttachmentAt = function (index) {
-      var attachment = $scope.benefitPlan.attachments[index];
-
-      $http
-        .delete('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/benefit_plans/' + $scope.benefitPlanId() + '/attachments/' + attachment.id + '.json')
-        .success(function (data, status, headers, config) {
-          $scope.benefitPlan.attachments = _($scope.benefitPlan.attachments).reject(function (deletedAttachment) {
-            return attachment.id === deletedAttachment.id;
-          });
-        })
-        .error(function (data, status, headers, config) {
-          var error = (data && data.error) ?
-            data.error :
-            'There was a problem deleting the attachment.';
-
-          flashesFactory.add('danger', error);
-        });
-    }
   }
 ]);
 

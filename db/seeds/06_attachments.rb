@@ -33,8 +33,11 @@ if Rails.env.development?
 
   upload_to_fakes3(name, tempfile, 'image/png')
 
+  group = Group.where(name: 'My Group').first
+
   Attachment.create! \
-    group_id: Group.where(name: 'My Group').first.id,
+    account_id: group.account_id,
+    group_id: group.id,
     title: title,
     filename: name,
     description: description,
@@ -52,7 +55,10 @@ if Rails.env.development?
 
   upload_to_fakes3(name, tempfile, 'image/png')
 
+  group = Group.where(name: 'My Group').first
+
   Attachment.create! \
+    account_id: group.account_id,
     benefit_plan_id: BenefitPlan.where(name: 'Best Health Insurance PPO').first.id,
     title: title,
     filename: name,

@@ -6,10 +6,10 @@ congoApp.controller('BenefitPlansNewController', [
     // Make sure user is totally signed up before continuing.
     $scope.enforceValidAccount();
 
-    $scope.carrierAccounts = null;
+    $scope.carriers = null;
     $scope.form = {
       name: null,
-      carrier_account_id: null,
+      carrier_id: null,
       plan_type: null,
       exchange_plan: null,
       small_group: null,
@@ -17,6 +17,10 @@ congoApp.controller('BenefitPlansNewController', [
       description_markdown: null,
       description_html: null,
       description_trusted: null
+    };
+
+    $scope.accountBenefitPlanForm = {
+
     };
 
     $scope.$watch('form.description_markdown', function (string) {
@@ -28,11 +32,14 @@ congoApp.controller('BenefitPlansNewController', [
       $http
         .post('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/benefit_plans.json', {
           name: $scope.form.name,
-          carrier_account_id: $scope.form.carrier_account_id,
-          properties: _($scope.form).omit('description_trusted')
+          carrier_id: $scope.form.carrier_id,
+          properties: _($scope.form).omit('description_trusted'),
+          account_benefit_plan_properties: $scope.accountBenefitPlanForm
         })
         .success(function (data, status, headers, config) {
-          $location.path('/accounts/' + $scope.accountSlug() + '/' + $scope.currentRole() + '/benefit_plans');
+          $location.path('/accounts/' + $scope.accountSlug() + '/' + $scope.currentRole() + '/carriers');
+
+          flashesFactory.add('success', 'Successfully created the benefit plan.');
         })
         .error(function (data, status, headers, config) {
           var error = (data && data.error) ?
@@ -44,17 +51,17 @@ congoApp.controller('BenefitPlansNewController', [
     };
 
     $http
-      .get('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/carrier_accounts.json')
+      .get('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/carriers.json')
       .success(function (data, status, headers, config) {
-        $scope.carrierAccounts = data.carrier_accounts;
-        $scope.form.carrier_account_id = $scope.carrierAccounts[0].id;
+        $scope.carriers = data.carriers;
+        $scope.form.carrier_id = $scope.carriers[0].id;
 
         $scope.ready();
       })
       .error(function (data, status, headers, config) {
         var error = (data && data.error) ?
           data.error :
-          'There was a problem loading the carrier accounts.';
+          'There was a problem loading the carriers.';
 
         flashesFactory.add('danger', error);
       });

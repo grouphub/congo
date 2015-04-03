@@ -6,10 +6,10 @@ congoApp.controller('AdminBenefitPlansNewController', [
     // Make sure user is admin before continuing.
     $scope.enforceAdmin();
 
-    $scope.carrierAccounts = null;
+    $scope.carriers = null;
     $scope.form = {
       name: null,
-      carrier_account_id: null,
+      carrier_id: null,
       plan_type: null,
       exchange_plan: null,
       small_group: null,
@@ -28,11 +28,11 @@ congoApp.controller('AdminBenefitPlansNewController', [
       $http
         .post('/api/internal/admin/benefit_plans.json', {
           name: $scope.form.name,
-          carrier_account_id: $scope.form.carrier_account_id,
+          carrier_id: $scope.form.carrier_id,
           properties: _($scope.form).omit('description_trusted')
         })
         .success(function (data, status, headers, config) {
-          $location.path('/admin/benefit_plans');
+          $location.path('/admin/carriers');
         })
         .error(function (data, status, headers, config) {
           var error = (data && data.error) ?
@@ -44,17 +44,17 @@ congoApp.controller('AdminBenefitPlansNewController', [
     };
 
     $http
-      .get('/api/internal/admin/carrier_accounts.json')
+      .get('/api/internal/admin/carriers.json')
       .success(function (data, status, headers, config) {
-        $scope.carrierAccounts = data.carrier_accounts;
-        $scope.form.carrier_account_id = $scope.carrierAccounts[0].id;
+        $scope.carriers = data.carriers;
+        $scope.form.carrier_id = $scope.carriers[0].id;
 
         $scope.ready();
       })
       .error(function (data, status, headers, config) {
         var error = (data && data.error) ?
           data.error :
-          'There was a problem loading the carrier accounts.';
+          'There was a problem loading the carriers.';
 
         flashesFactory.add('danger', error);
       });

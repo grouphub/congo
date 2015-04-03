@@ -5,27 +5,15 @@
 
   <ul class="simple-list functions-list">
     <li>
-      <a class="btn btn-default" ng-href="/admin/carriers">Manage Carriers</a>
+      <a class="btn btn-default" ng-href="/admin/carriers">Manage Carriers and Benefit Plans</a>
     </li>
 
     <li>
-      <a class="btn btn-default" ng-href="/admin/carrier_accounts">Manage Carrier Accounts</a>
-    </li>
-
-    <li>
-      <a class="btn btn-default" ng-href="/admin/benefit_plans">Manage Benefit Plans</a>
+      <a class="btn btn-default" ng-href="/admin/accounts">Show All Accounts, Groups, and Users</a>
     </li>
 
     <li>
       <a class="btn btn-default" ng-href="/admin/invitations">Manage Invitations</a>
-    </li>
-
-    <li>
-      <a class="btn btn-default" ng-href="/admin/accounts">Show All Accounts</a>
-    </li>
-
-    <li>
-      <a class="btn btn-default" ng-href="/admin/groups">Show All Groups</a>
     </li>
 
     <li>
@@ -41,11 +29,7 @@
 
   <ul class="simple-list functions-list">
     <li>
-      <a class="btn btn-default" ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/carrier_accounts">Manage Carrier Accounts</a>
-    </li>
-
-    <li>
-      <a class="btn btn-default" ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/benefit_plans">Manage Benefit Plans</a>
+      <a class="btn btn-default" ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/carriers">Manage Carriers and Benefit Plans</a>
     </li>
 
     <li>
@@ -63,6 +47,10 @@
     <li ng-if="featureEnabled('eligibility_modal')">
       <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#eligibility-modal">Check Eligibility</a>
     </li>
+
+    <li>
+      <a class="btn btn-success" href="mailto:info@grouphub.io">Get Help</a>
+    </li>
   </ul>
 </div>
 
@@ -73,7 +61,7 @@
 
   <ul class="simple-list functions-list">
     <li>
-      <a class="btn btn-default" ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/benefit_plans">Manage Benefit Plans</a>
+      <a class="btn btn-default" ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/carriers">Manage Carriers and Benefit Plans</a>
     </li>
 
     <li>
@@ -82,6 +70,10 @@
 
     <li ng-if="featureEnabled('eligibility_modal')">
       <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#eligibility-modal">Check Eligibility</a>
+    </li>
+
+    <li>
+      <a class="btn btn-success" href="mailto:info@grouphub.io">Get Help</a>
     </li>
   </ul>
 </div>
@@ -98,6 +90,10 @@
 
     <li>
       <a class="btn btn-default" ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/applications">Manage Benefits Applications</a>
+    </li>
+
+    <li>
+      <a class="btn btn-success" href="mailto:info@grouphub.io">Get Help</a>
     </li>
   </ul>
 </div>

@@ -1,12 +1,9 @@
 module Sluggable
   extend ActiveSupport::Concern
 
-  included do
-    before_save :add_slug
-  end
-
-  def add_slug
-    self.slug = Sluggerizer.sluggerize(self.name) if self.name
+  def name=(n)
+    write_attribute(:name, n)
+    write_attribute(:slug, Sluggerizer.sluggerize(n)) if n
   end
 end
 

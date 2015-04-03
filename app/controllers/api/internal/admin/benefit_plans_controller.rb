@@ -19,8 +19,8 @@ class Api::Internal::Admin::BenefitPlansController < ApplicationController
 
   def create
     name = params[:name]
-    carrier_account_id = params[:carrier_account_id]
-    carrier_account = CarrierAccount.where(id: carrier_account_id).first
+    carrier_id = params[:carrier_id]
+    carrier = Carrier.where(id: carrier_id).first
     properties = params[:properties]
     description_markdown = properties['description_markdown']
     description_html = properties['description_html']
@@ -31,16 +31,16 @@ class Api::Internal::Admin::BenefitPlansController < ApplicationController
       return
     end
 
-    unless carrier_account
+    unless carrier
       # TODO: Test this
-      error_response('Could not find a matching carrier account.')
+      error_response('Could not find a matching carrier.')
       return
     end
 
     benefit_plan = BenefitPlan.create! \
       name: name,
       account_id: nil,
-      carrier_account_id: carrier_account.id,
+      carrier_id: carrier.id,
       properties: properties,
       description_markdown: description_markdown,
       description_html: description_html
@@ -93,7 +93,7 @@ class Api::Internal::Admin::BenefitPlansController < ApplicationController
   end
 
   def update
-    benefit_plan = BenefitPlan.find(params[:id])
+    benefit_plan = BenefitPlan.where(slug: params[:id]).first
     properties = params[:properties]
 
     unless benefit_plan
@@ -133,8 +133,7 @@ class Api::Internal::Admin::BenefitPlansController < ApplicationController
   end
 
   def show
-    id = params[:id]
-    benefit_plan = BenefitPlan.find(id)
+    benefit_plan = BenefitPlan.where(slug: params[:id]).first
 
     respond_to do |format|
       format.json {
@@ -146,9 +145,9 @@ class Api::Internal::Admin::BenefitPlansController < ApplicationController
   end
 
   def destroy
-    id = params[:id]
+    benefit_plan = BenefitPlan.where(slug: params[:id]).first
 
-    benefit_plan = BenefitPlan.find(id).destroy
+    benefit_plan.destroy!
 
     respond_to do |format|
       format.json {

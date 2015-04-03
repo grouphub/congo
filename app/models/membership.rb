@@ -2,6 +2,7 @@ class Membership < ActiveRecord::Base
   belongs_to :user
   belongs_to :role
   belongs_to :group
+  belongs_to :account
 
   has_many :applications
 

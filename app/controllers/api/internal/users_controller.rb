@@ -109,6 +109,7 @@ class Api::Internal::UsersController < ApplicationController
       end
 
       role.update_attributes! \
+        account_id: role.account_id,
         invitation_id: invitation.id
     end
 
