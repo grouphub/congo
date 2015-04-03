@@ -26,7 +26,7 @@
     # Clock box
     {
       name: 'congo-staging-clock-1',
-      ssh_host: 'ec2-52-4-179-60.compute-1.amazonaws.com',
+      ssh_host: 'ec2-52-4-211-151.compute-1.amazonaws.com',
       ssh_args: {
         user: 'ec2-user',
         keys_only: true,
