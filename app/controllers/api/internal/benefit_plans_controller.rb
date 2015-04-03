@@ -108,8 +108,8 @@ class Api::Internal::BenefitPlansController < ApplicationController
     description_html = properties['description_html']
 
     if benefit_plan.account_id == current_account.id
-    # Only modify `properties` if it is passed as a parameter.
-      unless.properties.nil?
+      # Only modify `properties` if it is passed as a parameter.
+      unless properties.nil?
         benefit_plan.update_attributes! \
           name: name,
           properties: properties,
