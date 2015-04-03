@@ -13,7 +13,7 @@ namespace :workers do
   }
 
   start_worker = lambda { |worker|
-    puts %[Starting the new existing worker...]
+    puts %[Starting the new worker...]
     worker.ssh! %[
       cd #{worker.to_directory} &&
         #{worker.ruby_env} &&
