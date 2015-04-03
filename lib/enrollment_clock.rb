@@ -1,7 +1,7 @@
 require File.expand_path('../../config/boot', __FILE__)
 require File.expand_path('../../config/environment', __FILE__)
 
-class Clock
+class EnrollmentClock
   attr_accessor :log_file, :frequency, :logger
 
   def initialize
@@ -39,6 +39,4 @@ class Clock
     end
   end
 end
-
-Clock.new.start
 

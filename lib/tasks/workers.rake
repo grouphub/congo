@@ -59,6 +59,9 @@ namespace :workers do
       cd #{worker.deploy_directory} &&
         ls | sort -r | tail -n +4 | xargs rm -r
     ]
+
+    puts %[Finished deploying to "#{worker.name}".]
+    print "\n"
   }
 
   run_on_box_or_boxes = lambda { |callback|

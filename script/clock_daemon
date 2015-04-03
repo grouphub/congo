@@ -1,0 +1,9 @@
+#!/bin/sh
+
+nohup bundle exec rails runner lib/clock.rb \
+  --log-file=${CONGO_CLOCK_LOG:-log/clock.log} \
+  --frequency=${CONGO_CLOCK_SECONDS:-300} \
+  >/dev/null 2>&1 &
+
+echo $! > ${CONGO_CLOCK_PID:-tmp/pids/clock.pid}
+
