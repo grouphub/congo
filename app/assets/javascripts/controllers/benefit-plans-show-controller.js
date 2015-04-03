@@ -3,6 +3,9 @@ var congoApp = angular.module('congoApp');
 congoApp.controller('BenefitPlansShowController', [
   '$scope', '$http', '$location', '$timeout', '$sce', 'flashesFactory',
   function ($scope, $http, $location, $timeout, $sce, flashesFactory) {
+    // Make sure user is totally signed up before continuing.
+    $scope.enforceValidAccount();
+
     $scope.benefitPlan = null;
     $scope.carriers = null;
     $scope.form = {

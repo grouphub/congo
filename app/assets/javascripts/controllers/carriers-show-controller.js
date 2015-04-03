@@ -3,6 +3,9 @@ var congoApp = angular.module('congoApp');
 congoApp.controller('CarriersShowController', [
   '$scope', '$http', '$location', 'flashesFactory',
   function ($scope, $http, $location, flashesFactory) {
+    // Make sure user is totally signed up before continuing.
+    $scope.enforceValidAccount();
+
     $scope.carrier = null;
     $scope.form = {
       name: null,

@@ -3,6 +3,9 @@ var congoApp = angular.module('congoApp');
 congoApp.controller('CarriersIndexController', [
   '$scope', '$http', '$location', '$cookieStore', 'flashesFactory',
   function ($scope, $http, $location, $cookieStore, flashesFactory) {
+    // Make sure user is totally signed up before continuing.
+    $scope.enforceValidAccount();
+
     // Not the greatest place to put a selector, but c'est la vie.
     $('#index-carriers-tabs').tab();
 

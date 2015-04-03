@@ -126,7 +126,7 @@
     </a>
   </li>
 
-  <li class="sidebar-item" ng-if="currentRole() === 'broker'">
+  <li class="sidebar-item" ng-if="currentRole() === 'broker' || currentRole() === 'group_admin'">
     <a ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/carriers" title="Carriers">
       <i class="fa fa-institution"></i>
       <span class="caption">Carriers</span>
