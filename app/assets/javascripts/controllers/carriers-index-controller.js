@@ -17,11 +17,28 @@ congoApp.controller('CarriersIndexController', [
       $cookieStore.put('index-carriers-tab', tabName);
     };
 
+    $scope.search = {
+      carriers: '',
+      benefitPlans: ''
+    }
+
     // --------
     // Carriers
     // --------
 
     $scope.carriers = null;
+
+    $scope.carriersToShow = function () {
+      if ($scope.search.carriers.length > 0) {
+        return _($scope.carriers)
+          .select(function (carrier) {
+            return carrier.name.toLowerCase()
+              .indexOf($scope.search.carriers.toLowerCase()) > -1;
+          });
+      } else {
+        return $scope.carriers;
+      }
+    };
 
     $scope.carrierCanBeActivated = function (carrier) {
       return !carrier.carrier_account;
@@ -58,6 +75,18 @@ congoApp.controller('CarriersIndexController', [
     // -------------
 
     $scope.benefitPlans = null;
+
+    $scope.benefitPlansToShow = function () {
+      if ($scope.search.benefitPlans.length > 0) {
+        return _($scope.benefitPlans)
+          .select(function (benefitPlan) {
+            return benefitPlan.name.toLowerCase()
+              .indexOf($scope.search.benefitPlans.toLowerCase()) > -1;
+          });
+      } else {
+        return $scope.benefitPlans;
+      }
+    };
 
     $scope.benefitPlanCanBeActivated = function (benefitPlan) {
       return !benefitPlan.account_benefit_plan;

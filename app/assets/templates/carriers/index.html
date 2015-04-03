@@ -19,6 +19,16 @@
 
         <p>Add new carriers to your account or update existing carriers listed below.</p>
 
+        <form class="form">
+          <div class="input-group">
+            <span class="input-group-addon">
+              <span class="glyphicon glyphicon-search"></span>
+            </span>
+
+            <input type="text" class="form-control" ng-model="search.carriers" placeholder="Search Carriers&hellip;">
+          </div>
+        </form>
+
         <table class="table carriers">
           <thead>
             <th>Name</th>
@@ -26,7 +36,7 @@
           </thead>
 
           <tbody>
-            <tr ng-repeat="carrier in carriers">
+            <tr ng-repeat="carrier in carriersToShow()">
               <td>
                 <a href="/accounts/{{accountSlug()}}/{{currentRole()}}/carriers/{{carrier.slug}}">
                   {{carrier.name}}
@@ -53,6 +63,16 @@
 
         <p>Add and update benefits plans available from connected carriers.</p>
 
+        <form class="form">
+          <div class="input-group">
+            <span class="input-group-addon">
+              <span class="glyphicon glyphicon-search"></span>
+            </span>
+
+            <input type="text" class="form-control" ng-model="search.benefitPlans" placeholder="Search Benefit Plans&hellip;">
+          </div>
+        </form>
+
         <table class="table benefit-plans">
           <thead>
             <th>Name</th>
@@ -60,7 +80,7 @@
           </thead>
 
           <tbody>
-            <tr ng-repeat="benefitPlan in benefitPlans">
+            <tr ng-repeat="benefitPlan in benefitPlansToShow()">
               <td>
                 <a href="/accounts/{{accountSlug()}}/{{currentRole()}}/benefit_plans/{{benefitPlan.slug}}">
                   {{benefitPlan.name}}

@@ -19,6 +19,16 @@
 
         <p>Add new carriers to the system or update existing carriers listed below.</p>
 
+        <form class="form">
+          <div class="input-group">
+            <span class="input-group-addon">
+              <span class="glyphicon glyphicon-search"></span>
+            </span>
+
+            <input type="text" class="form-control" ng-model="search.carriers" placeholder="Search Carriers&hellip;">
+          </div>
+        </form>
+
         <table class="carriers table">
           <thead>
             <tr>
@@ -28,7 +38,7 @@
           </thead>
 
           <tbody>
-            <tr ng-repeat="carrier in carriers">
+            <tr ng-repeat="carrier in carriersToShow()">
               <td>
                 <a ng-if="isAdmin()" ng-href="/admin/carriers/{{carrier.slug}}">{{carrier.name}}</a>
               </td>
@@ -50,6 +60,16 @@
 
         <p>Add and update benefits plans available from connected carriers.</p>
 
+        <form class="form">
+          <div class="input-group">
+            <span class="input-group-addon">
+              <span class="glyphicon glyphicon-search"></span>
+            </span>
+
+            <input type="text" class="form-control" ng-model="search.benefitPlans" placeholder="Search Benefit Plans&hellip;">
+          </div>
+        </form>
+
         <table class="benefit-plans table">
           <thead>
             <tr>
@@ -59,7 +79,7 @@
           </thead>
 
           <tbody>
-            <tr ng-repeat="benefitPlan in benefitPlans">
+            <tr ng-repeat="benefitPlan in benefitPlansToShow()">
               <td>
                 <a href="/admin/benefit_plans/{{benefitPlan.slug}}">{{benefitPlan.name}}</a>
                 <a class="btn btn-info btn-xs disabled" href="" ng-if="benefitPlan.account_id">Owned</a>
