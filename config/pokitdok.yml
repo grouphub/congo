@@ -1,11 +1,7 @@
 development:
-  # client_id: 'RKH2S5iecrOcrGroqrx9'
-  # client_secret: '1eEx7fl95Deqz0Y9w3StPfMT8oXoRS8XR4oU2xLH'
+  client_id: 'RKH2S5iecrOcrGroqrx9'
+  client_secret: '1eEx7fl95Deqz0Y9w3StPfMT8oXoRS8XR4oU2xLH'
   callback_host: <%= "https://#{ENV['USER']}-grouphub.ngrok.com" %>
-  # client_id: 'ZzzUk4r9DMbV0F9xfuxG'
-  # client_secret: 'A1IsnMpkaQrqdSR9DTVOMQwCTswUMUOhaO69yLsP'
-  client_id: 'hdbLiaPNBDHJtDsAZmr8'
-  client_secret: 'n2FAvzE72RjUBCCPxL97cSpFcTs5tuVn0hUx6lnA'
 
 test:
   client_id: 'RKH2S5iecrOcrGroqrx9'
