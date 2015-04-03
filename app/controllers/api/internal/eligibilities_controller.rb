@@ -70,10 +70,6 @@ class Api::Internal::EligibilitiesController < ApplicationController
       return
     end
 
-    pokitdok = PokitDok::PokitDok.new \
-      Rails.application.config.pokitdok.client_id,
-      Rails.application.config.pokitdok.client_secret
-
     # Populate either the carrier first and last names, or the carrier name.
     carrier_name = carrier.properties['name']
     carrier_first_name = carrier.properties['first_name']

@@ -211,6 +211,9 @@ lines with your variables, then run:
     echo 'export CONGO_CLOCK_SECONDS=300' >> ~/.bashrc
     echo 'export CONGO_CLOCK_LOG=log/clock.log' >> ~/.bashrc
     echo 'export CONGO_CLOCK_PID=tmp/pids/clock.pid' >> ~/.bashrc
+    echo 'export POKITDOK_CLIENT_ID="..."' >> ~/.bashrc
+    echo 'export POKITDOK_CLIENT_SECRET="..."' >> ~/.bashrc
+    echo 'export POKITDOK_CALLBACK_HOST="..."' >> ~/.bashrc
 
 Make sure you have SQS, Postgres on RDS, and Redis on Elasticache setup and
 permissioned properly.

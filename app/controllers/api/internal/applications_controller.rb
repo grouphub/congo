@@ -143,10 +143,6 @@ class Api::Internal::ApplicationsController < ApplicationController
 
     # Application has been submitted to PokitDok.
     if application.completed_on || application.errored_on
-      pokitdok = PokitDok::PokitDok.new \
-        Rails.application.config.pokitdok.client_id,
-        Rails.application.config.pokitdok.client_secret
-
       response = nil
 
       begin

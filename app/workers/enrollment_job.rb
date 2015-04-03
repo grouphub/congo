@@ -19,10 +19,6 @@ class PaymentJob < ActiveJob::Base
     end
 
     application = Application.find(application_id)
-    pokitdok = PokitDok::PokitDok.new \
-      Rails.application.config.pokitdok.client_id,
-      Rails.application.config.pokitdok.client_secret
-
     data = application.to_pokitdok
     response = nil
 
