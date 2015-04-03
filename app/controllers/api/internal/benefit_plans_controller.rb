@@ -9,11 +9,17 @@ class Api::Internal::BenefitPlansController < ApplicationController
     account_slug = params[:account_id]
     account = Account.where(slug: account_slug).first
     role_slug = params[:role_id]
-    benefit_plans = BenefitPlan.where('account_id IS NULL or account_id = ?', current_account.id)
+    benefit_plans = BenefitPlan
+      .where('account_id IS NULL or account_id = ?', current_account.id)
 
     if role_slug != 'group_admin' && role_slug != 'broker'
       benefit_plans.where('is_enabled = TRUE')
     end
+
+    benefit_plans = benefit_plans.reject { |benefit_plan|
+      # Do not show admin-created benefit plans which are not enabled.
+      benefit_plan.account_id == nil && benefit_plan.is_enabled == false
+    }
 
     respond_to do |format|
       format.json {
@@ -107,6 +113,12 @@ class Api::Internal::BenefitPlansController < ApplicationController
         properties: properties,
         description_markdown: description_markdown,
         description_html: description_html
+
+      # Only modify `is_enabled` if it is passed as a parameter.
+      unless params[:is_enabled].nil?
+        benefit_plan.update_attributes! \
+          :is_enabled, params[:is_enabled]
+      end
     end
 
     account_benefit_plan ||= AccountBenefitPlan.create! \

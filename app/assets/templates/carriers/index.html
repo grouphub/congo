@@ -71,6 +71,7 @@
 
               <td>
                 <a href="/accounts/{{accountSlug()}}/{{currentRole()}}/benefit_plans/{{benefitPlan.slug}}" class="btn btn-success btn-xs" ng-if="benefitPlanCanBeActivated(benefitPlan)">Activate</a>
+                <a class="btn btn-info btn-xs" href="" ng-click="toggleBenefitPlanAt($index)" ng-if="benefitPlanCanBeEnabled(benefitPlan)">{{benefitPlan.is_enabled ? 'Disable' : 'Enable'}}</a>
                 <a href="" class="btn btn-danger btn-xs" ng-if="benefitPlanCanBeDeleted(benefitPlan)" ng-click="deleteBenefitPlanAt($index)">Delete</a>
               </td>
             </tr>

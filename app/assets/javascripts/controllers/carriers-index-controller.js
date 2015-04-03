@@ -67,6 +67,33 @@ congoApp.controller('CarriersIndexController', [
       return benefitPlan.account_benefit_plan;
     };
 
+    $scope.benefitPlanCanBeEnabled = function (benefitPlan) {
+      return benefitPlan.account_benefit_plan;
+    };
+
+    $scope.toggleBenefitPlanAt = function (index) {
+      var benefitPlan = $scope.benefitPlans[index];
+
+      if (!benefitPlan) {
+        flashesFactory.add('danger', 'We could not find a matching benefit plan.');
+      }
+
+      $http
+        .put('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/benefit_plans/' + benefitPlan.slug + '.json', {
+          is_enabled: !benefitPlan.is_enabled
+        })
+        .success(function (data, status, headers, config) {
+          $scope.benefitPlans[index] = data.benefit_plan;
+        })
+        .error(function (data, status, headers, config) {
+          var error = (data && data.error) ?
+            data.error :
+            'There was a problem updating the benefit plan.';
+
+          flashesFactory.add('danger', error);
+        });
+    };
+
     $scope.deleteBenefitPlanAt = function (index) {
       var benefitPlan = $scope.benefitPlans[index];
 

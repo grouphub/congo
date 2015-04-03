@@ -55,44 +55,6 @@ class Api::Internal::Admin::BenefitPlansController < ApplicationController
   end
 
   def update
-    benefit_plan = BenefitPlan.find(params[:id])
-    properties = params[:properties]
-    name = properties['name']
-    description_markdown = properties['description_markdown']
-    description_html = properties['description_html']
-    carrier_account_id = properties['carrier_account_id'].to_i
-
-    unless benefit_plan
-      # TODO: Test this
-      error_response('Could not find a matching benefit plan.')
-      return
-    end
-
-    # Only modify `is_enabled` if it is passed as a parameter.
-    unless params[:is_enabled].nil?
-      benefit_plan.update_attribute!(:is_enabled, params[:is_enabled])
-    end
-
-    # Only modify `properties` if it is passed as a parameter.
-    unless properties.nil?
-      benefit_plan.update_attributes! \
-        name: name,
-        carrier_account_id: carrier_account_id,
-        properties: properties,
-        description_markdown: description_markdown,
-        description_html: description_html
-    end
-
-    respond_to do |format|
-      format.json {
-        render json: {
-          benefit_plan: render_benefit_plan(benefit_plan)
-        }
-      }
-    end
-  end
-
-  def update
     benefit_plan = BenefitPlan.where(slug: params[:id]).first
     properties = params[:properties]
 
