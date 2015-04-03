@@ -82,7 +82,7 @@ class Api::Internal::BenefitPlansController < ApplicationController
       carrier_id: carrier.id,
       carrier_account_id: carrier_account.try(:id),
       benefit_plan_id: benefit_plan.id,
-      properties: account_benefit_plan
+      properties: account_benefit_plan_properties
 
     respond_to do |format|
       format.json {
@@ -108,11 +108,14 @@ class Api::Internal::BenefitPlansController < ApplicationController
     description_html = properties['description_html']
 
     if benefit_plan.account_id == current_account.id
-      benefit_plan.update_attributes! \
-        name: name,
-        properties: properties,
-        description_markdown: description_markdown,
-        description_html: description_html
+    # Only modify `properties` if it is passed as a parameter.
+      unless.properties.nil?
+        benefit_plan.update_attributes! \
+          name: name,
+          properties: properties,
+          description_markdown: description_markdown,
+          description_html: description_html
+      end
 
       # Only modify `is_enabled` if it is passed as a parameter.
       unless params[:is_enabled].nil?
@@ -127,8 +130,11 @@ class Api::Internal::BenefitPlansController < ApplicationController
       carrier_account_id: carrier_account.try(:id),
       benefit_plan_id: benefit_plan.id
 
-    account_benefit_plan.update_attributes! \
-      properties: account_benefit_plan_properties
+    # Only modify `account_benefit_plan_properties` if it is passed as a parameter.
+    unless account_benefit_plan_properties.nil?
+      account_benefit_plan.update_attributes! \
+        properties: account_benefit_plan_properties
+    end
 
     respond_to do |format|
       format.json {

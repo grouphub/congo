@@ -56,6 +56,10 @@ congoApp.controller('BenefitPlansShowController', [
         $scope.benefitPlan = data.benefit_plan;
         $scope.form = JSON.parse($scope.benefitPlan.properties_data);
         $scope.form.carrier_id = $scope.benefitPlan.carrier_id;
+        $scope.accountBenefitPlan = $scope.benefitPlan.account_benefit_plan
+        $scope.accountBenefitPlanForm = JSON.parse($scope.accountBenefitPlan.properties_data);
+
+        console.log($scope.accountBenefitPlanForm);
 
         $http
           .get('/api/internal/admin/carriers.json')

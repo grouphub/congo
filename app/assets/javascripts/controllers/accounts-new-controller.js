@@ -13,7 +13,7 @@ congoApp.controller('AccountsNewController', [
       first_name: null,
       last_name: null,
       phone: null,
-      plan_name: null,
+      plan_name: 'basic',
       card_number: null,
       month: null,
       year: null,
