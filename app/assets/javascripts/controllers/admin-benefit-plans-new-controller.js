@@ -13,7 +13,6 @@ congoApp.controller('AdminBenefitPlansNewController', [
       plan_type: null,
       exchange_plan: null,
       small_group: null,
-      group_id: null,
       description_markdown: null,
       description_html: null,
       description_trusted: null

@@ -31,11 +31,6 @@
       <input type="text" class="form-control" id="small_group" placeholder="Enter a Small Group&hellip;" ng-model="form.small_group">
     </div>
 
-    <div class="form-group">
-      <label for="small_group">Group ID</label>
-      <input type="text" class="form-control" id="group_id" placeholder="Enter a Group ID&hellip;" ng-model="form.group_id">
-    </div>
-
     <div class="row">
       <div class="form-group col-md-6">
         <label for="description">Description</label>
@@ -55,7 +50,16 @@
       <div class="col-md-12">
         <input type="submit" class="btn btn-primary" value="New Benefit Plan">
       </div>
-     </div>
+    </div>
+
+    <hr>
+
+    <h1>Account-Specific Benefit Plan Info</h1>
+
+    <div class="form-group">
+      <label for="small_group">Group ID</label>
+      <input type="text" class="form-control" id="group_id" placeholder="Enter a Group ID&hellip;" ng-model="accountBenefitPlanForm.group_id">
+    </div>
   </form>
 </div>
 

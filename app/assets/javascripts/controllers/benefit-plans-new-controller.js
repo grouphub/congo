@@ -13,14 +13,13 @@ congoApp.controller('BenefitPlansNewController', [
       plan_type: null,
       exchange_plan: null,
       small_group: null,
-      group_id: null,
       description_markdown: null,
       description_html: null,
       description_trusted: null
     };
 
     $scope.accountBenefitPlanForm = {
-
+      group_id: null
     };
 
     $scope.$watch('form.description_markdown', function (string) {
