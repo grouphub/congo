@@ -24,7 +24,7 @@ class Account < ActiveRecord::Base
   validates_uniqueness_of :slug, allow_nil: true
 
   DEMO_PERIOD = 30
-  PLAN_NAMES = %[free basic standard premier admin]
+  PLAN_NAMES = %[basic standard premier admin]
 
   # TODO: Move to a background job
   def nuke!
@@ -55,7 +55,6 @@ class Account < ActiveRecord::Base
   end
 
   def needs_to_pay?
-    return false if self.plan_name == 'free'
     return false if self.plan_name == 'admin'
 
     last_payment = Payment
