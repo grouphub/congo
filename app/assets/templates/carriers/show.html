@@ -10,13 +10,24 @@
     </div>
 
     <div class="form-group">
-      <label for="npi">NPI</label>
-      <input ng-disabled="!carrier.account_id" type="text" class="form-control" id="npi" placeholder="Enter an NPI&hellip;" ng-model="form.npi">
+      <label for="trading_partner_id">Trading Partner ID</label>
+      <input type="text" class="form-control" id="trading_partner_id" placeholder="Enter a Trading Partner ID&hellip;" ng-model="form.trading_partner_id">
     </div>
 
     <div class="form-group">
-      <label for="trading_partner_id">Trading Partner ID</label>
-      <input ng-disabled="!carrier.account_id" type="text" class="form-control" id="trading_partner_id" placeholder="Enter a Trading Partner ID&hellip;" ng-model="form.trading_partner_id">
+      <label for="supported_transactions">Supported Transactions (Comma-Separated, <code>underscored_text</code>)</label>
+      <input type="text" class="form-control" id="supported_transactions" placeholder="Enter the Supported Transactions&hellip;" ng-model="form.name">
+    </div>
+
+    <div class="checkbox">
+      <label>
+        <input type="checkbox" id="is_enabled" name="is_enabled" ng-model="is_enabled"> Is Enabled?
+      </label>
+    </div>
+
+    <div class="form-group">
+      <label for="npi">NPI</label>
+      <input type="text" class="form-control" id="npi" placeholder="Enter an NPI&hellip;" ng-model="form.npi">
     </div>
 
     <div class="form-group">

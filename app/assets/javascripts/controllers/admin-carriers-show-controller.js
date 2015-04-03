@@ -9,8 +9,10 @@ congoApp.controller('AdminCarriersShowController', [
     $scope.carrier = null;
     $scope.form = {
       name: null,
-      npi: null,
       trading_partner_id: null,
+      supported_transactions: null,
+      is_enabled: null,
+      npi: null,
       service_types: null,
       tax_id: null,
       first_name: null,

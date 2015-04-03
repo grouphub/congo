@@ -7,6 +7,10 @@ class CreateCarriers < ActiveRecord::Migration
 
       # Fields:
       #
+      # * name
+      # * trading_partner_id
+      # * supported_transactions
+      # * is_enabled
       # * npi
       # * first_name
       # * last_name

@@ -1,18 +1,54 @@
 account = Account.where(name: 'First Account').first
 
+# Pre-populated list of carriers
+
+path = "#{Rails.root}/spec/data/carrier-response.json"
+if File.exists?(path)
+  carrier_response = JSON.load(File.read(path))
+  carrier_data = carrier_response['data']
+
+  carrier_data.each do |carrier_datum|
+    Carrier.create! \
+      account_id: nil, # Admin carrier
+      name: carrier_datum['name'],
+      properties: {
+        name: carrier_datum['name'],
+        trading_partner_id: carrier_datum['id'],
+        supported_transactions: carrier_datum['supported_transactions'],
+        is_enabled: carrier_datum['is_enabled'],
+        npi: nil,
+        service_types: nil,
+        tax_id: nil,
+        first_name: nil,
+        last_name: nil,
+        address_1: nil,
+        address_2: nil,
+        city: nil,
+        state: nil,
+        zip: nil,
+        phone: nil
+      }
+  end
+else
+  Rails.logger.warn "There is no carrier response data at \"#{path}\"."
+  Rails.logger.warn 'Try generating it by running `bundle exec rake data:carriers:fetch`.'
+end
+
 # Admin-created carrier account and benefit plan
 
 carrier = Carrier.create! \
   account_id: nil, # Admin carrier
-  name: 'Blue Shield',
+  name: 'Sample Admin Carrier',
   properties: {
-    name: 'Blue Shield',
-    npi: '1530731902',
+    name: 'Sample Admin Carrier',
     trading_partner_id: 'MOCKPAYER',
+    supported_transactions: ['555'],
+    is_enabled: true,
+    npi: '1530731902',
     service_types: ['health_benefit_plan_coverage'],
     tax_id: '234',
-    first_name: 'Billy',
-    last_name: 'Blueshield',
+    first_name: 'Sally',
+    last_name: 'Sampleadmincarrier',
     address_1: '123 Somewhere Lane',
     address_2: 'Apt. 123',
     city: 'Somewhereville',
@@ -42,15 +78,17 @@ BenefitPlan.create! \
 
 carrier = Carrier.create! \
   account_id: account.id,
-  name: 'Blue Cross',
+  name: 'Sample Broker Carrier',
   properties: {
-    name: 'Blue Cross',
-    npi: '1467560003',
+    name: 'Sample Broker Carrier',
     trading_partner_id: 'MOCKPAYER',
+    supported_transactions: ['555'],
+    is_enabled: true,
+    npi: '1467560003',
     service_types: ['health_benefit_plan_coverage'],
     tax_id: '123',
-    first_name: 'Brad',
-    last_name: 'Bluecross',
+    first_name: 'Samuel',
+    last_name: 'Samplebrokercarrier',
     address_1: '123 Somewhere Lane',
     address_2: 'Apt. 123',
     city: 'Somewhereville',
