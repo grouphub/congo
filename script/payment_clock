@@ -1,0 +1,9 @@
+#!/bin/sh
+
+nohup ruby lib/payment_clock.rb \
+  --log-file=log/payment_clock.log \
+  --frequency=$CONGO_PAYMENT_CLOCK_SECONDS \
+  >/dev/null 2>&1 &
+
+echo $! > tmp/pids/payment_clock.pid
+
