@@ -6,4 +6,5 @@ delay: 25
 
 queues:
   - ['default', 1]
+  - ['mailers', 1]
 
