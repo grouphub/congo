@@ -37,10 +37,10 @@
     </li>
 
     <li>
-      <a class="btn btn-default" ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/edit">Manage Account Settings</a>
+      <a class="btn btn-default" ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/settings">Manage Account Settings</a>
     </li>
 
-    <li>
+    <li ng-if="featureEnabled('api_tokens')">
       <a class="btn btn-default" ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/tokens">Manage API Tokens</a>
     </li>
 

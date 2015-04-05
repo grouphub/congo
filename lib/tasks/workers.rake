@@ -45,9 +45,6 @@ namespace :workers do
         bundle
     ]
 
-    stop_worker.call(worker)
-    start_worker.call(worker)
-
     puts %[Removing the current "current" symlink and link it to the new project...]
     worker.ssh! %[
       rm -f #{worker.deploy_directory}/current &&
@@ -59,6 +56,9 @@ namespace :workers do
       cd #{worker.deploy_directory} &&
         ls | sort -r | tail -n +4 | xargs rm -r
     ]
+
+    stop_worker.call(worker)
+    start_worker.call(worker)
 
     puts %[Finished deploying to "#{worker.name}".]
     print "\n"
@@ -86,7 +86,7 @@ namespace :workers do
       workers.boxes.each do |ec2_config|
         Net::SSH::Simple.sync do |s|
           worker = Workers::Worker.new(workers, ec2_config, s)
-          puts %[Preparing to run task on box named "#{name}" at "#{worker.ssh_host}"...]
+          puts %[Preparing to run task on box named "#{worker.name}" at "#{worker.ssh_host}"...]
           callback.call(worker)
         end
       end
@@ -147,6 +147,14 @@ namespace :workers do
   desc 'Get info about all worker boxes'
   task :info => :environment do
     pp Workers.new('current').config
+  end
+
+  desc 'Ping the boxes'
+  task :ping => :environment do
+    run_on_box_or_boxes.call(lambda { |worker|
+      puts %[Pinging "#{worker.name} at "#{worker.ssh_host}"...]
+      worker.ssh! %[echo 'PONG']
+    })
   end
 end
 

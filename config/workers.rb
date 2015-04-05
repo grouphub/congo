@@ -9,7 +9,9 @@
         keys_only: true,
         keys: [
           "#{ENV['HOME']}/.ssh/grouphub-congo"
-        ]
+        ],
+        timeout: 0,
+        operation_timeout: 0
       },
       deploy_directory: '/home/ec2-user/congo',
       pid_file: 'tmp/pids/shoryuken.pid',
@@ -32,7 +34,9 @@
         keys_only: true,
         keys: [
           "#{ENV['HOME']}/.ssh/grouphub-congo"
-        ]
+        ],
+        timeout: 0,
+        operation_timeout: 0
       },
       deploy_directory: '/home/ec2-user/congo',
       pid_file: 'tmp/pids/clock.pid',

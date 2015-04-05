@@ -214,6 +214,8 @@ lines with your variables, then run:
     echo 'export POKITDOK_CLIENT_ID="..."' >> ~/.bashrc
     echo 'export POKITDOK_CLIENT_SECRET="..."' >> ~/.bashrc
     echo 'export POKITDOK_CALLBACK_HOST="..."' >> ~/.bashrc
+    echo 'export SENDGRID_USERNAME="..."' >> ~/.bashrc
+    echo 'export SENDGRID_PASSWORD="..."' >> ~/.bashrc
 
 Make sure you have SQS, Postgres on RDS, and Redis on Elasticache setup and
 permissioned properly.

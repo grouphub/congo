@@ -56,10 +56,14 @@ congoApp.controller('BenefitPlansShowController', [
         $scope.benefitPlan = data.benefit_plan;
         $scope.form = JSON.parse($scope.benefitPlan.properties_data);
         $scope.form.carrier_id = $scope.benefitPlan.carrier_id;
-        $scope.accountBenefitPlan = $scope.benefitPlan.account_benefit_plan
-        $scope.accountBenefitPlanForm = JSON.parse($scope.accountBenefitPlan.properties_data);
+        $scope.accountBenefitPlan = $scope.benefitPlan.account_benefit_plan || {};
 
-        console.log($scope.accountBenefitPlanForm);
+        // TODO: Make sure I don't need to do this in more places. Is this the best way to do this?
+        try {
+          $scope.accountBenefitPlanForm = JSON.parse($scope.accountBenefitPlan.properties_data);
+        } catch (e) {
+          $scope.accountBenefitPlanForm = {};
+        }
 
         $http
           .get('/api/internal/admin/carriers.json')
