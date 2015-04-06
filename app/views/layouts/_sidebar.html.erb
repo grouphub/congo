@@ -185,7 +185,7 @@
 
   <!-- Show Support Link for everyone except admins -->
   <li class="sidebar-item" ng-if="!inAdminPanel()">
-    <a href="mailto:info@grouphub.io" title="Support">
+    <a href="/accounts/{{accountSlug()}}/{{currentRole()}}/contact" title="Support">
       <i class="fa fa-question-circle"></i>
       <span class="caption">Get Help</span>
     </a>

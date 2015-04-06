@@ -133,6 +133,10 @@ congoApp.config([
         templateUrl: congo.assets['settings/show.html'],
         controller: 'SettingsShowController'
       })
+      .when('/accounts/:slug/:role/contact', {
+        templateUrl: congo.assets['contact.html'],
+        controller: 'ContactController'
+      })
       .when('/accounts/:slug/:role/carriers', {
         templateUrl: congo.assets['carriers/index.html'],
         controller: 'CarriersIndexController'
