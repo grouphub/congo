@@ -11,8 +11,8 @@ congoApp.controller('UsersNewBillingController', [
       }
 
       $http
-        .put('/api/internal/users/' + congo.currentUser.id + '.json', {
-          user_properties: {
+        .put('/api/internal/users/' + congo.currentUser.id + '/account.json', {
+          account_properties: {
             card_number: $scope.cardNumber,
             month: $scope.month,
             year: $scope.year,
