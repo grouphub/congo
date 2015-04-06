@@ -31,7 +31,9 @@ class Api::Internal::BenefitPlansController < ApplicationController
     end
 
     if role_slug != 'group_admin' && role_slug != 'broker'
-      benefit_plans.where('is_enabled = TRUE')
+      benefit_plans.select { |benefit_plan|
+        benefit_plan.is_enabled == true
+      }
     end
 
     benefit_plans = benefit_plans.reject { |benefit_plan|
