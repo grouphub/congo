@@ -66,7 +66,7 @@ congoApp.controller('BenefitPlansShowController', [
         }
 
         $http
-          .get('/api/internal/admin/carriers.json')
+          .get('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/carriers.json?only_activated=true')
           .success(function (data, status, headers, config) {
             $scope.carriers = data.carriers;
 

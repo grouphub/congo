@@ -60,6 +60,11 @@ congoApp.controller('CarriersIndexController', [
           } else {
             carrier.carrier_account = null;
           }
+
+          // Remove associated benefit plans from the list after deleting.
+          $scope.benefitPlans = _($scope.benefitPlans).reject(function (benefitPlan) {
+            return benefitPlan.carrier_id === carrier.id;
+          });
         })
         .error(function (data, status, headers, config) {
           var error = (data && data.error) ?
@@ -171,7 +176,7 @@ congoApp.controller('CarriersIndexController', [
       });
 
     $http
-      .get('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/benefit_plans.json')
+      .get('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/benefit_plans.json?only_activated_carriers=true')
       .success(function (data, status, headers, config) {
         $scope.benefitPlans = data.benefit_plans;
 

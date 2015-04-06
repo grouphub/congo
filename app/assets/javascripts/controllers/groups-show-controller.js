@@ -366,7 +366,7 @@ congoApp.controller('GroupsShowController', [
     }
 
     $http
-      .get('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/benefit_plans.json')
+      .get('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/benefit_plans.json?only_activated=true')
       .success(function (data, status, headers, config) {
         $scope.benefitPlans = data.benefit_plans;
         done();
@@ -397,6 +397,7 @@ congoApp.controller('GroupsShowController', [
     // ===========
     // Attachments
     // ===========
+
     $scope.attachmentFormData = {
       title: null,
       description: null

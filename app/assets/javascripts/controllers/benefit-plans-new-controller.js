@@ -50,10 +50,10 @@ congoApp.controller('BenefitPlansNewController', [
     };
 
     $http
-      .get('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/carriers.json')
+      .get('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/carriers.json?only_activated=true')
       .success(function (data, status, headers, config) {
         $scope.carriers = data.carriers;
-        $scope.form.carrier_id = $scope.carriers[0].id;
+        $scope.form.carrier_id = ($scope.carriers[0] ? $scope.carriers[0].id : null);
 
         $scope.ready();
       })

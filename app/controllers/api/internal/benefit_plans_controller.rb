@@ -9,8 +9,26 @@ class Api::Internal::BenefitPlansController < ApplicationController
     account_slug = params[:account_id]
     account = Account.where(slug: account_slug).first
     role_slug = params[:role_id]
-    benefit_plans = BenefitPlan
-      .where('account_id IS NULL or account_id = ?', current_account.id)
+    only_activated_carriers = (params[:only_activated_carriers] == 'true')
+    only_activated = (params[:only_activated] == 'true')
+    benefit_plans = nil
+
+    if only_activated_carriers
+      benefit_plans = CarrierAccount
+        .where('account_id = ?', current_account.id)
+        .includes(:carrier => :benefit_plans)
+        .map(&:carrier)
+        .map(&:benefit_plans)
+        .flatten(1)
+    elsif only_activated
+      benefit_plans = AccountBenefitPlan
+        .where('account_id = ?', current_account.id)
+        .includes(:benefit_plan)
+        .map(&:benefit_plan)
+    else
+      benefit_plans = BenefitPlan
+        .where('account_id IS NULL or account_id = ?', current_account.id)
+    end
 
     if role_slug != 'group_admin' && role_slug != 'broker'
       benefit_plans.where('is_enabled = TRUE')

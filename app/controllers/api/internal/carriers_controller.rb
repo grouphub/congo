@@ -6,7 +6,17 @@ class Api::Internal::CarriersController < ApplicationController
   before_filter :ensure_broker!, only: [:create, :destroy]
 
   def index
-    carriers = Carrier.where('account_id IS NULL OR account_id = ?', current_account.id)
+    only_activated = (params[:only_activated] == 'true')
+    carriers = nil
+
+    if only_activated
+      carriers = CarrierAccount
+        .where('account_id = ?', current_account.id)
+        .includes(:carrier)
+        .map(&:carrier)
+    else
+      carriers = Carrier.where('account_id IS NULL OR account_id = ?', current_account.id)
+    end
 
     respond_to do |format|
       format.json {
