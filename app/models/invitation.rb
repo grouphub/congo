@@ -1,4 +1,6 @@
 class Invitation < ActiveRecord::Base
+  acts_as_paranoid
+
   has_one :role
 
   belongs_to :account

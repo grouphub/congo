@@ -7,7 +7,11 @@ class CreateAccountBenefitPlans < ActiveRecord::Migration
       t.integer :benefit_plan_id
       t.text :properties_data
 
-      t.timestamps null: false
+      t.timestamps
+
+      t.datetime :deleted_at
+      t.index :deleted_at
     end
   end
 end
+

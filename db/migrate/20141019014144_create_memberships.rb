@@ -10,6 +10,10 @@ class CreateMemberships < ActiveRecord::Migration
       t.string :email_token
 
       t.timestamps
+
+      t.datetime :deleted_at
+      t.index :deleted_at
     end
   end
 end
+

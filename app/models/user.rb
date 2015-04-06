@@ -4,6 +4,8 @@ require "#{Rails.root}/lib/sluggerizer"
 class User < ActiveRecord::Base
   include Propertied
 
+  acts_as_paranoid
+
   has_many :roles
   has_many :memberships
 

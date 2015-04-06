@@ -43,6 +43,10 @@ class CreateApplications < ActiveRecord::Migration
       t.string :activity_id
 
       t.timestamps
+
+      t.datetime :deleted_at
+      t.index :deleted_at
     end
   end
 end
+

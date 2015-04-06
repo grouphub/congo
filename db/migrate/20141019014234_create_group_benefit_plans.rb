@@ -6,6 +6,10 @@ class CreateGroupBenefitPlans < ActiveRecord::Migration
       t.integer :benefit_plan_id
 
       t.timestamps
+
+      t.datetime :deleted_at
+      t.index :deleted_at
     end
   end
 end
+

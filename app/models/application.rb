@@ -1,6 +1,8 @@
 class Application < ActiveRecord::Base
   include Propertied
 
+  acts_as_paranoid
+
   belongs_to :account
   belongs_to :benefit_plan
   belongs_to :membership

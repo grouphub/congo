@@ -1,4 +1,6 @@
 class Role < ActiveRecord::Base
+  acts_as_paranoid
+
   belongs_to :account
   belongs_to :user
   belongs_to :invitation

@@ -1,4 +1,5 @@
 class Feature < ActiveRecord::Base
+  acts_as_paranoid
 
   before_save :ensure_account_slugs
 
@@ -13,6 +14,5 @@ class Feature < ActiveRecord::Base
   def account_slugs
     (self.account_slug_data || '').split(', ')
   end
-
 end
 

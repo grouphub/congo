@@ -11,6 +11,10 @@ class CreateAttachments < ActiveRecord::Migration
       t.text :description
 
       t.timestamps
+
+      t.datetime :deleted_at
+      t.index :deleted_at
     end
   end
 end
+

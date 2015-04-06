@@ -4,6 +4,8 @@ class Account < ActiveRecord::Base
   include Sluggable
   include Propertied
 
+  acts_as_paranoid
+
   has_many :groups
   has_many :roles
   has_many :applications
