@@ -35,6 +35,8 @@
       <li ng-if="firstName()" class="dropdown">
         <a href="" class="dropdown-toggle" data-toggle="dropdown">
           {{firstName()}}
+          <span ng-if="inAdminPanel()">&mdash; Admin</span>
+          <span ng-if="accountName()">&mdash; {{accountName()}}</span>
           <i class="caret"></i>
         </a>
 

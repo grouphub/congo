@@ -39,7 +39,11 @@ congoApp.controller('BenefitPlansShowController', [
         .success(function (data, status, headers, config) {
           $location.path('/accounts/' + $scope.accountSlug() + '/' + $scope.currentRole() + '/carriers');
 
-          flashesFactory.add('success', 'Successfully updated the benefit plan.');
+          if ($scope.benefitPlan.account_benefit_plan) {
+            flashesFactory.add('success', 'Successfully updated the benefit plan.');
+          } else {
+            flashesFactory.add('success', 'Successfully added the benefit plan to your account.');
+          }
         })
         .error(function (data, status, headers, config) {
           var error = (data && data.error) ?

@@ -39,7 +39,11 @@ congoApp.controller('CarriersShowController', [
         .success(function (data, status, headers, config) {
           $location.path('/accounts/' + $scope.accountSlug() + '/' + $scope.currentRole() + '/carriers');
 
-          flashesFactory.add('success', 'Successfully updated the carrier.');
+          if ($scope.carrier.carrier_account) {
+            flashesFactory.add('success', 'Successfully updated the carrier.');
+          } else {
+            flashesFactory.add('success', 'Successfully added the carrier to your account.');
+          }
         })
         .error(function (data, status, headers, config) {
           var error = (data && data.error) ?
