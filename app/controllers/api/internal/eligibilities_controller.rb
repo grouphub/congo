@@ -110,7 +110,12 @@ class Api::Internal::EligibilitiesController < ApplicationController
     Rails.logger.info('')
     Rails.logger.info('')
 
-    eligibility = pokitdok.eligibility(eligibility_query)
+    begin
+      eligibility = pokitdok.eligibility(eligibility_query)
+    rescue OAuth2::Error => e
+      error_response('The carrier had trouble processing your eligibility request.')
+      return
+    end
 
     Rails.logger.info('')
     Rails.logger.info('=================')
@@ -130,6 +135,13 @@ class Api::Internal::EligibilitiesController < ApplicationController
     coverage_data = data['coverage'] || {}
     contacts_data = coverage_data['contacts'] || []
     carrier_data = contacts_data.find { |contact| contact['contact_type'] == 'payer' } || {}
+
+    # If a reject reason is provided, something like "patient_birth_date_mismatch".
+    raw_reject_reason = eligibility['reject_reason']
+    if raw_reject_reason
+      error_response(reject_reason.gsub('_', ' ').capitalize + '.')
+      return
+    end
 
     # TODO: SSN
 
