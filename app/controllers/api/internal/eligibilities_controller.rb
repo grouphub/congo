@@ -128,6 +128,7 @@ class Api::Internal::EligibilitiesController < ApplicationController
     subscriber_data = data['subscriber'] || {}
     subscriber_address_data = subscriber_data['address'] || {}
     coverage_data = data['coverage'] || {}
+    contacts_data = coverage_data['contacts'] || []
 
     # TODO: SSN
 
@@ -149,8 +150,7 @@ class Api::Internal::EligibilitiesController < ApplicationController
 
     # TODO: Health insurance ID
 
-    carrier = coverage_data['contacts']
-      .find { |contact| contact['contact_type'] == 'payer' }
+    carrier = contacts_data.find { |contact| contact['contact_type'] == 'payer' }
     carrier_name = carrier['name']
     plan_description = coverage_data['plan_description']
     group_description = coverage_data['group_description']
