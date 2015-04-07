@@ -38,7 +38,7 @@ congoApp.directive('eligibilityModal', [
             $('#date-of-birth').datepicker();
           }, 100);
 
-          $http.get('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/carriers.json')
+          $http.get('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/carriers.json?only_activated=true')
             .then(
               function (response) {
                 var carrier = response.data.carriers[0];
