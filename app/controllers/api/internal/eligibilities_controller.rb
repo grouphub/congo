@@ -128,7 +128,7 @@ class Api::Internal::EligibilitiesController < ApplicationController
     subscriber_data = data['subscriber'] || {}
     subscriber_address_data = subscriber_data['address'] || {}
     coverage_data = data['coverage'] || {}
-    contacts_data = coverage_data['contacts']
+    contacts_data = coverage_data['contacts'] || []
     carrier_data = contacts_data.find { |contact| contact['contact_type'] == 'payer' } || {}
 
     # TODO: SSN
