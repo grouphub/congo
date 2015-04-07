@@ -167,7 +167,7 @@ class Api::Internal::EligibilitiesController < ApplicationController
       eligibility_begin_date_components[1],
       eligibility_begin_date_components[2],
       eligibility_begin_date_components[0]
-    ].join('/')
+    ].compact.join('/')
 
     raw_plan_begin_date = coverage_data['plan_begin_date'] || ''
     plan_begin_date_components = raw_plan_begin_date.split('-')
@@ -175,7 +175,7 @@ class Api::Internal::EligibilitiesController < ApplicationController
       plan_begin_date_components[1],
       plan_begin_date_components[2],
       plan_begin_date_components[0]
-    ].join('/')
+    ].compact.join('/')
 
     respond_to do |format|
       format.json {
