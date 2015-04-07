@@ -154,7 +154,7 @@ class Api::Internal::EligibilitiesController < ApplicationController
     carrier_name = carrier_data['name']
     plan_description = coverage_data['plan_description']
     group_description = coverage_data['group_description']
-    insurance_type = coverage_data['insurance_type'].upcase
+    insurance_type = coverage_data['insurance_type'].try(:upcase)
 
     group_number = coverage_data['group_number']
     plan_number = coverage_data['plan_number']
