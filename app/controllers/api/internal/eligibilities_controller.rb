@@ -161,7 +161,7 @@ class Api::Internal::EligibilitiesController < ApplicationController
 
     # TODO: RX IIN/BIN
 
-    raw_eligibility_begin_date = coverage_data['eligibility_begin_date']
+    raw_eligibility_begin_date = coverage_data['eligibility_begin_date'] || ''
     eligibility_begin_date_components = raw_eligibility_begin_date.split('-')
     eligibility_begin_date = [
       eligibility_begin_date_components[1],
@@ -169,7 +169,7 @@ class Api::Internal::EligibilitiesController < ApplicationController
       eligibility_begin_date_components[0]
     ].join('/')
 
-    raw_plan_begin_date = coverage_data['plan_begin_date']
+    raw_plan_begin_date = coverage_data['plan_begin_date'] || ''
     plan_begin_date_components = raw_plan_begin_date.split('-')
     plan_begin_date = [
       plan_begin_date_components[1],
