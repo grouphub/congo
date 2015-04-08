@@ -19,7 +19,7 @@ congoApp.controller('BenefitPlansNewController', [
     };
 
     $scope.accountBenefitPlanForm = {
-      group_id: null
+
     };
 
     $scope.$watch('form.description_markdown', function (string) {

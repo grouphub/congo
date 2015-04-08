@@ -307,7 +307,7 @@
       </thead>
 
       <tbody>
-        <tr ng-repeat="benefitPlan in benefitPlans">
+        <tr ng-repeat="benefitPlan in benefitPlans" ng-if="benefitPlan.isEnabled">
           <td>{{benefitPlan.name}}</td>
 
           <td>

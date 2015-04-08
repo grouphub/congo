@@ -17,6 +17,8 @@ congoApp.directive('descriptionModal', [
           var properties = JSON.parse(item.properties_data);
           var html = properties.description_html;
 
+          console.log('yes');
+
           $scope.description_trusted = $sce.trustAsHtml(html);
         });
       }

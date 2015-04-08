@@ -355,14 +355,36 @@ congoApp.controller('GroupsShowController', [
         });
     };
 
+    function done() {
+      if ($scope.benefitPlans && $scope.group) {
+        _($scope.benefitPlans).each(function (benefitPlan) {
+          benefitPlan.isEnabled = !!_($scope.group.benefit_plans).findWhere({ id: benefitPlan.id });
+        });
+
+        $scope.ready();
+      }
+    }
+
+    $http
+      .get('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/benefit_plans.json?only_activated=true')
+      .success(function (data, status, headers, config) {
+        $scope.benefitPlans = data.benefit_plans;
+        done();
+      })
+      .error(function (data, status, headers, config) {
+        var error = (data && data.error) ?
+          data.error :
+          'There was a problem fetching the benefit plans.';
+
+        flashesFactory.add('danger', error);
+      });
+
     $http
       .get('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups/' + $scope.groupSlug() + '.json')
       .success(function (data, status, headers, config) {
         $scope.group = data.group;
-        $scope.benefitPlans = $scope.group.benefit_plans;
         $scope.form = JSON.parse($scope.group.properties_data);
-
-        $scope.ready();
+        done();
       })
       .error(function (data, status, headers, config) {
         var error = (data && data.error) ?
