@@ -1,4 +1,6 @@
 class GroupBenefitPlan < ActiveRecord::Base
+  include Propertied
+
   acts_as_paranoid
 
   belongs_to :account

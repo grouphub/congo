@@ -315,22 +315,8 @@ congoApp.controller('GroupsShowController', [
     };
 
     $scope.addBenefitPlan = function (benefitPlan) {
-      var data = {
-        benefit_plan_id: benefitPlan.id
-      }
-
-      $http
-        .post('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups/' + $scope.groupSlug() + '/group_benefit_plans.json', data)
-        .success(function (data, status, headers, config) {
-          benefitPlan.isEnabled = true;
-        })
-        .error(function (data, status, headers, config) {
-          var error = (data && data.error) ?
-            data.error :
-            'There was a problem adding the benefit plan.';
-
-          flashesFactory.add('danger', error);
-        });
+      $('#group-benefit-plans-modal').modal('show');
+      eventsFactory.emit('group-benefit-plan', $scope.group, benefitPlan);
     };
 
     $scope.disabledBenefitPlans = function () {

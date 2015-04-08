@@ -11,11 +11,13 @@ class Api::Internal::GroupBenefitPlansController < ApplicationController
     group_slug = params[:group_id]
     group = Group.where(slug: group_slug).first
     benefit_plan_id = params[:benefit_plan_id]
+    properties = params[:properties]
 
     group_benefit_plan = GroupBenefitPlan.create! \
       account_id: account.id,
       group_id: group.id,
-      benefit_plan_id: benefit_plan_id
+      benefit_plan_id: benefit_plan_id,
+      properties: properties
 
     respond_to do |format|
       format.json {
