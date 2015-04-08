@@ -8,11 +8,11 @@
 
       <div class="modal-body">
         <div class="widget enrollment-status">
-          <h2>Status: {{lastAttempt.parameters.state.title}}</h2>
+          <h2>Status: {{lastActivity.parameters.state.title}}</h2>
 
           <table class="table">
             <tbody>
-              <tr ng-repeat="point in lastAttempt.parameters.history">
+              <tr ng-repeat="point in lastActivity.parameters.history">
                 <td>
                   <i class="fa fa-check activity-check"></i>
                   <span class="activity-state {{point.name}}">{{point.title}}</span>
