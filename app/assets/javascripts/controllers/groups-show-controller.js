@@ -361,7 +361,8 @@ congoApp.controller('GroupsShowController', [
         $scope.group = data.group;
         $scope.benefitPlans = $scope.group.benefit_plans;
         $scope.form = JSON.parse($scope.group.properties_data);
-        done();
+
+        $scope.ready();
       })
       .error(function (data, status, headers, config) {
         var error = (data && data.error) ?
