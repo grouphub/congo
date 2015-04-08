@@ -3,8 +3,9 @@ var congoApp = angular.module('congoApp');
 congoApp.directive('descriptionModal', [
   '$http',
   '$sce',
+  '$timeout',
   'eventsFactory',
-  function ($http, $sce, eventsFactory) {
+  function ($http, $sce, $timeout, eventsFactory) {
     return {
       restrict: 'E',
       replace: true,
@@ -17,7 +18,9 @@ congoApp.directive('descriptionModal', [
           var properties = JSON.parse(item.properties_data);
           var html = properties.description_html;
 
-          console.log('yes');
+          $timeout(function () {
+            $('#description-modal .modal-body a').attr('target', '_blank');
+          }, 100);
 
           $scope.description_trusted = $sce.trustAsHtml(html);
         });
