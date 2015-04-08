@@ -28,3 +28,7 @@ node_modules
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
+
+# Database dump files
+db/**/*.dump
+
