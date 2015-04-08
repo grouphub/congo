@@ -31,12 +31,22 @@ congoApp.controller('CarriersIndexController', [
     $scope.carriersToShow = function () {
       if ($scope.search.carriers.length > 0) {
         return _($scope.carriers)
+          .chain()
           .select(function (carrier) {
             return carrier.name.toLowerCase()
               .indexOf($scope.search.carriers.toLowerCase()) > -1;
-          });
+          })
+          .sortBy(function (carrier) {
+            return $scope.carrierCanBeDeleted(carrier) ? 0 : 1;
+          })
+          .value();
       } else {
-        return $scope.carriers;
+        return _($scope.carriers)
+          .chain()
+          .sortBy(function (carrier) {
+            return $scope.carrierCanBeDeleted(carrier) ? 0 : 1;
+          })
+          .value();
       }
     };
 
@@ -48,15 +58,15 @@ congoApp.controller('CarriersIndexController', [
       return carrier.carrier_account;
     };
 
-    $scope.deleteCarrierAt = function (index) {
-      var carrier = $scope.carriers[index];
-
+    $scope.deleteCarrier = function (carrier) {
       $http
         .delete('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/carriers/' + carrier.slug + '.json')
         .success(function (data, status, headers, config) {
           // Only delete the carrier if it was created by the account.
           if (carrier.account_id) {
-            $scope.carriers.splice(index, 1);
+            $scope.carriers = _($scope.carriers).reject(function (c) {
+              return c.id === carrier.id;
+            });
           } else {
             carrier.carrier_account = null;
           }
@@ -84,12 +94,22 @@ congoApp.controller('CarriersIndexController', [
     $scope.benefitPlansToShow = function () {
       if ($scope.search.benefitPlans.length > 0) {
         return _($scope.benefitPlans)
+          .chain()
           .select(function (benefitPlan) {
             return benefitPlan.name.toLowerCase()
               .indexOf($scope.search.benefitPlans.toLowerCase()) > -1;
-          });
+          })
+          .sortBy(function (benefitPlan) {
+            return $scope.benefitPlanCanBeDeleted(benefitPlan) ? 0 : 1;
+          })
+          .value();
       } else {
-        return $scope.benefitPlans;
+        return _($scope.benefitPlans)
+          .chain()
+          .sortBy(function (benefitPlan) {
+            return $scope.benefitPlanCanBeDeleted(benefitPlan) ? 0 : 1;
+          })
+          .value();
       }
     };
 
@@ -105,9 +125,7 @@ congoApp.controller('CarriersIndexController', [
       return benefitPlan.account_benefit_plan;
     };
 
-    $scope.toggleBenefitPlanAt = function (index) {
-      var benefitPlan = $scope.benefitPlans[index];
-
+    $scope.toggleBenefitPlan = function (benefitPlan) {
       if (!benefitPlan) {
         flashesFactory.add('danger', 'We could not find a matching benefit plan.');
       }
@@ -117,6 +135,8 @@ congoApp.controller('CarriersIndexController', [
           is_enabled: !benefitPlan.is_enabled
         })
         .success(function (data, status, headers, config) {
+          var index = _($scope.benefitPlans).indexOf(benefitPlan);
+
           $scope.benefitPlans[index] = data.benefit_plan;
         })
         .error(function (data, status, headers, config) {
@@ -128,15 +148,15 @@ congoApp.controller('CarriersIndexController', [
         });
     };
 
-    $scope.deleteBenefitPlanAt = function (index) {
-      var benefitPlan = $scope.benefitPlans[index];
-
+    $scope.deleteBenefitPlan = function (benefitPlan) {
       $http
         .delete('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/benefit_plans/' + benefitPlan.slug + '.json')
         .success(function (data, status, headers, config) {
           // Only delete the benefit plan if it was created by the account.
           if (benefitPlan.account_id) {
-            $scope.benefitPlans.splice(index, 1);
+            $scope.benefitPlans = _($scope.benefitPlans).reject(function (b) {
+              return b.id === benefitPlan.id;
+            });
           } else {
             benefitPlan.account_benefit_plan = null;
           }

@@ -49,7 +49,7 @@
 
               <td>
                 <a href="/accounts/{{accountSlug()}}/{{currentRole()}}/carriers/{{carrier.slug}}" class="btn btn-success btn-xs" ng-if="carrierCanBeActivated(carrier)">Add to Account</a>
-                <a href="" class="btn btn-danger btn-xs" ng-if="carrierCanBeDeleted(carrier)" ng-click="deleteCarrierAt($index)">Delete</a>
+                <a href="" class="btn btn-danger btn-xs" ng-if="carrierCanBeDeleted(carrier)" ng-click="deleteCarrier(carrier)">Delete</a>
               </td>
             </tr>
           </tbody>
@@ -95,8 +95,8 @@
 
               <td>
                 <a href="/accounts/{{accountSlug()}}/{{currentRole()}}/benefit_plans/{{benefitPlan.slug}}" class="btn btn-success btn-xs" ng-if="benefitPlanCanBeActivated(benefitPlan)">Add to Account</a>
-                <a class="btn btn-info btn-xs" href="" ng-click="toggleBenefitPlanAt($index)" ng-if="benefitPlanCanBeEnabled(benefitPlan)">{{benefitPlan.is_enabled ? 'Disable' : 'Enable'}}</a>
-                <a href="" class="btn btn-danger btn-xs" ng-if="benefitPlanCanBeDeleted(benefitPlan)" ng-click="deleteBenefitPlanAt($index)">Delete</a>
+                <a class="btn btn-info btn-xs" href="" ng-click="toggleBenefitPlan(benefitPlan)" ng-if="benefitPlanCanBeEnabled(benefitPlan)">{{benefitPlan.is_enabled ? 'Disable' : 'Enable'}}</a>
+                <a href="" class="btn btn-danger btn-xs" ng-if="benefitPlanCanBeDeleted(benefitPlan)" ng-click="deleteBenefitPlan(benefitPlan)">Delete</a>
               </td>
             </tr>
           </tbody>
