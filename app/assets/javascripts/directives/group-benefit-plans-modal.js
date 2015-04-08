@@ -11,13 +11,14 @@ congoApp.directive('groupBenefitPlansModal', [
       templateUrl: congo.assets['directives/group-benefit-plans-modal.html'],
       link: function ($scope, $element, $attrs) {
         $scope.benefitPlan = null;
-        $scope.form = {
-          broker_id: null
-        }
+        $scope.form = null;
 
         // TODO: Change eligibility modal to use this format
         eventsFactory.on($scope, 'group-benefit-plan', function (group, benefitPlan) {
           $scope.benefitPlan = benefitPlan;
+          $scope.form = {
+            broker_id: null
+          };
         });
 
         $scope.submit = function () {

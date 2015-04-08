@@ -316,6 +316,7 @@ congoApp.controller('GroupsShowController', [
 
     $scope.addBenefitPlan = function (benefitPlan) {
       $('#group-benefit-plans-modal').modal('show');
+
       eventsFactory.emit('group-benefit-plan', $scope.group, benefitPlan);
     };
 
