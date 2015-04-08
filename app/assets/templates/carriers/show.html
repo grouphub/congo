@@ -6,6 +6,15 @@
   <p>Disabled fields are fields that are provided by the carrier. Scroll down to get to the fields which are specific to your account.</p>
 
   <form ng-submit="submit()">
+    <h2>Account-Specific Carrier Info</h2>
+
+    <div class="form-group">
+      <label for="broker_id">Broker ID</label>
+      <input type="text" class="form-control" id="broker_id" placeholder="Enter a Broker ID&hellip;" ng-model="carrierAccountForm.broker_id">
+    </div>
+
+    <h2>Non-Specific Carrier Info</h2>
+
     <div class="form-group">
       <label for="name">Name</label>
       <input ng-disabled="!carrier.account_id" type="text" class="form-control" id="name" placeholder="Enter a Name&hellip;" ng-model="form.name" auto-focus>

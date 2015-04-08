@@ -4,6 +4,15 @@
   <p>Add new carrier connection details below.</p>
 
   <form ng-submit="submit()">
+    <h2>Account-Specific Carrier Info</h2>
+
+    <div class="form-group">
+      <label for="broker_id">Broker ID</label>
+      <input type="text" class="form-control" id="broker_id" placeholder="Enter a Broker ID&hellip;" ng-model="carrierAccountForm.broker_id">
+    </div>
+
+    <h2>Non-Specific Carrier Info</h2>
+
     <div class="form-group">
       <label for="name">Name</label>
       <input type="text" class="form-control" id="name" placeholder="Enter a Name&hellip;" ng-model="form.name" auto-focus>

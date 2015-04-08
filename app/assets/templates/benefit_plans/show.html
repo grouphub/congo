@@ -13,6 +13,15 @@
   <p>Disabled fields are fields that are provided by the carrier. Scroll down to get to the fields which are specific to your account.</p>
 
   <form ng-submit="submit()">
+    <h2>Account-Specific Benefit Plan Info</h2>
+
+    <div class="form-group">
+      <label for="group_id">Group ID</label>
+      <input type="text" class="form-control" id="group_id" placeholder="Enter a Group ID&hellip;" ng-model="accountBenefitPlanForm.group_id">
+    </div>
+
+    <h2>Non-Specific Benefit Plan Info</h2>
+
     <div class="form-group">
       <label for="name">Name</label>
       <input ng-disabled="!benefitPlan.account_id" type="text" class="form-control" id="name" placeholder="Enter name&hellip;" ng-model="form.name" auto-focus>
@@ -53,13 +62,6 @@
         <label for="markdown">Preview</label>
         <div id="markdown" ng-bind-html="form.description_trusted"></div>
       </div>
-    </div>
-
-    <h2>Account-Specific Benefit Plan Info</h2>
-
-    <div class="form-group">
-      <label for="small_group">Group ID</label>
-      <input type="text" class="form-control" id="group_id" placeholder="Enter a Group ID&hellip;" ng-model="accountBenefitPlanForm.group_id">
     </div>
 
     <div class="row">

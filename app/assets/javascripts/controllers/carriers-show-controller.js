@@ -26,7 +26,7 @@ congoApp.controller('CarriersShowController', [
     };
 
     $scope.carrierAccountForm = {
-
+      broker_id: null
     };
 
     $scope.submit = function () {
