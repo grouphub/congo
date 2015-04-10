@@ -101,7 +101,7 @@ class Api::Internal::AccountsController < ApplicationController
       account.cvc = properties['cvc']
     end
 
-    if Account::PLAN_NAMES.include?(plan_name)
+    if Account::PLAN_NAMES.include?(plan_name || '')
       account.plan_name = plan_name
     end
 

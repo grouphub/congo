@@ -159,6 +159,7 @@ ActiveRecord::Schema.define(version: 20150402002142) do
     t.integer  "account_id"
     t.integer  "group_id"
     t.integer  "benefit_plan_id"
+    t.text     "properties_data"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "deleted_at"

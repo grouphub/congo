@@ -13,7 +13,7 @@ namespace :db do
     pp app
 
     path = ENV['DUMP_PATH'] || "#{Rails.root}/db/#{app}.dump"
-    cmd = %[pg_dump #{options.join('')} --verbose --clean --no-owner --no-acl --format=c #{db} > "#{path}"]
+    cmd = %[pg_dump #{options.join('')} --verbose --clean --no-owner --no-acl --format=plain #{db} > "#{path}"]
 
     puts cmd
     exec cmd
