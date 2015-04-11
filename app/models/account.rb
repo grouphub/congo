@@ -9,6 +9,7 @@ class Account < ActiveRecord::Base
   has_many :groups
   has_many :roles
   has_many :applications
+  has_many :application_statuses
   has_many :carriers
   has_many :carrier_accounts
   has_many :benefit_plans
@@ -34,6 +35,7 @@ class Account < ActiveRecord::Base
     self.group_benefit_plans.destroy_all
     self.attachments.destroy_all
     self.applications.destroy_all
+    self.application_statuses.destroy_all
     self.benefit_plans.destroy_all
     self.memberships.destroy_all
     self.carrier_accounts.destroy_all
