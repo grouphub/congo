@@ -51,6 +51,27 @@ class Account < ActiveRecord::Base
     self.destroy!
   end
 
+  def eviscerate!
+    self.account_benefit_plans.each(&:really_destroy!)
+    self.group_benefit_plans.each(&:really_destroy!)
+    self.attachments.each(&:really_destroy!)
+    self.applications.each(&:really_destroy!)
+    self.application_statuses.each(&:really_destroy!)
+    self.benefit_plans.each(&:really_destroy!)
+    self.memberships.each(&:really_destroy!)
+    self.carrier_accounts.each(&:really_destroy!)
+    self.groups.each(&:really_destroy!)
+    self.roles.each(&:really_destroy!)
+    self.tokens.each(&:really_destroy!)
+    self.carriers.each(&:really_destroy!)
+    self.invitations.each(&:really_destroy!)
+
+    # TODO: Do we actually want to destroy payments?
+    self.payments.each(&:really_destroy!)
+
+    self.really_destroy!
+  end
+
   def set_billing_start_and_day
     date = Date.today + DEMO_PERIOD
 
