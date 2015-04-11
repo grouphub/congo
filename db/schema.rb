@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(version: 20150402002142) do
   add_index "accounts", ["deleted_at"], name: "index_accounts_on_deleted_at", using: :btree
 
   create_table "application_statuses", force: :cascade do |t|
+    t.integer  "account_id"
     t.integer  "application_id"
     t.text     "payload"
     t.datetime "created_at"
