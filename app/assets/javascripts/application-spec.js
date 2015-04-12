@@ -43,6 +43,7 @@
 //= require controllers/accounts-controller
 //= require controllers/accounts-new-controller
 //= require controllers/settings-show-controller
+//= require controllers/reports-index-controller
 //= require controllers/activities-index-controller
 //= require controllers/messages-index-controller
 //= require controllers/admin-accounts-index-controller

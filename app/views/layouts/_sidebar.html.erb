@@ -147,6 +147,13 @@
     </a>
   </li>
 
+  <li class="sidebar-item" ng-if="currentRole() === 'broker' || currentRole() === 'group_admin'">
+    <a ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/reports" title="Reports">
+      <i class="fa fa-file-text"></i>
+      <span class="caption">Reports</span>
+    </a>
+  </li>
+
   <li class="sidebar-item" ng-if="currentRole() === 'broker' && featureEnabled('api_tokens')">
     <a ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/tokens" title="API Tokens">
       <i class="fa fa-ticket"></i>
