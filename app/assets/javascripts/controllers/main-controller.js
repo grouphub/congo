@@ -5,10 +5,11 @@ congoApp.controller('MainController', [
   '$http',
   '$location',
   '$timeout',
+  '$interval',
   'userDataFactory',
   'flashesFactory',
   'eventsFactory',
-  function ($scope, $http, $location, $timeout, userDataFactory, flashesFactory, eventsFactory) {
+  function ($scope, $http, $location, $timeout, $interval, userDataFactory, flashesFactory, eventsFactory) {
     $scope.assets = congo.assets;
 
     // Loading behavior
@@ -113,6 +114,28 @@ congoApp.controller('MainController', [
       // Enable tooltips
       $('[data-toggle="tooltip"]').tooltip()
     });
+
+    // Notifications system
+    $scope.notificationsWaitTime = 5000;
+    $scope.notificationsSince = null;
+    $scope.notificationsInterval = $interval(function () {
+      if (!$scope.accountSlug() || !$scope.currentRole()) {
+        return;
+      }
+
+      var url = $scope.notificationsSince ?
+        '/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/notifications.json?since=' + $scope.notificationsSince.toISOString() :
+        '/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/notifications.json'
+
+      $http
+        .get(url)
+        .success(function (data, status, headers, config) {
+          // TODO: Do something...
+        })
+        .error(function (data, status, headers, config) {
+          debugger;
+        })
+    }, $scope.notificationsWaitTime);
 
     window.$congo = {}
     window.$congo.$mainControllerScope = $scope;
