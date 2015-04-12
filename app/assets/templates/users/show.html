@@ -21,7 +21,7 @@
       <p class="help-block" ng-if="userForm.email.$error.email">The email address is invalid</p>
     </div>
 
-    <button class="btn btn-primary" ng-click="submit()">Save</button>
+    <button class="btn btn-primary" ng-click="submit()" ng-disabled="isLocked">Save</button>
   </form>
 
   <form name="passwordForm">
@@ -37,7 +37,7 @@
       <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" ng-model="passwordData.password_confirmation" placeholder="Confirm Your Password&hellip;">
     </div>
 
-    <button class="btn btn-primary" ng-click="submitPassword()">Save</button>
+    <button class="btn btn-primary" ng-click="submitPassword()" ng-disabled="passwordIsLocked">Save</button>
   </form>
 </div>
 

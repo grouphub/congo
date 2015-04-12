@@ -28,7 +28,11 @@ congoApp.controller('CarriersNewController', [
       broker_id: null
     }
 
+    $scope.isLocked = false;
+
     $scope.submit = function () {
+      $scope.isLocked = true;
+
       $http
         .post('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/carriers.json', {
           name: $scope.form.name,
@@ -39,6 +43,8 @@ congoApp.controller('CarriersNewController', [
           $location.path('/accounts/' + $scope.accountSlug() + '/' + $scope.currentRole() + '/carriers');
 
           flashesFactory.add('success', 'Successfully created the carrier.');
+
+          $scope.isLocked = false;
         })
         .error(function (data, status, headers, config) {
           var error = (data && data.error) ?
@@ -46,6 +52,8 @@ congoApp.controller('CarriersNewController', [
             'There was a problem creating the carrier.';
 
           flashesFactory.add('danger', error);
+
+          $scope.isLocked = false;
         });
     };
 

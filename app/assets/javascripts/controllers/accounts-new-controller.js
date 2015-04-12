@@ -20,10 +20,14 @@ congoApp.controller('AccountsNewController', [
       cvc: null
     };
 
+    $scope.isLocked = false;
+
     $scope.submit = function () {
       var data = {
         properties: $scope.form
       };
+
+      $scope.isLocked = true;
 
       $http
         .post('/api/internal/accounts', data)
@@ -34,6 +38,8 @@ congoApp.controller('AccountsNewController', [
             congo.currentUser = response.data.user;
 
             $location.path('/');
+
+            $scope.isLocked = false;
           },
           function (response) {
             var error = (response.data && response.data.error) ?
@@ -41,6 +47,8 @@ congoApp.controller('AccountsNewController', [
               'An error occurred. Please try creating an account again later.';
 
             flashesFactory.add('danger', error);
+
+            $scope.isLocked = false;
           }
         );
     };

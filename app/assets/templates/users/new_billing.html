@@ -26,7 +26,7 @@
       <p class="help-block" ng-if="billingForm.cvc.$error.required">CVC is required</p>
     </div>
 
-    <button class="btn btn-primary" ng-click="submit()">Save</button>
+    <button class="btn btn-primary" ng-click="submit()" ng-disabled="isLocked">Save</button>
   </form>
 </div>
 

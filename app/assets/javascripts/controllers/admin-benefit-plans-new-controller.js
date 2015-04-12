@@ -23,7 +23,11 @@ congoApp.controller('AdminBenefitPlansNewController', [
       $scope.form.description_trusted = $sce.trustAsHtml($scope.form.description_html);
     });
     
+    $scope.isLocked = false;
+
     $scope.submit = function () {
+      $scope.isLocked = true;
+
       $http
         .post('/api/internal/admin/benefit_plans.json', {
           name: $scope.form.name,
@@ -32,6 +36,8 @@ congoApp.controller('AdminBenefitPlansNewController', [
         })
         .success(function (data, status, headers, config) {
           $location.path('/admin/carriers');
+
+          $scope.isLocked = false;
         })
         .error(function (data, status, headers, config) {
           var error = (data && data.error) ?
@@ -39,6 +45,8 @@ congoApp.controller('AdminBenefitPlansNewController', [
             'There was a problem saving your benefit plan.';
 
           flashesFactory.add('danger', error);
+
+          $scope.isLocked = false;
         });
     };
 

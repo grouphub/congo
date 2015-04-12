@@ -21,7 +21,11 @@ congoApp.controller('AdminCarriersNewController', [
       phone: null
     };
 
+    $scope.isLocked = false;
+
     $scope.submit = function () {
+      $scope.isLocked = true;
+
       $http
         .post('/api/internal/admin/carriers.json', {
           name: $scope.form.name,
@@ -31,6 +35,8 @@ congoApp.controller('AdminCarriersNewController', [
           $location.path('/admin/carriers');
 
           flashesFactory.add('success', 'Successfully created the carrier.');
+
+          $scope.isLocked = false;
         })
         .error(function (data, status, headers, config) {
           var error = (data && data.error) ?
@@ -38,6 +44,8 @@ congoApp.controller('AdminCarriersNewController', [
             'There was a problem creating the carrier.';
 
           flashesFactory.add('danger', error);
+
+          $scope.isLocked = false;
         });
     };
 

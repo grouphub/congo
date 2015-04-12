@@ -26,8 +26,12 @@ congoApp.controller('BenefitPlansNewController', [
       $scope.form.description_html = marked(string || '');
       $scope.form.description_trusted = $sce.trustAsHtml($scope.form.description_html);
     });
+
+    $scope.isLocked = false;
     
     $scope.submit = function () {
+      $scope.isLocked = true;
+
       $http
         .post('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/benefit_plans.json', {
           name: $scope.form.name,
@@ -39,6 +43,8 @@ congoApp.controller('BenefitPlansNewController', [
           $location.path('/accounts/' + $scope.accountSlug() + '/' + $scope.currentRole() + '/carriers');
 
           flashesFactory.add('success', 'Successfully created the benefit plan.');
+
+          $scope.isLocked = false;
         })
         .error(function (data, status, headers, config) {
           var error = (data && data.error) ?
@@ -46,6 +52,8 @@ congoApp.controller('BenefitPlansNewController', [
             'There was a problem saving your benefit plan.';
 
           flashesFactory.add('danger', error);
+
+          $scope.isLocked = false;
         });
     };
 
