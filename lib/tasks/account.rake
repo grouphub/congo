@@ -14,6 +14,7 @@ namespace :account do
     tokens
     carriers
     invitations
+    notifications
   ]
 
   desc 'Import an account'

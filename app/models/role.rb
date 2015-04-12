@@ -6,6 +6,7 @@ class Role < ActiveRecord::Base
   belongs_to :invitation
 
   has_many :memberships
+  has_many :notifications
 
   before_save :add_english_name
 
