@@ -6,6 +6,8 @@ congoApp.controller('AdminFeaturesIndexController', [
     // Make sure user is admin before continuing.
     $scope.enforceAdmin();
 
+    $scope.isLocked = false;
+
     $scope.newFeature = function () {
       var feature = {
         name: $scope.feature.name,
@@ -13,6 +15,8 @@ congoApp.controller('AdminFeaturesIndexController', [
         enabled_for_all: $scope.feature.enabled_for_all,
         account_slugs: $scope.feature.account_slugs.split(/,\s*/)
       };
+
+      $scope.isLocked = true;
 
       $http
         .post('/api/internal/admin/features.json', feature)
@@ -22,6 +26,8 @@ congoApp.controller('AdminFeaturesIndexController', [
           feature.account_slugs = feature.account_slug_data.split(', ');
 
           $scope.features.push(feature);
+
+          $scope.isLocked = false;
         })
         .error(function (data, status, headers, config) {
           var error = (data && data.error) ?
@@ -29,6 +35,8 @@ congoApp.controller('AdminFeaturesIndexController', [
             'There was a problem creating a new feature.';
 
           flashesFactory.add('danger', error);
+
+          $scope.isLocked = false;
         });
     };
     

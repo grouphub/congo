@@ -12,7 +12,11 @@ congoApp.controller('TokensIndexController', [
       name: undefined
     };
 
+    $scope.isLocked = false;
+
     $scope.newToken = function () {
+      $scope.isLocked = true;
+
       $http
         .post('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/tokens.json', {
           name: $scope.form.name
@@ -20,6 +24,8 @@ congoApp.controller('TokensIndexController', [
         .success(function (data, status, headers, config) {
           $scope.tokens.push(data.token);
           $scope.form.name = '';
+
+          $scope.isLocked = false;
         })
         .error(function (data, status, headers, config) {
           var error = (data && data.error) ?
@@ -27,6 +33,8 @@ congoApp.controller('TokensIndexController', [
             'There was a problem creating a new token.';
 
           flashesFactory.add('danger', error);
+
+          $scope.isLocked = false;
         });
     };
 

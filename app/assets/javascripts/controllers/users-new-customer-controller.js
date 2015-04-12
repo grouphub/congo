@@ -41,7 +41,11 @@ congoApp.controller('UsersNewCustomerController', [
         });
     }
 
+    $scope.isLocked = false;
+
     $scope.signup = function () {
+      $scope.isLocked = true;
+
       $scope.$broadcast('show-errors-check-validity');
 
       if ($scope.memberForm.$invalid) {
@@ -65,6 +69,8 @@ congoApp.controller('UsersNewCustomerController', [
           $location.path('/accounts/' + account.slug + '/' + account.role.name);
 
           flashesFactory.add('success', 'Welcome, ' + congo.currentUser.first_name + ' ' + congo.currentUser.last_name + '!');
+
+          $scope.isLocked = false;
         })
         .error(function (data, status, headers, config) {
           var error = (data && data.error) ?
@@ -72,6 +78,8 @@ congoApp.controller('UsersNewCustomerController', [
             'There was a problem signing you up.';
 
           flashesFactory.add('danger', error);
+
+          $scope.isLocked = false;
         });
     };
 

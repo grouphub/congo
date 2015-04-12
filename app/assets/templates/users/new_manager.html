@@ -33,7 +33,7 @@
       <p class="help-block" ng-if="userForm.password_confirmation.$error.required">The user's password is required</p>
     </div>
 
-    <button class="btn btn-primary" ng-click="submit()">Add User</button>
+    <button class="btn btn-primary" ng-click="submit()" ng-disabled="isLocked">Add User</button>
   </form>
 </div>
 

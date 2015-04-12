@@ -143,6 +143,11 @@ class Api::Internal::UsersController < ApplicationController
     end
 
     if account_name
+      if account_name.blank?
+        error_response('Name must be provided.')
+        return
+      end
+
       account = user.roles.first.account
       account.name ||= account_name
       account.tagline ||= account_tagline

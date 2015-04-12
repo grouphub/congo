@@ -3,7 +3,11 @@ var congoApp = angular.module('congoApp');
 congoApp.controller('UsersNewBillingController', [
   '$scope', '$http', '$location',
   function ($scope, $http, $location) {
+    $scope.isLocked = false;
+
     $scope.submit = function () {
+      $scope.isLocked = true;
+
       $scope.$broadcast('show-errors-check-validity');
 
       if ($scope.billingForm.$invalid) {
@@ -21,6 +25,8 @@ congoApp.controller('UsersNewBillingController', [
         })
         .success(function (data, status, headers, config) {
           $location.path('/users/new_account');
+
+          $scope.isLocked = false;
         })
         .error(function (data, status, headers, config) {
           var error = (data && data.error) ?
@@ -28,6 +34,8 @@ congoApp.controller('UsersNewBillingController', [
             'There was a problem setting up your payment info.';
 
           flashesFactory.add('danger', error);
+
+          $scope.isLocked = false;
         });
     };
 

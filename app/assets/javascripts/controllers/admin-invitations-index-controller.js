@@ -25,7 +25,11 @@ congoApp.controller('AdminInvitationsIndexController', [
         });
     };
 
+    $scope.isLocked = false;
+
     $scope.newInvitation = function () {
+      $scope.isLocked = true;
+
       $http
         .post('/api/internal/admin/invitations.json', {
           description: $scope.description     
@@ -33,6 +37,8 @@ congoApp.controller('AdminInvitationsIndexController', [
         .success(function (data, status, headers, config) {
           $scope.invitations.push(data.invitation);
           $scope.description = '';
+
+          $scope.isLocked = false;
         })
         .error(function (data, status, headers, config) {
           var error = (data && data.error) ?
@@ -40,6 +46,8 @@ congoApp.controller('AdminInvitationsIndexController', [
             'There was a problem creating a new invitation.';
 
           flashesFactory.add('danger', error);
+
+          $scope.isLocked = false;
         });
     };
 

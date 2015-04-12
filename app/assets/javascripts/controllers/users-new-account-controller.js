@@ -1,16 +1,20 @@
 var congoApp = angular.module('congoApp');
 
 congoApp.controller('UsersNewAccountController', [
-  '$scope', '$http', '$location', 'flashesFactory',
-  function ($scope, $http, $location, flashesFactory) {
+  '$scope', '$http', '$location', 'flashesFactory', 'lockerFactory',
+  function ($scope, $http, $location, flashesFactory, lockerFactory) {
     $scope.form = {
-      name: null,
+      // If name is blank, it will fail validation server-side.
+      name: '',
+
       tagline: null,
       tax_id: null,
       first_name: null,
       last_name: null,
       phone: null
     };
+
+    $scope.isLocked = false;
 
     $scope.submit = function () {
       var account;
@@ -25,6 +29,8 @@ congoApp.controller('UsersNewAccountController', [
         account_properties: $scope.form
       };
 
+      $scope.isLocked = true;
+
       $http
         .put('/api/internal/users/' + congo.currentUser.id + '/account.json', data)
         .success(function (data, status, headers, config) {
@@ -37,6 +43,8 @@ congoApp.controller('UsersNewAccountController', [
           $location.path('/accounts/' + account.slug + '/' + account.role.name);
 
           flashesFactory.add('success', 'Welcome, ' + congo.currentUser.first_name + ' ' + congo.currentUser.last_name + '!');
+
+          $scope.isLocked = false;
         })
         .error(function (data, status, headers, config) {
           var error = (data && data.error) ?
@@ -44,6 +52,10 @@ congoApp.controller('UsersNewAccountController', [
             'There was a problem creating your account.';
 
           flashesFactory.add('danger', error);
+
+          lockerFactory.unlock('users-new-account');
+
+          $scope.isLocked = false;
         });
     };
 

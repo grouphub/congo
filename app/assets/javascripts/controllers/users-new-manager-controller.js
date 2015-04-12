@@ -4,17 +4,11 @@ congoApp.controller('UsersNewManagerController', [
   '$scope', '$http', '$location', 'flashesFactory',
   
   function ($scope, $http, $location, flashesFactory) {
-    $scope.save = function() {
-      $scope.$broadcast('show-errors-check-validity');
-
-      if ($scope.userForm.$invalid) {
-        return;
-      }
-
-      // TODO: Add code to add the user...?
-    };
+    $scope.isLocked = false;
 
     $scope.submit = function () {
+      $scope.isLocked = true;
+
       $scope.$broadcast('show-errors-check-validity');
 
       if ($scope.userForm.$invalid) {
@@ -34,6 +28,8 @@ congoApp.controller('UsersNewManagerController', [
           congo.currentUser = data.user;
 
           $location.path('/users/new_plan');
+
+          $scope.isLocked = false;
         })
         .error(function (data, status, headers, config) {
           var error = (data && data.error) ?
@@ -41,6 +37,8 @@ congoApp.controller('UsersNewManagerController', [
             'There was a problem creating your account.';
 
           flashesFactory.add('danger', error);
+
+          $scope.isLocked = false;
         });
     };
 
