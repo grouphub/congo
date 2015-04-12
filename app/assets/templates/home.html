@@ -25,33 +25,43 @@
 <div ng-if="currentRole() === 'broker'" class="col-md-12">
   <h1>Broker Dashboard: {{accountName()}}</h1>
 
-  <h2>Broker Functions</h2>
+  <div class="row">
+    <div class="col-md-6">
+      <h2>Broker Functions</h2>
 
-  <ul class="simple-list functions-list">
-    <li>
-      <a class="btn btn-default" ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/carriers">Manage Carriers and Benefit Plans</a>
-    </li>
+      <ul class="simple-list functions-list">
+        <li>
+          <a class="btn btn-default" ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/carriers">Manage Carriers and Benefit Plans</a>
+        </li>
 
-    <li>
-      <a class="btn btn-default" ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/groups">Manage Groups</a>
-    </li>
+        <li>
+          <a class="btn btn-default" ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/groups">Manage Groups</a>
+        </li>
 
-    <li>
-      <a class="btn btn-default" ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/settings">Manage Account Settings</a>
-    </li>
+        <li>
+          <a class="btn btn-default" ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/settings">Manage Account Settings</a>
+        </li>
 
-    <li ng-if="featureEnabled('api_tokens')">
-      <a class="btn btn-default" ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/tokens">Manage API Tokens</a>
-    </li>
+        <li ng-if="featureEnabled('api_tokens')">
+          <a class="btn btn-default" ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/tokens">Manage API Tokens</a>
+        </li>
 
-    <li ng-if="featureEnabled('eligibility_modal')">
-      <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#eligibility-modal">Check Eligibility</a>
-    </li>
+        <li ng-if="featureEnabled('eligibility_modal')">
+          <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#eligibility-modal">Check Eligibility</a>
+        </li>
 
-    <li>
-      <a class="btn btn-success" href="/accounts/{{accountSlug()}}/{{currentRole()}}/contact">Get Help</a>
-    </li>
-  </ul>
+        <li>
+          <a class="btn btn-success" href="/accounts/{{accountSlug()}}/{{currentRole()}}/contact">Get Help</a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="col-md-6">
+      <h2>Member Status</h2>
+
+      <canvas id="bar" class="chart chart-bar" data="data" labels="labels" series="series"></canvas>
+    </div>
+  </div>
 </div>
 
 <div ng-if="currentRole() === 'group_admin'" class="col-md-12">

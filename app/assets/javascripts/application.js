@@ -26,6 +26,8 @@
 //= require angular-cookies
 //= require ng-rails-csrf
 //= require ui-utils
+//= require chart
+//= require angular-chart
 //
 //  -----
 //  Setup

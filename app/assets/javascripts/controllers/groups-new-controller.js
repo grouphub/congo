@@ -19,7 +19,11 @@ congoApp.controller('GroupsNewController', [
       $scope.form.description_trusted = $sce.trustAsHtml($scope.form.description_html);
     });
 
+    $scope.isLocked = false;
+
     $scope.submit = function () {
+      $scope.isLocked = true;
+
       $http
         .post('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups.json', {
           name: $scope.form.name,
@@ -30,6 +34,8 @@ congoApp.controller('GroupsNewController', [
 
           // TODO: Does this need to be here?
           $scope.ready();
+
+          $scope.isLocked = false;
         })
         .error(function (data, status, headers, config) {
           var error = (data && data.error) ?
@@ -37,6 +43,8 @@ congoApp.controller('GroupsNewController', [
             'There was a problem creating the group.';
 
           flashesFactory.add('danger', error);
+
+          $scope.isLocked = false;
         });
     };
 

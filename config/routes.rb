@@ -135,6 +135,8 @@ Rails.application.routes.draw do
             post '/group_benefit_plans', to: 'group_benefit_plans#create'
             delete '/group_benefit_plans', to: 'group_benefit_plans#destroy'
           end
+
+          get '/charts/members_status', to: 'charts#members_status'
         end
       end
 

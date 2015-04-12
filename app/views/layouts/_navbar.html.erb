@@ -21,7 +21,7 @@
       <li class="messages-menu" ng-if="isSignedin() && currentRole() && !inAdminPanel()">
         <a href="/accounts/{{accountSlug()}}/{{currentRole()}}/messages">
           <i class="fa fa-newspaper-o"></i>
-          <span class="icon-label">{{currentAccount().message_count}}</span>
+          <span class="icon-label" ng-if="currentAccount().message_count > 0">{{currentAccount().message_count}}</span>
         </a>
       </li>
 

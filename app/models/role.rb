@@ -13,11 +13,12 @@ class Role < ActiveRecord::Base
     self.english_name = self.name.split('_').map(&:capitalize).join(' ')
   end
 
+  # TODO: Update this
   def message_count
     return nil unless self.account && self.account.slug
     return nil unless self.user && self.user.full_name
 
-    Digest::MD5.hexdigest(self.account.slug + ':' + self.user.full_name).to_i(16) % 30
+    0
   end
 
   def activity_count
