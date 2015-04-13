@@ -6,10 +6,12 @@ congoApp.controller('MainController', [
   '$location',
   '$timeout',
   '$interval',
+  '$q',
+  '$routeParams',
   'userDataFactory',
   'flashesFactory',
   'eventsFactory',
-  function ($scope, $http, $location, $timeout, $interval, userDataFactory, flashesFactory, eventsFactory) {
+  function ($scope, $http, $location, $timeout, $interval, $q, $routeParams, userDataFactory, flashesFactory, eventsFactory) {
     $scope.assets = congo.assets;
 
     // Loading behavior
@@ -116,26 +118,27 @@ congoApp.controller('MainController', [
     });
 
     // Notifications system
-    $scope.notificationsWaitTime = 5000;
-    $scope.notificationsSince = null;
-    $scope.notificationsInterval = $interval(function () {
+    $interval(function () {
       if (!$scope.accountSlug() || !$scope.currentRole()) {
         return;
       }
 
-      var url = $scope.notificationsSince ?
-        '/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/notifications.json?since=' + $scope.notificationsSince.toISOString() :
-        '/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/notifications.json'
+      var url = '/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/notifications/count.json';
 
       $http
         .get(url)
-        .success(function (data, status, headers, config) {
-          // TODO: Do something...
+        .then(function (response) {
+          $scope.currentAccount().activity_count = response.data.count;
         })
-        .error(function (data, status, headers, config) {
-          debugger;
-        })
-    }, $scope.notificationsWaitTime);
+        .catch(function (response) {
+          var data = response.data;
+          var error = (data && data.error) ?
+            data.error :
+            'There was a problem fetching notification count.';
+
+          flashesFactory.add('danger', error);
+        });
+    }, 5000);
 
     window.$congo = {}
     window.$congo.$mainControllerScope = $scope;

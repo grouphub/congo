@@ -28,7 +28,7 @@
       <li class="messages-menu" ng-if="isSignedin() && currentRole() && !inAdminPanel()">
         <a href="/accounts/{{accountSlug()}}/{{currentRole()}}/activities">
           <i class="fa fa-th-list"></i>
-          <span class="icon-label">{{currentAccount().activity_count}}</span>
+          <span class="icon-label">{{activityCount()}}</span>
         </a>
       </li>
 

@@ -119,6 +119,22 @@ congoApp.factory('userDataFactory', [
 
         return account;
       },
+      activityCount: function () {
+        var match;
+        var account;
+
+        if (!congo.currentUser) {
+          return;
+        }
+
+        match = $location.path().match(/\/accounts\/([^\/]+)/);
+
+        if (match && match[1] && match[1].length > 0) {
+          account = _(congo.currentUser.accounts).findWhere({ slug: match[1] });
+        }
+
+        return account.activity_count;
+      },
       accountName: function () {
         var account;
 
