@@ -207,6 +207,7 @@ lines with your variables, then run:
     echo 'export RDS_DB_NAME="..."' >> ~/.bashrc
     echo 'export RDS_USERNAME="..."' >> ~/.bashrc
     echo 'export RDS_PASSWORD="..."' >> ~/.bashrc
+    echo 'export S3_BUCKET="..."' >> ~/.bashrc
     echo 'export REDIS_URL="..."' >> ~/.bashrc
     echo 'export CONGO_CLOCK_SECONDS=300' >> ~/.bashrc
     echo 'export CONGO_CLOCK_LOG=log/clock.log' >> ~/.bashrc
