@@ -29,8 +29,6 @@ class Clock
       ticks
     }
 
-  pp TICKS
-
   def initialize
     @log_file = STDOUT
     @frequency = 60

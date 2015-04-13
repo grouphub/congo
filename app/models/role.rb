@@ -25,7 +25,7 @@ class Role < ActiveRecord::Base
     Notification
       .where(account_id: self.account.id)
       .where(role_id: self.id)
-      .order('read_at is NULL')
+      .where('read_at is NULL')
       .count
   end
 end

@@ -128,7 +128,15 @@ congoApp.controller('MainController', [
       $http
         .get(url)
         .then(function (response) {
-          $scope.currentAccount().activity_count = response.data.count;
+          var currentAccount = _(congo.currentUser.accounts).findWhere({ slug: $scope.accountSlug() });
+
+          if (currentAccount) {
+            currentAccount.activity_count = response.data.count;
+
+            console.log(currentAccount.activity_count, response.data.count);
+          } else {
+            // ...
+          }
         })
         .catch(function (response) {
           // var data = response.data;

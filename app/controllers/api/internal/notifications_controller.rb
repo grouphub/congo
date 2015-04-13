@@ -93,9 +93,6 @@ class Api::Internal::NotificationsController < ApplicationController
   end
 
   def count
-    since = params[:since] ? Time.parse(params[:since]) : nil
-    limit = params[:limit] ? params[:limit].to_i : nil
-    before = params[:before] ? Time.parse(params[:before]) : nil
     role_name = params[:role_id]
     role = Role
       .where(account_id: current_account.id)
