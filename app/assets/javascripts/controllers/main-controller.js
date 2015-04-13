@@ -131,12 +131,12 @@ congoApp.controller('MainController', [
           $scope.currentAccount().activity_count = response.data.count;
         })
         .catch(function (response) {
-          var data = response.data;
-          var error = (data && data.error) ?
-            data.error :
-            'There was a problem fetching notification count.';
+          // var data = response.data;
+          // var error = (data && data.error) ?
+          //   data.error :
+          //   'There was a problem fetching notification count.';
 
-          flashesFactory.add('danger', error);
+          // flashesFactory.add('danger', error);
         });
     }, 5000);
 

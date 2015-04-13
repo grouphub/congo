@@ -111,5 +111,27 @@ class Api::Internal::NotificationsController < ApplicationController
       }
     end
   end
+
+  def mark_all_as_read
+    role_name = params[:role_id]
+    role = Role
+      .where(account_id: current_account.id)
+      .where(name: role_name)
+      .where(user_id: current_user.id)
+      .first
+    notifications = Notification
+      .where(account_id: current_account.id)
+      .where(role_id: role.id)
+      .order('created_at DESC')
+
+    notifications.update_all \
+      read_at: Time.now
+
+    respond_to do |format|
+      format.json {
+        render json: {}
+      }
+    end
+  end
 end
 

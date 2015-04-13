@@ -111,7 +111,6 @@ class Api::Internal::ApplicationsController < ApplicationController
         .first
 
       # TODO: Verify this works
-      # TODO: Send notification email
       member_notification = Notification.create! \
         subject: application,
         account_id: application.account.id,
@@ -121,8 +120,9 @@ class Api::Internal::ApplicationsController < ApplicationController
           %[for "#{application.benefit_plan.name}" in the account ] +
           %[#{application.account.name}.]
 
+      NotificationMailer.notification_email(member_notification).deliver_later
+
       # TODO: Verify this works
-      # TODO: Send notification email
       broker_notification = Notification.create! \
         subject: application,
         account_id: current_account.id,
@@ -132,6 +132,8 @@ class Api::Internal::ApplicationsController < ApplicationController
           %[#{application.membership.user.email} for the plan ] +
           %["#{application.benefit_plan.name}" in the account ] +
           %[#{application.account.name}.]
+
+      NotificationMailer.notification_email(broker_notification).deliver_later
     end
 
     # TODO: Return activity log from PokitDok and show it in the eligibility status modal.

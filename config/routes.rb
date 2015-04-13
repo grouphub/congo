@@ -139,6 +139,7 @@ Rails.application.routes.draw do
           get '/charts/members_status', to: 'charts#members_status'
 
           get '/notifications/count', to: 'notifications#count'
+          put '/notifications/mark_all_as_read', to: 'notifications#mark_all_as_read'
           resources :notifications
         end
       end

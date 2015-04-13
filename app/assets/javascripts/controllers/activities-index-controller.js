@@ -16,6 +16,8 @@ congoApp.controller('ActivitiesIndexController', [
         .put('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/notifications/' + notification.id + '.json', data)
         .then(function (response) {
           notification.read_at = response.data.notification.read_at;
+
+          $scope.currentAccount().activity_count--;
         })
         .catch(function (response) {
           var data = response.data;
@@ -36,6 +38,8 @@ congoApp.controller('ActivitiesIndexController', [
         .put('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/notifications/' + notification.id + '.json', data)
         .then(function (response) {
           notification.read_at = response.data.notification.read_at;
+
+          $scope.currentAccount().activity_count++;
         })
         .catch(function (response) {
           var data = response.data;
@@ -54,6 +58,10 @@ congoApp.controller('ActivitiesIndexController', [
           $scope.notifications = _($scope.notifications).reject(function (n) {
             return n.id === notification.id;
           });
+
+          if (!notification.read_at) {
+            $scope.currentAccount().activity_count--;
+          }
         })
         .catch(function (response) {
           var data = response.data;
@@ -78,6 +86,26 @@ congoApp.controller('ActivitiesIndexController', [
           var error = (data && data.error) ?
             data.error :
             'There was a problem fetching notification count.';
+
+          flashesFactory.add('danger', error);
+        });
+    };
+
+    $scope.markAllAsRead = function () {
+      $http
+        .put('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/notifications/mark_all_as_read.json')
+        .then(function (response) {
+          _($scope.notifications).each(function (notification) {
+            notification.read_at = new Date().toISOString();
+          });
+
+          $scope.currentAccount().activity_count = 0;
+        })
+        .catch(function (response) {
+          var data = response.data;
+          var error = (data && data.error) ?
+            data.error :
+            'There was a problem marking all notifications as read.';
 
           flashesFactory.add('danger', error);
         });
