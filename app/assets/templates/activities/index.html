@@ -27,14 +27,14 @@
 
         <td>
           <a href="" class="btn btn-warning btn-xs" ng-click="markRead(notification)" ng-if="!notification.read_at">Mark Read</a>
-          <a href="" class="btn btn-warning btn-xs" ng-click="markUnead(notification)" ng-if="notification.read_at">Mark Unread</a>
+          <a href="" class="btn btn-warning btn-xs" ng-click="markUnread(notification)" ng-if="notification.read_at">Mark Unread</a>
           <a href="" class="btn btn-danger btn-xs" ng-click="destroy(notification)">Delete</a>
         </td>
       </tr>
     </tbody>
   </table>
 
-  <a href="" class="btn btn-default" ng-click="viewMore()" ng-disabled="isLoading">View More&hellip;</a>
-  <a href="" class="btn btn-info" ng-click="reload()" ng-disabled="isLoading">Reload</a>
+  <a href="" class="btn btn-default" ng-click="viewMore()">View More&hellip;</a>
+  <a href="" class="btn btn-info" ng-click="reload()">Reload</a>
 </div>
 
