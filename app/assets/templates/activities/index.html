@@ -1,4 +1,40 @@
 <div class="col-md-12">
   <h1>Activities</h1>
+
+  <table class="table">
+    <thead>
+      <th>Title</th>
+      <th>Date</th>
+      <th>Actions</th>
+    </thead>
+
+    <tbody>
+      <tr ng-repeat="notification in notifications">
+        <td>
+          <p>
+            {{notification.title}}
+            <span class="label label-default" ng-if="!notification.read_at">Unread</span>
+          </p>
+
+          <p class="small">
+            {{notification.description}}
+          </p>
+        </td>
+
+        <td>
+          {{notification.created_at | date : 'short'}}
+        </td>
+
+        <td>
+          <a href="" class="btn btn-warning btn-xs" ng-click="markRead(notification)" ng-if="!notification.read_at">Mark Read</a>
+          <a href="" class="btn btn-warning btn-xs" ng-click="markUnead(notification)" ng-if="notification.read_at">Mark Unread</a>
+          <a href="" class="btn btn-danger btn-xs" ng-click="destroy(notification)">Delete</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <a href="" class="btn btn-default" ng-click="viewMore()" ng-disabled="isLoading">View More&hellip;</a>
+  <a href="" class="btn btn-info" ng-click="reload()" ng-disabled="isLoading">Reload</a>
 </div>
 
