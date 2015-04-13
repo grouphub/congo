@@ -6,6 +6,7 @@ class Role < ActiveRecord::Base
   belongs_to :invitation
 
   has_many :memberships
+  has_many :notifications
 
   before_save :add_english_name
 
@@ -15,17 +16,17 @@ class Role < ActiveRecord::Base
 
   # TODO: Update this
   def message_count
-    return nil unless self.account && self.account.slug
-    return nil unless self.user && self.user.full_name
-
     0
   end
 
   def activity_count
     return nil unless self.account && self.account.slug
-    return nil unless self.user && self.user.full_name
 
-    Digest::MD5.hexdigest(self.account.slug + ':' + self.user.full_name + 'test').to_i(16) % 30
+    Notification
+      .where(account_id: self.account.id)
+      .where(role_id: self.id)
+      .order('read_at is NULL')
+      .count
   end
 end
 

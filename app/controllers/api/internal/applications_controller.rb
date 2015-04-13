@@ -101,6 +101,37 @@ class Api::Internal::ApplicationsController < ApplicationController
       application.update_attributes \
         approved_by_id: approved_by_id,
         approved_on: DateTime.now
+
+
+      approver_role_name = params[:role_id]
+      approver_role = Role
+        .where(account_id: current_account.id)
+        .where(name: role_name)
+        .where(user_id: current_user.id)
+        .first
+
+      # TODO: Verify this works
+      # TODO: Send notification email
+      member_notification = Notification.create! \
+        subject: application,
+        account_id: application.account.id,
+        role_id: application.membership.role.id,
+        title: %[One of your applications was approved!],
+        description: %[The user "#{approver.email}" approved your application ] +
+          %[for "#{application.benefit_plan.name}" in the account ] +
+          %[#{application.account.name}.]
+
+      # TODO: Verify this works
+      # TODO: Send notification email
+      broker_notification = Notification.create! \
+        subject: application,
+        account_id: current_account.id,
+        role_id: approver_role.id,
+        title: %[You approved an application for "#{application.membership.user.email}"],
+        description: %[You approved an application for the user ] +
+          %[#{application.membership.user.email} for the plan ] +
+          %["#{application.benefit_plan.name}" in the account ] +
+          %[#{application.account.name}.]
     end
 
     # TODO: Return activity log from PokitDok and show it in the eligibility status modal.

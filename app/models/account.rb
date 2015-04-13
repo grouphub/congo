@@ -20,6 +20,7 @@ class Account < ActiveRecord::Base
   has_many :invitations
   has_many :memberships
   has_many :attachments
+  has_many :notifications
 
   before_save :set_billing_start_and_day
 

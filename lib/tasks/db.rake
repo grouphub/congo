@@ -5,15 +5,15 @@ namespace :db do
     host = ActiveRecord::Base.connection_config[:host]
     db = ActiveRecord::Base.connection_config[:database]
     username = ActiveRecord::Base.connection_config[:username]
+    password = ActiveRecord::Base.connection_config[:password]
 
     options = []
     options << "--host #{host}" if host
     options << "--username #{username}" if username
 
-    pp app
-
     path = ENV['DUMP_PATH'] || "#{Rails.root}/db/#{app}.dump"
-    cmd = %[pg_dump #{options.join('')} --verbose --clean --no-owner --no-acl --format=plain #{db} > "#{path}"]
+    cmd = %[pg_dump #{options.join(' ')} --verbose --clean --no-owner --no-acl --format=plain #{db} > "#{path}"]
+    cmd = %[PGPASSWORD="#{password}" #{cmd}] if password
 
     puts cmd
     exec cmd
@@ -25,13 +25,15 @@ namespace :db do
     host = ActiveRecord::Base.connection_config[:host]
     db = ActiveRecord::Base.connection_config[:database]
     username = ActiveRecord::Base.connection_config[:username]
+    password = ActiveRecord::Base.connection_config[:password]
 
     options = []
     options << "--host #{host}" if host
     options << "--username #{username}" if username
 
     path = ENV['DUMP_PATH'] || "#{Rails.root}/db/#{app}.dump"
-    cmd = %[pg_restore --verbose #{options.join('')} --clean --no-owner --no-acl --dbname #{db} "#{path}"]
+    cmd = %[psql #{options.join(' ')} --file="#{path}" --dbname=#{db}]
+    cmd = %[PGPASSWORD="#{password}" #{cmd}] if password
 
     Rake::Task['db:drop'].invoke
     Rake::Task['db:create'].invoke

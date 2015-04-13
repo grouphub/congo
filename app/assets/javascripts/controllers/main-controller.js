@@ -5,10 +5,13 @@ congoApp.controller('MainController', [
   '$http',
   '$location',
   '$timeout',
+  '$interval',
+  '$q',
+  '$routeParams',
   'userDataFactory',
   'flashesFactory',
   'eventsFactory',
-  function ($scope, $http, $location, $timeout, userDataFactory, flashesFactory, eventsFactory) {
+  function ($scope, $http, $location, $timeout, $interval, $q, $routeParams, userDataFactory, flashesFactory, eventsFactory) {
     $scope.assets = congo.assets;
 
     // Loading behavior
@@ -113,6 +116,29 @@ congoApp.controller('MainController', [
       // Enable tooltips
       $('[data-toggle="tooltip"]').tooltip()
     });
+
+    // Notifications system
+    $interval(function () {
+      if (!$scope.accountSlug() || !$scope.currentRole()) {
+        return;
+      }
+
+      var url = '/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/notifications/count.json';
+
+      $http
+        .get(url)
+        .then(function (response) {
+          $scope.currentAccount().activity_count = response.data.count;
+        })
+        .catch(function (response) {
+          var data = response.data;
+          var error = (data && data.error) ?
+            data.error :
+            'There was a problem fetching notification count.';
+
+          flashesFactory.add('danger', error);
+        });
+    }, 5000);
 
     window.$congo = {}
     window.$congo.$mainControllerScope = $scope;

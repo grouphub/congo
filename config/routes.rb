@@ -137,6 +137,9 @@ Rails.application.routes.draw do
           end
 
           get '/charts/members_status', to: 'charts#members_status'
+
+          get '/notifications/count', to: 'notifications#count'
+          resources :notifications
         end
       end
 
