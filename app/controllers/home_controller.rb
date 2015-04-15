@@ -41,7 +41,7 @@ class HomeController < ApplicationController
       # invitation, then we need them to enter in a valid plan.
       #
       plan_name = current_account.plan_name || ''
-      has_no_valid_plan_name !Account::PLAN_NAMES.include?(plan_name)
+      has_no_valid_plan_name = !Account::PLAN_NAMES.include?(plan_name)
       membership = Membership.where \
         account_id: current_account.id,
         user_id: current_user.id,
