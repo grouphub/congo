@@ -42,12 +42,12 @@ class HomeController < ApplicationController
       #
       plan_name = current_account.plan_name || ''
       has_no_valid_plan_name = !Account::PLAN_NAMES.include?(plan_name)
-      membership = Membership
+      role = Role
         .where(account_id: current_account.id)
         .where(user_id: current_user.id)
-        .where(role_name: 'broker')
+        .where(name: 'broker')
         .first
-      has_no_broker_invitation = !membership.try(:invitation)
+      has_no_broker_invitation = !role.try(:invitation)
       if has_no_valid_plan_name && has_no_broker_invitation
         flash[:error] = 'Please choose a valid plan before continuing.'
         redirect_to '/users/new_plan'
