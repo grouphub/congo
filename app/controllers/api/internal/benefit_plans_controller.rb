@@ -16,13 +16,9 @@ class Api::Internal::BenefitPlansController < ApplicationController
     if only_activated_carriers
       benefit_plans = CarrierAccount
         .where('account_id = ?', current_account.id)
-        .includes(:carrier => :benefit_plans)
-        .map(&:carrier)
+        .includes(:benefit_plans)
         .map(&:benefit_plans)
         .flatten(1)
-        .reject { |benefit_plan|
-          benefit_plan.account_id == account.id || benefit_plan.account_id.nil?
-        }
     elsif only_activated
       benefit_plans = AccountBenefitPlan
         .where('account_id = ?', current_account.id)
