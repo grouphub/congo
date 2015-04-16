@@ -17,7 +17,6 @@ congoApp.controller('ApplicationsShowController', [
 
           _(propertiesData).each(function (i, key, hash) {
             var value = hash[key]
-            console.log(key, value);
 
             $('#enrollment-form [name="' + key + '"]').val(value)
           });

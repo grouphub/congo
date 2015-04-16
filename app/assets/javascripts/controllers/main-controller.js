@@ -132,8 +132,6 @@ congoApp.controller('MainController', [
 
           if (currentAccount) {
             currentAccount.activity_count = response.data.count;
-
-            console.log(currentAccount.activity_count, response.data.count);
           } else {
             // ...
           }

@@ -124,24 +124,27 @@ class Api::Internal::BenefitPlansController < ApplicationController
     carrier_account = CarrierAccount.where(account_id: current_account.id, carrier_id: carrier.id).first
     properties = params[:properties]
     account_benefit_plan_properties = params[:account_benefit_plan_properties]
-    name = properties['name']
-    description_markdown = properties['description_markdown']
-    description_html = properties['description_html']
 
     if benefit_plan.account_id == current_account.id
       # Only modify `properties` if it is passed as a parameter.
       unless properties.nil?
+        name = properties['name']
+        description_markdown = properties['description_markdown']
+        description_html = properties['description_html']
+
         benefit_plan.update_attributes! \
           name: name,
           properties: properties,
           description_markdown: description_markdown,
           description_html: description_html
       end
+    end
 
+    if account_benefit_plan
       # Only modify `is_enabled` if it is passed as a parameter.
       unless params[:is_enabled].nil?
         benefit_plan.update_attributes! \
-          :is_enabled, params[:is_enabled]
+          is_enabled: params[:is_enabled]
       end
     end
 
