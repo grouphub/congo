@@ -1,4 +1,5 @@
-account = Account.where(name: 'First Account').first
+first_account = Account.where(name: 'First Account').first
+second_account = Account.where(name: 'Second Account').first
 
 # Pre-populated list of carriers
 
@@ -74,10 +75,14 @@ BenefitPlan.create! \
     group_id: '234'
   }
 
+# =============
+# First Account
+# =============
+
 # Broker-created carrier account and benefit plan
 
 carrier = Carrier.create! \
-  account_id: account.id,
+  account_id: first_account.id,
   name: 'Sample Broker Carrier',
   properties: {
     name: 'Sample Broker Carrier',
@@ -98,7 +103,7 @@ carrier = Carrier.create! \
   }
 
 carrier_account = CarrierAccount.create! \
-  account_id: account.id,
+  account_id: first_account.id,
   carrier_id: carrier.id,
   name: 'My Broker Blue Cross',
   properties: {
@@ -111,7 +116,7 @@ carrier_account = CarrierAccount.create! \
   }
 
 benefit_plan = BenefitPlan.create! \
-  account_id: account.id,
+  account_id: first_account.id,
   carrier_id: carrier.id,
   carrier_account_id: carrier_account.id,
   is_enabled: true,
@@ -129,7 +134,72 @@ benefit_plan = BenefitPlan.create! \
   }
 
 account_benefit_plan = AccountBenefitPlan.create! \
-  account_id: account.id,
+  account_id: first_account.id,
+  carrier_id: carrier.id,
+  carrier_account_id: carrier_account.id,
+  benefit_plan_id: benefit_plan.id,
+  properties: {
+
+  }
+
+# ==============
+# Second Account
+# ==============
+
+carrier = Carrier.create! \
+  account_id: second_account.id,
+  name: 'Second Sample Broker Carrier',
+  properties: {
+    name: 'Second Sample Broker Carrier',
+    trading_partner_id: 'MOCKPAYER',
+    supported_transactions: ['555'],
+    is_enabled: true,
+    npi: '1467560003',
+    service_types: ['health_benefit_plan_coverage'],
+    tax_id: '123',
+    first_name: 'Samuel',
+    last_name: 'Samplebrokercarrier',
+    address_1: '123 Somewhere Lane',
+    address_2: 'Apt. 123',
+    city: 'Somewhereville',
+    state: 'CA',
+    zip: '94444',
+    phone: '444-444-4444'
+  }
+
+carrier_account = CarrierAccount.create! \
+  account_id: second_account.id,
+  carrier_id: carrier.id,
+  name: 'Second My Broker Blue Cross',
+  properties: {
+    name: 'Second My Broker Blue Cross',
+    carrier_slug: 'blue_cross',
+    broker_number: '234',
+    brokerage_name: 'Example Brokerage',
+    tax_id: '345',
+    account_type: 'broker'
+  }
+
+benefit_plan = BenefitPlan.create! \
+  account_id: second_account.id,
+  carrier_id: carrier.id,
+  carrier_account_id: carrier_account.id,
+  is_enabled: true,
+  name: 'Second Best Health Insurance PPO',
+  description_html: "<h1>Best Health Insurance PPO</h1>\n<p>An example plan.</p>",
+  description_markdown: "# Best Health Insurance PPO\n\nAn example plan.",
+  properties: {
+    name: 'Second Best Health Insurance PPO',
+    description_html: "<h1>Best Health Insurance PPO</h1>\n<p>An example plan.</p>",
+    description_markdown: "# Best Health Insurance PPO\n\nAn example plan.",
+    plan_type: 'foo',
+    exchange_plan: 'bar',
+    small_group: 'baz',
+    group_id: '235'
+  }
+
+account_benefit_plan = AccountBenefitPlan.create! \
+  account_id: second_account.id,
   carrier_id: carrier.id,
   carrier_account_id: carrier_account.id,
   benefit_plan_id: benefit_plan.id,

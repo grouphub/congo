@@ -14,15 +14,16 @@ class Api::Internal::BenefitPlansController < ApplicationController
     benefit_plans = nil
 
     if only_activated_carriers
-      current_account
-        .benefit_plans
+      benefit_plans = BenefitPlan
+        .where('account_id IS NULL or account_id = ?', current_account.id)
+        .includes(:carrier)
         .to_a
         .select { |benefit_plan|
-          benefit_plan.carrier_account
+          benefit_plan.carrier
         }
     elsif only_activated
-      current_account
-        .account_benefit_plans
+      benefit_plans = AccountBenefitPlan
+        .where('account_id IS NULL or account_id = ?', current_account.id)
         .includes(:benefit_plan)
         .map(&:benefit_plan)
     else

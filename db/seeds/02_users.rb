@@ -4,6 +4,7 @@
 
 admin_account = Account.where(name: 'Admin').first
 first_account = Account.where(name: 'First Account').first
+second_account = Account.where(name: 'Second Account').first
 
 # =====
 # Admin
@@ -85,4 +86,20 @@ Role.create! \
   user_id: garol.id,
   account_id: first_account.id,
   name: 'group_admin'
+
+# ==============
+# Second Account
+# ==============
+
+cecilia = User.create! \
+  first_name: 'Cecilia',
+  last_name: 'Secondaccount',
+  email: 'cecilia@second-account.com',
+  password: 'testtest'
+
+# She's a broker admin
+Role.create! \
+  user_id: cecilia.id,
+  account_id: second_account.id,
+  name: 'broker'
 
