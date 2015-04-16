@@ -6,21 +6,28 @@ congoApp.controller('HomeController', [
   'flashesFactory',
   function ($scope, $http, flashesFactory) {
     if ($scope.currentRole() === 'broker' || $scope.currentRole() === 'group_admin') {
-      $http.get('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/charts/members_status.json')
-        .success(function (data, status, headers, config) {
-          $scope.labels = data.labels;
-          $scope.series = data.series;
-          $scope.data = data.data;
+      function reloadChart () {
+        $http.get('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/charts/members_status.json')
+          .success(function (data, status, headers, config) {
+            $scope.labels = data.labels;
+            $scope.series = data.series;
+            $scope.data = data.data;
 
-          $scope.ready();
-        })
-        .error(function (data, status, headers, config) {
-          var error = (data && data.error) ?
-            data.error :
-            'There was a problem loading the chart.';
+            $scope.ready();
 
-          flashesFactory.add('danger', error);
-        });
+            $(window).trigger('resize');
+          })
+          .error(function (data, status, headers, config) {
+            var error = (data && data.error) ?
+              data.error :
+              'There was a problem loading the chart.';
+
+            flashesFactory.add('danger', error);
+          });
+      }
+
+      $scope.$on('$locationChangeStart', reloadChart);
+      reloadChart();
     } else {
       $scope.ready();
     }

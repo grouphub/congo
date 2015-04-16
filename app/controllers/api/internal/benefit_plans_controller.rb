@@ -11,36 +11,35 @@ class Api::Internal::BenefitPlansController < ApplicationController
     role_slug = params[:role_id]
     only_activated_carriers = (params[:only_activated_carriers] == 'true')
     only_activated = (params[:only_activated] == 'true')
-    benefit_plans = nil
 
-    if only_activated_carriers
+    # Do not show admin-created benefit plans which are not enabled.
+    if role_slug == 'group_admin' || role_slug == 'broker'
       benefit_plans = BenefitPlan
-        .where('account_id IS NULL or account_id = ?', current_account.id)
-        .includes(:carrier)
-        .to_a
-        .select { |benefit_plan|
-          benefit_plan.carrier
-        }
-    elsif only_activated
-      benefit_plans = AccountBenefitPlan
-        .where('account_id IS NULL or account_id = ?', current_account.id)
-        .includes(:benefit_plan)
-        .map(&:benefit_plan)
+        .where(
+          %[
+            (account_id IS NULL AND is_enabled = TRUE) OR
+            (account_id = ?)
+          ],
+          current_account.id
+        )
     else
       benefit_plans = BenefitPlan
-        .where('account_id IS NULL or account_id = ?', current_account.id)
+        .where('account_id = ? AND is_enabled = TRUE')
     end
 
-    if role_slug != 'group_admin' && role_slug != 'broker'
-      benefit_plans.select { |benefit_plan|
-        benefit_plan.is_enabled == true
-      }
+    if only_activated_carriers
+      # Plans whose carrier has been activated, but which themselves may not
+      # have been activated yet, for display on the carriers index page.
+      benefit_plans = benefit_plans
+        .where('carrier_id IS NOT NULL')
+    elsif only_activated
+      # Plans which have been activated and enabled, for display on the groups
+      # show page.
+      benefit_plans = benefit_plans
+        .where('is_enabled = TRUE')
+        .to_a
+        .select { |benefit_plan| benefit_plan.account_benefit_plan }
     end
-
-    benefit_plans = benefit_plans.reject { |benefit_plan|
-      # Do not show admin-created benefit plans which are not enabled.
-      benefit_plan.account_id == nil && benefit_plan.is_enabled == false
-    }
 
     respond_to do |format|
       format.json {
