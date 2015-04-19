@@ -66,6 +66,7 @@ namespace :workers do
 
   run_on_box_or_boxes = lambda { |callback|
     name = ENV['WORKER_NAME']
+    environment = ENV['WORKER_ENVIRONMENT']
     workers = Workers.new('current')
 
     if name
@@ -83,7 +84,16 @@ namespace :workers do
     else
       puts %[Preparing to run task on all boxes...]
 
-      workers.boxes.each do |ec2_config|
+      unless environment
+        raise 'WORKER_ENVIRONMENT must be provided.'
+      end
+
+      # Find all boxes for a specific environment.
+      boxes = workers.boxes.select { |ec2_config|
+        ec2_config[:environment] == environment
+      }
+
+      boxes.each do |ec2_config|
         Net::SSH::Simple.sync do |s|
           worker = Workers::Worker.new(workers, ec2_config, s)
           puts %[Preparing to run task on box named "#{worker.name}" at "#{worker.ssh_host}"...]
@@ -96,6 +106,7 @@ namespace :workers do
   desc 'Deploy application to all boxes or a specific box'
   task :deploy => :environment do
     name = ENV['WORKER_NAME']
+    environment = ENV['WORKER_ENVIRONMENT']
     workers = Workers.new
 
     if name
@@ -116,8 +127,17 @@ namespace :workers do
     else
       puts %[Preparing to deploy to all boxes...]
 
+      unless environment
+        raise 'WORKER_ENVIRONMENT must be provided.'
+      end
+
+      # Find all boxes for a specific environment.
+      boxes = workers.boxes.select { |ec2_config|
+        ec2_config[:environment] == environment
+      }
+
       workers.with_zip! do |zip_path|
-        workers.boxes.each do |ec2_config|
+        boxes.each do |ec2_config|
           Net::SSH::Simple.sync do |s|
             worker = Workers::Worker.new(workers, ec2_config, s)
             default_deploy.call(worker, zip_path)

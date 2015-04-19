@@ -168,7 +168,7 @@ Prepare the server. Make sure you're ssh'ed in, and run:
       gcc-c++ patch readline readline-devel zlib zlib-devel \
       libyaml-devel libffi-devel openssl-devel make \
       bzip2 autoconf automake libtool bison iconv-devel \
-      git postgresql-libs postgresql-devel
+      git tmux postgresql-libs postgresql-devel
     exit
 
     # Install rbenv, ruby, and bundler as ec2-user
