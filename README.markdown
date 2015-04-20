@@ -219,6 +219,10 @@ lines with your variables, then run:
     echo 'export POKITDOK_CALLBACK_HOST="..."' >> ~/.bashrc
     echo 'export SENDGRID_USERNAME="..."' >> ~/.bashrc
     echo 'export SENDGRID_PASSWORD="..."' >> ~/.bashrc
+    echo 'export PAPERTRAIL_HOST="..."' >> ~/.bashrc
+    echo 'export PAPERTRAIL_PORT="..."' >> ~/.bashrc
+    echo 'export NEWRELIC_LICENSE_KEY="..."' >> ~/.bashrc
+    echo 'export NEWRELIC_APP_NAME="..."' >> ~/.bashrc
 
 Make sure you have SQS, Postgres on RDS, and Redis on Elasticache setup and
 permissioned properly.
