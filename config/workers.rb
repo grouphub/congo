@@ -122,7 +122,7 @@
 
     # Production Clock Box 1
     {
-      name: 'congo-staging-clock-1',
+      name: 'congo-production-clock-1',
       environment: 'production',
       ssh_host: 'ec2-52-0-141-43.compute-1.amazonaws.com',
       ssh_args: {

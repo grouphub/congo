@@ -1,5 +1,5 @@
 namespace :workers do
-  stop_worker = lambda { |worker|
+  def stop_worker(worker)
     puts %[Stopping the existing worker...]
     worker.ssh! %[
       cd #{worker.to_directory} &&
@@ -10,9 +10,9 @@ namespace :workers do
         #{worker.kill_command} &&
         rm #{worker.pid_file}
     ]
-  }
+  end
 
-  start_worker = lambda { |worker|
+  def start_worker(worker)
     puts %[Starting the new worker...]
     worker.ssh! %[
       cd #{worker.to_directory} &&
@@ -20,9 +20,9 @@ namespace :workers do
         touch #{worker.pid_file}
         #{worker.run_command}
     ]
-  }
+  end
 
-  default_deploy = lambda { |worker, zip_path|
+  def default_deploy(worker, zip_path)
     puts %[Deploying to "#{worker.name} at "#{worker.ssh_host}"...]
 
     puts %[Creating the directory where the project will live...]
@@ -57,51 +57,30 @@ namespace :workers do
         ls | sort -r | tail -n +4 | xargs rm -r
     ]
 
-    stop_worker.call(worker)
-    start_worker.call(worker)
+    stop_worker(worker)
+    start_worker(worker)
 
     puts %[Finished deploying to "#{worker.name}".]
     print "\n"
-  }
+  end
 
-  run_on_box_or_boxes = lambda { |callback|
+  def run_on_box_or_boxes(with_zip = false, &block)
     name = ENV['WORKER_NAME']
     environment = ENV['WORKER_ENVIRONMENT']
     workers = Workers.new('current')
 
-    if name
-      Net::SSH::Simple.sync do |s|
-        ec2_config = workers.boxes.find { |ec2_config|
-          ec2_config[:name] == name
-        }
+    puts %[Preparing to run task on boxes...]
 
-        raise %[Could not find box with name "#{name}"] unless ec2_config
-
-        worker = Workers::Worker.new(workers, ec2_config, s)
-        puts %[Preparing to run task on box named "#{name}" at "#{worker.ssh_host}"...]
-        callback.call(worker)
-      end
-    else
-      puts %[Preparing to run task on all boxes...]
-
-      unless environment
-        raise 'WORKER_ENVIRONMENT must be provided.'
-      end
-
-      # Find all boxes for a specific environment.
-      boxes = workers.boxes.select { |ec2_config|
-        ec2_config[:environment] == environment
-      }
-
-      boxes.each do |ec2_config|
+    workers.with_zip!(with_zip) do |zip_path|
+      workers.select_boxes(name, environment).each do |ec2_config|
         Net::SSH::Simple.sync do |s|
           worker = Workers::Worker.new(workers, ec2_config, s)
           puts %[Preparing to run task on box named "#{worker.name}" at "#{worker.ssh_host}"...]
-          callback.call(worker)
+          block.call(worker)
         end
       end
     end
-  }
+  end
 
   desc 'Deploy application to all boxes or a specific box'
   task :deploy => :environment do
@@ -109,56 +88,26 @@ namespace :workers do
     environment = ENV['WORKER_ENVIRONMENT']
     workers = Workers.new
 
-    if name
-      puts %[Preparing to deploy to box named "#{name}"...]
+    puts %[Preparing to deploy to boxes...]
 
-      workers.with_zip! do |zip_path|
-        Net::SSH::Simple.sync do |s|
-          ec2_config = workers.boxes.find { |ec2_config|
-            ec2_config[:name] == name
-          }
-
-          raise %[Could not find box with name "#{name}"] unless ec2_config
-
-          worker = Workers::Worker.new(workers, ec2_config, s)
-          default_deploy.call(worker, zip_path)
-        end
-      end
-    else
-      puts %[Preparing to deploy to all boxes...]
-
-      unless environment
-        raise 'WORKER_ENVIRONMENT must be provided.'
-      end
-
-      # Find all boxes for a specific environment.
-      boxes = workers.boxes.select { |ec2_config|
-        ec2_config[:environment] == environment
-      }
-
-      workers.with_zip! do |zip_path|
-        boxes.each do |ec2_config|
-          Net::SSH::Simple.sync do |s|
-            worker = Workers::Worker.new(workers, ec2_config, s)
-            default_deploy.call(worker, zip_path)
-          end
-        end
-      end
+    run_on_box_or_boxes(true) do |worker|
+      worker = Workers::Worker.new(workers, ec2_config, s)
+      default_deploy(worker, zip_path)
     end
   end
 
   desc 'Stop all workers or a specific worker'
   task :stop => :environment do
-    run_on_box_or_boxes.call(lambda { |worker|
-      stop_worker.call(worker)
-    })
+    run_on_box_or_boxes do |worker|
+      stop_worker(worker)
+    end
   end
 
   desc 'Stop then start all workers or a specific worker'
   task :start => [:stop] do
-    run_on_box_or_boxes.call(lambda { |worker|
-      start_worker.call(worker)
-    })
+    run_on_box_or_boxes do |worker|
+      start_worker(worker)
+    end
   end
 
   desc 'Stop then start all workers or a specific worker'
@@ -171,10 +120,10 @@ namespace :workers do
 
   desc 'Ping the boxes'
   task :ping => :environment do
-    run_on_box_or_boxes.call(lambda { |worker|
+    run_on_box_or_boxes do |worker|
       puts %[Pinging "#{worker.name} at "#{worker.ssh_host}"...]
       worker.ssh! %[echo 'PONG']
-    })
+    end
   end
 end
 

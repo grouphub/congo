@@ -7,7 +7,12 @@ class Workers
     @timestamp = timestamp || Time.now.to_i
   end
 
-  def with_zip!(&block)
+  def with_zip!(with_zip = true, &block)
+    unless with_zip
+      block.call(nil)
+      return
+    end
+
     Dir.mktmpdir do |directory|
       zip_path = File.join(directory, "#{timestamp}.zip")
 
@@ -20,6 +25,23 @@ class Workers
 
   def boxes
     config[:boxes]
+  end
+
+  def select_boxes(name = nil, environment = nil)
+    if !name && !environment
+      raise 'WORKER_ENVIRONMENT must be provided.'
+    end
+
+    # Find all boxes for a specific environment.
+    self.boxes.select { |ec2_config|
+      if name && environment
+        ec2_config[:name] == name && ec2_config[:environment] == environment
+      elsif name
+        ec2_config[:name] == name
+      elsif environment
+        ec2_config[:environment] == environment
+      end
+    }
   end
 
   class Worker
