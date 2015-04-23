@@ -169,6 +169,9 @@ Prepare the server. Make sure you're ssh'ed in, and run:
       libyaml-devel libffi-devel openssl-devel make \
       bzip2 autoconf automake libtool bison iconv-devel \
       git tmux postgresql-libs postgresql-devel
+
+      curl -sL https://rpm.nodesource.com/setup | bash -
+      yum install --assumeyes nodejs
     exit
 
     # Install rbenv, ruby, and bundler as ec2-user

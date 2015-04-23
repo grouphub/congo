@@ -34,7 +34,7 @@ namespace :workers do
     puts %[Unzipping the project and removing the zip file...]
     worker.ssh! %[
       cd #{worker.to_directory} &&
-        unzip #{worker.workers.timestamp} >/dev/null &&
+        unzip #{worker.workers.timestamp}.zip >/dev/null &&
         rm #{worker.workers.timestamp}.zip
     ]
 
@@ -67,7 +67,7 @@ namespace :workers do
   def run_on_box_or_boxes(with_zip = false, &block)
     name = ENV['WORKER_NAME']
     environment = ENV['WORKER_ENVIRONMENT']
-    workers = Workers.new('current')
+    workers = Workers.new(with_zip ? nil : 'current')
 
     puts %[Preparing to run task on boxes...]
 
@@ -76,7 +76,7 @@ namespace :workers do
         Net::SSH::Simple.sync do |s|
           worker = Workers::Worker.new(workers, ec2_config, s)
           puts %[Preparing to run task on box named "#{worker.name}" at "#{worker.ssh_host}"...]
-          block.call(worker)
+          block.call(worker, zip_path)
         end
       end
     end
@@ -90,8 +90,7 @@ namespace :workers do
 
     puts %[Preparing to deploy to boxes...]
 
-    run_on_box_or_boxes(true) do |worker|
-      worker = Workers::Worker.new(workers, ec2_config, s)
+    run_on_box_or_boxes(true) do |worker, zip_path|
       default_deploy(worker, zip_path)
     end
   end
