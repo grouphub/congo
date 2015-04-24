@@ -5,6 +5,8 @@ gem 'rails', github: 'rails/rails', branch: '4-2-stable'
 gem 'pg'
 gem 'sprockets-rails', github: 'rails/sprockets-rails', branch: '2.x'
 
+gem 'redis-namespace'
+
 gem 'sass-rails', github: 'rails/sass-rails'
 
 gem 'uglifier', '>= 1.3.0'

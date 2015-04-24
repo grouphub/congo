@@ -82,6 +82,41 @@ namespace :workers do
     end
   end
 
+  def toggle_maintenance!(to_enable)
+    environment = ENV['WORKER_ENVIRONMENT']
+
+    raise 'WORKER_ENVIRONMENT must be specified.' unless environment
+
+    workers = Workers.new('current')
+
+    # Get the first box you can find for the environment.
+    box = workers.boxes.find { |ec2_config|
+      ec2_config[:environment] == environment
+    }
+
+    Net::SSH::Simple.sync do |s|
+      worker = Workers::Worker.new(workers, ec2_config, s)
+
+      if to_enable
+        puts %[Preparing to put environment "#{environment}" into maintenance mode ] +
+          %[from "#{worker.name}" at "#{worker.ssh_host}"...]
+
+        worker.ssh! %[
+          cd #{worker.deploy_directory}/current
+          bundle exec rake maintenance:start
+        ]
+      else
+        puts %[Preparing to take environment "#{environment}" out of maintenance mode ] +
+          %[from "#{worker.name}" at "#{worker.ssh_host}"...]
+
+        worker.ssh! %[
+          cd #{worker.deploy_directory}/current
+          bundle exec rake maintenance:stop
+        ]
+      end
+    end
+  end
+
   desc 'Deploy application to all boxes or a specific box'
   task :deploy => :environment do
     name = ENV['WORKER_NAME']
@@ -122,6 +157,34 @@ namespace :workers do
     run_on_box_or_boxes do |worker|
       puts %[Pinging "#{worker.name} at "#{worker.ssh_host}"...]
       worker.ssh! %[echo 'PONG']
+    end
+  end
+
+  desc 'Check if process is running'
+  task :check => :environment do
+    run_on_box_or_boxes do |worker|
+      puts %[Checking if process is running on "#{worker.name} at "#{worker.ssh_host}"...]
+      worker.ssh! %[
+        cd #{worker.deploy_directory}/current
+        cat #{worker.pid_file}
+        if ps -p `cat #{worker.pid_file}` >/dev/null; then
+          echo 'RUNNING'
+        else
+          echo 'NOT RUNNING'
+        fi
+      ]
+    end
+  end
+
+  namespace :maintenance do
+    desc 'Put WORKER_ENVIRONMENT into maintenance mode'
+    task :start => :environment do
+      toggle_maintenance!(true)
+    end
+
+    desc 'Take WORKER_ENVIRONMENT out of maintenance mode'
+    task :stop => :environment do
+      toggle_maintenance!(false)
     end
   end
 end

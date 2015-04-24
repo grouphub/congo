@@ -51,7 +51,10 @@ Rails.application.configure do
   # config.logger = ActiveSupport::TaggedLogging.new(SyslogLogger.new)
 
   if ENV['PAPERTRAIL_HOST'] && ENV['PAPERTRAIL_PORT']
-    config.logger = RemoteSyslogLogger.new(ENV['PAPERTRAIL_HOST'], ENV['PAPERTRAIL_PORT'])
+    config.logger = RemoteSyslogLogger.new \
+      ENV['PAPERTRAIL_HOST'],
+      ENV['PAPERTRAIL_PORT'],
+      program: ENV['PAPERTRAIL_PROGRAM']
   end
 
   # Use a different cache store in production.
