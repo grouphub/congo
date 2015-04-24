@@ -79,6 +79,8 @@ Rails.application.routes.draw do
     '/accounts/:slug/:role/activities'
   ]
 
+  resources :maintenance
+
   namespace :api do
     # Internal API for Angular app
     namespace :internal do

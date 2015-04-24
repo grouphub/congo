@@ -1,10 +1,13 @@
 development:
   url: 'redis://localhost:6379'
+  namespace: 'congo2'
 
 test:
   url: 'redis://localhost:6379'
+  namespace: 'congo2'
 
 # Setup for Heroku or Elasticache
 production:
   url: <%= ENV['REDISTOGO_URL'] || ENV['REDIS_URL'] || 'redis://localhost:6379' %>
+  namespace: 'congo2'
 

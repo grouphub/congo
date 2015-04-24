@@ -32,4 +32,5 @@ node_modules
 # Database dump files
 db/**/*.dump
 db/**/*.json
+db/**/*.sql
 
