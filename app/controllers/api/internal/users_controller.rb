@@ -1,5 +1,5 @@
 # TODO: Secure this controller
-class Api::Internal::UsersController < ApplicationController
+class Api::Internal::UsersController < Api::ApiController
   include ApplicationHelper
   include UsersHelper
   include CustomerCreatable

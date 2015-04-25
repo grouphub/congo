@@ -1,4 +1,12 @@
 class HomeController < ApplicationController
+  before_filter :check_maintenance
+
+  def check_maintenance
+    if Maintenance.in_progress?
+      render :file => 'public/maintenance.html', :layout => false
+    end
+  end
+
   def index
     account_match = request.fullpath.match(/^\/accounts\/(\w+)/)
     admin_match = request.fullpath.match(/^\/admin/)

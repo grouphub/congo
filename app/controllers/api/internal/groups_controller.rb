@@ -1,4 +1,4 @@
-class Api::Internal::GroupsController < ApplicationController
+class Api::Internal::GroupsController < Api::ApiController
   include UsersHelper
 
   protect_from_forgery

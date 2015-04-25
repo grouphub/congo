@@ -1,4 +1,4 @@
-class Api::Internal::AccountsController < ApplicationController
+class Api::Internal::AccountsController < Api::ApiController
   protect_from_forgery
 
   before_filter :ensure_user!

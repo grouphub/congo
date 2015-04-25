@@ -1,4 +1,4 @@
-class Api::Internal::NotificationsController < ApplicationController
+class Api::Internal::NotificationsController < Api::ApiController
   before_filter :ensure_user!
   before_filter :ensure_account!
 

@@ -1,4 +1,4 @@
-class Api::Internal::EligibilitiesController < ApplicationController
+class Api::Internal::EligibilitiesController < Api::ApiController
   include ApplicationHelper
 
   protect_from_forgery

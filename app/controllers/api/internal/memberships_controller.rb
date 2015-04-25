@@ -1,4 +1,4 @@
-class Api::Internal::MembershipsController < ApplicationController
+class Api::Internal::MembershipsController < Api::ApiController
   protect_from_forgery
 
   before_filter :ensure_user!

@@ -1,4 +1,4 @@
-class Api::Internal::Admin::UsersController < ApplicationController
+class Api::Internal::Admin::UsersController < Api::ApiController
   protect_from_forgery
 
   before_filter :ensure_admin!, except: :index

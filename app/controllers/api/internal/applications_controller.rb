@@ -1,4 +1,4 @@
-class Api::Internal::ApplicationsController < ApplicationController
+class Api::Internal::ApplicationsController < Api::ApiController
   protect_from_forgery
 
   before_filter :ensure_user!, except: :callback
