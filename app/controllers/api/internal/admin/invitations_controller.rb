@@ -1,4 +1,4 @@
-class Api::Internal::Admin::InvitationsController < ApplicationController
+class Api::Internal::Admin::InvitationsController < Api::ApiController
   protect_from_forgery
 
   before_filter :ensure_admin!

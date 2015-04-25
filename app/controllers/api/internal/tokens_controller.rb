@@ -1,4 +1,4 @@
-class Api::Internal::TokensController < ApplicationController
+class Api::Internal::TokensController < Api::ApiController
   protect_from_forgery
 
   before_filter :ensure_user!

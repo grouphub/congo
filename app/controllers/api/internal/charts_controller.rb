@@ -1,4 +1,4 @@
-class Api::Internal::ChartsController < ApplicationController
+class Api::Internal::ChartsController < Api::ApiController
   protect_from_forgery
 
   before_filter :ensure_user!

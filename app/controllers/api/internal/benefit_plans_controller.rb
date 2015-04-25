@@ -1,4 +1,4 @@
-class Api::Internal::BenefitPlansController < ApplicationController
+class Api::Internal::BenefitPlansController < Api::ApiController
   protect_from_forgery
 
   before_filter :ensure_user!

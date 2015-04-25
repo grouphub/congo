@@ -8,6 +8,33 @@ congoApp.config([
   }
 ]);
 
+congoApp.factory('MaintenanceInterceptor', [
+  '$location',
+  '$q',
+  function ($location, $q) {
+    return {
+      'response': function(response) {
+        console.log(response.data);
+
+        if (response.data && response.data.maintenance) {
+          window.location.reload();
+
+          return response;
+        }
+
+        return response;
+      }
+    }
+  }
+]);
+
+congoApp.config([
+  '$httpProvider',
+  function ($httpProvider) {
+    $httpProvider.interceptors.push('MaintenanceInterceptor');
+  }
+]);
+
 // General routes
 congoApp.config([
   '$routeProvider',

@@ -1,4 +1,4 @@
-class Api::Internal::AttachmentsController < ApplicationController
+class Api::Internal::AttachmentsController < Api::ApiController
   include ApplicationHelper
 
   protect_from_forgery
