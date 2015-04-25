@@ -45,20 +45,24 @@ namespace :workers do
         bundle
     ]
 
+    current_workers = Workers.new('current')
+    current_worker = worker.dup
+    current_worker.workers = current_workers
+    stop_worker(current_worker)
+
     puts %[Removing the current "current" symlink and link it to the new project...]
     worker.ssh! %[
       rm -f #{worker.deploy_directory}/current &&
         ln -s #{worker.to_directory} #{worker.deploy_directory}/current
     ]
 
+    start_worker(worker)
+
     puts %[Remove all but the current and last versions of the app...]
     worker.ssh! %[
       cd #{worker.deploy_directory} &&
         ls | sort -r | tail -n +4 | xargs rm -r
     ]
-
-    stop_worker(worker)
-    start_worker(worker)
 
     puts %[Finished deploying to "#{worker.name}".]
     print "\n"
