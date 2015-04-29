@@ -51,6 +51,18 @@ congoApp.config([
       .when('/accounts/new', {
         templateUrl: congo.assets['accounts-new.html'],
         controller: 'AccountsNewController'
+      })
+      .when('/security', {
+        templateUrl: congo.assets['security.html'],
+        controller: 'SecurityController'
+      })
+      .when('/terms', {
+        templateUrl: congo.assets['terms.html'],
+        controller: 'TermsController'
+      })
+      .when('/privacy', {
+        templateUrl: congo.assets['privacy.html'],
+        controller: 'PrivacyController'
       });
   }
 ]);

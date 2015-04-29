@@ -13,6 +13,9 @@ Rails.application.routes.draw do
     '/home',
     '/accounts',
     '/accounts/new',
+    '/security',
+    '/privacy',
+    '/terms',
 
     # Users
     '/users/signin',

@@ -45,6 +45,9 @@
 //= require controllers/contact-controller
 //= require controllers/accounts-controller
 //= require controllers/accounts-new-controller
+//= require controllers/security-controller
+//= require controllers/terms-controller
+//= require controllers/privacy-controller
 //= require controllers/settings-show-controller
 //= require controllers/reports-index-controller
 //= require controllers/activities-index-controller
