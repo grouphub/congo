@@ -79,7 +79,10 @@ Rails.application.routes.draw do
 
     # Notifications
     '/accounts/:slug/:role/messages',
-    '/accounts/:slug/:role/activities'
+    '/accounts/:slug/:role/activities',
+
+    # Spreadsheet Imports
+    '/accounts/:slug/:role/spreadsheet_imports'
   ]
 
   resources :maintenance

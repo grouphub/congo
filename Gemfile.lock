@@ -293,6 +293,9 @@ GEM
       rspec-support (~> 3.2.0)
     rspec-support (3.2.2)
     ruby-progressbar (1.7.1)
+    rubyXL (3.3.8)
+      nokogiri (>= 1.4.4)
+      rubyzip (>= 1.1.6)
     rubyzip (1.1.7)
     sass (3.4.13)
     sdoc (0.4.1)
@@ -374,6 +377,7 @@ DEPENDENCIES
   remote_syslog_logger
   rspec-rails
   ruby-progressbar
+  rubyXL
   sass-rails!
   sdoc (~> 0.4.0)
   selenium-webdriver

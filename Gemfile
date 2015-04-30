@@ -63,6 +63,9 @@ gem 'unindent'
 # Papertrail Logging
 gem 'remote_syslog_logger'
 
+# XLSX Import
+gem 'rubyXL'
+
 group :doc do
   gem 'sdoc', '~> 0.4.0'
 end

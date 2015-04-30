@@ -1,0 +1,45 @@
+<div ng-if="currentRole() === 'broker' || currentRole() === 'group_admin'" class="col-md-12">
+  <h1>Spreadsheet Import</h1>
+
+  <p>Follow the instructions below to load employees into a group using a spreadsheet.</p>
+
+  <p>Do not hesitate to <a href="/accounts/{{accountSlug()}}/{{currentRole()}}/contact">contact us</a> if you have any questions.</p>
+
+  <h2>Step One</h2>
+
+  <p>Download the example spreadsheet <a target="_self" href="/spreadsheets/GroupHub Group Import.xlsx">here</a>.</p>
+
+  <p>Fill in the appropriate fields for your employees. These fields will be pre-populated for your employees.</p>
+
+  <p><strong>TODO:</strong> Add more notes.</p>
+
+  <h2>Step Two</h2>
+
+  <p>Upload the spreadsheet.</p>
+
+  <form id="new-attachment" class="new-spreadsheet" name="newSpreadsheet">
+    <h3>Upload a new spreadsheet</h3>
+
+    <div class="form-group">
+      <label for="title">Title</label>
+      <input type="title" class="form-control" id="title" placeholder="Enter a Title&hellip;" ng-model="attachmentFormData.title">
+    </div>
+
+    <div class="form-group">
+      <label for="description">Description</label>
+      <input type="description" class="form-control" id="description" placeholder="Enter a Description&hellip;" ng-model="attachmentFormData.description">
+    </div>
+
+    <div class="form-group">
+      <label for="file">File</label>
+      <input type="file" class="form-control" id="file" onchange="angular.element(this).scope().fileChanged(this)">
+    </div>
+
+    <input type="submit" class="btn btn-primary" value="Add Spreadsheet">
+  </form>
+
+  <h2>Step Three</h2>
+
+  <p>View previously uploaded spreadsheets.</p>
+</div>
+

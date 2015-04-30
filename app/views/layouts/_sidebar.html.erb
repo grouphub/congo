@@ -168,6 +168,13 @@
     </a>
   </li>
 
+  <li class="sidebar-item" ng-if="(currentRole() === 'broker' || currentRole() === 'group_admin') && featureEnabled('spreadsheet_import')">
+    <a href="/accounts/{{accountSlug()}}/{{currentRole()}}/spreadsheet_imports" title="Spreadsheet Import">
+      <i class="fa fa-table"></i>
+      <span class="caption">Spreadsheet Import</span>
+    </a>
+  </li>
+
   <!-- Customer Applications -->
   <li class="sidebar-item" ng-if="currentRole() === 'customer'">
     <a ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/applications" title="Applications">

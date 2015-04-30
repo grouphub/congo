@@ -236,6 +236,10 @@ congoApp.config([
         templateUrl: congo.assets['activities/index.html'],
         controller: 'ActivitiesIndexController'
       })
+      .when('/accounts/:slug/:role/spreadsheet_imports', {
+        templateUrl: congo.assets['spreadsheet_imports/index.html'],
+        controller: 'SpreadsheetImportsIndexController'
+      });
   }
 ]);
 

@@ -79,6 +79,7 @@
 //= require controllers/users-new-plan-controller
 //= require controllers/users-show-controller
 //= require controllers/users-signin-controller
+//= require controllers/spreadsheet-imports-controller
 //
 //  -------
 //  Routers
