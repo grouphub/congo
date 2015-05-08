@@ -24,7 +24,7 @@ class Api::Internal::BenefitPlansController < Api::ApiController
         )
     else
       benefit_plans = BenefitPlan
-        .where('account_id = ? AND is_enabled = TRUE')
+        .where('account_id = ? AND is_enabled = TRUE', current_account.id)
     end
 
     if only_activated_carriers
