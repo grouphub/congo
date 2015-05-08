@@ -224,6 +224,7 @@ lines with your variables, then run:
     echo 'export SENDGRID_PASSWORD="..."' >> ~/.bashrc
     echo 'export PAPERTRAIL_HOST="..."' >> ~/.bashrc
     echo 'export PAPERTRAIL_PORT="..."' >> ~/.bashrc
+    echo 'export PAPERTRAIL_PROGRAM="..."' >> ~/.bashrc
     echo 'export NEWRELIC_LICENSE_KEY="..."' >> ~/.bashrc
     echo 'export NEWRELIC_APP_NAME="..."' >> ~/.bashrc
 
