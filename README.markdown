@@ -174,6 +174,8 @@ Prepare the server. Make sure you're ssh'ed in, and run:
       yum install --assumeyes nodejs
     exit
 
+    # Consider running the following commands in `tmux`...
+
     # Install rbenv, ruby, and bundler as ec2-user
     git clone https://github.com/sstephenson/rbenv.git ~/.rbenv
     echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc

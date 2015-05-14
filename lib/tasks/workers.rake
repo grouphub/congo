@@ -180,6 +180,31 @@ namespace :workers do
     end
   end
 
+  desc 'Check if process is running'
+  task :health => [:check]
+
+  # TODO: Are there other logs that should be cleared? Other files?
+  desc 'Clear logs'
+  task :clear_logs => :environment do
+    run_on_box_or_boxes do |worker|
+      puts %[Checking if process is running on "#{worker.name} at "#{worker.ssh_host}"...]
+      worker.ssh! %[
+        cd #{worker.deploy_directory}/current
+        bundle exec rake log:clear
+      ]
+    end
+  end
+
+  desc 'Check remaining disk space'
+  task :check_disk => :environment do
+    run_on_box_or_boxes do |worker|
+      puts %[Checking disk space on "#{worker.name} at "#{worker.ssh_host}"...]
+      worker.ssh! %[
+        df -h
+      ]
+    end
+  end
+
   namespace :maintenance do
     desc 'Put WORKER_ENVIRONMENT into maintenance mode'
     task :start => :environment do
