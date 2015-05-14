@@ -87,6 +87,8 @@ Rails.application.routes.draw do
   namespace :api do
     # Internal API for Angular app
     namespace :internal do
+      resource :health
+
       # Admin routes
       namespace :admin do
         resources :carriers
