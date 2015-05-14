@@ -9,11 +9,11 @@ Account.create! \
   }
 
 first_account = Account.create! \
-  name: 'First Account',
-  tagline: 'First account is best account!',
+  name: 'Top Tier Brokerage',
+  tagline: 'Top Tier Brokerage, Bringing Top Tier Quality to All Companies',
   plan_name: 'premier',
   properties: {
-    name: 'First Account',
+    name: 'Top Tier Brokerage',
     tagline: 'First account is best account!',
     plan_name: 'premier',
     tax_id: '123',
