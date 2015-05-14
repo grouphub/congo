@@ -1,8 +1,8 @@
 var congoApp = angular.module('congoApp');
 
 congoApp.controller('UsersNewAccountController', [
-  '$scope', '$http', '$location', 'flashesFactory', 'lockerFactory',
-  function ($scope, $http, $location, flashesFactory, lockerFactory) {
+  '$scope', '$http', '$location', 'flashesFactory',
+  function ($scope, $http, $location, flashesFactory) {
     $scope.form = {
       // If name is blank, it will fail validation server-side.
       name: '',
@@ -52,8 +52,6 @@ congoApp.controller('UsersNewAccountController', [
             'There was a problem creating your account.';
 
           flashesFactory.add('danger', error);
-
-          lockerFactory.unlock('users-new-account');
 
           $scope.isLocked = false;
         });

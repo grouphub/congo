@@ -130,8 +130,6 @@ congoApp.controller('CarriersIndexController', [
         flashesFactory.add('danger', 'We could not find a matching benefit plan.');
       }
 
-      console.log(benefitPlan);
-
       $http
         .put('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/benefit_plans/' + benefitPlan.slug + '.json', {
           is_enabled: !benefitPlan.is_enabled

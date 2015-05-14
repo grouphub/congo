@@ -90,10 +90,9 @@ class Api::Internal::UsersController < Api::ApiController
 
   def update_invitation
     id = params[:id]
-    user = User.where(id: id).first
     is_invite = params[:is_invite]
     invite_code = params[:invite_code]
-    role = user.roles.first
+    role = current_user.roles.first
 
     if is_invite
       unless invite_code
@@ -116,7 +115,7 @@ class Api::Internal::UsersController < Api::ApiController
     respond_to do |format|
       format.json {
         render json: {
-          user: render_user(user)
+          user: render_user(current_user)
         }
       }
     end

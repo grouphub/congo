@@ -102,5 +102,5 @@ group :development, :test do
   gem 'pry-rails'
 end
 
-ruby '2.2.0'
+ruby ENV['CUSTOM_RUBY_VERSION'] || '2.2.0'
 

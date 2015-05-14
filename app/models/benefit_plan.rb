@@ -7,7 +7,7 @@ class BenefitPlan < ActiveRecord::Base
   has_many :group_benefit_plans
   has_many :applications
   has_many :attachments
-  has_one :account_benefit_plan
+  has_many :account_benefit_plans
 
   belongs_to :account
   belongs_to :carrier_account

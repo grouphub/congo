@@ -164,15 +164,18 @@ Prepare the server. Make sure you're ssh'ed in, and run:
 
     # Install packages as root
     sudo su
+    yum update --assumeyes
     yum install --assumeyes \
       gcc-c++ patch readline readline-devel zlib zlib-devel \
       libyaml-devel libffi-devel openssl-devel make \
       bzip2 autoconf automake libtool bison iconv-devel \
       git tmux postgresql-libs postgresql-devel
 
-      curl -sL https://rpm.nodesource.com/setup | bash -
-      yum install --assumeyes nodejs
+    curl -sL https://rpm.nodesource.com/setup | bash -
+    yum install --assumeyes nodejs
     exit
+
+    # Consider running the following commands in `tmux`...
 
     # Install rbenv, ruby, and bundler as ec2-user
     git clone https://github.com/sstephenson/rbenv.git ~/.rbenv
@@ -224,6 +227,7 @@ lines with your variables, then run:
     echo 'export SENDGRID_PASSWORD="..."' >> ~/.bashrc
     echo 'export PAPERTRAIL_HOST="..."' >> ~/.bashrc
     echo 'export PAPERTRAIL_PORT="..."' >> ~/.bashrc
+    echo 'export PAPERTRAIL_PROGRAM="..."' >> ~/.bashrc
     echo 'export NEWRELIC_LICENSE_KEY="..."' >> ~/.bashrc
     echo 'export NEWRELIC_APP_NAME="..."' >> ~/.bashrc
 

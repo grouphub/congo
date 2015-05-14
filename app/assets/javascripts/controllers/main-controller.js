@@ -95,7 +95,7 @@ congoApp.controller('MainController', [
         $location.path('/');
       }
 
-      if (!currentAccount.plan_name && !congo.currentUser.invitation_id) {
+      if (!currentAccount.plan_name && !currentAccount.role.invitation_id) {
         flashesFactory.add('danger', 'Please choose a valid plan before continuing.');
         $location.path('/users/new_plan');
       }
