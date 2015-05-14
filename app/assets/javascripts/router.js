@@ -14,8 +14,6 @@ congoApp.factory('MaintenanceInterceptor', [
   function ($location, $q) {
     return {
       'response': function(response) {
-        console.log(response.data);
-
         if (response.data && response.data.maintenance) {
           window.location.reload();
 
