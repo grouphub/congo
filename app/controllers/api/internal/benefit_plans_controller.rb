@@ -31,7 +31,7 @@ class Api::Internal::BenefitPlansController < Api::ApiController
       # Plans whose carrier has been activated, but which themselves may not
       # have been activated yet, for display on the carriers index page.
       benefit_plans = benefit_plans
-        .where('carrier_id IS NOT NULL')
+        .where('carrier_account_id IS NOT NULL')
     elsif only_activated
       # Plans which have been activated and enabled, for display on the groups
       # show page.
