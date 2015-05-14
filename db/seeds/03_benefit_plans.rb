@@ -1,4 +1,4 @@
-first_account = Account.where(name: 'First Account').first
+first_account = Account.where(name: 'Top Tier Brokerage').first
 second_account = Account.where(name: 'Second Account').first
 
 # Pre-populated list of carriers
