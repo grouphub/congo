@@ -164,14 +164,15 @@ Prepare the server. Make sure you're ssh'ed in, and run:
 
     # Install packages as root
     sudo su
+    yum update --assumeyes
     yum install --assumeyes \
       gcc-c++ patch readline readline-devel zlib zlib-devel \
       libyaml-devel libffi-devel openssl-devel make \
       bzip2 autoconf automake libtool bison iconv-devel \
       git tmux postgresql-libs postgresql-devel
 
-      curl -sL https://rpm.nodesource.com/setup | bash -
-      yum install --assumeyes nodejs
+    curl -sL https://rpm.nodesource.com/setup | bash -
+    yum install --assumeyes nodejs
     exit
 
     # Install rbenv, ruby, and bundler as ec2-user

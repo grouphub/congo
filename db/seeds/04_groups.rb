@@ -1,4 +1,4 @@
-first_account = Account.where(name: 'First Account').first
+first_account = Account.where(name: 'Top Tier Brokerage').first
 second_account = Account.where(name: 'Second Account').first
 
 # =============
@@ -34,21 +34,24 @@ Membership.create! \
   group_id: group.id,
   user_id: alice.id,
   role_id: alice.roles.first.id,
-  email: alice.email
+  email: alice.email,
+  role_name: 'customer'
 
 Membership.create! \
   account_id: first_account.id,
   group_id: group.id,
   user_id: bob.id,
   role_id: bob.roles.first.id,
-  email: bob.email
+  email: bob.email,
+  role_name: 'customer'
 
 Membership.create! \
   account_id: first_account.id,
   group_id: group.id,
   user_id: garol.id,
   role_id: garol.roles.first.id,
-  email: garol.email
+  email: garol.email,
+  role_name: 'group_admin'
 
 # ==============
 # Second Account
@@ -71,7 +74,7 @@ group = Group.create! \
 benefit_plan = BenefitPlan.where(account_id: second_account.id).first
 
 GroupBenefitPlan.create! \
-  account_id: second_account.id,
+  account_id: first_account.id,
   group_id: group.id,
   benefit_plan_id: benefit_plan.id
 
