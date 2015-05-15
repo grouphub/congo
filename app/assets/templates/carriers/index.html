@@ -45,7 +45,7 @@
                 </a>
 
                 <span ng-if="carrier.account_id" class="label label-default owned">Owned</span>
-                <span ng-if="carrierCanBeDeleted(carrier)" class="label label-default added">Added</span>
+                <span ng-if="!carrier.account_id && carrierCanBeDeleted(carrier)" class="label label-default added">Added</span>
               </td>
 
               <td>

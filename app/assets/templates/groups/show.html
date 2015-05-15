@@ -124,7 +124,8 @@
         <table class="table">
           <thead>
             <tr>
-              <th>Benefit Plan name</th>
+              <th>Benefit Plan Name</th>
+              <th>Carrier Name</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -132,6 +133,7 @@
           <tbody>
             <tr ng-repeat="benefitPlan in benefitPlans" ng-if="benefitPlan.isEnabled">
               <td>{{benefitPlan.name}}</td>
+              <td>{{benefitPlan.carrier.name}}</td>
               <td>
                 <a href="" class="btn btn-danger btn-xs" ng-click="removeBenefitPlan(benefitPlan)">
                   Remove

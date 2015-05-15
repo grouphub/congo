@@ -377,8 +377,8 @@ GroupBenefitPlan.create! \
 # ID 8
 aetna_plan = BenefitPlan.create! \
   account_id: first_account.id,
-  carrier_id: twenty_first_carrier.id,
-  carrier_account_id: twenty_first_carrier_account.id,
+  carrier_id: aetna_carrier.id,
+  carrier_account_id: aetna_carrier_account.id,
   is_enabled: true,
   name: 'Aetna PPO',
   description_html: '',
