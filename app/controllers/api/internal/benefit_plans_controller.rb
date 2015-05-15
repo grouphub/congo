@@ -218,7 +218,7 @@ class Api::Internal::BenefitPlansController < Api::ApiController
     carrier = benefit_plan.carrier
     account_benefit_plan = benefit_plan.account_benefit_plans
       .to_a
-      .select { |account_benefit_plan|
+      .find { |account_benefit_plan|
         account_benefit_plan.account_id == current_account.id
       }
     attachments = benefit_plan.attachments
