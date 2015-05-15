@@ -103,7 +103,7 @@ class Api::Internal::NotificationsController < Api::ApiController
     respond_to do |format|
       format.json {
         render json: {
-          count: role.activity_count
+          count: role.try(:activity_count)
         }
       }
     end
