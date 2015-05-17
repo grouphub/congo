@@ -25,11 +25,20 @@ class Api::Internal::MembershipsController < Api::ApiController
     email = params[:membership][:email]
     role_name = params[:role_name]
 
+    unless role_name == 'customer' || role_name == 'group_admin'
+      error_response 'Role must be "customer" or "group_admin".'
+      return
+    end
+
     membership = Membership.create! \
       account_id: group.account_id,
       group_id: group.id,
       email: email,
       role_name: role_name
+
+    if role_name == 'group_admin'
+      MembershipMailer.confirmation_email(membership.id, request.protocol, request.host_with_port).deliver_later
+    end
 
     respond_to do |format|
       format.json {
