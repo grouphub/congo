@@ -95,7 +95,8 @@
 
   <ul class="simple-list functions-list">
     <li>
-      <a class="btn btn-default" ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/groups">Manage Group Benefits</a>
+      <a class="btn btn-default" ng-if="currentAccount().enabled_group_count === 1" ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/groups/{{currentAccount().first_enabled_group.slug}}">Manage Group Benefits</a>
+      <a class="btn btn-default" ng-if="currentAccount().enabled_group_count !== 1" ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/groups">Manage Group Benefits</a>
     </li>
 
     <li>

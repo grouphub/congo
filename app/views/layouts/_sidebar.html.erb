@@ -133,8 +133,16 @@
     </a>
   </li>
 
-  <li class="sidebar-item" ng-if="currentRole() === 'broker' || currentRole() === 'group_admin' || currentRole() === 'customer'">
+  <li class="sidebar-item" ng-if="currentRole() === 'broker' || currentRole() === 'group_admin'">
     <a ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/groups" title="Groups">
+      <i class="fa fa-group"></i>
+      <span class="caption">Groups</span>
+    </a>
+  </li>
+
+
+  <li class="sidebar-item" ng-if="currentRole() === 'customer'">
+    <a ng-if="currentAccount().enabled_group_count === 1" ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/groups/{{currentAccount().first_enabled_group.slug}}" title="Groups">
       <i class="fa fa-group"></i>
       <span class="caption">Groups</span>
     </a>

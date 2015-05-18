@@ -8,29 +8,25 @@ class Api::Internal::GroupsController < Api::ApiController
   before_filter :ensure_broker_or_group_admin!, only: [:create, :update, :destroy]
 
   def index
-    account_slug = params[:account_id]
-    account = Account.where(slug: account_slug).first
-    role_name = params[:role_id]
     groups = nil
 
-    # TODO: Verify user role
-    if role_name == 'customer'
+    if current_role.name == 'customer'
       groups = Membership
         .where(user_id: current_user.id)
         .includes(:group)
         .map(&:group)
         .select(&:is_enabled)
-        .select { |group| group.account_id == account.id }
-    elsif role_name == 'group_admin'
+        .select { |group| group.account_id == current_account.id }
+    elsif current_role.name == 'group_admin'
       groups = Membership
         .where(user_id: current_user.id)
         .includes(:group)
         .includes(:role)
         .select { |membership| membership.role.name == 'group_admin' }
         .map(&:group)
-        .select { |group| group.account_id == account.id }
+        .select { |group| group.account_id == current_account.id }
     else
-      groups = Group.where(account_id: account.id)
+      groups = Group.where(account_id: current_account.id)
     end
 
     respond_to do |format|
