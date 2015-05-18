@@ -31,11 +31,21 @@ congoApp.controller('UsersSigninController', [
               if (account.slug === 'admin') {
                 $location
                   .path('/admin')
-                  .replace();;
+                  .replace();
               } else {
-                $location
-                  .path('/accounts/' + account.slug + '/' + account.role.name)
-                  .replace();;
+                if (
+                  account.role.name === 'customer' &&
+                  account.enabled_group_count === 1 &&
+                  account.first_enabled_group
+                ) {
+                  $location
+                    .path('/accounts/' + account.slug + '/' + account.role.name + '/groups/' + account.first_enabled_group.slug)
+                    .replace();
+                } else {
+                  $location
+                    .path('/accounts/' + account.slug + '/' + account.role.name)
+                    .replace();
+                }
               }
 
               return;

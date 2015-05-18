@@ -55,8 +55,6 @@ module UsersHelper
       .first
   end
 
-  # TODO: Need `current_role` and `ensure_broker!` methods
-
   def ensure_user!
     unless current_user
       error_response('You must be signed in.')
@@ -106,15 +104,28 @@ module UsersHelper
   def render_user(user)
     return nil unless user
 
+    groups = Membership
+      .where(user_id: current_user.id)
+      .includes(:group)
+      .map(&:group)
+      .select(&:is_enabled)
+
     accounts = user
       .roles
       .includes(:account)
       .map { |role|
+        enabled_groups = groups
+          .select { |group| group.account_id == role.account.id }
+
+        first_enabled_group = enabled_groups.first
+
         role.account.as_json.merge({
           'role' => role,
           'enabled_features' => role.account.enabled_features.map(&:name),
           'message_count' => role.message_count,
-          'activity_count' => role.activity_count
+          'activity_count' => role.activity_count,
+          'enabled_group_count' => enabled_groups.count,
+          'first_enabled_group' => first_enabled_group.as_json
         })
       }
 
