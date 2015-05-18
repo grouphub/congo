@@ -9,6 +9,7 @@ class Api::Internal::CarriersController < Api::ApiController
     only_activated = (params[:only_activated] == 'true')
     carriers = nil
 
+    carriers = nil
     if only_activated
       carriers = CarrierAccount
         .where('account_id = ?', current_account.id)
@@ -21,9 +22,7 @@ class Api::Internal::CarriersController < Api::ApiController
     respond_to do |format|
       format.json {
         render json: {
-          carriers: carriers.map { |carrier|
-            render_carrier(carrier)
-          }
+          carriers: render_carriers(carriers)
         }
       }
     end
@@ -145,6 +144,28 @@ class Api::Internal::CarriersController < Api::ApiController
       account: carrier.account,
       carrier_account: carrier.carrier_accounts.where(account_id: current_account.id).first
     })
+  end
+
+  def render_carriers(carriers)
+    carrier_ids = carriers.map(&:id)
+    carrier_accounts = CarrierAccount.where('carrier_id IN (?)', carrier_ids)
+    carrier_accounts_hash = carrier_accounts.inject({}) { |hash, carrier_account|
+      if carrier_account.account_id == current_account.id
+        hash[carrier_account.carrier_id] = carrier_account
+      end
+
+      hash
+    }
+
+    rendered_carriers = carriers.map { |carrier|
+      account = (carrier.account_id == current_account.id) ? current_account : nil
+      carrier_account = carrier_accounts_hash[carrier.id]
+
+      carrier.as_json.merge({
+        account: account.try(:as_json),
+        carrier_account: carrier_account.try(:as_json)
+      })
+    }
   end
 end
 
