@@ -82,6 +82,27 @@ congoApp.controller('GroupsShowController', [
       }
     };
 
+    $scope.updateMembershipEmail = function (membership) {
+      var email = membership.email;
+      var data = {
+        email: membership.email
+      };
+
+      $http
+        .put('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups/' + $scope.groupSlug() + '/memberships/' + membership.id + '.json', data)
+        .success(function (data, status, headers, config) {
+          var newMembership = data.membership;
+          membership.email = newMembership.email;
+        })
+        .error(function (data, status, headers, config) {
+          var error = (data && data.error) ?
+            data.error :
+            'There was a problem updating the member email.';
+
+          flashesFactory.add('danger', error);
+        });
+    };
+
     $scope.selectBenefitPlan = function (benefitPlan) {
       if (!benefitPlan) {
         flashesFactory.add('danger', 'We could not find a matching benefit plan.');

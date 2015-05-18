@@ -64,6 +64,23 @@ class Api::Internal::MembershipsController < Api::ApiController
     end
   end
 
+  def update
+    membership = Membership.find(params[:id].to_i)
+    email = params[:email]
+
+    if email
+      membership.update_attributes!(email: email)
+    end
+
+    respond_to do |format|
+      format.json {
+        render json: {
+          membership: render_membership(membership)
+        }
+      }
+    end
+  end
+
   def send_confirmation
     membership_id = params[:membership_id]
     membership = Membership.where(id: membership_id).first
