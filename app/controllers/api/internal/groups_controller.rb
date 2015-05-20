@@ -153,7 +153,7 @@ class Api::Internal::GroupsController < Api::ApiController
         'applications' => membership.applications.map { |application|
           application.as_json.merge({
             'state' => application.state,
-            'human_state' => application.state.titleize,
+            'human_state' => application.human_state,
             'state_label' => application.state_label
           })
         }
@@ -174,7 +174,7 @@ class Api::Internal::GroupsController < Api::ApiController
         sum += membership.applications.map { |application|
           application.as_json.merge({
             'state' => application.state,
-            'human_state' => application.state.titleize,
+            'human_state' => application.human_state,
             'state_label' => application.state_label
           })
         }

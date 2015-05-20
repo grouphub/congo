@@ -162,5 +162,28 @@ class Application < ActiveRecord::Base
       'default'
     end
   end
+
+  def human_state
+    case self.state
+    when 'errored'
+      'Errored'
+    when 'completed'
+      'Completed'
+    when 'sent'
+      'Sent'
+    when 'submitted'
+      'Submitted'
+    when 'approved'
+      'Enrolled'
+    when 'applied'
+      'Applied'
+    when 'declined'
+      'Declined'
+    when 'selected'
+      'Selected'
+    else
+      nil
+    end
+  end
 end
 

@@ -263,7 +263,7 @@ class Api::Internal::ApplicationsController < Api::ApiController
         'applications' => membership.applications
       }),
       'state' => application.state,
-      'human_state' => application.state.titleize,
+      'human_state' => application.human_state,
       'state_label' => application.state_label
     })
   end
