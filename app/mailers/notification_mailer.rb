@@ -9,6 +9,7 @@ class NotificationMailer < ActionMailer::Base
     @notification = notification
     @email = user.email
     @url = "#{protocol}#{host}/#{account.slug}/#{role.name}/notifications"
+    @logo_url = "#{protocol}#{host}/logo.png"
 
     mail(to: @email, subject: 'You received a notification')
   end

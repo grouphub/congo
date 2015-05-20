@@ -12,6 +12,7 @@ class MembershipMailer < ActionMailer::Base
     @group_domain = 'broker'
     @group_admin = 'GroupHub Admin'
     @url = "#{protocol}#{host}/users/new_customer?email_token=#{email_token}"
+    @logo_url = "#{protocol}#{host}/logo.png"
 
     # TODO: Add account name
     # TODO: Finish laying out email

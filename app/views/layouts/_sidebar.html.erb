@@ -146,6 +146,11 @@
       <i class="fa fa-group"></i>
       <span class="caption">Groups</span>
     </a>
+
+    <a ng-if="currentAccount().enabled_group_count !== 1" ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/groups" title="Groups">
+      <i class="fa fa-group"></i>
+      <span class="caption">Groups</span>
+    </a>
   </li>
 
   <li class="sidebar-item" ng-if="currentRole() === 'broker'">
