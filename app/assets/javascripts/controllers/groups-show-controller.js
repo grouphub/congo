@@ -363,7 +363,15 @@ congoApp.controller('GroupsShowController', [
         });
     };
 
+    $scope.historyApplications = null;
+
     function done() {
+      if ($scope.currentRole() === 'customer') {
+        if (!$scope.historyApplications) {
+          return;
+        }
+      }
+
       if ($scope.benefitPlans && $scope.group) {
         _($scope.benefitPlans).each(function (benefitPlan) {
           benefitPlan.isEnabled = !!_($scope.group.benefit_plans).findWhere({ id: benefitPlan.id });
@@ -401,6 +409,23 @@ congoApp.controller('GroupsShowController', [
 
         flashesFactory.add('danger', error);
       });
+
+    if ($scope.currentRole() === 'customer') {
+      $http
+        .get('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/applications.json')
+        .success(function (data, status, headers, config) {
+          $scope.historyApplications = data.applications;
+
+          done();
+        })
+        .error(function (data, status, headers, config) {
+          var error = (data && data.error) ?
+            data.error :
+            'There was a problem fetching the list of applications.';
+
+          flashesFactory.add('danger', error);
+        });
+    }
 
     // ===========
     // Attachments
@@ -470,6 +495,32 @@ congoApp.controller('GroupsShowController', [
           flashesFactory.add('danger', error);
         });
     }
+
+    // -------------------
+    // Application History
+    // -------------------
+
+
+    $scope.revokeApplication = function (application) {
+      if (!application) {
+        flashesFactory.add('danger', 'We could not find a matching invitation.');
+      }
+
+      $http
+        .delete('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/applications/' + application.id + '.json')
+        .success(function (data, status, headers, config) {
+          $scope.historyapplications = _($scope.applications).reject(function (a) {
+            return application.id === a.id;
+          });
+        })
+        .error(function (data, status, headers, config) {
+          var error = (data && data.error) ?
+            data.error :
+            'There was a problem revoking the application.';
+
+          flashesFactory.add('danger', error);
+        });
+    };
   }
 ]);
 

@@ -181,14 +181,6 @@
     </a>
   </li>
 
-  <!-- Customer Applications -->
-  <li class="sidebar-item" ng-if="currentRole() === 'customer'">
-    <a ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/applications" title="Applications">
-      <i class="fa fa-file-text"></i>
-      <span class="caption">Applications</span>
-    </a>
-  </li>
-
   <li class="sidebar-item" ng-if="!firstName()">
     <a href="/users/signin" title="Sign In">
       <i class="glyphicon glyphicon-user"></i>
