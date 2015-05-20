@@ -115,6 +115,8 @@ congoApp.controller('ApplicationsNewController', [
           $cookieStore.remove('current-application-id');
 
           $location.path('/accounts/' + $scope.accountSlug() + '/' + $scope.currentRole());
+
+          flashesFactory.add('success', 'Successfully sent the application.');
         })
         .error(function (data, status, headers, config) {
           var error = (data && data.error) ?

@@ -102,12 +102,12 @@ class Api::Internal::ApplicationsController < Api::ApiController
         approved_by_id: approved_by_id,
         approved_on: DateTime.now
 
-
-      approver_role_name = params[:role_id]
       approver_role = Role
-        .where(account_id: current_account.id)
-        .where(name: role_name)
-        .where(user_id: current_user.id)
+        .where({
+          account_id: current_account.id,
+          name: current_role.name,
+          user_id: current_user.id
+        })
         .first
 
       # TODO: Verify this works
@@ -116,11 +116,11 @@ class Api::Internal::ApplicationsController < Api::ApiController
         account_id: application.account.id,
         role_id: application.membership.role.id,
         title: %[One of your applications was approved!],
-        description: %[The user "#{approver.email}" approved your application ] +
+        description: %[The user "#{approver_role.user.email}" approved your application ] +
           %[for "#{application.benefit_plan.name}" in the account ] +
           %[#{application.account.name}.]
 
-      NotificationMailer.notification_email(member_notification).deliver_later
+      NotificationMailer.notification_email(member_notification, request.protocol, request.host_with_port).deliver_later
 
       # TODO: Verify this works
       broker_notification = Notification.create! \
@@ -133,7 +133,7 @@ class Api::Internal::ApplicationsController < Api::ApiController
           %["#{application.benefit_plan.name}" in the account ] +
           %[#{application.account.name}.]
 
-      NotificationMailer.notification_email(broker_notification).deliver_later
+      NotificationMailer.notification_email(broker_notification, request.protocol, request.host_with_port).deliver_later
     end
 
     # TODO: Return activity log from PokitDok and show it in the eligibility status modal.

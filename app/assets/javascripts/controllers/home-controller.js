@@ -20,11 +20,7 @@ congoApp.controller('HomeController', [
             }, 100);
           })
           .error(function (data, status, headers, config) {
-            var error = (data && data.error) ?
-              data.error :
-              'There was a problem loading the chart.';
-
-            flashesFactory.add('danger', error);
+            // Do nothing for now...
           });
       } else {
         $scope.ready();
