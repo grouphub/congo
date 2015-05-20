@@ -17,7 +17,7 @@ congoApp.controller('HomeController', [
               $scope.data = data.data;
 
               $scope.ready();
-            }, 100);
+            }, 250);
           })
           .error(function (data, status, headers, config) {
             // Do nothing for now...

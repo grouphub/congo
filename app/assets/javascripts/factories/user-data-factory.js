@@ -3,6 +3,22 @@ var congoApp = angular.module('congoApp');
 congoApp.factory('userDataFactory', [
   '$location', '$cookieStore', '$routeParams',
   function ($location, $cookieStore, $routeParams) {
+    function isSignedIn () {
+      return !!congo.currentUser;
+    }
+
+    function currentRole () {
+      var match;
+
+      match = $location.path().match(/^\/admin/);
+
+      if (match) {
+        return 'admin';
+      }
+
+      return $routeParams.role;
+    }
+
     var userDataFactory = {
       drawerToggle: function () {
         $cookieStore.put('show-drawer', !$cookieStore.get('show-drawer'));
@@ -35,17 +51,7 @@ congoApp.factory('userDataFactory', [
       userId: function () {
         return $routeParams.id;
       },
-      currentRole: function () {
-        var match;
-
-        match = $location.path().match(/^\/admin/);
-
-        if (match) {
-          return 'admin';
-        }
-
-        return $routeParams.role;
-      },
+      currentRole: currentRole,
       isGroupAdmin: function () {
         switch (userDataFactory.currentRole()) { 
           case "broker":
@@ -54,9 +60,7 @@ congoApp.factory('userDataFactory', [
             break;
         }
       },
-      isSignedin: function () {
-        return !!congo.currentUser;
-      },
+      isSignedin: isSignedIn,
       isAdmin: function () {
         var currentUser = congo.currentUser;
 
@@ -133,6 +137,10 @@ congoApp.factory('userDataFactory', [
           account = _(congo.currentUser.accounts).findWhere({ slug: match[1] });
         }
 
+        if (!account) {
+          return;
+        }
+
         return account.activity_count;
       },
       accountName: function () {
@@ -191,6 +199,21 @@ congoApp.factory('userDataFactory', [
       },
       hasBrokerAccount: function () {
         return JSON.parse(congo.currentUser.properties_data).is_broker;
+      },
+      shouldShowSidebar: function () {
+        if (!isSignedIn()) {
+          return false;
+        }
+
+        if (!currentRole()) {
+          return false;
+        }
+
+        if (currentRole() === 'customer') {
+          return false;
+        }
+
+        return true;
       }
     };
 
