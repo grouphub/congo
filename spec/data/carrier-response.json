@@ -1,16 +1,19 @@
 {
   "meta": {
-    "rate_limit_amount": 3,
-    "rate_limit_reset": 1428087203,
-    "application_mode": "production",
-    "processing_time": 47,
+    "rate_limit_amount": 1,
+    "rate_limit_reset": 1432183121,
+    "application_mode": "test",
+    "processing_time": 130,
     "rate_limit_cap": 1000,
-    "activity_id": "551ed44380de1d00707422a8"
+    "activity_id": "555d534180de1d00d9915e86"
   },
   "data": [
     {
       "is_enabled": true,
       "supported_transactions": [
+        "837"
+      ],
+      "enrollment_required": [
         "837"
       ],
       "id": "21st_century_insurance",
@@ -19,6 +22,9 @@
     {
       "is_enabled": true,
       "supported_transactions": [
+        "837"
+      ],
+      "enrollment_required": [
         "837"
       ],
       "id": "8th_district_electrical",
@@ -30,6 +36,9 @@
         "270",
         "837"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "aarp_medicare_complete",
       "name": "AARP Medicare Complete"
     },
@@ -40,21 +49,31 @@
         "837",
         "270"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "aarp_medicare_supplement",
-      "name": "AARP Medicare Supplement Plan (Fixed/Hospital Indemnity)"
+      "name": "AARP Medicare Supplement Plan (Fixed or Hospital Indemnity)"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
         "837"
       ],
+      "enrollment_required": [
+        "837"
+      ],
       "id": "aps_healthcare",
-      "name": "APS Healthcare Inc."
+      "name": "APS Healthcare Inc"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
         "270",
+        "837",
+        "276"
+      ],
+      "enrollment_required": [
         "837",
         "276"
       ],
@@ -66,12 +85,18 @@
       "supported_transactions": [
         "837"
       ],
+      "enrollment_required": [
+        "837"
+      ],
       "id": "access_behavioral_care",
       "name": "Access Behavioral Care (Medicaid) - Colorado Access"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
+        "837"
+      ],
+      "enrollment_required": [
         "837"
       ],
       "id": "activ_healthcare",
@@ -85,6 +110,9 @@
         "270",
         "837"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "aetna",
       "name": "Aetna"
     },
@@ -92,6 +120,9 @@
       "is_enabled": true,
       "supported_transactions": [
         "837"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "aetna_affordable_health_src",
       "name": "Aetna Affordable Health Choices SM SRC"
@@ -103,14 +134,21 @@
         "270",
         "276"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "aetna_better_health",
       "name": "Aetna Better Health"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
+        "837",
         "270",
         "276"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "aetna_better_health_il",
       "name": "Aetna Better Health of Illinois"
@@ -118,8 +156,12 @@
     {
       "is_enabled": true,
       "supported_transactions": [
+        "276",
         "270",
         "837"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "aetna_better_health_la",
       "name": "Aetna Better Health of Louisiana"
@@ -128,7 +170,11 @@
       "is_enabled": true,
       "supported_transactions": [
         "270",
+        "837",
         "276"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "aetna_better_health_ne",
       "name": "Aetna Better Health of Nebraska"
@@ -140,6 +186,9 @@
         "837",
         "270"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "aetna_better_health_nj",
       "name": "Aetna Better Health of New Jersey"
     },
@@ -147,7 +196,11 @@
       "is_enabled": true,
       "supported_transactions": [
         "270",
+        "837",
         "276"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "aetna_better_health_ny",
       "name": "Aetna Better Health of New York"
@@ -159,6 +212,9 @@
         "270",
         "276"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "aetna_better_health_oh",
       "name": "Aetna Better Health of Ohio"
     },
@@ -168,6 +224,9 @@
         "276",
         "837",
         "270"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "aetna_better_health_pa",
       "name": "Aetna Better Health of Pennsylvania"
@@ -179,6 +238,9 @@
         "270",
         "276"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "aetna_better_health_tx",
       "name": "Aetna Better Health of Texas"
     },
@@ -186,6 +248,9 @@
       "is_enabled": true,
       "supported_transactions": [
         "270"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "aetna_medicaid",
       "name": "Aetna Medicaid (Schaller Anderson Mercy Care)"
@@ -196,6 +261,9 @@
         "270",
         "837"
       ],
+      "enrollment_required": [
+        "837"
+      ],
       "id": "affinity_health_plan",
       "name": "Affinity Health Plan"
     },
@@ -204,13 +272,20 @@
       "supported_transactions": [
         "837"
       ],
+      "enrollment_required": [
+        "837"
+      ],
       "id": "affinity_medicare",
       "name": "Affinity Health Plan (Medicare)"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
+        "276",
         "270",
+        "837"
+      ],
+      "enrollment_required": [
         "837"
       ],
       "id": "aftra_health_fund",
@@ -219,33 +294,46 @@
     {
       "is_enabled": true,
       "supported_transactions": [
-        "276",
-        "837"
+        "837",
+        "276"
+      ],
+      "enrollment_required": [
+        "837",
+        "276"
       ],
       "id": "alabama_hhh",
-      "name": "Alabama Home Health and Hospice*"
+      "name": "Alabama Home Health and Hospice"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
         "270"
       ],
+      "enrollment_required": [
+        "270"
+      ],
       "id": "medicaid_al",
-      "name": "Alabama Medicaid*"
+      "name": "Alabama Medicaid"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
         "837"
       ],
+      "enrollment_required": [
+        "837"
+      ],
       "id": "ak_elec_health",
-      "name": "Alaska Electrical Health & Welfare Fund"
+      "name": "Alaska Electrical Health And Welfare Fund"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
         "270",
         "837"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "all_savers_insurance",
       "name": "All Savers Insurance"
@@ -255,12 +343,18 @@
       "supported_transactions": [
         "837"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "allegeant",
       "name": "Allegeant (LBA Health Plan)"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
+        "837"
+      ],
+      "enrollment_required": [
         "837"
       ],
       "id": "alliant_health_ga",
@@ -271,8 +365,11 @@
       "supported_transactions": [
         "837"
       ],
+      "enrollment_required": [
+        "837"
+      ],
       "id": "alta_health",
-      "name": "Alta Health & Life Insurance Company"
+      "name": "Alta Health And Life Insurance Company"
     },
     {
       "is_enabled": true,
@@ -281,12 +378,18 @@
         "270",
         "837"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "altius_health_plans",
       "name": "Altius Health Plans"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
+        "837"
+      ],
+      "enrollment_required": [
         "837"
       ],
       "id": "americorp_health",
@@ -297,6 +400,9 @@
       "supported_transactions": [
         "837"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "amerihealth_administrators",
       "name": "AmeriHealth Administrators"
     },
@@ -304,6 +410,9 @@
       "is_enabled": true,
       "supported_transactions": [
         "270",
+        "837"
+      ],
+      "enrollment_required": [
         "837"
       ],
       "id": "amerihealth_caritas_pa",
@@ -314,6 +423,9 @@
       "supported_transactions": [
         "837"
       ],
+      "enrollment_required": [
+        "837"
+      ],
       "id": "amerihealth_dc",
       "name": "AmeriHealth DC"
     },
@@ -321,6 +433,9 @@
       "is_enabled": true,
       "supported_transactions": [
         "837"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "amerihealth_de",
       "name": "AmeriHealth Delaware"
@@ -330,6 +445,9 @@
       "supported_transactions": [
         "837"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "amerihealth_de_hmo",
       "name": "AmeriHealth HMO of Delaware"
     },
@@ -337,6 +455,9 @@
       "is_enabled": true,
       "supported_transactions": [
         "837"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "amerihealth_nj_hmo",
       "name": "AmeriHealth HMO of New Jersey"
@@ -346,12 +467,18 @@
       "supported_transactions": [
         "837"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "amerihealth_nj",
       "name": "AmeriHealth New Jersey"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
+        "837"
+      ],
+      "enrollment_required": [
         "837"
       ],
       "id": "americas_1st_choice_nc",
@@ -362,12 +489,18 @@
       "supported_transactions": [
         "837"
       ],
+      "enrollment_required": [
+        "837"
+      ],
       "id": "americas_1st_choice_sc",
       "name": "America's 1st Choice Health Plans of South Carolina"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
+        "837"
+      ],
+      "enrollment_required": [
         "837"
       ],
       "id": "american_behavioral",
@@ -380,12 +513,19 @@
         "837",
         "270"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "american_medical_security",
       "name": "American Medical Security (AMS - UnitedHealthcare Life)"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
+        "276",
+        "837"
+      ],
+      "enrollment_required": [
         "837"
       ],
       "id": "american_postal_union_health",
@@ -397,12 +537,18 @@
         "270",
         "837"
       ],
+      "enrollment_required": [
+        "837"
+      ],
       "id": "american_republic",
       "name": "American Republic Insurance Company (ARIC)"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
+        "837"
+      ],
+      "enrollment_required": [
         "837"
       ],
       "id": "american_sentinel",
@@ -413,6 +559,9 @@
       "supported_transactions": [
         "837"
       ],
+      "enrollment_required": [
+        "837"
+      ],
       "id": "american_specialty",
       "name": "American Specialty Health Plan"
     },
@@ -421,12 +570,18 @@
       "supported_transactions": [
         "837"
       ],
+      "enrollment_required": [
+        "837"
+      ],
       "id": "american_workers_plan",
       "name": "American Worker Insurance Services"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
+        "837"
+      ],
+      "enrollment_required": [
         "837"
       ],
       "id": "ahip",
@@ -438,6 +593,9 @@
         "837",
         "270"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "amerigroup",
       "name": "Amerigroup"
     },
@@ -447,6 +605,9 @@
         "837",
         "270"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "amerigroup_community_care",
       "name": "Amerigroup Community Care"
     },
@@ -454,6 +615,9 @@
       "is_enabled": true,
       "supported_transactions": [
         "270"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "ameritas_ny",
       "name": "Ameritas of New York"
@@ -464,6 +628,9 @@
         "276",
         "270",
         "837",
+        "278"
+      ],
+      "enrollment_required": [
         "278"
       ],
       "id": "anthem_blue_cross_ca",
@@ -477,6 +644,9 @@
         "270",
         "837"
       ],
+      "enrollment_required": [
+        "278"
+      ],
       "id": "anthem_blue_cross_blue_shield_co",
       "name": "Anthem Blue Cross and Blue Shield of Colorado"
     },
@@ -487,6 +657,9 @@
         "276",
         "270",
         "837"
+      ],
+      "enrollment_required": [
+        "278"
       ],
       "id": "anthem_blue_cross_blue_shield_ct",
       "name": "Anthem Blue Cross and Blue Shield of Connecticut"
@@ -499,6 +672,9 @@
         "270",
         "837"
       ],
+      "enrollment_required": [
+        "278"
+      ],
       "id": "anthem_blue_cross_blue_shield_in",
       "name": "Anthem Blue Cross and Blue Shield of Indiana"
     },
@@ -509,6 +685,9 @@
         "276",
         "270",
         "837"
+      ],
+      "enrollment_required": [
+        "278"
       ],
       "id": "anthem_blue_cross_blue_shield_ky",
       "name": "Anthem Blue Cross and Blue Shield of Kentucky"
@@ -521,6 +700,9 @@
         "270",
         "837"
       ],
+      "enrollment_required": [
+        "278"
+      ],
       "id": "anthem_blue_cross_blue_shield_me",
       "name": "Anthem Blue Cross and Blue Shield of Maine"
     },
@@ -531,6 +713,9 @@
         "276",
         "270",
         "837"
+      ],
+      "enrollment_required": [
+        "278"
       ],
       "id": "anthem_blue_cross_blue_shield_mo",
       "name": "Anthem Blue Cross and Blue Shield of Missouri"
@@ -543,6 +728,9 @@
         "270",
         "837"
       ],
+      "enrollment_required": [
+        "278"
+      ],
       "id": "anthem_blue_cross_blue_shield_nv",
       "name": "Anthem Blue Cross and Blue Shield of Nevada"
     },
@@ -553,6 +741,9 @@
         "276",
         "270",
         "837"
+      ],
+      "enrollment_required": [
+        "278"
       ],
       "id": "anthem_blue_cross_blue_shield_nh",
       "name": "Anthem Blue Cross and Blue Shield of New Hampshire"
@@ -565,6 +756,9 @@
         "276",
         "837"
       ],
+      "enrollment_required": [
+        "278"
+      ],
       "id": "anthem_blue_cross_blue_shield_oh",
       "name": "Anthem Blue Cross and Blue Shield of Ohio"
     },
@@ -575,6 +769,9 @@
         "276",
         "270",
         "837"
+      ],
+      "enrollment_required": [
+        "278"
       ],
       "id": "anthem_blue_cross_blue_shield_va",
       "name": "Anthem Blue Cross and Blue Shield of Virginia"
@@ -587,12 +784,18 @@
         "270",
         "837"
       ],
+      "enrollment_required": [
+        "278"
+      ],
       "id": "anthem_blue_cross_blue_shield_wi",
       "name": "Anthem Blue Cross and Blue Shield of Wisconsin"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
+        "837"
+      ],
+      "enrollment_required": [
         "837"
       ],
       "id": "arcadian_health_plan",
@@ -603,6 +806,9 @@
       "supported_transactions": [
         "837"
       ],
+      "enrollment_required": [
+        "837"
+      ],
       "id": "arise_health",
       "name": "Arise"
     },
@@ -611,14 +817,21 @@
       "supported_transactions": [
         "270"
       ],
+      "enrollment_required": [
+        "270"
+      ],
       "id": "arizona_medicaid",
-      "name": "Arizona Medicaid (AHCCCS)*"
+      "name": "Arizona Medicaid (AHCCCS)"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
+        "276",
         "270",
         "837"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "az_physicians_ipa",
       "name": "Arizona Physicians IPA (United Healthcare Community Plan AZ)"
@@ -626,19 +839,26 @@
     {
       "is_enabled": true,
       "supported_transactions": [
-        "276",
-        "837"
+        "837",
+        "276"
+      ],
+      "enrollment_required": [
+        "837",
+        "276"
       ],
       "id": "arkansas_hhh",
-      "name": "Arkansas Home Health and Hospice*"
+      "name": "Arkansas Home Health and Hospice"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
         "270"
       ],
+      "enrollment_required": [
+        "270"
+      ],
       "id": "medicaid_ar",
-      "name": "Arkansas Medicaid*"
+      "name": "Arkansas Medicaid"
     },
     {
       "is_enabled": true,
@@ -646,12 +866,18 @@
         "837",
         "270"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "arnett_health_plan",
       "name": "Arnett Health Plan"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
+        "837"
+      ],
+      "enrollment_required": [
         "837"
       ],
       "id": "aspire_health_plan",
@@ -663,6 +889,9 @@
         "276",
         "270"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "assurant_health",
       "name": "Assurant Health"
     },
@@ -670,6 +899,9 @@
       "is_enabled": true,
       "supported_transactions": [
         "837"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "asuris_northwest_health",
       "name": "Asuris Northwest Health"
@@ -679,12 +911,18 @@
       "supported_transactions": [
         "837"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "atrio_health_plans",
       "name": "Atrio Health Plans"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
+        "837"
+      ],
+      "enrollment_required": [
         "837"
       ],
       "id": "avera_health_plan",
@@ -695,6 +933,9 @@
       "supported_transactions": [
         "837"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "avmed_health_plan",
       "name": "Avmed Health Plan"
     },
@@ -703,6 +944,9 @@
       "supported_transactions": [
         "837"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "beech_street",
       "name": "Beech Street"
     },
@@ -710,6 +954,9 @@
       "is_enabled": true,
       "supported_transactions": [
         "270",
+        "837"
+      ],
+      "enrollment_required": [
         "837"
       ],
       "id": "best_life_health",
@@ -722,12 +969,18 @@
         "270",
         "837"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "better_health_plan",
       "name": "Better Health Plan (Unison)"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
+        "837"
+      ],
+      "enrollment_required": [
         "837"
       ],
       "id": "better_health_plans_fl",
@@ -738,6 +991,9 @@
       "supported_transactions": [
         "837"
       ],
+      "enrollment_required": [
+        "837"
+      ],
       "id": "bienvivir",
       "name": "Bienvivir"
     },
@@ -746,23 +1002,21 @@
       "supported_transactions": [
         "837"
       ],
+      "enrollment_required": [
+        "837"
+      ],
       "id": "block_vision",
       "name": "Block Vision"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
-        "276",
         "270",
-        "837"
+        "278",
+        "837",
+        "276"
       ],
-      "id": "blue_cross_blue_shield_mn",
-      "name": "Blue Cross Blue Shield Minnesota"
-    },
-    {
-      "is_enabled": true,
-      "supported_transactions": [
-        "270",
+      "enrollment_required": [
         "278",
         "837",
         "276"
@@ -773,15 +1027,21 @@
     {
       "is_enabled": true,
       "supported_transactions": [
-        "837",
-        "270"
+        "270",
+        "837"
       ],
-      "id": "blue_cross_blue_shield_tn",
-      "name": "Blue Cross Blue Shield of Tennessee"
+      "enrollment_required": [
+
+      ],
+      "id": "blue_cross_blue_shield_mn",
+      "name": "Blue Cross Blue Shield of Minnesota"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
+        "837"
+      ],
+      "enrollment_required": [
         "837"
       ],
       "id": "fep_plan_sc",
@@ -794,6 +1054,9 @@
         "837",
         "270"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "blue_cross_blue_shield_ma",
       "name": "Blue Cross and Blue Shield Massachusetts"
     },
@@ -802,6 +1065,9 @@
       "supported_transactions": [
         "270",
         "837"
+      ],
+      "enrollment_required": [
+        "270"
       ],
       "id": "blue_cross_blue_shield_al",
       "name": "Blue Cross and Blue Shield of Alabama"
@@ -812,12 +1078,18 @@
         "270",
         "837"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "blue_cross_blue_shield_az",
       "name": "Blue Cross and Blue Shield of Arizona"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
+        "270"
+      ],
+      "enrollment_required": [
         "270"
       ],
       "id": "blue_cross_blue_shield_ar",
@@ -830,6 +1102,9 @@
         "270",
         "837"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "blue_cross_blue_shield_fl",
       "name": "Blue Cross and Blue Shield of Florida (Florida Blue)"
     },
@@ -840,6 +1115,9 @@
         "270",
         "837"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "blue_cross_blue_shield_ga",
       "name": "Blue Cross and Blue Shield of Georgia"
     },
@@ -848,6 +1126,9 @@
       "supported_transactions": [
         "837",
         "270"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "blue_cross_blue_shield_il",
       "name": "Blue Cross and Blue Shield of Illinois"
@@ -858,6 +1139,9 @@
         "276",
         "270"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "blue_cross_blue_shield_ks",
       "name": "Blue Cross and Blue Shield of Kansas"
     },
@@ -867,6 +1151,9 @@
         "270",
         "276"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "blue_cross_blue_shield_kc",
       "name": "Blue Cross and Blue Shield of Kansas City"
     },
@@ -874,6 +1161,9 @@
       "is_enabled": true,
       "supported_transactions": [
         "270"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "blue_cross_blue_shield_la",
       "name": "Blue Cross and Blue Shield of Louisiana"
@@ -884,6 +1174,9 @@
         "270",
         "837"
       ],
+      "enrollment_required": [
+        "270"
+      ],
       "id": "blue_cross_blue_shield_mi",
       "name": "Blue Cross and Blue Shield of Michigan"
     },
@@ -893,6 +1186,9 @@
         "270",
         "837"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "blue_cross_blue_shield_ms",
       "name": "Blue Cross and Blue Shield of Mississippi"
     },
@@ -901,8 +1197,11 @@
       "supported_transactions": [
         "837"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "blue_cross_blue_shield_mt",
-      "name": "Blue Cross and Blue Shield of Montana*"
+      "name": "Blue Cross and Blue Shield of Montana"
     },
     {
       "is_enabled": true,
@@ -910,6 +1209,9 @@
         "837",
         "270",
         "276"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "blue_cross_blue_shield_ne",
       "name": "Blue Cross and Blue Shield of Nebraska"
@@ -920,6 +1222,9 @@
         "837",
         "270"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "blue_cross_blue_shield_nm",
       "name": "Blue Cross and Blue Shield of New Mexico"
     },
@@ -929,6 +1234,9 @@
         "837",
         "270"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "blue_cross_blue_shield_ok",
       "name": "Blue Cross and Blue Shield of Oklahoma"
     },
@@ -936,6 +1244,10 @@
       "is_enabled": true,
       "supported_transactions": [
         "270",
+        "837",
+        "276"
+      ],
+      "enrollment_required": [
         "837",
         "276"
       ],
@@ -948,6 +1260,21 @@
         "837",
         "270"
       ],
+      "enrollment_required": [
+        "270"
+      ],
+      "id": "blue_cross_blue_shield_tn",
+      "name": "Blue Cross and Blue Shield of Tennessee"
+    },
+    {
+      "is_enabled": true,
+      "supported_transactions": [
+        "837",
+        "270"
+      ],
+      "enrollment_required": [
+
+      ],
       "id": "blue_cross_blue_shield_tx",
       "name": "Blue Cross and Blue Shield of Texas"
     },
@@ -955,6 +1282,9 @@
       "is_enabled": true,
       "supported_transactions": [
         "837"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "blue_cross_blue_shield_vt",
       "name": "Blue Cross and Blue Shield of Vermont"
@@ -967,6 +1297,9 @@
         "278",
         "837"
       ],
+      "enrollment_required": [
+        "278"
+      ],
       "id": "blue_shield_ca",
       "name": "Blue Shield of California"
     },
@@ -974,6 +1307,9 @@
       "is_enabled": true,
       "supported_transactions": [
         "270",
+        "837"
+      ],
+      "enrollment_required": [
         "837"
       ],
       "id": "boston_medical_center",
@@ -984,6 +1320,9 @@
       "supported_transactions": [
         "837"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "bridgespan",
       "name": "BridgeSpan"
     },
@@ -991,6 +1330,10 @@
       "is_enabled": true,
       "supported_transactions": [
         "270",
+        "837",
+        "276"
+      ],
+      "enrollment_required": [
         "837",
         "276"
       ],
@@ -1004,12 +1347,19 @@
         "270",
         "837"
       ],
+      "enrollment_required": [
+        "276",
+        "837"
+      ],
       "id": "buckeye_community_health_plan",
       "name": "Buckeye Community Health Plan"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
+        "837"
+      ],
+      "enrollment_required": [
         "837"
       ],
       "id": "cds_group_health",
@@ -1021,6 +1371,9 @@
         "270",
         "837"
       ],
+      "enrollment_required": [
+        "837"
+      ],
       "id": "champva",
       "name": "CHAMPVA"
     },
@@ -1028,6 +1381,9 @@
       "is_enabled": true,
       "supported_transactions": [
         "837"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "cal_optima_medi_cal",
       "name": "Cal-Optima (Medi-Cal)"
@@ -1037,12 +1393,18 @@
       "supported_transactions": [
         "270"
       ],
+      "enrollment_required": [
+        "270"
+      ],
       "id": "medicaid_ca",
-      "name": "California Medicaid (Medi-Cal)*"
+      "name": "California Medicaid (Medi-Cal)"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
+        "837"
+      ],
+      "enrollment_required": [
         "837"
       ],
       "id": "cdphp",
@@ -1053,12 +1415,18 @@
       "supported_transactions": [
         "837"
       ],
+      "enrollment_required": [
+        "837"
+      ],
       "id": "care_adv",
       "name": "Care Advantage"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
+        "837"
+      ],
+      "enrollment_required": [
         "837"
       ],
       "id": "care_improvement_plus",
@@ -1069,12 +1437,18 @@
       "supported_transactions": [
         "837"
       ],
+      "enrollment_required": [
+        "837"
+      ],
       "id": "care_first_health_ca",
       "name": "Care1st Health Plan (of California)"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
+        "837"
+      ],
+      "enrollment_required": [
         "837"
       ],
       "id": "care_first_health_az",
@@ -1085,6 +1459,9 @@
       "supported_transactions": [
         "837"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "carefirst_admin_ncas",
       "name": "CareFirst Administrators (NCAS)"
     },
@@ -1093,6 +1470,9 @@
       "supported_transactions": [
         "270",
         "837"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "blue_cross_blue_shield_dc",
       "name": "CareFirst Blue Cross Blue Shield of DC"
@@ -1103,12 +1483,18 @@
         "270",
         "837"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "blue_cross_blue_shield_md",
       "name": "CareFirst Blue Cross Blue Shield of Maryland"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
+        "837"
+      ],
+      "enrollment_required": [
         "837"
       ],
       "id": "caremore_health_plan",
@@ -1119,6 +1505,9 @@
       "supported_transactions": [
         "837"
       ],
+      "enrollment_required": [
+        "837"
+      ],
       "id": "careone_health_plan",
       "name": "CareOne Health Plan"
     },
@@ -1127,13 +1516,20 @@
       "supported_transactions": [
         "837"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "care_or",
       "name": "CareOregon"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
+        "276",
         "270",
+        "837"
+      ],
+      "enrollment_required": [
         "837"
       ],
       "id": "careplus_health_plan",
@@ -1144,6 +1540,9 @@
       "supported_transactions": [
         "837"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "caresource_ky",
       "name": "CareSource of Kentucky"
     },
@@ -1152,6 +1551,9 @@
       "supported_transactions": [
         "270",
         "837"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "caresource_oh",
       "name": "CareSource of Ohio"
@@ -1163,6 +1565,9 @@
         "837",
         "270"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "carelink_coventry",
       "name": "Carelink (Coventry)"
     },
@@ -1173,6 +1578,9 @@
         "837",
         "270"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "carelink_medicaid_coventry",
       "name": "Carelink Medicaid (Coventry)"
     },
@@ -1181,13 +1589,20 @@
       "supported_transactions": [
         "837"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "care_source_health_plan_or",
       "name": "Caresource Health Plan of Oregon"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
-        "270"
+        "270",
+        "837"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "cariten_healthcare",
       "name": "Cariten Healthcare"
@@ -1195,6 +1610,9 @@
     {
       "is_enabled": true,
       "supported_transactions": [
+        "837"
+      ],
+      "enrollment_required": [
         "837"
       ],
       "id": "carolina_care_plan",
@@ -1205,12 +1623,18 @@
       "supported_transactions": [
         "837"
       ],
+      "enrollment_required": [
+        "837"
+      ],
       "id": "carolina_summit_healthcare",
-      "name": "Carolina Summit Healthcare, Inc."
+      "name": "Carolina Summit Healthcare, Inc"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
+        "837"
+      ],
+      "enrollment_required": [
         "837"
       ],
       "id": "cedar_valley_community_health",
@@ -1219,7 +1643,13 @@
     {
       "is_enabled": true,
       "supported_transactions": [
-        "270"
+        "270",
+        "276",
+        "837"
+      ],
+      "enrollment_required": [
+        "276",
+        "837"
       ],
       "id": "celticare_health_plan",
       "name": "CeltiCare Health Plan"
@@ -1229,21 +1659,18 @@
       "supported_transactions": [
         "837"
       ],
+      "enrollment_required": [
+        "837"
+      ],
       "id": "celtic_insurance_co",
       "name": "Celtic Insurance Company"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
-        "276",
         "837"
       ],
-      "id": "celticcare_health_plan",
-      "name": "CelticCare Health Plan"
-    },
-    {
-      "is_enabled": true,
-      "supported_transactions": [
+      "enrollment_required": [
         "837"
       ],
       "id": "cencal_health",
@@ -1256,20 +1683,20 @@
         "837",
         "276"
       ],
+      "enrollment_required": [
+        "837",
+        "276"
+      ],
       "id": "cenpatico_az",
       "name": "Cenpatico Behavioral Health Arizona"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
-        "270"
+        "837",
+        "276"
       ],
-      "id": "cenpatico_fl",
-      "name": "Cenpatico Behavioral Health Florida"
-    },
-    {
-      "is_enabled": true,
-      "supported_transactions": [
+      "enrollment_required": [
         "837",
         "276"
       ],
@@ -1279,7 +1706,22 @@
     {
       "is_enabled": true,
       "supported_transactions": [
+        "270"
+      ],
+      "enrollment_required": [
+
+      ],
+      "id": "cenpatico_fl",
+      "name": "Cenpatico Behavioral Health Florida"
+    },
+    {
+      "is_enabled": true,
+      "supported_transactions": [
         "270",
+        "837",
+        "276"
+      ],
+      "enrollment_required": [
         "837",
         "276"
       ],
@@ -1293,6 +1735,10 @@
         "270",
         "837"
       ],
+      "enrollment_required": [
+        "276",
+        "837"
+      ],
       "id": "cenpatico_il",
       "name": "Cenpatico Behavioral Health Illinois"
     },
@@ -1300,6 +1746,10 @@
       "is_enabled": true,
       "supported_transactions": [
         "270",
+        "837",
+        "276"
+      ],
+      "enrollment_required": [
         "837",
         "276"
       ],
@@ -1313,6 +1763,10 @@
         "837",
         "276"
       ],
+      "enrollment_required": [
+        "837",
+        "276"
+      ],
       "id": "cenpatico_ks",
       "name": "Cenpatico Behavioral Health Kansas"
     },
@@ -1321,6 +1775,10 @@
       "supported_transactions": [
         "276",
         "270",
+        "837"
+      ],
+      "enrollment_required": [
+        "276",
         "837"
       ],
       "id": "cenpatico_ky",
@@ -1333,6 +1791,10 @@
         "270",
         "837"
       ],
+      "enrollment_required": [
+        "276",
+        "837"
+      ],
       "id": "cenpatico_ma",
       "name": "Cenpatico Behavioral Health Massachusetts"
     },
@@ -1340,6 +1802,10 @@
       "is_enabled": true,
       "supported_transactions": [
         "270",
+        "837",
+        "276"
+      ],
+      "enrollment_required": [
         "837",
         "276"
       ],
@@ -1353,6 +1819,10 @@
         "270",
         "837"
       ],
+      "enrollment_required": [
+        "276",
+        "837"
+      ],
       "id": "cenpatico_sc",
       "name": "Cenpatico Behavioral Health South Carolina"
     },
@@ -1360,6 +1830,10 @@
       "is_enabled": true,
       "supported_transactions": [
         "270",
+        "837",
+        "276"
+      ],
+      "enrollment_required": [
         "837",
         "276"
       ],
@@ -1373,15 +1847,23 @@
         "270",
         "837"
       ],
+      "enrollment_required": [
+        "276",
+        "837"
+      ],
       "id": "cenpatico_wi",
       "name": "Cenpatico Behavioral Health Wisconsin"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
+        "837",
         "276",
-        "270",
-        "837"
+        "270"
+      ],
+      "enrollment_required": [
+        "837",
+        "270"
       ],
       "id": "centene_medicare_advantage",
       "name": "Centene Medicare Advantage"
@@ -1391,13 +1873,20 @@
       "supported_transactions": [
         "837"
       ],
+      "enrollment_required": [
+        "837"
+      ],
       "id": "central_health_medicare",
       "name": "Central Health Medicare Plan"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
+        "837",
         "270"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "chesapeake_life",
       "name": "Chesapeake Life Insurance"
@@ -1405,6 +1894,9 @@
     {
       "is_enabled": true,
       "supported_transactions": [
+        "837"
+      ],
+      "enrollment_required": [
         "837"
       ],
       "id": "cchp",
@@ -1415,6 +1907,9 @@
       "supported_transactions": [
         "837"
       ],
+      "enrollment_required": [
+        "837"
+      ],
       "id": "chiropractic_health_plans",
       "name": "Chiropractic Health Plans (CHP)"
     },
@@ -1423,12 +1918,18 @@
       "supported_transactions": [
         "837"
       ],
+      "enrollment_required": [
+        "837"
+      ],
       "id": "christus_health_plan",
       "name": "Christus Health Plan"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
+        "837"
+      ],
+      "enrollment_required": [
         "837"
       ],
       "id": "christus_spohn_health_network",
@@ -1442,13 +1943,20 @@
         "270",
         "837"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "cigna",
-      "name": "Cigna"
+      "name": "Cigna (including Dental)"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
+        "276",
         "837"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "cigna_behavioral_health",
       "name": "Cigna Behavioral Health"
@@ -1458,14 +1966,21 @@
       "supported_transactions": [
         "837"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "cigna_medicare_adv",
       "name": "Cigna Medicare Advantage"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
+        "276",
         "837",
         "270"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "cigna_health_spring",
       "name": "Cigna-HealthSpring"
@@ -1473,6 +1988,9 @@
     {
       "is_enabled": true,
       "supported_transactions": [
+        "837"
+      ],
+      "enrollment_required": [
         "837"
       ],
       "id": "citrus_health_net",
@@ -1483,21 +2001,42 @@
       "supported_transactions": [
         "837"
       ],
+      "enrollment_required": [
+        "837"
+      ],
       "id": "amarillo_group_health",
       "name": "City of Amarillo Group Health Plan"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
+        "837",
+        "ccd"
+      ],
+      "enrollment_required": [
+
+      ],
+      "id": "cleveland_clinic",
+      "name": "Cleveland Clinic"
+    },
+    {
+      "is_enabled": true,
+      "supported_transactions": [
+        "270"
+      ],
+      "enrollment_required": [
         "270"
       ],
       "id": "medicaid_co",
-      "name": "Colorado Medicaid*"
+      "name": "Colorado Medicaid"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
         "837"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "columbia_united_providers",
       "name": "Columbia United Providers"
@@ -1507,13 +2046,20 @@
       "supported_transactions": [
         "837"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "community_health_plan_wa",
       "name": "Community Health Plan of Washington"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
+        "276",
         "270"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "community_hospital_corp",
       "name": "Community Hospital Corporation (CHC)"
@@ -1521,7 +2067,11 @@
     {
       "is_enabled": true,
       "supported_transactions": [
+        "276",
         "270",
+        "837"
+      ],
+      "enrollment_required": [
         "837"
       ],
       "id": "complementary_healthcare_plan",
@@ -1530,6 +2080,9 @@
     {
       "is_enabled": true,
       "supported_transactions": [
+        "837"
+      ],
+      "enrollment_required": [
         "837"
       ],
       "id": "comprehensive_behavoiral_care",
@@ -1542,12 +2095,18 @@
         "276",
         "837"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "connecticare",
       "name": "ConnectiCare"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
+        "837"
+      ],
+      "enrollment_required": [
         "837"
       ],
       "id": "connecticut_carpenters_benefit_health",
@@ -1558,12 +2117,18 @@
       "supported_transactions": [
         "270"
       ],
+      "enrollment_required": [
+        "270"
+      ],
       "id": "medicaid_ct",
-      "name": "Connecticut Medicaid*"
+      "name": "Connecticut Medicaid"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
+        "837"
+      ],
+      "enrollment_required": [
         "837"
       ],
       "id": "continental_general_insurance",
@@ -1574,12 +2139,18 @@
       "supported_transactions": [
         "837"
       ],
+      "enrollment_required": [
+        "837"
+      ],
       "id": "cooks_children_health",
       "name": "Cook Childrens Health Plan"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
+        "837"
+      ],
+      "enrollment_required": [
         "837"
       ],
       "id": "cook_county_health_behavioral",
@@ -1590,6 +2161,9 @@
       "supported_transactions": [
         "837"
       ],
+      "enrollment_required": [
+        "837"
+      ],
       "id": "cook_county_health_medical",
       "name": "Cook County Health - Medical"
     },
@@ -1598,13 +2172,20 @@
       "supported_transactions": [
         "837"
       ],
+      "enrollment_required": [
+        "837"
+      ],
       "id": "cook_group_health",
       "name": "Cook Group Health Plan"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
+        "276",
         "270"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "cooperative_benefit",
       "name": "Cooperative Benefit Administrators"
@@ -1615,6 +2196,9 @@
         "270",
         "837"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "coordinated_care",
       "name": "Coordinated Care"
     },
@@ -1622,6 +2206,9 @@
       "is_enabled": true,
       "supported_transactions": [
         "837"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "coordinated_care_medical",
       "name": "Coordinated Care - Medical"
@@ -1631,6 +2218,9 @@
       "supported_transactions": [
         "837"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "coordinated_medical_specialists",
       "name": "Coordinated Medical Specialists"
     },
@@ -1639,14 +2229,21 @@
       "supported_transactions": [
         "837"
       ],
+      "enrollment_required": [
+        "837"
+      ],
       "id": "coresource_az_mn",
       "name": "CoreSource (AZ, MN)"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
+        "276",
         "837",
         "270"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "coresource_il_in_md_nc_pa",
       "name": "CoreSource (IL, IN, MD, NC, PA)"
@@ -1654,8 +2251,12 @@
     {
       "is_enabled": true,
       "supported_transactions": [
+        "276",
         "270",
         "837"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "coresource_little_rock",
       "name": "CoreSource Little Rock"
@@ -1663,8 +2264,12 @@
     {
       "is_enabled": true,
       "supported_transactions": [
+        "276",
         "270",
         "837"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "coresource_oh",
       "name": "CoreSource Ohio"
@@ -1674,12 +2279,18 @@
       "supported_transactions": [
         "837"
       ],
+      "enrollment_required": [
+        "837"
+      ],
       "id": "correctional_health_partners",
       "name": "Correctional Health Partners (CHP)"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
+        "837"
+      ],
+      "enrollment_required": [
         "837"
       ],
       "id": "countycare_health_plan",
@@ -1692,6 +2303,9 @@
         "837",
         "270"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "coventry_diamond_plan",
       "name": "Coventry Diamond Plan (Maryland Medicaid)"
     },
@@ -1700,8 +2314,11 @@
       "supported_transactions": [
         "837"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "coventry",
-      "name": "Coventry Health & Life"
+      "name": "Coventry Health And Life"
     },
     {
       "is_enabled": true,
@@ -1709,6 +2326,9 @@
         "276",
         "837",
         "270"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "coventry_health_care_de",
       "name": "Coventry Health Care of Delaware"
@@ -1720,6 +2340,9 @@
         "837",
         "270"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "coventry_health_care_ga",
       "name": "Coventry Health Care of Georgia"
     },
@@ -1729,6 +2352,9 @@
         "276",
         "837",
         "270"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "coventry_health_care_il",
       "name": "Coventry Health Care of Illinois"
@@ -1740,6 +2366,9 @@
         "837",
         "270"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "coventry_health_care_ia",
       "name": "Coventry Health Care of Iowa"
     },
@@ -1749,6 +2378,9 @@
         "276",
         "837",
         "270"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "coventry_health_care_ks",
       "name": "Coventry Health Care of Kansas"
@@ -1760,6 +2392,9 @@
         "837",
         "270"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "coventry_health_care_la",
       "name": "Coventry Health Care of Louisiana"
     },
@@ -1769,6 +2404,9 @@
         "276",
         "837",
         "270"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "coventry_health_care_mo",
       "name": "Coventry Health Care of Missouri"
@@ -1780,6 +2418,9 @@
         "837",
         "270"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "coventry_health_care_ne",
       "name": "Coventry Health Care of Nebraska"
     },
@@ -1787,6 +2428,9 @@
       "is_enabled": true,
       "supported_transactions": [
         "837"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "coventry_health_care_nv",
       "name": "Coventry Health Care of Nevada"
@@ -1796,6 +2440,9 @@
       "supported_transactions": [
         "837",
         "270"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "coventry_health_care_tx",
       "name": "Coventry Health Care of Texas"
@@ -1807,6 +2454,9 @@
         "837",
         "270"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "coventry_health_care_va",
       "name": "Coventry Health Care of Virginia (Southern Health Services)"
     },
@@ -1817,6 +2467,9 @@
         "837",
         "270"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "coventry_health_care_carolinas",
       "name": "Coventry Health Care of the Carolinas (WellPath)"
     },
@@ -1824,6 +2477,9 @@
       "is_enabled": true,
       "supported_transactions": [
         "837"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "coventry_health_kids",
       "name": "Coventry Health Kids"
@@ -1833,6 +2489,9 @@
       "supported_transactions": [
         "837",
         "270"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "coventry_cares_mi",
       "name": "CoventryCares of Michigan (OmniCare)"
@@ -1844,20 +2503,30 @@
         "270",
         "837"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "coventry_cares_va",
       "name": "CoventryCares of Virginia"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
+        "837",
         "270"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "cypress_benefits",
-      "name": "Cypress Benefit Administrators"
+      "name": "Cypress Benefits"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
+        "837"
+      ],
+      "enrollment_required": [
         "837"
       ],
       "id": "dakotacare",
@@ -1866,6 +2535,9 @@
     {
       "is_enabled": true,
       "supported_transactions": [
+        "837"
+      ],
+      "enrollment_required": [
         "837"
       ],
       "id": "dean_health_plan",
@@ -1878,6 +2550,9 @@
         "837",
         "270"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "definity_health",
       "name": "Definity Health (United)"
     },
@@ -1886,13 +2561,21 @@
       "supported_transactions": [
         "270"
       ],
+      "enrollment_required": [
+        "270"
+      ],
       "id": "medicaid_de",
-      "name": "Delaware Medicaid*"
+      "name": "Delaware Medicaid"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
+        "837",
+        "276",
         "270"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "dga_health",
       "name": "Directors Guild of America Health Fund"
@@ -1900,6 +2583,9 @@
     {
       "is_enabled": true,
       "supported_transactions": [
+        "837"
+      ],
+      "enrollment_required": [
         "837"
       ],
       "id": "driscoll_childrens_health",
@@ -1910,12 +2596,18 @@
       "supported_transactions": [
         "837"
       ],
+      "enrollment_required": [
+        "837"
+      ],
       "id": "epic_life_insurance",
       "name": "EPIC Life Insurance"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
+        "837"
+      ],
+      "enrollment_required": [
         "837"
       ],
       "id": "easy_choice_health_ny",
@@ -1925,6 +2617,9 @@
       "is_enabled": true,
       "supported_transactions": [
         "270"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "emblem_health",
       "name": "Emblem Health"
@@ -1936,14 +2631,20 @@
         "270",
         "837"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "empire_blue_cross_blue_shield",
       "name": "Empire Blue Cross and Blue Shield"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
-        "276",
-        "270"
+        "270",
+        "276"
+      ],
+      "enrollment_required": [
+        "276"
       ],
       "id": "excellus_blue_cross_blue_shield",
       "name": "Excellus Blue Cross and Blue Shield"
@@ -1951,8 +2652,12 @@
     {
       "is_enabled": true,
       "supported_transactions": [
+        "276",
         "270",
         "837"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "fallon_community_health",
       "name": "Fallon Community Health Plan"
@@ -1960,7 +2665,11 @@
     {
       "is_enabled": true,
       "supported_transactions": [
+        "837",
         "270"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "federated_mutual",
       "name": "Federated Mutual Insurance Company"
@@ -1972,6 +2681,9 @@
         "270",
         "837"
       ],
+      "enrollment_required": [
+        "276"
+      ],
       "id": "fidelis_care_ny",
       "name": "Fidelis Care of New York"
     },
@@ -1979,6 +2691,9 @@
       "is_enabled": true,
       "supported_transactions": [
         "837"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "first_choice_health_network",
       "name": "First Choice Health Network"
@@ -1990,12 +2705,18 @@
         "837",
         "270"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "first_health_coventry",
       "name": "First Health (Coventry)"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
+        "837"
+      ],
+      "enrollment_required": [
         "837"
       ],
       "id": "firstcare",
@@ -2007,29 +2728,42 @@
         "270",
         "837"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "florida_health_care_plan",
       "name": "Florida Health Care Plan"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
-        "276",
-        "837"
+        "837",
+        "276"
+      ],
+      "enrollment_required": [
+        "837",
+        "276"
       ],
       "id": "florida_hhh",
-      "name": "Florida Home Health and Hospice*"
+      "name": "Florida Home Health and Hospice"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
         "270"
       ],
+      "enrollment_required": [
+        "270"
+      ],
       "id": "medicaid_fl",
-      "name": "Florida Medicaid*"
+      "name": "Florida Medicaid"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
+        "837"
+      ],
+      "enrollment_required": [
         "837"
       ],
       "id": "florida_true_health",
@@ -2040,12 +2774,18 @@
       "supported_transactions": [
         "837"
       ],
+      "enrollment_required": [
+        "837"
+      ],
       "id": "freedom_health",
       "name": "Freedom Health Plan"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
+        "837"
+      ],
+      "enrollment_required": [
         "837"
       ],
       "id": "galveston_indigent_health",
@@ -2056,12 +2796,18 @@
       "supported_transactions": [
         "837"
       ],
+      "enrollment_required": [
+        "837"
+      ],
       "id": "gateway_health_oh",
       "name": "Gateway Health Plan Ohio"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
+        "837"
+      ],
+      "enrollment_required": [
         "837"
       ],
       "id": "gateway _health_pa",
@@ -2072,32 +2818,44 @@
       "supported_transactions": [
         "837"
       ],
+      "enrollment_required": [
+        "837"
+      ],
       "id": "geisinger_health",
       "name": "Geisinger Health Plans"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
-        "276",
-        "837"
+        "837",
+        "276"
+      ],
+      "enrollment_required": [
+        "837",
+        "276"
       ],
       "id": "georgia_hhh",
-      "name": "Georgia Home Health and Hospice*"
+      "name": "Georgia Home Health and Hospice"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
         "270"
       ],
+      "enrollment_required": [
+        "270"
+      ],
       "id": "medicaid_ga",
-      "name": "Georgia Medicaid*"
+      "name": "Georgia Medicaid"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
         "270",
-        "837",
         "276"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "golden_rule_united",
       "name": "Golden Rule"
@@ -2107,6 +2865,9 @@
       "supported_transactions": [
         "276",
         "270"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "geha",
       "name": "Government Employees Health Association (GEHA)"
@@ -2118,6 +2879,9 @@
         "837",
         "270"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "great_west_health_care",
       "name": "Great West Healthcare"
     },
@@ -2125,6 +2889,9 @@
       "is_enabled": true,
       "supported_transactions": [
         "837"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "group_health_cooperative",
       "name": "Group Health Cooperative"
@@ -2134,6 +2901,9 @@
       "supported_transactions": [
         "837"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "group_health_cooperative_eau_claire",
       "name": "Group Health Cooperative of Eau Claire"
     },
@@ -2141,6 +2911,9 @@
       "is_enabled": true,
       "supported_transactions": [
         "837"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "group_health_cooperative_south_central_wi",
       "name": "Group Health Cooperative of South Central Wisconsin"
@@ -2150,12 +2923,19 @@
       "supported_transactions": [
         "837"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "group_health_plan_care_management_resource",
       "name": "Group Health Plan - CMR"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
+        "276",
+        "270"
+      ],
+      "enrollment_required": [
         "276",
         "270"
       ],
@@ -2168,6 +2948,9 @@
         "270",
         "837"
       ],
+      "enrollment_required": [
+        "837"
+      ],
       "id": "harmony_health_plan",
       "name": "Harmony Health Plan"
     },
@@ -2175,8 +2958,11 @@
       "is_enabled": true,
       "supported_transactions": [
         "270",
-        "276",
-        "837"
+        "837",
+        "276"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "harvard_pilgrim_health_care",
       "name": "Harvard Pilgrim Healthcare"
@@ -2187,6 +2973,9 @@
         "270",
         "837"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "harvard_pilgrim_passport_connect",
       "name": "Harvard Pilgrim Passport Connect (United)"
     },
@@ -2195,12 +2984,18 @@
       "supported_transactions": [
         "837"
       ],
+      "enrollment_required": [
+        "837"
+      ],
       "id": "health_alliance",
       "name": "Health Alliance Medical Plan"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
+        "837"
+      ],
+      "enrollment_required": [
         "837"
       ],
       "id": "health_alliance_mi",
@@ -2213,13 +3008,20 @@
         "837",
         "270"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "health_america_coventry",
       "name": "Health America (Coventry)"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
+        "276",
         "270"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "health_choice_az",
       "name": "Health Choice of Arizona"
@@ -2227,6 +3029,9 @@
     {
       "is_enabled": true,
       "supported_transactions": [
+        "837"
+      ],
+      "enrollment_required": [
         "837"
       ],
       "id": "health_first",
@@ -2237,12 +3042,18 @@
       "supported_transactions": [
         "270"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "health_net_az_ct_nj_ny_pa",
       "name": "Health Net (AZ, CT, NJ, NY, PA)"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
+        "837"
+      ],
+      "enrollment_required": [
         "837"
       ],
       "id": "health_net_az",
@@ -2254,12 +3065,18 @@
         "270",
         "837"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "health_net_ca",
       "name": "Health Net of California"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
+        "837"
+      ],
+      "enrollment_required": [
         "837"
       ],
       "id": "health_net_or",
@@ -2270,6 +3087,9 @@
       "supported_transactions": [
         "837"
       ],
+      "enrollment_required": [
+        "837"
+      ],
       "id": "health_net_wa",
       "name": "Health Net of Washington"
     },
@@ -2278,25 +3098,23 @@
       "supported_transactions": [
         "837"
       ],
+      "enrollment_required": [
+        "837"
+      ],
       "id": "health_new_england",
       "name": "Health New England"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
-        "270",
+        "837",
+        "270"
+      ],
+      "enrollment_required": [
         "837"
       ],
       "id": "health_partners_pa",
-      "name": "Health Partners of Pennsylvania"
-    },
-    {
-      "is_enabled": true,
-      "supported_transactions": [
-        "837"
-      ],
-      "id": "meridan_health_plan_mi",
-      "name": "Health Plan of Michigan - Meridan"
+      "name": "Health Partners Plans, Inc"
     },
     {
       "is_enabled": true,
@@ -2304,12 +3122,18 @@
         "276",
         "270"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "health_plan_nv",
       "name": "Health Plan of Nevada (United Healthcare Nevada)"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
+        "837"
+      ],
+      "enrollment_required": [
         "837"
       ],
       "id": "health_plan_san_joaquin",
@@ -2320,6 +3144,9 @@
       "supported_transactions": [
         "837"
       ],
+      "enrollment_required": [
+        "837"
+      ],
       "id": "health_plan_san_mateo",
       "name": "Health Plan of San Mateo (HPSM)"
     },
@@ -2328,13 +3155,20 @@
       "supported_transactions": [
         "837"
       ],
+      "enrollment_required": [
+        "837"
+      ],
       "id": "health_republic",
       "name": "Health Republic Insurance"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
+        "837",
         "270"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "healthease",
       "name": "HealthEase of Florida (WellCare)"
@@ -2345,6 +3179,9 @@
         "837",
         "270"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "health_partners_mn",
       "name": "HealthPartners Minnesota"
     },
@@ -2353,13 +3190,20 @@
       "supported_transactions": [
         "837"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "healthscope_benefits",
       "name": "HealthScope Benefits"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
+        "837",
         "270"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "healthsmart_benefit",
       "name": "HealthSmart Benefit Solutions"
@@ -2371,6 +3215,9 @@
         "837",
         "270"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "healthcare_usa_coventry",
       "name": "Healthcare USA (Coventry)"
     },
@@ -2380,6 +3227,9 @@
         "270",
         "837"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "healthfirst_ny",
       "name": "Healthfirst of New York"
     },
@@ -2387,6 +3237,9 @@
       "is_enabled": true,
       "supported_transactions": [
         "837"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "health_source_ar",
       "name": "Healthsource AR (Cigna)"
@@ -2396,6 +3249,9 @@
       "supported_transactions": [
         "837"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "health_source_ga",
       "name": "Healthsource GA (Cigna)"
     },
@@ -2403,6 +3259,9 @@
       "is_enabled": true,
       "supported_transactions": [
         "837"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "health_source_tn",
       "name": "Healthsource TN (Cigna)"
@@ -2413,6 +3272,9 @@
         "276",
         "270",
         "837"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "highmark_blue_cross_blue_shield_de",
       "name": "Highmark Blue Cross Blue Shield Delaware"
@@ -2425,6 +3287,10 @@
         "278",
         "276"
       ],
+      "enrollment_required": [
+        "837",
+        "278"
+      ],
       "id": "highmark_blue_cross_blue_shield_pa",
       "name": "Highmark Blue Cross Blue Shield Pennsylvania"
     },
@@ -2434,6 +3300,9 @@
         "276",
         "837",
         "270",
+        "278"
+      ],
+      "enrollment_required": [
         "278"
       ],
       "id": "highmark_blue_cross_blue_shield_wv",
@@ -2446,6 +3315,9 @@
         "278",
         "276"
       ],
+      "enrollment_required": [
+        "278"
+      ],
       "id": "highmark_blue_shield_pa",
       "name": "Highmark Blue Shield Pennsylvania"
     },
@@ -2454,14 +3326,21 @@
       "supported_transactions": [
         "837"
       ],
+      "enrollment_required": [
+        "837"
+      ],
       "id": "highmark_bs_vision_pa",
       "name": "Highmark Blue Shield Vision Pennsylvania"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
+        "276",
         "270",
         "837"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "blue_cross_blue_shield_nj",
       "name": "Horizon Blue Cross Blue Shield of New Jersey"
@@ -2469,7 +3348,11 @@
     {
       "is_enabled": true,
       "supported_transactions": [
+        "276",
         "270"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "horizon_nj_health",
       "name": "Horizon NJ Health"
@@ -2478,6 +3361,9 @@
       "is_enabled": true,
       "supported_transactions": [
         "270"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "hudson_health_plan",
       "name": "Hudson Health Plan"
@@ -2489,6 +3375,9 @@
         "270",
         "837"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "humana",
       "name": "Humana"
     },
@@ -2497,13 +3386,20 @@
       "supported_transactions": [
         "270"
       ],
+      "enrollment_required": [
+        "270"
+      ],
       "id": "medicaid_id",
-      "name": "Idaho Medicaid*"
+      "name": "Idaho Medicaid"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
         "270",
+        "837",
+        "276"
+      ],
+      "enrollment_required": [
         "837",
         "276"
       ],
@@ -2513,24 +3409,34 @@
     {
       "is_enabled": true,
       "supported_transactions": [
-        "276",
-        "837"
+        "837",
+        "276"
+      ],
+      "enrollment_required": [
+        "837",
+        "276"
       ],
       "id": "illinois_hhh",
-      "name": "Illinois Home Health and Hospice*"
+      "name": "Illinois Home Health and Hospice"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
         "270"
       ],
+      "enrollment_required": [
+        "270"
+      ],
       "id": "medicaid_il",
-      "name": "Illinois Medicaid*"
+      "name": "Illinois Medicaid"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
         "837"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "independence_admin",
       "name": "Independence Administrators"
@@ -2540,37 +3446,53 @@
       "supported_transactions": [
         "837"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "independence_blue_cross",
       "name": "Independence Blue Cross"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
-        "276",
-        "837"
+        "837",
+        "276"
+      ],
+      "enrollment_required": [
+        "837",
+        "276"
       ],
       "id": "indiana_hhh",
-      "name": "Indiana Home Health and Hospice*"
+      "name": "Indiana Home Health and Hospice"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
         "270"
       ],
+      "enrollment_required": [
+        "270"
+      ],
       "id": "medicaid_in",
-      "name": "Indiana Medicaid*"
+      "name": "Indiana Medicaid"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
         "837"
       ],
+      "enrollment_required": [
+        "837"
+      ],
       "id": "medicare_in",
-      "name": "Indiana Medicare*"
+      "name": "Indiana Medicare"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
+        "837"
+      ],
+      "enrollment_required": [
         "837"
       ],
       "id": "inland_empire_health",
@@ -2581,13 +3503,20 @@
       "supported_transactions": [
         "837"
       ],
+      "enrollment_required": [
+        "837"
+      ],
       "id": "medicare_ia",
-      "name": "Iowa Medicare*"
+      "name": "Iowa Medicare"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
+        "837",
         "270"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "john_hopkins_health_care",
       "name": "John Hopkins HealthCare LLC"
@@ -2595,8 +3524,12 @@
     {
       "is_enabled": true,
       "supported_transactions": [
+        "276",
         "270",
         "837"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "kaiser_permanente_co",
       "name": "Kaiser Permanente of Colorado"
@@ -2607,6 +3540,9 @@
         "270",
         "837"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "kaiser_permanente_ga",
       "name": "Kaiser Permanente of Georgia"
     },
@@ -2616,14 +3552,19 @@
         "270",
         "837"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "kaiser_permanente_northern_ca",
       "name": "Kaiser Permanente of Northern CA"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
-        "270",
         "837"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "kaiser_permanente_oh",
       "name": "Kaiser Permanente of Ohio"
@@ -2634,6 +3575,9 @@
         "270",
         "837"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "kaiser_permanente_southern_ca",
       "name": "Kaiser Permanente of Southern CA"
     },
@@ -2643,14 +3587,20 @@
         "270",
         "837"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "kaiser_permanente_mid_atlantic",
-      "name": "Kaiser Permanente of the Mid-Atlantic"
+      "name": "Kaiser Permanente of the Mid Atlantic"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
         "270",
         "837"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "kaiser_permanente_northwest",
       "name": "Kaiser Permanente of the Northwest"
@@ -2660,12 +3610,18 @@
       "supported_transactions": [
         "270"
       ],
+      "enrollment_required": [
+        "270"
+      ],
       "id": "medicaid_ks",
-      "name": "Kansas Medicaid*"
+      "name": "Kansas Medicaid"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
+        "837"
+      ],
+      "enrollment_required": [
         "837"
       ],
       "id": "medicare_ks",
@@ -2674,24 +3630,35 @@
     {
       "is_enabled": true,
       "supported_transactions": [
-        "276",
-        "837"
+        "837",
+        "276"
+      ],
+      "enrollment_required": [
+        "837",
+        "276"
       ],
       "id": "kentucky_hhh",
-      "name": "Kentucky Home Health and Hospice*"
+      "name": "Kentucky Home Health and Hospice"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
         "270"
       ],
+      "enrollment_required": [
+        "270"
+      ],
       "id": "medicaid_ky",
-      "name": "Kentucky Medicaid*"
+      "name": "Kentucky Medicaid"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
         "270",
+        "837",
+        "276"
+      ],
+      "enrollment_required": [
         "837",
         "276"
       ],
@@ -2703,13 +3670,31 @@
       "supported_transactions": [
         "837"
       ],
+      "enrollment_required": [
+        "837"
+      ],
       "id": "kern_medical_center",
       "name": "Kern Medical Center Health Plan"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
+        "837",
+        "ccd"
+      ],
+      "enrollment_required": [
+
+      ],
+      "id": "kettering",
+      "name": "Kettering Health Network"
+    },
+    {
+      "is_enabled": true,
+      "supported_transactions": [
         "270",
+        "837"
+      ],
+      "enrollment_required": [
         "837"
       ],
       "id": "keystone_first",
@@ -2720,12 +3705,18 @@
       "supported_transactions": [
         "837"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "keystone_health_plan_east",
       "name": "Keystone Health Plan East"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
+        "837"
+      ],
+      "enrollment_required": [
         "837"
       ],
       "id": "la_care",
@@ -2736,21 +3727,32 @@
       "supported_transactions": [
         "837"
       ],
+      "enrollment_required": [
+        "837"
+      ],
       "id": "landmark_health",
-      "name": "Landmark Health"
+      "name": "Landmark Healthplan of California, Inc"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
+        "837",
         "270"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "lifewise_or",
-      "name": "LifeWise Health Plan of  Oregon"
+      "name": "LifeWise Health Plan of Oregon"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
+        "837",
         "270"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "lifewise_wa",
       "name": "LifeWise Health Plan of Washington"
@@ -2760,12 +3762,18 @@
       "supported_transactions": [
         "837"
       ],
+      "enrollment_required": [
+        "837"
+      ],
       "id": "linden_oaks_behavioral_health",
       "name": "Linden Oaks Behavioral Health"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
+        "837"
+      ],
+      "enrollment_required": [
         "837"
       ],
       "id": "loma_linda_medical_center",
@@ -2778,29 +3786,43 @@
         "270",
         "837"
       ],
+      "enrollment_required": [
+        "276",
+        "837"
+      ],
       "id": "la_healthcare_connections",
       "name": "Louisiana Healthcare Connections"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
-        "276",
-        "837"
+        "837",
+        "276"
+      ],
+      "enrollment_required": [
+        "837",
+        "276"
       ],
       "id": "louisiana_hhh",
-      "name": "Louisiana Home Health and Hospice*"
+      "name": "Louisiana Home Health and Hospice"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
         "270"
       ],
+      "enrollment_required": [
+        "270"
+      ],
       "id": "medicaid_la",
-      "name": "Louisiana Medicaid*"
+      "name": "Louisiana Medicaid"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
+        "837"
+      ],
+      "enrollment_required": [
         "837"
       ],
       "id": "lovelace_health_plan",
@@ -2810,17 +3832,23 @@
       "is_enabled": true,
       "supported_transactions": [
         "276",
-        "837",
-        "270"
+        "270",
+        "837"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "mahp",
-      "name": "MAHP/MAMSI (United)"
+      "name": "MAHP MAMSI (United)"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
         "276",
         "270",
+        "837"
+      ],
+      "enrollment_required": [
         "837"
       ],
       "id": "mvp_health_care",
@@ -2832,6 +3860,9 @@
         "270",
         "837"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "magellan_health",
       "name": "Magellan Health"
     },
@@ -2840,12 +3871,18 @@
       "supported_transactions": [
         "837"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "magellan_health_aetna",
       "name": "Magellan Health (Aetna Members Only)"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
+        "837"
+      ],
+      "enrollment_required": [
         "837"
       ],
       "id": "magnacare",
@@ -2858,6 +3895,10 @@
         "837",
         "276"
       ],
+      "enrollment_required": [
+        "837",
+        "276"
+      ],
       "id": "magnolia_health_plan",
       "name": "Magnolia Health Plan"
     },
@@ -2867,6 +3908,9 @@
         "276",
         "270"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "mail_handlers",
       "name": "Mail Handlers Benefit Plan (MHBP)"
     },
@@ -2875,14 +3919,21 @@
       "supported_transactions": [
         "270"
       ],
+      "enrollment_required": [
+        "270"
+      ],
       "id": "medicaid_me",
-      "name": "Maine Medicaid*"
+      "name": "Maine Medicaid"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
         "276",
         "270",
+        "837"
+      ],
+      "enrollment_required": [
+        "276",
         "837"
       ],
       "id": "managed_health_services_in",
@@ -2895,6 +3946,10 @@
         "270",
         "837"
       ],
+      "enrollment_required": [
+        "276",
+        "837"
+      ],
       "id": "managed_health_services_wi",
       "name": "Managed Health Services Wisconsin"
     },
@@ -2903,31 +3958,32 @@
       "supported_transactions": [
         "270"
       ],
+      "enrollment_required": [
+        "270"
+      ],
       "id": "medicaid_md",
-      "name": "Maryland Medicaid*"
+      "name": "Maryland Medicaid"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
         "270"
       ],
-      "id": "medicaid_ma",
-      "name": "Massachusetts Medicaid*"
-    },
-    {
-      "is_enabled": true,
-      "supported_transactions": [
-        "837"
+      "enrollment_required": [
+        "270"
       ],
-      "id": "medica_national",
-      "name": "Medica (National)"
+      "id": "medicaid_ma",
+      "name": "Massachusetts Medicaid"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
+        "837",
         "276",
-        "270",
-        "837"
+        "270"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "medica_health_plans",
       "name": "Medica Health Plans"
@@ -2937,14 +3993,31 @@
       "supported_transactions": [
         "837"
       ],
-      "id": "medica_healthcare_plans_medicare",
-      "name": "Medica Healthcare Plans (Medicare)"
+      "enrollment_required": [
+
+      ],
+      "id": "medica_health_plans_ifb_groups",
+      "name": "Medica Health Plans (IFB Groups)"
+    },
+    {
+      "is_enabled": true,
+      "supported_transactions": [
+        "837"
+      ],
+      "enrollment_required": [
+
+      ],
+      "id": "medica_healthcare_fl",
+      "name": "Medica Healthcare (FL)"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
         "270",
         "837"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "medical_mutual_oh",
       "name": "Medical Mutual of Ohio"
@@ -2953,6 +4026,9 @@
       "is_enabled": true,
       "supported_transactions": [
         "270"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "medicare_national",
       "name": "Medicare (all states)"
@@ -2963,6 +4039,9 @@
         "270",
         "837"
       ],
+      "enrollment_required": [
+        "837"
+      ],
       "id": "mega_life_health",
       "name": "Mega Life and Health Insurance"
     },
@@ -2970,6 +4049,20 @@
       "is_enabled": true,
       "supported_transactions": [
         "837"
+      ],
+      "enrollment_required": [
+        "837"
+      ],
+      "id": "meridan_health_plan_mi",
+      "name": "Meridian Health Plan"
+    },
+    {
+      "is_enabled": true,
+      "supported_transactions": [
+        "837"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "meritain_health",
       "name": "Meritain Health"
@@ -2979,12 +4072,18 @@
       "supported_transactions": [
         "270"
       ],
+      "enrollment_required": [
+        "270"
+      ],
       "id": "medicaid_mi",
-      "name": "Michigan Medicaid*"
+      "name": "Michigan Medicaid"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
+        "837"
+      ],
+      "enrollment_required": [
         "837"
       ],
       "id": "michigan_medicare_a",
@@ -2995,13 +4094,20 @@
       "supported_transactions": [
         "837"
       ],
+      "enrollment_required": [
+        "837"
+      ],
       "id": "michigan_medicare_b",
       "name": "Michigan Medicare Part B"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
+        "276",
         "270"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "mid_west_life",
       "name": "Mid-West National Life Insurance Company of Tennessee"
@@ -3009,44 +4115,61 @@
     {
       "is_enabled": true,
       "supported_transactions": [
-        "276",
-        "837"
+        "837",
+        "276"
+      ],
+      "enrollment_required": [
+        "837",
+        "276"
       ],
       "id": "mississippi_hhh",
-      "name": "Mississippi Home Health and Hospice*"
+      "name": "Mississippi Home Health and Hospice"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
         "270"
       ],
+      "enrollment_required": [
+        "270"
+      ],
       "id": "medicaid_ms",
-      "name": "Mississippi Medicaid*"
+      "name": "Mississippi Medicaid"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
         "837"
       ],
+      "enrollment_required": [
+        "837"
+      ],
       "id": "medicare_mo",
-      "name": "Missouri Medicare*"
+      "name": "Missouri Medicare"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
+        "ccd",
         "834",
         "270",
         "276",
         "837",
         "278"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "MOCKPAYER",
-      "name": "Mock Payer for Testing"
+      "name": "Mock Payer for Testing Continuity of Care Documents"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
         "270"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "MOCKPAYER_REJECTION",
       "name": "Mock Payer for Testing with inquiry rejection"
@@ -3056,14 +4179,21 @@
       "supported_transactions": [
         "837"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "moda_health",
       "name": "Moda Health"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
+        "276",
         "270",
         "837"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "molina_health_care_ca",
       "name": "Molina Healthcare of California"
@@ -3073,6 +4203,9 @@
       "supported_transactions": [
         "837"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "molina_health_care_fl",
       "name": "Molina Healthcare of Florida"
     },
@@ -3080,6 +4213,9 @@
       "is_enabled": true,
       "supported_transactions": [
         "837"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "molina_health_care_mi",
       "name": "Molina Healthcare of Michigan"
@@ -3089,14 +4225,21 @@
       "supported_transactions": [
         "837"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "molina_health_care_nv",
       "name": "Molina Healthcare of Nevada"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
+        "276",
         "270",
         "837"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "molina_health_care_nm",
       "name": "Molina Healthcare of New Mexico"
@@ -3104,8 +4247,12 @@
     {
       "is_enabled": true,
       "supported_transactions": [
+        "276",
         "270",
         "837"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "molina_health_care_oh",
       "name": "Molina Healthcare of Ohio"
@@ -3115,14 +4262,21 @@
       "supported_transactions": [
         "837"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "molina_health_care_sc",
       "name": "Molina Healthcare of South Carolina"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
+        "276",
         "270",
         "837"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "molina_health_care_tx",
       "name": "Molina Healthcare of Texas"
@@ -3130,7 +4284,11 @@
     {
       "is_enabled": true,
       "supported_transactions": [
+        "276",
         "270"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "molina_health_care_ut",
       "name": "Molina Healthcare of Utah"
@@ -3141,6 +4299,9 @@
         "270",
         "837"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "molina_health_care_wa",
       "name": "Molina Healthcare of Washington"
     },
@@ -3149,6 +4310,9 @@
       "supported_transactions": [
         "837"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "molina_health_care_wi",
       "name": "Molina Healthcare of Wisconsin"
     },
@@ -3156,6 +4320,9 @@
       "is_enabled": true,
       "supported_transactions": [
         "837"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "molina_health_care_id",
       "name": "Molina Medicaid Solutions - Idaho"
@@ -3166,13 +4333,21 @@
         "276",
         "270"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "mutual_omaha",
       "name": "Mutual of Omaha"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
+        "276",
+        "837",
         "270"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "nalc",
       "name": "National Association of Letter Carriers (NALC)"
@@ -3180,7 +4355,12 @@
     {
       "is_enabled": true,
       "supported_transactions": [
+        "837",
+        "276",
         "270"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "nationwide_health",
       "name": "Nationwide Health Plan"
@@ -3190,14 +4370,20 @@
       "supported_transactions": [
         "837"
       ],
+      "enrollment_required": [
+        "837"
+      ],
       "id": "medicare_ne",
-      "name": "Nebraska Medicare*"
+      "name": "Nebraska Medicare"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
         "276",
         "837"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "neighborhood_health_partnership",
       "name": "Neighborhood Health Partnership"
@@ -3208,6 +4394,9 @@
         "270",
         "837"
       ],
+      "enrollment_required": [
+        "837"
+      ],
       "id": "neighborhood_health_plan",
       "name": "Neighborhood Health Plan"
     },
@@ -3216,12 +4405,18 @@
       "supported_transactions": [
         "270"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "network_health",
       "name": "Network Health"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
+        "270"
+      ],
+      "enrollment_required": [
         "270"
       ],
       "id": "medicaid_nv",
@@ -3232,46 +4427,68 @@
       "supported_transactions": [
         "270"
       ],
-      "id": "medicaid_nh",
-      "name": "New Hampshire Medicaid*"
-    },
-    {
-      "is_enabled": true,
-      "supported_transactions": [
+      "enrollment_required": [
         "270"
       ],
-      "id": "medicaid_nj",
-      "name": "New Jersey Medicaid*"
+      "id": "medicaid_nh",
+      "name": "New Hampshire Medicaid"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
         "276",
-        "837"
+        "270"
       ],
-      "id": "new_mexico_hhh",
-      "name": "New Mexico Home Health and Hospice*"
+      "enrollment_required": [
+        "270"
+      ],
+      "id": "medicaid_nj",
+      "name": "New Jersey Medicaid"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
+        "837",
+        "276"
+      ],
+      "enrollment_required": [
+        "837",
+        "276"
+      ],
+      "id": "new_mexico_hhh",
+      "name": "New Mexico Home Health and Hospice"
+    },
+    {
+      "is_enabled": true,
+      "supported_transactions": [
+        "270"
+      ],
+      "enrollment_required": [
         "270"
       ],
       "id": "medicaid_nm",
-      "name": "New Mexico Medicaid*"
+      "name": "New Mexico Medicaid"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
         "270"
       ],
+      "enrollment_required": [
+        "270"
+      ],
       "id": "medicaid_ny",
-      "name": "New York Medicaid*"
+      "name": "New York Medicaid"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
+        "276",
+        "837",
         "270"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "nippon_life_principal",
       "name": "Nippon Life (Principal Financial Group)"
@@ -3279,33 +4496,48 @@
     {
       "is_enabled": true,
       "supported_transactions": [
-        "276",
-        "837"
+        "837",
+        "276"
+      ],
+      "enrollment_required": [
+        "837",
+        "276"
       ],
       "id": "north_carolina_hhh",
-      "name": "North Carolina Home Health and Hospice*"
+      "name": "North Carolina Home Health and Hospice"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
+        "270"
+      ],
+      "enrollment_required": [
         "270"
       ],
       "id": "medicaid_nc",
-      "name": "North Carolina Medicaid*"
+      "name": "North Carolina Medicaid"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
-        "276",
-        "837"
+        "837",
+        "276"
+      ],
+      "enrollment_required": [
+        "837",
+        "276"
       ],
       "id": "medicare_nc",
-      "name": "North Carolina Medicare*"
+      "name": "North Carolina Medicare"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
+        "837",
         "270"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "ohana_health_plan",
       "name": "Ohana Health Plan"
@@ -3313,19 +4545,26 @@
     {
       "is_enabled": true,
       "supported_transactions": [
-        "276",
-        "837"
+        "837",
+        "276"
+      ],
+      "enrollment_required": [
+        "837",
+        "276"
       ],
       "id": "ohio_hhh",
-      "name": "Ohio Home Health and Hospice*"
+      "name": "Ohio Home Health and Hospice"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
         "270"
       ],
+      "enrollment_required": [
+        "270"
+      ],
       "id": "medicaid_oh",
-      "name": "Ohio Medicaid*"
+      "name": "Ohio Medicaid"
     },
     {
       "is_enabled": true,
@@ -3333,16 +4572,23 @@
         "837",
         "276"
       ],
+      "enrollment_required": [
+        "837",
+        "276"
+      ],
       "id": "oklahoma_hhh",
-      "name": "Oklahoma Home Health and Hospice*"
+      "name": "Oklahoma Home Health and Hospice"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
         "270"
       ],
+      "enrollment_required": [
+        "270"
+      ],
       "id": "medicaid_ok",
-      "name": "Oklahoma Medicaid*"
+      "name": "Oklahoma Medicaid"
     },
     {
       "is_enabled": true,
@@ -3350,6 +4596,9 @@
         "276",
         "837",
         "270"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "optum_health_behavioral",
       "name": "OptumHealth Behavioral Solutions"
@@ -3357,8 +4606,23 @@
     {
       "is_enabled": true,
       "supported_transactions": [
+        "276",
+        "837"
+      ],
+      "enrollment_required": [
+
+      ],
+      "id": "optum_complex_medical_conditions",
+      "name": "OptumHealth Complex Medical Conditions (CMC)"
+    },
+    {
+      "is_enabled": true,
+      "supported_transactions": [
         "270",
         "276"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "oxford_health_plan_united",
       "name": "Oxford Health Plan"
@@ -3368,6 +4632,9 @@
       "supported_transactions": [
         "270"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "pehp_ut",
       "name": "PEHP Utah"
     },
@@ -3375,6 +4642,9 @@
       "is_enabled": true,
       "supported_transactions": [
         "837"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "pacific_source_health_plans",
       "name": "PacificSource Health Plans"
@@ -3386,6 +4656,10 @@
         "837",
         "276"
       ],
+      "enrollment_required": [
+        "837",
+        "276"
+      ],
       "id": "peach_state_health",
       "name": "Peach State Health Plan"
     },
@@ -3394,12 +4668,18 @@
       "supported_transactions": [
         "270"
       ],
+      "enrollment_required": [
+        "270"
+      ],
       "id": "medicaid_pa",
-      "name": "Pennsylvania Medicaid*"
+      "name": "Pennsylvania Medicaid"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
+        "837"
+      ],
+      "enrollment_required": [
         "837"
       ],
       "id": "phoenix_health_plan",
@@ -3408,7 +4688,11 @@
     {
       "is_enabled": true,
       "supported_transactions": [
+        "837",
         "270"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "physicians_mutual",
       "name": "Physicians Mutual Insurance Company"
@@ -3417,6 +4701,9 @@
       "is_enabled": true,
       "supported_transactions": [
         "837"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "preferred_care_partners",
       "name": "Preferred Care Partners"
@@ -3429,6 +4716,9 @@
         "278",
         "837"
       ],
+      "enrollment_required": [
+        "278"
+      ],
       "id": "premera_blue_cross",
       "name": "Premera Blue Cross"
     },
@@ -3439,6 +4729,9 @@
         "276",
         "837"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "premera_blue_cross_blue_shield_ak",
       "name": "Premera Blue Cross Blue Shield Of Alaska"
     },
@@ -3446,6 +4739,9 @@
       "is_enabled": true,
       "supported_transactions": [
         "270"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "principal_financial",
       "name": "Principal Financial Group"
@@ -3456,22 +4752,32 @@
         "270",
         "837"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "qual_choice_ar",
       "name": "QualChoice of Arkansas"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
-        "276",
-        "837"
+        "837",
+        "276"
+      ],
+      "enrollment_required": [
+        "837",
+        "276"
       ],
       "id": "medicare_railroad",
-      "name": "Railroad Medicare*"
+      "name": "Railroad Medicare"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
         "837"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "federal_employees_plan_wa",
       "name": "Regence Blue Shield Federal Employees Plan of Washington"
@@ -3480,6 +4786,9 @@
       "is_enabled": true,
       "supported_transactions": [
         "837"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "regence_bluecross_blueshield_or",
       "name": "Regence BlueCross BlueShield of Oregon"
@@ -3490,6 +4799,9 @@
         "270",
         "837"
       ],
+      "enrollment_required": [
+        "270"
+      ],
       "id": "bluecross_blueshield_utah",
       "name": "Regence BlueCross BlueShield of Utah"
     },
@@ -3497,6 +4809,9 @@
       "is_enabled": true,
       "supported_transactions": [
         "837"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "regence_blueshield_id",
       "name": "Regence BlueShield of Idaho"
@@ -3506,22 +4821,31 @@
       "supported_transactions": [
         "837"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "regence_blue_shield_wa",
       "name": "Regence BlueShield of Washington"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
-        "270",
+        "276",
+        "837"
+      ],
+      "enrollment_required": [
         "837"
       ],
       "id": "scan_health",
-      "name": "Scan Health Plan"
+      "name": "SCAN Health Plan"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
         "270"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "secure_horizons",
       "name": "SecureHorizons Medicare Complete (United)"
@@ -3530,6 +4854,9 @@
       "is_enabled": true,
       "supported_transactions": [
         "270"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "selecthealth",
       "name": "SelectHealth"
@@ -3540,47 +4867,68 @@
         "270",
         "837"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "sierra_health_plan",
       "name": "Sierra Health Plan"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
-        "276",
-        "837"
+        "837",
+        "276"
+      ],
+      "enrollment_required": [
+        "837",
+        "276"
       ],
       "id": "south_carolina_hhh",
-      "name": "South Carolina Home Health and Hospice*"
+      "name": "South Carolina Home Health and Hospice"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
+        "270"
+      ],
+      "enrollment_required": [
         "270"
       ],
       "id": "medicaid_sc",
-      "name": "South Carolina Medicaid*"
+      "name": "South Carolina Medicaid"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
-        "276",
-        "837"
+        "837",
+        "276"
+      ],
+      "enrollment_required": [
+        "837",
+        "276"
       ],
       "id": "medicare_sc",
-      "name": "South Carolina Medicare*"
+      "name": "South Carolina Medicare"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
+        "270"
+      ],
+      "enrollment_required": [
         "270"
       ],
       "id": "medicaid_sd",
-      "name": "South Dakota Medicaid*"
+      "name": "South Dakota Medicaid"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
+        "837",
         "270"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "staywell",
       "name": "StayWell"
@@ -3590,21 +4938,19 @@
       "supported_transactions": [
         "270"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "sunflower_state_health_plan",
       "name": "Sunflower State Health Plan"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
-        "276"
-      ],
-      "id": "sunshine_state_health",
-      "name": "Sunshine State Health Plan"
-    },
-    {
-      "is_enabled": true,
-      "supported_transactions": [
         "270",
+        "837"
+      ],
+      "enrollment_required": [
         "837"
       ],
       "id": "sunshine_state_health_plan",
@@ -3613,7 +4959,21 @@
     {
       "is_enabled": true,
       "supported_transactions": [
+        "276"
+      ],
+      "enrollment_required": [
+        "276"
+      ],
+      "id": "sunshine_state_health",
+      "name": "Sunshine State Health Plan"
+    },
+    {
+      "is_enabled": true,
+      "supported_transactions": [
         "837"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "sunshine_state_health_plan_cenpatico",
       "name": "Sunshine State Health Plan - Cenpatico"
@@ -3623,6 +4983,9 @@
       "supported_transactions": [
         "837"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "sunshine_state_health_plan_medical",
       "name": "Sunshine State Health Plan - Medical"
     },
@@ -3630,6 +4993,10 @@
       "is_enabled": true,
       "supported_transactions": [
         "270",
+        "837",
+        "276"
+      ],
+      "enrollment_required": [
         "837",
         "276"
       ],
@@ -3642,6 +5009,9 @@
         "270",
         "276"
       ],
+      "enrollment_required": [
+        "276"
+      ],
       "id": "tricare",
       "name": "TRICARE (National)"
     },
@@ -3652,39 +5022,56 @@
         "270",
         "837"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "tricare_west",
       "name": "TRICARE West"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
-        "276",
-        "837"
+        "837",
+        "276"
+      ],
+      "enrollment_required": [
+        "837",
+        "276"
       ],
       "id": "tennessee_hhh",
-      "name": "Tennessee Home Health and Hospice*"
+      "name": "Tennessee Home Health and Hospice"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
+        "270"
+      ],
+      "enrollment_required": [
         "270"
       ],
       "id": "medicaid_tn",
-      "name": "Tennessee Medicaid (TennCare)*"
+      "name": "Tennessee Medicaid (TennCare)"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
-        "276",
-        "837"
+        "837",
+        "276"
+      ],
+      "enrollment_required": [
+        "837",
+        "276"
       ],
       "id": "texas_hhh",
-      "name": "Texas Home Health and Hospice*"
+      "name": "Texas Home Health and Hospice"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
         "270"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "medicaid_tx",
       "name": "Texas Medicaid"
@@ -3695,6 +5082,9 @@
         "837",
         "270"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "empire_plan",
       "name": "The Empire Plan (United)"
     },
@@ -3703,13 +5093,21 @@
       "supported_transactions": [
         "270"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "transamerica",
       "name": "Transamerica Life"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
+        "837",
+        "276",
         "270"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "trustmark",
       "name": "Trustmark"
@@ -3718,6 +5116,9 @@
       "is_enabled": true,
       "supported_transactions": [
         "270",
+        "837"
+      ],
+      "enrollment_required": [
         "837"
       ],
       "id": "tufts",
@@ -3729,6 +5130,9 @@
         "276",
         "270"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "uhc_west",
       "name": "UHC West (PacifiCare)"
     },
@@ -3739,12 +5143,18 @@
         "837",
         "270"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "umr",
       "name": "UMR (Wausau)"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
+        "270"
+      ],
+      "enrollment_required": [
         "270"
       ],
       "id": "upmc_health_plan",
@@ -3755,13 +5165,20 @@
       "supported_transactions": [
         "837"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "managed_care_services",
       "name": "US Managed Care Services LLC"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
+        "276",
         "270"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "usaa_life",
       "name": "USAA Life Insurance"
@@ -3771,6 +5188,9 @@
       "supported_transactions": [
         "270",
         "276"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "unicare",
       "name": "UniCare"
@@ -3783,6 +5203,9 @@
         "276",
         "837"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "united_health_care",
       "name": "United Healthcare"
     },
@@ -3792,6 +5215,9 @@
         "276",
         "837",
         "270"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "united_health_care_community_plan",
       "name": "United Healthcare Community Plan (AmeriChoice)"
@@ -3803,6 +5229,9 @@
         "270",
         "837"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "united_health_care_community_plan_pa",
       "name": "United Healthcare Community Plan PA (AmeriChoice)"
     },
@@ -3811,6 +5240,9 @@
       "supported_transactions": [
         "837",
         "270"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "united_health_care_community_plan_ia",
       "name": "United Healthcare Community Plan of Iowa"
@@ -3822,14 +5254,21 @@
         "270",
         "837"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "united_health_care_community_plan_ks",
       "name": "United Healthcare Community Plan of Kansas (KanCare)"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
-        "270",
-        "837"
+        "276",
+        "837",
+        "270"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "united_health_care_community_plan_mi",
       "name": "United Healthcare Community Plan of Michigan"
@@ -3837,8 +5276,11 @@
     {
       "is_enabled": true,
       "supported_transactions": [
-        "270",
-        "837"
+        "837",
+        "270"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "united_health_care_community_plan_ms",
       "name": "United Healthcare Community Plan of Mississippi (CHIP)"
@@ -3850,6 +5292,9 @@
         "270",
         "837"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "united_health_care_community_plan_nj",
       "name": "United Healthcare Community Plan of New Jersey (AmeriChoice)"
     },
@@ -3860,6 +5305,9 @@
         "837",
         "270"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "united_health_care_community_plan_tn",
       "name": "United Healthcare Community Plan of Tennessee (TennCare)"
     },
@@ -3868,6 +5316,9 @@
       "supported_transactions": [
         "276",
         "270"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "uhc_dental",
       "name": "United Healthcare Dental"
@@ -3878,6 +5329,9 @@
         "276",
         "270"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "united_health_care_facets_detroit",
       "name": "United Healthcare Facets Detroit"
     },
@@ -3887,6 +5341,9 @@
         "276",
         "270"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "united_health_care_facets_pittsburgh",
       "name": "United Healthcare Facets Pittsburgh"
     },
@@ -3895,6 +5352,9 @@
       "supported_transactions": [
         "270",
         "837"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "united_health_care_medicare_solutions",
       "name": "United Healthcare Medicare Solutions (Evercare)"
@@ -3906,14 +5366,20 @@
         "837",
         "270"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "united_health_care_student_resources",
       "name": "United Healthcare Student Resources (Student Insurance)"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
-        "270",
-        "837"
+        "837",
+        "270"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "united_health_care_river_valley",
       "name": "United Healthcare of the River Valley"
@@ -3921,7 +5387,22 @@
     {
       "is_enabled": true,
       "supported_transactions": [
+        "837",
+        "ccd"
+      ],
+      "enrollment_required": [
+
+      ],
+      "id": "university_health",
+      "name": "University Health"
+    },
+    {
+      "is_enabled": true,
+      "supported_transactions": [
         "270"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "university_mo_coventry",
       "name": "University of Missouri Health (Coventry)"
@@ -3931,12 +5412,18 @@
       "supported_transactions": [
         "270"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "va_fee_basis",
       "name": "VA Fee Basis Program"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
+        "837"
+      ],
+      "enrollment_required": [
         "837"
       ],
       "id": "veterans_affairs_3",
@@ -3947,12 +5434,18 @@
       "supported_transactions": [
         "837"
       ],
+      "enrollment_required": [
+        "837"
+      ],
       "id": "veterans_affairs_5a",
       "name": "Veterans Affairs Region 5A"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
+        "837"
+      ],
+      "enrollment_required": [
         "837"
       ],
       "id": "veterans_affairs_5b",
@@ -3963,6 +5456,9 @@
       "supported_transactions": [
         "837"
       ],
+      "enrollment_required": [
+        "837"
+      ],
       "id": "veterans_affairs_6",
       "name": "Veterans Affairs Region 6"
     },
@@ -3971,21 +5467,31 @@
       "supported_transactions": [
         "270"
       ],
+      "enrollment_required": [
+        "270"
+      ],
       "id": "medicaid_va",
-      "name": "Virginia Medicaid*"
+      "name": "Virginia Medicaid"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
-        "276",
-        "837"
+        "837",
+        "276"
+      ],
+      "enrollment_required": [
+        "837",
+        "276"
       ],
       "id": "medicare_va",
-      "name": "Virginia Medicare*"
+      "name": "Virginia Medicare"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
+        "837"
+      ],
+      "enrollment_required": [
         "837"
       ],
       "id": "wps_commercial",
@@ -3996,6 +5502,9 @@
       "supported_transactions": [
         "270",
         "837"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "wellcare",
       "name": "Wellcare"
@@ -4008,6 +5517,10 @@
         "270",
         "278"
       ],
+      "enrollment_required": [
+        "837",
+        "278"
+      ],
       "id": "wellmark_blue_cross_blue_shield_ia",
       "name": "Wellmark Blue Cross and Blue Shield of Iowa"
     },
@@ -4017,6 +5530,9 @@
         "276",
         "270"
       ],
+      "enrollment_required": [
+
+      ],
       "id": "wellmark_blue_cross_blue_shield_sd",
       "name": "Wellmark Blue Cross and Blue Shield of South Dakota"
     },
@@ -4025,30 +5541,43 @@
       "supported_transactions": [
         "270"
       ],
+      "enrollment_required": [
+        "270"
+      ],
       "id": "medicaid_wv",
-      "name": "West Virginia Medicaid*"
+      "name": "West Virginia Medicaid"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
-        "276",
-        "837"
+        "837",
+        "276"
+      ],
+      "enrollment_required": [
+        "837",
+        "276"
       ],
       "id": "medicare_wv",
-      "name": "West Virginia Medicare*"
+      "name": "West Virginia Medicare"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
+        "270"
+      ],
+      "enrollment_required": [
         "270"
       ],
       "id": "medicaid_wi",
-      "name": "Wisconsin Medicaid*"
+      "name": "Wisconsin Medicaid"
     },
     {
       "is_enabled": true,
       "supported_transactions": [
         "270"
+      ],
+      "enrollment_required": [
+
       ],
       "id": "writers_guild_health_fund",
       "name": "Writers Guild Health Fund"
@@ -4058,8 +5587,11 @@
       "supported_transactions": [
         "270"
       ],
+      "enrollment_required": [
+        "270"
+      ],
       "id": "medicaid_wy",
-      "name": "Wyoming Medicaid*"
+      "name": "Wyoming Medicaid"
     }
   ]
 }

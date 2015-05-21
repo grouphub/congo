@@ -35,6 +35,88 @@ else
   Rails.logger.warn 'Try generating it by running `bundle exec rake data:carriers:fetch`.'
 end
 
+# Pre-populated list of benefit plans
+
+Dir.glob("#{Rails.root}/spec/data/benefit_plans/**/*-response.json").each do |path|
+  data = JSON.parse(File.read(path))['data']
+
+  puts "Loading benefit plan data for \"#{path}\"..."
+
+  data.each do |datum|
+    # TODO: Add `trading_partner_id` as an attribute
+    carrier = Carrier.all
+      .find { |carrier|
+        datum['trading_partner_id'] == carrier.properties['trading_partner_id']
+      }
+
+    benefit_plan = BenefitPlan.create! \
+      account_id: nil, # Admin benefit plan
+      carrier_id: carrier.id,
+      is_enabled: true,
+      name: datum['plan_name'],
+      description_html: nil,
+      description_markdown: nil,
+      properties: {
+        name: datum['plan_name'],
+        description_url: datum['benefits_summary_url'],
+        description_html: nil,
+        description_markdown: nil,
+        plan_type: nil,
+        exchange_plan: nil,
+        small_group: nil,
+        group_id: nil
+      }
+
+      # TODO:
+      #
+      #   * plan_type
+      #   * county
+      #   * trading_partner_id
+      #   * plan_id
+      #   * max_out_of_pocket
+      #   * state
+      #   * customer_service_phone
+      #   * premiums
+      #   * metallic_level
+      #   * deductible
+      #   * plan_name
+      #   * benefits_summary_url
+      #
+  end
+end
+
+path = "#{Rails.root}/spec/data/benefit-plans-response.json"
+if File.exists?(path)
+  carrier_response = JSON.load(File.read(path))
+  carrier_data = carrier_response['data']
+
+  carrier_data.each do |carrier_datum|
+    Carrier.create! \
+      account_id: nil, # Admin carrier
+      name: carrier_datum['name'],
+      properties: {
+        name: carrier_datum['name'],
+        trading_partner_id: carrier_datum['id'],
+        supported_transactions: carrier_datum['supported_transactions'],
+        is_enabled: carrier_datum['is_enabled'],
+        npi: nil,
+        service_types: nil,
+        tax_id: nil,
+        first_name: nil,
+        last_name: nil,
+        address_1: nil,
+        address_2: nil,
+        city: nil,
+        state: nil,
+        zip: nil,
+        phone: nil
+      }
+  end
+else
+  Rails.logger.warn "There is no carrier response data at \"#{path}\"."
+  Rails.logger.warn 'Try generating it by running `bundle exec rake data:carriers:fetch`.'
+end
+
 # Admin-created carrier account and benefit plan
 
 carrier = Carrier.create! \
