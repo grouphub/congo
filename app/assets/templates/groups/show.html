@@ -339,26 +339,28 @@
             </ul>
           </td>
 
-          <td ng-if="applications(benefitPlan).length < 1">
-            <a class="btn btn-default btn-xs" ng-click="showBenefitPlanDescription(benefitPlan)" ng-href="">Description</a>
+          <td>
+            <div ng-if="applications(benefitPlan).length < 1">
+              <a class="btn btn-default btn-xs" ng-click="showBenefitPlanDescription(benefitPlan)" ng-href="">Description</a>
 
-            <span class="dropdown" ng-if="benefitPlan.attachments && benefitPlan.attachments.length > 0">
-              <a class="btn btn-default btn-xs dropdown-toggle" id="attachments-{{$index}}" data-target="" href="" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
-                Attachments
-                <span class="caret"></span>
-              </a>
+              <span class="dropdown" ng-if="benefitPlan.attachments && benefitPlan.attachments.length > 0">
+                <a class="btn btn-default btn-xs dropdown-toggle" id="attachments-{{$index}}" data-target="" href="" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
+                  Attachments
+                  <span class="caret"></span>
+                </a>
 
-              <ul class="dropdown-menu" role="menu" aria-labelledby="attachments-{{$index}}">
-                <li ng-repeat="attachment in benefitPlan.attachments">
-                  <a ng-href="{{attachment.url}}" target="_blank" title="{{attachment.description}}">
-                    {{attachment.title}}
-                  </a>
-                <li>
-              </ul>
-            </span>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="attachments-{{$index}}">
+                  <li ng-repeat="attachment in benefitPlan.attachments">
+                    <a ng-href="{{attachment.url}}" target="_blank" title="{{attachment.description}}">
+                      {{attachment.title}}
+                    </a>
+                  <li>
+                </ul>
+              </span>
 
-            <a class="btn btn-warning btn-xs" ng-click="selectBenefitPlan(benefitPlan)" ng-href="">Select</a>
-            <a class="btn btn-danger btn-xs" ng-click="declineBenefitPlan(benefitPlan)" ng-href="">Decline</a>
+              <a class="btn btn-warning btn-xs" ng-click="selectBenefitPlan(benefitPlan)" ng-href="">Select</a>
+              <a class="btn btn-danger btn-xs" ng-click="declineBenefitPlan(benefitPlan)" ng-href="">Decline</a>
+            </div>
           </td>
         </tr>
       </tbody>

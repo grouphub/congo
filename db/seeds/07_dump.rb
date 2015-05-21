@@ -1,186 +1,342 @@
+
+
 first_account = Account.where(name: 'Top Tier Brokerage').first
+
+puts 'Destroying existing demo groups, attachments, memberships, and group benefit plans.'
+
+sally_group = Group.where(name: 'Sally\'s Bread Company').first
+uber_group = Group.where(name: 'Uber Tech Company').first
+
+if sally_group
+  Attachment.where(group_id: sally_group.id).destroy_all
+  Membership.where(group_id: sally_group.id).destroy_all
+  GroupBenefitPlan.where(group_id: sally_group.id).destroy_all
+end
+
+if uber_group
+  Attachment.where(group_id: uber_group.id).destroy_all
+  Membership.where(group_id: uber_group.id).destroy_all
+  GroupBenefitPlan.where(group_id: uber_group.id).destroy_all
+end
+
+Group.where(name: 'Sally\'s Bread Company').destroy_all
+Group.where(name: 'Uber Tech Company').destroy_all
+
+example_description_markdown = File.read("#{Rails.root}/spec/data/description.html")
+example_description_html = Kramdown::Document.new(example_description_markdown).to_html
 
 # =====
 # Users
 # =====
 
+puts 'Creating users.'
+
 # ID 8
-sally = User.create! \
-  first_name: 'Sally',
-  last_name: 'Breadmaker',
-  email: 'sally@bread.com',
-  password: 'testtest'
+sally = User.where(email: 'sally@bread.com').first
+unless sally
+  puts 'User "sally@bread.com" does not yet exist. Creating.'
+
+  sally = User.create! \
+    first_name: 'Sally',
+    last_name: 'Breadmaker',
+    email: 'sally@bread.com',
+    password: 'testtest'
+end
 
 # ID 9
-sam = User.create! \
-  first_name: 'Sam',
-  last_name: 'Breadmaker',
-  email: 'sam@bread.com',
-  password: 'testtest'
+sam = User.where(email: 'sam@bread.com').first
+unless sam
+  puts 'User "sam@bread.com" does not yet exist. Creating.'
+
+  sam = User.create! \
+    first_name: 'Sam',
+    last_name: 'Breadmaker',
+    email: 'sam@bread.com',
+    password: 'testtest'
+end
 
 # ID 10
-kevin = User.create! \
-  first_name: 'Kevin',
-  last_name: 'Breadmaker',
-  email: 'kevin@bread.com',
-  password: 'testtest'
+kevin = User.where(email: 'kevin@bread.com').first
+unless kevin
+  puts 'User "kevin@bread.com" does not yet exist. Creating.'
+
+  kevin = User.create! \
+    first_name: 'Kevin',
+    last_name: 'Breadmaker',
+    email: 'kevin@bread.com',
+    password: 'testtest'
+end
 
 # ID 5
-john = User.create! \
-  first_name: 'John',
-  last_name: 'Breadmaker',
-  email: 'john@bread.com',
-  password: 'testtest'
+john = User.where(email: 'john@bread.com').first
+unless john
+  puts 'User "john@bread.com" does not yet exist. Creating.'
+
+  john = User.create! \
+    first_name: 'John',
+    last_name: 'Breadmaker',
+    email: 'john@bread.com',
+    password: 'testtest'
+end
 
 # =====
 # Roles
 # =====
 
+puts 'Creating roles.'
+
 # ID 9
-sally_role = Role.create! \
-  user_id: sally.id,
-  account_id: first_account.id,
-  name: 'customer'
+sally_role = Role
+  .where(
+    user_id: sally.id,
+    account_id: first_account.id,
+    name: 'customer'
+  )
+  .first
+
+unless sally_role
+  puts 'Customer role for "sally@bread.com" does not yet exist. Creating.'
+
+  sally_role = Role.create! \
+    user_id: sally.id,
+    account_id: first_account.id,
+    name: 'customer'
+end
 
 # ID 10
-sam_role = Role.create! \
-  user_id: sam.id,
-  account_id: first_account.id,
-  name: 'customer'
+sam_role = Role
+  .where(
+    user_id: sam.id,
+    account_id: first_account.id,
+    name: 'customer'
+  )
+  .first
+
+unless sam_role
+  puts 'Customer role for "sam@bread.com" does not yet exist. Creating.'
+
+  sam_role = Role.create! \
+    user_id: sam.id,
+    account_id: first_account.id,
+    name: 'customer'
+end
 
 # ID 11
-kevin_role = Role.create! \
-  user_id: kevin.id,
-  account_id: first_account.id,
-  name: 'customer'
+kevin_role = Role
+  .where(
+    user_id: kevin.id,
+    account_id: first_account.id,
+    name: 'customer'
+  )
+  .first
+
+unless kevin_role
+  puts 'Customer role for "kevin@bread.com" does not yet exist. Creating.'
+
+  kevin_role = Role.create! \
+    user_id: kevin.id,
+    account_id: first_account.id,
+    name: 'customer'
+end
 
 # ID 5
-john_role = Role.create! \
-  user_id: john.id,
-  account_id: first_account.id,
-  name: 'group_admin'
+john_role = Role
+  .where(
+    user_id: john.id,
+    account_id: first_account.id,
+    name: 'group_admin'
+  )
+  .first
+
+unless john_role
+  puts 'Customer role for "john@bread.com" does not yet exist. Creating.'
+
+  john_role = Role.create! \
+    user_id: john.id,
+    account_id: first_account.id,
+    name: 'group_admin'
+end
 
 # ======
 # Groups
 # ======
 
+puts 'Creating test groups.'
+
 # ID 2
-description_html = %[<h1 id="sally-s-bread-company">Sally&#39;s Bread Company</h1>\n<p>Sally&#39;s Bread Company offers a full range of benefits for all employees.  You can see a summary of benefits offered in the attachments section.  </p>\n<h2 id="benefits-offered-">Benefits Offered:</h2>\n<p>You can see a summary of benefits offered in the attachments section.</p>\n<h4 id="aetna-ppo">Aetna PPO</h4>\n<h4 id="the-guardian-life-insurance">The Guardian Life Insurance</h4>\n<h4 id="the-guardian-long-term-disability">The Guardian Long Term Disability</h4>\n<h4 id="transamerica-401k">TransAmerica 401k</h4>\n<h4 id="vsp-premier-vision">VSP Premier Vision</h4>\n<h4 id="delta-dental-platinum-plan">Delta Dental Platinum Plan</h4>]
-description_markdown = "# Sally's Bread Company\nSally's Bread Company offers a full range of benefits for all employees.  You can see a summary of benefits offered in the attachments section.  \n\n##Benefits Offered:\nYou can see a summary of benefits offered in the attachments section.\n####Aetna PPO\n####The Guardian Life Insurance\n####The Guardian Long Term Disability\n####TransAmerica 401k\n####VSP Premier Vision\n####Delta Dental Platinum Plan"
 sally_group = Group.create! \
   account_id: first_account.id,
   name: 'Sally\'s Bread Company',
   is_enabled: true,
-  description_html: description_html,
-  description_markdown: description_markdown,
+  description_html: example_description_html,
+  description_markdown: example_description_markdown,
   properties: {
     name: 'Sally\'s Bread Company',
     group_id: '234',
     tax_id: '345',
-    description_html: description_html,
-    description_markdown: description_markdown
+    description_html: example_description_html,
+    description_markdown: example_description_markdown
   }
 
 # ID 1
-description_html = %[<h1 id="uber-tech-company">Uber Tech Company</h1>\n<p>Uber Tech Company offers a full range of benefits for all employees.  You can see a summary of benefits offered in the attachments section.  </p>\n<h2 id="benefits-offered-">Benefits Offered:</h2>\n<p>You can see a summary of benefits offered in the attachments section.</p>\n<h4 id="aetna-ppo">Aetna PPO</h4>\n<h4 id="the-guardian-life-insurance">The Guardian Life Insurance</h4>\n<h4 id="the-guardian-long-term-disability">The Guardian Long Term Disability</h4>\n<h4 id="transamerica-401k">TransAmerica 401k</h4>\n<h4 id="vsp-premier-vision">VSP Premier Vision</h4>\n<h4 id="delta-dental-platinum-plan">Delta Dental Platinum Plan</h4>]
-description_markdown = "# Uber Tech Company\nUber Tech Company offers a full range of benefits for all employees.  You can see a summary of benefits offered in the attachments section.  \n\n##Benefits Offered:\nYou can see a summary of benefits offered in the attachments section.\n####Aetna PPO\n####The Guardian Life Insurance\n####The Guardian Long Term Disability\n####TransAmerica 401k\n####VSP Premier Vision\n####Delta Dental Platinum Plan"
 uber_group = Group.create! \
   account_id: first_account.id,
   name: 'Uber Tech Company',
   is_enabled: true,
-  description_html: description_html,
-  description_markdown: description_markdown,
+  description_html: example_description_html,
+  description_markdown: example_description_markdown,
   properties: {
     name: 'Uber Tech Company',
     group_id: '234',
     tax_id: '345',
-    description_html: description_html,
-    description_markdown: description_markdown
+    description_html: example_description_html,
+    description_markdown: example_description_markdown
   }
 
 # ========
 # Carriers
 # ========
 
+puts 'Creating carriers and carrier accounts.'
+
 # ID 9
 aetna_carrier = Carrier.where(name: 'Aetna').first
 
-aetna_carrier_account = CarrierAccount.create! \
-  account_id: first_account.id,
-  carrier_id: aetna_carrier.id,
-  name: 'Aetna',
-  properties: {
+aetna_carrier_account = CarrierAccount
+  .where(
+    account_id: first_account.id,
+    carrier_id: aetna_carrier.id
+  )
+  .first
+
+unless aetna_carrier_account
+  puts '"Aetna" carrier account does not yet exist. Creating.'
+
+  aetna_carrier_account = CarrierAccount.create! \
+    account_id: first_account.id,
+    carrier_id: aetna_carrier.id,
     name: 'Aetna',
-    carrier_slug: 'aetna',
-    broker_number: '234',
-    brokerage_name: 'Top Tier Brokerage',
-    tax_id: '345',
-    account_type: 'broker'
-  }
+    properties: {
+      name: 'Aetna',
+      carrier_slug: 'aetna',
+      broker_number: '234',
+      brokerage_name: 'Top Tier Brokerage',
+      tax_id: '345',
+      account_type: 'broker'
+    }
+end
 
 # ID 1
 twenty_first_carrier = Carrier.where(name: '21st Century Insurance and Financial Services').first
 
-twenty_first_carrier_account = CarrierAccount.create! \
-  account_id: first_account.id,
-  carrier_id: twenty_first_carrier.id,
-  name: '21st Century Insurance and Financial Services',
-  properties: {
+twenty_first_carrier_account = CarrierAccount
+  .where(
+    account_id: first_account.id,
+    carrier_id: twenty_first_carrier.id
+  )
+  .first
+
+unless twenty_first_carrier_account
+  puts '"21st Century Insurance and Financial Services" carrier account does not yet exist. Creating.'
+
+  twenty_first_carrier_account = CarrierAccount.create! \
+    account_id: first_account.id,
+    carrier_id: twenty_first_carrier.id,
     name: '21st Century Insurance and Financial Services',
-    carrier_slug: '21st_century_insurance_and_financial_services',
-    broker_number: '234',
-    brokerage_name: 'Top Tier Brokerage',
-    tax_id: '345',
-    account_type: 'broker'
-  }
+    properties: {
+      name: '21st Century Insurance and Financial Services',
+      carrier_slug: '21st_century_insurance_and_financial_services',
+      broker_number: '234',
+      brokerage_name: 'Top Tier Brokerage',
+      tax_id: '345',
+      account_type: 'broker'
+    }
+end
 
 # ID 299
 kaiser_carrier = Carrier.where(name: 'Kaiser Permanente of Southern CA').first
 
-kaiser_carrier_account = CarrierAccount.create! \
-  account_id: first_account.id,
-  carrier_id: twenty_first_carrier.id,
-  name: 'Kaiser Permanente of Southern CA',
-  properties: {
+kaiser_carrier_account = CarrierAccount
+  .where(
+    account_id: first_account.id,
+    carrier_id: twenty_first_carrier.id
+  )
+  .first
+
+unless kaiser_carrier_account
+  puts '"Kaiser Permanente of Southern CA" carrier account does not yet exist. Creating.'
+
+  kaiser_carrier_account = CarrierAccount.create! \
+    account_id: first_account.id,
+    carrier_id: twenty_first_carrier.id,
     name: 'Kaiser Permanente of Southern CA',
-    carrier_slug: 'kaiser_permanente_of_southern_ca',
-    broker_number: '234',
-    brokerage_name: 'Top Tier Brokerage',
-    tax_id: '345',
-    account_type: 'broker'
-  }
+    properties: {
+      name: 'Kaiser Permanente of Southern CA',
+      carrier_slug: 'kaiser_permanente_of_southern_ca',
+      broker_number: '234',
+      brokerage_name: 'Top Tier Brokerage',
+      tax_id: '345',
+      account_type: 'broker'
+    }
+end
 
 # =============
 # Benefit Plans
 # =============
 
+puts 'Creating benefit plans, account benefit plans, and group benefit plans.'
+
 # ID 6
-delta_dental_plan = BenefitPlan.create! \
-  account_id: first_account.id,
-  carrier_id: aetna_carrier.id,
-  carrier_account_id: aetna_carrier_account.id,
-  is_enabled: true,
-  name: 'Delta Dental Platinum Plan',
-  description_html: '',
-  description_markdown: '',
-  properties: {
+delta_dental_plan = BenefitPlan
+  .where(
+    account_id: first_account.id,
+    carrier_id: aetna_carrier.id,
+    name: 'Delta Dental Platinum Plan'
+  )
+  .first
+
+unless delta_dental_plan
+  puts '"Delta Dental Platinum" benefit plan does not yet exist. Creating.'
+
+  delta_dental_plan = BenefitPlan.create! \
+    account_id: first_account.id,
+    carrier_id: aetna_carrier.id,
+    carrier_account_id: aetna_carrier_account.id,
     name: 'Delta Dental Platinum Plan',
+    is_enabled: true,
     description_html: '',
     description_markdown: '',
-    plan_type: 'foo',
-    exchange_plan: 'bar',
-    small_group: 'baz',
-    group_id: '235'
-  }
+    properties: {
+      name: 'Delta Dental Platinum Plan',
+      description_html: '',
+      description_markdown: '',
+      plan_type: 'foo',
+      exchange_plan: 'bar',
+      small_group: 'baz',
+      group_id: '235'
+    }
+end
 
-delta_dental_account_plan = AccountBenefitPlan.create! \
-  account_id: first_account.id,
-  carrier_id: aetna_carrier.id,
-  carrier_account_id: aetna_carrier_account.id,
-  benefit_plan_id: delta_dental_plan.id,
-  properties: {
+delta_dental_account_plan = AccountBenefitPlan
+  .where(
+    account_id: first_account.id,
+    carrier_id: aetna_carrier.id,
+    benefit_plan_id: delta_dental_plan.id
+  )
+  .first
 
-  }
+unless delta_dental_account_plan
+  puts '"Delta Dental Platinum" account benefit plan does not yet exist. Creating.'
+
+  delta_dental_account_plan = AccountBenefitPlan.create! \
+    account_id: first_account.id,
+    carrier_id: aetna_carrier.id,
+    benefit_plan_id: delta_dental_plan.id,
+    carrier_account_id: aetna_carrier_account.id,
+    properties: {
+
+    }
+end
 
 GroupBenefitPlan.create! \
   account_id: first_account.id,
@@ -199,32 +355,57 @@ GroupBenefitPlan.create! \
   }
 
 # ID 7
-vsp_premier_plan = BenefitPlan.create! \
-  account_id: first_account.id,
-  carrier_id: twenty_first_carrier.id,
-  carrier_account_id: twenty_first_carrier_account.id,
-  is_enabled: true,
-  name: 'VSP Premier Vision',
-  description_html: '',
-  description_markdown: '',
-  properties: {
+vsp_premier_plan = BenefitPlan
+  .where(
+    account_id: first_account.id,
+    carrier_id: twenty_first_carrier.id,
+    carrier_account_id: twenty_first_carrier_account.id,
     name: 'VSP Premier Vision',
+  )
+  .first
+
+unless vsp_premier_plan
+  puts '"VSP Premier Vision" benefit plan does not yet exist. Creating.'
+
+  vsp_premier_plan = BenefitPlan.create! \
+    account_id: first_account.id,
+    carrier_id: twenty_first_carrier.id,
+    carrier_account_id: twenty_first_carrier_account.id,
+    name: 'VSP Premier Vision',
+    is_enabled: true,
     description_html: '',
     description_markdown: '',
-    plan_type: 'foo',
-    exchange_plan: 'bar',
-    small_group: 'baz',
-    group_id: '235'
-  }
+    properties: {
+      name: 'VSP Premier Vision',
+      description_html: '',
+      description_markdown: '',
+      plan_type: 'foo',
+      exchange_plan: 'bar',
+      small_group: 'baz',
+      group_id: '235'
+    }
+end
 
-vsp_premier_account_plan = AccountBenefitPlan.create! \
-  account_id: first_account.id,
-  carrier_id: twenty_first_carrier.id,
-  carrier_account_id: twenty_first_carrier_account.id,
-  benefit_plan_id: vsp_premier_plan.id,
-  properties: {
+vsp_premier_account_plan = AccountBenefitPlan
+  .where(
+    account_id: first_account.id,
+    carrier_id: twenty_first_carrier.id,
+    benefit_plan_id: vsp_premier_plan.id
+  )
+  .first
 
-  }
+unless vsp_premier_account_plan
+  puts '"VSP Premier Vision" account benefit plan does not yet exist. Creating.'
+
+  vsp_premier_account_plan = AccountBenefitPlan.create! \
+    account_id: first_account.id,
+    carrier_id: twenty_first_carrier.id,
+    benefit_plan_id: vsp_premier_plan.id,
+    carrier_account_id: twenty_first_carrier_account.id,
+    properties: {
+
+    }
+end
 
 GroupBenefitPlan.create! \
   account_id: first_account.id,
@@ -243,32 +424,56 @@ GroupBenefitPlan.create! \
   }
 
 # ID 3
-the_guardian_life_plan = BenefitPlan.create! \
-  account_id: first_account.id,
-  carrier_id: twenty_first_carrier.id,
-  carrier_account_id: twenty_first_carrier_account.id,
-  is_enabled: true,
-  name: 'The Guardian Life Insurance',
-  description_html: '',
-  description_markdown: '',
-  properties: {
+the_guardian_life_plan = BenefitPlan
+  .where(
+    account_id: first_account.id,
+    carrier_id: twenty_first_carrier.id,
+    name: 'The Guardian Life Insurance'
+  )
+  .first
+
+unless the_guardian_life_plan
+  puts '"The Guardian Life Insurance" benefit plan does not yet exist. Creating.'
+
+  the_guardian_life_plan = BenefitPlan.create! \
+    account_id: first_account.id,
+    carrier_id: twenty_first_carrier.id,
+    carrier_account_id: twenty_first_carrier_account.id,
     name: 'The Guardian Life Insurance',
+    is_enabled: true,
     description_html: '',
     description_markdown: '',
-    plan_type: 'foo',
-    exchange_plan: 'bar',
-    small_group: 'baz',
-    group_id: '235'
-  }
+    properties: {
+      name: 'The Guardian Life Insurance',
+      description_html: '',
+      description_markdown: '',
+      plan_type: 'foo',
+      exchange_plan: 'bar',
+      small_group: 'baz',
+      group_id: '235'
+    }
+end
 
-the_guardian_life_account_plan = AccountBenefitPlan.create! \
-  account_id: first_account.id,
-  carrier_id: twenty_first_carrier.id,
-  carrier_account_id: twenty_first_carrier_account.id,
-  benefit_plan_id: the_guardian_life_plan.id,
-  properties: {
+the_guardian_life_account_plan = AccountBenefitPlan
+  .where(
+    account_id: first_account.id,
+    carrier_id: twenty_first_carrier.id,
+    benefit_plan_id: the_guardian_life_plan.id
+  )
+  .first
 
-  }
+unless the_guardian_life_account_plan
+  puts '"The Guardian Life Insurance" account benefit plan does not yet exist. Creating.'
+
+  the_guardian_life_account_plan = AccountBenefitPlan.create! \
+    account_id: first_account.id,
+    carrier_id: twenty_first_carrier.id,
+    benefit_plan_id: the_guardian_life_plan.id,
+    carrier_account_id: twenty_first_carrier_account.id,
+    properties: {
+
+    }
+end
 
 GroupBenefitPlan.create! \
   account_id: first_account.id,
@@ -287,32 +492,57 @@ GroupBenefitPlan.create! \
   }
 
 # ID 4
-the_guardian_long_plan = BenefitPlan.create! \
-  account_id: first_account.id,
-  carrier_id: twenty_first_carrier.id,
-  carrier_account_id: twenty_first_carrier_account.id,
-  is_enabled: true,
-  name: 'The Guardian Long Term Disability',
-  description_html: '',
-  description_markdown: '',
-  properties: {
+the_guardian_long_plan = BenefitPlan
+  .where(
+    account_id: first_account.id,
+    carrier_id: twenty_first_carrier.id,
+    carrier_account_id: twenty_first_carrier_account.id,
+    name: 'The Guardian Long Term Disability'
+  )
+  .first
+
+unless the_guardian_long_plan
+  puts '"The Guardian Long Term Disability" benefit plan does not yet exist. Creating.'
+
+  the_guardian_long_plan = BenefitPlan.create! \
+    account_id: first_account.id,
+    carrier_id: twenty_first_carrier.id,
+    carrier_account_id: twenty_first_carrier_account.id,
     name: 'The Guardian Long Term Disability',
+    is_enabled: true,
     description_html: '',
     description_markdown: '',
-    plan_type: 'foo',
-    exchange_plan: 'bar',
-    small_group: 'baz',
-    group_id: '235'
-  }
+    properties: {
+      name: 'The Guardian Long Term Disability',
+      description_html: '',
+      description_markdown: '',
+      plan_type: 'foo',
+      exchange_plan: 'bar',
+      small_group: 'baz',
+      group_id: '235'
+    }
+end
 
-the_guardian_long_account_plan = AccountBenefitPlan.create! \
-  account_id: first_account.id,
-  carrier_id: twenty_first_carrier.id,
-  carrier_account_id: twenty_first_carrier_account.id,
-  benefit_plan_id: the_guardian_long_plan.id,
-  properties: {
+the_guardian_long_account_plan = AccountBenefitPlan
+  .where(
+    account_id: first_account.id,
+    carrier_id: twenty_first_carrier.id,
+    benefit_plan_id: the_guardian_long_plan.id
+  )
+  .first
 
-  }
+unless the_guardian_long_account_plan
+  puts '"The Guardian Long Term Disability" account benefit plan does not yet exist. Creating.'
+
+  the_guardian_long_account_plan = AccountBenefitPlan.create! \
+    account_id: first_account.id,
+    carrier_id: twenty_first_carrier.id,
+    benefit_plan_id: the_guardian_long_plan.id,
+    carrier_account_id: twenty_first_carrier_account.id,
+    properties: {
+
+    }
+end
 
 GroupBenefitPlan.create! \
   account_id: first_account.id,
@@ -331,32 +561,56 @@ GroupBenefitPlan.create! \
   }
 
 # ID 5
-transamerica_plan = BenefitPlan.create! \
-  account_id: first_account.id,
-  carrier_id: twenty_first_carrier.id,
-  carrier_account_id: twenty_first_carrier_account.id,
-  is_enabled: true,
-  name: 'TransAmerica 401k',
-  description_html: '',
-  description_markdown: '',
-  properties: {
+transamerica_plan = BenefitPlan
+  .where(
+    account_id: first_account.id,
+    carrier_id: twenty_first_carrier.id,
+    name: 'TransAmerica 401k'
+  )
+  .first
+
+unless transamerica_plan
+  puts '"TransAmerica 401k" benefit plan does not yet exist. Creating.'
+
+  transamerica_plan = BenefitPlan.create! \
+    account_id: first_account.id,
+    carrier_id: twenty_first_carrier.id,
+    carrier_account_id: twenty_first_carrier_account.id,
     name: 'TransAmerica 401k',
+    is_enabled: true,
     description_html: '',
     description_markdown: '',
-    plan_type: 'foo',
-    exchange_plan: 'bar',
-    small_group: 'baz',
-    group_id: '235'
-  }
+    properties: {
+      name: 'TransAmerica 401k',
+      description_html: '',
+      description_markdown: '',
+      plan_type: 'foo',
+      exchange_plan: 'bar',
+      small_group: 'baz',
+      group_id: '235'
+    }
+end
 
-transamerica_account_plan = AccountBenefitPlan.create! \
-  account_id: first_account.id,
-  carrier_id: twenty_first_carrier.id,
-  carrier_account_id: twenty_first_carrier_account.id,
-  benefit_plan_id: transamerica_plan.id,
-  properties: {
+transamerica_account_plan = AccountBenefitPlan
+  .where(
+    account_id: first_account.id,
+    carrier_id: twenty_first_carrier.id,
+    benefit_plan_id: transamerica_plan.id
+  )
+  .first
 
-  }
+unless transamerica_account_plan
+  puts '"TransAmerica 401k" account benefit plan does not yet exist. Creating.'
+
+  transamerica_account_plan = AccountBenefitPlan.create! \
+    account_id: first_account.id,
+    carrier_id: twenty_first_carrier.id,
+    benefit_plan_id: transamerica_plan.id,
+    carrier_account_id: twenty_first_carrier_account.id,
+    properties: {
+
+    }
+end
 
 GroupBenefitPlan.create! \
   account_id: first_account.id,
@@ -375,32 +629,56 @@ GroupBenefitPlan.create! \
   }
 
 # ID 8
-aetna_plan = BenefitPlan.create! \
-  account_id: first_account.id,
-  carrier_id: twenty_first_carrier.id,
-  carrier_account_id: twenty_first_carrier_account.id,
-  is_enabled: true,
-  name: 'Aetna PPO',
-  description_html: '',
-  description_markdown: '',
-  properties: {
+aetna_plan = BenefitPlan
+  .where(
+    account_id: first_account.id,
+    carrier_id: twenty_first_carrier.id,
+    name: 'Aetna PPO'
+  )
+  .first
+
+unless aetna_plan
+  puts '"Aetna PPO" benefit plan does not yet exist. Creating.'
+
+  aetna_plan = BenefitPlan.create! \
+    account_id: first_account.id,
+    carrier_id: twenty_first_carrier.id,
+    carrier_account_id: twenty_first_carrier_account.id,
     name: 'Aetna PPO',
+    is_enabled: true,
     description_html: '',
     description_markdown: '',
-    plan_type: 'foo',
-    exchange_plan: 'bar',
-    small_group: 'baz',
-    group_id: '235'
-  }
+    properties: {
+      name: 'Aetna PPO',
+      description_html: '',
+      description_markdown: '',
+      plan_type: 'foo',
+      exchange_plan: 'bar',
+      small_group: 'baz',
+      group_id: '235'
+    }
+end
 
-aetna_account_plan = AccountBenefitPlan.create! \
-  account_id: first_account.id,
-  carrier_id: twenty_first_carrier.id,
-  carrier_account_id: twenty_first_carrier_account.id,
-  benefit_plan_id: aetna_plan.id,
-  properties: {
+aetna_account_plan = AccountBenefitPlan
+  .where(
+    account_id: first_account.id,
+    carrier_id: twenty_first_carrier.id,
+    benefit_plan_id: aetna_plan.id
+  )
+  .first
 
-  }
+unless aetna_account_plan
+  puts '"Aetna PPO" account benefit plan does not yet exist. Creating.'
+
+  aetna_account_plan = AccountBenefitPlan.create! \
+    account_id: first_account.id,
+    carrier_id: twenty_first_carrier.id,
+    benefit_plan_id: aetna_plan.id,
+    carrier_account_id: twenty_first_carrier_account.id,
+    properties: {
+
+    }
+end
 
 GroupBenefitPlan.create! \
   account_id: first_account.id,
@@ -419,36 +697,62 @@ GroupBenefitPlan.create! \
   }
 
 # ID 9
-kaiser_plan = BenefitPlan.create! \
-  account_id: first_account.id,
-  carrier_id: twenty_first_carrier.id,
-  carrier_account_id: twenty_first_carrier_account.id,
-  is_enabled: true,
-  name: 'Kaiser Silver Grandfather',
-  description_html: '',
-  description_markdown: '',
-  properties: {
+kaiser_plan = BenefitPlan
+  .where(
+    account_id: first_account.id,
+    carrier_id: twenty_first_carrier.id,
+    name: 'Kaiser Silver Grandfather'
+  )
+  .first
+
+unless kaiser_plan
+  puts '"Kaiser Silver Grandfather" benefit plan does not yet exist. Creating.'
+
+  kaiser_plan = BenefitPlan.create! \
+    account_id: first_account.id,
+    carrier_id: twenty_first_carrier.id,
+    carrier_account_id: twenty_first_carrier_account.id,
     name: 'Kaiser Silver Grandfather',
+    is_enabled: true,
     description_html: '',
     description_markdown: '',
-    plan_type: 'foo',
-    exchange_plan: 'bar',
-    small_group: 'baz',
-    group_id: '235'
-  }
+    properties: {
+      name: 'Kaiser Silver Grandfather',
+      description_html: '',
+      description_markdown: '',
+      plan_type: 'foo',
+      exchange_plan: 'bar',
+      small_group: 'baz',
+      group_id: '235'
+    }
+end
 
-kaiser_account_plan = AccountBenefitPlan.create! \
-  account_id: first_account.id,
-  carrier_id: twenty_first_carrier.id,
-  carrier_account_id: twenty_first_carrier_account.id,
-  benefit_plan_id: kaiser_plan.id,
-  properties: {
+kaiser_account_plan = AccountBenefitPlan
+  .where(
+    account_id: first_account.id,
+    carrier_id: twenty_first_carrier.id,
+    benefit_plan_id: kaiser_plan.id,
+  )
+  .first
 
-  }
+unless kaiser_account_plan
+  puts '"Kaiser Silver Grandfather" account benefit plan does not yet exist. Creating.'
+
+  kaiser_account_plan = AccountBenefitPlan.create! \
+    account_id: first_account.id,
+    carrier_id: twenty_first_carrier.id,
+    benefit_plan_id: kaiser_plan.id,
+    carrier_account_id: twenty_first_carrier_account.id,
+    properties: {
+
+    }
+end
 
 # ===========
 # Memberships
 # ===========
+
+puts 'Creating memberships.'
 
 Membership.create! \
   account_id: first_account.id,
@@ -533,6 +837,8 @@ Membership.create! \
 # ===========
 # Attachments
 # ===========
+
+puts 'Creating attachments.'
 
 [sally_group, uber_group].each do |group|
   title = 'Summary of Benefits'
