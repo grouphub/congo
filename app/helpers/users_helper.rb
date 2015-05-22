@@ -108,6 +108,7 @@ module UsersHelper
       .where(user_id: current_user.id)
       .includes(:group)
       .map(&:group)
+      .compact
       .select(&:is_enabled)
 
     accounts = user

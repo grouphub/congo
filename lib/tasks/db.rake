@@ -1,6 +1,19 @@
 namespace :db do
+  desc 'Reseeds just the demo data.'
+  task :reseed_demo_data => :environment do
+    path = "#{Rails.root}/db/seeds/07_dump.rb"
+    begin
+      load(path)
+    rescue StandardError => e
+      print "Error loading #{path} I think...\n\n#{e.message}\n\n#{e.backtrace.join("\n")}\n\n"
+      exit
+    end
+  end
+
   desc 'Dumps the database to db/APP_NAME.dump'
   task :dump => :environment do
+    STDERR.puts 'Deprecated. Please use seeds instead.'
+
     app = Rails.application.class.parent_name.underscore
     host = ActiveRecord::Base.connection_config[:host]
     db = ActiveRecord::Base.connection_config[:database]
@@ -21,6 +34,8 @@ namespace :db do
 
   desc 'Restores the database dump at db/APP_NAME.dump.'
   task :restore => :environment do
+    STDERR.puts 'Deprecated. Please use seeds instead.'
+
     app = Rails.application.class.parent_name.underscore
     host = ActiveRecord::Base.connection_config[:host]
     db = ActiveRecord::Base.connection_config[:database]
