@@ -108,7 +108,7 @@ congoApp.controller('AdminBenefitPlansShowController', [
       formData.append('properties', JSON.stringify($scope.attachmentFormData));
 
       $http
-        .post('/api/internal/admin/attachments.json?benefit_plan_id=' + $scope.benefitPlanSlug(), formData, {
+        .post('/api/internal/admin/benefit_plans/' + $scope.benefitPlanSlug() + '/attachments.json', formData, {
           withCredentials: true,
           headers: {
             'Content-Type': undefined
@@ -134,7 +134,7 @@ congoApp.controller('AdminBenefitPlansShowController', [
       var attachment = $scope.benefitPlan.attachments[index];
 
       $http
-        .delete('/api/internal/admin/attachments/' + attachment.id + '.json?benefit_plan_id=' + $scope.benefitPlanSlug())
+        .delete('/api/internal/admin/benefit_plans/' + $scope.benefitPlanSlug() + '/attachments/' + attachment.id + '.json')
         .success(function (data, status, headers, config) {
           $scope.benefitPlan.attachments = _($scope.benefitPlan.attachments).reject(function (deletedAttachment) {
             return attachment.id === deletedAttachment.id;

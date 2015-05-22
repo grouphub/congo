@@ -98,9 +98,6 @@ Rails.application.routes.draw do
           resources :attachments
         end
 
-        # TODO: Should not need this
-        resources :attachments
-
         resources :invitations
         resources :accounts
         resources :groups
