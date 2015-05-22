@@ -6,15 +6,10 @@ class Api::Internal::BenefitPlansController < Api::ApiController
   before_filter :ensure_broker_or_group_admin!, only: [:create, :update, :destroy]
 
   def index
-    account_slug = params[:account_id]
-    account = Account.where(slug: account_slug).first
-    role_slug = params[:role_id]
     only_activated_carriers = (params[:only_activated_carriers] == 'true')
     only_activated = (params[:only_activated] == 'true')
 
-    if role_slug == 'admin'
-      benefit_plans = BenefitPlan.all
-    elsif role_slug == 'group_admin' || role_slug == 'broker'
+    if current_role.name == 'group_admin' || current_role.name == 'broker'
       # For group admins and brokers, do not show admin-created benefit plans
       # which are not enabled.
       benefit_plans = BenefitPlan

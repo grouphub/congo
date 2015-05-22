@@ -4,7 +4,7 @@ class Api::Internal::Admin::BenefitPlansController < Api::ApiController
   before_filter :ensure_admin!
 
   def index
-    benefit_plans = BenefitPlan.where('account_id IS NULL')
+    benefit_plans = BenefitPlan.all
 
     respond_to do |format|
       format.json {
@@ -130,6 +130,7 @@ class Api::Internal::Admin::BenefitPlansController < Api::ApiController
     carrier_account_hash = carrier_account.try(:as_json) || {}
 
     benefit_plan.as_json.merge({
+      'account' => benefit_plan.account,
       'carrier_account' => carrier_account_hash.merge({
         'account' => account,
         'carrier' => carrier

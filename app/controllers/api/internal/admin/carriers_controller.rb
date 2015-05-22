@@ -4,11 +4,15 @@ class Api::Internal::Admin::CarriersController < Api::ApiController
   before_filter :ensure_admin!, except: :index
 
   def index
+    carriers = Carrier.all
+
     respond_to do |format|
       format.json {
         render json: {
           # TODO: Scope groups by account
-          carriers: Carrier.all
+          carriers: carriers.map { |carrier|
+            render_carrier(carrier)
+          }
         }
       }
     end
@@ -106,6 +110,12 @@ class Api::Internal::Admin::CarriersController < Api::ApiController
         }
       }
     end
+  end
+
+  def render_carrier(carrier)
+    carrier.as_json.merge({
+      'account' => carrier.account
+    })
   end
 end
 

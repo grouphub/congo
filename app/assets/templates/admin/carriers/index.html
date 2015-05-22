@@ -33,24 +33,29 @@
           <thead>
             <tr>
               <th>Name</th>
-              <th ng-if="isAdmin()">Actions</th>
+              <th>Owned By</th>
+              <th>Actions</th>
             </tr>
           </thead>
 
           <tbody>
             <tr ng-repeat="carrier in carriersToShow()">
               <td>
-                <a ng-if="isAdmin()" ng-href="/admin/carriers/{{carrier.slug}}">{{carrier.name}}</a>
+                <a ng-href="/admin/carriers/{{carrier.slug}}">{{carrier.name}}</a>
               </td>
 
               <td>
-                <a class="btn btn-danger btn-xs" ng-if="isAdmin()" ng-click="deleteCarrierAt($index)">Delete</a>
+                {{carrier.account.name}}
+              </td>
+
+              <td>
+                <a class="btn btn-danger btn-xs" ng-click="deleteCarrierAt($index)">Delete</a>
               </td>
             </tr>
           </tbody>
         </table>
 
-        <p ng-if="isAdmin()">
+        <p>
           <a class="btn btn-primary" href="/admin/carriers/new">New Carrier</a>
         </p>
       </div>
@@ -74,6 +79,7 @@
           <thead>
             <tr>
               <th>Name</th>
+              <th>Owned By</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -82,12 +88,15 @@
             <tr ng-repeat="benefitPlan in benefitPlansToShow()">
               <td>
                 <a href="/admin/benefit_plans/{{benefitPlan.slug}}">{{benefitPlan.name}}</a>
-                <a class="btn btn-info btn-xs disabled" href="" ng-if="benefitPlan.account_id">Owned</a>
+              </td>
+
+              <td>
+                {{benefitPlan.account.name}}
               </td>
 
               <td>
                 <a class="btn btn-info btn-xs" href="" ng-click="toggleBenefitPlanAt($index)" ng-if="!benefitPlan.account_id">{{benefitPlan.is_enabled ? 'Disable' : 'Enable'}}</a>
-                <a class="btn btn-danger btn-xs" href="" ng-click="deleteBenefitPlanAt($index)" ng-if="!benefitPlan.account_id">Delete</a>
+                <a class="btn btn-danger btn-xs" href="" ng-click="deleteBenefitPlanAt($index)">Delete</a>
               </td>
             </tr>
           </tbody>
