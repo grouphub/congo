@@ -9,32 +9,7 @@ class Api::Internal::BenefitPlansController < Api::ApiController
     only_activated_carriers = (params[:only_activated_carriers] == 'true')
     only_activated = (params[:only_activated] == 'true')
 
-    benefit_plans = BenefitPlan
-      .where(
-        %[
-          (account_id IS NULL AND is_enabled = TRUE) OR
-          (account_id = ?)
-        ],
-        current_account.id
-      )
-
-    # if current_role.name == 'group_admin' || current_role.name == 'broker'
-    #   # For group admins and brokers, do not show admin-created benefit plans
-    #   # which are not enabled.
-    #   benefit_plans = BenefitPlan
-    #     .where(
-    #       %[
-    #         (account_id IS NULL AND is_enabled = TRUE) OR
-    #         (account_id = ?)
-    #       ],
-    #       current_account.id
-    #     )
-    # else
-    #   # For customers
-    #   benefit_plans = BenefitPlan
-    #     .where('account_id = ? AND is_enabled = TRUE', current_account.id)
-    # end
-
+    benefit_plans = nil
     if only_activated_carriers
       # Plans whose carrier has been activated, but which themselves may not
       # have been activated yet, for display on the carriers index page.
@@ -58,22 +33,17 @@ class Api::Internal::BenefitPlansController < Api::ApiController
           .to_a
           .map(&:benefit_plan)
       ).uniq(&:id)
-
-      # benefit_plans = benefit_plans
-      #   .where(
-      #     %[
-      #         (carrier_account_id IS NULL) OR
-      #           (carrier_account_id IN (?))
-      #     ],
-      #     carrier_accounts.map(&:id)
-      #   )
-
-      # benefit_plans = benefit_plans
-      #   .where('carrier_account_id IN (?)', carrier_accounts.map(&:id))
     elsif only_activated
       # Plans which have been activated and enabled, for display on the groups
       # show page.
-      benefit_plans = benefit_plans
+      benefit_plans = BenefitPlan
+        .where(
+          %[
+            (account_id IS NULL AND is_enabled = TRUE) OR
+            (account_id = ?)
+          ],
+          current_account.id
+        )
         .where('is_enabled = TRUE')
         .includes(:account_benefit_plans)
         .to_a
@@ -82,6 +52,15 @@ class Api::Internal::BenefitPlansController < Api::ApiController
             account_benefit_plan.account_id == current_account.id
           }
         }
+    else
+      benefit_plans = BenefitPlan
+        .where(
+          %[
+            (account_id IS NULL AND is_enabled = TRUE) OR
+            (account_id = ?)
+          ],
+          current_account.id
+        )
     end
 
     respond_to do |format|
