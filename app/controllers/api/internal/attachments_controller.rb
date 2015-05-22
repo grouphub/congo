@@ -36,10 +36,11 @@ class Api::Internal::AttachmentsController < Api::ApiController
       content_type: content_type
     }
 
+    account_id = (current_account.slug == 'admin') ? nil : current_account.id
     group_slug = params[:group_id]
-    group = Group.where(account_id: current_account.id, slug: group_slug).first
+    group = Group.where(account_id: account_id, slug: group_slug).first
     benefit_plan_id = params[:benefit_plan_id]
-    benefit_plan = BenefitPlan.where(account_id: current_account.id, id: benefit_plan_id).first
+    benefit_plan = BenefitPlan.where(account_id: account_id, slug: benefit_plan_id).first
 
     if group
       attributes[:group_id] = group.id
@@ -66,10 +67,11 @@ class Api::Internal::AttachmentsController < Api::ApiController
   end
 
   def destroy
+    account_id = (current_account.slug == 'admin') ? nil : current_account.id
     group_slug = params[:group_id]
-    group = Group.where(account_id: current_account.id, slug: group_slug).first
+    group = Group.where(account_id: account_id, slug: group_slug).first
     benefit_plan_id = params[:benefit_plan_id]
-    benefit_plan = BenefitPlan.where(account_id: current_account.id, id: benefit_plan_id).first
+    benefit_plan = BenefitPlan.where(account_id: account_id, slug: benefit_plan_id).first
     attributes = {
       id: params[:id]
     }

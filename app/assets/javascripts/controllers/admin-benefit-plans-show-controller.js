@@ -100,11 +100,53 @@ congoApp.controller('AdminBenefitPlansShowController', [
     };
 
     $scope.newAttachment = function () {
-      // TODO: Fill this in
+      var fileInput = $('#new-attachment').find('[type="file"]');
+      var file = fileInput[0].files[0];
+      var formData = new FormData();
+
+      formData.append('file', file);
+      formData.append('properties', JSON.stringify($scope.attachmentFormData));
+
+      $http
+        .post('/api/internal/admin/benefit_plans/' + $scope.benefitPlanSlug() + '/attachments.json', formData, {
+          withCredentials: true,
+          headers: {
+            'Content-Type': undefined
+          },
+          transformRequest: angular.identity
+        })
+        .success(function (data, status, headers, config) {
+          $scope.benefitPlan.attachments.push(data.attachment);
+
+          fileInput[0].value = null;
+          $scope.file.name = '';
+        })
+        .error(function (data, status, headers, config) {
+          var error = (data && data.error) ?
+            data.error :
+            'There was a problem uploading the file.';
+
+          flashesFactory.add('danger', error);
+        });
     };
 
     $scope.deleteAttachmentAt = function (index) {
-      // TODO: Fill this in
+      var attachment = $scope.benefitPlan.attachments[index];
+
+      $http
+        .delete('/api/internal/admin/benefit_plans/' + $scope.benefitPlanSlug() + '/attachments/' + attachment.id + '.json')
+        .success(function (data, status, headers, config) {
+          $scope.benefitPlan.attachments = _($scope.benefitPlan.attachments).reject(function (deletedAttachment) {
+            return attachment.id === deletedAttachment.id;
+          });
+        })
+        .error(function (data, status, headers, config) {
+          var error = (data && data.error) ?
+            data.error :
+            'There was a problem deleting the attachment.';
+
+          flashesFactory.add('danger', error);
+        });
     };
   }
 ]);
