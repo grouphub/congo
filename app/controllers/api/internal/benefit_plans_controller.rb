@@ -12,8 +12,11 @@ class Api::Internal::BenefitPlansController < Api::ApiController
     only_activated_carriers = (params[:only_activated_carriers] == 'true')
     only_activated = (params[:only_activated] == 'true')
 
-    # Do not show admin-created benefit plans which are not enabled.
-    if role_slug == 'group_admin' || role_slug == 'broker'
+    if role_slug == 'admin'
+      benefit_plans = BenefitPlan.all
+    elsif role_slug == 'group_admin' || role_slug == 'broker'
+      # For group admins and brokers, do not show admin-created benefit plans
+      # which are not enabled.
       benefit_plans = BenefitPlan
         .where(
           %[
@@ -23,6 +26,7 @@ class Api::Internal::BenefitPlansController < Api::ApiController
           current_account.id
         )
     else
+      # For customers
       benefit_plans = BenefitPlan
         .where('account_id = ? AND is_enabled = TRUE', current_account.id)
     end
@@ -38,14 +42,17 @@ class Api::Internal::BenefitPlansController < Api::ApiController
         current_account.id
       )
 
+      # benefit_plans = benefit_plans
+      #   .where(
+      #     %[
+      #         (carrier_account_id IS NULL) OR
+      #           (carrier_account_id IN (?))
+      #     ],
+      #     carrier_accounts.map(&:id)
+      #   )
+
       benefit_plans = benefit_plans
-        .where(
-          %[
-              (carrier_account_id IS NULL) OR
-                (carrier_account_id IN (?))
-          ],
-          carrier_accounts.map(&:id)
-        )
+        .where('carrier_account_id IN (?)', carrier_accounts.map(&:id))
     elsif only_activated
       # Plans which have been activated and enabled, for display on the groups
       # show page.
