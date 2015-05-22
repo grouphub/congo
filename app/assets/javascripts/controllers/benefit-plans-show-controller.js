@@ -76,7 +76,7 @@ congoApp.controller('BenefitPlansShowController', [
 
             // TODO: This is not the right way to do this, but I can't get the select to behave.
             $timeout(function () {
-              $('.benefit-plans-show form #carrier').val($scope.benefitPlan.carrier_id);
+              $('select#carrier').val($scope.benefitPlan.carrier_id);
             });
 
             $scope.ready();
