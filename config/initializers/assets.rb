@@ -13,6 +13,7 @@ Rails.application.config.assets.precompile += [
   'glyphicons-halflings-regular.eot',
   'glyphicons-halflings-regular.woff',
   'glyphicons-halflings-regular.ttf',
+  'glyphicons-halflings-regular.svg',
   'fontawesome-webfont.eot',
   'fontawesome-webfont.woff',
   'fontawesome-webfont.ttf',
