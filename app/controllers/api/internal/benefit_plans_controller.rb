@@ -37,17 +37,17 @@ class Api::Internal::BenefitPlansController < Api::ApiController
         current_account.id
       )
 
-      # benefit_plans = benefit_plans
-      #   .where(
-      #     %[
-      #         (carrier_account_id IS NULL) OR
-      #           (carrier_account_id IN (?))
-      #     ],
-      #     carrier_accounts.map(&:id)
-      #   )
-
       benefit_plans = benefit_plans
-        .where('carrier_account_id IN (?)', carrier_accounts.map(&:id))
+        .where(
+          %[
+              (carrier_account_id IS NULL) OR
+                (carrier_account_id IN (?))
+          ],
+          carrier_accounts.map(&:id)
+        )
+
+      # benefit_plans = benefit_plans
+      #   .where('carrier_account_id IN (?)', carrier_accounts.map(&:id))
     elsif only_activated
       # Plans which have been activated and enabled, for display on the groups
       # show page.
