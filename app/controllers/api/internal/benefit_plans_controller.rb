@@ -38,22 +38,35 @@ class Api::Internal::BenefitPlansController < Api::ApiController
     if only_activated_carriers
       # Plans whose carrier has been activated, but which themselves may not
       # have been activated yet, for display on the carriers index page.
-      carrier_accounts = CarrierAccount.where(
-        %[
-          (account_id IS NULL) OR
-            (account_id = ?)
-        ],
-        current_account.id
-      )
-
-      benefit_plans = benefit_plans
+      carrier_accounts = CarrierAccount
         .where(
           %[
-              (carrier_account_id IS NULL) OR
-                (carrier_account_id IN (?))
+            (account_id IS NULL) OR
+              (account_id = ?)
           ],
-          carrier_accounts.map(&:id)
+          current_account.id
         )
+        .includes(:carrier)
+
+      carriers = carrier_accounts.map(&:carrier)
+
+      benefit_plans = (
+        BenefitPlan.where('carrier_id IN (?)', carriers.map(&:id)) +
+        AccountBenefitPlan
+          .where('carrier_account_id IN (?)', carrier_accounts.map(&:id))
+          .includes(:benefit_plan)
+          .to_a
+          .map(&:benefit_plan)
+      ).uniq(&:id)
+
+      # benefit_plans = benefit_plans
+      #   .where(
+      #     %[
+      #         (carrier_account_id IS NULL) OR
+      #           (carrier_account_id IN (?))
+      #     ],
+      #     carrier_accounts.map(&:id)
+      #   )
 
       # benefit_plans = benefit_plans
       #   .where('carrier_account_id IN (?)', carrier_accounts.map(&:id))
