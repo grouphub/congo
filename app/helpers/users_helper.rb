@@ -42,10 +42,20 @@ module UsersHelper
   end
 
   def current_account
+    if admin? && params[:account_id].nil?
+      @current_account ||= Account.where(slug: 'admin').first
+      return @current_account
+    end
+
     @current_account ||= Account.where(slug: params[:account_id]).first
   end
 
   def current_role
+    if admin? && params[:role_id].nil?
+      @current_role ||= Role.where(name: 'admin').first
+      return @current_role
+    end
+
     @current_role ||= Role
       .where(
         name: params[:role_id],
@@ -88,6 +98,11 @@ module UsersHelper
   end
 
   def ensure_broker_or_group_admin!
+    # Skip if admin
+    if current_role && current_role.name == 'admin'
+      return
+    end
+
     unless current_role && (current_role.name == 'broker' || current_role.name == 'group_admin')
       error_response('You must be a broker or group admin to continue.')
       return

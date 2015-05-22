@@ -93,7 +93,11 @@ Rails.application.routes.draw do
       namespace :admin do
         resources :carriers
         resources :carrier_accounts
-        resources :benefit_plans
+
+        resources :benefit_plans do
+          resources :attachments
+        end
+
         resources :invitations
         resources :accounts
         resources :groups
