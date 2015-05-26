@@ -1,6 +1,7 @@
 class NotificationMailer < ActionMailer::Base
   default from: 'info@grouphub.io'
 
+  # TODO: Change to use notification_id instead
   def notification_email(notification, protocol, host)
     account = notification.account
     role = notification.role

@@ -87,9 +87,11 @@ class Api::Internal::BenefitPlansController < Api::ApiController
     respond_to do |format|
       format.json {
         render json: {
-          benefit_plans: benefit_plans.map { |benefit_plan|
-            render_benefit_plan(benefit_plan)
-          }
+          benefit_plans: benefit_plans
+            .compact
+            .map { |benefit_plan|
+              render_benefit_plan(benefit_plan)
+            }
         }
       }
     end

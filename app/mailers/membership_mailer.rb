@@ -2,7 +2,14 @@ class MembershipMailer < ActionMailer::Base
   default from: 'info@grouphub.io'
 
   def confirmation_email(membership_id, protocol, host)
-    membership = Membership.find(membership_id)
+    membership = nil
+    begin
+      membership = Membership.find(membership_id)
+    rescue ActiveRecord::RecordNotFound => e
+      # TODO: Should we do anything here?
+      return
+    end
+
     email = membership.email
     email_token = membership.email_token
     group_name = membership.group.name
