@@ -14,25 +14,24 @@ class Api::Internal::BenefitPlansController < Api::ApiController
       # Plans whose carrier has been activated, but which themselves may not
       # have been activated yet, for display on the carriers index page.
       carrier_accounts = CarrierAccount
-        .where(
-          %[
-            (account_id IS NULL) OR
-              (account_id = ?)
-          ],
-          current_account.id
-        )
+        .where('account_id = ?', current_account.id)
         .includes(:carrier)
 
       carriers = carrier_accounts.map(&:carrier)
 
-      benefit_plans = (
-        BenefitPlan.where('carrier_id IN (?)', carriers.map(&:id)) +
-        AccountBenefitPlan
-          .where('carrier_account_id IN (?)', carrier_accounts.map(&:id))
-          .includes(:benefit_plan)
-          .to_a
-          .map(&:benefit_plan)
-      ).uniq(&:id)
+      global_benefit_plans = BenefitPlan
+        .where('carrier_id IN (?)', carriers.map(&:id))
+        .select { |benefit_plan|
+          benefit_plan.account_id == nil || benefit_plan.account_id == current_account.id
+        }
+
+      local_benefit_plans = AccountBenefitPlan
+        .where('carrier_account_id IN (?)', carrier_accounts.map(&:id))
+        .includes(:benefit_plan)
+        .to_a
+        .map(&:benefit_plan)
+
+      benefit_plans = (global_benefit_plans + local_benefit_plans).uniq(&:id)
     elsif only_activated
       # Plans which have been activated and enabled, for display on the groups
       # show page.
@@ -221,7 +220,7 @@ class Api::Internal::BenefitPlansController < Api::ApiController
     carrier = benefit_plan.carrier
     account_benefit_plan = benefit_plan.account_benefit_plans
       .to_a
-      .select { |account_benefit_plan|
+      .find { |account_benefit_plan|
         account_benefit_plan.account_id == current_account.id
       }
     attachments = benefit_plan.attachments
