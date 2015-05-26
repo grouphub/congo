@@ -23,6 +23,7 @@ namespace :db do
     options = []
     options << "--host #{host}" if host
     options << "--username #{username}" if username
+    options << '--ignore-version'
 
     path = ENV['DUMP_PATH'] || "#{Rails.root}/db/#{app}.dump"
     cmd = %[pg_dump #{options.join(' ')} --verbose --clean --no-owner --no-acl --format=plain #{db} > "#{path}"]
