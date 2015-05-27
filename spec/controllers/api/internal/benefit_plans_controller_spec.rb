@@ -4,6 +4,8 @@ describe Api::Internal::BenefitPlansController do
 
   describe 'GET #index' do
 
+    # NOTE: We currently do not show benefits whose account ID is admin. Rather,
+    # it is expected that admin-created carriers have a nil account ID.
     before do
       create_admin
       create_broker
@@ -78,7 +80,7 @@ describe Api::Internal::BenefitPlansController do
       @current_role = Role.where(user_id: @current_user.id, account_id: @current_account.id, name: 'broker').first
     end
 
-    context 'displaying plans for only activated carriers' do
+    context 'displaying plans for only activated carriers (what a broker sees)' do
       it 'renders a list of benefit plans' do
         get :index,
           {
@@ -110,7 +112,7 @@ describe Api::Internal::BenefitPlansController do
       end
     end
 
-    context 'displaying plans for only activated benefit plans' do
+    context 'displaying plans for only activated benefit plans (what a customer sees)' do
       it 'renders a list of benefit plans' do
         get :index,
           {
