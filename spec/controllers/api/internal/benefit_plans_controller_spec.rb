@@ -156,8 +156,6 @@ describe Api::Internal::BenefitPlansController do
           @ids_to_identifiers[benefit_plan['id']]
         }
 
-        pp identifiers
-
         expect(identifiers).to eq([
           'Nil Benefit Plan Added Enabled Carrier Added 1',
           'Yours Benefit Plan Added Enabled Carrier Added 1',
