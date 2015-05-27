@@ -107,6 +107,9 @@ class Api::Internal::UsersController < Api::ApiController
         return
       end
 
+      invitation.update_attributes! \
+        account_id: role.account_id
+
       role.update_attributes! \
         account_id: role.account_id,
         invitation_id: invitation.id

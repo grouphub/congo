@@ -10,55 +10,60 @@ describe 'As a broker', js: true do
       signout_broker
     end
 
-    it 'allows them to sign up' do
-      visit '/'
+    %w[basic standard premier].each do |plan_name|
+      it "allows them to sign up for a \"#{plan_name}\" plan" do
+        visit '/'
 
-      all('a', text: 'Sign Up').first.click
-
-      fill_in 'First Name', with: 'Barry'
-      fill_in 'Last Name', with: 'Broker'
-      fill_in 'Email', with: 'barry@broker.com'
-      fill_in 'Password', with: 'barry'
-      fill_in 'Confirm Password', with: 'barry'
-
-      all('button', text: 'Add User').first.click
-
-      expect(page).to have_content('Pick a plan')
-
-      within 'ul.plan.featured' do
         all('a', text: 'Sign Up').first.click
+
+        fill_in 'First Name', with: 'Barry'
+        fill_in 'Last Name', with: 'Broker'
+        fill_in 'Email', with: 'barry@broker.com'
+        fill_in 'Password', with: 'barry'
+        fill_in 'Confirm Password', with: 'barry'
+
+        all('button', text: 'Add User').first.click
+
+        expect(page).to have_content('Pick a plan')
+
+        within "ul.plan.#{plan_name}" do
+          all('a', text: 'Sign Up').first.click
+        end
+
+        expect(page).to have_content('Billing Information')
+
+        fill_in 'Card Number', with: '4444-4444-4444-4444'
+        fill_in 'Expiration Month', with: '04'
+        fill_in 'Expiration Year', with: '04'
+        fill_in 'CVC Code', with: '444'
+
+        all('button', text: 'Save').first.click
+
+        expect(page).to have_content('Create Account')
+
+        fill_in 'Name', with: 'First Account'
+        fill_in 'Company Tagline', with: '#1 Account'
+        fill_in 'Tax ID', with: '1234'
+        fill_in 'First Name', with: 'Barry'
+        fill_in 'Last Name', with: 'Barry Broker'
+        fill_in 'Phone Number', with: '(555) 555-5555'
+
+        all('input[type=submit]').first.click
+
+        expect(page).to have_content('Welcome, Barry Broker!')
+        expect(page).to have_content('Broker Dashboard: First Account')
+
+        current_user = current_user_data
+        expect(current_user['first_name']).to eq('Barry')
+        expect(current_user['last_name']).to eq('Broker')
+        expect(current_user['email']).to eq('barry@broker.com')
+        expect(current_user['invitation_id']).to be_nil
+        expect(current_user['is_admin']).to be_falsey
+        expect(current_user['accounts'].length).to eq(1)
+
+        current_account = current_user['accounts'].first
+        expect(current_account['plan_name']).to eq(plan_name)
       end
-
-      expect(page).to have_content('Billing Information')
-
-      fill_in 'Card Number', with: '4444-4444-4444-4444'
-      fill_in 'Expiration Month', with: '04'
-      fill_in 'Expiration Year', with: '04'
-      fill_in 'CVC Code', with: '444'
-
-      all('button', text: 'Save').first.click
-
-      expect(page).to have_content('Create Account')
-
-      fill_in 'Name', with: 'First Account'
-      fill_in 'Company Tagline', with: '#1 Account'
-      fill_in 'Tax ID', with: '1234'
-      fill_in 'First Name', with: 'Barry'
-      fill_in 'Last Name', with: 'Barry Broker'
-      fill_in 'Phone Number', with: '(555) 555-5555'
-
-      all('input[type=submit]').first.click
-
-      expect(page).to have_content('Welcome, Barry Broker!')
-      expect(page).to have_content('Broker Dashboard: First Account')
-
-      current_user = current_user_data
-      expect(current_user['first_name']).to eq('Barry')
-      expect(current_user['last_name']).to eq('Broker')
-      expect(current_user['email']).to eq('barry@broker.com')
-      expect(current_user['invitation_id']).to be_nil
-      expect(current_user['is_admin']).to be_falsey
-      expect(current_user['accounts'].length).to eq(1)
     end
 
     it 'allows them to sign up with an invitation code' do
@@ -123,9 +128,17 @@ describe 'As a broker', js: true do
       expect(current_user['first_name']).to eq('Barry')
       expect(current_user['last_name']).to eq('Broker')
       expect(current_user['email']).to eq('barry@broker.com')
-      expect(current_user['invitation_id']).not_to be_nil
       expect(current_user['is_admin']).to be_falsey
       expect(current_user['accounts'].length).to eq(1)
+
+      account_data = current_user['accounts'].first
+      user = User.find(current_user['id'])
+      role = Role.where(name: 'broker').first
+      account = role.account
+      invitation = role.invitation
+      expect(invitation.account_id).to eq(account.id)
+      expect(role.invitation_id).to eq(invitation.id)
+      expect(account_data['role']['invitation_id']).to eq(invitation.id)
     end
 
     it 'prevents them from creating a new account with an existing email address'
@@ -144,6 +157,10 @@ describe 'As a broker', js: true do
       account_properties['first_name'] = 'Felice'
       account_properties['last_name'] = 'Felton'
       account_properties['phone'] = '555-555-5555'
+      account_properties['card_number'] = '1111222233334444'
+      account_properties['month'] = '11'
+      account_properties['year'] = '2016'
+      account_properties['cvc'] = '123'
       account.update_attributes!(properties: account_properties)
 
       signin_broker
@@ -157,7 +174,13 @@ describe 'As a broker', js: true do
         expect(selected_radio.value).to eq('basic')
 
         values = all('input[type="text"]').map(&:value)
-        expect(values).to eq(['First Account', '#1 Account', '123', 'Felice', 'Felton', '555-555-5555'])
+        expect(values).to eq(['First Account', '#1 Account', '123', 'Felice', 'Felton', '555-555-5555', '1111222233334444', '11', '2016'])
+
+        password_values = all('input[type="password"]').map(&:value)
+        expect(password_values.length).to eq(1)
+
+        cvc = password_values.first
+        expect(cvc).to eq('123')
 
         fill_in 'Name', with: 'Second Account'
         fill_in 'Tagline', with: '#2 Account'
@@ -165,6 +188,14 @@ describe 'As a broker', js: true do
         fill_in 'First Name', with: 'Barry'
         fill_in 'Last Name', with: 'Belton'
         fill_in 'Phone Number', with: '444-444-4444'
+        fill_in 'Card Number', with: '2222333344445555'
+        fill_in 'Expiration Month', with: '12'
+        fill_in 'Expiration Year', with: '2017'
+
+        # Not capitalized because it needs to match the name instead of the
+        # placeholder.
+        fill_in 'cvc', with: '234'
+
         choose 'Premier'
 
         all('input[type="submit"]').first.click
@@ -190,6 +221,9 @@ describe 'As a broker', js: true do
       expect(account_properties['first_name']).to eq('Barry')
       expect(account_properties['last_name']).to eq('Belton')
       expect(account_properties['phone']).to eq('444-444-4444')
+      expect(account_properties['month']).to eq('12')
+      expect(account_properties['year']).to eq('2017')
+      expect(account_properties['cvc']).to eq('234')
 
       account = Account.find_by_name('Second Account')
       account_properties = account.properties
@@ -203,6 +237,9 @@ describe 'As a broker', js: true do
       expect(account_properties['first_name']).to eq('Barry')
       expect(account_properties['last_name']).to eq('Belton')
       expect(account_properties['phone']).to eq('444-444-4444')
+      expect(account_properties['month']).to eq('12')
+      expect(account_properties['year']).to eq('2017')
+      expect(account_properties['cvc']).to eq('234')
     end
 
   end
@@ -210,6 +247,10 @@ describe 'As a broker', js: true do
   describe 'API Tokens' do
 
     it 'allows a broker to see a list of API tokens' do
+      Feature.create! \
+        name: 'api_tokens',
+        account_slugs: %w[first_account]
+
       create_broker
       signin_broker
 
@@ -243,6 +284,10 @@ describe 'As a broker', js: true do
     end
 
     it 'allows a broker to create a new API token' do
+      Feature.create! \
+        name: 'api_tokens',
+        account_slugs: %w[first_account]
+
       create_broker
       signin_broker
 
@@ -271,6 +316,10 @@ describe 'As a broker', js: true do
       # Should not need this. This is to fix test wobbles. Token from previous
       # test is sometimes sticking around.
       Token.destroy_all
+
+      Feature.create! \
+        name: 'api_tokens',
+        account_slugs: %w[first_account]
 
       create_broker
 

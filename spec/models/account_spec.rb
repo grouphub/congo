@@ -333,5 +333,11 @@ describe Account do
 
   end
 
+  describe '#eviscerate!' do
+
+    it 'gets rid of all account data and does not keep any remnants around'
+
+  end
+
 end
 

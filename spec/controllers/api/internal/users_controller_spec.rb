@@ -1,7 +1,11 @@
+require 'spec_helper'
+
 describe Api::Internal::UsersController do
-  describe 'POST /api/v1/users.json' do
+
+  describe 'POST /api/internal/users.json' do
+
     it 'creates a broker' do
-      post :create, \
+      post :create,
         format: 'json',
         email: 'alvin@chipmunks.com',
         first_name: 'Alvin',
@@ -48,7 +52,7 @@ describe Api::Internal::UsersController do
         email_token: 'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa',
         role_name: 'customer'
 
-      post :create, \
+      post :create,
         format: 'json',
         email: 'alvin@chipmunks.com',
         first_name: 'Alvin',
@@ -92,7 +96,7 @@ describe Api::Internal::UsersController do
         email_token: 'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa',
         role_name: 'group_admin'
 
-      post :create, \
+      post :create,
         format: 'json',
         email: 'alvin@chipmunks.com',
         first_name: 'Alvin',
@@ -126,13 +130,14 @@ describe Api::Internal::UsersController do
     it 'responds with an error when creating a customer with no matching membership'
   end
 
-  describe 'PUT /api/v1/users/:id.json' do
+  describe 'PUT /api/internal/users/:id.json' do
   end
 
-  describe 'POST /api/v1/users/signin' do
+  describe 'POST /api/internal/users/signin' do
   end
 
-  describe 'DELETE /api/v1/users/signout' do
+  describe 'DELETE /api/internal/users/signout' do
   end
+
 end
 

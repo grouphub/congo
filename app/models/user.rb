@@ -27,5 +27,33 @@ class User < ActiveRecord::Base
   def admin?
     self.roles.any? { |role| role.name == 'admin' }
   end
+
+  def nuke!
+    roles = Role.where(user_id: self.id)
+    memberships = Membership.where(user_id: self.id)
+    applications = Application.where('membership_id IN (?)', memberships.map(&:id))
+    application_statuses = ApplicationStatus.where('application_id IN (?)', applications.map(&:id))
+
+    application_statuses.destroy_all
+    applications.destroy_all
+    memberships.destroy_all
+    roles.destroy_all
+
+    self.destroy!
+  end
+
+  def eviscerate!
+    roles = Role.where(user_id: self.id)
+    memberships = Membership.where(user_id: self.id)
+    applications = Application.where('membership_id IN (?)', memberships.map(&:id))
+    application_statuses = ApplicationStatus.where('application_id IN (?)', applications.map(&:id))
+
+    application_statuses.each(:really_destroy!)
+    applications.each(:really_destroy!)
+    memberships.each(:really_destroy!)
+    roles.each(:really_destroy!)
+
+    self.really_destroy!
+  end
 end
 
