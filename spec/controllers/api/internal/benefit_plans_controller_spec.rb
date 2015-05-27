@@ -79,7 +79,7 @@ describe Api::Internal::BenefitPlansController do
     end
 
     context 'displaying plans for only activated carriers' do
-      it 'foo' do
+      it 'renders a list of benefit plans' do
         get :index,
           {
             format: 'json',
@@ -111,7 +111,7 @@ describe Api::Internal::BenefitPlansController do
     end
 
     context 'displaying plans for only activated benefit plans' do
-      it 'foo' do
+      it 'renders a list of benefit plans' do
         get :index,
           {
             format: 'json',
@@ -139,7 +139,7 @@ describe Api::Internal::BenefitPlansController do
     end
 
     context 'displaying any plans' do
-      it 'foo' do
+      it 'renders a list of benefit plans' do
         get :index,
           {
             format: 'json',
