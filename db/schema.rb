@@ -199,6 +199,8 @@ ActiveRecord::Schema.define(version: 20150528181039) do
     t.integer  "membership_id"
     t.integer  "cents"
     t.string   "plan_name"
+    t.integer  "payment_id"
+    t.boolean  "paid"
     t.text     "properties_data"
     t.datetime "created_at"
     t.datetime "updated_at"

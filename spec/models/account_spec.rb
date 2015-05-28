@@ -80,6 +80,100 @@ describe Account do
 
   end
 
+  describe '#unpaid_invoices' do
+
+    it 'returns unpaid invoices' do
+      account = Account.create! \
+        name: 'Overdue Account'
+
+      unpaid_invoice = Invoice.create! \
+        account_id: account.id,
+        membership_id: nil,
+        cents: 100,
+        plan_name: 'basic'
+
+      unpaid_invoice_2 = Invoice.create! \
+        account_id: account.id,
+        membership_id: nil,
+        cents: 100,
+        plan_name: 'basic',
+        paid: false
+
+
+      unpaid_invoice_3 = Invoice.create! \
+        account_id: account.id,
+        membership_id: nil,
+        plan_name: 'basic',
+        paid: false
+
+      paid_invoice = Invoice.create! \
+        account_id: account.id,
+        membership_id: nil,
+        cents: 100,
+        plan_name: 'basic',
+        paid: true
+
+      payment = Payment.create!
+
+      paid_invoice = Invoice.create! \
+        account_id: account.id,
+        membership_id: nil,
+        cents: 100,
+        plan_name: 'basic',
+        payment_id: payment.id
+
+      expect(account.unpaid_invoices).to eq([unpaid_invoice, unpaid_invoice_2])
+    end
+
+  end
+
+  describe '#unpaid_cents' do
+
+    it 'returns unpaid amount in cents' do
+      account = Account.create! \
+        name: 'Overdue Account'
+
+      unpaid_invoice = Invoice.create! \
+        account_id: account.id,
+        membership_id: nil,
+        cents: 100,
+        plan_name: 'basic'
+
+      unpaid_invoice_2 = Invoice.create! \
+        account_id: account.id,
+        membership_id: nil,
+        cents: 100,
+        plan_name: 'basic',
+        paid: false
+
+
+      unpaid_invoice_3 = Invoice.create! \
+        account_id: account.id,
+        membership_id: nil,
+        plan_name: 'basic',
+        paid: false
+
+      paid_invoice = Invoice.create! \
+        account_id: account.id,
+        membership_id: nil,
+        cents: 100,
+        plan_name: 'basic',
+        paid: true
+
+      payment = Payment.create!
+
+      paid_invoice = Invoice.create! \
+        account_id: account.id,
+        membership_id: nil,
+        cents: 100,
+        plan_name: 'basic',
+        payment_id: payment.id
+
+      expect(account.unpaid_cents).to eq(200)
+    end
+
+  end
+
   describe '#enabled_features' do
 
     it 'returns a feature if it is enabled for all' do

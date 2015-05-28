@@ -5,6 +5,7 @@ class Invoice < ActiveRecord::Base
 
   belongs_to :account
   belongs_to :membership
+  belongs_to :payment
 
   PLAN_COSTS = {
     basic: 100,

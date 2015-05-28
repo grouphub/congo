@@ -96,6 +96,17 @@ class Account < ActiveRecord::Base
       current_time.day >= self.billing_day
   end
 
+  def unpaid_invoices
+    self.invoices.where('(paid = FALSE OR paid IS NULL) AND payment_id IS NULL')
+  end
+
+  def unpaid_cents
+    self.unpaid_invoices.inject(0) { |sum, invoice|
+      sum += (invoice.cents || 0)
+      sum
+    }
+  end
+
   def enabled_features
     @enabled_features ||= Feature.all.to_a.select { |feature|
       feature.enabled_for_all? || feature.account_slugs.include?(self.slug)
