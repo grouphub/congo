@@ -495,32 +495,6 @@ congoApp.controller('GroupsShowController', [
           flashesFactory.add('danger', error);
         });
     }
-
-    // -------------------
-    // Application History
-    // -------------------
-
-
-    $scope.revokeApplication = function (application) {
-      if (!application) {
-        flashesFactory.add('danger', 'We could not find a matching invitation.');
-      }
-
-      $http
-        .delete('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/applications/' + application.id + '.json')
-        .success(function (data, status, headers, config) {
-          $scope.historyapplications = _($scope.applications).reject(function (a) {
-            return application.id === a.id;
-          });
-        })
-        .error(function (data, status, headers, config) {
-          var error = (data && data.error) ?
-            data.error :
-            'There was a problem revoking the application.';
-
-          flashesFactory.add('danger', error);
-        });
-    };
   }
 ]);
 
