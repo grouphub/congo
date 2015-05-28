@@ -28,7 +28,7 @@ class InvoiceJob < ActiveJob::Base
       plan_name = account.plan_name
       plan_cost = Invoice::PLAN_COSTS[plan_name.to_sym]
 
-      account.memberships.each do |membership|
+      account.employee_memberships.each do |membership|
         next unless membership.invoiceable?
 
         invoice = Invoice.create! \

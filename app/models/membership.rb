@@ -30,13 +30,17 @@ class Membership < ActiveRecord::Base
     read_attribute(:email)
   end
 
+  def employee?
+    self.role.try(:name) == 'employee' || self.role_name == 'employee'
+  end
+
   # Membership is invoiceable if a user has been invited and it is outside the
   # grace period.
   def invoiceable?
     has_user_id = self.user.present?
     grace_date = self.created_at.to_date + GRACE_PERIOD
 
-    has_user_id && grace_date < Date.today
+    self.employee? && has_user_id && grace_date < Date.today
   end
 end
 
