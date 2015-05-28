@@ -27,7 +27,7 @@ class InvoiceClock
 
   def start
     loop do
-      manager.log 'Tick.'
+      manager.log 'Invoice tick.'
 
       Account.find_each do |account|
         InvoiceJob.perform_later(account)
