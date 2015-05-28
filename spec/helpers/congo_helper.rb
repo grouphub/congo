@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 module CongoHelper
+
   def create_admin
     test_debug 'Creating an admin account...'
 
@@ -207,5 +208,6 @@ module CongoHelper
   def sample_application
     JSON.load File.read("#{Rails.root}/spec/data/application.json")
   end
+
 end
 

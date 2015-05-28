@@ -1,9 +1,11 @@
 class SampleJob < ActiveJob::Base
   queue_as :default
 
-  rescue_from ActiveJob::DeserializationError do |e|
-    Shoryuken.logger.error ex
-    Shoryuken.logger.error ex.backtrace.join("\n")
+  if ENV['AWS_REGION']
+    rescue_from ActiveJob::DeserializationError do |e|
+      Shoryuken.logger.error ex
+      Shoryuken.logger.error ex.backtrace.join("\n")
+    end
   end
 
   def perform

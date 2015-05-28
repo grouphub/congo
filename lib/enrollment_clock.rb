@@ -27,9 +27,9 @@ class EnrollmentClock
 
   def start
     loop do
-      logger.info 'Tick. Enrollment is currently disabled.'
+      logger.info 'Enrollment tick. Enrollment is currently disabled.'
 
-      # manager.log 'Tick.'
+      # manager.log 'Enrollment tick.'
 
       # Application.where('submitted_on IS NOT NULL AND completed_on IS NULL').find_each do |application|
       #   EnrollmentJob.perform_later(application.id)

@@ -34,7 +34,7 @@ module Congo2
     config.autoload_paths << Rails.root.join('lib')
 
     # Process jobs using Shoryuken on AWS
-    if Rails.env.development?
+    if Rails.env.development? || Rails.env.test?
       config.active_job.queue_adapter = :inline
     else
       config.active_job.queue_adapter = :shoryuken

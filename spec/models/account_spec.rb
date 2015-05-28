@@ -2,7 +2,175 @@ require 'spec_helper'
 
 describe Account do
 
-  describe '#needs_to_pay?' do
+  describe '#needs_invoicing?' do
+
+    context 'no invoices were created yet' do
+
+      it 'returns false if account is in demo period' do
+        account = Account.create! \
+          name: 'Overdue Account',
+          billing_start: 29.days.ago,
+          billing_day: 29.days.ago.day
+
+        expect(account.needs_invoicing?).to eq(false)
+      end
+
+      it 'returns true if account is out of demo period' do
+        account = Account.create! \
+          name: 'Overdue Account',
+          billing_start: 31.days.ago,
+          billing_day: 31.days.ago.day
+
+        expect(account.needs_invoicing?).to eq(true)
+      end
+
+    end
+
+    context 'invoices have been created' do
+
+      it 'returns false if account is in demo period' do
+        account = Account.create! \
+          name: 'Overdue Account',
+          billing_start: 29.days.ago,
+          billing_day: 29.days.ago.day
+
+        invoice = Invoice.create! \
+          account_id: account.id,
+          membership_id: nil,
+          cents: 100,
+          plan_name: 'basic'
+
+        expect(account.needs_invoicing?).to eq(false)
+      end
+
+      it 'returns false if account is out of demo period and invoice is new' do
+        account = Account.create! \
+          name: 'Overdue Account',
+          billing_start: 2.months.ago,
+          billing_day: 2.months.ago.day
+
+        invoice = Invoice.create! \
+          account_id: account.id,
+          membership_id: nil,
+          cents: 100,
+          plan_name: 'basic'
+
+        expect(account.needs_invoicing?).to eq(false)
+      end
+
+      it 'returns false if account is out of demo period and invoice is old' do
+        account = Account.create! \
+          name: 'Overdue Account',
+          billing_start: 2.months.ago,
+          billing_day: 2.months.ago.day
+
+        invoice = Invoice.create! \
+          account_id: account.id,
+          membership_id: nil,
+          cents: 100,
+          plan_name: 'basic'
+
+        invoice.update_attributes! \
+          created_at: 40.days.ago
+
+        expect(account.needs_invoicing?).to eq(true)
+      end
+
+    end
+
+  end
+
+  describe '#unpaid_invoices' do
+
+    it 'returns unpaid invoices' do
+      account = Account.create! \
+        name: 'Overdue Account'
+
+      unpaid_invoice = Invoice.create! \
+        account_id: account.id,
+        membership_id: nil,
+        cents: 100,
+        plan_name: 'basic'
+
+      unpaid_invoice_2 = Invoice.create! \
+        account_id: account.id,
+        membership_id: nil,
+        cents: 100,
+        plan_name: 'basic',
+        paid: false
+
+
+      unpaid_invoice_3 = Invoice.create! \
+        account_id: account.id,
+        membership_id: nil,
+        plan_name: 'basic',
+        paid: false
+
+      paid_invoice = Invoice.create! \
+        account_id: account.id,
+        membership_id: nil,
+        cents: 100,
+        plan_name: 'basic',
+        paid: true
+
+      payment = Payment.create!
+
+      paid_invoice = Invoice.create! \
+        account_id: account.id,
+        membership_id: nil,
+        cents: 100,
+        plan_name: 'basic',
+        payment_id: payment.id
+
+      expect(account.unpaid_invoices).to eq([unpaid_invoice, unpaid_invoice_2])
+    end
+
+  end
+
+  describe '#unpaid_cents' do
+
+    it 'returns unpaid amount in cents' do
+      account = Account.create! \
+        name: 'Overdue Account'
+
+      unpaid_invoice = Invoice.create! \
+        account_id: account.id,
+        membership_id: nil,
+        cents: 100,
+        plan_name: 'basic'
+
+      unpaid_invoice_2 = Invoice.create! \
+        account_id: account.id,
+        membership_id: nil,
+        cents: 100,
+        plan_name: 'basic',
+        paid: false
+
+
+      unpaid_invoice_3 = Invoice.create! \
+        account_id: account.id,
+        membership_id: nil,
+        plan_name: 'basic',
+        paid: false
+
+      paid_invoice = Invoice.create! \
+        account_id: account.id,
+        membership_id: nil,
+        cents: 100,
+        plan_name: 'basic',
+        paid: true
+
+      payment = Payment.create!
+
+      paid_invoice = Invoice.create! \
+        account_id: account.id,
+        membership_id: nil,
+        cents: 100,
+        plan_name: 'basic',
+        payment_id: payment.id
+
+      expect(account.unpaid_cents).to eq(200)
+    end
 
   end
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150412192152) do
+ActiveRecord::Schema.define(version: 20150528181039) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -193,6 +193,21 @@ ActiveRecord::Schema.define(version: 20150412192152) do
   end
 
   add_index "invitations", ["deleted_at"], name: "index_invitations_on_deleted_at", using: :btree
+
+  create_table "invoices", force: :cascade do |t|
+    t.integer  "account_id"
+    t.integer  "membership_id"
+    t.integer  "cents"
+    t.string   "plan_name"
+    t.integer  "payment_id"
+    t.boolean  "paid"
+    t.text     "properties_data"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.datetime "deleted_at"
+  end
+
+  add_index "invoices", ["deleted_at"], name: "index_invoices_on_deleted_at", using: :btree
 
   create_table "memberships", force: :cascade do |t|
     t.integer  "account_id"

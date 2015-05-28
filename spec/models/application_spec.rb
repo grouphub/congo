@@ -1,5 +1,7 @@
 describe Application do
+
   describe '#to_pokitdok' do
+
     it 'converts an application into a PokitDok-friendly format' do
       account = Account.create! \
         name: 'First Account',
@@ -111,6 +113,8 @@ describe Application do
 
       expect(application.to_pokitdok).to eq(application_pokitdok)
     end
+
   end
+
 end
 
