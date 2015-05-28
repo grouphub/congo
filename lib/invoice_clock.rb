@@ -1,7 +1,7 @@
 require File.expand_path('../../config/boot', __FILE__)
 require File.expand_path('../../config/environment', __FILE__)
 
-class PaymentClock
+class InvoiceClock
   attr_accessor :log_file, :frequency, :logger
 
   def initialize
@@ -27,15 +27,11 @@ class PaymentClock
 
   def start
     loop do
-      logger.info 'Tick. Payment is currently disabled.'
+      manager.log 'Tick.'
 
-      # manager.log 'Tick.'
-
-      # Account.find_each do |account|
-      #   if account.needs_to_pay?
-      #     PaymentJob.perform_later(account)
-      #   end
-      # end
+      Account.find_each do |account|
+        InvoiceJob.perform_later(account)
+      end
 
       sleep @frequency
     end

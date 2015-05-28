@@ -32,7 +32,7 @@ class Clock
   def initialize
     @log_file = STDOUT
     @frequency = 60
-    @queues = %w[enrollment payment].map(&:to_sym)
+    @queues = %w[enrollment invoice].map(&:to_sym)
 
     parser = OptionParser.new do |opts|
       opts.banner = 'Usage: TODO'

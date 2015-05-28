@@ -17,6 +17,7 @@ class Account < ActiveRecord::Base
   has_many :account_benefit_plans
   has_many :tokens
   has_many :payments
+  has_many :invoices
   has_many :invitations
   has_many :memberships
   has_many :attachments
@@ -27,6 +28,7 @@ class Account < ActiveRecord::Base
   # NOTE: Slug will be nil for new accounts.
   validates_uniqueness_of :slug, allow_nil: true
 
+  # Demo period is in days.
   DEMO_PERIOD = 30
   PLAN_NAMES = %[basic standard premier admin]
 
@@ -80,17 +82,17 @@ class Account < ActiveRecord::Base
     self.billing_day ||= [self.billing_start.day, 28].min
   end
 
-  def needs_to_pay?
+  def needs_invoicing?
     return false if self.plan_name == 'admin'
 
-    last_payment = Payment
+    last_invoice = Invoice
       .where(account_id: self.id)
       .order('created_at DESC')
       .first
     current_time = Date.today
-    created_at = last_payment ? last_payment.created_at : self.billing_start
+    last_invoice_at = last_invoice ? last_invoice.created_at : self.billing_start
 
-    current_time.month > created_at.month &&
+    current_time.month > last_invoice_at.month &&
       current_time.day >= self.billing_day
   end
 
