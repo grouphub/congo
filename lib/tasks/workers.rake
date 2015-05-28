@@ -204,17 +204,5 @@ namespace :workers do
       ]
     end
   end
-
-  namespace :maintenance do
-    desc 'Put WORKER_ENVIRONMENT into maintenance mode'
-    task :start => :environment do
-      toggle_maintenance!(true)
-    end
-
-    desc 'Take WORKER_ENVIRONMENT out of maintenance mode'
-    task :stop => :environment do
-      toggle_maintenance!(false)
-    end
-  end
 end
 
