@@ -107,6 +107,12 @@ class Account < ActiveRecord::Base
     }
   end
 
+  def accepted_employees
+    self.memberships.select { |membership|
+      membership.employee? && membership.user.present?
+    }
+  end
+
   def enabled_features
     @enabled_features ||= Feature.all.to_a.select { |feature|
       feature.enabled_for_all? || feature.account_slugs.include?(self.slug)

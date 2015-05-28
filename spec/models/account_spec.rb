@@ -247,6 +247,12 @@ describe Account do
 
   end
 
+  describe '#accepted_employees' do
+
+    it 'lists all employees which have accepted their invites'
+
+  end
+
   describe '#nuke!' do
 
     it 'destroys all account data' do
