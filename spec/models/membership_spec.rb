@@ -71,10 +71,10 @@ describe Membership do
 
     it 'returns true if the member is an employee' do
       membership = Membership.create! \
-        role_name: 'employee'
+        role_name: 'customer'
 
       role = Role.create! \
-        name: 'employee'
+        name: 'customer'
 
       membership_2 = Membership.create! \
         role_id: role.id
@@ -129,7 +129,7 @@ describe Membership do
         email: 'foo@bar.com'
 
       role = Role.create! \
-        name: 'employee'
+        name: 'customer'
 
       membership = Membership.create! \
         role_id: role.id,
@@ -143,7 +143,7 @@ describe Membership do
         email: 'foo@bar.com'
 
       role = Role.create! \
-        name: 'employee'
+        name: 'customer'
 
       membership = Membership.create! \
         role_id: role.id,

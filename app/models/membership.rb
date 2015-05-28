@@ -31,7 +31,7 @@ class Membership < ActiveRecord::Base
   end
 
   def employee?
-    self.role.try(:name) == 'employee' || self.role_name == 'employee'
+    self.role.try(:name) == 'customer' || self.role_name == 'customer'
   end
 
   # Membership is invoiceable if a user has been invited and it is outside the
