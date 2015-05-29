@@ -13,14 +13,29 @@ congoApp.factory('MaintenanceInterceptor', [
   '$q',
   function ($location, $q) {
     return {
-      'response': function(response) {
+      response: function (response) {
         if (response.data && response.data.maintenance) {
           window.location.reload();
-
-          return response;
         }
 
         return response;
+      }
+    }
+  }
+]);
+
+congoApp.factory('FlashesInterceptor', [
+  'flashesFactory',
+  function (flashesFactory) {
+    return {
+      request: function (config) {
+        if (config.method === 'GET') {
+          return config;
+        }
+
+        flashesFactory.update();
+
+        return config;
       }
     }
   }
@@ -30,6 +45,7 @@ congoApp.config([
   '$httpProvider',
   function ($httpProvider) {
     $httpProvider.interceptors.push('MaintenanceInterceptor');
+    $httpProvider.interceptors.push('FlashesInterceptor');
   }
 ]);
 
