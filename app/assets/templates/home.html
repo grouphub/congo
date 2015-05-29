@@ -35,10 +35,6 @@
         </li>
 
         <li>
-          <a class="btn btn-default" ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/groups">Manage Groups</a>
-        </li>
-
-        <li>
           <a class="btn btn-default" ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/settings">Manage Account Settings</a>
         </li>
 
@@ -54,6 +50,30 @@
           <a class="btn btn-success" href="/accounts/{{accountSlug()}}/{{currentRole()}}/contact">Get Help</a>
         </li>
       </ul>
+
+      <hr>
+
+      <h2>Groups</h2>
+
+      <table class="groups table">
+        <thead>
+          <tr>
+            <th>Name</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr ng-repeat="group in groups">
+            <td>
+              <a ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/groups/{{group.slug}}">{{group.name}}</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>
+        <a class="btn btn-primary" href="/accounts/{{accountSlug()}}/{{currentRole()}}/groups/new">New Group</a>
+      </p>
     </div>
 
     <div class="col-md-6">
@@ -86,6 +106,30 @@
       <a class="btn btn-success" href="mailto:info@grouphub.io">Get Help</a>
     </li>
   </ul>
+
+  <hr>
+
+  <h2>Groups</h2>
+
+  <table class="groups table">
+    <thead>
+      <tr>
+        <th>Name</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr ng-repeat="group in groups">
+        <td>
+          <a ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/groups/{{group.slug}}">{{group.name}}</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>
+    <a class="btn btn-primary" href="/accounts/{{accountSlug()}}/{{currentRole()}}/groups/new">New Group</a>
+  </p>
 </div>
 
 <div ng-if="currentRole() === 'customer'" class="col-md-12">
@@ -94,14 +138,33 @@
   <h2>Member Functions</h2>
 
   <ul class="simple-list functions-list">
-    <li>
-      <a class="btn btn-default" ng-if="currentAccount().enabled_group_count === 1" ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/groups/{{currentAccount().first_enabled_group.slug}}">Manage Group Benefits</a>
-      <a class="btn btn-default" ng-if="currentAccount().enabled_group_count !== 1" ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/groups">Manage Group Benefits</a>
+    <li ng-if="groups.length === 1">
+      <a class="btn btn-default" ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/groups/{{groups[0].slug}}">Visit {{groups[0].name}}</a>
     </li>
 
     <li>
       <a class="btn btn-success" href="mailto:info@grouphub.io">Get Help</a>
     </li>
   </ul>
+
+  <hr ng-if="groups.length > 1">
+
+  <h2 ng-if="groups.length > 1">Groups</h2>
+
+  <table ng-if="groups.length > 1" class="groups table">
+    <thead>
+      <tr>
+        <th>Name</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr ng-repeat="group in groups">
+        <td>
+          <a ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/groups/{{group.slug}}">{{group.name}}</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>
 

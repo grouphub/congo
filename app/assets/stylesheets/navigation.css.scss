@@ -276,7 +276,7 @@ nav {
   background: none;
 }
 
-main [ng-controller=HomeController] .col-md-12 {
+main #home .col-md-12 {
   float: initial;
 }
 
