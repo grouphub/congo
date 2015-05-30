@@ -4,10 +4,13 @@ congoApp.factory('flashesFactory', [
   'eventsFactory',
   function (eventsFactory) {
     var flashes = [];
-    
+    var maxAge = 1;
+
     return {
       flashes: flashes,
       add: function (type, message) {
+        flashes = [];
+
         flashes.push({
           type: type,
           message: message,
@@ -25,6 +28,11 @@ congoApp.factory('flashesFactory', [
 
         eventsFactory.emit('flashes:changed', flashes);
       },
+      clear: function () {
+        flashes = [];
+
+        eventsFactory.emit('flashes:changed', flashes);
+      },
       update: function () {
         var me = this;
 
@@ -33,11 +41,11 @@ congoApp.factory('flashesFactory', [
             flash.age = 0;
           }
 
-          flash.age++;
-
-          if (flash.age < 2) {
+          if (flash.age < maxAge) {
             sum.push(flash);
           }
+
+          flash.age++;
 
           return sum;
         }, []);
