@@ -280,6 +280,7 @@ ActiveRecord::Schema.define(version: 20150528181039) do
     t.string   "last_name"
     t.string   "email"
     t.string   "encrypted_password"
+    t.string   "password_token"
     t.text     "properties_data"
     t.integer  "invitation_id"
     t.datetime "created_at"

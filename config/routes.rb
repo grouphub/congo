@@ -24,7 +24,9 @@ Rails.application.routes.draw do
     '/users/new_billing',
     '/users/new_account',
     '/users/new_customer',
+    '/users/forgot_password',
     '/users/:id',
+    '/users/:id/reset_password/:password_id',
 
     # Admin home
     '/admin',
@@ -157,10 +159,12 @@ Rails.application.routes.draw do
 
       # User routes
       post '/users/signin', to: 'users#signin'
+      post '/users/forgot_password', to: 'users#forgot_password'
       delete '/users/signout', to: 'users#signout'
       resources :users do
         put '/invitation', to: 'users#update_invitation'
         put '/account', to: 'users#update_account'
+        post '/reset_password/:password_token', to: 'users#reset_password'
       end
     end
 

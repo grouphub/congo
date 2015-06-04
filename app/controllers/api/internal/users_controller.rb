@@ -1,4 +1,3 @@
-# TODO: Secure this controller
 class Api::Internal::UsersController < Api::ApiController
   include ApplicationHelper
   include UsersHelper
@@ -229,6 +228,63 @@ class Api::Internal::UsersController < Api::ApiController
     rescue AuthenticationException => e
       render nothing: true, status: :unauthorized
     end
+  end
+
+  def forgot_password
+    email = params[:email]
+    user = User.find_by_email(email)
+
+    unless user
+      error_response('No user exists with that email address.')
+      return
+    end
+
+    user.update_attributes! \
+      password_token: ThirtySix.generate,
+      password: nil
+
+    ForgotPasswordMailer.forgot_password_email(user.id, request.protocol, request.host_with_port).deliver_later
+
+    render nothing: true
+  end
+
+  def reset_password
+    id = params[:user_id]
+    password_token = params[:password_token]
+    password = params[:password]
+    password_confirmation = params[:password_confirmation]
+    user = User.find(id)
+
+    unless user
+      error_response('Could not find the user.')
+      return
+    end
+
+    unless password_token
+      error_response('Password token must be provided.')
+      return
+    end
+
+    unless password.present?
+      error_response('Password must be provided.')
+      return
+    end
+
+    unless password == password_confirmation
+      error_response('Password and confirmation must match.')
+      return
+    end
+
+    unless user.password_token == password_token
+      error_response('Password token is not valid.')
+      return
+    end
+
+    user.update_attributes! \
+      password: password,
+      password_token: nil
+
+    render nothing: true
   end
 
   def signout

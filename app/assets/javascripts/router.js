@@ -166,9 +166,17 @@ congoApp.config([
         templateUrl: congo.assets['users/signin.html'],
         controller: 'UsersSigninController'
       })
+      .when('/users/forgot_password', {
+        templateUrl: congo.assets['users/forgot_password.html'],
+        controller: 'UsersForgotPasswordController'
+      })
       .when('/users/:id', {
         templateUrl: congo.assets['users/show.html'],
         controller: 'UsersShowController'
+      })
+      .when('/users/:id/reset_password/:password_token', {
+        templateUrl: congo.assets['users/reset_password.html'],
+        controller: 'UsersResetPasswordController'
       });
   }
 ]);

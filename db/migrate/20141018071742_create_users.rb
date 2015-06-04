@@ -5,6 +5,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :last_name
       t.string :email
       t.string :encrypted_password
+      t.string :password_token
       t.text :properties_data
 
       # Invitation system
