@@ -55,7 +55,7 @@
           </table>
 
           <p class="lead">
-            <b>{{account.unpaid_cents | monetize}}</b> Owed<br>
+            <b>{{monetize(account.unpaid_cents)}}</b> Owed<br>
             <b>{{account.employee_count}}</b> Employees in the System
           </p>
         </td>

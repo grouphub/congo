@@ -49,32 +49,6 @@ congoApp.config([
   }
 ]);
 
-congoApp.config([
-  '$provide',
-  '$filterProvider',
-  function ($provide, $filterProvider) {
-    $provide.value('monetize', function (cents) {
-      var dollars = Math.floor(cents / 100);
-      var remainingCents = (cents % 100).toString();
-
-      if (remainingCents.length === 0) {
-        remainingCents = '00';
-      } else if(remainingCents.length === 1) {
-        remainingCents = '0' + remainingCents;
-      }
-
-      return ['$', dollars.toString(), '.', remainingCents.toString()].join('');
-    });
-
-    $filterProvider.register('monetize', function (monetize) {
-      return function (cents) {
-        console.log(cents);
-        return monetize(cents);
-      };
-    });
-  }
-]);
-
 // General routes
 congoApp.config([
   '$routeProvider',

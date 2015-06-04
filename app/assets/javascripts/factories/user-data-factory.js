@@ -214,6 +214,18 @@ congoApp.factory('userDataFactory', [
         }
 
         return true;
+      },
+      monetize: function (cents) {
+        var dollars = Math.floor(cents / 100);
+        var remainingCents = (cents % 100).toString();
+
+        if (remainingCents.length === 0) {
+          remainingCents = '00';
+        } else if(remainingCents.length === 1) {
+          remainingCents = '0' + remainingCents;
+        }
+
+        return ['$', dollars.toString(), '.', remainingCents.toString()].join('');
       }
     };
 
