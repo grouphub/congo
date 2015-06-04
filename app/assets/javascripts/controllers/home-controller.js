@@ -37,7 +37,7 @@ congoApp.controller('HomeController', [
               $scope.labels = data.labels;
               $scope.series = data.series;
               $scope.data = data.data;
-            }, 500);
+            }, 1000);
 
             done();
           })
