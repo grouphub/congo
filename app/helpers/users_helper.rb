@@ -8,6 +8,7 @@ module UsersHelper
     user = User.find_by_email(email)
 
     raise AuthenticationException unless user
+    raise AuthenticationException unless user.password_token.blank?
     raise AuthenticationException unless user.password == password
 
     @current_user = user

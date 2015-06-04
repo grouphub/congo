@@ -78,6 +78,8 @@
 //= require controllers/users-new-plan-controller
 //= require controllers/users-show-controller
 //= require controllers/users-signin-controller
+//= require controllers/users-forgot-password-controller
+//= require controllers/users-reset-password-controller
 //
 //  -------
 //  Routers
