@@ -204,5 +204,16 @@ namespace :workers do
       ]
     end
   end
+
+  desc 'Shell into server'
+  task :ssh => :environment do
+    run_on_box_or_boxes do |worker|
+      puts %[Shelling into "#{worker.name}" at "#{worker.ssh_host}"...]
+
+      cmd = %[ssh -v -i #{worker.ssh_args[:keys].join(' ')} #{worker.ssh_args[:user]}@#{worker.ssh_host}]
+      puts(cmd)
+      exec(cmd)
+    end
+  end
 end
 
