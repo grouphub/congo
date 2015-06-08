@@ -38,6 +38,9 @@ module Congo2
       config.active_job.queue_adapter = :inline
     else
       config.active_job.queue_adapter = :shoryuken
+
+      config.active_job.queue_name_prefix = ENV['SQS_QUEUE_PREFIX']
+      config.active_job.queue_name_delimiter = '_'
     end
   end
 end
