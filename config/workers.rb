@@ -145,7 +145,7 @@
     {
       name: 'congo-staging-worker-1',
       environment: 'staging',
-      ssh_host: 'ec2-52-1-31-195.compute-1.amazonaws.com',
+      ssh_host: 'ec2-52-6-56-79.compute-1.amazonaws.com',
       ssh_args: {
         user: 'ec2-user',
         keys_only: true,

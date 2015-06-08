@@ -5,6 +5,6 @@ concurrency: 10
 delay: 25
 
 queues:
-  - ['<%= ENV['SQS_DEFAULT_QUEUE'] || 'default' %>', 1]
-  - ['<%= ENV['SQS_MAILERS_QUEUE'] || 'mailers' %>', 1]
+  - ['<%= ENV['SQS_QUEUE_PREFIX'] + '_default' %>', 1]
+  - ['<%= ENV['SQS_QUEUE_PREFIX'] + '_mailers' %>', 1]
 
