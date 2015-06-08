@@ -267,8 +267,6 @@ GEM
     redis (3.2.1)
     redis-namespace (1.5.2)
       redis (~> 3.0, >= 3.0.4)
-    redlock (0.1.1)
-      redis (~> 3, >= 3.0.5)
     remote_syslog_logger (1.0.3)
       syslog_protocol
     rest-client (1.8.0)
@@ -368,7 +366,6 @@ DEPENDENCIES
   railroady
   rails!
   redis-namespace
-  redlock
   remote_syslog_logger
   rspec-rails
   ruby-progressbar

@@ -9,44 +9,34 @@ class EnrollmentJob < ActiveJob::Base
   end
 
   def perform(application_id)
-    redlock = Redlock::Client.new([Rails.application.config.redis.url])
+    application = Application.find(application_id)
+    data = application.to_pokitdok
+    response = nil
 
-    # Lock will expire in five minutes if not relinquished.
-    redlock.lock("application_#{application_id}_enrollment", 5 * 60 * 1000) do |lock_acquired|
-      unless lock_acquired
-        Rails.logger.info("Another worker is attempting to enroll application with ID #{application_id}")
-        return
-      end
+    begin
+      response = pokitdok.enrollment(data)
+      meta = attempt['meta'] || {}
+      activity_id = meta['activity_id']
 
-      application = Application.find(application_id)
-      data = application.to_pokitdok
-      response = nil
+      application.update_attributes! \
+        submitted_by_id: submitted_by_id,
+        submitted_on: DateTime.now,
+        activity_id: activity_id
+    rescue StandardError => e
+      response = JSON.parse(e.response.body)
+      error_type = e.class
 
-      begin
-        response = pokitdok.enrollment(data)
-        meta = attempt['meta'] || {}
-        activity_id = meta['activity_id']
+      application.update_attributes \
+        errored_by_id: submitted_by_id
+    end
 
-        application.update_attributes! \
-          submitted_by_id: submitted_by_id,
-          submitted_on: DateTime.now,
-          activity_id: activity_id
-      rescue StandardError => e
-        response = JSON.parse(e.response.body)
-        error_type = e.class
-
-        application.update_attributes \
-          errored_by_id: submitted_by_id
-      end
-
-      if application.application_status
-        application.application_status.update_attributes! \
-          payload: response.to_json
-      else
-        ApplicationStatus.create! \
-          application_id: application,
-          payload: response.to_json
-      end
+    if application.application_status
+      application.application_status.update_attributes! \
+        payload: response.to_json
+    else
+      ApplicationStatus.create! \
+        application_id: application,
+        payload: response.to_json
     end
   end
 end

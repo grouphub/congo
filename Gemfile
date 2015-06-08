@@ -27,9 +27,6 @@ gem 'shoryuken'
 gem 'foreman'
 gem 'puma'
 
-# For background worker processes.
-gem 'redlock'
-
 # For the payment system.
 gem 'stripe'
 
