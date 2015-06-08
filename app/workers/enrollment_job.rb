@@ -1,5 +1,9 @@
 class EnrollmentJob < ActiveJob::Base
-  queue_as :default
+  if Rails.env.production?
+    queue_as (ENV['SQS_DEFAULT_QUEUE'] || 'default').to_sym
+  else
+    queue_as :default
+  end
 
   if ENV['AWS_REGION']
     rescue_from ActiveJob::DeserializationError do |e|

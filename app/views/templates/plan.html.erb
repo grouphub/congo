@@ -1,0 +1,219 @@
+<div class="panel panel-group">
+  <div class="panel panel-default">
+    <div class="panel-heading chevron-toggle collapsed" data-toggle="collapse" data-target="#collapseOverviewList">
+      <h3 class="panel-title">Plan Overview</h3>
+    </div>
+    <ul id="collapseOverviewList" class="list-group collapse in">
+      <li class="list-group-item">
+        <div class="row">
+          <div class="col-xs-4 col-xs-height col-full-height">{{plan_type}} Plan</div>
+          <div class="col-xs-4 col-xs-height col-full-height">Individual</div>
+          <div class="col-xs-4 col-xs-height col-full-height">Family</div>
+        </div>
+      </li>
+      <li class="list-group-item">
+        <div class="row">
+          <div class="col-xs-4 col-xs-height col-full-height">Deductible</div>
+          <div class="col-xs-4 col-xs-height col-full-height">{{deductible_individual}}</div>
+          <div class="col-xs-4 col-xs-height col-full-height">{{deductible_family}}</div>
+        </div>
+      </li>
+      <li class="list-group-item">
+        <div class="row">
+          <div class="col-xs-4 col-xs-height col-full-height">Maximum Out-of-Pocket</div>
+          <div class="col-xs-4 col-xs-height col-full-height">{{max_out_of_pocket_individual}}</div>
+          <div class="col-xs-4 col-xs-height col-full-height">{{max_out_of_pocket_family}}</div>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading chevron-toggle collapsed" data-toggle="collapse" data-target="#collapseVisitsList2">
+      <h3 class="panel-title">Doctor Visits</h3>
+    </div>
+    <ul id="collapseVisitsList2" class="list-group collapse">
+      <li class="list-group-item">
+        <div class="row">
+          <div class="col-xs-4 col-xs-height col-full-height">{{plan_type}} Plan</div>
+          <div class="col-xs-4 col-xs-height col-full-height">In Network</div>
+          <div class="col-xs-4 col-xs-height col-full-height">Out of Network</div>
+        </div>
+      </li>
+      <li class="list-group-item">
+        <div class="row">
+          <div class="col-xs-4 col-xs-height col-full-height">Doctor Visit</div>
+          <div class="col-xs-4 col-xs-height col-full-height">{{doctor_visits_plan}}</div>
+          <div class="col-xs-4 col-xs-height col-full-height">{{doctor_visits_non_plan}}</div>
+        </div>
+      </li>
+      <li class="list-group-item">
+        <div class="row">
+          <div class="col-xs-4 col-xs-height col-full-height">Specialist Visit</div>
+          <div class="col-xs-4 col-xs-height col-full-height">{{specialist_visits_plan}}</div>
+          <div class="col-xs-4 col-xs-height col-full-height">{{specialist_visits_non_plan}}</div>
+        </div>
+      </li>
+      <li class="list-group-item">
+        <div class="row">
+          <div class="col-xs-4 col-xs-height col-full-height">X-Ray</div>
+          <div class="col-xs-4 col-xs-height col-full-height">{{xray_plan}}</div>
+          <div class="col-xs-4 col-xs-height col-full-height">{{xray_non_plan}}</div>
+        </div>
+      </li>
+      <li class="list-group-item">
+        <div class="row">
+          <div class="col-xs-4 col-xs-height col-full-height">MRI</div>
+          <div class="col-xs-4 col-xs-height col-full-height">{{mri_plan}}</div>
+          <div class="col-xs-4 col-xs-height col-full-height">{{mri_non_plan}}</div>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading chevron-toggle collapsed" data-toggle="collapse" data-target="#collapsePrescriptionsList">
+      <h3 class="panel-title">Prescriptions</h3>
+    </div>
+    <ul id="collapsePrescriptionsList" class="list-group collapse">
+      <li class="list-group-item">
+        <div class="row">
+          <div class="col-xs-4 col-xs-height col-full-height">{{plan_type}} Plan</div>
+          <div class="col-xs-4 col-xs-height col-full-height">In Network</div>
+          <div class="col-xs-4 col-xs-height col-full-height">Out of Network</div>
+        </div>
+      </li>
+      <li class="list-group-item">
+        <div class="row">
+          <div class="col-xs-4 col-xs-height col-full-height">Drug Deductable</div>
+          <div class="col-xs-4 col-xs-height col-full-height">{{drug_deductible_plan}}</div>
+          <div class="col-xs-4 col-xs-height col-full-height">{{drug_deductible_non_plan}}</div>
+        </div>
+      </li>
+      <li class="list-group-item">
+        <div class="row">
+          <div class="col-xs-4 col-xs-height col-full-height">Generic</div>
+          <div class="col-xs-4 col-xs-height col-full-height">{{generic_plan}}</div>
+          <div class="col-xs-4 col-xs-height col-full-height">{{generic_non_plan}}</div>
+        </div>
+      </li>
+      <li class="list-group-item">
+        <div class="row">
+          <div class="col-xs-4 col-xs-height col-full-height">Brand</div>
+          <div class="col-xs-4 col-xs-height col-full-height">{{specialty_plan}}</div>
+          <div class="col-xs-4 col-xs-height col-full-height">{{specialty_non_plan}}</div>
+        </div>
+      </li>
+      <li class="list-group-item">
+        <div class="row">
+          <div class="col-xs-4 col-xs-height col-full-height">Specialty</div>
+          <div class="col-xs-4 col-xs-height col-full-height">{{specialty_plan}}</div>
+          <div class="col-xs-4 col-xs-height col-full-height">{{specialty_non_plan}}</div>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading chevron-toggle collapsed" data-toggle="collapse" data-target="#collapseHospitalList">
+      <h3 class="panel-title">Hospital Services</h3>
+    </div>
+    <ul id="collapseHospitalList" class="list-group collapse">
+      <li class="list-group-item">
+        <div class="row">
+          <div class="col-xs-4 col-xs-height col-full-height">{{plan_type}} Plan</div>
+          <div class="col-xs-4 col-xs-height col-full-height">In Network</div>
+          <div class="col-xs-4 col-xs-height col-full-height">Out of Network</div>
+        </div>
+      </li>
+      <li class="list-group-item">
+        <div class="row">
+          <div class="col-xs-4 col-xs-height col-full-height">Emergency Room</div>
+          <div class="col-xs-4 col-xs-height col-full-height">{{emergency_room_plan}}</div>
+          <div class="col-xs-4 col-xs-height col-full-height">{{emergency_room_non_plan}}</div>
+        </div>
+      </li>
+      <li class="list-group-item">
+        <div class="row">
+          <div class="col-xs-4 col-xs-height col-full-height">Hospital Stay</div>
+          <div class="col-xs-4 col-xs-height col-full-height">{{hospital_stay_plan}}</div>
+          <div class="col-xs-4 col-xs-height col-full-height">{{hospital_stay_non_plan}}</div>
+        </div>
+      </li>
+      <li class="list-group-item">
+        <div class="row">
+          <div class="col-xs-4 col-xs-height col-full-height">Child Birth</div>
+          <div class="col-xs-4 col-xs-height col-full-height">{{child_birth_plan}}</div>
+          <div class="col-xs-4 col-xs-height col-full-height">{{child_birth_non_plan}}</div>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading chevron-toggle collapsed" data-toggle="collapse" data-target="#collapseIllnessList">
+      <h3 class="panel-title">Mental Health</h3>
+    </div>
+    <ul id="collapseIllnessList" class="list-group collapse">
+      <li class="list-group-item">
+        <div class="row">
+          <div class="col-xs-4 col-xs-height col-full-height">{{plan_type}} Plan</div>
+          <div class="col-xs-4 col-xs-height col-full-height">In Network</div>
+          <div class="col-xs-4 col-xs-height col-full-height">Out of Network</div>
+        </div>
+      </li>
+      <li class="list-group-item">
+        <div class="row">
+          <div class="col-xs-4 col-xs-height col-full-height">Mental/Behavioral health outpatient services</div>
+          <div class="col-xs-4 col-xs-height col-full-height">{{mental_outpatient_plan}}</div>
+          <div class="col-xs-4 col-xs-height col-full-height">{{mental_outpatient_non_plan}}</div>
+        </div>
+      </li>
+      <li class="list-group-item">
+        <div class="row">
+          <div class="col-xs-4 col-xs-height col-full-height">Mental/Behavioral health inpatient services</div>
+          <div class="col-xs-4 col-xs-height col-full-height">{{mental_inpatient_plan}}</div>
+          <div class="col-xs-4 col-xs-height col-full-height">{{mental_inpatient_non_plan}}</div>
+        </div>
+      </li>
+      <li class="list-group-item">
+        <div class="row">
+          <div class="col-xs-4 col-xs-height col-full-height">Substance Abuse disorder outpatient services</div>
+          <div class="col-xs-4 col-xs-height col-full-height">{{substance_outpatient_plan}}</div>
+          <div class="col-xs-4 col-xs-height col-full-height">{{substance_outpatient_non_plan}}</div>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading chevron-toggle collapsed" data-toggle="collapse" data-target="#collapseEmergencyList">
+      <h3 class="panel-title">Emergencies</h3>
+    </div>
+    <ul id="collapseEmergencyList" class="list-group collapse">
+      <li class="list-group-item">
+        <div class="row">
+          <div class="col-xs-4 col-xs-height col-full-height">{{plan_type}} Plan</div>
+          <div class="col-xs-4 col-xs-height col-full-height">In Network</div>
+          <div class="col-xs-4 col-xs-height col-full-height">Out of Network</div>
+        </div>
+      </li>
+      <li class="list-group-item">
+        <div class="row">
+          <div class="col-xs-4 col-xs-height col-full-height">Emergency Room Services</div>
+          <div class="col-xs-4 col-xs-height col-full-height">{{emergency_room_plan}}</div>
+          <div class="col-xs-4 col-xs-height col-full-height">{{emergency_room_non_plan}}</div>
+        </div>
+      </li>
+      <li class="list-group-item">
+        <div class="row">
+          <div class="col-xs-4 col-xs-height col-full-height">Emergency Medical Transportation</div>
+          <div class="col-xs-4 col-xs-height col-full-height">{{emergency_medical_plan}}</div>
+          <div class="col-xs-4 col-xs-height col-full-height">{{emergency_medical_non_plan}}</div>
+        </div>
+      </li>
+      <li class="list-group-item">
+        <div class="row">
+          <div class="col-xs-4 col-xs-height col-full-height">Urgent Care</div>
+          <div class="col-xs-4 col-xs-height col-full-height">{{urgent_care_plan}}</div>
+          <div class="col-xs-4 col-xs-height col-full-height">{{urgent_care_non_plan}}</div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
