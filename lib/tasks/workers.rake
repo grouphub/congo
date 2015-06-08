@@ -17,6 +17,8 @@ namespace :workers do
     worker.ssh! %[
       cd #{worker.to_directory} &&
         #{worker.ruby_env} &&
+        mkdir -p tmp/pids
+        mkdir log
         touch #{worker.pid_file}
         #{worker.run_command}
     ]
@@ -34,7 +36,12 @@ namespace :workers do
     puts %[Unzipping the project and removing the zip file...]
     worker.ssh! %[
       cd #{worker.to_directory} &&
-        unzip #{worker.workers.timestamp}.zip >/dev/null &&
+        unzip #{worker.workers.timestamp}.zip
+    ]
+
+    puts %[Removing the old project directory...]
+    worker.ssh! %[
+      cd #{worker.to_directory} &&
         rm #{worker.workers.timestamp}.zip
     ]
 

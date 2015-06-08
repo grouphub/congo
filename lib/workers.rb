@@ -17,7 +17,7 @@ class Workers
       zip_path = File.join(directory, "#{timestamp}.zip")
 
       puts %[Zipping up the app to "#{zip_path}"...]
-      `zip -r #{zip_path} * .[^.]*`
+      `zip -x ".git/*" "tmp/*" "log/*" -r #{zip_path} * .[^.]*`
 
       block.call(zip_path)
     end
@@ -33,15 +33,17 @@ class Workers
     end
 
     # Find all boxes for a specific environment.
-    self.boxes.select { |ec2_config|
-      if name && environment
-        ec2_config[:name] == name && ec2_config[:environment] == environment
-      elsif name
-        ec2_config[:name] == name
-      elsif environment
-        ec2_config[:environment] == environment
-      end
-    }
+    self.boxes
+      .select { |ec2_config|
+        if name && environment
+          ec2_config[:name] == name && ec2_config[:environment] == environment
+        elsif name
+          ec2_config[:name] == name
+        elsif environment
+          ec2_config[:environment] == environment
+        end
+      }
+      .uniq
   end
 
   class Worker
