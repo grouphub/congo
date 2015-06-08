@@ -3,8 +3,8 @@ class SampleJob < ActiveJob::Base
 
   if ENV['AWS_REGION']
     rescue_from ActiveJob::DeserializationError do |e|
-      Shoryuken.logger.error ex
-      Shoryuken.logger.error ex.backtrace.join("\n")
+      Shoryuken.logger.error e
+      Shoryuken.logger.error e.backtrace.join("\n")
     end
   end
 
