@@ -142,7 +142,8 @@ module UsersHelper
           'message_count' => role.message_count,
           'activity_count' => role.activity_count,
           'enabled_group_count' => enabled_groups.count,
-          'first_enabled_group' => first_enabled_group.as_json
+          'first_enabled_group' => first_enabled_group.as_json,
+          'enabled_groups' => enabled_groups
         })
       }
 
