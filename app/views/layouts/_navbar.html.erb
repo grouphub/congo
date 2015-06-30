@@ -64,6 +64,27 @@
           </li>
 
           <li class="divider" ng-if="accounts().length > 0"></li>
+          
+          
+          
+          
+          <li ng-if="currentRole() === 'customer' && currentAccount().enabled_group_count > 0">
+            <a class="heading" href="">Groups</a>
+          </li>
+
+          <li ng-if="currentRole() === 'customer'"
+             ng-repeat="group in currentAccount().enabled_groups">
+
+            <a ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/groups/{{group.slug}}">
+              {{group.name}}
+              <span class="label label-default role">Group</span>
+            </a>
+          </li>
+
+          <li class="divider" ng-if="currentRole() === 'customer' && currentAccount().enabled_group_count > 0"></li>
+          
+          
+
 
           <li>
             <a href="/users/{{currentUserId()}}">My Profile</a>
