@@ -107,6 +107,15 @@ congoApp.factory('userDataFactory', [
           return (account.slug && account.slug.length)
         });
       },
+      groups: function () {
+         if (!congo.currentUser) {
+           return;
+         }
+
+         return _.select(congo.currentUser.groups, function (group) {
+           return (group.slug && group.slug.length)
+         });
+       },
       currentAccount: function () {
         var match;
         var account;
@@ -209,9 +218,6 @@ congoApp.factory('userDataFactory', [
           return false;
         }
 
-        if (currentRole() === 'customer') {
-          return false;
-        }
 
         return true;
       },
