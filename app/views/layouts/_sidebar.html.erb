@@ -140,6 +140,48 @@
     </a>
   </li>
 
+  <li class="sidebar-item" ng-if="currentRole() === 'customer'">
+    <a ng-if="currentAccount().enabled_group_count >0" ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/groups/{{currentAccount().first_enabled_group.slug}}" title={{currentAccount().first_enabled_group.name}}>
+      <i class="fa fa-group"></i>
+      <span class="caption">{{currentAccount().first_enabled_group.name}}</span>
+    </a>
+  </li>
+  
+  <li class="sidebar-item" ng-if="currentRole() === 'customer'">
+    <a ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/contact" title="Dashboard">
+      <i class="fa fa-dashboard"></i>
+      <span class="caption">Dashboard</span>
+    </a>
+  </li>
+      
+  <li class="sidebar-item" ng-if="currentRole() === 'customer'">
+    <a ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/contact" title="Benefits">
+      <i class="fa fa-group"></i>
+      <span class="caption">Benefits</span>
+    </a>
+  </li>
+  
+  <li class="sidebar-item" ng-if="currentRole() === 'customer'">
+    <a ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/contact" title="Applications">
+      <i class="fa fa-group"></i>
+      <span class="caption">Applications</span>
+    </a>
+  </li>
+  
+  <li class="sidebar-item" ng-if="currentRole() === 'customer'">
+    <a ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/contact" title="Challenges">
+      <i class="fa fa-group"></i>
+      <span class="caption">Challenges</span>
+    </a>
+  </li>
+  
+  <li class="sidebar-item" ng-if="currentRole() === 'customer'">
+    <a ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/contact" title="Rewards">
+      <i class="fa fa-group"></i>
+      <span class="caption">Rewards</span>
+    </a>
+  </li>
+
   <li class="sidebar-item" ng-if="currentRole() === 'broker'">
     <a ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/settings" title="Account Settings">
       <i class="fa fa-user"></i>
