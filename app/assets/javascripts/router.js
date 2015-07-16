@@ -202,6 +202,14 @@ congoApp.config([
         templateUrl: congo.assets['contact.html'],
         controller: 'ContactController'
       })
+      .when('/accounts/:slug/:role/rewards', {
+        templateUrl: congo.assets['rewards.html'],
+        controller: 'RewardsController'
+      })
+      .when('/accounts/:slug/:role/challenges', {
+        templateUrl: congo.assets['challenges.html'],
+        controller: 'ChallengesController'
+      })
       .when('/accounts/:slug/:role/carriers', {
         templateUrl: congo.assets['carriers/index.html'],
         controller: 'CarriersIndexController'
