@@ -150,6 +150,10 @@ congoApp.config([
         templateUrl: congo.assets['users/new_plan.html'],
         controller: 'UsersNewPlanController'
       })
+      .when('/users/new_group', {
+        templateUrl: congo.assets['users/new_group.html'],
+        controller: 'GroupsNewController'
+      })
       .when('/users/new_billing', {
         templateUrl: congo.assets['users/new_billing.html'],
         controller: 'UsersNewBillingController'

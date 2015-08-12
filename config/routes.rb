@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     # Users
     '/users/signin',
     '/users/new_manager',
+    '/users/new_group',
     '/users/new_plan',
     '/users/new_billing',
     '/users/new_account',
