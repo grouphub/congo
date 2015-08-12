@@ -72,6 +72,7 @@
 //= require controllers/users-new-customer-controller
 //= require controllers/users-new-manager-controller
 //= require controllers/users-new-plan-controller
+//= require controllers/users-new-group-controller
 //= require controllers/users-show-controller
 //= require controllers/users-signin-controller
 //= require controllers/users-forgot-password-controller

@@ -1,6 +1,6 @@
 var congoApp = angular.module('congoApp');
 
-congoApp.controller('UsersNewManagerController', [
+congoApp.controller('UsersNewController', [
   '$scope', '$http', '$location', 'flashesFactory',
   
   function ($scope, $http, $location, flashesFactory) {
@@ -26,7 +26,7 @@ congoApp.controller('UsersNewManagerController', [
         .success(function (data, status, headers, config) {
           congo.currentUser = data.user;
 
-          $location.path('/users/new_group');
+          $location.path('/users/new_plan');
 
           $scope.isLocked = false;
         })

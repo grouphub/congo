@@ -40,9 +40,11 @@ congoApp.controller('UsersNewAccountController', [
 
           account = congo.currentUser.accounts[0];
 
-          $location.path('/accounts/' + account.slug + '/' + account.role.name);
+           $location.path('/accounts/' + $scope.accountSlug() + '/' + $scope.currentRole() + '/groups');
 
-          flashesFactory.add('success', 'Welcome, ' + congo.currentUser.first_name + ' ' + congo.currentUser.last_name + '!');
+       //   $location.path('/accounts/' + account.slug + '/' + account.role.name);
+
+        //  flashesFactory.add('success', 'Welcome, ' + congo.currentUser.first_name + ' ' + congo.currentUser.last_name + '!');
 
           $scope.isLocked = false;
         })

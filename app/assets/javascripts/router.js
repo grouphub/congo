@@ -142,6 +142,10 @@ congoApp.config([
   '$routeProvider',
   function ($routeProvider) {
     $routeProvider
+      .when('/users/new', {
+        templateUrl: congo.assets['users/new.html'],
+        controller: 'UsersNewController'
+      })
       .when('/users/new_manager', {
         templateUrl: congo.assets['users/new_manager.html'],
         controller: 'UsersNewManagerController'
@@ -152,7 +156,7 @@ congoApp.config([
       })
       .when('/users/new_group', {
         templateUrl: congo.assets['users/new_group.html'],
-        controller: 'GroupsNewController'
+        controller: 'UsersNewGroupController'
       })
       .when('/users/new_billing', {
         templateUrl: congo.assets['users/new_billing.html'],

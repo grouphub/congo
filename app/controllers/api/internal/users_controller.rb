@@ -21,17 +21,7 @@ class Api::Internal::UsersController < Api::ApiController
       return
     end
 
-    #If the user came in from a standard grouphub signup they are a member of grouphub
-    begin
-      attempt_to_create_member!
-    rescue ActiveRecord::RecordInvalid => e
-      error_response(e.message)
-      return
-    end
-
-
-
-    # If user came in from an email then they are a customer of the group account associated with the invitation
+    # If user came in from an email then they are a customer.
     begin
       attempt_to_create_customer!
     rescue ActiveRecord::RecordInvalid => e
@@ -39,7 +29,7 @@ class Api::Internal::UsersController < Api::ApiController
       return
     end
 
-    # If user came from a broker signup, then they are a broker for a new broker account.
+    # If user came from a manual signup, then they're a broker.
     begin
       attempt_to_create_broker!
     rescue ActiveRecord::RecordInvalid => e
