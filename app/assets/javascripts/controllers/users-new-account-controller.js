@@ -40,7 +40,9 @@ congoApp.controller('UsersNewAccountController', [
 
           account = congo.currentUser.accounts[0];
 
-           $location.path('/accounts/' + $scope.accountSlug() + '/' + $scope.currentRole() + '/groups');
+           $location.path('/users/new_group');
+
+      //     $location.path('/accounts/' + $scope.accountSlug() + '/' + $scope.currentRole() + '/groups');
 
        //   $location.path('/accounts/' + account.slug + '/' + account.role.name);
 

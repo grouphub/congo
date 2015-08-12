@@ -4,7 +4,7 @@ congoApp.controller('UsersNewGroupController', [
   '$scope', '$http', '$location', '$sce', 'flashesFactory',
   function ($scope, $http, $location, $sce, flashesFactory) {
     // Make sure user is totally signed up before continuing.
-   // $scope.enforceValidAccount();
+    $scope.enforceValidAccount();
 
  $scope.form = {
       name: null,

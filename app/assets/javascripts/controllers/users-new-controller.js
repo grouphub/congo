@@ -21,12 +21,13 @@ congoApp.controller('UsersNewController', [
           last_name: $scope.last_name,
           email: $scope.email,
           password: $scope.password,
-          password_confirmation: $scope.password_confirmation
+          password_confirmation: $scope.password_confirmation,
+          type: 'group_admin'
         })
         .success(function (data, status, headers, config) {
           congo.currentUser = data.user;
 
-          $location.path('/groups/new_group');
+          $location.path('/users/new_plan');
 
           $scope.isLocked = false;
         })

@@ -58,6 +58,7 @@ class Api::Internal::GroupsController < Api::ApiController
     unless account
       # TODO: Test this
       #account = Account.create!(plan_name:'group')
+      
 
       error_response('A matching account could not be found.')
       return
