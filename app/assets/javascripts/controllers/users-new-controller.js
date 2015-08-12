@@ -26,7 +26,7 @@ congoApp.controller('UsersNewController', [
         .success(function (data, status, headers, config) {
           congo.currentUser = data.user;
 
-          $location.path('/users/new_plan');
+          $location.path('/groups/new_group');
 
           $scope.isLocked = false;
         })
