@@ -250,6 +250,10 @@ congoApp.config([
         templateUrl: congo.assets['groups/show.html'],
         controller: 'GroupsShowController'
       })
+      .when('/accounts/:slug/:role/groups/:group_slug/welcome', {
+        templateUrl: congo.assets['groups/welcome.html'],
+        controller: 'GroupsWelcomeController'
+      })
       .when('/accounts/:slug/:role/groups/:group_slug/benefit_plans/:benefit_plan_slug/applications/new', {
         templateUrl: congo.assets['applications/new.html'],
         controller: 'ApplicationsNewController'
