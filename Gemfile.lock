@@ -386,6 +386,3 @@ DEPENDENCIES
   stripe
   uglifier (>= 1.3.0)
   unindent
-
-BUNDLED WITH
-   1.10.6
