@@ -1,0 +1,28 @@
+<div class="col-md-12 centered" ng-init="init()">
+  <h1>Welcome to your {{groupSlug() | capitalize}} Account.</h1>
+  <h2>Lets setup your group in just a few steps.</h2>
+
+  <div class="col-md-3">
+  </div>
+
+  <div class="col-md-6">
+    <ul>
+      <li class="left-aligned">
+        <h3>Provide group details to help us serve you better</h3>
+      </li>
+      <li class="left-aligned">
+        <h3>Add or import group members</h3>
+      </li>
+      <li class="left-aligned">
+        <h3>Add existing group benefits or work with personalized experts to shop for customized plan</h3>
+      </li>
+    </ul>
+  </div>
+
+  <div class="col-md-3">
+  </div>
+
+  <div class="row clear padding-top-25">
+    <a ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/groups/{{groupSlug()}}/details" class="btn btn-primary">Get Started</a>
+  </div>
+</div>

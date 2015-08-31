@@ -5,30 +5,17 @@ module CongoHelper
   def create_admin
     test_debug 'Creating an admin account...'
 
-    account = Account.create \
-      name: 'Admin',
-      tagline: 'GroupHub administrative account',
-      plan_name: 'admin',
-      properties: {
-        name: 'Admin',
-        tagline: 'GroupHub administrative account',
-        plan_name: 'admin'
-      }
+    account = create(:admin_account)
 
-    user = User.create \
-      first_name: 'GroupHub',
-      last_name: 'Admin',
-      email: 'admin@grouphub.io',
-      password: 'testtest'
+    user = create(:admin_user)
 
-    Role.create \
-      user_id: user.id,
-      account_id: account.id,
-      name: 'admin'
+    create(:admin_role, user_id: user.id, account_id: account.id)
   end
 
   def signin_admin
     test_debug 'Signing in as an admin...'
+
+    admin = Role.find_by_name('admin').user
 
     visit '/'
 
@@ -36,7 +23,7 @@ module CongoHelper
 
     expect(page).to have_content('Email')
 
-    fill_in 'Email', with: 'admin@grouphub.io'
+    fill_in 'Email', with: admin.email
     fill_in 'Password', with: 'testtest'
 
     all('button', text: 'Sign In').first.click
@@ -60,26 +47,11 @@ module CongoHelper
   def create_broker
     test_debug 'Creating a broker account...'
 
-    account = Account.create \
-      name: 'First Account',
-      tagline: '#1 Account',
-      plan_name: 'basic',
-      properties: {
-        name: 'First Account',
-        tagline: '#1 Account',
-        plan_name: 'basic'
-      }
+    account = create(:broker_account)
 
-    user = User.create \
-      first_name: 'Barry',
-      last_name: 'Broker',
-      email: 'barry@broker.com',
-      password: 'barry'
+    user = create(:broker_user)
 
-    Role.create \
-      user_id: user.id,
-      account_id: account.id,
-      name: 'broker'
+    create(:broker_role, user_id: user.id, account_id: account.id)
   end
 
   def signin_broker(broker=nil)
@@ -93,7 +65,7 @@ module CongoHelper
 
     expect(page).to have_content('Email')
 
-    fill_in 'Email', with: 'barry@broker.com'
+    fill_in 'Email', with: broker.email
     fill_in 'Password', with: 'barry'
 
     all('button', text: 'Sign In').first.click
@@ -222,5 +194,22 @@ module CongoHelper
     select account_benefit_plan.name, from: "Select Plan"
 
     click_on "Upload"
+  end
+
+  def sign_in(user)
+    test_debug 'Signing in as a broker...'
+
+    visit '/'
+
+    all('a', text: 'Sign In').first.click
+
+    expect(page).to have_content('Email')
+
+    fill_in 'Email', with: user.email
+    fill_in 'Password', with: 'supersecret'
+
+    all('button', text: 'Sign In').first.click
+
+    expect(page).to have_content(user.first_name)
   end
 end

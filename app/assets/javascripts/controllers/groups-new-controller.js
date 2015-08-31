@@ -8,10 +8,6 @@ congoApp.controller('GroupsNewController', [
 
     $scope.form = {
       name: null,
-      group_id: null,
-      description_markdown: null,
-      description_html: null,
-      description_trusted: null
     };
 
     $scope.$watch('form.description_markdown', function (string) {
@@ -30,7 +26,7 @@ congoApp.controller('GroupsNewController', [
           properties: _($scope.form).omit('description_trusted')
         })
         .success(function (data, status, headers, config) {
-          $location.path('/accounts/' + $scope.accountSlug() + '/' + $scope.currentRole() + '/groups');
+          $location.path('/accounts/' + $scope.accountSlug() + '/' + $scope.currentRole() + '/groups/' + data.group.slug + '/welcome');
 
           // TODO: Does this need to be here?
           $scope.ready();
@@ -51,4 +47,3 @@ congoApp.controller('GroupsNewController', [
     $scope.ready();
   }
 ]);
-

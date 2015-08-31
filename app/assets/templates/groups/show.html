@@ -225,7 +225,7 @@
                 <a ng-if="membership.user" ng-href="mailto:{{membership.email}}">{{membership.email}}</a>
 
                 <form ng-if="!membership.user" ng-submit="updateMembershipEmail(membership)">
-                  <input type="text" ng-model="membership.email">
+                  <input class="invited-membership-{{ membership.id }}" type="text" ng-model="membership.email">
                   <input type="submit" class="btn btn-primary btn-xs" value="Update">
                 </form>
               </td>
