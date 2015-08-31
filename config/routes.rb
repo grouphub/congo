@@ -69,6 +69,9 @@ Rails.application.routes.draw do
     '/accounts/:slug/:role/groups',
     '/accounts/:slug/:role/groups/new',
     '/accounts/:slug/:role/groups/:group_slug',
+    '/accounts/:slug/:role/groups/:group_slug/welcome',
+    '/accounts/:slug/:role/groups/:group_slug/details',
+    '/accounts/:slug/:role/groups/:group_slug/members',
     '/accounts/:slug/:role/groups/:group_slug/benefit_plans/:benefit_plan_id/applications/new',
 
     # Applications
@@ -148,6 +151,11 @@ Rails.application.routes.draw do
 
             # Send confirmation to all members of a group
             post '/confirmations_all', to: 'memberships#send_confirmation_to_all'
+
+            # Download GroupHub Employee Template file
+            get '/download_employee_template', to: 'memberships#download_employee_template'
+
+            post '/create_employees_from_list', to: 'memberships#create_employees_from_list'
 
             post '/group_benefit_plans', to: 'group_benefit_plans#create'
             delete '/group_benefit_plans', to: 'group_benefit_plans#destroy'

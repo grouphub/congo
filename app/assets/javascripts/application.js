@@ -38,3 +38,4 @@
 //= require router
 //= require_tree ./factories
 //= require_tree ./directives
+//= require_tree ./filters

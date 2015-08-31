@@ -1,0 +1,98 @@
+<div class="col-md-12 centered" ng-init="init()">
+  <h1>{{group.name}} Details</h1>
+  <h2>Enter some basic information about your company and connect to benefits right away.</h2>
+
+  <ul class="nav nav-tabs padding-top-25">
+    <li class="active"><a href="#">Details</a></li>
+    <li><a href="#" class="disabled">Members</a></li>
+    <li><a href="#" class="disabled">Benefits</a></li>
+  </ul>
+
+
+  <div class="col-md-3">
+  </div>
+
+  <div class="col-md-6">
+    <br />
+    <br />
+
+    <form ng-submit="submit()" class="group-form">
+      <table>
+        <tr>
+          <td class="td-label">
+            <label for="number_of_members">Number of Members*</label>
+          </td>
+          <td>
+            <select id="number_of_members" name="number_of_members" ng-required="true" ng-options="number_of_member.id as number_of_member.desc for number_of_member in number_of_members" ng-model="form.number_of_members">
+              <option value="">Please select a number</option>
+            </select>
+          </td>
+        </tr>
+
+        <tr>
+          <td class="td-label">
+            <label for="industry">Industry*</label>
+          </td>
+          <td>
+            <select id="industry" name="industry" ng-required="true" ng-options="industry.id as industry.desc for industry in industries" ng-model="form.industry">
+              <option value="">Please select an industry</option>
+            </select>
+          </td>
+          <td>
+          </td>
+        </tr>
+
+        <tr>
+          <td class="td-label">
+            <label for="website">Website</label>
+          </td>
+          <td>
+            <input type="text" class="form-control" id="website" placeholder="Enter a website&hellip;" ng-model="form.website">
+          </td>
+        </tr>
+
+        <tr>
+          <td class="td-label">
+            <label for="phone_number">Phone Number*</label>
+          </td>
+          <td>
+            <input type="text" class="form-control" id="phone_number" placeholder="Enter a phone number&hellip;" ng-required="true" ng-model="form.phone_number">
+          </td>
+        </tr>
+
+        <tr>
+          <td class="td-label">
+            <label for="zip_code">ZIP Code</label>
+          </td>
+          <td>
+            <input type="text" class="form-control" id="zip_code" placeholder="Enter a zip code&hellip;" ng-model="form.zip_code">
+          </td>
+        </tr>
+
+        <tr>
+          <td class="td-label">
+            <label for="tax_id">Tax ID</label>
+          </td>
+          <td>
+            <input type="text" class="form-control" id="tax_id" placeholder="Enter a Tax ID&hellip;" ng-model="form.tax_id">
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+          </td>
+
+          <td class="td-buttons-right padding-top-25">
+            <input type="submit" class="btn btn-primary" value="Save & Continue" ng-disabled="isLocked">
+            <a ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/groups/{{groupSlug()}}/members" class="btn btn-primary">Skip</a>
+          </td>
+        </tr>
+      </table>
+    </form>
+    <br />
+    <br />
+  </div>
+
+  <div class="col-md-3">
+  </div>
+</div>

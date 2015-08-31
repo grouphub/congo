@@ -19,6 +19,8 @@ class Api::Internal::MembershipsController < Api::ApiController
     end
   end
 
+  #TODO: tables need to be normalized; email
+  #is repeated on Memberships and Users tables
   def create
     group_slug = params[:group_id]
     group = Group.where(slug: group_slug).first
@@ -113,6 +115,21 @@ class Api::Internal::MembershipsController < Api::ApiController
           membership: render_memberships(memberships)
         }
       }
+    end
+  end
+
+  def download_employee_template
+    send_file 'public/GroupHub_Employee_Template.csv', type: 'application/csv'
+  end
+
+  def create_employees_from_list
+    Memberships::CreateFromCSV.(
+      params[:employee_list_file].tempfile,
+      Group.where(slug: params[:group_id]).first
+    )
+
+    respond_to do |format|
+      format.json { render json: {} }
     end
   end
 

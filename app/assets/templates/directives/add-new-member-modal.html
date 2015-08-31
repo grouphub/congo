@@ -1,0 +1,68 @@
+<div class="centered modal fade" id="add-new-member-modal" tabindex="-1" role="dialog" aria-labelledby="add-new-member-modal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3 class="modal-title" id="add-new-member-modal">Add New Member</h3>
+      </div>
+
+      <div class="modal-body">
+        <p>Connect to carriers to validate enrollment and ensure compliance or simply upload a current carrier invoice or bill.</p>
+
+        <form ng-submit="submitNewMember()" class="group-form" name="newMemberForm">
+          <table>
+            <tr>
+              <td class="td-label">
+                <label for="first_name">First Name</label>
+              </td>
+              <td>
+                <input id="first_name" type="text" class="form-control" name="first_name" placeholder="Enter first name&hellip;" ng-model="newMember.first_name" ng-required="true" auto-focus />
+              </td>
+              <td>
+            </tr>
+
+            <tr>
+              <td class="td-label">
+                <label for="last_name">Last Name</label>
+              </td>
+              <td>
+                <input id="last_name" type="text" class="form-control" name="last_name" placeholder="Enter last name&hellip;" ng-model="newMember.last_name" ng-required="true" />
+              </td>
+            </tr>
+
+            <tr>
+              <td class="td-label">
+                <label for="phone">Phone</label>
+              </td>
+              <td>
+                <input id="phone" type="text" class="form-control" name="phone" placeholder="Enter phone number&hellip;" ng-model="newMember.phone" ng-required="true" />
+              </td>
+            </tr>
+
+            <tr>
+              <td class="td-label">
+                <label for="email">Email</label>
+              </td>
+              <td>
+                <input id="email" type="text" class="form-control" name="email" placeholder="Enter email address&hellip;" ng-model="newMember.email" />
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+              </td>
+
+              <td class="td-buttons-right padding-top-25">
+                <input type="submit" class="btn btn-primary" value="Invite" ng-disabled="isLocked">
+                <a ng-href="" class="btn btn-primary" data-dismiss="modal">Close</a>
+              </td>
+            </tr>
+          </table>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
