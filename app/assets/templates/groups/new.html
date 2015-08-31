@@ -1,43 +1,27 @@
 <div class="col-md-12">
-  <h1>New group</h1>
+  <h1>Create New Group</h1>
+  <h3>Create a new group and select option</h3>
 
-  <form ng-submit="submit()">
-    <div class="form-group">
-      <label for="name">Name</label>
-      <input type="text" class="form-control" id="name" placeholder="Enter name&hellip;" ng-model="form.name" auto-focus>
-    </div>
+  <form ng-submit="submit()" id="new-group-form">
+    <table>
+      <tr>
+        <td class="td-label">
+          <label for="name">Group Name</label>
+        </td>
+        <td>
+          <input type="text" class="form-control" id="name" placeholder="Enter name&hellip;" ng-model="form.name" auto-focus>
+        </td>
+      </tr>
 
-    <!-- TODO: Is this correct? -->
-    <div class="form-group">
-      <label for="group_id">Group ID</label>
-      <input type="text" class="form-control" id="group_id" placeholder="Enter a Group ID&hellip;" ng-model="form.group_id">
-    </div>
-
-    <div class="form-group">
-      <label for="tax_id">Tax ID</label>
-      <input type="text" class="form-control" id="tax_id" placeholder="Enter a Tax ID&hellip;" ng-model="form.tax_id">
-    </div>
-
-    <div class="row">
-      <div class="form-group col-md-6">
-        <label for="description">Description</label>
-        <textarea class="form-control markdown" id="description" placeholder="Enter a Description&hellip;" ng-model="form.description_markdown"></textarea>
-        <small>
-          Enter a description using Markdown. <a target="_blank" href="https://en.support.wordpress.com/markdown-quick-reference/">Click here</a> for a Markdown reference.
-        </small>
-      </div>
-
-      <div class="form-group col-md-6">
-        <label for="markdown">Preview</label>
-        <div id="markdown" ng-bind-html="form.description_trusted"></div>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-md-12">
-        <input type="submit" class="btn btn-primary" value="New Group" ng-disabled="isLocked">
-      </div>
-    </div>
+      <tr>
+        <td>
+        </td>
+        <td class="td-buttons-right">
+          <input type="submit" class="btn btn-primary" value="New Group" ng-disabled="isLocked">
+          <a href="#" class="btn btn-primary" >Cancel</a>
+        </td>
+      </tr>
+    </table>
   </form>
 </div>
 

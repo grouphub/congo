@@ -85,3 +85,14 @@ textarea.markdown {
   background-color: white;
 }
 
+#new-group-form table {
+  width: 100%;
+  .td-label {
+    width: 10%;
+    padding-right: 20px;
+  }
+  .td-buttons-right {
+    text-align: right;
+    padding-top: 15px;
+  }
+}
