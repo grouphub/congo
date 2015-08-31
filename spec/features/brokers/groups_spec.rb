@@ -4,7 +4,19 @@ describe 'As a broker', js: true do
 
   describe 'Groups' do
 
-    it 'allows them to create a group'
+    it 'allows them to create a group' do
+      create_admin
+
+      visit '/users/signin' 
+
+      fill_in 'Email', with: User.first.email
+      fill_in 'Password', with: 'testtest'
+      
+      click_button 'Sign In'
+    end
+
+    it 'allows them to cancel the creation of a group'
+
     it 'allows them to delete a group'
     it 'allows them to view a group'
     it 'allows them to enable and disable a group'
