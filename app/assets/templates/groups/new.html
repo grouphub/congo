@@ -18,7 +18,7 @@
         </td>
         <td class="td-buttons-right">
           <input type="submit" class="btn btn-primary" value="New Group" ng-disabled="isLocked">
-          <a href="#" class="btn btn-primary" >Cancel</a>
+          <a ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/groups" class="btn btn-primary">Cancel</a>
         </td>
       </tr>
     </table>
