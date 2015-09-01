@@ -45,26 +45,11 @@ module CongoHelper
   def create_broker
     test_debug 'Creating a broker account...'
 
-    account = Account.create \
-      name: 'First Account',
-      tagline: '#1 Account',
-      plan_name: 'basic',
-      properties: {
-        name: 'First Account',
-        tagline: '#1 Account',
-        plan_name: 'basic'
-      }
+    account = create(:broker_account)
 
-    user = User.create \
-      first_name: 'Barry',
-      last_name: 'Broker',
-      email: 'barry@broker.com',
-      password: 'barry'
+    user = create(:broker_user)
 
-    Role.create \
-      user_id: user.id,
-      account_id: account.id,
-      name: 'broker'
+    create(:broker_role, user_id: user.id, account_id: account.id)
   end
 
   def signin_broker
