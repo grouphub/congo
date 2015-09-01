@@ -18,7 +18,19 @@ describe 'As a broker', js: true do
       expect(page).to have_content("Welcome to your #{broker_account.slug.capitalize} Account.")
     end
 
-    it 'allows them to cancel the creation of a group'
+    it 'allows them to cancel the creation of a group' do
+      create_broker
+      signin_broker
+
+      broker_account = Role.find_by_name('broker').account
+
+      visit "/accounts/#{broker_account.slug}/broker/groups/new"
+
+      fill_in 'name', with: 'My first group'
+      click_link 'Cancel'
+
+      expect(current_path).to eq("/accounts/#{broker_account.slug}/broker/groups")
+    end
 
     it 'allows them to delete a group'
     it 'allows them to view a group'
