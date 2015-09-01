@@ -23,6 +23,15 @@ class Api::Internal::UsersController < Api::ApiController
       return
     end
 
+      # If user came from a manual signup, then they're a broker.
+    begin
+      attempt_to_create_broker!
+    rescue ActiveRecord::RecordInvalid => e
+      error_response(e.message)
+      return
+    end
+    
+
     # If user came in from an email then they are a customer.
     begin
       attempt_to_create_customer!
@@ -39,13 +48,7 @@ class Api::Internal::UsersController < Api::ApiController
       return
     end
 
-    # If user came from a manual signup, then they're a broker.
-    begin
-      attempt_to_create_broker!
-    rescue ActiveRecord::RecordInvalid => e
-      error_response(e.message)
-      return
-    end
+  
 
     user = signin! email, password
 

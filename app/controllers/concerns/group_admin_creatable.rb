@@ -7,13 +7,19 @@ module GroupAdminCreatable
 
   def attempt_to_create_group_admin!
   
+    email_token = params[:email_token]
+    type = params[:type]
+
+    return unless email_token
+    return if type != 'group_admin'
+
     first_name = params[:first_name]
     last_name  = params[:last_name]
     email      = params[:email]
     password   = params[:password]
     type       = params[:type]
 
-    return if type != 'groupadmin'
+    
 
     user = User.create! \
       first_name: first_name,
@@ -26,16 +32,16 @@ module GroupAdminCreatable
 
     account = Account.create!
 
-    broker_role = Role
+    admin_role = Role
       .where({
         account_id: account.id,
         user_id: user.id,
-        name: 'broker'
+        name: 'group_admin'
       })
       .first
 
-    unless broker_role
-      broker_role = Role.create \
+    unless admin_role
+      admin_role = Role.create \
         account_id: account.id,
         user_id: user.id,
         name: 'group_admin'

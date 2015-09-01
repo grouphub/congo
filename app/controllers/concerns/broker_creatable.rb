@@ -7,8 +7,10 @@ module BrokerCreatable
 
   def attempt_to_create_broker!
     email_token = params[:email_token]
+    type = params[:type]
 
     return if email_token
+    return if type != 'broker'
 
     first_name = params[:first_name]
     last_name = params[:last_name]
