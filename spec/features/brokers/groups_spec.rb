@@ -4,48 +4,36 @@ describe 'As a broker', js: true do
 
   describe 'Groups' do
 
-    it 'allows them to create a group' do
+    before(:each) do
       create_broker
       signin_broker
 
-      broker_account = Role.find_by_name('broker').account
+      @broker_account = Role.find_by_name('broker').account
 
-      visit "/accounts/#{broker_account.slug}/broker/groups/new"
+      visit "/accounts/#{@broker_account.slug}/broker/groups/new"
+    end
 
+    it 'allows them to create a group' do
       fill_in 'name', with: 'My first group'
       click_button 'Create Group'
 
-      expect(page).to have_content("Welcome to your #{broker_account.slug.capitalize} Account.")
+      expect(page).to have_content("Welcome to your #{@broker_account.slug.capitalize} Account.")
     end
 
     it 'allows them to cancel the creation of a group' do
-      create_broker
-      signin_broker
-
-      broker_account = Role.find_by_name('broker').account
-
-      visit "/accounts/#{broker_account.slug}/broker/groups/new"
-
       fill_in 'name', with: 'My first group'
       click_link 'Cancel'
 
-      expect(current_path).to eq("/accounts/#{broker_account.slug}/broker/groups")
+      expect(current_path).to eq("/accounts/#{@broker_account.slug}/broker/groups")
     end
 
     it 'sees the group he created' do
-      create_broker
-      signin_broker
-
-      broker_account = Role.find_by_name('broker').account
-
-      visit "/accounts/#{broker_account.slug}/broker/groups/new"
-
       fill_in 'name', with: 'My first group'
       click_button 'Create Group'
 
-      visit "/accounts/#{broker_account.slug}/broker/groups"
+      visit "/accounts/#{@broker_account.slug}/broker/groups"
 
-      expect(page).to have_content(broker_account.groups.first.name)
+      expect(page).to have_content(@broker_account.groups.first.name)
     end
 
     it 'allows them to delete a group'
