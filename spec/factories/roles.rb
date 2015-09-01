@@ -4,7 +4,11 @@ FactoryGirl.define do
     account_id 1
 
     factory :admin_role do
-      name       'admin'
+      name 'admin'
+    end
+
+    factory :broker_role do
+      name 'broker'
     end
   end
 end
