@@ -5,26 +5,11 @@ module CongoHelper
   def create_admin
     test_debug 'Creating an admin account...'
 
-    account = Account.create \
-      name: 'Admin',
-      tagline: 'GroupHub administrative account',
-      plan_name: 'admin',
-      properties: {
-        name: 'Admin',
-        tagline: 'GroupHub administrative account',
-        plan_name: 'admin'
-      }
+    account = create(:admin_account)
 
-    user = User.create \
-      first_name: 'GroupHub',
-      last_name: 'Admin',
-      email: 'admin@grouphub.io',
-      password: 'testtest'
+    user = create(:admin_user)
 
-    Role.create \
-      user_id: user.id,
-      account_id: account.id,
-      name: 'admin'
+    create(:admin_role)
   end
 
   def signin_admin
