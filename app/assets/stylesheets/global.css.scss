@@ -41,6 +41,10 @@ footer {
   }
 }
 
+.centered {
+  text-align: center;
+}
+
 @media screen and (max-width: 765px) {
   footer {
     img { padding: 0 20px 10px 20px; }
