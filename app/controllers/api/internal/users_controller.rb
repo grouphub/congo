@@ -23,14 +23,8 @@ class Api::Internal::UsersController < Api::ApiController
       return
     end
 
-      # If user came from a manual signup, then they're a broker.
-    begin
-      attempt_to_create_broker!
-    rescue ActiveRecord::RecordInvalid => e
-      error_response(e.message)
-      return
-    end
     
+
 
     # If user came in from an email then they are a customer.
     begin
@@ -41,8 +35,16 @@ class Api::Internal::UsersController < Api::ApiController
     end
 
     # If user came from a user signup, then they're a group admin.
+  #  begin
+   #   attempt_to_create_group_admin!
+   # rescue ActiveRecord::RecordInvalid => e
+    #  error_response(e.message)
+     # return
+   # end
+
+    # If user came from a manual signup, then they're a broker.
     begin
-      attempt_to_create_group_admin!
+      attempt_to_create_broker!
     rescue ActiveRecord::RecordInvalid => e
       error_response(e.message)
       return
