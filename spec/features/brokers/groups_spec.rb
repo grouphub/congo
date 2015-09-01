@@ -7,6 +7,15 @@ describe 'As a broker', js: true do
     it 'allows them to create a group' do
       create_broker
       signin_broker
+
+      broker_account = Role.find_by_name('broker').account
+
+      visit "/accounts/#{broker_account.slug}/broker/groups/new"
+
+      fill_in 'name', with: 'My first group'
+      click_button 'Create Group'
+
+      expect(page).to have_content("Welcome to your #{broker_account.slug.capitalize} Account.")
     end
 
     it 'allows them to cancel the creation of a group'
