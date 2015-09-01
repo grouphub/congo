@@ -8,6 +8,7 @@ describe 'As a broker', js: true do
       create_admin
       signin_admin
 
+      binding.pry
 
     end
 

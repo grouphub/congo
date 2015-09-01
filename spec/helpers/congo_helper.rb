@@ -9,7 +9,7 @@ module CongoHelper
 
     user = create(:admin_user)
 
-    create(:admin_role)
+    create(:admin_role, user_id: user.id, account_id: account.id)
   end
 
   def signin_admin
