@@ -1,27 +1,37 @@
-<div class="col-md-12">
+<div class="col-md-12 centered">
   <h1>Create New Group</h1>
-  <h3>Create a new group and select option</h3>
+  <h2>Create a new group and select option</h2>
 
-  <form ng-submit="submit()" id="new-group-form">
-    <table>
-      <tr>
-        <td class="td-label">
-          <label for="name">Group Name</label>
-        </td>
-        <td>
-          <input type="text" class="form-control" id="name" placeholder="Enter name&hellip;" ng-model="form.name" auto-focus>
-        </td>
-      </tr>
+  <div class="col-md-3">
+  </div>
 
-      <tr>
-        <td>
-        </td>
-        <td class="td-buttons-right">
-          <input type="submit" class="btn btn-primary" value="Create Group" ng-disabled="isLocked">
-          <a ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/groups" class="btn btn-primary">Cancel</a>
-        </td>
-      </tr>
-    </table>
-  </form>
+  <div class="col-md-6">
+    <form ng-submit="submit()" id="new-group-form">
+      <table>
+        <tr>
+          <td class="td-label">
+            <label for="name">Group Name</label>
+          </td>
+          <td>
+            <input type="text" class="form-control" id="name" placeholder="Enter name&hellip;" ng-model="form.name" auto-focus>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+          </td>
+          <td class="td-buttons-right padding-top-25">
+            <input type="submit" class="btn btn-primary" value="Create Group" ng-disabled="isLocked">
+            <a ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/groups" class="btn btn-primary">Cancel</a>
+          </td>
+        </tr>
+      </table>
+    </form>
+    <br />
+    <br />
+  </div>
+
+  <div class="col-md-3">
+  </div>
 </div>
 
