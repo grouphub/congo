@@ -5,11 +5,8 @@ describe 'As a broker', js: true do
   describe 'Groups' do
 
     it 'allows them to create a group' do
-      create_admin
-      signin_admin
-
-      binding.pry
-
+      create_broker
+      signin_broker
     end
 
     it 'allows them to cancel the creation of a group'
