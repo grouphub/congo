@@ -45,6 +45,18 @@ footer {
   text-align: center;
 }
 
+.left-aligned {
+  text-align: left;
+}
+
+.clear {
+  clear: both;
+}
+
+.padding-top-25 {
+  padding-top: 25px;
+}
+
 @media screen and (max-width: 765px) {
   footer {
     img { padding: 0 20px 10px 20px; }
