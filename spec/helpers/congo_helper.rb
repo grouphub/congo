@@ -15,13 +15,15 @@ module CongoHelper
   def signin_admin
     test_debug 'Signing in as an admin...'
 
+    admin = Role.find_by_name('admin').user
+
     visit '/'
 
     all('a', text: 'Sign In').first.click
 
     expect(page).to have_content('Email')
 
-    fill_in 'Email', with: 'admin@grouphub.io'
+    fill_in 'Email', with: admin.email
     fill_in 'Password', with: 'testtest'
 
     all('button', text: 'Sign In').first.click
@@ -55,13 +57,15 @@ module CongoHelper
   def signin_broker
     test_debug 'Signing in as a broker...'
 
+    broker = Role.find_by_name('broker').user
+
     visit '/'
 
     all('a', text: 'Sign In').first.click
 
     expect(page).to have_content('Email')
 
-    fill_in 'Email', with: 'barry@broker.com'
+    fill_in 'Email', with: broker.email
     fill_in 'Password', with: 'barry'
 
     all('button', text: 'Sign In').first.click
