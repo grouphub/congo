@@ -1,8 +1,14 @@
 FactoryGirl.define do
-  properties_data = {
+  admin_properties = {
     name: 'Admin',
     tagline: 'GroupHub administrative account',
     plan_name: 'admin'
+  }
+
+  broker_properties = {
+    name: 'First Account',
+    tagline: '#1 Account',
+    plan_name: 'basic'
   }
 
   factory :account do
@@ -10,7 +16,14 @@ FactoryGirl.define do
       name       'Admin'
       tagline    'GroupHub administrative account'
       plan_name  'admin'
-      properties properties_data
+      properties admin_properties
+    end
+
+    factory :broker_account do
+      name       'First Account'
+      tagline    '#1 Account'
+      plan_name  'basic'
+      properties broker_properties
     end
   end
 end
