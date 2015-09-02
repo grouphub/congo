@@ -253,6 +253,7 @@ congoApp.config([
       .when('/accounts/:slug/:role/groups/:group_slug/welcome', {
         templateUrl: congo.assets['groups/welcome.html'],
         controller: 'GroupsWelcomeController'
+      })
       .when('/accounts/:slug/:role/groups/:group_slug/details', {
         templateUrl: congo.assets['groups/details.html'],
         controller: 'GroupsDetailsController'
