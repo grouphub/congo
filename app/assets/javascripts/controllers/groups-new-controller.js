@@ -8,10 +8,6 @@ congoApp.controller('GroupsNewController', [
 
     $scope.form = {
       name: null,
-      group_id: null,
-      description_markdown: null,
-      description_html: null,
-      description_trusted: null
     };
 
     $scope.$watch('form.description_markdown', function (string) {
