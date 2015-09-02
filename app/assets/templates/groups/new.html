@@ -6,7 +6,7 @@
   </div>
 
   <div class="col-md-6">
-    <form ng-submit="submit()" id="new-group-form">
+    <form ng-submit="submit()" class="group-form">
       <table>
         <tr>
           <td class="td-label">
@@ -20,6 +20,7 @@
         <tr>
           <td>
           </td>
+
           <td class="td-buttons-right padding-top-25">
             <input type="submit" class="btn btn-primary" value="Create Group" ng-disabled="isLocked">
             <a ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/groups" class="btn btn-primary">Cancel</a>
