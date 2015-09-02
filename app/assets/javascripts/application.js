@@ -73,6 +73,7 @@
 //= require controllers/groups-new-controller
 //= require controllers/groups-show-controller
 //= require controllers/groups-welcome-controller
+//= require controllers/groups-details-controller
 //= require controllers/tokens-index-controller
 //= require controllers/users-new-controller
 //= require controllers/users-new-account-controller
