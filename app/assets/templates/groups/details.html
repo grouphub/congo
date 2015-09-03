@@ -20,10 +20,10 @@
       <table>
         <tr>
           <td class="td-label">
-            <label for="number_of_members">Number of Members</label>
+            <label for="number_of_members">Number of Members*</label>
           </td>
           <td>
-            <select name="member_number" ng-options="member_number.id as member_number.desc for member_number in number_of_members" ng-model="number_of_members_selected">
+            <select name="member_number" ng-required="true" ng-options="member_number.id as member_number.desc for member_number in number_of_members" ng-model="number_of_members_selected">
               <option value="">Please select a number</option>
             </select>
           </td>
@@ -31,10 +31,10 @@
 
         <tr>
           <td class="td-label">
-            <label for="industry">Industry</label>
+            <label for="industry">Industry*</label>
           </td>
           <td>
-            <select name="industry" ng-options="industry.id as industry.desc for industry in industries" ng-model="industry_selected">
+            <select name="industry" ng-required="true" ng-options="industry.id as industry.desc for industry in industries" ng-model="industry_selected">
               <option value="">Please select an industry</option>
             </select>
           </td>
@@ -53,10 +53,10 @@
 
         <tr>
           <td class="td-label">
-            <label for="tax_id">Phone Number</label>
+            <label for="tax_id">Phone Number*</label>
           </td>
           <td>
-            <input type="text" class="form-control" id="phone_number" placeholder="Enter a phone number&hellip;" ng-model="form.phone_number">
+            <input type="text" class="form-control" id="phone_number" placeholder="Enter a phone number&hellip;" ng-required="true" ng-model="form.phone_number">
           </td>
         </tr>
 
