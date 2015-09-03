@@ -45,6 +45,48 @@ describe 'As a broker', js: true do
       end
     end
 
+    context 'A group already exist' do
+      before(:each) do
+        @broker_group = create(:group, account_id: @broker_account.id)
+      end
+
+      it 'allows them to navigate to a group\'s Details page' do
+        visit "/accounts/#{@broker_account.slug}/broker/groups/#{@broker_group.slug}/welcome"
+
+        click_link 'Get Started'
+        expect(current_path).to eq('/accounts/first_account/broker/groups/group_test/details')
+      end
+
+      it 'allows them to create the details of a group' do
+        pending 'The group is not being created for some reason'
+
+        visit "/accounts/#{@broker_account.slug}/broker/groups/#{@broker_group.slug}/details"
+
+        number_of_members_select = all('select').first
+        industry_select          = all('select').last
+
+        number_of_members_select.find(:xpath, 'option[2]').select_option
+        industry_select.find(:xpath, 'option[2]').select_option
+
+        fill_in 'website',      with: 'www.website.com'
+        fill_in 'phone_number', with: '1111111111'
+        fill_in 'zip_code',     with: '22222'
+        fill_in 'tax_id',       with: '1234'
+
+        click_button 'Save & Continue'
+
+        #TODO: Check why this is not creating the group
+        expect(current_path).to eq("/accounts/#{@broker_account.slug}/broker/groups/#{@broker_group.slug}/members")
+      end
+
+      it 'allows them to skip details of a group' do
+        visit "/accounts/#{@broker_account.slug}/broker/groups/#{@broker_group.slug}/details"
+
+        click_link 'Skip'
+        expect(current_path).to eq("/accounts/#{@broker_account.slug}/broker/groups/#{@broker_group.slug}/members")
+      end
+    end
+
     it 'allows them to delete a group'
     it 'allows them to enable and disable a group'
 
