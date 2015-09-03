@@ -23,7 +23,7 @@
             <label for="number_of_members">Number of Members*</label>
           </td>
           <td>
-            <select name="member_number" ng-required="true" ng-options="member_number.id as member_number.desc for member_number in number_of_members" ng-model="number_of_members_selected">
+            <select name="number_of_members" ng-required="true" ng-options="number_of_member.id as number_of_member.desc for number_of_member in number_of_members" ng-model="form.number_of_members">
               <option value="">Please select a number</option>
             </select>
           </td>
@@ -34,7 +34,7 @@
             <label for="industry">Industry*</label>
           </td>
           <td>
-            <select name="industry" ng-required="true" ng-options="industry.id as industry.desc for industry in industries" ng-model="industry_selected">
+            <select name="industry" ng-required="true" ng-options="industry.id as industry.desc for industry in industries" ng-model="form.industry">
               <option value="">Please select an industry</option>
             </select>
           </td>
@@ -84,7 +84,7 @@
 
           <td class="td-buttons-right padding-top-25">
             <input type="submit" class="btn btn-primary" value="Save & Continue" ng-disabled="isLocked">
-            <input type="submit" class="btn btn-primary" value="Skip" ng-disabled="isLocked">
+            <a ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/groups/{{groupSlug()}}/members" class="btn btn-primary">Skip</a>
           </td>
         </tr>
       </table>
