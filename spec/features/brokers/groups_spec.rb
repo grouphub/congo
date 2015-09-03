@@ -13,31 +13,39 @@ describe 'As a broker', js: true do
       visit "/accounts/#{@broker_account.slug}/broker/groups/new"
     end
 
-    it 'allows them to create a group' do
-      fill_in 'name', with: 'My first group'
-      click_button 'Create Group'
+    context 'Creating a group' do
+      it 'allows them to create a group' do
+        fill_in 'name', with: 'My first group'
+        click_button 'Create Group'
 
-      expect(page).to have_content("Welcome to your #{@broker_account.slug.capitalize} Account.")
-    end
+        expect(page).to have_content("Welcome to your #{@broker_account.slug.capitalize} Account.")
+      end
 
-    it 'allows them to cancel the creation of a group' do
-      fill_in 'name', with: 'My first group'
-      click_link 'Cancel'
+      it 'allows them to cancel the creation of a group' do
+        fill_in 'name', with: 'My first group'
+        click_link 'Cancel'
 
-      expect(current_path).to eq("/accounts/#{@broker_account.slug}/broker/groups")
-    end
+        expect(current_path).to eq("/accounts/#{@broker_account.slug}/broker/groups")
+      end
 
-    it 'sees the group he created' do
-      fill_in 'name', with: 'My first group'
-      click_button 'Create Group'
+      it 'allows them to view a group' do
+        fill_in 'name', with: 'My first group'
+        click_button 'Create Group'
 
-      visit "/accounts/#{@broker_account.slug}/broker/groups"
+        visit "/accounts/#{@broker_account.slug}/broker/groups"
 
-      expect(page).to have_content(@broker_account.groups.first.name)
+        expect(page).to have_content(@broker_account.groups.first.name)
+      end
+
+      it 'allows shows welcome page afterwards' do
+        fill_in 'name', with: 'My first group'
+        click_button 'Create Group'
+
+        expect(page).to have_content('Welcome to your')
+      end
     end
 
     it 'allows them to delete a group'
-    it 'allows them to view a group'
     it 'allows them to enable and disable a group'
 
     describe 'Benefit Plans' do
