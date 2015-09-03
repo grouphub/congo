@@ -66,7 +66,6 @@ congoApp.controller('GroupsDetailsController', [
       .get('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups/' + $scope.groupSlug() + '.json')
       .success(function (data, status, headers, config) {
         $scope.group = data.group;
-        $scope.ready();
       })
       .error(function (data, status, headers, config) {
         var error = (data && data.error) ?
@@ -75,6 +74,41 @@ congoApp.controller('GroupsDetailsController', [
 
         flashesFactory.add('danger', error);
       });
+
+    $scope.isLocked = false;
+
+    $scope.submit = function () {
+      $scope.isLocked = true;
+
+      $http
+        .put('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups/' + $scope.groupSlug(), {
+          number_of_members: $scope.form.number_of_members,
+          industry:          $scope.form.industry,
+          website:           $scope.form.website,
+          phone_number:      $scope.form.phone_number,
+          zip_code:          $scope.form.zip_code,
+          tax_id:            $scope.form.tax_id
+        })
+        .success(function (data, status, headers, config) {
+          $location.path('/accounts/' + $scope.accountSlug() + '/' + $scope.currentRole() + '/groups/' + data.group.slug + '/members');
+
+          // TODO: Does this need to be here?
+          $scope.ready();
+
+          $scope.isLocked = false;
+        })
+        .error(function (data, status, headers, config) {
+          var error = (data && data.error) ?
+            data.error :
+            'There was a problem creating the group.';
+
+          flashesFactory.add('danger', error);
+
+          $scope.isLocked = false;
+        });
+    };
+
+    $scope.ready();
   }
 ]);
 
