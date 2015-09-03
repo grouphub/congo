@@ -114,11 +114,20 @@ class Api::Internal::GroupsController < Api::ApiController
       description_html = properties['description_html']
 
       group.update_attributes! \
-        name: properties['name'],
-        properties: properties,
+        name:                 properties['name'],
+        properties:           properties,
         description_markdown: description_markdown,
-        description_html: description_html
+        description_html:     description_html
     end
+
+    #TODO: we need to implement strong parameters
+    group.update_attributes! \
+        number_of_members:    params[:number_of_members],
+        industry:             params[:industry],
+        website:              params[:website],
+        phone_number:         params[:phone_number],
+        zip_code:             params[:zip_code],
+        tax_id:               params[:tax_id]
 
     respond_to do |format|
       format.json {
