@@ -10,7 +10,14 @@ congoApp.directive('addNewMemberModal', [
       replace: true,
       templateUrl: congo.assets['directives/add-new-member-modal.html'],
       link: function ($scope, $element, $attrs) {
-        $scope.deleteAccount = function () {
+        $scope.newMember = {
+          first_name: null,
+          last_name: null,
+          phone: null,
+          email: null
+        };
+
+        $scope.submitNewMember = function() {
           $http
             .post()
             .then(

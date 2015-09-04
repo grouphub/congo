@@ -9,15 +9,16 @@
       <div class="modal-body">
         <p>Connect to carriers to validate enrollment and ensure compliance or simply upload a current carrier invoice or bill.</p>
 
-        <form ng-submit="submit()" class="group-form">
+        <form ng-submit="submitNewMember()" class="group-form" name="newMemberForm">
           <table>
             <tr>
               <td class="td-label">
                 <label for="name">First Name</label>
               </td>
               <td>
-                <input type="text" class="form-control" id="first_name" placeholder="Enter first name&hellip;" ng-model="form.first_name" auto-focus>
+                <input type="text" class="form-control" name="first_name" placeholder="Enter first name&hellip;" ng-model="newMember.first_name" ng-required="true" auto-focus />
               </td>
+              <td>
             </tr>
 
             <tr>
@@ -25,7 +26,7 @@
                 <label for="name">Last Name</label>
               </td>
               <td>
-                <input type="text" class="form-control" id="last_name" placeholder="Enter last name&hellip;" ng-model="form.last_name">
+                <input type="text" class="form-control" name="last_name" placeholder="Enter last name&hellip;" ng-model="newMember.last_name" ng-required="true" />
               </td>
             </tr>
 
@@ -34,7 +35,7 @@
                 <label for="name">Phone</label>
               </td>
               <td>
-                <input type="text" class="form-control" id="phone" placeholder="Enter phone number&hellip;" ng-model="form.phone">
+                <input type="text" class="form-control" name="phone" placeholder="Enter phone number&hellip;" ng-model="newMember.phone" ng-required="true" />
               </td>
             </tr>
 
@@ -43,7 +44,7 @@
                 <label for="name">Email</label>
               </td>
               <td>
-                <input type="text" class="form-control" id="email" placeholder="Enter email address&hellip;" ng-model="form.email">
+                <input type="text" class="form-control" name="email" placeholder="Enter email address&hellip;" ng-model="newMember.email" />
               </td>
             </tr>
 
