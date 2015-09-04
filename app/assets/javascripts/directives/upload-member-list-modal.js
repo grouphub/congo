@@ -8,7 +8,7 @@ congoApp.directive('uploadMemberListModal', [
       replace: true,
       templateUrl: congo.assets['directives/upload-member-list-modal.html'],
       link: function ($scope, $element, $attrs) {
-        $scope.deleteAccount = function () {
+        $scope.uploadMemberList = function () {
           $http
             .post()
             .then(
