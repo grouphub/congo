@@ -23,6 +23,10 @@ congoApp.controller('GroupsMembersController', [
         $('#add-new-member-modal').modal('show');
       };
 
+      $scope.openUploadMemberListModal = function () {
+        $('#upload-member-list-modal').modal('show');
+      };
+
     $scope.ready();
   }
 ]);

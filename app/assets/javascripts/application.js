@@ -115,6 +115,7 @@
 //= require directives/account-delete-modal
 //= require directives/group-benefit-plans-modal
 //= require directives/add-new-member-modal
+//= require directives/upload-member-list-modal
 //
 //  -------
 //  Filters
