@@ -19,7 +19,10 @@ congoApp.controller('GroupsMembersController', [
         flashesFactory.add('danger', error);
       });
 
+      $scope.openAddNewMemberModal = function () {
+        $('#add-new-member-modal').modal('show');
+      };
+
     $scope.ready();
   }
 ]);
-
