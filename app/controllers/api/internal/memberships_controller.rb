@@ -19,6 +19,8 @@ class Api::Internal::MembershipsController < Api::ApiController
     end
   end
 
+  #TODO: tables need to be normalized; email
+  #is repeated on Memberships and Users tables
   def create
     group_slug = params[:group_id]
     group = Group.where(slug: group_slug).first
@@ -36,6 +38,12 @@ class Api::Internal::MembershipsController < Api::ApiController
       email: email,
       role_name: role_name
 
+    membership.create_user \
+      first_name: params[:first_name],
+      last_name: params[:last_name],
+      email: params[:email],
+      phone: params[:phone]
+    
     if role_name == 'group_admin'
       MembershipMailer.confirmation_email(membership.id, request.protocol, request.host_with_port).deliver_later
     end

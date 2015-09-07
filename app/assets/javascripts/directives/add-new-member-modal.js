@@ -10,7 +10,9 @@ congoApp.directive('addNewMemberModal', [
       replace: true,
       templateUrl: congo.assets['directives/add-new-member-modal.html'],
       link: function ($scope, $element, $attrs) {
+
         $scope.newMember = {
+          role_name: 'customer',
           first_name: null,
           last_name: null,
           phone: null,
@@ -19,14 +21,12 @@ congoApp.directive('addNewMemberModal', [
 
         $scope.submitNewMember = function() {
           $http
-            .post()
+            .post('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups/' + $scope.groupSlug() + '/memberships.json', $scope.newMember)
             .then(
               function (response) {
                 congo.currentUser = response.data.user;
 
                 flashesFactory.add('success', 'Successfully added the member.');
-
-                //$location.path('/').replace();
 
                 $('#add-new-member-modal').modal('hide');
               },
