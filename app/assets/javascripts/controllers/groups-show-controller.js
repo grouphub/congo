@@ -178,28 +178,6 @@ congoApp.controller('GroupsShowController', [
         });
     };
 
-    $scope.inviteMember = function () {
-      var email = $scope.inviteMemberFormData.email;
-      var data = {
-        role_name: 'customer',
-        email: email
-      };
-      $http
-        .post('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups/' + $scope.groupSlug() + '/memberships.json', data)
-        .success(function (data, status, headers, config) {
-          $scope.inviteMemberFormData.email = '';
-          $scope.group.memberships.push(data.membership);
-          $scope.group.customer_memberships.push(data.membership);
-        })
-        .error(function (data, status, headers, config) {
-          var error = (data && data.error) ?
-            data.error :
-            'There was a problem inviting a new member.';
-
-          flashesFactory.add('danger', error);
-        });
-    };
-
     $scope.inviteGroupAdmin = function () {
       var email = $scope.inviteGroupAdminFormData.email;
       var data = {
