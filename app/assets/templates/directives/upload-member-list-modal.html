@@ -12,17 +12,19 @@
           Otherwise, you can simply upload any of your existing lists and we will help you add them instead.
         </p>
 
+        <br />
+
+        <div class="row">
+          <a href='/api/internal/accounts/{{accountSlug()}}/roles/{{currentRole()}}/groups/{{groupSlug()}}/download_employee_template' target='_blank' class="btn btn-primary">Download Grouphub Template</a>
+        </div>
+
+        <br />
+
         <form ng-submit="uploadMemberList()" class="group-form">
           <div class="row">
             <input type="submit" class="btn btn-primary" value="Upload Employee List" ng-disabled="isLocked" />
           </div>
         </form>
-
-        <br />
-
-        <div class="row">
-          <a ng-ref="" class="btn btn-primary">Download Group</a>
-        </div>
 
         <br />
 

@@ -152,6 +152,9 @@ Rails.application.routes.draw do
             # Send confirmation to all members of a group
             post '/confirmations_all', to: 'memberships#send_confirmation_to_all'
 
+            # Download GroupHub Employee Template file
+            get '/download_employee_template', to: 'memberships#download_employee_template'
+
             post '/group_benefit_plans', to: 'group_benefit_plans#create'
             delete '/group_benefit_plans', to: 'group_benefit_plans#destroy'
           end
