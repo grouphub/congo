@@ -20,11 +20,15 @@
 
         <br />
 
-        <form ng-submit="uploadMemberList()" class="group-form">
+        <form id="send_member_list" class="group-form" enctype="multipart/form-data">
           <div class="row">
-            <input type="submit" class="btn btn-primary" value="Upload Employee List" ng-disabled="isLocked" />
+            <input id="upload_employees_list" type="file" class="hidden" onchange="angular.element(this).scope().sendMemberList()" />
           </div>
         </form>
+
+        <div class="row">
+          <a ng-click="uploadMemberList()" class="btn btn-primary" ng-disabled="isLocked">Upload Employee List</a>
+        </div>
 
         <br />
 

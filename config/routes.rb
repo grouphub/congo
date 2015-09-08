@@ -151,6 +151,8 @@ Rails.application.routes.draw do
             # Download GroupHub Employee Template file
             get '/download_employee_template', to: 'memberships#download_employee_template'
 
+            post '/create_employees_from_list', to: 'memberships#create_employees_from_list'
+
             post '/group_benefit_plans', to: 'group_benefit_plans#create'
             delete '/group_benefit_plans', to: 'group_benefit_plans#destroy'
           end

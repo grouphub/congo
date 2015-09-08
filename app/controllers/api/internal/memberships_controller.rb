@@ -128,6 +128,14 @@ class Api::Internal::MembershipsController < Api::ApiController
     send_file 'public/GroupHub_Employee_Template.csv', type: 'application/csv'
   end
 
+  def create_employees_from_list
+    respond_to do |format|
+      format.json {
+        render json: {}
+      }
+    end
+  end
+
   # Render methods
 
   def render_membership(membership)
