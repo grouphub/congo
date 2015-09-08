@@ -8,27 +8,30 @@ congoApp.directive('uploadMemberListModal', [
       replace: true,
       templateUrl: congo.assets['directives/upload-member-list-modal.html'],
       link: function ($scope, $element, $attrs) {
-        $scope.uploadMemberList = function () {
-          $http
-            .post()
-            .then(
-              function (response) {
-                congo.currentUser = response.data.user;
+        $scope.uploadMemberList = function() {
+          $('#upload_employees_list').click();
+        };
 
-                flashesFactory.add('success', 'Successfully uploaded member list.');
+        $scope.submitEmployeesListForm = function(){
+          $('#send_member_list').submit();
+        };
 
-                //$location.path('/').replace();
+        $scope.sendMemberList = function(){
+          var formData = new FormData($('#yourformID')[0]);
+          formData.append('employee_list_file', $('#upload_employees_list')[0].files[0]);
 
-                $('#add-new-member-modal').modal('hide');
-              },
-              function (response) {
-                var error = (response.data && response.data.error) ?
-                  response.data.error :
-                  'An error occurred. Please try uploading the list again later.';
+          $.ajax({
+            url: "/api/internal/accounts/tangosource/roles/broker/groups/my_sixth_group/create_employees_from_list",
+            data: formData,
+            processData: false,
+            contentType: false,
+            type: 'POST',
+            success: function(data){
+              flashesFactory.add('success', 'Successfully uploaded member list.');
 
-                flashesFactory.add('danger', error);
-              }
-            );
+              $('#add-new-member-modal').modal('hide');
+            }
+          });
         };
       }
     };
