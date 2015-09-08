@@ -124,6 +124,10 @@ class Api::Internal::MembershipsController < Api::ApiController
     end
   end
 
+  def download_employee_template
+    send_file 'public/GroupHub_Employee_Template.csv', type: 'application/csv'
+  end
+
   # Render methods
 
   def render_membership(membership)
