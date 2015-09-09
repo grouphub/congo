@@ -85,6 +85,26 @@ describe 'As a broker', js: true do
         click_link 'Skip'
         expect(current_path).to eq("/accounts/#{@broker_account.slug}/broker/groups/#{@broker_group.slug}/members")
       end
+
+      context 'Adding members' do
+        before(:each) do
+          visit "/accounts/#{@broker_account.slug}/broker/groups/#{@broker_group.slug}/members"
+        end
+
+        it 'allows adding a member using "Add Members Now" button' do
+          click_link 'Add Members Now'
+
+          fill_in 'first_name', with: 'John'
+          fill_in 'last_name', with: 'Doe'
+          fill_in 'phone', with: '1111111111'
+          fill_in 'email', with: 'john@doe.com'
+
+          click_button 'Invite'
+          expect(page).to have_content('Successfully added the member.')
+        end
+
+        it 'allows adding several members using "Upload Members List" button'
+      end
     end
 
     it 'allows them to delete a group'
