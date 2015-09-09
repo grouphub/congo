@@ -104,6 +104,12 @@ describe 'As a broker', js: true do
         end
 
         it 'allows adding several members using "Upload Members List" button'
+
+        it 'allows to skip "Add Members to Group" wizard' do
+          click_link 'Do Later'
+
+          expect(current_path).to eq("/accounts/#{@broker_account.slug}/broker/groups/#{@broker_group.slug}")
+        end
       end
     end
 
