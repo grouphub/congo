@@ -521,6 +521,41 @@ congoApp.controller('GroupsShowController', [
           flashesFactory.add('danger', error);
         });
     };
+
+    // ----------------------------------
+    // Benefit Plans Categories Accordion
+    // ----------------------------------
+
+    $scope.oneAtATime = true;
+
+    $scope.groups = [
+      {
+        title: 'Health:',
+        content: ['Medical','Dental', 'Vision']
+      },
+      {
+        title: 'HSA/FSA savaings benefits:',
+        content: ['Health Savings Account (HSA)','Flexible Spending Account (FSA)']
+      },
+      {
+        title: 'Life & Disability:',
+        content: ['Life Insurance','Short-term disability', 'Long-term disability']
+      },
+      {
+        title: 'Retirement:',
+        content: ['401k','Roth 401k']
+      },
+      {
+        title: 'Other:',
+        content: ['Perks','Discounts']
+      },
+      {
+        title: 'Wellness:',
+        content: ['Rewards','Challenges', 'Initiatives']
+      }
+    ];
+
+    $scope.items = ['Item 1', 'Item 2', 'Item 3'];
   }
 ]);
 

@@ -41,6 +41,38 @@ footer {
   }
 }
 
+.centered {
+  text-align: center;
+}
+
+.left-aligned {
+  text-align: left;
+}
+
+.float-right {
+  float: right;
+}
+
+ul.benefit-plan-subcategory {
+  li {
+    width: 300px;
+    height: 50px;
+    float: left;
+  }
+
+  a {
+    float: right;
+  }
+}
+
+.clear {
+  clear: both;
+}
+
+.padding-top-25 {
+  padding-top: 25px;
+}
+
 @media screen and (max-width: 765px) {
   footer {
     img { padding: 0 20px 10px 20px; }
