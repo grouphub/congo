@@ -10,6 +10,7 @@ Rails.application.config.assets.version = '1.0'
 Rails.application.config.assets.paths << Rails.root.join('app', 'assets', 'templates', 'admin')
 
 Rails.application.config.assets.precompile += [
+  'ui-bootstrap-tpls-0.13.4.min.js',
   'glyphicons-halflings-regular.eot',
   'glyphicons-halflings-regular.woff',
   'glyphicons-halflings-regular.ttf',

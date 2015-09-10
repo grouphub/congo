@@ -28,6 +28,7 @@
 //= require ui-utils
 //= require chart
 //= require angular-chart
+//= require ui-bootstrap-tpls-0.13.4.min.js
 //
 //  -----
 //  Setup

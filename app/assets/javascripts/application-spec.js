@@ -25,6 +25,7 @@
 //= require angular-route
 //= require angular-cookies
 //= require ui-utils
+//= require ui-bootstrap-tpls-0.13.4.min.js
 //
 //  -----
 //  Setup
