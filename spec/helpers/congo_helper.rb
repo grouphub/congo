@@ -82,8 +82,10 @@ module CongoHelper
       name: 'broker'
   end
 
-  def signin_broker
+  def signin_broker(broker=nil)
     test_debug 'Signing in as a broker...'
+
+    broker ||= Role.find_by_name('broker').user
 
     visit '/'
 

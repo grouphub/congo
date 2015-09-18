@@ -150,6 +150,7 @@ class Api::Internal::GroupsController < Api::ApiController
       membership.as_json.merge({
         'user' => user.as_json,
         'role' => role.as_json,
+        'slug' => membership.slug,
         'applications' => membership.applications.map { |application|
           application.as_json.merge({
             'state' => application.state,
