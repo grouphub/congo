@@ -464,7 +464,7 @@ congoApp.controller('GroupsShowController', [
         })
         .success(function (data, status, headers, config) {
           $scope.group.attachments.push(data.attachment);
-      
+
           fileInput[0].value = null;
           $scope.file.name = '';
         })
@@ -499,6 +499,12 @@ congoApp.controller('GroupsShowController', [
     // -------------------
     // Application History
     // -------------------
+    //
+
+    $scope.uploadApplication = function(membership) {
+      $('#upload-application-modal').modal('show');
+      $scope.$emit('modal.upload-application', membership, $scope.benefitPlans);
+    };
 
 
     $scope.revokeApplication = function (application) {

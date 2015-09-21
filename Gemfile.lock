@@ -142,6 +142,13 @@ GEM
     erubis (2.7.0)
     eventmachine (1.0.7)
     execjs (2.5.2)
+    factory_girl (4.5.0)
+      activesupport (>= 3.0.0)
+    factory_girl_rails (4.5.0)
+      factory_girl (~> 4.5.0)
+      railties (>= 3.0.0)
+    faker (1.5.0)
+      i18n (~> 0.5)
     fakes3 (0.2.1)
       builder
       thor
@@ -315,6 +322,8 @@ GEM
       celluloid (~> 0.16.0)
     slop (3.6.0)
     spring (1.3.6)
+    spring-commands-rspec (1.0.4)
+      spring (>= 0.9.1)
     sprockets (3.1.0)
       rack (~> 1.0)
     stripe (1.21.0)
@@ -351,6 +360,8 @@ DEPENDENCIES
   coffee-rails!
   colorize
   database_cleaner
+  factory_girl_rails
+  faker
   fakes3
   foreman
   guard-livereload
@@ -384,6 +395,7 @@ DEPENDENCIES
   selenium-webdriver
   shoryuken
   spring
+  spring-commands-rspec
   sprockets-rails!
   stripe
   uglifier (>= 1.3.0)

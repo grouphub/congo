@@ -89,12 +89,16 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'capybara'
   gem 'selenium-webdriver'
+  gem 'factory_girl_rails'
 
   # For debugging.
   gem 'pry'
   gem 'pry-remote'
   gem 'pry-nav'
   gem 'pry-rails'
+
+  gem 'spring-commands-rspec'
+  gem 'faker'
 end
 
 group :production do

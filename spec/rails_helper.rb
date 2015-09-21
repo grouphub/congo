@@ -21,6 +21,7 @@ end
 RSpec.configure do |config|
   config.include(CapybaraHelper)
   config.include(CongoHelper)
+  config.include(FactoryGirl::Syntax::Methods)
 end
 
 # Capybara
@@ -36,6 +37,7 @@ end
 RSpec.configure do |config|
   config.before(:suite) do
     DatabaseCleaner.clean_with(:truncation)
+    FactoryGirl.lint
   end
 
   config.before(:each) do

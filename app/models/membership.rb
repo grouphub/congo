@@ -11,6 +11,8 @@ class Membership < ActiveRecord::Base
 
   before_save :create_email_token
 
+  delegate :slug, to: :account
+
   # Grace period is in days.
   GRACE_PERIOD = 2
 
