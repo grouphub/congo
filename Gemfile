@@ -59,6 +59,7 @@ gem 'unindent'
 
 # Papertrail Logging
 gem 'remote_syslog_logger'
+gem 'airbrake'
 
 group :doc do
   gem 'sdoc', '~> 0.4.0'
@@ -96,5 +97,8 @@ group :development, :test do
   gem 'pry-rails'
 end
 
-ruby ENV['CUSTOM_RUBY_VERSION'] || '2.2.0'
+group :production do
+  gem 'rails_12factor'
+end
 
+ruby ENV['CUSTOM_RUBY_VERSION'] || '2.2.0'
