@@ -47,7 +47,7 @@ describe InvoiceJob do
         email: 'foo@bar.com'
 
       role = Role.create! \
-        name: 'employee'
+        name: 'customer'
 
       membership = Membership.create! \
         account_id: account.id,
@@ -70,6 +70,4 @@ describe InvoiceJob do
     end
 
   end
-
 end
-

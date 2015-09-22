@@ -84,14 +84,14 @@ describe Api::Internal::BenefitPlansController do
       it 'renders a list of benefit plans' do
         get :index,
           {
-            format: 'json',
-            account_id: @current_account.slug,
-            role_id: @current_role.id,
-            only_activated_carriers: 'true'
-          },
-          {
-            current_user_id: @current_user.id
-          }
+          format: 'json',
+          account_id: @current_account.slug,
+          role_id: @current_role.id,
+          only_activated_carriers: 'true'
+        },
+        {
+          current_user_id: @current_user.id
+        }
 
         response_data = JSON.load(response.body)
         benefit_plans_data = response_data['benefit_plans']
@@ -116,14 +116,14 @@ describe Api::Internal::BenefitPlansController do
       it 'renders a list of benefit plans' do
         get :index,
           {
-            format: 'json',
-            account_id: @current_account.slug,
-            role_id: @current_role.id,
-            only_activated: 'true'
-          },
-          {
-            current_user_id: @current_user.id
-          }
+          format: 'json',
+          account_id: @current_account.slug,
+          role_id: @current_role.id,
+          only_activated: 'true'
+        },
+        {
+          current_user_id: @current_user.id
+        }
 
         response_data = JSON.load(response.body)
         benefit_plans_data = response_data['benefit_plans']
@@ -144,13 +144,13 @@ describe Api::Internal::BenefitPlansController do
       it 'renders a list of benefit plans' do
         get :index,
           {
-            format: 'json',
-            account_id: @current_account.slug,
-            role_id: @current_role.id
-          },
-          {
-            current_user_id: @current_user.id
-          }
+          format: 'json',
+          account_id: @current_account.slug,
+          role_id: @current_role.id
+        },
+        {
+          current_user_id: @current_user.id
+        }
 
         response_data = JSON.load(response.body)
         benefit_plans_data = response_data['benefit_plans']
@@ -188,18 +188,4 @@ describe Api::Internal::BenefitPlansController do
     end
 
   end
-
-  describe 'GET /api/v1/benefit_plans/:id.json' do
-  end
-
-  describe 'POST /api/v1/benefit_plans.json' do
-  end
-
-  describe 'PUT /api/v1/benefit_plans/:id.json' do
-  end
-
-  describe 'DELETE /api/v1/benefit_plans/:id.json' do
-  end
-
 end
-

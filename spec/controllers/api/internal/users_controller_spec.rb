@@ -125,19 +125,5 @@ describe Api::Internal::UsersController do
       # TODO: Needs more assertions
       expect(user_data['accounts'].length).to eq 1
     end
-
-    it 'responds with an error when the password does not match the confirmation'
-    it 'responds with an error when creating a customer with no matching membership'
   end
-
-  describe 'PUT /api/internal/users/:id.json' do
-  end
-
-  describe 'POST /api/internal/users/signin' do
-  end
-
-  describe 'DELETE /api/internal/users/signout' do
-  end
-
 end
-
