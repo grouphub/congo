@@ -151,7 +151,7 @@ module CongoHelper
 
     all('button', text: 'Sign In').first.click
 
-    expect(page).to have_content('Welcome, Candice!')
+    expect(page).to have_content('Candice')
   end
 
   def signout_customer
@@ -208,6 +208,4 @@ module CongoHelper
   def sample_application
     JSON.load File.read("#{Rails.root}/spec/data/application.json")
   end
-
 end
-

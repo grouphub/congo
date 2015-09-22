@@ -1,31 +1,25 @@
 require 'spec_helper'
 
 describe User do
-
   describe '#password' do
-
     it 'returns a password hash' do
       user = User.new
       user.password = 'foo'
 
       expect(user.password.length).to eq(60)
     end
-
   end
 
   describe '#password=' do
-
     it 'allows a password to be set' do
       user = User.new
       user.password = 'foo'
 
       expect(user.password).to eq('foo')
     end
-
   end
 
   describe '#full_name' do
-
     it 'returns a full name for a user with a first and last name' do
       user = User.new
       user.first_name = 'Britney'
@@ -47,11 +41,9 @@ describe User do
 
       expect(user.full_name).to eq('Spears')
     end
-
   end
 
   describe 'admin?' do
-
     it 'returns true if a user is an admin' do
       user = User.create!
 
@@ -75,11 +67,9 @@ describe User do
 
       expect(user.admin?).to eq(false)
     end
-
   end
 
   describe '#nuke!' do
-
     it 'destroys a user and all associated data' do
       user = User.create!(email: 'wanda@foo.com')
       user_2 = User.create!(email: 'virgil@foo.com')
@@ -102,14 +92,5 @@ describe User do
       expect(Application.where(id: application_2.id)).to be_present
       expect(ApplicationStatus.where(id: application_status_2.id)).to be_present
     end
-
   end
-
-  describe '#eviscerate!' do
-
-    it 'destroys a user and all associated data, leaving no remnants'
-
-  end
-
 end
-
