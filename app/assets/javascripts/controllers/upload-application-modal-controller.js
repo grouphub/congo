@@ -12,7 +12,7 @@
       $scope.benefitPlans = benefitPlans;
     });
 
-    $scope.submit = function() {
+    $scope.submitApplicationPDF = function() {
       var $form      = new FormData()
         , membership = $scope.membership;
 
