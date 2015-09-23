@@ -40,7 +40,7 @@ congoApp.controller('UsersNewAccountController', [
 
           account = congo.currentUser.accounts[0];
 
-          $location.path('/accounts/' + account.slug + '/' + account.role.name);
+          $location.path('/accounts/' + account.slug + '/' + account.role.name + '/groups/new');
 
           flashesFactory.add('success', 'Welcome, ' + congo.currentUser.first_name + ' ' + congo.currentUser.last_name + '!');
 
