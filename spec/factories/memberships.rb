@@ -4,9 +4,8 @@ FactoryGirl.define do
     email { Faker::Internet.email }
     role_name { "customer" }
 
-    after :create do |membership|
-      user = create(:user, email: membership.email)
-      membership.update(user: user)
+    trait :with_user do
+      user { create(:user, email: email) }
     end
   end
 end

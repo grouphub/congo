@@ -23,7 +23,7 @@
       $form.append('user_id',         membership.user_id);
 
       var request = $http.post(
-        '/api/internal/accounts/' + membership.slug + '/roles/' + membership.role_id + '/applications',
+        '/api/internal/accounts/' + membership.slug + '/memberships/' + membership.id + '/applications',
         $form, { transformRequest: angular.identity, headers: { 'Content-Type' : undefined } }
       );
 
