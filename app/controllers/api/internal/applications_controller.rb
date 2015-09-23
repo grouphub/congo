@@ -27,41 +27,11 @@ class Api::Internal::ApplicationsController < Api::ApiController
   end
 
   def create
-    account_slug = params[:account_id]
-    group_slug = params[:group_slug]
-    benefit_plan_id = params[:benefit_plan_id]
-    account = Account.where(slug: account_slug).first
-    group = Group.where(slug: group_slug).first
-    benefit_plan = BenefitPlan.where(id: benefit_plan_id).first
-    membership = Membership.where(group_id: group.id, user_id: params[:user_id] || current_user.id).first
-    selected_by_id = params[:selected_by_id]
-    declined_by_id = params[:declined_by_id]
-    properties = params[:properties]
-    pdf_attachment_url = nil
-
-    if params[:pdf_attachment].present?
-      pdf_attachment = params[:pdf_attachment]
-      S3.store(pdf_attachment.original_filename, pdf_attachment.tempfile, "application/pdf")
-      pdf_attachment_url = S3.public_url(pdf_attachment.original_filename)
-    end
-
-    application = Application.create! \
-      account_id: account.id,
-      benefit_plan_id: benefit_plan.id,
-      membership_id: membership.id,
-      selected_by_id: selected_by_id,
-      selected_on: (selected_by_id ? DateTime.now : nil),
-      declined_by_id: declined_by_id,
-      declined_on: (declined_by_id ? DateTime.now : nil),
-      properties: properties,
-      pdf_attachment_url: pdf_attachment_url
+    service = Applications::CreateService.new(params.dup)
+    service.process
 
     respond_to do |format|
-      format.json {
-        render json: {
-          application: render_application(application)
-        }
-      }
+      format.json { render json: { application: render_application(service.application) } }
     end
   end
 
