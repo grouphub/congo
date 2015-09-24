@@ -1,17 +1,15 @@
 require "rails_helper"
 
 feature "Broker uploading form to a specific employee", :js do
-  let(:user)    { create(:user, :broker) }
-  let(:group)   { create(:group, account: account) }
-  let(:account) { user.roles.first.account }
-  let(:membership) { create(:membership, group: group, account: group.account) }
-
+  let!(:user)    { create(:user, :broker) }
+  let!(:group)   { create(:group, account: account, slug: "group_test1") }
+  let!(:account) { user.roles.first.account }
   let!(:account_benefit_plan) { create(:account_benefit_plan, account: account) }
 
   background { signin_broker(user) }
 
   context "when there are existing memberships" do
-    before { membership }
+    let!(:membership) { create(:membership, :with_user, group: group, account: group.account) }
 
     scenario "Showing a list of the active plans for that group and selecting a plan" do
       visit "/accounts/#{account.slug}/broker/groups/#{group.slug}"
