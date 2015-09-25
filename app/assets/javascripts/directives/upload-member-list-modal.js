@@ -17,20 +17,23 @@ congoApp.directive('uploadMemberListModal', [
         };
 
         $scope.sendMemberList = function(){
-          var formData = new FormData($('#yourformID')[0]);
-          formData.append('employee_list_file', $('#upload_employees_list')[0].files[0]);
+          var $form = new FormData();
+          $form.append('employee_list_file', $('#upload_employees_list')[0].files[0]);
 
-          $.ajax({
-            url: "/api/internal/accounts/tangosource/roles/broker/groups/my_sixth_group/create_employees_from_list",
-            data: formData,
-            processData: false,
-            contentType: false,
-            type: 'POST',
-            success: function(data){
-              flashesFactory.add('success', 'Successfully uploaded member list.');
+          var request = $http.post(
+            '/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups/' + $scope.groupSlug() + '/create_employees_from_list.json',
+            $form, { transformRequest: angular.identity, headers: { 'Content-Type' : undefined } }
+          )
 
-              $('#add-new-member-modal').modal('hide');
-            }
+          request.success(function(response){
+            flashesFactory.add('success', 'Successfully uploaded member list.');
+            $('#upload-member-list-modal').modal('hide');
+            $location.path('/accounts/' + $scope.accountSlug() + '/' + $scope.currentRole() + '/groups/' + $scope.groupSlug());
+          });
+
+          request.error(function(){
+            flashesFactory.add('danger', 'There was a problem uploading your list');
+            $('#upload-member-list-modal').modal('hide');
           });
         };
       }

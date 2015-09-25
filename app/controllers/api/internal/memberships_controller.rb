@@ -38,12 +38,6 @@ class Api::Internal::MembershipsController < Api::ApiController
       email: email,
       role_name: role_name
 
-    membership.create_user \
-      first_name: params[:first_name],
-      last_name: params[:last_name],
-      email: params[:email],
-      phone: params[:phone]
-    
     if role_name == 'group_admin'
       MembershipMailer.confirmation_email(membership.id, request.protocol, request.host_with_port).deliver_later
     end
@@ -130,7 +124,7 @@ class Api::Internal::MembershipsController < Api::ApiController
 
   def create_employees_from_list
 
-    #TODO: WIP - Move this into a library to 
+    #TODO: WIP - Move this into a library to
     #create users out of csv uploaded by brokers
     require 'csv'
 
@@ -154,10 +148,18 @@ class Api::Internal::MembershipsController < Api::ApiController
       employees << Hash[csv_headers.zip employee_info]
     end
 
+    group = Group.where(slug: params[:group_id]).first
+
+    employees.each do |employee|
+      Membership.create! \
+        account_id: group.account_id,
+        group_id: group.id,
+        email: employee[:email],
+        role_name: params[:role_name]
+    end
+
     respond_to do |format|
-      format.json {
-        render json: {}
-      }
+      format.json { render json: {} }
     end
   end
 
