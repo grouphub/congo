@@ -155,7 +155,7 @@ class Api::Internal::MembershipsController < Api::ApiController
         account_id: group.account_id,
         group_id: group.id,
         email: employee[:email],
-        role_name: params[:role_name]
+        role_name: "customer"
     end
 
     respond_to do |format|

@@ -81,7 +81,7 @@ congoApp.controller('GroupsDetailsController', [
       $scope.isLocked = true;
 
       $http
-        .put('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups/' + $scope.groupSlug(), {
+        .put('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups/' + $scope.groupSlug() + '.json', {
           number_of_members: $scope.form.number_of_members,
           industry:          $scope.form.industry,
           website:           $scope.form.website,

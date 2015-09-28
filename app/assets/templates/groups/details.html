@@ -23,7 +23,7 @@
             <label for="number_of_members">Number of Members*</label>
           </td>
           <td>
-            <select name="number_of_members" ng-required="true" ng-options="number_of_member.id as number_of_member.desc for number_of_member in number_of_members" ng-model="form.number_of_members">
+            <select id="number_of_members" name="number_of_members" ng-required="true" ng-options="number_of_member.id as number_of_member.desc for number_of_member in number_of_members" ng-model="form.number_of_members">
               <option value="">Please select a number</option>
             </select>
           </td>
@@ -34,7 +34,7 @@
             <label for="industry">Industry*</label>
           </td>
           <td>
-            <select name="industry" ng-required="true" ng-options="industry.id as industry.desc for industry in industries" ng-model="form.industry">
+            <select id="industry" name="industry" ng-required="true" ng-options="industry.id as industry.desc for industry in industries" ng-model="form.industry">
               <option value="">Please select an industry</option>
             </select>
           </td>
@@ -53,7 +53,7 @@
 
         <tr>
           <td class="td-label">
-            <label for="tax_id">Phone Number*</label>
+            <label for="phone_number">Phone Number*</label>
           </td>
           <td>
             <input type="text" class="form-control" id="phone_number" placeholder="Enter a phone number&hellip;" ng-required="true" ng-model="form.phone_number">
@@ -62,7 +62,7 @@
 
         <tr>
           <td class="td-label">
-            <label for="tax_id">ZIP Code</label>
+            <label for="zip_code">ZIP Code</label>
           </td>
           <td>
             <input type="text" class="form-control" id="zip_code" placeholder="Enter a zip code&hellip;" ng-model="form.zip_code">
