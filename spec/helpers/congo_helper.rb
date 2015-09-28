@@ -183,5 +183,20 @@ module CongoHelper
     JSON.load File.read("#{Rails.root}/spec/data/application.json")
   end
 
-end
+  def sign_in(user)
+    test_debug 'Signing in as a broker...'
 
+    visit '/'
+
+    all('a', text: 'Sign In').first.click
+
+    expect(page).to have_content('Email')
+
+    fill_in 'Email', with: user.email
+    fill_in 'Password', with: 'supersecret'
+
+    all('button', text: 'Sign In').first.click
+
+    expect(page).to have_content(user.first_name)
+  end
+end
