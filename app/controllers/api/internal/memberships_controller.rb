@@ -123,40 +123,10 @@ class Api::Internal::MembershipsController < Api::ApiController
   end
 
   def create_employees_from_list
-
-    #TODO: WIP - Move this into a library to
-    #create users out of csv uploaded by brokers
-    require 'csv'
-
-    csv_file_rows = CSV.read(params[:employee_list_file].tempfile)
-
-    csv_headers = csv_file_rows.slice!(0).map do |header|
-      if header.include?('/')
-        header.downcase.gsub('/', '_').gsub(' ', '_')
-      elsif header.include?('-')
-        header.downcase.gsub('-', '_').gsub(' ', '_')
-      else
-        header.downcase.gsub(' ', '_')
-      end
-    end
-
-    csv_headers = csv_headers.map(&:to_sym)
-
-    employees = []
-
-    csv_file_rows.each do |employee_info|
-      employees << Hash[csv_headers.zip employee_info]
-    end
-
-    group = Group.where(slug: params[:group_id]).first
-
-    employees.each do |employee|
-      Membership.create! \
-        account_id: group.account_id,
-        group_id: group.id,
-        email: employee[:email],
-        role_name: "customer"
-    end
+    Memberships::CreateFromCSV.(
+      params[:employee_list_file].tempfile,
+      Group.where(slug: params[:group_id]).first
+    )
 
     respond_to do |format|
       format.json { render json: {} }
