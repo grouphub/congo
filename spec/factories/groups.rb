@@ -7,8 +7,8 @@ FactoryGirl.define do
 
   factory :group do
     account_id 1
-    name 'Group test'
-    slug 'group_test'
+    name  { Faker::Company.name }
+    slug  { name.parameterize.underscore }
     is_enabled true
     description_markdown 'Some description'
     description_html 'Some description'

@@ -1,10 +1,11 @@
 require 'rails_helper'
 
 feature 'Broker authentication', :js do
+  let(:broker) { create(:user, :broker) }
+
   scenario 'allows them to sign in and out' do
-    create_broker
-    signin_broker
-    signout_broker
+    sign_in broker
+    sign_out broker
   end
 
   scenario "allows them to sign up for a basic plan" do
@@ -47,7 +48,7 @@ feature 'Broker authentication', :js do
     all('input[type=submit]').first.click
 
     expect(page).to have_content('Welcome, Barry Broker!')
-    expect(page).to have_content('Broker Dashboard: First Account')
+    expect(page).to have_content('Create New Group')
 
     current_user = current_user_data
     expect(current_user['first_name']).to eq('Barry')
@@ -101,7 +102,7 @@ feature 'Broker authentication', :js do
     all('input[type=submit]').first.click
 
     expect(page).to have_content('Welcome, Barry Broker!')
-    expect(page).to have_content('Broker Dashboard: First Account')
+    expect(page).to have_content('Create New Group')
 
     current_user = current_user_data
     expect(current_user['first_name']).to eq('Barry')
@@ -155,7 +156,7 @@ feature 'Broker authentication', :js do
     all('input[type=submit]').first.click
 
     expect(page).to have_content('Welcome, Barry Broker!')
-    expect(page).to have_content('Broker Dashboard: First Account')
+    expect(page).to have_content('Create New Group')
 
     current_user = current_user_data
     expect(current_user['first_name']).to eq('Barry')

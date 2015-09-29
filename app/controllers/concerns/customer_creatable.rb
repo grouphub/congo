@@ -8,6 +8,8 @@ module CustomerCreatable
   def attempt_to_create_customer!
     password    = params[:password]
     email_token = params[:email_token]
+    first_name  = params[:first_name]
+    last_name   = params[:last_name]
 
     return unless email_token
 
@@ -17,7 +19,14 @@ module CustomerCreatable
     role_name  = membership.role_name
     account_id = group.account_id
 
+    user ||= membership.create_user \
+      first_name: first_name,
+      last_name: last_name,
+      email: membership.email,
+      password: password
+
     user.update(password: password)
+    membership.save!
 
     unless membership
       # TODO: Handle this

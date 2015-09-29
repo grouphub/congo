@@ -1,11 +1,10 @@
 require "spec_helper"
 
 feature "Brokers group onboarding wizard", :js do
-  let(:broker) { create(:broker_user) }
-  let(:account) { create(:broker_account) }
+  let(:broker) { create(:user, :broker) }
+  let(:account) { broker.roles.first.account }
   let(:group) { account.groups.first }
-
-  before { create(:broker_role, user_id: broker.id, account_id: account.id) }
+  let(:memberships) { group.memberships }
 
   background { sign_in broker }
 
@@ -50,8 +49,10 @@ feature "Brokers group onboarding wizard", :js do
 
     click_on "Members"
 
-    expect(find('.invited-membership-1').value).
-      to have_content "johndoe@example.com"
+    memberships.each do |membership|
+      expect(find(".invited-membership-#{membership.id}").value).
+        to have_content membership.email
+    end
   end
 
   scenario "creating new group and adding members list" do
@@ -92,11 +93,10 @@ feature "Brokers group onboarding wizard", :js do
 
     click_on "Members"
 
-    expect(find('.invited-membership-1').value).
-      to have_content "johndoe@example.com"
-
-    expect(find('.invited-membership-2').value).
-      to have_content "foobar@example.com"
+    memberships.each do |membership|
+      expect(find(".invited-membership-#{membership.id}").value).
+        to have_content membership.email
+    end
   end
 
 
