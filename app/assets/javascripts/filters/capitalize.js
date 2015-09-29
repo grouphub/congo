@@ -1,7 +1,12 @@
-var congoApp = angular.module('congoApp');
+!function() {
+  "use strict";
 
-congoApp.filter('capitalize', function() {
-  return function(input) {
-    return input.charAt(0).toUpperCase() + input.substr(1).toLowerCase();
-  }
-});
+  angular.module('congoApp').filter('capitalize', capitalize);
+
+  function capitalize(){
+    return function(input) {
+      return input.charAt(0).toUpperCase() + input.substr(1).toLowerCase();
+    };
+  };
+
+}();
