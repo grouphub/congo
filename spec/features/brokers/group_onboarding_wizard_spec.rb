@@ -137,11 +137,8 @@ feature "Brokers group onboarding wizard", :js do
     scenario 'allows them to create the details of a group' do
       visit "/accounts/#{account.slug}/broker/groups/#{group.slug}/details"
 
-      number_of_members_select = all('select').first
-      industry_select          = all('select').last
-
-      number_of_members_select.find(:xpath, 'option[2]').select_option
-      industry_select.find(:xpath, 'option[2]').select_option
+      select rand(1..11), from: "Number of Members*"
+      select "Information Technology", from: "Industry"
 
       fill_in 'website',      with: 'www.website.com'
       fill_in 'phone_number', with: '1111111111'
@@ -150,7 +147,7 @@ feature "Brokers group onboarding wizard", :js do
 
       click_button 'Save & Continue'
 
-      #TODO: Check why this is not creating the group
+      sleep(1)
       expect(current_path).to eq("/accounts/#{account.slug}/broker/groups/#{group.slug}/members")
     end
 
