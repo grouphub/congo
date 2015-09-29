@@ -5,11 +5,11 @@ module CongoHelper
   def create_admin
     test_debug 'Creating an admin account...'
 
-    account = create(:admin_account)
+    account = create(:account, :admin)
 
-    user = create(:admin_user)
+    user = create(:user, :admin)
 
-    create(:admin_role, user_id: user.id, account_id: account.id)
+    create(:role, :admin, user_id: user.id, account_id: account.id)
   end
 
   def signin_admin
@@ -46,12 +46,7 @@ module CongoHelper
 
   def create_broker
     test_debug 'Creating a broker account...'
-
-    account = create(:broker_account)
-
-    user = create(:broker_user)
-
-    create(:broker_role, user_id: user.id, account_id: account.id)
+    create(:user, :broker)
   end
 
   def signin_broker(broker=nil)
@@ -184,8 +179,6 @@ module CongoHelper
   end
 
   def sign_in(user)
-    test_debug 'Signing in as a broker...'
-
     visit '/'
 
     all('a', text: 'Sign In').first.click
@@ -198,5 +191,16 @@ module CongoHelper
     all('button', text: 'Sign In').first.click
 
     expect(page).to have_content(user.first_name)
+  end
+
+  def sign_out(user)
+    all('a', text: user.first_name).first.click
+
+    expect(page).to have_content('Sign Out')
+
+    all('a', text: 'Sign Out').first.click
+
+    expect(page).to have_content('You have signed out.')
+    expect(page).to have_content('The next generation')
   end
 end

@@ -7,12 +7,12 @@ FactoryGirl.define do
       first_name 'GroupHub'
       last_name  'Admin'
       email      'admin@grouphub.io'
-      password   'testtest'
     end
 
     trait :broker do
       email      'barry@broker.com'
-      password   'barry'
+      first_name { Faker::Name.first_name }
+      last_name  { Faker::Name.last_name }
 
       after :create do |user|
         account = create(:account, :broker)
