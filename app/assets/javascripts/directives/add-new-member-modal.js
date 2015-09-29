@@ -16,7 +16,6 @@
     return addNewMemberModalDirective;
 
     function modal($scope, $element, $attrs) {
-
       $scope.newMember = {
         role_name: 'customer',
         first_name: null,
