@@ -117,5 +117,5 @@
 //  Filters
 //  -------
 //
-//= require filters
+//= require filters/capitalize
 //
