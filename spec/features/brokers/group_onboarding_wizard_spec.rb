@@ -98,4 +98,91 @@ feature "Brokers group onboarding wizard", :js do
     expect(find('.invited-membership-2').value).
       to have_content "foobar@example.com"
   end
+
+
+  scenario 'allows them to cancel the creation of a group' do
+    visit "/accounts/#{account.slug}/broker/groups/new"
+    expect(page).to have_content "Create New Group"
+
+    fill_in 'name', with: 'My first group'
+    click_link 'Cancel'
+
+    expect(current_path).to eq("/accounts/#{account.slug}/broker/groups")
+  end
+
+  scenario 'allows them to view a group' do
+    visit "/accounts/#{account.slug}/broker/groups/new"
+    expect(page).to have_content "Create New Group"
+
+    fill_in 'name', with: 'My first group'
+    click_button 'Create Group'
+
+    visit "/accounts/#{account.slug}/broker/groups"
+
+    expect(page).to have_content(group.name)
+  end
+
+
+  context 'A group already exist' do
+    let!(:group) { create(:group, account: account) }
+
+    it 'allows them to navigate to a group\'s Details page' do
+      visit "/accounts/#{account.slug}/broker/groups/#{group.slug}/welcome"
+
+      click_link 'Get Started'
+
+      expect(current_path).to eq("/accounts/#{account.slug}/broker/groups/#{group.slug}/details")
+    end
+
+    scenario 'allows them to create the details of a group' do
+      visit "/accounts/#{account.slug}/broker/groups/#{group.slug}/details"
+
+      number_of_members_select = all('select').first
+      industry_select          = all('select').last
+
+      number_of_members_select.find(:xpath, 'option[2]').select_option
+      industry_select.find(:xpath, 'option[2]').select_option
+
+      fill_in 'website',      with: 'www.website.com'
+      fill_in 'phone_number', with: '1111111111'
+      fill_in 'zip_code',     with: '22222'
+      fill_in 'tax_id',       with: '1234'
+
+      click_button 'Save & Continue'
+
+      #TODO: Check why this is not creating the group
+      expect(current_path).to eq("/accounts/#{account.slug}/broker/groups/#{group.slug}/members")
+    end
+
+    scenario 'allows them to skip details of a group' do
+      visit "/accounts/#{account.slug}/broker/groups/#{group.slug}/details"
+
+      click_link 'Skip'
+      expect(current_path).to eq("/accounts/#{account.slug}/broker/groups/#{group.slug}/members")
+    end
+
+    context 'Adding members' do
+      before(:each) do
+        visit "/accounts/#{account.slug}/broker/groups/#{group.slug}/members"
+      end
+
+      scenario 'allows adding a member using "Add Members Now" button' do
+        click_link 'Add Members Now'
+
+        fill_in 'first_name', with: 'John'
+        fill_in 'last_name', with: 'Doe'
+        fill_in 'phone', with: '1111111111'
+        fill_in 'email', with: 'john@doe.com'
+
+        click_button 'Invite'
+        expect(page).to have_content('Successfully added the member.')
+      end
+
+      scenario 'allows to skip "Add Members to Group" wizard' do
+        click_link 'Do Later'
+
+        expect(current_path).to eq("/accounts/#{account.slug}/broker/groups/#{group.slug}")
+      end
+    end
+  end
 end
