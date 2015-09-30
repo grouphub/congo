@@ -14,6 +14,10 @@
         $element.bind('change', function(){
           $scope.$apply(function(){ $model.assign($scope, $element[0].files[0]); });
         });
+
+        $scope.$on('file.clear', function() {
+          $element.val('');
+        });
       }
     };
   };
