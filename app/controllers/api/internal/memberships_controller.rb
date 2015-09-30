@@ -137,7 +137,8 @@ class Api::Internal::MembershipsController < Api::ApiController
 
   def render_membership(membership)
     membership.as_json.merge({
-      user: membership.user
+      user: membership.user,
+      applications: membership.applications
     })
   end
 
