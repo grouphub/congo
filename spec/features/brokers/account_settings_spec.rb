@@ -1,22 +1,27 @@
 require 'rails_helper'
 
 feature 'Account Settings', :js do
+  let(:broker)  { create(:user, :broker) }
+  let!(:account) { broker.roles.first.account }
+
   scenario 'allows a broker to edit their account' do
-    create_broker
+    properties = {
+      'name'        => 'First Account',
+      'tagline'     => '#1 Account',
+      'plan_name'   => 'basic',
+      'tax_id'      => '123',
+      'first_name'  => 'Felice',
+      'last_name'   => 'Felton',
+      'phone'       => '555-555-5555',
+      'card_number' => '1111222233334444',
+      'month'       => '11',
+      'year'        => '2016',
+      'cvc'         => '123'
+    }
 
-    account = Account.find_by_name('First Account')
-    account_properties = account.properties
-    account_properties['tax_id'] = '123'
-    account_properties['first_name'] = 'Felice'
-    account_properties['last_name'] = 'Felton'
-    account_properties['phone'] = '555-555-5555'
-    account_properties['card_number'] = '1111222233334444'
-    account_properties['month'] = '11'
-    account_properties['year'] = '2016'
-    account_properties['cvc'] = '123'
-    account.update_attributes!(properties: account_properties)
+    account.update(properties: properties)
 
-    signin_broker
+    sign_in broker
 
     all('a', text: 'Account Settings').first.click
 

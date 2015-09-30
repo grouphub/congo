@@ -1,9 +1,10 @@
 require "rails_helper"
 
 feature "Broker invitations", :js do
+  let(:admin) { create(:user, :admin) }
+
   scenario 'allows them to sign up with an invitation code' do
-    create_admin
-    signin_admin
+    sign_in admin
 
     all('a', text: 'Manage Invitations').first.click
 
@@ -57,7 +58,7 @@ feature "Broker invitations", :js do
     all('input[type=submit]').first.click
 
     expect(page).to have_content('Welcome, Barry Broker!')
-    expect(page).to have_content('New group')
+    expect(page).to have_content('Create New Group')
 
     current_user = current_user_data
     expect(current_user['first_name']).to eq('Barry')

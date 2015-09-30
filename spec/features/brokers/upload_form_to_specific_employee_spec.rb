@@ -1,18 +1,20 @@
 require "rails_helper"
 
 feature "Broker uploading form to a specific employee", :js do
-  let!(:user)    { create(:user, :broker) }
+  let!(:broker)  { create(:user, :broker) }
+  let!(:account) { broker.roles.first.account }
   let!(:group)   { create(:group, account: account, slug: "group_test1") }
-  let!(:account) { user.roles.first.account }
   let!(:account_benefit_plan) { create(:account_benefit_plan, account: account) }
 
-  background { signin_broker(user) }
+  background { sign_in broker  }
 
   context "when there are existing memberships" do
     let!(:membership) { create(:membership, :with_user, group: group, account: group.account) }
 
     scenario "Showing a list of the active plans for that group and selecting a plan" do
-      visit "/accounts/#{account.slug}/broker/groups/#{group.slug}"
+      visit "/accounts/#{account.slug}/broker"
+      click_on group.name
+
       click_on "Members"
       click_on "Upload Application"
 
@@ -20,7 +22,8 @@ feature "Broker uploading form to a specific employee", :js do
     end
 
     scenario "Uploading a file to an existing member" do
-      visit "/accounts/#{account.slug}/broker/groups/#{group.slug}"
+      visit "/accounts/#{account.slug}/broker"
+      click_on group.name
 
       click_on "Members"
       click_on "Upload Application"
@@ -34,9 +37,9 @@ feature "Broker uploading form to a specific employee", :js do
     end
   end
 
-
   scenario "Uploading a file to an existing member" do
-    visit "/accounts/#{account.slug}/broker/groups/#{group.slug}"
+    visit "/accounts/#{account.slug}/broker"
+    click_on group.name
 
     click_on "Members"
 
