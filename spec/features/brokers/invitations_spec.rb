@@ -26,7 +26,7 @@ feature "Broker invitations", :js do
       expect(invitation_code).to be_a_thirty_six
     end
 
-    signout_admin
+    sign_out admin
 
     visit '/'
 
