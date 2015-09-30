@@ -76,6 +76,7 @@ Rails.application.routes.draw do
     '/accounts/:slug/:role/groups/:group_slug/welcome',
     '/accounts/:slug/:role/groups/:group_slug/details',
     '/accounts/:slug/:role/groups/:group_slug/members',
+    '/accounts/:slug/:role/groups/:group_slug/benefits',
     '/accounts/:slug/:role/groups/:group_slug/benefit_plans/:benefit_plan_id/applications/new',
 
     # Applications
