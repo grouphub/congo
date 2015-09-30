@@ -178,7 +178,17 @@ feature "Brokers group onboarding wizard", :js do
       scenario 'allows to skip "Add Members to Group" wizard' do
         click_link 'Do Later'
 
-        expect(current_path).to eq("/accounts/#{account.slug}/broker/groups/#{group.slug}")
+        expect(current_path).to eq("/accounts/#{account.slug}/broker/groups/#{group.slug}/benefits")
+      end
+    end
+
+    context 'Adding benefits' do
+      scenario 'allows user to see benefits options' do
+        visit "/accounts/#{account.slug}/broker/groups/#{group.slug}/benefits"
+
+        expect(page).to have_content('Add Existing Benefits')
+        expect(page).to have_content('Get Quotes')
+        expect(page).to have_content('Do Later')
       end
     end
   end
