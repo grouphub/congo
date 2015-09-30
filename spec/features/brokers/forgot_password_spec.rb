@@ -1,11 +1,11 @@
 require 'rails_helper'
 
 feature 'Broker forgot password', :js do
+  let!(:broker) { create(:user, :broker) }
+
   before { ActionMailer::Base.deliveries = [] }
 
   scenario 'allows them to request a password reset' do
-    create_broker
-
     visit '/'
 
     all('a', text: 'Sign In').first.click
