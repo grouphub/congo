@@ -182,13 +182,52 @@ feature "Brokers group onboarding wizard", :js do
       end
     end
 
-    context 'Adding benefits' do
-      scenario 'allows user to see benefits options' do
+    context 'Benefits' do
+      let!(:carrier1) { create(:carrier) }
+      let!(:carrier2) { create(:carrier) }
+      let!(:carrier3) { create(:carrier) }
+
+      it 'allows user to see benefits options' do
         visit "/accounts/#{account.slug}/broker/groups/#{group.slug}/benefits"
 
         expect(page).to have_content('Add Existing Benefits')
         expect(page).to have_content('Get Quotes')
         expect(page).to have_content('Do Later')
+      end
+
+      context 'Adding benefits' do
+        background do
+          visit "/accounts/#{account.slug}/broker/groups/#{group.slug}/add_existing_benefits"
+        end
+
+        it 'allows user to select existing benefits providers' do
+          Carrier.all.map(&:name).each do |carrier|
+            expect(page).to have_content(carrier)
+          end
+        end
+
+        it 'allows user to see and filter benefits providers' do
+          carrier_to_search =  Carrier.first.name
+          carriers_hidden   =  Carrier.all.map(&:name) - [carrier_to_search]
+
+          fill_in 'search-carrier', with: carrier_to_search
+
+          expect(page).to have_content(carrier_to_search)
+
+          carriers_hidden.each do |carrier_hidden|
+            expect(page).to_not have_content(carrier_hidden)
+          end
+        end
+
+        it 'allows user to do later the addition of benefits' do
+          #Resize window to make 'Do Later' button visible
+          window = Capybara.current_session.driver.browser.manage.window
+          window.resize_to('1000', '900')
+
+          click_on 'Do Later'
+
+          expect(current_path).to eq("/accounts/#{account.slug}/broker/groups/#{group.slug}")
+        end
       end
     end
   end

@@ -57,6 +57,14 @@ footer {
   padding-top: 25px;
 }
 
+.overflow-scroll {
+  overflow: scroll;
+}
+
+.height-400{
+  height: 400px;
+}
+
 @media screen and (max-width: 765px) {
   footer {
     img { padding: 0 20px 10px 20px; }
