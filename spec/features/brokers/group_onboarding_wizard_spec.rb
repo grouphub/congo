@@ -187,7 +187,7 @@ feature "Brokers group onboarding wizard", :js do
       let!(:carrier2) { create(:carrier) }
       let!(:carrier3) { create(:carrier) }
 
-      it 'allows user to see benefits options' do
+      scenario 'allowing user to see benefits options' do
         visit "/accounts/#{account.slug}/broker/groups/#{group.slug}/benefits"
 
         expect(page).to have_content('Add Existing Benefits')
@@ -195,7 +195,7 @@ feature "Brokers group onboarding wizard", :js do
         expect(page).to have_content('Do Later')
       end
 
-      context 'Adding benefits' do
+      scenario 'Adding benefits' do
         background do
           visit "/accounts/#{account.slug}/broker/groups/#{group.slug}/add_existing_benefits"
         end
