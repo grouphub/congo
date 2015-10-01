@@ -228,6 +228,12 @@ feature "Brokers group onboarding wizard", :js do
 
           expect(current_path).to eq("/accounts/#{account.slug}/broker/groups/#{group.slug}")
         end
+
+        it 'allows user to establish a connection with carriers' do
+          all('a', text: 'Add to Account').first.click
+
+          expect(page).to have_content('Establish Carriers Connection')
+        end
       end
     end
   end

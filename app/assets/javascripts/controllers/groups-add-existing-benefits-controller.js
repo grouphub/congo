@@ -65,6 +65,7 @@
     };
 
     $scope.openEstablishCarrierConnectionsModal = function(){
+      $('#establish-carrier-connection-modal').modal('show');
     };
 
   }
