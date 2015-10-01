@@ -9,5 +9,7 @@ class Group < ActiveRecord::Base
   has_many :attachments
 
   belongs_to :account
+
+  validates :name, uniqueness: true
 end
 

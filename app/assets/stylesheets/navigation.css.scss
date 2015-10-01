@@ -141,6 +141,15 @@ header {
   }
 }
 
+.nav-tabs {
+  li a.disabled{
+    pointer-events: none;
+    cursor: default;
+    background-color: #eee;
+    border: 1px solid #ddd;
+  }
+}
+
 // Header dropdown styling.
 header {
   .dropdown .dropdown-menu .heading {

@@ -1,43 +1,38 @@
-<div class="col-md-12">
-  <h1>New group</h1>
+<div class="col-md-12 centered">
+  <h1>Create New Group</h1>
+  <h2>Create a new group and select option</h2>
 
-  <form ng-submit="submit()">
-    <div class="form-group">
-      <label for="name">Name</label>
-      <input type="text" class="form-control" id="name" placeholder="Enter name&hellip;" ng-model="form.name" auto-focus>
-    </div>
+  <div class="col-md-3">
+  </div>
 
-    <!-- TODO: Is this correct? -->
-    <div class="form-group">
-      <label for="group_id">Group ID</label>
-      <input type="text" class="form-control" id="group_id" placeholder="Enter a Group ID&hellip;" ng-model="form.group_id">
-    </div>
+  <div class="col-md-6">
+    <form ng-submit="submit()" class="group-form">
+      <table>
+        <tr>
+          <td class="td-label">
+            <label for="name">Group Name</label>
+          </td>
+          <td>
+            <input type="text" class="form-control" id="name" placeholder="Enter name&hellip;" ng-model="form.name" auto-focus>
+          </td>
+        </tr>
 
-    <div class="form-group">
-      <label for="tax_id">Tax ID</label>
-      <input type="text" class="form-control" id="tax_id" placeholder="Enter a Tax ID&hellip;" ng-model="form.tax_id">
-    </div>
+        <tr>
+          <td>
+          </td>
 
-    <div class="row">
-      <div class="form-group col-md-6">
-        <label for="description">Description</label>
-        <textarea class="form-control markdown" id="description" placeholder="Enter a Description&hellip;" ng-model="form.description_markdown"></textarea>
-        <small>
-          Enter a description using Markdown. <a target="_blank" href="https://en.support.wordpress.com/markdown-quick-reference/">Click here</a> for a Markdown reference.
-        </small>
-      </div>
+          <td class="td-buttons-right padding-top-25">
+            <input type="submit" class="btn btn-primary" value="Create Group" ng-disabled="isLocked">
+            <a ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/groups" class="btn btn-primary">Cancel</a>
+          </td>
+        </tr>
+      </table>
+    </form>
+    <br />
+    <br />
+  </div>
 
-      <div class="form-group col-md-6">
-        <label for="markdown">Preview</label>
-        <div id="markdown" ng-bind-html="form.description_trusted"></div>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-md-12">
-        <input type="submit" class="btn btn-primary" value="New Group" ng-disabled="isLocked">
-      </div>
-    </div>
-  </form>
+  <div class="col-md-3">
+  </div>
 </div>
 

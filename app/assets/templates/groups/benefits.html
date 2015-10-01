@@ -1,0 +1,35 @@
+<div class="col-md-12 centered" ng-init="init()">
+  <h1>Add Benefits</h1>
+  <h2>Add existing member benefits.</h2>
+
+  <ul class="nav nav-tabs padding-top-25">
+    <li><a href="#" class="disabled">Details</a></li>
+    <li><a href="#" class="disabled">Members</a></li>
+    <li class="active"><a href="#">Benefits</a></li>
+  </ul>
+
+  <div class="col-md-3">
+  </div>
+
+  <div class="col-md-6">
+    <br />
+    <br />
+
+    <a ng-href='/accounts/{{accountSlug()}}/{{currentRole()}}/groups/{{groupSlug()}}/add_existing_benefits' class="btn btn-primary" ng-click="openAddBenefitsModal()">Add Existing Benefits</a>
+    <br />
+    <br />
+
+    <a ng-href="#" class="btn btn-primary disabled" ng-click="openGetQuotesModal()">Get Quotes</a>
+
+    <br />
+    <br />
+
+    <a ng-href='/accounts/{{accountSlug()}}/{{currentRole()}}/groups/{{groupSlug()}}/' class="btn btn-primary">Do Later</a>
+
+    <br />
+    <br />
+  </div>
+
+  <div class="col-md-3">
+  </div>
+</div>

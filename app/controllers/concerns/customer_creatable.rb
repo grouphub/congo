@@ -6,25 +6,27 @@ module CustomerCreatable
   end
 
   def attempt_to_create_customer!
+    password    = params[:password]
     email_token = params[:email_token]
+    first_name  = params[:first_name]
+    last_name   = params[:last_name]
 
     return unless email_token
 
-    first_name = params[:first_name]
-    last_name = params[:last_name]
-    email = params[:email]
-    password = params[:password]
+    membership = Membership.where(email_token: email_token).includes(:group).first
+    user       = membership.user
+    group      = membership.group
+    role_name  = membership.role_name
+    account_id = group.account_id
 
-    user = User.create! \
+    user ||= membership.create_user \
       first_name: first_name,
       last_name: last_name,
-      email: email,
+      email: membership.email,
       password: password
 
-    membership = Membership.where(email_token: email_token).includes(:group).first
-    role_name = membership.role_name
-    group = membership.group
-    account_id = group.account_id
+    user.update(password: password)
+    membership.save!
 
     unless membership
       # TODO: Handle this
@@ -39,15 +41,11 @@ module CustomerCreatable
       .first
 
     unless role
-      role = Role.create! \
+      membership.create_role \
         account_id: account_id,
         user_id: user.id,
         name: role_name
     end
-
-    membership.user_id = user.id
-    membership.role_id = role.id
-    membership.save!
   end
 
   def attempt_to_link_customer!(user)
