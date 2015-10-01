@@ -1,8 +1,8 @@
 var congoApp = angular.module('congoApp');
 
 congoApp.controller('GroupsShowController', [
-  '$scope', '$http', '$location', '$cookieStore', '$sce', 'eventsFactory', 'flashesFactory',
-  function ($scope, $http, $location, $cookieStore, $sce, eventsFactory, flashesFactory) {
+  '$scope', '$http', '$location', '$window', '$cookieStore', '$sce', 'eventsFactory', 'flashesFactory',
+  function ($scope, $http, $location, $window, $cookieStore, $sce, eventsFactory, flashesFactory) {
     // Make sure user is totally signed up before continuing.
     $scope.enforceValidAccount();
 
@@ -312,9 +312,12 @@ congoApp.controller('GroupsShowController', [
 
     // TODO: Change eligibility modal to use this format
     $scope.reviewApplication = function (application) {
-      $('#review-application-modal').modal('show');
-
-      eventsFactory.emit('review-application', application, $scope.customerMemberships);
+      if (application.pdf_attachment_url !== null) {
+        $window.open(application.pdf_attachment_url, '_blank');
+      } else {
+        $('#review-application-modal').modal('show');
+        eventsFactory.emit('review-application', application, $scope.customerMemberships);
+      }
     };
 
     $scope.showApplicationStatus = function (application) {

@@ -31,6 +31,7 @@ feature "Broker uploading form to a specific employee", :js do
       click_on "Upload"
 
       expect(page).to have_content "Successfully uploaded application PDF"
+      expect(page).to have_content "Review"
     end
   end
 
