@@ -53,7 +53,7 @@ module Applications
     end
 
     def applied_on_date
-      @appied_on_date ||= attributes[:applied_by_id] ? DateTime.now : nil
+      @applied_on_date ||= attributes[:applied_by_id] ? DateTime.now : nil
     end
 
     def pdf_attachment_url
