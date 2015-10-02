@@ -126,7 +126,7 @@ feature "Brokers group onboarding wizard", :js do
   context 'A group already exist' do
     let!(:group) { create(:group, account: account) }
 
-    it 'allows them to navigate to a group\'s Details page' do
+    scenario 'allows them to navigate to a group\'s Details page' do
       visit "/accounts/#{account.slug}/broker/groups/#{group.slug}/welcome"
 
       click_link 'Get Started'
@@ -195,18 +195,18 @@ feature "Brokers group onboarding wizard", :js do
         expect(page).to have_content('Do Later')
       end
 
-      scenario 'Adding benefits' do
+      context 'Adding benefits' do
         background do
           visit "/accounts/#{account.slug}/broker/groups/#{group.slug}/add_existing_benefits"
         end
 
-        it 'allows user to select existing benefits providers' do
+        scenario 'allows user to select existing benefits providers' do
           Carrier.all.map(&:name).each do |carrier|
             expect(page).to have_content(carrier)
           end
         end
 
-        it 'allows user to see and filter benefits providers' do
+        scenario 'allows user to see and filter benefits providers' do
           carrier_to_search =  Carrier.first.name
           carriers_hidden   =  Carrier.all.map(&:name) - [carrier_to_search]
 
@@ -219,7 +219,7 @@ feature "Brokers group onboarding wizard", :js do
           end
         end
 
-        it 'allows user to do later the addition of benefits' do
+        scenario 'allows user to do later the addition of benefits' do
           #Resize window to make 'Do Later' button visible
           window = Capybara.current_session.driver.browser.manage.window
           window.resize_to('1000', '900')
@@ -229,7 +229,7 @@ feature "Brokers group onboarding wizard", :js do
           expect(current_path).to eq("/accounts/#{account.slug}/broker/groups/#{group.slug}")
         end
 
-        it 'allows user to establish a connection with carriers' do
+        scenario 'allows user to establish a connection with carriers' do
           all('a', text: 'Add to Account').first.click
 
           expect(page).to have_content('Establish Carriers Connection')
