@@ -9,25 +9,25 @@
       <div class="modal-body">
         <p>Connect to carriers to validate enrollment and ensure compliance.</p>
 
-        <form ng-submit="submitCarrierConnection()" class="group-form" name="carrierConnectionForm">
+        <form id="new_carrier_connection_form" ng-submit="submitCarrierConnection()" class="group-form" name="carrierConnectionForm">
           <table>
             <tr>
               <td class="td-label">
-                <label for="first_name">Username</label>
+                <label for="new_carrier_connection_username">Username</label>
               </td>
 
               <td>
-                <input id="username" type="text" class="form-control" name="username" placeholder="Enter username&hellip;" ng-model="carrierCredentials.username" ng-required="true" auto-focus />
+                <input id="new_carrier_connection_username" type="text" class="form-control" name="username" placeholder="Enter username&hellip;" ng-model="carrierCredentials.username" ng-required="true" auto-focus />
               </td>
             </tr>
 
             <tr>
               <td class="td-label">
-                <label for="last_name">Password</label>
+                <label for="new_carrier_connection_password">Password</label>
               </td>
 
               <td>
-                <input id="password" type="password" class="form-control" name="password" placeholder="Enter password&hellip;" ng-model="carrierCredentials.password" ng-required="true" />
+                <input id="new_carrier_connection_password" type="password" class="form-control" name="password" placeholder="Enter password&hellip;" ng-model="carrierCredentials.password" ng-required="true" />
               </td>
             </tr>
 
