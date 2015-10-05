@@ -17,6 +17,10 @@ feature "Broker review pdf application", :js do
 
     sleep 1
 
+    within "#review-application-modal" do
+      click_on "Open PDF"
+    end
+
     expect(page.driver.browser.window_handles.count).to be > 1
   end
 end

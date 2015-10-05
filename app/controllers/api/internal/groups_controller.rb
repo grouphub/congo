@@ -164,7 +164,8 @@ class Api::Internal::GroupsController < Api::ApiController
           application.as_json.merge({
             'state' => application.state,
             'human_state' => application.human_state,
-            'state_label' => application.state_label
+            'state_label' => application.state_label,
+            'plan_name' => application.plan_name
           })
         }
       })

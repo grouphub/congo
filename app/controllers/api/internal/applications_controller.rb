@@ -235,6 +235,7 @@ class Api::Internal::ApplicationsController < Api::ApiController
     membership = application.membership
 
     application.as_json.merge({
+      'plan_name' => application.plan_name,
       'benefit_plan' => application.benefit_plan,
       'membership' => membership.as_json.merge({
         'group' => membership.group,
