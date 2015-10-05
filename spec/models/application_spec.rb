@@ -1,5 +1,22 @@
 describe Application do
 
+  describe "#plan_name" do
+    let(:benefit_plan) { create(:benefit_plan) }
+    subject { create(:application, benefit_plan: benefit_plan) }
+
+    it "returns the name of the benefit plan" do
+      expect(subject.plan_name).to eq benefit_plan.name
+    end
+
+    context "when the benefit plan is not present" do
+      subject { create(:application) }
+
+      it "returns nil" do
+        expect(subject.plan_name).to be_nil
+      end
+    end
+  end
+
   describe '#to_pokitdok' do
 
     it 'converts an application into a PokitDok-friendly format' do
