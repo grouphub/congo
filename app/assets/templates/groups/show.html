@@ -230,10 +230,11 @@
                 </form>
               </td>
 
-              <td style="width: 200px;">
+              <td style="width: 150px;">
                 <ul class="simple-list">
                   <li class="application" ng-repeat="application in membership.applications">
                     <span class="selected-date">
+                      {{application.plan_name}}
                       {{application.created_at | date}}
                     </span>
 
