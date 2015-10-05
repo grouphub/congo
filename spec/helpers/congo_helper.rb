@@ -68,4 +68,17 @@ module CongoHelper
     expect(page).to have_content('You have signed out.')
     expect(page).to have_content('The next generation')
   end
+
+  def upload_application_pdf
+    visit "/accounts/#{account.slug}/broker"
+    click_on group.name
+
+    click_on "Members"
+    click_on "Upload Application"
+
+    attach_file "Select PDF", "#{Rails.root}/spec/data/aetna-summary.pdf"
+    select account_benefit_plan.name, from: "Select Plan"
+
+    click_on "Upload"
+  end
 end

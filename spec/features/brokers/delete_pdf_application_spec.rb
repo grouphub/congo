@@ -1,22 +1,19 @@
 require "rails_helper"
 
-feature "Broker review pdf application", :js do
+feature "Brokers delete pdf application", :js do
   let!(:broker)  { create(:user, :broker) }
   let!(:account) { broker.roles.first.account }
   let!(:group)   { create(:group, account: account, slug: "group_test1") }
   let!(:account_benefit_plan) { create(:account_benefit_plan, account: account) }
   let!(:membership) { create(:membership, :with_user, group: group, account: group.account) }
 
-  let(:pdf_window) { page.driver.browser.window_handles.last }
+  background { signin_broker(broker) }
 
-  background { sign_in broker  }
-
-  scenario "opens the pdf in a new tab" do
+  scenario "when there is a submitted pdf application" do
     upload_application_pdf
-    click_on "Review"
 
-    sleep 1
+    click_on "Delete"
 
-    expect(page.driver.browser.window_handles.count).to be > 1
+    expect(page).to_not have_content("Review")
   end
 end
