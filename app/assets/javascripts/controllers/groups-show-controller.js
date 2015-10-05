@@ -320,6 +320,22 @@ congoApp.controller('GroupsShowController', [
       }
     };
 
+    $scope.deleteApplication = function(application) {
+      var request = $http.delete('/api/internal/accounts/' +
+                                 $scope.accountSlug() + '/roles/' +
+                                 $scope.currentRole() + '/applications/' +
+                                 application.id + '.json');
+
+      request.success(function(response) {
+        $scope.getGroup();
+        flashesFactory.add('success', 'Successfully deleted application.');
+      });
+
+      request.error(function(response) {
+        flashesFactory.add('danger', 'Could not delete application.');
+      });
+    };
+
     $scope.showApplicationStatus = function (application) {
       $('#enrollment-status-modal').modal('show');
 
@@ -384,6 +400,22 @@ congoApp.controller('GroupsShowController', [
       }
     }
 
+    $scope.getGroup = function() {
+      $http.
+        get('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups/' + $scope.groupSlug() + '.json').
+        success(function (data, status, headers, config) {
+        $scope.group = data.group;
+        $scope.form = JSON.parse($scope.group.properties_data);
+        done();
+      }).error(function (data, status, headers, config) {
+        var error = (data && data.error) ?
+          data.error :
+          'There was a problem fetching the group data.';
+
+        flashesFactory.add('danger', error);
+      });
+    };
+
     $http
       .get('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/benefit_plans.json?only_activated=true')
       .success(function (data, status, headers, config) {
@@ -398,20 +430,7 @@ congoApp.controller('GroupsShowController', [
         flashesFactory.add('danger', error);
       });
 
-    $http
-      .get('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups/' + $scope.groupSlug() + '.json')
-      .success(function (data, status, headers, config) {
-        $scope.group = data.group;
-        $scope.form = JSON.parse($scope.group.properties_data);
-        done();
-      })
-      .error(function (data, status, headers, config) {
-        var error = (data && data.error) ?
-          data.error :
-          'There was a problem fetching the group data.';
-
-        flashesFactory.add('danger', error);
-      });
+    $scope.getGroup();
 
     if ($scope.currentRole() === 'customer') {
       $http

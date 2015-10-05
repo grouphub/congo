@@ -230,7 +230,7 @@
                 </form>
               </td>
 
-              <td>
+              <td style="width: 200px;">
                 <ul class="simple-list">
                   <li class="application" ng-repeat="application in membership.applications">
                     <span class="selected-date">
@@ -240,6 +240,7 @@
                     <a class="btn btn-danger btn-xs disabled" href="" ng-if="application.state == 'declined'">Declined</a>
                     <a class="btn btn-warning btn-xs disabled" href="" ng-if="application.state == 'selected'" ng-click="">Remind</a>
                     <a class="btn btn-info btn-xs" href="" ng-if="application.state == 'applied'" ng-click="reviewApplication(application)">Review</a>
+                    <a class="btn btn-danger btn-xs" href="" ng-if="application.state !== 'not_applied'" ng-click="deleteApplication(application)">Delete</a>
                     <a class="btn btn-primary btn-xs" href="" ng-if="application.state == 'approved'" ng-click="submitApplication(application)">Submit</a>
                     <a class="btn btn-success btn-xs" href="" ng-if="application.state == 'submitted'" ng-click="showApplicationStatus(application)">Submitted</a>
                     <a class="btn btn-success btn-xs disabled" href="" ng-if="application.state == 'completed'">Completed</a>
