@@ -9,7 +9,7 @@ feature "Broker review pdf application", :js do
 
   let(:pdf_window) { page.driver.browser.window_handles.last }
 
-  background { signin_broker broker  }
+  background { sign_in broker  }
 
   scenario "opens the pdf in a new tab" do
     upload_application_pdf
