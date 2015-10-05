@@ -9,13 +9,17 @@ feature "Broker review pdf application", :js do
 
   let(:pdf_window) { page.driver.browser.window_handles.last }
 
-  background { sign_in broker  }
+  background { signin_broker broker  }
 
   scenario "opens the pdf in a new tab" do
     upload_application_pdf
     click_on "Review"
 
     sleep 1
+
+    within "#review-application-modal" do
+      click_on "Open PDF"
+    end
 
     expect(page.driver.browser.window_handles.count).to be > 1
   end

@@ -312,12 +312,8 @@ congoApp.controller('GroupsShowController', [
 
     // TODO: Change eligibility modal to use this format
     $scope.reviewApplication = function (application) {
-      if (application.pdf_attachment_url !== null) {
-        $window.open(application.pdf_attachment_url, '_blank');
-      } else {
-        $('#review-application-modal').modal('show');
-        eventsFactory.emit('review-application', application, $scope.customerMemberships);
-      }
+      $('#review-application-modal').modal('show');
+      eventsFactory.emit('review-application', application, $scope.customerMemberships);
     };
 
     $scope.deleteApplication = function(application) {
