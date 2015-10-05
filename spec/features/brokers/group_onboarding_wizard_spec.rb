@@ -220,9 +220,9 @@ feature "Brokers group onboarding wizard", :js do
         end
 
         scenario 'allows user to do later the addition of benefits' do
-          #Resize window to make 'Do Later' button visible
-          window = Capybara.current_session.driver.browser.manage.window
-          window.resize_to('1000', '900')
+          sleep 1
+
+          page.execute_script("$('main').scrollTop(500)")
 
           click_on 'Do Later'
 
