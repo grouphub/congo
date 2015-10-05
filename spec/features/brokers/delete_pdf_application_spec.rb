@@ -7,7 +7,7 @@ feature "Brokers delete pdf application", :js do
   let!(:account_benefit_plan) { create(:account_benefit_plan, account: account) }
   let!(:membership) { create(:membership, :with_user, group: group, account: group.account) }
 
-  background { signin_broker(broker) }
+  background { sign_in(broker) }
 
   scenario "when there is a submitted pdf application" do
     upload_application_pdf
