@@ -2,5 +2,3 @@ web: bundle exec rails server Puma --port=$PORT --binding=0.0.0.0
 fakes3: bundle exec fakes3 --root tmp/fakes3 --port 5001
 guard: guard --no-interactions
 clock: bundle exec rails runner lib/clock.rb
-# karma: bundle exec rake karma:start
-

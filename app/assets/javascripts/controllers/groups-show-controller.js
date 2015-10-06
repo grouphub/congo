@@ -1,8 +1,8 @@
 var congoApp = angular.module('congoApp');
 
 congoApp.controller('GroupsShowController', [
-  '$scope', '$http', '$location', '$cookieStore', '$sce', 'eventsFactory', 'flashesFactory',
-  function ($scope, $http, $location, $cookieStore, $sce, eventsFactory, flashesFactory) {
+  '$scope', '$http', '$location', '$window', '$cookieStore', '$sce', 'eventsFactory', 'flashesFactory',
+  function ($scope, $http, $location, $window, $cookieStore, $sce, eventsFactory, flashesFactory) {
     // Make sure user is totally signed up before continuing.
     $scope.enforceValidAccount();
 
@@ -313,8 +313,23 @@ congoApp.controller('GroupsShowController', [
     // TODO: Change eligibility modal to use this format
     $scope.reviewApplication = function (application) {
       $('#review-application-modal').modal('show');
-
       eventsFactory.emit('review-application', application, $scope.customerMemberships);
+    };
+
+    $scope.deleteApplication = function(application) {
+      var request = $http.delete('/api/internal/accounts/' +
+                                 $scope.accountSlug() + '/roles/' +
+                                 $scope.currentRole() + '/applications/' +
+                                 application.id + '.json');
+
+      request.success(function(response) {
+        $scope.getGroup();
+        flashesFactory.add('success', 'Successfully deleted application.');
+      });
+
+      request.error(function(response) {
+        flashesFactory.add('danger', 'Could not delete application.');
+      });
     };
 
     $scope.showApplicationStatus = function (application) {
@@ -381,6 +396,22 @@ congoApp.controller('GroupsShowController', [
       }
     }
 
+    $scope.getGroup = function() {
+      $http.
+        get('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups/' + $scope.groupSlug() + '.json').
+        success(function (data, status, headers, config) {
+        $scope.group = data.group;
+        $scope.form = JSON.parse($scope.group.properties_data);
+        done();
+      }).error(function (data, status, headers, config) {
+        var error = (data && data.error) ?
+          data.error :
+          'There was a problem fetching the group data.';
+
+        flashesFactory.add('danger', error);
+      });
+    };
+
     $http
       .get('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/benefit_plans.json?only_activated=true')
       .success(function (data, status, headers, config) {
@@ -395,20 +426,7 @@ congoApp.controller('GroupsShowController', [
         flashesFactory.add('danger', error);
       });
 
-    $http
-      .get('/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups/' + $scope.groupSlug() + '.json')
-      .success(function (data, status, headers, config) {
-        $scope.group = data.group;
-        $scope.form = JSON.parse($scope.group.properties_data);
-        done();
-      })
-      .error(function (data, status, headers, config) {
-        var error = (data && data.error) ?
-          data.error :
-          'There was a problem fetching the group data.';
-
-        flashesFactory.add('danger', error);
-      });
+    $scope.getGroup();
 
     if ($scope.currentRole() === 'customer') {
       $http
@@ -464,7 +482,7 @@ congoApp.controller('GroupsShowController', [
         })
         .success(function (data, status, headers, config) {
           $scope.group.attachments.push(data.attachment);
-      
+
           fileInput[0].value = null;
           $scope.file.name = '';
         })
@@ -499,6 +517,12 @@ congoApp.controller('GroupsShowController', [
     // -------------------
     // Application History
     // -------------------
+    //
+
+    $scope.uploadApplication = function(membership) {
+      $('#upload-application-modal').modal('show');
+      $scope.$emit('modal.upload-application', membership, $scope.benefitPlans);
+    };
 
 
     $scope.revokeApplication = function (application) {

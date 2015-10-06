@@ -116,6 +116,10 @@ Rails.application.routes.draw do
       end
 
       resources :accounts do
+        resources :memberships, only: [] do
+          resources :applications, only: :create
+        end
+
         resources :roles do
           resources :carriers do
             post '/activate', to: 'carriers#activate'

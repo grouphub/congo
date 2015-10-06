@@ -230,16 +230,18 @@
                 </form>
               </td>
 
-              <td>
+              <td style="width: 150px;">
                 <ul class="simple-list">
                   <li class="application" ng-repeat="application in membership.applications">
                     <span class="selected-date">
+                      {{application.plan_name}}
                       {{application.created_at | date}}
                     </span>
 
                     <a class="btn btn-danger btn-xs disabled" href="" ng-if="application.state == 'declined'">Declined</a>
                     <a class="btn btn-warning btn-xs disabled" href="" ng-if="application.state == 'selected'" ng-click="">Remind</a>
                     <a class="btn btn-info btn-xs" href="" ng-if="application.state == 'applied'" ng-click="reviewApplication(application)">Review</a>
+                    <a class="btn btn-danger btn-xs" href="" ng-if="application.state !== 'not_applied'" ng-click="deleteApplication(application)">Delete</a>
                     <a class="btn btn-primary btn-xs" href="" ng-if="application.state == 'approved'" ng-click="submitApplication(application)">Submit</a>
                     <a class="btn btn-success btn-xs" href="" ng-if="application.state == 'submitted'" ng-click="showApplicationStatus(application)">Submitted</a>
                     <a class="btn btn-success btn-xs disabled" href="" ng-if="application.state == 'completed'">Completed</a>
@@ -249,6 +251,8 @@
               </td>
 
               <td>
+                <a class="btn btn-success btn-xs" href="" ng-click="uploadApplication(membership)">Upload Application</a>
+                <a class="btn btn-warning btn-xs" href="javascript:void(0)" disabled>Download Application</a>
                 <a class="btn btn-danger btn-xs" href="" ng-click="revokeMembership(membership)">Revoke Membership</a>
                 <a class="btn btn-primary btn-xs" href="" ng-if="!membership.user" ng-click="sendConfirmation(membership)">Send Invitation</a>
               </td>

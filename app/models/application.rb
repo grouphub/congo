@@ -12,6 +12,10 @@ class Application < ActiveRecord::Base
   # Has one for now...
   has_one :application_status
 
+  def plan_name
+    benefit_plan.try(:name)
+  end
+
   def populate_reference_number
     self.reference_number ||= ThirtySix.generate
   end

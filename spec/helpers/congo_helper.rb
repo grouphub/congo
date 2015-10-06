@@ -82,8 +82,10 @@ module CongoHelper
       name: 'broker'
   end
 
-  def signin_broker
+  def signin_broker(broker=nil)
     test_debug 'Signing in as a broker...'
+
+    broker ||= Role.find_by_name('broker').user
 
     visit '/'
 
@@ -209,5 +211,16 @@ module CongoHelper
     JSON.load File.read("#{Rails.root}/spec/data/application.json")
   end
 
-end
+  def upload_application_pdf
+    visit "/accounts/#{account.slug}/broker"
+    click_on group.name
 
+    click_on "Members"
+    click_on "Upload Application"
+
+    attach_file "Select PDF", "#{Rails.root}/spec/data/aetna-summary.pdf"
+    select account_benefit_plan.name, from: "Select Plan"
+
+    click_on "Upload"
+  end
+end
