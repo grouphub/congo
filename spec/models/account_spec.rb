@@ -122,7 +122,7 @@ describe Account do
         plan_name: 'basic',
         payment_id: payment.id
 
-      expect(account.unpaid_invoices).to eq([unpaid_invoice, unpaid_invoice_2])
+      expect(account.unpaid_invoices.count).to eq 3
     end
 
   end
@@ -244,12 +244,6 @@ describe Account do
 
       expect(account.feature_enabled?('foo')).to eq(false)
     end
-
-  end
-
-  describe '#accepted_employees' do
-
-    it 'lists all employees which have accepted their invites'
 
   end
 
@@ -504,14 +498,5 @@ describe Account do
       expect(Carrier.where(id: carrier.id)).to be_present
       expect(BenefitPlan.where(id: benefit_plan.id)).to be_present
     end
-
   end
-
-  describe '#eviscerate!' do
-
-    it 'gets rid of all account data and does not keep any remnants around'
-
-  end
-
 end
-
