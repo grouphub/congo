@@ -142,6 +142,10 @@ congoApp.config([
   '$routeProvider',
   function ($routeProvider) {
     $routeProvider
+      .when('/users/new', {
+        templateUrl: congo.assets['users/new.html'],
+        controller: 'UsersNewController'
+      })
       .when('/users/new_manager', {
         templateUrl: congo.assets['users/new_manager.html'],
         controller: 'UsersNewManagerController'
@@ -149,6 +153,10 @@ congoApp.config([
       .when('/users/new_plan', {
         templateUrl: congo.assets['users/new_plan.html'],
         controller: 'UsersNewPlanController'
+      })
+      .when('/users/new_group', {
+        templateUrl: congo.assets['users/new_group.html'],
+        controller: 'UsersNewGroupController'
       })
       .when('/users/new_billing', {
         templateUrl: congo.assets['users/new_billing.html'],
@@ -201,6 +209,14 @@ congoApp.config([
       .when('/accounts/:slug/:role/contact', {
         templateUrl: congo.assets['contact.html'],
         controller: 'ContactController'
+      })
+      .when('/accounts/:slug/:role/rewards', {
+        templateUrl: congo.assets['rewards.html'],
+        controller: 'RewardsController'
+      })
+      .when('/accounts/:slug/:role/challenges', {
+        templateUrl: congo.assets['challenges.html'],
+        controller: 'ChallengesController'
       })
       .when('/accounts/:slug/:role/carriers', {
         templateUrl: congo.assets['carriers/index.html'],

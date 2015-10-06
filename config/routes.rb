@@ -20,6 +20,8 @@ Rails.application.routes.draw do
     # Users
     '/users/signin',
     '/users/new_manager',
+    '/users/new',
+    '/users/new_group',
     '/users/new_plan',
     '/users/new_billing',
     '/users/new_account',
@@ -55,6 +57,8 @@ Rails.application.routes.draw do
     '/accounts/:slug/:role/settings',
     '/accounts/:slug/:role/reports',
     '/accounts/:slug/:role/contact',
+    '/accounts/:slug/:role/rewards',
+    '/accounts/:slug/:role/challenges',
 
     # Carriers
     '/accounts/:slug/:role/carriers',

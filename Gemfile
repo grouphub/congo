@@ -64,7 +64,10 @@ group :doc do
   gem 'sdoc', '~> 0.4.0'
 end
 
+
 group :development do
+  #for erd generation
+  gem "rails-erd"
   # To speed up booting.
   gem 'spring'
 

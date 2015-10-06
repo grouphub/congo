@@ -40,6 +40,8 @@
 //= require controllers/landing-controller
 //= require controllers/home-controller
 //= require controllers/contact-controller
+//= require controllers/challenges-controller
+//= require controllers/rewards-controller
 //= require controllers/accounts-controller
 //= require controllers/accounts-new-controller
 //= require controllers/settings-show-controller
@@ -70,6 +72,7 @@
 //= require controllers/users-new-customer-controller
 //= require controllers/users-new-manager-controller
 //= require controllers/users-new-plan-controller
+//= require controllers/users-new-group-controller
 //= require controllers/users-show-controller
 //= require controllers/users-signin-controller
 //= require controllers/users-forgot-password-controller
