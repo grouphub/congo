@@ -17,7 +17,6 @@ module BrokerCreatable
     email = params[:email]
     password = params[:password]
 
-
     case type
       when 'group_admin'
         user = User.create! \
@@ -41,8 +40,6 @@ module BrokerCreatable
         return
     end
 
-    
-
     account = Account.create!
 
     broker_role = Role
@@ -59,5 +56,7 @@ module BrokerCreatable
         user_id: user.id,
         name: type
     end
+
+    user
   end
 end

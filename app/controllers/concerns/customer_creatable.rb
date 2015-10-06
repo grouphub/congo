@@ -46,6 +46,8 @@ module CustomerCreatable
         user_id: user.id,
         name: role_name
     end
+
+    user
   end
 
   def attempt_to_link_customer!(user)

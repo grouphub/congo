@@ -20,7 +20,7 @@ FactoryGirl.define do
       last_name  { Faker::Name.last_name }
 
       after :create do |user|
-        account = create(:account, :broker)
+        account = create(:account, :broker, slug: Faker::Lorem.word)
         create(:role, :broker, user_id: user.id, account_id: account.id)
       end
     end
