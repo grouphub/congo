@@ -57,7 +57,7 @@ feature "Broker invitations", :js do
     all('input[type=submit]').first.click
 
     expect(page).to have_content('Welcome, Barry Broker!')
-    expect(page).to have_content('Broker Dashboard: First Account')
+    expect(page).to have_content('New group')
 
     current_user = current_user_data
     expect(current_user['first_name']).to eq('Barry')
