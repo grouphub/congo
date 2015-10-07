@@ -1,9 +1,10 @@
 require 'rails_helper'
 
 feature 'Admins authentication', :js do
+  let(:admin) { create(:user, :admin) }
+
   scenario 'allows them to sign in and out' do
-    create_admin
-    signin_admin
-    signout_admin
+    sign_in admin
+    sign_out admin
   end
 end

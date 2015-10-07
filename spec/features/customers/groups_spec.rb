@@ -1,11 +1,10 @@
 require 'rails_helper'
 
 feature 'Customer groups', :js do
+  let(:broker)  { create(:user, :broker) }
+  let(:account) { broker.roles.first.account }
+
   pending 'allows them to select and apply for a plan' do
-    create_broker
-
-    account = Account.find_by_name('First Account')
-
     create_group_for(account)
 
     group = Group.find_by_name('My Group')
@@ -27,7 +26,7 @@ feature 'Customer groups', :js do
       role_id: role.id,
       email: customer.email
 
-    signin_customer
+    sign_in customer
 
     expect(page).to have_content('Benefit Plans')
 

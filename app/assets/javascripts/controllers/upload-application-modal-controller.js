@@ -23,7 +23,7 @@
       $form.append('user_id',         membership.user_id);
 
       var request = $http.post(
-        '/api/internal/accounts/' + membership.slug + '/memberships/' + membership.id + '/applications',
+        '/api/internal/accounts/' + $scope.accountSlug() + '/memberships/' + membership.id + '/applications',
         $form, { transformRequest: angular.identity, headers: { 'Content-Type' : undefined } }
       );
 
@@ -32,9 +32,10 @@
         flashesFactory.add('success', 'Successfully uploaded application PDF');
         $('#upload-application-modal').modal('hide');
         $scope.application = {};
+        $scope.$broadcast('file.clear');
       });
 
-      request.error(function(){
+      request.error(function(data){
         var error = (data && data.error) ?  data.error : 'There was a problem creating your application.';
         flashesFactory.add('danger', error);
       });

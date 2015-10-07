@@ -1,15 +1,19 @@
 require 'spec_helper'
 
 describe Api::Internal::BenefitPlansController do
+  let(:broker)         { create(:user, :broker) } 
+  let(:broker_role)    { broker.roles.first }
+  let(:broker_account) { broker_role.account }
+
+  let(:admin)         { create(:user, :admin) } 
+  let(:admin_role)    { admin.roles.first }
+  let(:admin_account) { admin_role.account }
 
   describe 'GET #index' do
 
     # NOTE: We currently do not show benefits whose account ID is admin. Rather,
     # it is expected that admin-created carriers have a nil account ID.
     before do
-      create_admin
-      create_broker
-
       @their_account = Account.create! \
         name: 'Second Account'
 
@@ -29,11 +33,11 @@ describe Api::Internal::BenefitPlansController do
 
                 account = nil
                 if who_created == :admin
-                  account = Account.where(name: 'Admin').first
+                  account = admin_account
                 elsif who_created == :nil
                   account = nil
                 elsif who_created == :yours
-                  account = Account.where(name: 'First Account').first
+                  account = broker_account
                 elsif who_created == :theirs
                   account = @their_account
                 else
@@ -75,9 +79,9 @@ describe Api::Internal::BenefitPlansController do
         end
       end
 
-      @current_user = User.where(email: 'barry@broker.com').first
-      @current_account = Account.where(name: 'First Account').first
-      @current_role = Role.where(user_id: @current_user.id, account_id: @current_account.id, name: 'broker').first
+      broker = User.where(email: 'barry@broker.com').first
+      broker_account = Account.where(name: 'First Account').first
+      broker_role = Role.where(user_id: broker.id, account_id: broker_account.id, name: 'broker').first
     end
 
     context 'displaying plans for only activated carriers (what a broker sees)' do
@@ -85,12 +89,12 @@ describe Api::Internal::BenefitPlansController do
         get :index,
           {
           format: 'json',
-          account_id: @current_account.slug,
-          role_id: @current_role.id,
+          account_id: broker_account.slug,
+          role_id: broker_role.id,
           only_activated_carriers: 'true'
         },
         {
-          current_user_id: @current_user.id
+          current_user_id: broker.id
         }
 
         response_data = JSON.load(response.body)
@@ -117,12 +121,12 @@ describe Api::Internal::BenefitPlansController do
         get :index,
           {
           format: 'json',
-          account_id: @current_account.slug,
-          role_id: @current_role.id,
+          account_id: broker_account.slug,
+          role_id: broker_role.id,
           only_activated: 'true'
         },
         {
-          current_user_id: @current_user.id
+          current_user_id: broker.id
         }
 
         response_data = JSON.load(response.body)
@@ -145,11 +149,11 @@ describe Api::Internal::BenefitPlansController do
         get :index,
           {
           format: 'json',
-          account_id: @current_account.slug,
-          role_id: @current_role.id
+          account_id: broker_account.slug,
+          role_id: broker_role.id
         },
         {
-          current_user_id: @current_user.id
+          current_user_id: broker.id
         }
 
         response_data = JSON.load(response.body)

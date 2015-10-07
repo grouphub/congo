@@ -250,6 +250,26 @@ congoApp.config([
         templateUrl: congo.assets['groups/show.html'],
         controller: 'GroupsShowController'
       })
+      .when('/accounts/:slug/:role/groups/:group_slug/welcome', {
+        templateUrl: congo.assets['groups/welcome.html'],
+        controller: 'GroupsWelcomeController'
+      })
+      .when('/accounts/:slug/:role/groups/:group_slug/details', {
+        templateUrl: congo.assets['groups/details.html'],
+        controller: 'GroupsDetailsController'
+      })
+      .when('/accounts/:slug/:role/groups/:group_slug/members', {
+        templateUrl: congo.assets['groups/members.html'],
+        controller: 'GroupsMembersController'
+      })
+      .when('/accounts/:slug/:role/groups/:group_slug/benefits', {
+        templateUrl: congo.assets['groups/benefits.html'],
+        controller: 'GroupsBenefitsController'
+      })
+      .when('/accounts/:slug/:role/groups/:group_slug/add_existing_benefits', {
+        templateUrl: congo.assets['groups/add_existing_benefits.html'],
+        controller: 'GroupsAddExistingBenefitsController'
+      })
       .when('/accounts/:slug/:role/groups/:group_slug/benefit_plans/:benefit_plan_slug/applications/new', {
         templateUrl: congo.assets['applications/new.html'],
         controller: 'ApplicationsNewController'

@@ -1,0 +1,44 @@
+<div class="centered modal fade" id="upload-member-list-modal" tabindex="-1" role="dialog" aria-labelledby="add-new-member-modal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3 class="modal-title" id="upload-member-list-modal-title">Upload Member List</h3>
+      </div>
+
+      <div class="modal-body">
+        <p>
+          Upload any list of members to add them. You can download our template, fill it out, and the upload it.
+          Otherwise, you can simply upload any of your existing lists and we will help you add them instead.
+        </p>
+
+        <br />
+
+        <div class="row">
+          <a href='/api/internal/accounts/{{accountSlug()}}/roles/{{currentRole()}}/groups/{{groupSlug()}}/download_employee_template' target='_blank' class="btn btn-primary">Download Grouphub Template</a>
+        </div>
+
+        <br />
+
+        <form id="send_member_list" class="group-form" enctype="multipart/form-data">
+          <div class="row">
+            <input id="upload_employees_list" type="file" class="hidden" onchange="angular.element(this).scope().sendMemberList()" />
+          </div>
+        </form>
+
+        <div class="row">
+          <a ng-click="uploadMemberList()" class="btn btn-primary" ng-disabled="isLocked">Upload Employee List</a>
+        </div>
+
+        <br />
+
+        <div class="row">
+          <a class="btn btn-primary" data-dismiss="modal">Go Back</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+

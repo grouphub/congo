@@ -2,20 +2,19 @@ require 'rails_helper'
 
 feature 'Customer authentication', :js do
   before { ActionMailer::Base.deliveries = [] }
+  let(:customer) { create(:user, :customer) }
+  let(:broker)   { create(:user, :broker) }
+  let(:account)   { broker.roles.first.account }
 
   scenario 'allows them to sign in and out' do
-    create_customer
-    signin_customer
-    signout_customer
+    sign_in customer
+    sign_out customer
   end
 
   scenario 'allows them to be invited to an account' do
-    create_broker
-
-    account = Account.first
     create_group_for(account)
 
-    signin_broker
+    sign_in broker
 
     all('a', text: 'Groups').first.click
 
@@ -68,12 +67,9 @@ feature 'Customer authentication', :js do
   end
 
   scenario 'allows them user to be invited to an account as a customer' do
-    create_broker
-
-    account = Account.first
     create_group_for(account)
 
-    signin_broker
+    sign_in broker
 
     all('a', text: 'Groups').first.click
 
@@ -114,18 +110,18 @@ feature 'Customer authentication', :js do
       expect(page).to have_content('Already have an account?')
 
       fill_in 'Email', with: 'barry@broker.com'
-      fill_in 'Password', with: 'barry'
+      fill_in 'Password', with: 'supersecret'
 
       all('button', text: 'Sign In').first.click
     end
 
     # Welcome flash should be present
-    expect(page).to have_content('Welcome, Barry Broker!')
+    expect(page).to have_content("Welcome, #{broker.first_name} #{broker.last_name}!")
 
     # Dashboard heading should be present
-    expect(page).to have_content('Welcome, Barry!')
+    expect(page).to have_content("Welcome, #{broker.first_name}!")
 
-    all('a', text: 'Barry').first.click
+    all('a', text: broker.first_name).first.click
 
     # Make sure that customer account appears in list
     expect(all('ul.dropdown-menu').first.text).to \

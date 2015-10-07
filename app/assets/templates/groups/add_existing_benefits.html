@@ -1,0 +1,62 @@
+<div class="col-md-12 centered" ng-init="init()">
+  <h1>Select Existing Benefits Providers</h1>
+
+  <ul class="nav nav-tabs padding-top-25">
+    <li><a href="#" class="disabled">Details</a></li>
+    <li><a href="#" class="disabled">Members</a></li>
+    <li class="active"><a href="#">Benefits</a></li>
+  </ul>
+
+  <br/>
+
+  <form class="form">
+    <div class="input-group">
+      <span class="input-group-addon">
+        <span class="glyphicon glyphicon-search"></span>
+      </span>
+
+      <input type="text" id="search-carrier" class="form-control" ng-model="search.carriers" placeholder="Search Carriers&hellip;">
+    </div>
+  </form>
+
+  <br/>
+
+  <div class="col-md-12 overflow-scroll height-400">
+    <table class="table carriers">
+      <thead>
+        <th>Name</th>
+        <th>Actions</th>
+      </thead>
+
+      <tbody>
+        <tr ng-repeat="carrier in carriersToShow()" class="left-aligned">
+          <td>
+            <a href="/accounts/{{accountSlug()}}/{{currentRole()}}/carriers/{{carrier.slug}}">
+              {{carrier.name}}
+            </a>
+          </td>
+
+          <td>
+            <a href="" class="btn btn-success btn-xs" ng-if="carrierCanBeActivated(carrier)" ng-click="openEstablishCarrierConnectionsModal()">Add to Account</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <br/>
+
+  <div class="col-md-4">
+  </div>
+
+  <div class="col-md-4">
+  </div>
+
+  <div class="col-md-4">
+    <a ng-href='/accounts/{{accountSlug()}}/{{currentRole()}}/groups/{{groupSlug()}}/' class="btn btn-primary">Do Later</a>
+    <a ng-href="#" class="btn btn-primary disabled" ng-click="">Next</a>
+  </div>
+
+  <br/>
+
+</div>
