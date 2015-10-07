@@ -7,6 +7,7 @@ require 'capybara/rails'
 require 'capybara/rspec'
 require_relative 'helpers/capybara_helper'
 require_relative 'helpers/congo_helper'
+require_relative 'override_s3.rb'
 
 ActiveRecord::Migration.maintain_test_schema!
 
