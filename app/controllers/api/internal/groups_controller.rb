@@ -152,6 +152,20 @@ class Api::Internal::GroupsController < Api::ApiController
     end
   end
 
+  def connect_to_carrier
+    group = Group.where(slug: params[:group_slug]).last
+
+    #TODO: Create field to store file reference on group
+
+    respond_to do |format|
+      format.json {
+        render json: {
+          group: render_group(group)
+        }
+      }
+    end
+  end
+
   # Render methods
 
   def render_group(group)
