@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150918183124) do
+ActiveRecord::Schema.define(version: 20151014175826) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -132,6 +132,12 @@ ActiveRecord::Schema.define(version: 20150918183124) do
   end
 
   add_index "carrier_accounts", ["deleted_at"], name: "index_carrier_accounts_on_deleted_at", using: :btree
+
+  create_table "carrier_invoice_files", force: :cascade do |t|
+    t.integer "carrier_id"
+    t.integer "group_id"
+    t.string  "location"
+  end
 
   create_table "carriers", force: :cascade do |t|
     t.string   "name"
