@@ -3,9 +3,9 @@
 
   angular.module('congoApp').directive('establishCarrierConnectionModal', establishCarrierConnectionModal);
 
-  establishCarrierConnectionModal.$inject = ['$http', '$location', 'flashesFactory'];
+  establishCarrierConnectionModal.$inject = ['$http', '$location', 'flashesFactory', 'carrierIdService'];
 
-  function establishCarrierConnectionModal($http, $location, flashesFactory) {
+  function establishCarrierConnectionModal($http, $location, flashesFactory, carrierIdService) {
     var establishCarrierConnectionModalDirective = {
       restrict: 'E',
       replace: true,
@@ -16,6 +16,8 @@
     return establishCarrierConnectionModalDirective;
 
     function modal($scope, $element, $attrs) {
+      $scope.carrierIdService = carrierIdService;
+
       $scope.carrierCredentials = {
         username: null,
         password: null
@@ -30,14 +32,14 @@
       };
 
       $scope.submitCarrierConnection = function() {
-        //API calls pending to be implemented
         var $form = new FormData();
 
-        $form.append('username',         $scope.carrierCredentials.username);
-        $form.append('password',         $scope.carrierCredentials.password);
-        $form.append('carrier_invoice',  $scope.carrierInvoice.file);
-        $form.append('group_slug',       $scope.groupSlug());
-        $form.append('applied_by_id',    congo.currentUser.id);
+        $form.append('username',        $scope.carrierCredentials.username);
+        $form.append('password',        $scope.carrierCredentials.password);
+        $form.append('carrier_id',      $scope.carrierIdService.get());
+        $form.append('carrier_invoice', $scope.carrierInvoice.file);
+        $form.append('group_slug',      $scope.groupSlug());
+        $form.append('applied_by_id',   congo.currentUser.id);
 
         var request = $http.post(
           '/api/internal/accounts/' + $scope.accountSlug() + '/roles/' + $scope.currentRole() + '/groups/' + $scope.groupSlug() + '/connect_to_carrier',
@@ -48,6 +50,7 @@
           flashesFactory.add('success', 'Successfully connected to carrier.');
           $('#establish-carrier-connection-modal').modal('hide');
           $scope.application = {};
+          $scope.carrierIdToUpload = null;
           $scope.$broadcast('file.clear');
         });
 

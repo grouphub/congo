@@ -3,11 +3,13 @@
 
   angular.module('congoApp').controller('GroupsAddExistingBenefitsController', GroupsAddExistingBenefitsController);
 
-  GroupsAddExistingBenefitsController.$inject = ['$scope', '$http', '$location', 'flashesFactory'];
+  GroupsAddExistingBenefitsController.$inject = ['$scope', '$http', '$location', 'flashesFactory', 'carrierIdService'];
 
-  function GroupsAddExistingBenefitsController($scope, $http, $location, flashesFactory){
+  function GroupsAddExistingBenefitsController($scope, $http, $location, flashesFactory, carrierIdService){
     // Make sure user is totally signed up before continuing.
     $scope.enforceValidAccount();
+
+    $scope.carrierIdService = carrierIdService;
 
     $scope.init = function() {
       $scope.search = {
@@ -64,8 +66,9 @@
       return !carrier.carrier_account;
     };
 
-    $scope.openEstablishCarrierConnectionsModal = function(){
-      $('#establish-carrier-connection-modal').modal('show');
+    $scope.openEstablishCarrierConnectionsModal = function(carrierId){
+      $scope.carrierIdService.set(carrierId);
+      $('#establish-carrier-connection-modal').modal('show', carrierId);
     };
 
   }
