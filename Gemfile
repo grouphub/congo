@@ -1,8 +1,9 @@
 source 'https://rubygems.org'
 
-gem 'rails', github: 'rails/rails', branch: '4-2-stable'
+# gem 'rails', github: 'rails/rails', branch: '4-2-stable'
+gem 'rails', '~> 4.2'
 
-gem 'pg'
+gem 'pg', '~>0.18'
 gem 'sprockets-rails', github: 'rails/sprockets-rails', branch: '2.x'
 
 gem 'redis-namespace'
@@ -103,5 +104,5 @@ group :development, :test do
   gem 'faker'
 end
 
-ruby ENV['CUSTOM_RUBY_VERSION'] || '2.2.0'
+ruby ENV['CUSTOM_RUBY_VERSION'] || '2.2.3'
 
