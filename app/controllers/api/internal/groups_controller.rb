@@ -4,8 +4,8 @@ class Api::Internal::GroupsController < Api::ApiController
   protect_from_forgery
 
   before_filter :ensure_user!
-  before_filter :ensure_account!
-  before_filter :ensure_broker_or_group_admin!, only: [:create, :update, :destroy]
+  before_filter :ensure_account!, only: [:update, :destroy]
+  before_filter :ensure_broker_or_group_admin!, only: [:update, :destroy]
 
   def index
     groups = nil
@@ -57,6 +57,9 @@ class Api::Internal::GroupsController < Api::ApiController
 
     unless account
       # TODO: Test this
+      #account = Account.create!(plan_name:'group')
+      
+
       error_response('A matching account could not be found.')
       return
     end

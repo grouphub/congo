@@ -14,8 +14,8 @@ class EnrollmentJob < ActiveJob::Base
     response = nil
 
     begin
-      response = pokitdok.enrollment(data)
-      meta = attempt['meta'] || {}
+    
+      meta = attempt['meta'] || {}  response = pokitdok.enrollment(data)
       activity_id = meta['activity_id']
 
       application.update_attributes! \

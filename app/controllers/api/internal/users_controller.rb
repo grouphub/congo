@@ -3,6 +3,7 @@ class Api::Internal::UsersController < Api::ApiController
   include UsersHelper
   include CustomerCreatable
   include BrokerCreatable
+  include GroupAdminCreatable
 
   protect_from_forgery
 
@@ -15,11 +16,15 @@ class Api::Internal::UsersController < Api::ApiController
     type = params[:type]
     email_token = params[:email_token]
 
+
     if password != password_confirmation
       # TODO: Test this
       error_response('Password and confirmation must match.')
       return
     end
+
+    
+
 
     # If user came in from an email then they are a customer.
     begin
@@ -29,6 +34,14 @@ class Api::Internal::UsersController < Api::ApiController
       return
     end
 
+    # If user came from a user signup, then they're a group admin.
+  #  begin
+   #   attempt_to_create_group_admin!
+   # rescue ActiveRecord::RecordInvalid => e
+    #  error_response(e.message)
+     # return
+   # end
+
     # If user came from a manual signup, then they're a broker.
     begin
       attempt_to_create_broker!
@@ -36,6 +49,8 @@ class Api::Internal::UsersController < Api::ApiController
       error_response(e.message)
       return
     end
+
+  
 
     user = signin! email, password
 

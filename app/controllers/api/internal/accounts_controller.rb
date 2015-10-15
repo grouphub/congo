@@ -1,6 +1,6 @@
 class Api::Internal::AccountsController < Api::ApiController
   protect_from_forgery
-
+  
   before_filter :ensure_user!
   before_filter :ensure_account!, except: [:create, :destroy]
   before_filter :ensure_broker!, except: [:create, :destroy]
