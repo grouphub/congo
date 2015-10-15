@@ -11,4 +11,4 @@ web:
   links:
     - db
   volumes:
-    - .:/grouphub-api
+    - .:/congo-app

@@ -15,10 +15,13 @@ RUN apt-get install -y libxml2-dev libxslt1-dev
 # for capybara-webkit
 RUN apt-get install -y libqt4-webkit libqt4-dev xvfb
 
+# for documentation
+RUN apt-get install -y graphviz
+
 # for a JS runtime
 RUN apt-get install -y nodejs --no-install-recommends && rm -rf /var/lib/apt/lists/*
 
-ENV APP_HOME /grouphub-api
+ENV APP_HOME /congo-app
 RUN mkdir $APP_HOME
 WORKDIR $APP_HOME
 
