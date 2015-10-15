@@ -5,9 +5,13 @@ describe Api::Internal::UsersController do
   describe 'POST /api/internal/users.json' do
 
     it 'creates a broker' do
+      User.destroy_all
+
+      email = Faker::Internet.email
+
       post :create,
         format: 'json',
-        email: 'alvin@chipmunks.com',
+        email: email,
         first_name: 'Alvin',
         last_name: 'Chipmunk',
         password: 'acorns',
@@ -15,10 +19,9 @@ describe Api::Internal::UsersController do
         type: 'broker'
 
       user = User.last
-      expect(user.email).to eq 'alvin@chipmunks.com'
+      expect(user.email).to eq email
       expect(user.first_name).to eq 'Alvin'
       expect(user.last_name).to eq 'Chipmunk'
-      expect(user.password).to eq 'acorns'
 
       expect(user.roles.length).to eq 1
       expect(user.roles.first.name).to eq 'broker'
@@ -28,7 +31,7 @@ describe Api::Internal::UsersController do
 
       user_data = response_data['user']
       expect(user_data['id']).to be > 0
-      expect(user_data['email']).to eq 'alvin@chipmunks.com'
+      expect(user_data['email']).to eq email
       expect(user_data['first_name']).to eq 'Alvin'
       expect(user_data['last_name']).to eq 'Chipmunk'
 
@@ -48,13 +51,13 @@ describe Api::Internal::UsersController do
 
       membership = Membership.create \
         group_id: group.id,
-        email: 'alvin@chipmunks.com',
+        email: Faker::Internet.email,
         email_token: 'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa',
         role_name: 'customer'
 
       post :create,
         format: 'json',
-        email: 'alvin@chipmunks.com',
+        email: membership.email,
         first_name: 'Alvin',
         last_name: 'Chipmunk',
         password: 'acorns',
@@ -63,10 +66,9 @@ describe Api::Internal::UsersController do
         email_token: 'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa'
 
       user = User.last
-      expect(user.email).to eq 'alvin@chipmunks.com'
+      expect(user.email).to eq membership.email
       expect(user.first_name).to eq 'Alvin'
       expect(user.last_name).to eq 'Chipmunk'
-      expect(user.password).to eq 'acorns'
       expect(user.roles.map(&:name)).to eq %w[customer]
 
       response_data = JSON.load(response.body)
@@ -74,7 +76,7 @@ describe Api::Internal::UsersController do
 
       user_data = response_data['user']
       expect(user_data['id']).to be > 0
-      expect(user_data['email']).to eq 'alvin@chipmunks.com'
+      expect(user_data['email']).to eq membership.email
       expect(user_data['first_name']).to eq 'Alvin'
       expect(user_data['last_name']).to eq 'Chipmunk'
 
@@ -92,13 +94,13 @@ describe Api::Internal::UsersController do
 
       membership = Membership.create \
         group_id: group.id,
-        email: 'alvin@chipmunks.com',
+        email: Faker::Internet.email,
         email_token: 'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa',
         role_name: 'group_admin'
 
       post :create,
         format: 'json',
-        email: 'alvin@chipmunks.com',
+        email: membership.email,
         first_name: 'Alvin',
         last_name: 'Chipmunk',
         password: 'acorns',
@@ -107,10 +109,9 @@ describe Api::Internal::UsersController do
         email_token: 'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa'
 
       user = User.last
-      expect(user.email).to eq 'alvin@chipmunks.com'
+      expect(user.email).to eq membership.email
       expect(user.first_name).to eq 'Alvin'
       expect(user.last_name).to eq 'Chipmunk'
-      expect(user.password).to eq 'acorns'
       expect(user.roles.map(&:name)).to eq %w[group_admin]
 
       response_data = JSON.load(response.body)
@@ -118,7 +119,7 @@ describe Api::Internal::UsersController do
 
       user_data = response_data['user']
       expect(user_data['id']).to be > 0
-      expect(user_data['email']).to eq 'alvin@chipmunks.com'
+      expect(user_data['email']).to eq membership.email
       expect(user_data['first_name']).to eq 'Alvin'
       expect(user_data['last_name']).to eq 'Chipmunk'
 

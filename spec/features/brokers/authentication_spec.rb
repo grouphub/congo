@@ -2,6 +2,7 @@ require 'rails_helper'
 
 feature 'Broker authentication', :js do
   let(:broker) { create(:user, :broker) }
+  let(:email)  { Faker::Internet.email }
 
   scenario 'allows them to sign in and out' do
     sign_in broker
@@ -15,9 +16,9 @@ feature 'Broker authentication', :js do
 
     fill_in 'First Name', with: 'Barry'
     fill_in 'Last Name', with: 'Broker'
-    fill_in 'Email', with: 'barry@broker.com'
-    fill_in 'Password', with: 'barry'
-    fill_in 'Confirm Password', with: 'barry'
+    fill_in 'Email', with: email
+    fill_in 'Password', with: 'supersecret'
+    fill_in 'Confirm Password', with: 'supersecret'
 
     all('button', text: 'Add User').first.click
 
@@ -42,18 +43,17 @@ feature 'Broker authentication', :js do
     fill_in 'Company Tagline', with: '#1 Account'
     fill_in 'Tax ID', with: '1234'
     fill_in 'First Name', with: 'Barry'
-    fill_in 'Last Name', with: 'Barry Broker'
+    fill_in 'Last Name', with: 'Broker'
     fill_in 'Phone Number', with: '(555) 555-5555'
 
     all('input[type=submit]').first.click
 
-    expect(page).to have_content('Welcome, Barry Broker!')
     expect(page).to have_content('Create New Group')
 
     current_user = current_user_data
     expect(current_user['first_name']).to eq('Barry')
     expect(current_user['last_name']).to eq('Broker')
-    expect(current_user['email']).to eq('barry@broker.com')
+    expect(current_user['email']).to eq(email)
     expect(current_user['invitation_id']).to be_nil
     expect(current_user['is_admin']).to be_falsey
     expect(current_user['accounts'].length).to eq(1)
@@ -69,9 +69,9 @@ feature 'Broker authentication', :js do
 
     fill_in 'First Name', with: 'Barry'
     fill_in 'Last Name', with: 'Broker'
-    fill_in 'Email', with: 'barry@broker.com'
-    fill_in 'Password', with: 'barry'
-    fill_in 'Confirm Password', with: 'barry'
+    fill_in 'Email', with: email
+    fill_in 'Password', with: 'supersecret'
+    fill_in 'Confirm Password', with: 'supersecret'
 
     all('button', text: 'Add User').first.click
 
@@ -96,18 +96,17 @@ feature 'Broker authentication', :js do
     fill_in 'Company Tagline', with: '#1 Account'
     fill_in 'Tax ID', with: '1234'
     fill_in 'First Name', with: 'Barry'
-    fill_in 'Last Name', with: 'Barry Broker'
+    fill_in 'Last Name', with: 'Broker'
     fill_in 'Phone Number', with: '(555) 555-5555'
 
     all('input[type=submit]').first.click
 
-    expect(page).to have_content('Welcome, Barry Broker!')
     expect(page).to have_content('Create New Group')
 
     current_user = current_user_data
     expect(current_user['first_name']).to eq('Barry')
     expect(current_user['last_name']).to eq('Broker')
-    expect(current_user['email']).to eq('barry@broker.com')
+    expect(current_user['email']).to eq(email)
     expect(current_user['invitation_id']).to be_nil
     expect(current_user['is_admin']).to be_falsey
     expect(current_user['accounts'].length).to eq(1)
@@ -123,9 +122,9 @@ feature 'Broker authentication', :js do
 
     fill_in 'First Name', with: 'Barry'
     fill_in 'Last Name', with: 'Broker'
-    fill_in 'Email', with: 'barry@broker.com'
-    fill_in 'Password', with: 'barry'
-    fill_in 'Confirm Password', with: 'barry'
+    fill_in 'Email', with: email
+    fill_in 'Password', with: 'supersecret'
+    fill_in 'Confirm Password', with: 'supersecret'
 
     all('button', text: 'Add User').first.click
 
@@ -150,18 +149,17 @@ feature 'Broker authentication', :js do
     fill_in 'Company Tagline', with: '#1 Account'
     fill_in 'Tax ID', with: '1234'
     fill_in 'First Name', with: 'Barry'
-    fill_in 'Last Name', with: 'Barry Broker'
+    fill_in 'Last Name', with: 'Broker'
     fill_in 'Phone Number', with: '(555) 555-5555'
 
     all('input[type=submit]').first.click
 
-    expect(page).to have_content('Welcome, Barry Broker!')
     expect(page).to have_content('Create New Group')
 
     current_user = current_user_data
     expect(current_user['first_name']).to eq('Barry')
     expect(current_user['last_name']).to eq('Broker')
-    expect(current_user['email']).to eq('barry@broker.com')
+    expect(current_user['email']).to eq(email)
     expect(current_user['invitation_id']).to be_nil
     expect(current_user['is_admin']).to be_falsey
     expect(current_user['accounts'].length).to eq(1)

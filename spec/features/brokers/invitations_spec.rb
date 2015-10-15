@@ -57,7 +57,6 @@ feature "Broker invitations", :js do
 
     all('input[type=submit]').first.click
 
-    expect(page).to have_content('Welcome, Barry Broker!')
     expect(page).to have_content('Create New Group')
 
     current_user = current_user_data

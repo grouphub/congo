@@ -16,41 +16,29 @@ class Api::Internal::UsersController < Api::ApiController
     type = params[:type]
     email_token = params[:email_token]
 
-
     if password != password_confirmation
       # TODO: Test this
       error_response('Password and confirmation must match.')
       return
     end
 
-    
-
-
     # If user came in from an email then they are a customer.
-    begin
-      attempt_to_create_customer!
-    rescue ActiveRecord::RecordInvalid => e
-      error_response(e.message)
-      return
+    if email_token
+      begin
+        user = attempt_to_create_customer!
+      rescue ActiveRecord::RecordInvalid => e
+        error_response(e.message)
+        return
+      end
+    else
+      # If user came from a manual signup, then they're a broker.
+      begin
+        user = attempt_to_create_broker!
+      rescue ActiveRecord::RecordInvalid => e
+        error_response(e.message)
+        return
+      end
     end
-
-    # If user came from a user signup, then they're a group admin.
-  #  begin
-   #   attempt_to_create_group_admin!
-   # rescue ActiveRecord::RecordInvalid => e
-    #  error_response(e.message)
-     # return
-   # end
-
-    # If user came from a manual signup, then they're a broker.
-    begin
-      attempt_to_create_broker!
-    rescue ActiveRecord::RecordInvalid => e
-      error_response(e.message)
-      return
-    end
-
-  
 
     user = signin! email, password
 
