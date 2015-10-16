@@ -155,6 +155,8 @@ Rails.application.routes.draw do
               post '/confirmations', to: 'memberships#send_confirmation'
             end
 
+            post '/connect_to_carrier', to: 'groups#connect_to_carrier'
+
             # Send confirmation to all members of a group
             post '/confirmations_all', to: 'memberships#send_confirmation_to_all'
 
