@@ -49,13 +49,15 @@
         request.success(function(response){
           flashesFactory.add('success', 'Successfully connected to carrier.');
           $('#establish-carrier-connection-modal').modal('hide');
-          $scope.application = {};
-          $scope.carrierIdToUpload = null;
-          $scope.$broadcast('file.clear');
+          $scope.application         = {};
+          $scope.carrierInvoice.file = null;
+          $('#carrier-invoice').val(undefined)
         });
 
         request.error(function(data){
-          var error = (data && data.error) ?  data.error : 'There was a problem connecting to the carrier.';
+          var error = (data && data.error) ? data.error : 'There was a problem connecting to the carrier.';
+          $scope.carrierInvoice.file = null;
+          $('#carrier-invoice').val(undefined)
           $('#establish-carrier-connection-modal').modal('hide');
           flashesFactory.add('danger', error);
         });
