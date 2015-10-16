@@ -155,7 +155,13 @@ class Api::Internal::GroupsController < Api::ApiController
   def connect_to_carrier
     group = Group.where(slug: params[:group_slug]).last
 
-    #TODO: Create field to store file reference on group
+    if params[:carrier_invoice] != 'null'
+      Groups::SaveInvoiceFileService.(
+        group,
+        params[:carrier_id],
+        params[:carrier_invoice]
+      )
+    end
 
     respond_to do |format|
       format.json {
