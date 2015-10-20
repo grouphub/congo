@@ -314,6 +314,17 @@ congoApp.controller('GroupsShowController', [
     $scope.reviewApplication = function (application) {
       $('#review-application-modal').modal('show');
       eventsFactory.emit('review-application', application, $scope.customerMemberships);
+
+      //WIP: this needs to fetch the PDF file and show it inside the modal
+      //$http.jsonp(application.pdf_attachment_url, {responseType: 'arraybuffer'})
+           //.success(function (response) {
+             //var file = new Blob([(response)], {type: 'application/pdf'});
+             //var fileURL = URL.createObjectURL(file);
+             //$scope.content = $sce.trustAsResourceUrl(fileURL);
+             //debugger;
+             //$('#review-application-modal').modal('show');
+             //eventsFactory.emit('review-application', application, $scope.customerMemberships);
+           //});
     };
 
     $scope.deleteApplication = function(application) {
