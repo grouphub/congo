@@ -20,11 +20,11 @@ default: &default
   # For details on connection pooling, see rails configuration guide
   # http://guides.rubyonrails.org/configuring.html#database-pooling
   pool: 5
-#<% if ENV['DOCKER_DEVELOPMENT'] %>
+<% if ENV['DOCKER_HOST'] %>
   username: postgres
   password:
   host: db
-#<% end %>
+<% end %>
 
 development:
   <<: *default
