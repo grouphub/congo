@@ -1,5 +1,5 @@
 <div class="modal fade" id="review-application-modal" tabindex="-1" role="dialog" aria-labelledby="review-application-modal" aria-hidden="true">
-  <div class="modal-dialog">
+  <div class="modal-dialog pdf-review-application">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -59,11 +59,8 @@
           </dl>
         </div>
 
-        <div ng-show="applicaion.pdf_attachment !== null">
-          <dl class="dl-horizontal">
-            <dt>Attachment</dt>
-            <dd> <a href="{{ application.pdf_attachment_url }}" target="_blank">Open PDF</a> </dd>
-          </dl>
+        <div id="iframe-container" ng-show="application.pdf_attachment_url !== null">
+          <iframe id="applicationPdfAttachment" ng-src={{applicationPdfUrl}}></iframe>
         </div>
       </div>
 

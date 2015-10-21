@@ -2,8 +2,9 @@ var congoApp = angular.module('congoApp');
 
 congoApp.directive('reviewApplicationModal', [
   '$http',
+  '$sce',
   'eventsFactory',
-  function ($http, eventsFactory) {
+  function ($http, $sce, eventsFactory) {
     return {
       restrict: 'E',
       replace: true,
@@ -46,8 +47,9 @@ congoApp.directive('reviewApplicationModal', [
         // TODO: Change eligibility modal to use this format
         eventsFactory.on($scope, 'review-application', function (application, memberships) {
           $scope.application = application;
-          $scope.properties = JSON.parse($scope.application.properties_data);
+          $scope.properties  = JSON.parse($scope.application.properties_data);
           $scope.memberships = memberships;
+          $scope.applicationPdfUrl = $sce.trustAsResourceUrl(application.pdf_attachment_url);
         });
       }
     };
