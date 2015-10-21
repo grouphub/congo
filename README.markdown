@@ -19,7 +19,7 @@ Getting started
 6.  You will need ngrok in order to test enrollment locally. Visit
     <a href="http://ngrok.com">http://ngrok.com</a> and sign up. Under your
     Dashboard, make note of your "auth token". Then, in the Terminal,
-    `brew install ngrok`, and run `ngrok -authtoken YOUR_AUTH_TOKEN`. Hit
+    `brew cask install ngrok`, and run `ngrok authtoken YOUR_AUTH_TOKEN`. Hit
     `ctrl-c` to quit.
 7.  Clone the repo. `git clone https://github.com/grouphub/congo.git`.
 8.  `cd congo`
