@@ -111,7 +111,7 @@ Then you will need to install the Elastic Beanstalk tools.
 
 To get setup, you will need to run the following:
 
-    eb setup
+    eb init
     eb use congo-staging
 
 You can deploy like so:
