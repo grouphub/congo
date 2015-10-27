@@ -17,7 +17,7 @@
         , membership = $scope.membership;
 
       $form.append('pdf_attachment',  $scope.application.pdf_attachment);
-      $form.append('benefit_plan_id', $scope.application.benefit_plan_id)
+      $form.append('benefit_plan_id', $scope.application.benefit_plan_id);
       $form.append('group_slug',      $scope.groupSlug());
       $form.append('applied_by_id',   congo.currentUser.id);
       $form.append('user_id',         membership.user_id);

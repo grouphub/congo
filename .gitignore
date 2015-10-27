@@ -34,3 +34,5 @@ db/**/*.dump
 db/**/*.json
 db/**/*.sql
 
+# Carriers' Invoices uploaded files
+public/system/

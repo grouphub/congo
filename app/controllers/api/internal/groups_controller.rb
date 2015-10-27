@@ -152,6 +152,26 @@ class Api::Internal::GroupsController < Api::ApiController
     end
   end
 
+  def connect_to_carrier
+    group = Group.where(slug: params[:group_slug]).last
+
+    if params[:carrier_invoice] != 'null'
+      Groups::SaveInvoiceFileService.(
+        group,
+        params[:carrier_id],
+        params[:carrier_invoice]
+      )
+    end
+
+    respond_to do |format|
+      format.json {
+        render json: {
+          group: render_group(group)
+        }
+      }
+    end
+  end
+
   # Render methods
 
   def render_group(group)

@@ -7,6 +7,7 @@ class Group < ActiveRecord::Base
   has_many :memberships
   has_many :group_benefit_plans
   has_many :attachments
+  has_many :carrier_invoice_files
 
   belongs_to :account
 
