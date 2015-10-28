@@ -46,7 +46,7 @@ feature "Broker uploading form to a specific employee", :js do
 
     within "form.invite-member" do
       fill_in "email", with: Faker::Internet.email
-      click_on "Invite a Member"
+      click_on "Add member"
     end
 
     click_on "Upload Application"

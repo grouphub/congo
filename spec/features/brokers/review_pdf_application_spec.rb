@@ -7,8 +7,6 @@ feature "Broker review pdf application", :js do
   let!(:account_benefit_plan) { create(:account_benefit_plan, account: account) }
   let!(:membership) { create(:membership, :with_user, group: group, account: group.account) }
 
-  let(:pdf_window) { page.driver.browser.window_handles.last }
-
   background { sign_in broker  }
 
   scenario "opens the pdf in a new tab" do
@@ -17,10 +15,6 @@ feature "Broker review pdf application", :js do
 
     sleep 1
 
-    within "#review-application-modal" do
-      click_on "Open PDF"
-    end
-
-    expect(page.driver.browser.window_handles.count).to be > 1
+    expect(page).to have_content 'Review Application'
   end
 end

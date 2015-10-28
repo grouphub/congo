@@ -28,7 +28,7 @@ feature 'Customer authentication', :js do
 
     within 'form.invite-member' do
       fill_in 'Invite a New Member', with: 'alice@first-account.com'
-      click_on "Invite a Member"
+      click_on "Add member"
     end
 
     expect(ActionMailer::Base.deliveries).to be_empty
@@ -83,7 +83,7 @@ feature 'Customer authentication', :js do
 
     within 'form.invite-member' do
       fill_in 'Invite a New Member', with: 'barry@broker.com'
-      click_on 'Invite a Member'
+      click_on 'Add member'
     end
 
     expect(ActionMailer::Base.deliveries).to be_empty
