@@ -6,6 +6,10 @@ test:
   secret_key: 'sk_test_ToaltqiFLMBQVY2tgHLnej0Z'
   publishable_key: 'pk_test_BsKUkN4WKQChntkityuHiPGa'
 
+staging:
+  secret_key: 'sk_test_ToaltqiFLMBQVY2tgHLnej0Z'
+  publishable_key: 'pk_test_BsKUkN4WKQChntkityuHiPGa'
+
 production:
   secret_key: 'sk_live_jf4Mz3rcLGGwJGvYDLMuHqob'
   publishable_key: 'pk_live_lQQ3DfJNxv5nzt24gqKGURvw'

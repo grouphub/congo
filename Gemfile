@@ -108,4 +108,4 @@ group :production do
   gem 'rails_12factor'
 end
 
-ruby ENV['CUSTOM_RUBY_VERSION'] || '2.2.0'
+# ruby ENV['CUSTOM_RUBY_VERSION'] || '2.2.0'
