@@ -8,6 +8,11 @@ test:
   client_secret: '1eEx7fl95Deqz0Y9w3StPfMT8oXoRS8XR4oU2xLH'
   callback_host: 'http://test.host'
 
+integration:
+  client_id: 'RKH2S5iecrOcrGroqrx9'
+  client_secret: '1eEx7fl95Deqz0Y9w3StPfMT8oXoRS8XR4oU2xLH'
+  callback_host: 'http://test.host'
+
 staging:
   client_id: 'RKH2S5iecrOcrGroqrx9'
   client_secret: '1eEx7fl95Deqz0Y9w3StPfMT8oXoRS8XR4oU2xLH'

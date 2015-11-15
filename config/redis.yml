@@ -7,6 +7,11 @@ test:
   namespace: 'congo2'
 
 # Setup for Heroku or Elasticache
+integration:
+  url: <%= ENV['REDISTOGO_URL'] || ENV['REDIS_URL'] || 'redis://localhost:6379' %>
+  namespace: 'congo2'
+
+# Setup for Heroku or Elasticache
 staging:
   url: <%= ENV['REDISTOGO_URL'] || ENV['REDIS_URL'] || 'redis://localhost:6379' %>
   namespace: 'congo2'

@@ -6,6 +6,10 @@ test:
   secret_key: 'sk_test_ToaltqiFLMBQVY2tgHLnej0Z'
   publishable_key: 'pk_test_BsKUkN4WKQChntkityuHiPGa'
 
+integration:
+  secret_key: 'sk_test_ToaltqiFLMBQVY2tgHLnej0Z'
+  publishable_key: 'pk_test_BsKUkN4WKQChntkityuHiPGa'
+
 staging:
   secret_key: 'sk_test_ToaltqiFLMBQVY2tgHLnej0Z'
   publishable_key: 'pk_test_BsKUkN4WKQChntkityuHiPGa'

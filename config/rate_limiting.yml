@@ -8,6 +8,11 @@ test:
   requests_per_period: 50
   period_in_milliseconds: 3600000 # One hour
 
+integration:
+  enabled: true
+  requests_per_period: 50
+  period_in_milliseconds: 3600000 # One hour
+
 staging:
   enabled: true
   requests_per_period: 50

@@ -53,5 +53,8 @@ production: &production
 
 staging:
   <<: *production
+
+integration:
+  <<: *production
 <% end %>
 
