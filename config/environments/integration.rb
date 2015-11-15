@@ -39,5 +39,5 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :letter_opener
 
   # Add Rack::LiveReload to the bottom of the middleware stack with the default options.
-  config.middleware.use Rack::LiveReload
+  # config.middleware.use Rack::LiveReload
 end
