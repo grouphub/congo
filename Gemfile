@@ -1,13 +1,13 @@
 source 'https://rubygems.org'
 
-gem 'rails', github: 'rails/rails', branch: '4-2-stable'
+gem 'rails', '~> 4.2'
 
 gem 'pg'
-gem 'sprockets-rails', github: 'rails/sprockets-rails', branch: '2.x'
+gem 'sprockets-rails', :require => 'sprockets/railtie'
 
 gem 'redis-namespace'
 
-gem 'sass-rails', github: 'rails/sass-rails'
+gem 'sass-rails'
 
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', github: 'rails/coffee-rails'
