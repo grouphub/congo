@@ -160,6 +160,15 @@ Make sure you can shell into the server. For example:
     HOST=ec2-52-1-31-195.compute-1.amazonaws.com
     ssh -i $KEY ec2-user@$HOST
 
+Make sure there is a local key on the main server (e.g., `congo-integration`):
+  `ls ~/.ssh/id_rsa*`
+
+Otherwise make one:
+  `ssh-keygen -t rsa -b 4096 -C "congo-integration@grouphub.io"`
+
+Add the main server's local key to authorized keys on worker/clock:
+  - paste `~/.ssh/id_rsa.pub` contents into `~/.ssh/authorized_keys`
+
 Prepare the server. Make sure you're ssh'ed in, and run:
 
     # Install packages as root
@@ -169,31 +178,22 @@ Prepare the server. Make sure you're ssh'ed in, and run:
       gcc-c++ patch readline readline-devel zlib zlib-devel \
       libyaml-devel libffi-devel openssl-devel make \
       bzip2 autoconf automake libtool bison iconv-devel \
-      git tmux postgresql-libs postgresql-devel
+      git tmux postgresql-libs postgresql-devel ruby22
 
-    curl -sL https://rpm.nodesource.com/setup | bash -
+    # set Ruby 2.2 as default
+    alternatives --set ruby /usr/bin/ruby2.2
+    gem install bundler
+
+    # install recent NodeJS
+    #curl -sL https://rpm.nodesource.com/setup_4.x | bash -
+    yum install --assumeyes https://rpm.nodesource.com/pub_4.x/el/7/x86_64/nodesource-release-el7-1.noarch.rpm
     yum install --assumeyes nodejs
     exit
 
-    # Consider running the following commands in `tmux`...
-
-    # Install rbenv, ruby, and bundler as ec2-user
-    git clone https://github.com/sstephenson/rbenv.git ~/.rbenv
-    echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
-    echo 'eval "$(rbenv init -)"' >> ~/.bashrc
-    git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
-    source ~/.bashrc
-    rbenv install 2.2.0
-    rbenv global 2.2.0
-    mv ~/bin ~/bin.old
-    gem install bundler
-    rbenv rehash
-
 Test that everything is correct:
 
-    which ruby # ~/.rbenv/shims/ruby
-    which bundle # ~/.rbenv/shims/bundle
-    bundle -v # Bundler version 1.9.1
+    ruby -v # ruby 2.2.3p173
+    bundle -v # Bundler version 1.10.6
 
 Set the environment variables. Make sure you're SSH'ed in, fill in the following
 lines with your variables, then run:

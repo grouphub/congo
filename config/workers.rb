@@ -94,6 +94,53 @@
       run_command: 'script/clock_daemon'
     },
 
+    # Integration Worker Box 1
+    {
+      name: 'congo-integration-worker-1',
+      environment: 'congo-integration',
+      ssh_host: 'ec2-52-3-242-237.compute-1.amazonaws.com',
+      ssh_args: {
+        user: 'ec2-user',
+        keys_only: true,
+        keys: [
+          "#{ENV['HOME']}/.ssh/id_rsa"
+        ],
+        timeout: 0,
+        operation_timeout: 0
+      },
+      deploy_directory: '/home/ec2-user/congo',
+      pid_file: 'tmp/pids/shoryuken.pid',
+      log_file: 'log/shoryuken.log',
+      kill_command: 'kill -KILL $(cat tmp/pids/shoryuken.pid)',
+      run_command: 'bundle exec shoryuken ' +
+        '--pidfile=tmp/pids/shoryuken.pid ' +
+        '--logfile=log/shoryuken.log ' +
+        '--config=config/shoryuken.yml ' +
+        '--rails ' +
+        '--daemon'
+    },
+
+    # Integration Clock Box 1
+    {
+      name: 'congo-integration-clock-1',
+      environment: 'congo-integration',
+      ssh_host: 'ec2-52-91-88-35.compute-1.amazonaws.com',
+      ssh_args: {
+        user: 'ec2-user',
+        keys_only: true,
+        keys: [
+          "#{ENV['HOME']}/.ssh/id_rsa"
+        ],
+        timeout: 0,
+        operation_timeout: 0
+      },
+      deploy_directory: '/home/ec2-user/congo',
+      pid_file: 'tmp/pids/clock.pid',
+      log_file: 'log/clock.log',
+      kill_command: 'kill -KILL $(cat tmp/pids/clock.pid)',
+      run_command: 'script/clock_daemon'
+    },
+
     # Staging Worker Box 1
     {
       name: 'congo-staging-worker-1',

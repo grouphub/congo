@@ -20,6 +20,12 @@ default: &default
   # For details on connection pooling, see rails configuration guide
   # http://guides.rubyonrails.org/configuring.html#database-pooling
   pool: 5
+<% if (ENV['APP_HOME'] == '/congo-app') %>
+  username: postgres
+  password:
+  host: db
+<% else %>
+<% end %>
 
 development:
   <<: *default
@@ -36,7 +42,7 @@ production:
   url: <%= ENV['DATABASE_URL'] %>
 <% else %>
 # Setup for RDS
-production:
+production: &production
   adapter: postgresql
   encoding: unicode
   database: <%= ENV['RDS_DB_NAME'] %>
@@ -44,5 +50,11 @@ production:
   password: <%= ENV['RDS_PASSWORD'] %>
   host: <%= ENV['RDS_HOSTNAME'] %>
   port: <%= ENV['RDS_PORT'] %>
+
+staging:
+  <<: *production
+
+integration:
+  <<: *production
 <% end %>
 
