@@ -160,6 +160,15 @@ Make sure you can shell into the server. For example:
     HOST=ec2-52-1-31-195.compute-1.amazonaws.com
     ssh -i $KEY ec2-user@$HOST
 
+Make sure there is a local key on the main server (e.g., `congo-integration`):
+  `ls ~/.ssh/id_rsa*`
+
+Otherwise make one:
+  `ssh-keygen -t rsa -b 4096 -C "congo-integration@grouphub.io"`
+
+Add the main server's local key to authorized keys on worker/clock:
+  - paste `~/.ssh/id_rsa.pub` contents into `~/.ssh/authorized_keys`
+
 Prepare the server. Make sure you're ssh'ed in, and run:
 
     # Install packages as root

@@ -103,7 +103,7 @@
         user: 'ec2-user',
         keys_only: true,
         keys: [
-          "#{ENV['HOME']}/.ssh/grouphub-congo"
+          "#{ENV['HOME']}/.ssh/id_rsa"
         ],
         timeout: 0,
         operation_timeout: 0
@@ -129,7 +129,7 @@
         user: 'ec2-user',
         keys_only: true,
         keys: [
-          "#{ENV['HOME']}/.ssh/grouphub-congo"
+          "#{ENV['HOME']}/.ssh/id_rsa"
         ],
         timeout: 0,
         operation_timeout: 0
