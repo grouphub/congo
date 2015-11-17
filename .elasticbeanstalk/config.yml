@@ -2,6 +2,8 @@ branch-defaults:
   master:
     environment: congo-production
   staging:
+    environment: congo-staging
+  integration:
     environment: congo-integration
 global:
   application_name: congo
