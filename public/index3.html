@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="UTF-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge" />	
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<title>React - Bootstrap Theme</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -12,12 +12,12 @@
 	<link rel="stylesheet" type="text/css" href="css/vendor/animate.css">
 
 	<!-- javascript -->
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 	<script src="js/bootstrap/bootstrap.min.js"></script>
 	<script src="js/theme.js"></script>
 
 	<!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 </head>
 <body id="home3">
@@ -147,7 +147,7 @@
 								  			<p>
 								  				Whether you want to fill this paragraph with some text like I'm doing right now, this place is perfect to describe some features or anything you want - React has a complete solution for you.
 								  			</p>
-								  		</div>					  		
+								  		</div>
 								  	</div>
 								  	<div class="tab-pane fade" id="messages">
 								  		<div class="col-md-6 info">
@@ -156,7 +156,7 @@
 								  				Whether you want to fill this paragraph with some text like I'm doing right now, this place is perfect to describe some features or anything you want - React has a complete solution for you.
 								  			</p>
 								  			<p>
-								  				You have complete control over the look & feel of your website, we offer the best quality so you take your site up and running in no time.
+								  				You have complete control over the look &amp; feel of your website, we offer the best quality so you take your site up and running in no time.
 								  			</p>
 								  		</div>
 								  		<div class="col-md-6 image">
@@ -467,7 +467,7 @@
 								</a>
 								<a href="#">
 									<img src="images/social/social-dbl.png" alt="dribbble" />
-								</a>					
+								</a>
 							</div>
 						</div>
 					</div>
@@ -481,7 +481,7 @@
 	  	<div class="modal-dialog">
 	    	<div class="modal-content">
 	      		<div class="modal-body">
-	      			<iframe src='http://player.vimeo.com/video/22439234' width='650' height='370' frameborder='0' webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+	      			<iframe src='//player.vimeo.com/video/22439234' width='650' height='370' frameborder='0' webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 	      		</div>
 	    	</div>
 	 	 </div>
@@ -489,15 +489,15 @@
 
 	<script type="text/javascript">
 		$(function () {
-			// Makes the demo video appear/disappear 
+			// Makes the demo video appear/disappear
 			var $demo = $("#demo");
 			$('#demo').on('hidden.bs.modal', function () {
 			  $demo.find("iframe").remove();
 			})
 			$('#demo').on('show.bs.modal', function () {
 				if (!$demo.find("iframe").length) {
-					$demo.find(".modal-body").append("<iframe src='http://player.vimeo.com/video/22439234' width='650' height='370' frameborder='0' webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>")
-				}			  
+					$demo.find(".modal-body").append("<iframe src='//player.vimeo.com/video/22439234' width='650' height='370' frameborder='0' webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>")
+				}
 			});
 
 			// triggers the off-canvas panel
@@ -512,10 +512,10 @@
 			 // parallax header
 			 $('#cover-image').css("background-position", "50% 50%");
 		    $(window).scroll(function() {
-				var scroll = $(window).scrollTop(), 
+				var scroll = $(window).scrollTop(),
 					slowScroll = scroll/4,
 					slowBg = 50 - slowScroll;
-					
+
 				$('#cover-image').css("background-position", "50% " + slowBg + "%");
 			});
 		});
