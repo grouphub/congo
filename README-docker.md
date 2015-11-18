@@ -1,4 +1,4 @@
-## Setup
+## Initial Setup
 - add `eval "$(docker-machine env default)"` to your `~/.profile` or `~/.bashrc`
 
 ### Mac

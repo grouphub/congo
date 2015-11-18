@@ -2,9 +2,12 @@ source 'https://rubygems.org'
 
 # gem 'rails', github: 'rails/rails', branch: '4-2-stable'
 gem 'rails', '~> 4.2'
+gem 'rails-api', github: 'rails-api/rails-api', branch: 'master'
+gem 'active_model_serializers', github: 'rails-api/active_model_serializers', branch: 'master'
 
 gem 'pg', '~>0.18'
-gem 'sprockets-rails', github: 'rails/sprockets-rails', branch: '2.x'
+gem 'sprockets-rails', :require => 'sprockets/railtie'
+# gem 'sprockets', '~> 3.0'
 
 gem 'redis-namespace'
 
@@ -12,6 +15,9 @@ gem 'sass-rails', github: 'rails/sass-rails'
 
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', github: 'rails/coffee-rails'
+
+# JSON API docs
+gem 'swagger-blocks'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
@@ -21,7 +27,11 @@ gem 'jbuilder', '~> 2.0'
 
 gem 'bcrypt', '~> 3.1.7'
 
+# for soft delete
 gem 'paranoia', '~> 2.0'
+
+# for pagination of results
+gem 'kaminari'
 
 # For running the server.
 gem 'shoryuken'
@@ -99,10 +109,18 @@ group :development, :test do
   gem 'pry-remote'
   gem 'pry-nav'
   gem 'pry-rails'
+  gem 'byebug'
+
+  # inline DB schema docs
+  gem 'annotate'
 
   gem 'spring-commands-rspec'
   gem 'faker'
 end
 
-ruby ENV['CUSTOM_RUBY_VERSION'] || '2.2.3'
+group :production, :staging do
+  gem 'rails_12factor'
+end
 
+# ruby ENV['CUSTOM_RUBY_VERSION'] || '2.2.3'
+# raise 'Ruby version must be 2.2 or greater' unless  RUBY_VERSION.to_f >= 2.2

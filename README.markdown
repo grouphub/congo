@@ -111,7 +111,7 @@ Then you will need to install the Elastic Beanstalk tools.
 
 To get setup, you will need to run the following:
 
-    eb setup
+    eb init
     eb use congo-staging
 
 You can deploy like so:
@@ -169,7 +169,7 @@ Prepare the server. Make sure you're ssh'ed in, and run:
       gcc-c++ patch readline readline-devel zlib zlib-devel \
       libyaml-devel libffi-devel openssl-devel make \
       bzip2 autoconf automake libtool bison iconv-devel \
-      git tmux postgresql-libs postgresql-devel
+      git tmux postgresql-libs postgresql94-devel ruby22 ruby22-devel
 
     curl -sL https://rpm.nodesource.com/setup | bash -
     yum install --assumeyes nodejs
