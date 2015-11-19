@@ -49,7 +49,8 @@ namespace :workers do
     worker.ssh! %[
       cd #{worker.to_directory} &&
         #{worker.ruby_env} &&
-        bundle
+        bundle pack &&
+        bundle install --path vendor/cache
     ]
 
     current_workers = Workers.new('current')
