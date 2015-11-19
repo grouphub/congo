@@ -164,7 +164,7 @@ GEM
     netrc (0.10.3)
     newrelic_rpm (3.12.0.288)
     ng-rails-csrf (0.1.0)
-    nokogiri (1.6.6.2)
+    nokogiri (1.6.6.3)
       mini_portile (~> 0.6.0)
     notiffany (0.0.6)
       nenv (~> 0.1)
@@ -350,6 +350,7 @@ DEPENDENCIES
   net-ssh-simple
   newrelic_rpm
   ng-rails-csrf
+  nokogiri (~> 1.6, >= 1.6.6.3)
   paranoia (~> 2.0)
   pg
   pokitdok-ruby (~> 0.7.2)
