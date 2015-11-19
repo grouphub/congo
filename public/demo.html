@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="UTF-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge" />	
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<title>HealthHub</title>
 	<script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -22,12 +22,12 @@
 	<link rel="stylesheet" type="text/css" href="css/vendor/animate.css">
 
 	<!-- javascript -->
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 	<script src="js/bootstrap/bootstrap.min.js"></script>
 	<script src="js/theme.js"></script>
 
 	<!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 </head>
 <body id="home3">
@@ -169,7 +169,7 @@
 								  			<p>
 								  				Whether you want to fill this paragraph with some text like I'm doing right now, this place is perfect to describe some features or anything you want - HealthHub has a complete solution for you.
 								  			</p>
-								  		</div>					  		
+								  		</div>
 								  	</div>
 								  	<div class="tab-pane fade" id="messages">
 								  		<div class="col-md-6 info">
@@ -490,7 +490,7 @@
 								</a>
 								<a href="#">
 									<img src="images/social/social-dbl.png" alt="dribbble" />
-								</a>					
+								</a>
 							</div>
 						</div>
 					</div>
@@ -512,7 +512,7 @@
 
 	<script type="text/javascript">
 		$(function () {
-			// Makes the demo video appear/disappear 
+			// Makes the demo video appear/disappear
 			var $demo = $("#demo");
 			$('#demo').on('hidden.bs.modal', function () {
 			  $demo.find("iframe").remove();
@@ -520,13 +520,13 @@
 			$('#demo').on('show.bs.modal', function () {
 				if (!$demo.find("iframe").length) {
 					$demo.find(".modal-body").append("<iframe width="650" height="370" src='https://www.youtube.com/embed/XS3u2LNxQn4' frameborder="0" allowfullscreen></iframe>")
-				}			  
+				}
 			});
 
 			// triggers the off-canvas panel
 			$(".sidebar-toggle").click(function (e) {
 				e.stopPropagation();
-				$(".st-container").toggleClass("nav-effect");	
+				$(".st-container").toggleClass("nav-effect");
 			});
 			$(".st-pusher").click(function () {
 				$(".st-container").removeClass("nav-effect");
@@ -535,10 +535,10 @@
 			 // parallax header
 			 $('#cover-image').css("background-position", "50% 50%");
 		    $(window).scroll(function() {
-				var scroll = $(window).scrollTop(), 
+				var scroll = $(window).scrollTop(),
 					slowScroll = scroll/4,
 					slowBg = 50 - slowScroll;
-					
+
 				$('#cover-image').css("background-position", "50% " + slowBg + "%");
 			});
 		});

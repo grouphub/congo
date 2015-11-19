@@ -178,7 +178,7 @@ Prepare the server. Make sure you're ssh'ed in, and run:
       gcc-c++ patch readline readline-devel zlib zlib-devel \
       libyaml-devel libffi-devel openssl-devel make \
       bzip2 autoconf automake libtool bison iconv-devel \
-      git tmux postgresql-libs postgresql-devel ruby22
+      git tmux postgresql-libs postgresql-devel ruby22 ruby22-devel
 
     # set Ruby 2.2 as default
     alternatives --set ruby /usr/bin/ruby2.2
