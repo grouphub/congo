@@ -23,7 +23,8 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'paranoia', '~> 2.0'
 
 # For running the server.
-gem 'shoryuken'
+#gem 'shoryuken'
+gem 'shoryuken', github: 'phstc/shoryuken', branch: 'master'
 gem 'foreman'
 gem 'puma'
 
@@ -48,6 +49,7 @@ gem 'rack-defense'
 # For Amazon S3 attachments
 gem 'aws-s3', github: 'bartoszkopinski/aws-s3'
 gem 'fakes3'
+gem 'aws-sdk', '~> 2'
 
 # For rich text in groups and benefit plans
 gem 'kramdown'
