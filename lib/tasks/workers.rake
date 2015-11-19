@@ -50,7 +50,7 @@ namespace :workers do
       cd #{worker.to_directory} &&
         #{worker.ruby_env} &&
         bundle package --all --path=ENV['BUNDLE_CACHE'] --no-prune &&
-        bundle install --local --path=ENV['BUNDLE_CACHE']
+        sudo bundle install --local --path=ENV['BUNDLE_CACHE']
     ]
 
     current_workers = Workers.new('current')

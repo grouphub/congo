@@ -49,8 +49,7 @@ gem 'ng-rails-csrf'
 gem 'rack-defense'
 
 # For Amazon S3 attachments
-#gem 'aws-s3', github: 'bartoszkopinski/aws-s3'
-gem 'aws-s3', '~> 0.6.3'
+gem 'aws-s3', github: 'bartoszkopinski/aws-s3'
 gem 'fakes3'
 gem 'aws-sdk', '~> 2'
 
