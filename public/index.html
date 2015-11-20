@@ -10,7 +10,6 @@
     <link rel="stylesheet" type="text/css" href="css/compiled/theme.css">
     <link rel="stylesheet" type="text/css" href="css/vendor/ionicons.min.css">
     <link rel="stylesheet" type="text/css" href="css/vendor/flipclock.css">
-    <link rel="stylesheet" type="text/css" href="stylesheets/menu.css">
 
 	<!-- javascript -->
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
@@ -19,7 +18,6 @@
     <script src="js/vendor/flipclock/flipclock.js"></script>
     <script src="js/vendor/flipclock/faces/dailycounter.js"></script>
 
-    <script src="js/theme.js"></script>
     <script type="text/javascript">
       var _gaq = _gaq || [];
       _gaq.push(['_setAccount', 'UA-54087593-1']);
@@ -29,7 +27,7 @@
        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
        })();
-    </script>x
+    </script>
 
     <meta name="google-site-verification" content="sPUvtX6rz9lPOSfpHNZ0TJbHm1ll8oH0R4ZNVPnOg9c">
     <meta name="p:domain_verify" content="5c11ee9bbd0c9a2e3e3b91bc789a60cf"><meta name="alexaVerifyID" content="17taQw2YDFii1s1vMno1IZicfKQ">
@@ -41,8 +39,7 @@
 </head>
 
 <body id="coming-soon" class="dark">
-  <div id="cover-image" class="animated fadeIn"></div> <div class="container">
-
+  <div id="cover-image" class="animated fadeIn"></div>
     <div class="container">
       <div class="row info">
         <div class="col-md-12">
@@ -52,7 +49,6 @@
       </div>
 
       <div class="row">
-
         <div class="col-md-12">
           <div id="countdown">
             <div id="clock"></div>
@@ -76,7 +72,7 @@
         <div class="col-md-12">
           <a class="ion" href="https://www.twitter.com/ghubapi"><span class="ion-social-twitter"></span></a>
           <a class="ion" href="https://www.facebook.com/grouphub"><span class="ion-social-facebook"></span></a>
-          <div class="tm">Follow up @ghubapi</div>
+          <div class="tm">Follow GroupHub</div>
         </div>
       </div>
     </div>
@@ -89,8 +85,8 @@
           // Grab the current date
           var currentDate = new Date();
 
-          // Set some date in the future. In this case, it's always Jan 1
-          var futureDate  = new Date(2015, 10, 19);
+          // Set some date in the future. Friday 6pm
+          var futureDate  = new Date('November 20, 2015 18:00:00 PST');
 
           // Calculate the difference in seconds between the future and current date
           var diff = futureDate.getTime() / 1000 - currentDate.getTime() / 1000;
@@ -103,59 +99,6 @@
       });
     </script>
 
-    <script type="text/javascript">
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', 'UA-54087593-1']);
-      _gaq.push(['_trackPageview']);
-      (function() {
-       var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-       ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-       })();
-    </script>
 
-    <script type="text/javascript">
-      $(window).load(function() {
-        $("#cssmenu").menumaker({
-          title: "Menu",
-          format: "multitoggle"
-        });
-
-        $("#cssmenu").prepend("<div id='menu-line'></div>");
-
-        var foundActive = false, activeElement, linePosition = 0, menuLine = $("#cssmenu #menu-line"), lineWidth, defaultPosition, defaultWidth;
-
-        $("#cssmenu > ul > li").each(function() {
-          if ($(this).hasClass('active')) {
-          activeElement = $(this);
-          foundActive = true;
-          }
-        });
-
-        if (foundActive === false) {
-          activeElement = $("#cssmenu > ul > li").first();
-        }
-
-        defaultWidth = lineWidth = activeElement.width();
-
-        defaultPosition = linePosition = activeElement.position().left;
-
-        menuLine.css("width", lineWidth);
-        menuLine.css("left", linePosition);
-
-        $("#cssmenu > ul > li").hover(function() {
-          activeElement = $(this);
-          lineWidth = activeElement.width();
-          linePosition = activeElement.position().left;
-          menuLine.css("width", lineWidth);
-          menuLine.css("left", linePosition);
-          },
-          function() {
-          menuLine.css("left", defaultPosition);
-          menuLine.css("width", defaultWidth);
-        });
-
-      });
-    </script>
 </body>
 </html>
