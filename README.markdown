@@ -178,7 +178,7 @@ Prepare the server. Make sure you're ssh'ed in, and run:
       gcc-c++ patch readline readline-devel zlib zlib-devel \
       libyaml-devel libffi-devel openssl-devel make \
       bzip2 autoconf automake libtool bison iconv-devel \
-      git tmux postgresql-libs postgresql-devel ruby22 ruby22-devel
+      git tmux postgresql94-libs postgresql94-devel ruby22 ruby22-devel
 
     # set Ruby 2.2 as default
     alternatives --set ruby /usr/bin/ruby2.2
@@ -214,8 +214,7 @@ lines with your variables, then run:
     echo 'export RDS_USERNAME="..."' >> ~/.bashrc
     echo 'export RDS_PASSWORD="..."' >> ~/.bashrc
     echo 'export S3_BUCKET="..."' >> ~/.bashrc
-    echo 'export SQS_DEFAULT_QUEUE="..."' >> ~/.bashrc
-    echo 'export SQS_MAILERS_QUEUE="..."' >> ~/.bashrc
+    echo 'export SQS_QUEUE_PREFIX="..."' >> ~/.bashrc
     echo 'export REDIS_URL="..."' >> ~/.bashrc
     echo 'export CONGO_CLOCK_SECONDS=300' >> ~/.bashrc
     echo 'export CONGO_CLOCK_LOG=log/clock.log' >> ~/.bashrc

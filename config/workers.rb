@@ -192,12 +192,12 @@
     {
       name: 'congo-production-worker-1',
       environment: 'congo-production',
-      ssh_host: 'ec2-52-5-153-195.compute-1.amazonaws.com',
+      ssh_host: 'ec2-54-85-19-208.compute-1.amazonaws.com',
       ssh_args: {
         user: 'ec2-user',
         keys_only: true,
         keys: [
-          "#{ENV['HOME']}/.ssh/grouphub-congo"
+          "#{ENV['HOME']}/.ssh/id_rsa"
         ],
         timeout: 0,
         operation_timeout: 0
@@ -223,7 +223,7 @@
         user: 'ec2-user',
         keys_only: true,
         keys: [
-          "#{ENV['HOME']}/.ssh/grouphub-congo"
+          "#{ENV['HOME']}/.ssh/id_rsa"
         ],
         timeout: 0,
         operation_timeout: 0
