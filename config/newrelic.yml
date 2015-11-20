@@ -204,7 +204,6 @@ development:
 integration:
   <<: *default_settings
   # Turn on communication to New Relic service in development mode
-  monitor_mode: true
   app_name: Congo (Integration)
 
   # Rails Only - when running in Developer Mode, the New Relic Agent will
@@ -226,7 +225,7 @@ test:
 # incurring any user-visible performance degradation.
 production:
   <<: *default_settings
-  monitor_mode: true
+  #monitor_mode: true
 
 # Many applications have a staging environment which behaves
 # identically to production. Support for that environment is provided
