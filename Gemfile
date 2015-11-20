@@ -10,7 +10,10 @@ gem 'redis-namespace'
 gem 'sass-rails'
 
 gem 'uglifier', '>= 1.3.0'
-gem 'coffee-rails', github: 'rails/coffee-rails'
+gem 'coffee-rails', '~> 4.1'
+
+gem 'json', '~> 1.8', '>= 1.8.3'
+gem 'nokogiri', '~> 1.6', '>= 1.6.6.3'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
@@ -23,8 +26,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'paranoia', '~> 2.0'
 
 # For running the server.
-#gem 'shoryuken'
-gem 'shoryuken', github: 'phstc/shoryuken', branch: 'master'
+gem 'shoryuken', '~> 2.0', '>= 2.0.2'
 gem 'foreman'
 gem 'puma'
 
@@ -35,7 +37,7 @@ gem 'stripe'
 gem 'colorize'
 
 # For health insurance enrollment and other concerns.
-gem 'pokitdok-ruby', github: 'pokitdok/pokitdok-ruby', require: 'pokitdok'
+gem 'pokitdok-ruby', '~> 0.7.2'
 
 # For monitoring.
 gem 'newrelic_rpm'
