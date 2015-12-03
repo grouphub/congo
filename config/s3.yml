@@ -17,14 +17,14 @@ test:
 integration:
   access_key: "<%= ENV['AWS_ACCESS_KEY_ID'] %>"
   secret_key: "<%= ENV['AWS_SECRET_ACCESS_KEY'] %>"
-  bucket: "<%= ENV['S3_BUCKET'] || 'congo-attachments' %>"
-  endpoint: 'http://<%= ENV['S3_BUCKET'] || 'congo-attachments' %>.s3.amazonaws.com'
+  bucket: "<%= ENV['S3_BUCKET'] || 'congo-integration-attachments' %>"
+  endpoint: 'http://<%= ENV['S3_BUCKET'] || 'congo-integration-attachments' %>.s3.amazonaws.com'
 
 staging:
   access_key: "<%= ENV['AWS_ACCESS_KEY_ID'] %>"
   secret_key: "<%= ENV['AWS_SECRET_ACCESS_KEY'] %>"
-  bucket: "<%= ENV['S3_BUCKET'] || 'congo-attachments' %>"
-  endpoint: 'http://<%= ENV['S3_BUCKET'] || 'congo-attachments' %>.s3.amazonaws.com'
+  bucket: "<%= ENV['S3_BUCKET'] || 'congo-staging-attachments' %>"
+  endpoint: 'http://<%= ENV['S3_BUCKET'] || 'congo-staing-attachments' %>.s3.amazonaws.com'
 
 production:
   access_key: "<%= ENV['AWS_ACCESS_KEY_ID'] %>"
