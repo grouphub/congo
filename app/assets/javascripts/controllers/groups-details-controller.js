@@ -34,7 +34,7 @@
     ];
 
     $scope.industries = [
-      {id: 'agriculture', desc: 'Agriculture/Foresty'},
+      {id: 'agriculture', desc: 'Agriculture/Forestry'},
       {id: 'automotive', desc: 'Automotive'},
       {id: 'finance_and_insurance', desc: 'Finance and Insurance'},
       {id: 'restaurant', desc: 'Restaurant/Foodservice'},
