@@ -182,7 +182,7 @@ Prepare the server. Make sure you're ssh'ed in, and run:
 
     # set Ruby 2.2 as default
     alternatives --set ruby /usr/bin/ruby2.2
-    gem install bundler
+    gem install bundler rake
 
     # install recent NodeJS
     #curl -sL https://rpm.nodesource.com/setup_4.x | bash -
