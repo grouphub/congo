@@ -1,0 +1,5 @@
+#!/bin/sh
+
+docker-compose run web rm -rf tmp/fakes3
+docker-compose run web bundle exec rake db:drop db:create db:migrate db:seed --trace
+
