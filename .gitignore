@@ -28,9 +28,12 @@ node_modules
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
+!.elasticbeanstalk/config.yml
 
 # Database dump files
 db/**/*.dump
 db/**/*.json
 db/**/*.sql
 
+# Carriers' Invoices uploaded files
+public/system/
