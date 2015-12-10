@@ -2,6 +2,8 @@ branch-defaults:
   master:
     environment: congo-production
   staging:
+    environment: congo-dev
+  stable_roger:
     environment: congo-staging
   integration:
     environment: congo-integration
