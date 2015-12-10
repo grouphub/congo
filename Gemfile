@@ -1,16 +1,19 @@
 source 'https://rubygems.org'
 
-gem 'rails', github: 'rails/rails', branch: '4-2-stable'
+gem 'rails', '~> 4.2'
 
 gem 'pg'
-gem 'sprockets-rails', github: 'rails/sprockets-rails', branch: '2.x'
+gem 'sprockets-rails', :require => 'sprockets/railtie'
 
 gem 'redis-namespace'
 
-gem 'sass-rails', github: 'rails/sass-rails'
+gem 'sass-rails'
 
 gem 'uglifier', '>= 1.3.0'
-gem 'coffee-rails', github: 'rails/coffee-rails'
+gem 'coffee-rails', '~> 4.1'
+
+gem 'json', '~> 1.8', '>= 1.8.3'
+gem 'nokogiri', '~> 1.6', '>= 1.6.6.3'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
@@ -23,7 +26,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'paranoia', '~> 2.0'
 
 # For running the server.
-gem 'shoryuken'
+gem 'shoryuken', '~> 2.0', '>= 2.0.2'
 gem 'foreman'
 gem 'puma'
 
@@ -34,7 +37,7 @@ gem 'stripe'
 gem 'colorize'
 
 # For health insurance enrollment and other concerns.
-gem 'pokitdok-ruby', github: 'pokitdok/pokitdok-ruby', require: 'pokitdok'
+gem 'pokitdok-ruby', '~> 0.7.2'
 
 # For monitoring.
 gem 'newrelic_rpm'
@@ -48,6 +51,7 @@ gem 'rack-defense'
 # For Amazon S3 attachments
 gem 'aws-s3', github: 'bartoszkopinski/aws-s3'
 gem 'fakes3'
+gem 'aws-sdk', '~> 2'
 
 # For rich text in groups and benefit plans
 gem 'kramdown'
@@ -59,12 +63,16 @@ gem 'unindent'
 
 # Papertrail Logging
 gem 'remote_syslog_logger'
+gem 'airbrake'
 
 group :doc do
   gem 'sdoc', '~> 0.4.0'
 end
 
+
 group :development do
+  #for erd generation
+  gem "rails-erd"
   # To speed up booting.
   gem 'spring'
 
@@ -88,13 +96,20 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'capybara'
   gem 'selenium-webdriver'
+  gem 'factory_girl_rails'
 
   # For debugging.
   gem 'pry'
   gem 'pry-remote'
   gem 'pry-nav'
   gem 'pry-rails'
+
+  gem 'spring-commands-rspec'
+  gem 'faker'
 end
 
-ruby ENV['CUSTOM_RUBY_VERSION'] || '2.2.0'
+group :production do
+  gem 'rails_12factor'
+end
 
+# ruby ENV['CUSTOM_RUBY_VERSION'] || '2.2.0'
