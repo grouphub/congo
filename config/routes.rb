@@ -20,6 +20,8 @@ Rails.application.routes.draw do
     # Users
     '/users/signin',
     '/users/new_manager',
+    '/users/new',
+    '/users/new_group',
     '/users/new_plan',
     '/users/new_billing',
     '/users/new_account',
@@ -55,6 +57,8 @@ Rails.application.routes.draw do
     '/accounts/:slug/:role/settings',
     '/accounts/:slug/:role/reports',
     '/accounts/:slug/:role/contact',
+    '/accounts/:slug/:role/rewards',
+    '/accounts/:slug/:role/challenges',
 
     # Carriers
     '/accounts/:slug/:role/carriers',
@@ -69,6 +73,11 @@ Rails.application.routes.draw do
     '/accounts/:slug/:role/groups',
     '/accounts/:slug/:role/groups/new',
     '/accounts/:slug/:role/groups/:group_slug',
+    '/accounts/:slug/:role/groups/:group_slug/welcome',
+    '/accounts/:slug/:role/groups/:group_slug/details',
+    '/accounts/:slug/:role/groups/:group_slug/members',
+    '/accounts/:slug/:role/groups/:group_slug/benefits',
+    '/accounts/:slug/:role/groups/:group_slug/add_existing_benefits',
     '/accounts/:slug/:role/groups/:group_slug/benefit_plans/:benefit_plan_id/applications/new',
 
     # Applications
@@ -112,6 +121,10 @@ Rails.application.routes.draw do
       end
 
       resources :accounts do
+        resources :memberships, only: [] do
+          resources :applications, only: :create
+        end
+
         resources :roles do
           resources :carriers do
             post '/activate', to: 'carriers#activate'
@@ -142,8 +155,15 @@ Rails.application.routes.draw do
               post '/confirmations', to: 'memberships#send_confirmation'
             end
 
+            post '/connect_to_carrier', to: 'groups#connect_to_carrier'
+
             # Send confirmation to all members of a group
             post '/confirmations_all', to: 'memberships#send_confirmation_to_all'
+
+            # Download GroupHub Employee Template file
+            get '/download_employee_template', to: 'memberships#download_employee_template'
+
+            post '/create_employees_from_list', to: 'memberships#create_employees_from_list'
 
             post '/group_benefit_plans', to: 'group_benefit_plans#create'
             delete '/group_benefit_plans', to: 'group_benefit_plans#destroy'

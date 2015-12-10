@@ -201,6 +201,18 @@ development:
   # Do not use for production or load testing.
   developer_mode: true
 
+integration:
+  <<: *default_settings
+  # Turn on communication to New Relic service in development mode
+  app_name: Congo (Integration)
+
+  # Rails Only - when running in Developer Mode, the New Relic Agent will
+  # present performance information on the last 100 transactions you have
+  # executed since starting the mongrel.
+  # NOTE: There is substantial overhead when running in developer mode.
+  # Do not use for production or load testing.
+  developer_mode: true
+
 test:
   <<: *default_settings
   # It almost never makes sense to turn on the agent when running
@@ -213,7 +225,7 @@ test:
 # incurring any user-visible performance degradation.
 production:
   <<: *default_settings
-  monitor_mode: true
+  #monitor_mode: true
 
 # Many applications have a staging environment which behaves
 # identically to production. Support for that environment is provided
