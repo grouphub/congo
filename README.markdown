@@ -190,6 +190,8 @@ Prepare the server. Make sure you're ssh'ed in, and run:
     yum install --assumeyes nodejs
     exit
 
+    mkdir -p ~/vendor/cache
+
 Test that everything is correct:
 
     ruby -v # ruby 2.2.3p173
