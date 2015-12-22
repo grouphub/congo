@@ -37,3 +37,6 @@ db/**/*.sql
 
 # Carriers' Invoices uploaded files
 public/system/
+
+# PID files
+tmp/pids/*.pid
