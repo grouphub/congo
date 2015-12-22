@@ -1,6 +1,6 @@
 development:
-  secret_key: 'sk_test_ToaltqiFLMBQVY2tgHLnej0Z'
-  publishable_key: 'pk_test_BsKUkN4WKQChntkityuHiPGa'
+  secret_key: 'sk_test_1zgTAy5Y7ge7063fUibaz5bj'
+  publishable_key: 'pk_test_5XKO0gfvgQKn03IU4hxEU5Sl'
 
 test:
   secret_key: 'sk_test_ToaltqiFLMBQVY2tgHLnej0Z'
