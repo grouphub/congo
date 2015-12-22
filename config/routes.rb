@@ -187,6 +187,9 @@ Rails.application.routes.draw do
         put '/account', to: 'users#update_account'
         post '/reset_password/:password_token', to: 'users#reset_password'
       end
+
+      # Payment routes
+      resources :charges
     end
 
     # External API for third parties
