@@ -32,6 +32,7 @@ gem 'puma'
 
 # For the payment system.
 gem 'stripe'
+gem 'payola-payments'
 
 # For colorizing console output in specs.
 gem 'colorize'
