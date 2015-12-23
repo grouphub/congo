@@ -15,6 +15,7 @@
 //  ---------
 //
 //= require jquery
+//= require payola
 //= require jquery_ujs
 //= require underscore
 //= require eventemitter-2

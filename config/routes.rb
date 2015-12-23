@@ -5,6 +5,7 @@ def angular_routes(routes)
 end
 
 Rails.application.routes.draw do
+  mount Payola::Engine => '/payola', as: :payola
   get '/index_v1', :to => redirect('/index_v1.html')
 
   angular_routes [
