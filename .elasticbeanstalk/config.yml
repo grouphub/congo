@@ -3,8 +3,8 @@ branch-defaults:
     environment: congo-production
   staging:
     environment: congo-dev
-  stable_roger:
-    environment: congo-staging
+  rollback:
+    environment: congo-dev
   integration:
     environment: congo-integration
 global:
