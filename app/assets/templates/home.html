@@ -131,7 +131,7 @@
     <a class="btn btn-primary" href="/accounts/{{accountSlug()}}/{{currentRole()}}/groups/new">New Group</a>
   </p>
 </div>
-<div style="position: fixed;
+<div ng-if="currentRole() === 'customer'"style="position: fixed;
     width: 100%;
     height: 100%;">
   <iframe id="healthhub" src="http://localhost:9292" style="display: block;
