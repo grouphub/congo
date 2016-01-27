@@ -1,0 +1,11 @@
+LOG:  database system was shut down at 2016-01-26 04:40:22 PST
+LOG:  MultiXact member wraparound protections are now enabled
+LOG:  database system is ready to accept connections
+LOG:  autovacuum launcher started
+ERROR:  database "congo2_development" is being accessed by other users
+DETAIL:  There are 2 other sessions using the database.
+STATEMENT:  DROP DATABASE IF EXISTS "congo2_development"
+ERROR:  database "congo2_development" already exists
+STATEMENT:  CREATE DATABASE "congo2_development" ENCODING = 'unicode'
+FATAL:  lock file "postmaster.pid" already exists
+HINT:  Is another postmaster (PID 8297) running in data directory "/usr/local/var/postgres"?
