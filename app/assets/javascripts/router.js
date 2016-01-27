@@ -267,6 +267,10 @@ congoApp.config([
         templateUrl: congo.assets['groups/members.html'],
         controller: 'GroupsMembersController'
       })
+      .when('/accounts/:slug/:role/groups/:group_slug/billing', {
+        templateUrl: congo.assets['groups/billing.html'],
+        controller: 'GroupsBillingController'
+      })
       .when('/accounts/:slug/:role/groups/:group_slug/benefits', {
         templateUrl: congo.assets['groups/benefits.html'],
         controller: 'GroupsBenefitsController'
