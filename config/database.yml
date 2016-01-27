@@ -20,7 +20,8 @@ default: &default
   # For details on connection pooling, see rails configuration guide
   # http://guides.rubyonrails.org/configuring.html#database-pooling
   pool: 5
-<% if (ENV['APP_HOME'] == '/congo-app') %>
+#if (ENV['APP_HOME'] == '/congo-app')
+<% if (ENV['APP_HOME'] == '/Users/kimnguyen/congo_integration/congo') %>
   username: postgres
   password:
   host: db
@@ -57,4 +58,3 @@ staging:
 integration:
   <<: *production
 <% end %>
-
