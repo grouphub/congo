@@ -24,6 +24,11 @@
       <li role="presentation" ng-class="{active: currentTab() === 'members'}">
         <a href="" data-target="#members" aria-controls="members" role="tab" data-toggle="tab" ng-click="changeTab('members')">Members</a>
       </li>
+
+      <li role="presentation" ng-class="{active: currentTab() === 'billing'}">
+        <a href="" data-target="#billing" aria-controls="billing" role="tab" data-toggle="tab" ng-click="changeTab('billing')">Billing</a>
+      </li>
+
     </ul>
 
     <!-- Panes -->
@@ -273,7 +278,78 @@
           <input type="submit" class="btn btn-primary" value="Add member">
         </form>
       </div>
-    </div>
+    
+
+      <div role="tabpanel" class="tab-pane" ng-class="{active: currentTab() === 'billing'}" id="billing">
+        <h2>Billing</h2>
+        <div class="col-md-12">
+          <h1>All Accounts</h1>
+
+          <table class="accounts table">
+            <thead>
+                <tr>
+                  <th>Account</th>
+                  <th>Users and Groups</th>
+                </tr>
+            </thead>
+
+            <tbody>
+              <tr ng-repeat="account in accounts">
+                <td>
+                  <a href="">{{account.name}}</a>
+                </td>
+
+                <td>
+                  <table class="table users">
+                    <thead>
+                      <tr>
+                        <th>Users</th>
+                        <th>Actions</th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      <tr ng-repeat="role in account.roles">
+                        <td>
+                          {{role.user.full_name}}
+                          <span class="label label-default role">{{role.english_name}}</span>
+                        </td>
+
+                        <td>
+                          <a class="btn btn-danger btn-xs" href="" ng-click="crystalBall(role.user)">Crystal Ball</a>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                  <table class="table groups" ng-if="account.groups.length > 0">
+                    <thead>
+                      <tr>
+                        <th>Groups</th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      <tr ng-repeat="group in account.groups">
+                        <td>
+                          <a href="">{{group.name}}</a>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                  <p class="lead">
+                    <b>{{monetize(account.unpaid_cents)}}</b> Owed<br>
+                    <b>{{account.employee_count}}</b> Employees in the System
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      
+    </div>  <!--end div for tab content -->
   </div>
 </div>
 
