@@ -13,10 +13,17 @@ module Applications
 
     private
 
+
+
+
+
+
+
+
     def application_params
       { account_id: account.id,
         benefit_plan_id: benefit_plan.id,
-        membership_id: membership.id,
+        membership_id: Membership.where(group_id: group.id, user_id: attributes[:user_id] || Membership.where(group_id: group.id, user_id: attributes[:user_id]).first).id,#membership.id,
         selected_by_id: attributes[:selected_by_id],
         declined_by_id: attributes[:declined_by_id],
         applied_by_id: attributes[:applied_by_id],
