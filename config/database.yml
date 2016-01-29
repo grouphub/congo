@@ -50,17 +50,7 @@ production: &production
   password: <%= ENV['RDS_PASSWORD'] %>
   host: <%= ENV['RDS_HOSTNAME'] %>
   port: <%= ENV['RDS_PORT'] %>
-<<<<<<< billing
-=======
-
-staging:
-  <<: *production
-
-integration:
-  <<: *production
-<% end %>
->>>>>>> update config files for integration and staging
-
+  
 staging:
   <<: *production
 
