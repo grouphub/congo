@@ -142,6 +142,8 @@ Rails.application.routes.draw do
 
           resources :eligibilities
           resources :tokens
+          resources :charges
+
 
           resources :applications do
             get '/activities', to: 'applications#activities'
@@ -175,8 +177,9 @@ Rails.application.routes.draw do
 
           get '/notifications/count', to: 'notifications#count'
           put '/notifications/mark_all_as_read', to: 'notifications#mark_all_as_read'
-          resources :notifications
+          resources :notifications      
         end
+
       end
 
       # User routes
@@ -188,9 +191,6 @@ Rails.application.routes.draw do
         put '/account', to: 'users#update_account'
         post '/reset_password/:password_token', to: 'users#reset_password'
       end
-
-      # Payment routes
-      resources :charges
     end
 
     # External API for third parties
