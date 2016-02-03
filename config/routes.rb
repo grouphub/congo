@@ -95,6 +95,8 @@ Rails.application.routes.draw do
     '/accounts/:slug/:role/activities'
   ]
 
+  resources :charges
+
   resources :maintenance
 
   namespace :api do
@@ -142,7 +144,7 @@ Rails.application.routes.draw do
 
           resources :eligibilities
           resources :tokens
-          resources :charges
+       
 
 
           resources :applications do
