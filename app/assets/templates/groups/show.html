@@ -300,11 +300,31 @@
           </tbody>
         </table>
 
+        <form action="/charges" method="POST">
+  <script
+    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+    data-key="pk_test_HJHNiSYiPCXV8RpgrKCdB7Gv"
+    data-image="/img/documentation/checkout/marketplace.png"
+    data-name="GroupHub, Inc."
+    data-description="2 widgets"
+    data-zip-code="true"
+    data-amount="2000"
+    data-locale="auto">
+  </script>
+</form>
+
+  <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+          data-key="pk_test_HJHNiSYiPCXV8RpgrKCdB7Gv"
+          data-description="A month's subscription"
+          data-amount="500"
+          data-locale="auto"></script>
+
+
         <div>
-          <button type="submit" class="btn btn-primary" ng-click="charges()">
+          <button type="button" class="btn btn-primary" click="charges()">
             Pay Now
           </button>
-
+ 
 <!-- <script type="text/javascript" src="https://js.stripe.com/v2/"></script> 
 
 <script type="text/javascript">
