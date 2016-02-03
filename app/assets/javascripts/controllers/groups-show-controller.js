@@ -545,6 +545,17 @@ congoApp.controller('GroupsShowController', [
           flashesFactory.add('danger', error);
         });
     };
+
+    // -------------------
+    // Billing - Pay Now
+    // -------------------
+    //
+    $scope.charges = function() {
+      $('#charges-modal').modal('show');
+      $scope.$emit('modal.charges', membership, $scope.billing);
+    };
+
+
   }
-]);
+]);   
 

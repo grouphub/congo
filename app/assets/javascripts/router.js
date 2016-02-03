@@ -122,11 +122,6 @@ congoApp.config([
         templateUrl: congo.assets['admin/accounts/index.html'],
         controller: 'AdminAccountsIndexController'
       })
-      //added this for demo
-      .when('/admin/billing', {
-        templateUrl: congo.assets['admin/accounts/index.html'],
-        controller: 'AdminAccountsIndexController'
-      })
       .when('/admin/groups', {
         templateUrl: congo.assets['admin/groups/index.html'],
         controller: 'AdminGroupsIndexController'
