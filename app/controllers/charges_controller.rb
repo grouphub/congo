@@ -3,12 +3,17 @@ def new
 end
 
 def create
+
+Stripe.api_key = "sk_test_3u36ymxidCQDcnaojEM8FINu"
+
+
+  token = params[:stripeToken]
   # Amount in cents
   @amount = 500
 
   customer = Stripe::Customer.create(
     :email => params[:stripeEmail],
-    :source  => params[:stripeToken]
+    :source  => token
   )
 
   charge = Stripe::Charge.create(

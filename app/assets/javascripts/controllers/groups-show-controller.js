@@ -546,6 +546,9 @@ congoApp.controller('GroupsShowController', [
         });
     };
 
+
+    
+
     // -------------------
     // Billing - Pay Now
     // -------------------
