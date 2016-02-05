@@ -4,7 +4,7 @@ class Api::Internal::ChargesController < Api::ApiController
 
   def create
     # Amount in cents
-    @amount = 500
+    @amount = 4000000
 
     customer = Stripe::Customer.create(
       :email => params[:stripeEmail],
