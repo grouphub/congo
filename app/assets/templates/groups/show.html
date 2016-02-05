@@ -295,7 +295,7 @@
             <tr ng-repeat="benefitPlan in benefitPlans" ng-if="benefitPlan.isEnabled">
               <td>{{benefitPlan.name}}</td>
               <td>{{benefitPlan.memberships}}10</td>
-              <td>$1000000000</td>
+              <td>$5000</td>
             </tr>
           </tbody>
         </table>
@@ -304,26 +304,15 @@
   <script
     src="https://checkout.stripe.com/checkout.js" class="stripe-button"
     data-key="pk_test_HJHNiSYiPCXV8RpgrKCdB7Gv"
-    data-image="/img/documentation/checkout/marketplace.png"
+    data-image="logo-small.png"
     data-name="GroupHub, Inc."
     data-description="2 widgets"
     data-zip-code="true"
-    data-amount="2000"
+    data-amount="4000000"
     data-locale="auto">
   </script>
 </form>
-
-  <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-          data-key="pk_test_HJHNiSYiPCXV8RpgrKCdB7Gv"
-          data-description="A month's subscription"
-          data-amount="500"
-          data-locale="auto"></script>
-
-
-        <div>
-          <button type="button" class="btn btn-primary" click="charges()">
-            Pay Now
-          </button>
+         
  
 <!-- <script type="text/javascript" src="https://js.stripe.com/v2/"></script> 
 

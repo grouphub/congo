@@ -9,7 +9,7 @@ Stripe.api_key = "sk_test_3u36ymxidCQDcnaojEM8FINu"
 
   token = params[:stripeToken]
   # Amount in cents
-  @amount = 500
+  @amount = 4000000
 
   customer = Stripe::Customer.create(
     :email => params[:stripeEmail],
