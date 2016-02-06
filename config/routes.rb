@@ -76,9 +76,12 @@ Rails.application.routes.draw do
     '/accounts/:slug/:role/groups/:group_slug/welcome',
     '/accounts/:slug/:role/groups/:group_slug/details',
     '/accounts/:slug/:role/groups/:group_slug/members',
+<<<<<<< HEAD
     '/accounts/:slug/:role/groups/:group_slug/benefits',
      '/accounts/:slug/:role/groups/:group_slug/billing',
     '/accounts/:slug/:role/groups/:group_slug/add_existing_benefits',
+=======
+>>>>>>> 43b8c25ebc78f40533620f7803972260d964f35c
     '/accounts/:slug/:role/groups/:group_slug/benefit_plans/:benefit_plan_id/applications/new',
 
     # Applications

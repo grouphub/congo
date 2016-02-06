@@ -34,8 +34,96 @@
 //  -----
 //
 //= require init
+<<<<<<< HEAD
 //= require_tree ./controllers
 //= require router
 //= require_tree ./factories
 //= require_tree ./directives
 //= require_tree ./filters
+=======
+//
+//  -----------
+//  Controllers
+//  -----------
+//
+//= require controllers/main-controller
+//= require controllers/landing-controller
+//= require controllers/home-controller
+//= require controllers/contact-controller
+//= require controllers/accounts-controller
+//= require controllers/accounts-new-controller
+//= require controllers/security-controller
+//= require controllers/terms-controller
+//= require controllers/privacy-controller
+//= require controllers/settings-show-controller
+//= require controllers/reports-index-controller
+//= require controllers/activities-index-controller
+//= require controllers/messages-index-controller
+//= require controllers/admin-accounts-index-controller
+//= require controllers/admin-carriers-index-controller
+//= require controllers/admin-carriers-new-controller
+//= require controllers/admin-carriers-show-controller
+//= require controllers/admin-benefit-plans-new-controller
+//= require controllers/admin-benefit-plans-show-controller
+//= require controllers/admin-invitations-index-controller
+//= require controllers/admin-features-index-controller
+//= require controllers/applications-new-controller
+//= require controllers/applications-show-controller
+//= require controllers/carriers-index-controller
+//= require controllers/carriers-new-controller
+//= require controllers/carriers-show-controller
+//= require controllers/benefit-plans-new-controller
+//= require controllers/benefit-plans-show-controller
+//= require controllers/groups-index-controller
+//= require controllers/groups-new-controller
+//= require controllers/groups-show-controller
+//= require controllers/groups-welcome-controller
+//= require controllers/groups-details-controller
+//= require controllers/groups-members-controller
+//= require controllers/tokens-index-controller
+//= require controllers/users-new-account-controller
+//= require controllers/users-new-billing-controller
+//= require controllers/users-new-customer-controller
+//= require controllers/users-new-manager-controller
+//= require controllers/users-new-plan-controller
+//= require controllers/users-show-controller
+//= require controllers/users-signin-controller
+//= require controllers/users-forgot-password-controller
+//= require controllers/users-reset-password-controller
+//
+//  -------
+//  Routers
+//  -------
+//
+//= require router
+//
+//  ---------
+//  Factories
+//  ---------
+//
+//= require factories/events-factory
+//= require factories/flashes-factory
+//= require factories/user-data-factory
+//
+//  ----------
+//  Directives
+//  ----------
+//
+//= require directives/auto-focus
+//= require directives/show-errors
+//= require directives/eligibility-modal
+//= require directives/review-application-modal
+//= require directives/enrollment-status-modal
+//= require directives/description-modal
+//= require directives/account-delete-modal
+//= require directives/group-benefit-plans-modal
+//= require directives/add-new-member-modal
+//= require directives/upload-member-list-modal
+//
+//  -------
+//  Filters
+//  -------
+//
+//= require filters/capitalize
+//
+>>>>>>> 43b8c25ebc78f40533620f7803972260d964f35c

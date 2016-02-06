@@ -1,7 +1,11 @@
 !function() {
   "use strict";
 
+<<<<<<< HEAD
   angular.module('congoApp').directive('uploadMemberListModal', uploadMemberListModal);
+=======
+  angular.module('congoApp').directive('uploadMemberListModal',uploadMemberListModal);
+>>>>>>> 43b8c25ebc78f40533620f7803972260d964f35c
 
   uploadMemberListModal.$inject = ['$http', '$location', 'flashesFactory'];
 

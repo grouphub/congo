@@ -18,6 +18,7 @@ module CustomerCreatable
     group      = membership.group
     role_name  = membership.role_name
     account_id = group.account_id
+<<<<<<< HEAD
 
     user ||= membership.create_user \
       first_name: first_name,
@@ -27,6 +28,10 @@ module CustomerCreatable
 
     user.update(password: password)
     membership.save!
+=======
+>>>>>>> 43b8c25ebc78f40533620f7803972260d964f35c
+
+    user.update(password: password)
 
     unless membership
       # TODO: Handle this
@@ -46,8 +51,11 @@ module CustomerCreatable
         user_id: user.id,
         name: role_name
     end
+<<<<<<< HEAD
 
     user
+=======
+>>>>>>> 43b8c25ebc78f40533620f7803972260d964f35c
   end
 
   def attempt_to_link_customer!(user)

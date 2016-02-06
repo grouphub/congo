@@ -1,10 +1,18 @@
 require "spec_helper"
 
 feature "Brokers group onboarding wizard", :js do
+<<<<<<< HEAD
   let(:broker) { create(:user, :broker) }
   let(:account) { broker.roles.first.account }
   let(:group) { account.groups.first }
   let(:memberships) { group.memberships }
+=======
+  let(:broker) { create(:broker_user) }
+  let(:account) { create(:broker_account) }
+  let(:group) { account.groups.first }
+
+  before { create(:broker_role, user_id: broker.id, account_id: account.id) }
+>>>>>>> 43b8c25ebc78f40533620f7803972260d964f35c
 
   background { sign_in broker }
 
@@ -49,10 +57,15 @@ feature "Brokers group onboarding wizard", :js do
 
     click_on "Members"
 
+<<<<<<< HEAD
     memberships.each do |membership|
       expect(find(".invited-membership-#{membership.id}").value).
         to have_content membership.email
     end
+=======
+    expect(find('.invited-membership-1').value).
+      to have_content "johndoe@example.com"
+>>>>>>> 43b8c25ebc78f40533620f7803972260d964f35c
   end
 
   scenario "creating new group and adding members list" do
@@ -93,10 +106,18 @@ feature "Brokers group onboarding wizard", :js do
 
     click_on "Members"
 
+<<<<<<< HEAD
     memberships.each do |membership|
       expect(find(".invited-membership-#{membership.id}").value).
         to have_content membership.email
     end
+=======
+    expect(find('.invited-membership-1').value).
+      to have_content "johndoe@example.com"
+
+    expect(find('.invited-membership-2').value).
+      to have_content "foobar@example.com"
+>>>>>>> 43b8c25ebc78f40533620f7803972260d964f35c
   end
 
 
@@ -126,7 +147,11 @@ feature "Brokers group onboarding wizard", :js do
   context 'A group already exist' do
     let!(:group) { create(:group, account: account) }
 
+<<<<<<< HEAD
     scenario 'allows them to navigate to a group\'s Details page' do
+=======
+    it 'allows them to navigate to a group\'s Details page' do
+>>>>>>> 43b8c25ebc78f40533620f7803972260d964f35c
       visit "/accounts/#{account.slug}/broker/groups/#{group.slug}/welcome"
 
       click_link 'Get Started'
@@ -137,8 +162,16 @@ feature "Brokers group onboarding wizard", :js do
     scenario 'allows them to create the details of a group' do
       visit "/accounts/#{account.slug}/broker/groups/#{group.slug}/details"
 
+<<<<<<< HEAD
       select rand(1..11), from: "Number of Members*"
       select "Information Technology", from: "Industry"
+=======
+      number_of_members_select = all('select').first
+      industry_select          = all('select').last
+
+      number_of_members_select.find(:xpath, 'option[2]').select_option
+      industry_select.find(:xpath, 'option[2]').select_option
+>>>>>>> 43b8c25ebc78f40533620f7803972260d964f35c
 
       fill_in 'website',      with: 'www.website.com'
       fill_in 'phone_number', with: '1111111111'
@@ -147,7 +180,11 @@ feature "Brokers group onboarding wizard", :js do
 
       click_button 'Save & Continue'
 
+<<<<<<< HEAD
       sleep(1)
+=======
+      #TODO: Check why this is not creating the group
+>>>>>>> 43b8c25ebc78f40533620f7803972260d964f35c
       expect(current_path).to eq("/accounts/#{account.slug}/broker/groups/#{group.slug}/members")
     end
 
@@ -178,6 +215,7 @@ feature "Brokers group onboarding wizard", :js do
       scenario 'allows to skip "Add Members to Group" wizard' do
         click_link 'Do Later'
 
+<<<<<<< HEAD
         expect(current_path).to eq("/accounts/#{account.slug}/broker/groups/#{group.slug}/benefits")
       end
     end
@@ -234,6 +272,9 @@ feature "Brokers group onboarding wizard", :js do
 
           expect(page).to have_content('Establish Carriers Connection')
         end
+=======
+        expect(current_path).to eq("/accounts/#{account.slug}/broker/groups/#{group.slug}")
+>>>>>>> 43b8c25ebc78f40533620f7803972260d964f35c
       end
     end
   end

@@ -267,6 +267,7 @@ congoApp.config([
         templateUrl: congo.assets['groups/members.html'],
         controller: 'GroupsMembersController'
       })
+<<<<<<< HEAD
       .when('/accounts/:slug/:role/groups/:group_slug/billing', {
         templateUrl: congo.assets['groups/billing.html'],
         controller: 'GroupsBillingController'
@@ -279,6 +280,8 @@ congoApp.config([
         templateUrl: congo.assets['groups/add_existing_benefits.html'],
         controller: 'GroupsAddExistingBenefitsController'
       })
+=======
+>>>>>>> 43b8c25ebc78f40533620f7803972260d964f35c
       .when('/accounts/:slug/:role/groups/:group_slug/benefit_plans/:benefit_plan_slug/applications/new', {
         templateUrl: congo.assets['applications/new.html'],
         controller: 'ApplicationsNewController'
