@@ -2,7 +2,9 @@ branch-defaults:
   master:
     environment: congo-production
   staging:
-    environment: congo-staging
+    environment: congo-dev
+  rollback:
+    environment: congo-dev
   integration:
     environment: congo-integration
 global:

@@ -131,12 +131,20 @@
     <a class="btn btn-primary" href="/accounts/{{accountSlug()}}/{{currentRole()}}/groups/new">New Group</a>
   </p>
 </div>
+<div ng-if="currentRole() === 'customer'"style="position: fixed;
+    width: 100%;
+    height: 100%;">
+  <iframe id="healthhub" src="http://localhost:9292" style="display: block;
 
+   top:-75px;
+    width: 100%;
+    height: 100%;
+    border: none;"></iframe>
+<!-- 
+  position:relative;
+    top:-75px; -->
 <div ng-if="currentRole() === 'customer'" class="col-md-12">
-  <h1>Welcome, {{firstName()}}!</h1>
-
-  <h2>Member Functions</h2>
-
+ 
   <ul class="simple-list functions-list">
     <li ng-if="groups.length === 1">
       <a class="btn btn-default" ng-href="/accounts/{{accountSlug()}}/{{currentRole()}}/groups/{{groups[0].slug}}">Visit {{groups[0].name}}</a>
@@ -167,4 +175,4 @@
     </tbody>
   </table>
 </div>
-
+ </div>

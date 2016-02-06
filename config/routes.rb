@@ -5,6 +5,7 @@ def angular_routes(routes)
 end
 
 Rails.application.routes.draw do
+  mount Payola::Engine => '/payola', as: :payola
   get '/index_v1', :to => redirect('/index_v1.html')
 
   angular_routes [
@@ -77,6 +78,7 @@ Rails.application.routes.draw do
     '/accounts/:slug/:role/groups/:group_slug/details',
     '/accounts/:slug/:role/groups/:group_slug/members',
     '/accounts/:slug/:role/groups/:group_slug/benefits',
+     '/accounts/:slug/:role/groups/:group_slug/billing',
     '/accounts/:slug/:role/groups/:group_slug/add_existing_benefits',
     '/accounts/:slug/:role/groups/:group_slug/benefit_plans/:benefit_plan_id/applications/new',
 
@@ -92,6 +94,8 @@ Rails.application.routes.draw do
     '/accounts/:slug/:role/messages',
     '/accounts/:slug/:role/activities'
   ]
+
+  resources :charges
 
   resources :maintenance
 
@@ -140,6 +144,8 @@ Rails.application.routes.draw do
 
           resources :eligibilities
           resources :tokens
+       
+
 
           resources :applications do
             get '/activities', to: 'applications#activities'
@@ -173,8 +179,9 @@ Rails.application.routes.draw do
 
           get '/notifications/count', to: 'notifications#count'
           put '/notifications/mark_all_as_read', to: 'notifications#mark_all_as_read'
-          resources :notifications
+          resources :notifications      
         end
+
       end
 
       # User routes

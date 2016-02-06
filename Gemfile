@@ -32,6 +32,7 @@ gem 'puma'
 
 # For the payment system.
 gem 'stripe'
+gem 'payola-payments'
 
 # For colorizing console output in specs.
 gem 'colorize'
@@ -63,7 +64,7 @@ gem 'unindent'
 
 # Papertrail Logging
 gem 'remote_syslog_logger'
-gem 'airbrake'
+gem 'airbrake', '~> 4.3.1'
 
 group :doc do
   gem 'sdoc', '~> 0.4.0'
