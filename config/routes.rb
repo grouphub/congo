@@ -144,7 +144,11 @@ Rails.application.routes.draw do
 
           resources :eligibilities
           resources :tokens
+<<<<<<< HEAD
        
+=======
+          resources :charges
+>>>>>>> 381c61ede777f0afe1397991c1d5577c0957e381
 
 
           resources :applications do

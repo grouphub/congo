@@ -545,10 +545,6 @@ congoApp.controller('GroupsShowController', [
           flashesFactory.add('danger', error);
         });
     };
-
-
-    
-
     // -------------------
     // Billing - Pay Now
     // -------------------
