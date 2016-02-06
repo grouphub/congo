@@ -64,7 +64,7 @@ gem 'unindent'
 
 # Papertrail Logging
 gem 'remote_syslog_logger'
-gem 'airbrake'
+gem 'airbrake', '~> 4.3.1'
 
 group :doc do
   gem 'sdoc', '~> 0.4.0'
