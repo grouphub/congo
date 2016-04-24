@@ -299,11 +299,11 @@
           </tbody>
         </table>
         <div>
-          <button type="submit" class="btn btn-primary" ng-click="charges()">
+        <!----  <button type="submit" class="btn btn-primary" ng-click="charges()">
             Pay Now
           </button>
 
-<!-- <script type="text/javascript" src="https://js.stripe.com/v2/"></script> 
+<!-- <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
 
 <script type="text/javascript">
 //   // This identifies your website in the createToken call below
@@ -340,28 +340,26 @@
 
   <button type="submit">Submit Payment</button>
 </form>
- -->
+
 
 
         </div>
-      </div>
-
-<<<<<<< HEAD
+ -->
         <form action="/charges" method="POST">
   <script
     src="https://checkout.stripe.com/checkout.js" class="stripe-button"
     data-key="pk_test_HJHNiSYiPCXV8RpgrKCdB7Gv"
     data-image="logo-small.png"
     data-name="GroupHub, Inc."
-    data-description="2 widgets"
+    data-description="Premium Payment"
     data-zip-code="true"
-    data-amount="4000000"
+    data-amount="300000"
     data-locale="auto">
   </script>
 </form>
-         
- 
-<!-- <script type="text/javascript" src="https://js.stripe.com/v2/"></script> 
+
+
+<!-- <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
 
 <script type="text/javascript">
 //   // This identifies your website in the createToken call below
@@ -399,13 +397,9 @@
   <button type="submit">Submit Payment</button>
 </form>
  -->
-        <div class="dropdown" ng-if="disabledBenefitPlans().length > 0">
-          <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
-            Add a benefit plan
-            <span class="caret"></span>
-          </button>
 
-    </div>  <!--end div for tab content --->
+      </div>
+
 
 <!-- Form for customers -->
 <div ng-if="currentRole() === 'customer'" class="col-md-12">
@@ -539,4 +533,3 @@
     </tbody>
   </table>
 </div>
-

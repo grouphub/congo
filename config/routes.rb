@@ -144,13 +144,7 @@ Rails.application.routes.draw do
 
           resources :eligibilities
           resources :tokens
-<<<<<<< HEAD
-       
-=======
           resources :charges
->>>>>>> 381c61ede777f0afe1397991c1d5577c0957e381
-
-
           resources :applications do
             get '/activities', to: 'applications#activities'
             post '/callback', to: 'applications#callback'
@@ -183,7 +177,7 @@ Rails.application.routes.draw do
 
           get '/notifications/count', to: 'notifications#count'
           put '/notifications/mark_all_as_read', to: 'notifications#mark_all_as_read'
-          resources :notifications      
+          resources :notifications
         end
 
       end
@@ -205,4 +199,3 @@ Rails.application.routes.draw do
     end
   end
 end
-

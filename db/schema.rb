@@ -358,6 +358,7 @@ ActiveRecord::Schema.define(version: 20151014175826) do
     t.text     "customer_address"
     t.text     "business_address"
     t.integer  "setup_fee"
+    t.integer  "tax_percent"
   end
 
   add_index "payola_subscriptions", ["guid"], name: "index_payola_subscriptions_on_guid", using: :btree
