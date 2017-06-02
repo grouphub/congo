@@ -26,7 +26,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'paranoia', '~> 2.0'
 
 # For running the server.
-gem 'shoryuken', '~> 2.0', '>= 2.0.2'
+
 gem 'foreman'
 gem 'puma'
 
