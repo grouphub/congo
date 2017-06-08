@@ -6,15 +6,7 @@ end
 
 Rails.application.routes.draw do
   get '/index_v1', :to => redirect('/index_v1.html')
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-=======
-  get '/.well-known/acme-challenge/:vU0Aui2L3wC4yqvXCs1MDDWazDorvXD5rntM4-iFCdo' => 'home#letsencrypt'
->>>>>>> parent of 909c37d... Updated encrypted challenge to routes.rb and challenge anser to home_controller.rb
-=======
   get '/.well-known/acme-challenge/:x_M3LuAQe1hizZhQlRNQ3J9Xs7oRlR7_JcG0y1Q64aU' => 'home#letsencrypt'
->>>>>>> d369c82a59dcfc0570196f11dad6009e499e8c07
   angular_routes [
     # Home
     '/',
