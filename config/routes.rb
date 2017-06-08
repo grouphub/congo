@@ -6,7 +6,7 @@ end
 
 Rails.application.routes.draw do
   get '/index_v1', :to => redirect('/index_v1.html')
-  get '/.well-known/acme-challenge/:vU0Aui2L3wC4yqvXCs1MDDWazDorvXD5rntM4-iFCdo' => 'home#letsencrypt'
+  get '/.well-known/acme-challenge/:x_M3LuAQe1hizZhQlRNQ3J9Xs7oRlR7_JcG0y1Q64aU' => 'home#letsencrypt'
   angular_routes [
     # Home
     '/',
