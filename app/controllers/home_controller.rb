@@ -7,10 +7,10 @@ class HomeController < ApplicationController
     end
   end
 
-  def letsencrypt
+#  def letsencrypt
       # use your code here, not mine
-      render text: "x_M3LuAQe1hizZhQlRNQ3J9Xs7oRlR7_JcG0y1Q64aU.WrBfqpC8Ep4AncMU6x8nnKHz5pVGjpZh60i_2fzKysw"
-  end
+#      render text: "x_M3LuAQe1hizZhQlRNQ3J9Xs7oRlR7_JcG0y1Q64aU.WrBfqpC8Ep4AncMU6x8nnKHz5pVGjpZh60i_2fzKysw"
+#  end
 
   def index
     account_match = request.fullpath.match(/^\/accounts\/(\w+)/)
