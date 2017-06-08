@@ -7,6 +7,11 @@ class HomeController < ApplicationController
     end
   end
 
+  def letsencrypt
+      # use your code here, not mine
+      render text: "RiTo8p8G8kasS8ieg4-zEGaODrOQtytHfrYl2RP5P9U.WrBfqpC8Ep4AncMU6x8nnKHz5pVGjpZh60i_2fzKysw"
+  end
+
   def index
     account_match = request.fullpath.match(/^\/accounts\/(\w+)/)
     admin_match = request.fullpath.match(/^\/admin/)
@@ -75,4 +80,3 @@ class HomeController < ApplicationController
     end
   end
 end
-
