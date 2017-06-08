@@ -16,7 +16,7 @@ Rails.application.routes.draw do
     '/security',
     '/privacy',
     '/terms',
-
+    '/test'
     # Users
     '/users/signin',
     '/users/new_manager',
