@@ -8,6 +8,7 @@ class HomeController < ApplicationController
   end
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
   def letsencrypt
       # use your code here, not mine
@@ -15,6 +16,13 @@ class HomeController < ApplicationController
   end
 
 >>>>>>> parent of 909c37d... Updated encrypted challenge to routes.rb and challenge anser to home_controller.rb
+=======
+  def letsencrypt
+      # use your code here, not mine
+      render text: "x_M3LuAQe1hizZhQlRNQ3J9Xs7oRlR7_JcG0y1Q64aU.WrBfqpC8Ep4AncMU6x8nnKHz5pVGjpZh60i_2fzKysw"
+  end
+
+>>>>>>> d369c82a59dcfc0570196f11dad6009e499e8c07
   def index
     account_match = request.fullpath.match(/^\/accounts\/(\w+)/)
     admin_match = request.fullpath.match(/^\/admin/)
@@ -83,4 +91,3 @@ class HomeController < ApplicationController
     end
   end
 end
-
