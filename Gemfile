@@ -6,6 +6,9 @@ gem 'pg'
 gem 'sprockets-rails', github: 'rails/sprockets-rails', branch: '2.x'
 
 gem 'redis-namespace'
+gem 'net-ssh-simple', '~> 1.7.0'
+gem 'blockenspiel', '~> 0.5'
+
 
 gem 'sass-rails', github: 'rails/sass-rails'
 
@@ -53,7 +56,6 @@ gem 'fakes3'
 gem 'kramdown'
 
 # For worker deployment
-gem 'net-ssh-simple'
 gem 'ruby-progressbar'
 gem 'unindent'
 
@@ -103,5 +105,5 @@ group :development, :test do
   gem 'faker'
 end
 
-ruby ENV['CUSTOM_RUBY_VERSION'] || '2.2.0'
+ruby ENV['CUSTOM_RUBY_VERSION'] || '2.3.7'
 
