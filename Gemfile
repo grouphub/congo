@@ -1,7 +1,6 @@
 source 'https://rubygems.org'
 
 gem 'rails', github: 'rails/rails', branch: '4-2-stable'
-
 gem 'pg'
 gem 'sprockets-rails', github: 'rails/sprockets-rails', branch: '2.x'
 
@@ -85,6 +84,8 @@ group :development do
 
   # For model diagrams.
   gem 'railroady'
+
+
 end
 
 # Testing gems.
@@ -105,5 +106,5 @@ group :development, :test do
   gem 'faker'
 end
 
-ruby ENV['CUSTOM_RUBY_VERSION'] || '2.3.7'
+ruby '~> 2.3.7'
 
