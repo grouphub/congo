@@ -105,5 +105,5 @@ group :development, :test do
   gem 'faker'
 end
 
-ruby ENV['CUSTOM_RUBY_VERSION'] || '2.4.5'
+ruby '2.4.5'
 
